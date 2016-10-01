@@ -18,7 +18,7 @@ import UIKit
 func createButtonWithImageSetName(_ imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white) -> UIButton {
     let button = UIButton(type: .custom)
     button.tintColor = tintColor
-    button.setImage(UIImage(named: "\(imageSetName)"), for: UIControlState())
+    button.setImage(UIImage(named: "\(imageSetName)"), for: .normal)
     button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .highlighted)
     button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .selected)
     return button
