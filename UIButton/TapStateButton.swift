@@ -15,11 +15,11 @@ import UIKit
     - emphasisSuffix: suffix to append to `imageSetName` to show for `.Highlighted` and `.Selected` states (defaults to empty string to use same image for everything)
     - tintColor: the tint color to use on the images (defaults to white)
  */
-func createButtonWithImageSetName(imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.whiteColor()) -> UIButton {
-    let button = UIButton(type: .Custom)
+func createButtonWithImageSetName(_ imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white) -> UIButton {
+    let button = UIButton(type: .custom)
     button.tintColor = tintColor
-    button.setImage(UIImage(named: "\(imageSetName)"), forState: .Normal)
-    button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), forState: .Highlighted)
-    button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), forState: .Selected)
+    button.setImage(UIImage(named: "\(imageSetName)"), for: UIControlState())
+    button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .highlighted)
+    button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .selected)
     return button
 }
