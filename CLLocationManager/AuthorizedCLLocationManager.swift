@@ -11,32 +11,32 @@ import Foundation
 
 private let firstLaunchTokenUserDefaultKey = "com.tworingsoft.can-i-haz.authorized-location-manager.user-defaults.key.first-launch-token"
 
-enum AuthorizationScope {
-    case WhenInUse
-    case Always
+@objc enum AuthorizationScope: Int {
+    case whenInUse
+    case always
 }
 
 typealias AuthorizedLocationManagerResult = (locationManager: CLLocationManager?, error: NSError?)
 
 enum AuthorizationErrorCode: Int {
-    case Denied
-    case Disabled
+    case denied
+    case disabled
 }
 
 private let AuthorizationErrorDomain = "com.tworingsoft.can-i-haz.authorized-location-manager.error"
 private let AuthorizationErrorDescription = "Location services not available."
 
-final class AuthorizedCLLocationManager: NSObject {
+@objc class AuthorizedCLLocationManager: NSObject {
 
-    private static let singleton = AuthorizedCLLocationManager()
+    fileprivate static let singleton = AuthorizedCLLocationManager()
 
-    private var authorizationCompletion: (Bool -> Void)!
-    private var authorizationScope: AuthorizationScope!
+    fileprivate var authorizationCompletion: ((Bool) -> Void)!
+    fileprivate var authorizationScope: AuthorizationScope!
 
-    class func authorizedLocationManager(scope: AuthorizationScope, completion: AuthorizedLocationManagerResult -> Void) {
+    public class func authorizedLocationManager(scope: AuthorizationScope, completion: @escaping (AuthorizedLocationManagerResult) -> Void) {
 
         if !CLLocationManager.locationServicesEnabled() {
-            completion((locationManager: nil, error: NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.Disabled.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has disabled location services for their device."])))
+            completion((locationManager: nil, error: NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.disabled.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has disabled location services for their device."])))
             return
         }
 
@@ -45,19 +45,19 @@ final class AuthorizedCLLocationManager: NSObject {
         singleton.createAndAuthorizeNewLocationManager(scope, completion: completion)
     }
 
-    private class func checkRequiredPlistValues(scope: AuthorizationScope) {
+    fileprivate class func checkRequiredPlistValues(_ scope: AuthorizationScope) {
 
         var requiredPlistKey: String!
         switch scope {
-        case .Always:
+        case .always:
             requiredPlistKey = "NSLocationAlwaysUsageDescription"
             break
-        case .WhenInUse:
+        case .whenInUse:
             requiredPlistKey = "NSLocationWhenInUseUsageDescription"
             break
         }
 
-        guard let infoDictionary = NSBundle.mainBundle().infoDictionary else {
+        guard let infoDictionary = Bundle.main.infoDictionary else {
             fatalError("Could not locate Info.plist keys and values.")
         }
         guard let requiredLocationRequestDescriptionValue = infoDictionary[requiredPlistKey] as? String else {
@@ -68,7 +68,7 @@ final class AuthorizedCLLocationManager: NSObject {
         }
     }
 
-    private func createAndAuthorizeNewLocationManager(scope: AuthorizationScope, completion: (AuthorizedLocationManagerResult -> Void)) {
+    fileprivate func createAndAuthorizeNewLocationManager(_ scope: AuthorizationScope, completion: @escaping ((AuthorizedLocationManagerResult) -> Void)) {
 
         authorizationScope = scope
 
@@ -79,7 +79,7 @@ final class AuthorizedCLLocationManager: NSObject {
                 locationManager?.delegate = nil
                 completion((locationManager: locationManager, error: nil))
             } else {
-                completion((locationManager: nil, error: NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.Denied.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has denied location services for this app."])))
+                completion((locationManager: nil, error: NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has denied location services for this app."])))
             }
         }
 
@@ -91,24 +91,24 @@ final class AuthorizedCLLocationManager: NSObject {
 
 extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 
         var authorized = false
 
         switch status {
-        case .AuthorizedAlways:
+        case .authorizedAlways:
             authorized = true
             break
-        case .AuthorizedWhenInUse:
+        case .authorizedWhenInUse:
             authorized = true
             break
-        case .Denied:
+        case .denied:
             authorized = false
             break
-        case .NotDetermined:
+        case .notDetermined:
             authorized = false
             break
-        case .Restricted:
+        case .restricted:
             authorized = false
             break
         }
@@ -118,19 +118,19 @@ extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
             return
         }
 
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let appHasLaunchedAtLeastOnceBefore = defaults.boolForKey(firstLaunchTokenUserDefaultKey)
+        let defaults = UserDefaults.standard
+        let appHasLaunchedAtLeastOnceBefore = defaults.bool(forKey: firstLaunchTokenUserDefaultKey)
 
         if !appHasLaunchedAtLeastOnceBefore {
-            defaults.setBool(true, forKey: firstLaunchTokenUserDefaultKey)
+            defaults.set(true, forKey: firstLaunchTokenUserDefaultKey)
             defaults.synchronize()
 
             let scope: AuthorizationScope = self.authorizationScope
             switch scope {
-            case .WhenInUse:
+            case .whenInUse:
                 manager.requestWhenInUseAuthorization()
                 break
-            case .Always:
+            case .always:
                 manager.requestAlwaysAuthorization()
                 break
             }
