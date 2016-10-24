@@ -1,6 +1,6 @@
 //
 //  MaybeFont.swift
-//  Trigonometry
+//  shared-utils
 //
 //  Created by Andrew McKnight on 10/1/16.
 //  Copyright © 2016 Two Ring Software. All rights reserved.

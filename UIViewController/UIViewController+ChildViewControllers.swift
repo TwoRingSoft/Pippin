@@ -1,6 +1,6 @@
 //
 //  UIViewController+ChildViewControllers.swift
-//  PeakFinder
+//  shared-utils
 //
 //  Created by Andrew McKnight on 4/25/16.
 //  Copyright © 2016 Two Ring Software. All rights reserved.
