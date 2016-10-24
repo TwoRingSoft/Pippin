@@ -1,5 +1,5 @@
 //
-//  TapStateButton.swift
+//  UIButtonFactory.swift
 //  shared-utils
 //
 //  Created by Andrew McKnight on 2/15/16.
@@ -21,5 +21,16 @@ func createButtonWithImageSetName(_ imageSetName: String, emphasisSuffix: String
     button.setImage(UIImage(named: "\(imageSetName)"), for: .normal)
     button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .highlighted)
     button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .selected)
+    return button
+}
+
+func button(withTitle title: String, tintColor color: UIColor = .black) -> UIButton {
+    let button = UIButton(type: .custom)
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(color, for: .normal)
+    if let rgb = color.rgb() {
+        button.setTitleColor(UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5), for: .highlighted)
+    }
+
     return button
 }
