@@ -17,20 +17,18 @@ final class BlurViewController: UIViewController {
     required init(viewController: UIViewController) {
         super.init(nibName: nil, bundle: nil)
 
-        self.setUpBackground()
-        fillWithChildViewController(childViewController: viewController)
-    }
+        addNewChildViewController(newChildViewController: viewController)
 
-}
+        let blurEffect: UIBlurEffect
+        if #available(iOS 10.0, *) {
+            blurEffect = UIBlurEffect(style: .prominent)
+        } else {
+            blurEffect = UIBlurEffect(style: .light)
+        }
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.addSubview(viewController.view)
+        viewController.view.fillSuperview()
 
-fileprivate extension BlurViewController {
-
-    // MARK: Private
-
-    func setUpBackground() {
-        let blurView = UIToolbar(frame: .zero)
-        blurView.barStyle = .black
-        blurView.isTranslucent = true
         view.addSubview(blurView)
         blurView.fillSuperview()
     }

@@ -12,7 +12,6 @@ extension UIViewController {
 
     func fillWithChildViewController(childViewController: UIViewController) {
         addNewChildViewController(newChildViewController: childViewController)
-
         childViewController.view.fillSuperview()
     }
 
