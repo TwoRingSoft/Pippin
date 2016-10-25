@@ -46,7 +46,6 @@ class DismissableModalViewController: UIViewController {
         childViewController.edgeAnchors == contentView.edgeAnchors
         let stack = UIStackView(arrangedSubviews: [ titleAndCloseButtonView, contentView ])
         stack.axis = .vertical
-        stack.spacing = 20
         view.addSubview(stack)
         titleAndCloseButtonView.widthAnchor == stack.widthAnchor
         stack.edgeAnchors == self.edgeAnchors
