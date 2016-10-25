@@ -8,8 +8,9 @@
 
 import Foundation
 
-func label(withText text: String) -> UILabel {
+func label(withText text: String, font: UIFont) -> UILabel {
     let label = UILabel(frame: .zero)
     label.text = text
+    label.font = font
     return label
 }
