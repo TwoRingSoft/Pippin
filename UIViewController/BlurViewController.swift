@@ -6,7 +6,6 @@
 //  Copyright © 2016 Two Ring Software. All rights reserved.
 //
 
-import Cartography
 import Foundation
 
 final class BlurViewController: UIViewController {
@@ -19,24 +18,21 @@ final class BlurViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.setUpBackground()
-        self.fillWithChildViewController(viewController)
+        fillWithChildViewController(childViewController: viewController)
     }
 
 }
 
-extension BlurViewController {
+fileprivate extension BlurViewController {
 
     // MARK: Private
 
-    private func setUpBackground() {
-        let blurView = UIToolbar(frame: CGRectZero)
-        blurView.barStyle = .Black
-        blurView.translucent = true
+    func setUpBackground() {
+        let blurView = UIToolbar(frame: .zero)
+        blurView.barStyle = .black
+        blurView.isTranslucent = true
         view.addSubview(blurView)
-
-        constrain(blurView, view) { blurView, view in
-            blurView.edges == view.edges
-        }
+        blurView.fillSuperview()
     }
 
 }
