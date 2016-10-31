@@ -27,28 +27,32 @@ class DismissableModalViewController: UIViewController {
         titleAndCloseButtonView.addSubview(closeButton)
         closeButton.topAnchor == titleAndCloseButtonView.topAnchor
         closeButton.bottomAnchor == titleAndCloseButtonView.bottomAnchor
-        closeButton.trailingAnchor == titleAndCloseButtonView.trailingAnchor
+        closeButton.trailingAnchor == titleAndCloseButtonView.trailingAnchor - 10
         closeButton.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
         closeButton.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
-        let titleLabel = UILabel(frame: .zero)
-        titleLabel.text = title
-        titleLabel.textAlignment = .center
+        let titleLabel = label(withText: title ?? "", font: titleFont)
         
         titleAndCloseButtonView.addSubview(titleLabel)
-        titleLabel.centerAnchors == titleAndCloseButtonView.centerAnchors
+        titleLabel.centerYAnchor == titleAndCloseButtonView.centerYAnchor
+        titleLabel.leadingAnchor == titleAndCloseButtonView.leadingAnchor + 10
         titleLabel.trailingAnchor >= closeButton.leadingAnchor
-
-        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         let contentView = UIView(frame: .zero)
         contentView.addSubview(childViewController.view)
-        childViewController.edgeAnchors == contentView.edgeAnchors
-        let stack = UIStackView(arrangedSubviews: [ titleAndCloseButtonView, contentView ])
+        childViewController.view.fillSuperview()
+
+        let stack = UIStackView(arrangedSubviews: [
+            titleAndCloseButtonView,
+            contentView
+        ])
         stack.axis = .vertical
+        stack.spacing = 10
+        stack.distribution = .fill
         view.addSubview(stack)
         titleAndCloseButtonView.widthAnchor == stack.widthAnchor
-        stack.edgeAnchors == self.edgeAnchors
+        stack.fillSuperview(insets: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0))
 
         self.closeBlock = closeBlock
     }
