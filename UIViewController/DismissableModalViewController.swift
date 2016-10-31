@@ -16,7 +16,7 @@ class DismissableModalViewController: UIViewController {
     init(childViewController: UIViewController, onClose closeBlock: ((Void) -> Void)?) {
         super.init(nibName: nil, bundle: nil)
 
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
 
         addChildViewController(childViewController)
         title = childViewController.title
