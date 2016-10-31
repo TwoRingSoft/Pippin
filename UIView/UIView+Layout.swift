@@ -10,14 +10,14 @@ import Foundation
 
 extension UIView {
 
-    func fillSuperview() {
+    func fillSuperview(insets: UIEdgeInsets = .zero) {
         self.translatesAutoresizingMaskIntoConstraints = false
         guard let superview = superview else { return }
         for constraint in [
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-            topAnchor.constraint(equalTo: superview.topAnchor),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left),
+            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right),
+            topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top),
+            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom)
             ] {
                 constraint.isActive = true
         }
