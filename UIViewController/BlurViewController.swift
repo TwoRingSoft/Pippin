@@ -6,7 +6,7 @@
 //  Copyright © 2016 Two Ring Software. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class BlurViewController: UIViewController {
 

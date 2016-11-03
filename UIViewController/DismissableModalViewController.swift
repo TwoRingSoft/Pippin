@@ -7,7 +7,7 @@
 //
 
 import Anchorage
-import Foundation
+import UIKit
 
 class DismissableModalViewController: UIViewController {
 
