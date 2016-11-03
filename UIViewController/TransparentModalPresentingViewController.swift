@@ -1,6 +1,6 @@
 //
 //  TransparentModalPresentingViewController.swift
-//  McMileage
+//  shared-utils
 //
 //  Created by Andrew McKnight on 10/30/16.
 //  Copyright © 2016 andrew mcknight. All rights reserved.
