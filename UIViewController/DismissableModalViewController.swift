@@ -13,7 +13,7 @@ class DismissableModalViewController: UIViewController {
 
     private var closeBlock: ((Void) -> Void)?
 
-    init(childViewController: UIViewController, onClose closeBlock: ((Void) -> Void)?) {
+    init(childViewController: UIViewController, titleFont: UIFont, onClose closeBlock: ((Void) -> Void)?) {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = .clear
