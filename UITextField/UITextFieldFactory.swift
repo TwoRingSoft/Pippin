@@ -10,7 +10,7 @@ import UIKit
 
 extension UITextField {
 
-    static func textField(withPlaceholder placeholder: String?, text: String?, keyboardType: UIKeyboardType = .default) -> UITextField {
+    static func textField(withPlaceholder placeholder: String?, text: String? = nil, keyboardType: UIKeyboardType = .default) -> UITextField {
         let textField = UITextField(frame: .zero)
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder
