@@ -14,8 +14,8 @@ extension String {
         return (self as NSString).doubleValue
     }
 
-    var intValue: Int {
-        return (self as NSString).integerValue
+    var intValue: Int32 {
+        return (self as NSString).intValue
     }
 
 }
