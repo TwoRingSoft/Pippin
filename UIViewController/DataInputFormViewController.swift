@@ -15,6 +15,7 @@ class DataInputFormViewController: UIViewController {
     fileprivate var formView: UIView!
 
     fileprivate var textFields: [UITextField]!
+    fileprivate var oldTextFieldDelegates: [UITextField: UITextFieldDelegate?] = [:]
     
     fileprivate var currentTextField: UITextField?
     fileprivate var keyboardFrame: CGRect?
@@ -23,6 +24,9 @@ class DataInputFormViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.textFields = textFields
+        for textField in textFields {
+            oldTextFieldDelegates[textField] = textField.delegate
+        }
 
         formView = UIView(frame: .zero)
         formConfigure(formView)
@@ -74,6 +78,16 @@ extension DataInputFormViewController: UITextFieldDelegate {
         if keyboardFrame != nil {
             position(textField: textField, aboveKeyboardRect: keyboardFrame!)
         }
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
+            if unwrappedDelegate.responds(to: #selector(UITextFieldDelegate.textField(_:shouldChangeCharactersIn:replacementString:))) {
+                return unwrappedDelegate.textField!(textField, shouldChangeCharactersIn: range, replacementString: string)
+            }
+        }
+
+        return true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
