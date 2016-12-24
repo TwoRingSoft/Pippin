@@ -147,10 +147,11 @@ extension DataInputFormViewController {
 
     func watchKeyboardNotifications() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: OperationQueue.main) { note in
-            guard let currentTextField = self.currentTextField,
-                let keyboardRect = (note.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-
-                    return
+            guard
+                let currentTextField = self.currentTextField,
+                let keyboardRect = (note.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            else {
+                return
             }
 
             self.keyboardFrame = keyboardRect
