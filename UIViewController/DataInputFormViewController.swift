@@ -120,8 +120,7 @@ extension DataInputFormViewController {
     }
 
     func position(textField: UITextField, aboveKeyboardRect keyboardRect: CGRect) {
-        guard let rootView = AppDelegate.getAppDelegate().window?.rootViewController?.view else {
-
+        guard let rootView = UIApplication.shared.keyWindow?.rootViewController?.view else {
             return
         }
 
