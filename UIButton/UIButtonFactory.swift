@@ -8,29 +8,33 @@
 
 import UIKit
 
-/**
- - description: Create a UIButton with a tintColor and an image for `.Normal` and `.Highlighted`/`.Selected` states. The images should be template rendered in the asset catalog.
- - parameters:
-    - imageSetName: name of the image set in Asset catalog to use for `.Normal` state
-    - emphasisSuffix: suffix to append to `imageSetName` to show for `.Highlighted` and `.Selected` states (defaults to empty string to use same image for everything)
-    - tintColor: the tint color to use on the images (defaults to white)
- */
-func createButtonWithImageSetName(_ imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white) -> UIButton {
-    let button = UIButton(type: .custom)
-    button.tintColor = tintColor
-    button.setImage(UIImage(named: "\(imageSetName)"), for: .normal)
-    button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .highlighted)
-    button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .selected)
-    return button
-}
+extension UIButton {
 
-func button(withTitle title: String, tintColor color: UIColor = .black) -> UIButton {
-    let button = UIButton(type: .custom)
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(color, for: .normal)
-    if let rgb = color.rgb() {
-        button.setTitleColor(UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5), for: .highlighted)
+    /**
+     - description: Create a UIButton with a tintColor and an image for `.Normal` and `.Highlighted`/`.Selected` states. The images should be template rendered in the asset catalog.
+     - parameters:
+     - imageSetName: name of the image set in Asset catalog to use for `.Normal` state
+     - emphasisSuffix: suffix to append to `imageSetName` to show for `.Highlighted` and `.Selected` states (defaults to empty string to use same image for everything)
+     - tintColor: the tint color to use on the images (defaults to white)
+     */
+    class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.tintColor = tintColor
+        button.setImage(UIImage(named: "\(imageSetName)"), for: .normal)
+        button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .highlighted)
+        button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .selected)
+        return button
     }
 
-    return button
+    class func button(withTitle title: String, tintColor color: UIColor = .black) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        if let rgb = color.rgb() {
+            button.setTitleColor(UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5), for: .highlighted)
+        }
+        
+        return button
+    }
+    
 }
