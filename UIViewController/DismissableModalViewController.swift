@@ -13,7 +13,7 @@ class DismissableModalViewController: UIViewController {
 
     private var closeBlock: ((Void) -> Void)?
 
-    init(childViewController: UIViewController, titleFont: UIFont, onClose closeBlock: ((Void) -> Void)?) {
+    init(childViewController: UIViewController, titleFont: UIFont, onClose closeBlock: ((Void) -> Void)? = nil) {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = .clear
@@ -23,7 +23,7 @@ class DismissableModalViewController: UIViewController {
 
         let titleAndCloseButtonView = UIView(frame: .zero)
 
-        let closeButton = createButtonWithImageSetName("close", emphasisSuffix: "-filled", tintColor: .black)
+        let closeButton = UIButton.button(withImageSetName: "close", emphasisSuffix: "-filled", tintColor: .black)
         titleAndCloseButtonView.addSubview(closeButton)
         closeButton.topAnchor == titleAndCloseButtonView.topAnchor
         closeButton.bottomAnchor == titleAndCloseButtonView.bottomAnchor
@@ -33,7 +33,7 @@ class DismissableModalViewController: UIViewController {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         let titleLabel = UILabel.label(withText: title ?? "", font: titleFont)
-        
+
         titleAndCloseButtonView.addSubview(titleLabel)
         titleLabel.centerYAnchor == titleAndCloseButtonView.centerYAnchor
         titleLabel.leadingAnchor == titleAndCloseButtonView.leadingAnchor + 10
