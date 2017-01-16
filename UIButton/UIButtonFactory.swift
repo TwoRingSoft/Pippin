@@ -31,14 +31,16 @@ extension UIButton {
         return button
     }
 
-    class func button(withTitle title: String, tintColor color: UIColor = .black) -> UIButton {
+    class func button(withTitle title: String, tintColor color: UIColor = .black, target: Any? = nil, selector: Selector? = nil) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
         button.setTitleColor(color, for: .normal)
         if let rgb = color.rgb() {
             button.setTitleColor(UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5), for: .highlighted)
         }
-        
+        if selector != nil {
+            button.addTarget(target, action: selector!, for: .touchUpInside)
+        }
         return button
     }
     
