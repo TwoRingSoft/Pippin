@@ -37,14 +37,14 @@ extension TransparentModalPresentingViewController {
 
     // MARK: Public
 
-    func presentTransparently(animated: Bool, completion: ((Bool) -> Void)?) {
+    func presentTransparently(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         animateViewWithConstraintConstant(constant: 0, animated: animated, completion: { finished in
             self.view.isUserInteractionEnabled = true
             completion?(finished)
         })
     }
 
-    func dismissTransparently(animated: Bool, completion: ((Bool) -> Void)?) {
+    func dismissTransparently(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         animateViewWithConstraintConstant(constant: view.bounds.height, animated: animated, completion: { finished in
             self.view.isUserInteractionEnabled = false
             completion?(finished)
