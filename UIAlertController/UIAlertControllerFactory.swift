@@ -18,7 +18,7 @@ extension UIViewController {
         })
     }
 
-    func showAlert(withTitle: String, message: String, confirmTitle: String = "OK", completion: ((Void) -> Void)?) {
+    func showAlert(withTitle title: String, message: String, confirmTitle: String = "OK", completion: ((Void) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .destructive, handler: { action in
             completion?()
@@ -26,7 +26,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func showCancellableAlert(withTitle: String, message: String, confirmTitle: String = "OK", cancelTitle: String = "Cancel", style: UIAlertControllerStyle = .alert, completion: ((Bool) -> Void)?) {
+    func showCancellableAlert(withTitle title: String, message: String, confirmTitle: String = "OK", cancelTitle: String = "Cancel", style: UIAlertControllerStyle = .alert, completion: ((Bool) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .destructive, handler: { action in
             completion?(true)
