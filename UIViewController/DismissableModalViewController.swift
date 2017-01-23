@@ -29,6 +29,7 @@ class DismissableModalViewController: UIViewController {
         closeButton.bottomAnchor == titleAndCloseButtonView.bottomAnchor
         closeButton.trailingAnchor == titleAndCloseButtonView.trailingAnchor - 10
         closeButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal)
+        closeButton.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         let titleLabel = UILabel.label(withText: title ?? "", font: titleFont, alignment: .center)
