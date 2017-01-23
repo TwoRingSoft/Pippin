@@ -39,7 +39,7 @@ class DismissableModalViewController: UIViewController {
         titleAndCloseButtonView.addSubview(titleLabel)
         titleLabel.centerYAnchor == titleAndCloseButtonView.centerYAnchor
         titleLabel.leadingAnchor == titleAndCloseButtonView.leadingAnchor + 10
-        titleLabel.trailingAnchor <= closeButton.leadingAnchor - 10
+        titleLabel.trailingAnchor == closeButton.leadingAnchor - 10
 
         let contentView = UIView(frame: .zero)
         contentView.addSubview(childViewController.view)
