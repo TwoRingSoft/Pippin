@@ -40,7 +40,7 @@ private extension InfoViewController {
         let build = getBundleInfoWithKey("CFBundleVersion")
         let appNameString = getBundleInfoWithKey("CFBundleName")
         let tworingURL = "http://tworingsoft.com"
-        let copyrightString = "© 2016"
+        let copyrightString = "© 2017"
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string:
             "\(appNameString)" +
                 "\n\n" +
