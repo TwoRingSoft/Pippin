@@ -36,9 +36,9 @@ private extension InfoViewController {
         textView.isScrollEnabled = false
         textView.linkTextAttributes = [ NSForegroundColorAttributeName: UIColor.lightGray, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ]
 
-        let version = getBundleInfoWithKey("CFBundleShortVersionString")
-        let build = getBundleInfoWithKey("CFBundleVersion")
-        let appNameString = getBundleInfoWithKey("CFBundleName")
+        let version = Bundle.getSemanticVersion()
+        let build = Bundle.getBuild()
+        let appNameString = Bundle.getAppName()
         let tworingURL = "http://tworingsoft.com"
         let copyrightString = "© 2017"
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string:
@@ -90,19 +90,6 @@ private extension InfoViewController {
         textView.leadingAnchor == view.leadingAnchor
         textView.trailingAnchor == view.trailingAnchor
         textView.heightAnchor == height + inset + paddingDelta
-    }
-
-    func getBundleInfoWithKey(_ key: String) -> String {
-        guard let infoDict = Bundle.main.infoDictionary else {
-            print("[%s] could not get infoDictionary from mainBundle", type(of: self))
-            return "?"
-        }
-
-        guard let version = infoDict[key] as? String else {
-            print("[%s] could not get value from bundle dictionary for key %@", type(of: self), key)
-            return "?"
-        }
-        return version
     }
     
 }
