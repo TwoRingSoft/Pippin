@@ -18,4 +18,21 @@ extension String {
         return (self as NSString).intValue
     }
 
+    /// 0 if no unsigned integer exists.
+    var unsignedIntegerValue: UInt {
+        var value: UInt64 = 0
+        let scanner = Scanner(string: self)
+        if scanner.scanUnsignedLongLong(&value) {
+            if value == UInt64(ULLONG_MAX) {
+                print("[%@] could not extract unsigned integer from %@ due to overflow.", instanceType(self as NSObject), self)
+            }
+
+            return UInt(value)
+        } else {
+            print("[%@] could not extract unsigned integer from %@.", instanceType(self as NSObject), self)
+            return 0
+        }
+
+    }
+
 }
