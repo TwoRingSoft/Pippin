@@ -9,4 +9,4 @@
 import Foundation
 
 /// ULLONG_MAX is not currently defined in Swift.
-let ULLONG_MAX = UInt(2) * UInt(LLONG_MAX) + UInt(1)
+let ULLONG_MAX = UInt64(2) * UInt64(LLONG_MAX) + UInt64(1)
