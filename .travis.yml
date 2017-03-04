@@ -1,0 +1,10 @@
+language: objective-c
+osx_image: xcode 8.2
+script: 
+    - xcodebuild -project shared-utils-tests analyze test
+notifications:
+    email:
+        recipients:
+         - andrew@tworingsoft.com
+        on_success: change
+        on_failure: always
