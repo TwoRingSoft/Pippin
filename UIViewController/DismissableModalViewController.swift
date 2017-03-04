@@ -65,7 +65,8 @@ class DismissableModalViewController: UIViewController {
     }
 
     func closeButtonTapped() {
-        closeBlock?()
+        guard let closeBlock = closeBlock else { return }
+        DispatchQueue.main.async(execute: closeBlock)
     }
 
 }
