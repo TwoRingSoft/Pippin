@@ -1,15 +1,16 @@
 //
-//  shared_utils_ios_tests.swift
-//  shared-utils-ios-tests
+//  shared_utilsTests.swift
+//  shared-utilsTests
 //
 //  Created by Andrew McKnight on 3/4/17.
 //
 //
 
 import XCTest
+@testable import SharedUtils
 
-class shared_utils_ios_tests: XCTestCase {
-    
+class shared_utilsTests: XCTestCase {
+
     func testTribool() {
         let p: [Tribool] = [ false, false, false, nil, nil, nil, true, true, true ]
         let q: [Tribool] = [ false, nil, true, false, nil, true, false, nil, true ]

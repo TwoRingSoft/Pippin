@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "494822241E6B73C2003DD4EC"
-               BuildableName = "SharedUtilsIOS.framework"
-               BlueprintName = "shared-utils-ios"
+               BlueprintIdentifier = "494822DC1E6B7BC8003DD4EC"
+               BuildableName = "shared-utils-harness-ios.app"
+               BlueprintName = "shared-utils-harness-ios"
                ReferencedContainer = "container:shared-utils-tests.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "494821BA1E6B4F0C003DD4EC"
-               BuildableName = "shared-utils-ios-tests.xctest"
-               BlueprintName = "shared-utils-ios-tests"
+               BlueprintIdentifier = "494822C91E6B7945003DD4EC"
+               BuildableName = "SharedUtilsTests.xctest"
+               BlueprintName = "shared-utilsTests"
                ReferencedContainer = "container:shared-utils-tests.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "494822241E6B73C2003DD4EC"
-            BuildableName = "SharedUtilsIOS.framework"
-            BlueprintName = "shared-utils-ios"
+            BlueprintIdentifier = "494822DC1E6B7BC8003DD4EC"
+            BuildableName = "shared-utils-harness-ios.app"
+            BlueprintName = "shared-utils-harness-ios"
             ReferencedContainer = "container:shared-utils-tests.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,15 +61,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "494822241E6B73C2003DD4EC"
-            BuildableName = "SharedUtilsIOS.framework"
-            BlueprintName = "shared-utils-ios"
+            BlueprintIdentifier = "494822DC1E6B7BC8003DD4EC"
+            BuildableName = "shared-utils-harness-ios.app"
+            BlueprintName = "shared-utils-harness-ios"
             ReferencedContainer = "container:shared-utils-tests.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +80,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "494822241E6B73C2003DD4EC"
-            BuildableName = "SharedUtilsIOS.framework"
-            BlueprintName = "shared-utils-ios"
+            BlueprintIdentifier = "494822DC1E6B7BC8003DD4EC"
+            BuildableName = "shared-utils-harness-ios.app"
+            BlueprintName = "shared-utils-harness-ios"
             ReferencedContainer = "container:shared-utils-tests.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
