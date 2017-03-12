@@ -10,14 +10,37 @@ import Crashlytics
 import Foundation
 import XCGLogger
 
+enum LogLevel: Int {
+
+    case unknown = 0
+    case verbose
+    case debug
+    case info
+    case warning
+    case error
+
+    func xcgLogLevel() -> XCGLogger.Level {
+        switch self {
+        case .unknown: return XCGLogger.Level.info // default to info
+        case .verbose: return XCGLogger.Level.verbose
+        case .debug: return XCGLogger.Level.debug
+        case .info: return XCGLogger.Level.info
+        case .warning: return XCGLogger.Level.warning
+        case .error: return XCGLogger.Level.error
+        }
+    }
+
+}
+
 final class LogController: NSObject {
 
+    var logLevel: LogLevel = .info
     fileprivate var appName: String!
     fileprivate var loggingQueue: DispatchQueue!
     fileprivate var logFileURL: URL?
     fileprivate let xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
 
-    init(forAppNamed appName: String, logLevel: XCGLogger.Level) {
+    init(forAppNamed appName: String, logLevel: LogLevel) {
         super.init()
         self.appName = appName
         self.loggingQueue = DispatchQueue(label: "com.tworingsoft.\(appName).logger-queue")
@@ -28,7 +51,7 @@ final class LogController: NSObject {
         }
         self.logFileURL = logFileURL
 
-        xcgLogger.setup(level: logLevel,
+        xcgLogger.setup(level: logLevel.xcgLogLevel(),
                         showLogIdentifier: false,
                         showFunctionName: false,
                         showThreadName: false,
@@ -37,7 +60,7 @@ final class LogController: NSObject {
                         showLineNumbers: false,
                         showDate: true,
                         writeToFile: logFileURL,
-                        fileLevel: logLevel
+                        fileLevel: logLevel.xcgLogLevel()
         )
     }
 
@@ -101,6 +124,7 @@ extension LogController {
 
 }
 
+// MARK: Private
 private extension LogController {
 
     func resetContentsOfLog() {
@@ -123,11 +147,7 @@ private extension LogController {
             }
         } catch {
             let message = String(format: "[%@] Could not read logging file.", instanceType(self))
-            let domain: ErrorDomain = .Logging
-            let code: LoggingErrorCode = .CouldNotReadLogFile
-            let wrappedError = NSError(domain: domain.domainString(),
-                                       code: code.rawValue,
-                                       userInfo: [ NSLocalizedDescriptionKey: message, NSUnderlyingErrorKey: error as NSError])
+            let wrappedError = LoggingErrorCode.CouldNotReadLogFile.error(withDescription: message, userInfo: [ NSUnderlyingErrorKey: error as NSError ])
             logError(message: message, error: wrappedError)
         }
         return contents
@@ -147,12 +167,25 @@ private extension LogController {
 
     func reportMissingLogFile() {
         let message = String(format: "[%@] Could not locate log file.", instanceType(self))
-        let domain: ErrorDomain = .Logging
-        let code: LoggingErrorCode = .NoLoggingFile
-        let error = NSError(domain: domain.domainString(),
-                            code: code.rawValue,
-                            userInfo: [ NSLocalizedDescriptionKey: message ])
-        logError(message: message, error: error)
+        let wrappedError = LoggingErrorCode.NoLoggingFile.error(withDescription: message)
+        logError(message: message, error: wrappedError)
     }
     
+}
+
+// MARK: Errors
+
+let LogControllerErrorUserFacingDescriptionKey = String(asRDNSForApp: "dough", domain: "error", subpaths: [ "logging", "user-info", "key", "user-facing-description" ])
+
+enum LoggingErrorCode: Int {
+
+    case NoLoggingFile
+    case CouldNotReadLogFile
+
+    func error(withDescription description: String, userInfo: [ AnyHashable: Any ]? = nil) -> NSError {
+        let domain = String(asRDNSForApp: "dough", domain: "error", subpaths: [ "logging" ])
+        var info: [ AnyHashable: Any ] = [ LogControllerErrorUserFacingDescriptionKey: description ]
+        userInfo?.forEach { info[$0.key] = $0.value }
+        return NSError(domain: domain, code: self.rawValue, userInfo: info)
+    }
 }
