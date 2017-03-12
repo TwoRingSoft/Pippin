@@ -35,17 +35,16 @@ enum LogLevel: Int {
 final class LogController: NSObject {
 
     var logLevel: LogLevel = .info
-    fileprivate var appName: String!
     fileprivate var loggingQueue: DispatchQueue!
     fileprivate var logFileURL: URL?
     fileprivate let xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
 
-    init(forAppNamed appName: String, logLevel: LogLevel) {
+    init(name: String, logLevel: LogLevel) {
         super.init()
-        self.appName = appName
-        self.loggingQueue = DispatchQueue(label: "com.tworingsoft.\(appName).logger-queue")
+        let appName = Bundle.getAppName()
+        self.loggingQueue = DispatchQueue(label: "com.tworingsoft.\(appName).logger.\(name).queue")
 
-        guard let logFileURL = urlForFilename(fileName: "\(appName).log", inDirectoryType: .libraryDirectory) else {
+        guard let logFileURL = urlForFilename(fileName: "\(appName)-\(name).log", inDirectoryType: .libraryDirectory) else {
             reportMissingLogFile()
             return
         }
