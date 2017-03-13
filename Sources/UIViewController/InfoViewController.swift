@@ -42,6 +42,7 @@ private extension InfoViewController {
         let appNameString = Bundle.getAppName()
         let tworingURL = "http://tworingsoft.com"
         let copyrightString = "© 2017"
+        let logoReplacementCharacter = " " // it doesn't actually matter what this is, it's replaced by position, not character. just want to call out that there is something here, that will be replaced
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string:
             "\(appNameString)" +
                 "\n\n" +
@@ -49,7 +50,7 @@ private extension InfoViewController {
                 (acknowledgements != nil ? "\n\n\(acknowledgements!)" : "") +
                 (thirdPartyKits != nil ? "\n\n3rd party software used in this app:\n \(thirdPartyKits!.joined(separator: "\n"))" : "") +
                 "\n\n" +
-                " \(copyrightString) b" + // add one space before because otherwise it doesn't center properly after insert logo image
+                " \(copyrightString) \(logoReplacementCharacter)" + // add one space before because otherwise it doesn't center properly after insert logo image
                 "\n\n\n\n" +
             "\(tworingURL)"
         )
