@@ -13,15 +13,12 @@ class TextFieldTableViewCell: UITableViewCell {
 
     static let reuseIdentifier = "TextFieldTableViewCell"
 
-    var title: String!
-
     let textField = UITextField(frame: .zero)
     let titleLabel = UILabel(frame: .zero)
 
-    init(title: String) {
+    init(title: String, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)) {
         super.init(style: .default, reuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
-        self.title = title
-        setUpUI()
+        setUpUI(title: title, font: font)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,8 +31,9 @@ class TextFieldTableViewCell: UITableViewCell {
 
 extension TextFieldTableViewCell {
 
-    func setUpUI() {
+    func setUpUI(title: String, font: UIFont) {
         titleLabel.text = title
+        titleLabel.font = font
         titleLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
 
         textField.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
