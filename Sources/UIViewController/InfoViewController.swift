@@ -10,6 +10,33 @@ import Anchorage
 import Crashlytics
 import UIKit
 
+enum ImageAttachment: String {
+
+    case twoRing = "trs-logo"
+    case twitter = "twitter-logo"
+    case facebook = "facebook-logo"
+    case linkedin = "linkedin-logo"
+
+    func image() -> UIImage {
+        switch self {
+        case .twoRing: return #imageLiteral(resourceName: "trs-logo")
+        case .twitter: return #imageLiteral(resourceName: "twitter-logo")
+        case .facebook: return #imageLiteral(resourceName: "facebook-logo")
+        case .linkedin: return #imageLiteral(resourceName: "linkedin-logo")
+        }
+    }
+
+    func url() -> String {
+        switch self {
+        case .twoRing: return "http://tworingsoft.com"
+        case .twitter: return "https://twitter.com/tworingsoft"
+        case .facebook: return "https://www.facebook.com/tworingsoft"
+        case .linkedin: return "https://www.linkedin.com/company/11026810"
+        }
+    }
+    
+}
+
 class InfoViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
@@ -18,17 +45,103 @@ class InfoViewController: UIViewController {
 
     required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
         super.init(nibName: nil, bundle: nil)
-        configureUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
+        setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
+        setUpSecretCrash()
+    }
+
+}
+
+// MARK: Actions
+extension InfoViewController {
+
+    func twitterPressed() {
+        openURL(URLString: ImageAttachment.twitter.url())
+    }
+
+    func facebookPressed() {
+        openURL(URLString: ImageAttachment.facebook.url())
+    }
+
+    func linkedinPressed() {
+        openURL(URLString: ImageAttachment.linkedin.url())
+    }
+
+    func secretTestCrash() {
+        Crashlytics.sharedInstance().crash()
+    }
+
+    private func openURL(URLString: String) {
+        UIApplication.shared.openURL(URL(string: URLString)!)
     }
 
 }
 
 private extension InfoViewController {
 
-    func configureUI(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
-
+    func setUpUI(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
         view.backgroundColor = UIColor.white
 
+        let textView = configureTextView(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
+        let socialLinks = configureSocialLinks()
+        let copyright = configureCopyright()
+
+        view.addSubview(textView)
+        view.addSubview(socialLinks)
+        view.addSubview(copyright)
+
+        let width = view.bounds.width
+        view.addSubview(textView)
+        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let height = textView.attributedText.boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil).height
+        let inset = textView.contentInset.top + textView.contentInset.bottom + textView.textContainerInset.top + textView.textContainerInset.bottom
+        let paddingDelta: CGFloat = 20 // for some reason the bounding size is not computed quite correctly
+
+        NSLayoutConstraint(item: textView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 0.75, constant: 1).isActive = true
+        textView.leadingAnchor == view.leadingAnchor
+        textView.trailingAnchor == view.trailingAnchor
+        textView.heightAnchor == height + inset + paddingDelta
+
+        socialLinks.topAnchor == textView.bottomAnchor
+        socialLinks.centerXAnchor == textView.centerXAnchor
+
+        copyright.topAnchor == socialLinks.bottomAnchor + 30
+        copyright.centerXAnchor == socialLinks.centerXAnchor
+    }
+
+    func configureSocialLinks() -> UIView {
+        let twitterButton = UIButton.button(withImageSetName: "twitter-logo")
+        let facebookButton = UIButton.button(withImageSetName: "facebook-logo")
+        let linkedinButton = UIButton.button(withImageSetName: "linkedin-logo")
+        let views = [ twitterButton, facebookButton, linkedinButton ]
+        views.forEach { $0.tintColor = .lightLightGray }
+
+        twitterButton.addTarget(self, action: #selector(twitterPressed), for: .touchUpInside)
+        facebookButton.addTarget(self, action: #selector(facebookPressed), for: .touchUpInside)
+        linkedinButton.addTarget(self, action: #selector(linkedinPressed), for: .touchUpInside)
+
+        let stack = UIStackView(arrangedSubviews: views)
+        stack.spacing = 20
+
+        return stack
+    }
+
+    func configureCopyright() -> UILabel {
+        let copyrightString = "© 2017"
+        let string = NSMutableAttributedString(string: "\(copyrightString) \(ImageAttachment.twoRing.rawValue)")
+
+        // insert two ring logo and style copyright text to match
+        let copyrightRange = (string.string as NSString).range(of: copyrightString)
+        string.addAttributes([NSForegroundColorAttributeName: UIColor.lightGray], range: copyrightRange)
+        string.addAttributes([NSFontAttributeName: textFont], range: NSMakeRange(0, string.length))
+
+        replace(attachmentImage: .twoRing, in: string, scale: ImageAttachment.twoRing.image().size.height / textFont.lineHeight * UIScreen.main.scale * 1.7)
+
+        let label = UILabel(frame: .zero)
+        label.attributedText = string
+        return label
+    }
+
+    func configureTextView(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) -> UITextView {
         let textView = UITextView(frame: CGRect.zero)
         textView.isEditable = false
         textView.backgroundColor = nil
@@ -41,34 +154,19 @@ private extension InfoViewController {
         let build = Bundle.getBuild()
         let appNameString = Bundle.getAppName()
         let tworingURL = "http://tworingsoft.com"
-        let copyrightString = "© 2017"
-        let logoReplacementCharacter = " " // it doesn't actually matter what this is, it's replaced by position, not character. just want to call out that there is something here, that will be replaced
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string:
             "\(appNameString)" +
-                "\n\n" +
-                "version \(version) build \(build)" +
-                (acknowledgements != nil ? "\n\n\(acknowledgements!)" : "") +
-                (thirdPartyKits != nil ? "\n\n3rd party software used in this app:\n \(thirdPartyKits!.joined(separator: "\n"))" : "") +
-                "\n\n" +
-                " \(copyrightString) \(logoReplacementCharacter)" + // add one space before because otherwise it doesn't center properly after insert logo image
-                "\n\n\n\n" +
+            "\n\n" +
+            "version \(version) build \(build)" +
+            (acknowledgements != nil ? "\n\n\(acknowledgements!)" : "") +
+            (thirdPartyKits != nil ? "\n\n3rd party software used in this app:\n \(thirdPartyKits!.joined(separator: "\n"))" : "") +
+            "\n\n\n" +
             "\(tworingURL)"
         )
 
         // style the title
         let titleRange = (attributedString.string as NSString).range(of: appNameString)
         attributedString.addAttributes([NSFontAttributeName : titleFont], range: titleRange)
-
-        // insert two ring logo and style copyright text to match
-        let copyrightRange = (attributedString.string as NSString).range(of: copyrightString)
-        attributedString.addAttributes([NSForegroundColorAttributeName: UIColor.lightGray], range: copyrightRange)
-
-        let twoRingNameRange = NSMakeRange(copyrightRange.location + copyrightRange.length + 1, 1)
-        let textAttachment = NSTextAttachment()
-        let attachmentImage = UIImage(named: "trs-logo")!
-        textAttachment.image = UIImage(cgImage: attachmentImage.cgImage!, scale: attachmentImage.size.height / textFont.lineHeight * UIScreen.main.scale * 1.7, orientation: .up)
-        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-        attributedString.replaceCharacters(in: twoRingNameRange, with: attrStringWithImage)
 
         // center everything
         let paragraphStyle = NSMutableParagraphStyle()
@@ -81,19 +179,15 @@ private extension InfoViewController {
         // set the string
         textView.attributedText = attributedString
 
-        let width = view.bounds.width
-        view.addSubview(textView)
-        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let height = attributedString.boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil).height
-        let inset = textView.contentInset.top + textView.contentInset.bottom + textView.textContainerInset.top + textView.textContainerInset.bottom
-        let paddingDelta: CGFloat = 20 // for some reason the bounding size is not computed quite correctly
+        return textView
+    }
 
-        textView.centerYAnchor == view.centerYAnchor
-        textView.leadingAnchor == view.leadingAnchor
-        textView.trailingAnchor == view.trailingAnchor
-        textView.heightAnchor == height + inset + paddingDelta
-
-        setUpSecretCrash()
+    func replace(attachmentImage: ImageAttachment, in attributedString: NSMutableAttributedString, scale: CGFloat) {
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(cgImage: attachmentImage.image().cgImage!, scale: scale, orientation: .up)
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let range = (attributedString.string as NSString).range(of: attachmentImage.rawValue)
+        attributedString.replaceCharacters(in: range, with: attachmentString)
     }
 
     func setUpSecretCrash() {
@@ -107,12 +201,4 @@ private extension InfoViewController {
         button.addGestureRecognizer(secretCrashGesture)
     }
     
-}
-
-extension InfoViewController {
-
-    func secretTestCrash() {
-        Crashlytics.sharedInstance().crash()
-    }
-
 }
