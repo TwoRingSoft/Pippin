@@ -7,6 +7,7 @@
 //
 
 import Anchorage
+import Crashlytics
 import UIKit
 
 class InfoViewController: UIViewController {
@@ -90,6 +91,27 @@ private extension InfoViewController {
         textView.leadingAnchor == view.leadingAnchor
         textView.trailingAnchor == view.trailingAnchor
         textView.heightAnchor == height + inset + paddingDelta
+
+        setUpSecretCrash()
+    }
+
+    func setUpSecretCrash() {
+        let button = UIButton(type: .custom)
+        view.addSubview(button)
+        button.bottomAnchor == view.bottomAnchor
+        button.trailingAnchor == view.trailingAnchor
+
+        let secretCrashGesture = UITapGestureRecognizer(target: self, action: #selector(secretTestCrash))
+        secretCrashGesture.numberOfTapsRequired = 10
+        button.addGestureRecognizer(secretCrashGesture)
     }
     
+}
+
+extension InfoViewController {
+
+    func secretTestCrash() {
+        Crashlytics.sharedInstance().crash()
+    }
+
 }
