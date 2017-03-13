@@ -10,7 +10,7 @@ import Anchorage
 import Crashlytics
 import UIKit
 
-enum ImageAttachment: String {
+enum SocialIcon: String {
 
     case twoRing = "trs-logo"
     case twitter = "twitter-logo"
@@ -55,15 +55,15 @@ class InfoViewController: UIViewController {
 extension InfoViewController {
 
     func twitterPressed() {
-        openURL(URLString: ImageAttachment.twitter.url())
+        openURL(URLString: SocialIcon.twitter.url())
     }
 
     func facebookPressed() {
-        openURL(URLString: ImageAttachment.facebook.url())
+        openURL(URLString: SocialIcon.facebook.url())
     }
 
     func linkedinPressed() {
-        openURL(URLString: ImageAttachment.linkedin.url())
+        openURL(URLString: SocialIcon.linkedin.url())
     }
 
     func secretTestCrash() {
@@ -127,14 +127,14 @@ private extension InfoViewController {
 
     func configureCopyright() -> UILabel {
         let copyrightString = "© 2017"
-        let string = NSMutableAttributedString(string: "\(copyrightString) \(ImageAttachment.twoRing.rawValue)")
+        let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
 
         // insert two ring logo and style copyright text to match
         let copyrightRange = (string.string as NSString).range(of: copyrightString)
         string.addAttributes([NSForegroundColorAttributeName: UIColor.lightGray], range: copyrightRange)
         string.addAttributes([NSFontAttributeName: textFont], range: NSMakeRange(0, string.length))
 
-        replace(attachmentImage: .twoRing, in: string, scale: ImageAttachment.twoRing.image().size.height / textFont.lineHeight * UIScreen.main.scale * 1.7)
+        replace(attachmentImage: .twoRing, in: string, scale: SocialIcon.twoRing.image().size.height / textFont.lineHeight * UIScreen.main.scale * 1.7)
 
         let label = UILabel(frame: .zero)
         label.attributedText = string
@@ -182,7 +182,7 @@ private extension InfoViewController {
         return textView
     }
 
-    func replace(attachmentImage: ImageAttachment, in attributedString: NSMutableAttributedString, scale: CGFloat) {
+    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, scale: CGFloat) {
         let attachment = NSTextAttachment()
         attachment.image = UIImage(cgImage: attachmentImage.image().cgImage!, scale: scale, orientation: .up)
         let attachmentString = NSAttributedString(attachment: attachment)
