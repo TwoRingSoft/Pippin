@@ -71,7 +71,12 @@ extension InfoViewController {
     }
 
     private func openURL(URLString: String) {
-        UIApplication.shared.openURL(URL(string: URLString)!)
+        let url = URL(string: URLString)!
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [String: Any](), completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 
 }
