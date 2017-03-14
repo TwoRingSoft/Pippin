@@ -83,7 +83,7 @@ private extension InfoViewController {
 
         let textView = configureTextView(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
         let socialLinks = configureSocialLinks()
-        let copyright = configureCopyright()
+        let copyright = configureCopyright(textFont: textFont)
 
         view.addSubview(textView)
         view.addSubview(socialLinks)
@@ -125,7 +125,7 @@ private extension InfoViewController {
         return stack
     }
 
-    func configureCopyright() -> UILabel {
+    func configureCopyright(textFont: UIFont) -> UILabel {
         let copyrightString = "© 2017"
         let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
 
