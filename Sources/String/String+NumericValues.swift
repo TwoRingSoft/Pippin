@@ -10,6 +10,18 @@ import Foundation
 
 extension String {
 
+    func isAllDigits() -> Bool {
+        let nondecimalDigitSet = NSCharacterSet.decimalDigits.inverted
+
+        let nondecimalCharacters = self.characters.filter { char in
+            let str = String(char)
+            guard let uni = UnicodeScalar(str) else { return false }
+            return nondecimalDigitSet.contains(uni)
+        }
+
+        return nondecimalCharacters.count == 0
+    }
+
     var doubleValue: Double {
         return (self as NSString).doubleValue
     }
