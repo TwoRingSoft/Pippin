@@ -1,10 +1,10 @@
 language: objective-c
 osx_image: xcode 8.2
 script: 
-    - xcodebuild -project shared-utils-tests/shared-utils-tests.xcodeproj -scheme shared-utils-ios -configuration Release -sdk iphoneos analyze test
+    - rake test
 notifications:
     email:
         recipients:
-         - andrew@tworingsoft.com
+         - andrew+travis+shared-utils@tworingsoft.com
         on_success: change
         on_failure: always
