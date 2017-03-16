@@ -4,7 +4,7 @@ task :test_travis do
 	xcodebuild \
 	-project Xcode/shared-utils-tests.xcodeproj \
 	-scheme shared-utilsTests \
-	-destination \'platform=iOS Simulator,id=EF14975A-06EA-4CD6-8003-0767995A2DC0\' \
+	-destination \'id=EF14975A-06EA-4CD6-8003-0767995A2DC0\' \
 	test'
 end
 
