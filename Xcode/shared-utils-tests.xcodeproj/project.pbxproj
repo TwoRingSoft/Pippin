@@ -40,6 +40,8 @@
 		494823431E6BBDF5003DD4EC /* ULLONG_MAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */; };
 		494823441E6BBDF5003DD4EC /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823261E6BBDF4003DD4EC /* Build.swift */; };
 		494823451E6BBDF5003DD4EC /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823271E6BBDF4003DD4EC /* SemanticVersion.swift */; };
+		49A5BE271E7A4F6A00F59393 /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE261E7A4F6A00F59393 /* Array+Search.swift */; };
+		49A5BE291E7A4FA400F59393 /* Array+Search_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */; };
 		49A5BE2B1E7A4FBD00F59393 /* Tribool_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */; };
 		49C4DF821E78E91600103663 /* String+NumericValues_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */; };
 /* End PBXBuildFile section */
@@ -111,6 +113,8 @@
 		494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ULLONG_MAX.swift; sourceTree = "<group>"; };
 		494823261E6BBDF4003DD4EC /* Build.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Build.swift; sourceTree = "<group>"; };
 		494823271E6BBDF4003DD4EC /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
+		49A5BE261E7A4F6A00F59393 /* Array+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search.swift"; sourceTree = "<group>"; };
+		49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search_Test.swift"; sourceTree = "<group>"; };
 		49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tribool_Test.swift; sourceTree = "<group>"; };
 		49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumericValues_Test.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +179,7 @@
 		494822CE1E6B7945003DD4EC /* shared-utilsTests */ = {
 			isa = PBXGroup;
 			children = (
+				49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */,
 				494822D11E6B7945003DD4EC /* Info.plist */,
 				49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */,
 				49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */,
@@ -198,6 +203,7 @@
 		494822F71E6BBDF4003DD4EC /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				49A5BE251E7A4F6A00F59393 /* Array */,
 				494822F81E6BBDF4003DD4EC /* Bool */,
 				494822FA1E6BBDF4003DD4EC /* CGRect */,
 				494822FC1E6BBDF4003DD4EC /* CLLocationManager */,
@@ -377,6 +383,14 @@
 			path = Versioning;
 			sourceTree = "<group>";
 		};
+		49A5BE251E7A4F6A00F59393 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				49A5BE261E7A4F6A00F59393 /* Array+Search.swift */,
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -542,6 +556,7 @@
 				494823421E6BBDF5003DD4EC /* UIViewController+ChildViewControllers.swift in Sources */,
 				494823441E6BBDF5003DD4EC /* Build.swift in Sources */,
 				494823381E6BBDF4003DD4EC /* MoreColors.swift in Sources */,
+				49A5BE271E7A4F6A00F59393 /* Array+Search.swift in Sources */,
 				494823291E6BBDF4003DD4EC /* Operations.swift in Sources */,
 				4948232B1E6BBDF4003DD4EC /* CoreData+Utils.swift in Sources */,
 				494823321E6BBDF4003DD4EC /* Types.swift in Sources */,
@@ -558,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C4DF821E78E91600103663 /* String+NumericValues_Test.swift in Sources */,
+				49A5BE291E7A4FA400F59393 /* Array+Search_Test.swift in Sources */,
 				49A5BE2B1E7A4FBD00F59393 /* Tribool_Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
