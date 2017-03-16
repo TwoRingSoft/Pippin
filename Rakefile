@@ -3,6 +3,6 @@ task :test do
 	xcodebuild \
 	-project Xcode/shared-utils-tests.xcodeproj \
 	-scheme shared-utilsTests \
-	-destination \'platform=iOS Simulator,OS=10.2,name=iPhone SE\' \
+	-destination \'platform=iOS Simulator,name=iPhone SE\' \
 	test'
 end
