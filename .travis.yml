@@ -1,7 +1,7 @@
 language: objective-c
 osx_image: xcode 8.2
 script: 
-    - rake test
+    - rake test_travis
 notifications:
     email:
         recipients:
