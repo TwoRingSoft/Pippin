@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		494822D01E6B7945003DD4EC /* shared_utilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822CF1E6B7945003DD4EC /* shared_utilsTests.swift */; };
 		494822D21E6B7945003DD4EC /* shared-utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 494822C41E6B7945003DD4EC /* shared-utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		494822E01E6B7BC8003DD4EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822DF1E6B7BC8003DD4EC /* AppDelegate.swift */; };
 		494822E21E6B7BC8003DD4EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822E11E6B7BC8003DD4EC /* ViewController.swift */; };
@@ -41,6 +40,7 @@
 		494823431E6BBDF5003DD4EC /* ULLONG_MAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */; };
 		494823441E6BBDF5003DD4EC /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823261E6BBDF4003DD4EC /* Build.swift */; };
 		494823451E6BBDF5003DD4EC /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823271E6BBDF4003DD4EC /* SemanticVersion.swift */; };
+		49A5BE2B1E7A4FBD00F59393 /* Tribool_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */; };
 		49C4DF821E78E91600103663 /* String+NumericValues_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +73,6 @@
 		494822C41E6B7945003DD4EC /* shared-utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shared-utils.h"; sourceTree = "<group>"; };
 		494822C51E6B7945003DD4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		494822CA1E6B7945003DD4EC /* SharedUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		494822CF1E6B7945003DD4EC /* shared_utilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shared_utilsTests.swift; sourceTree = "<group>"; };
 		494822D11E6B7945003DD4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		494822DD1E6B7BC8003DD4EC /* shared-utils-harness-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shared-utils-harness-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494822DF1E6B7BC8003DD4EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +111,7 @@
 		494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ULLONG_MAX.swift; sourceTree = "<group>"; };
 		494823261E6BBDF4003DD4EC /* Build.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Build.swift; sourceTree = "<group>"; };
 		494823271E6BBDF4003DD4EC /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
+		49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tribool_Test.swift; sourceTree = "<group>"; };
 		49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumericValues_Test.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,9 +175,9 @@
 		494822CE1E6B7945003DD4EC /* shared-utilsTests */ = {
 			isa = PBXGroup;
 			children = (
-				494822CF1E6B7945003DD4EC /* shared_utilsTests.swift */,
 				494822D11E6B7945003DD4EC /* Info.plist */,
 				49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */,
+				49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */,
 			);
 			path = "shared-utilsTests";
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C4DF821E78E91600103663 /* String+NumericValues_Test.swift in Sources */,
-				494822D01E6B7945003DD4EC /* shared_utilsTests.swift in Sources */,
+				49A5BE2B1E7A4FBD00F59393 /* Tribool_Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

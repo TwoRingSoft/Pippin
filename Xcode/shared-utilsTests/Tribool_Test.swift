@@ -1,15 +1,15 @@
 //
-//  shared_utilsTests.swift
-//  shared-utilsTests
+//  Tribool_Test.swift
+//  shared-utils-tests
 //
-//  Created by Andrew McKnight on 3/4/17.
+//  Created by Andrew McKnight on 3/16/17.
 //
 //
 
 import XCTest
 @testable import SharedUtils
 
-class shared_utilsTests: XCTestCase {
+class Tribool_Test: XCTest {
 
     func testTribool() {
         let p: [Tribool] = [ false, false, false, nil, nil, nil, true, true, true ]
@@ -45,5 +45,5 @@ class shared_utilsTests: XCTestCase {
             XCTAssert(a_implies_b_Łukasiewicz == a_implies_b_Łukasiewicz_expected, "\(a) ->Ł \(b): expected \(a_implies_b_Łukasiewicz_expected) but got \(a_implies_b_Łukasiewicz)")
         }
     }
-    
+
 }
