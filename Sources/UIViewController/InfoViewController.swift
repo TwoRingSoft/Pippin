@@ -139,7 +139,7 @@ private extension InfoViewController {
         string.addAttributes([NSForegroundColorAttributeName: UIColor.lightGray], range: copyrightRange)
         string.addAttributes([NSFontAttributeName: textFont], range: NSMakeRange(0, string.length))
 
-        replace(attachmentImage: .twoRing, in: string, scale: SocialIcon.twoRing.image().size.height / textFont.lineHeight * UIScreen.main.scale * 1.7)
+        replace(attachmentImage: .twoRing, in: string, font: textFont)
 
         let label = UILabel(frame: .zero)
         label.attributedText = string
@@ -187,9 +187,10 @@ private extension InfoViewController {
         return textView
     }
 
-    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, scale: CGFloat) {
+    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, font: UIFont) {
         let attachment = NSTextAttachment()
-        attachment.image = UIImage(cgImage: attachmentImage.image().cgImage!, scale: scale, orientation: .up)
+        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: font.capHeight * attachmentImage.image().size.width / attachmentImage.image().size.height, height: font.capHeight))
+        attachment.image = attachmentImage.image()
         let attachmentString = NSAttributedString(attachment: attachment)
         let range = (attributedString.string as NSString).range(of: attachmentImage.rawValue)
         attributedString.replaceCharacters(in: range, with: attachmentString)
