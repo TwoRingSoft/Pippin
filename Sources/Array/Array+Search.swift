@@ -8,53 +8,66 @@
 
 import Foundation
 
-extension Array where Element: Comparable {
+extension Array where Element: Strideable {
 
     /**
-     - precondition: array must be sorted
-     - returns: the position of the query in the array
+     - precondition: array must be sorted.
+     - parameters:
+         - lowerBound: defaults to 0.
+         - upperBound: defaults to `nil`, meaning the last element in the array.
+         - query: value for which to search.
+     - returns: the position of the query in the array or `nil` if it doesn't exist in the array.
      */
-    func binarySearchRecursive(lowIdx: Int, highIdx: Int, query: Element) -> Int? {
-        if lowIdx >= highIdx {
+    func binarySearchRecursive(lowerBound: Int = 0, upperBound: Int? = nil, query: Element) -> Int? {
+        let resolvedUpperBound = upperBound ?? count - 1
+
+        if lowerBound >= resolvedUpperBound {
             return nil
         }
 
-        let midIdx = lowIdx + (highIdx - lowIdx) / 2
+        let midIdx = lowerBound + (resolvedUpperBound - lowerBound) / 2
 
         if self[midIdx] > query {
-            return binarySearchRecursive(lowIdx: lowIdx, highIdx: midIdx, query: query)
+            return binarySearchRecursive(lowerBound: lowerBound, upperBound: midIdx, query: query)
         } else if self[midIdx] < query {
-            return binarySearchRecursive(lowIdx: midIdx + 1, highIdx: highIdx, query: query)
+            return binarySearchRecursive(lowerBound: midIdx + 1, upperBound: resolvedUpperBound, query: query)
         } else {
             return midIdx
         }
     }
 
-}
-
-extension Array where Element: IntegerArithmetic {
-
     /**
-     - precondition: array must be sorted
-     - returns: the position of the value nearest to query in the array
+     Find the index of the element in this array that is closest to the query value. If `query` falls directly between two values, the lesser is chosen.
+     - precondition: array must be sorted.
+     - parameters:
+         - lowerBound: defaults to 0.
+         - upperBound: defaults to `nil`, meaning the last element in the array.
+         - query: value for which to search.
+     - returns: the position of the value nearest to query in the array.
      */
-    func fuzzyBinarySearchRecursive(lowIdx: Int, highIdx: Int, query: Element) -> Int {
-        if lowIdx == highIdx - 1 {
-            // we're in between two elements. pick the one that's closer in value
-            let a = self[lowIdx]
-            let b = self[highIdx]
-            let closerToA = query - a < b - query
-            return closerToA ? lowIdx : highIdx
+    func fuzzyBinarySearchRecursive(lowerBound: Int = 0, upperBound: Int? = nil, query: Element) -> Int {
+        let resolvedUpperBound = upperBound ?? count - 1
+
+        if lowerBound == resolvedUpperBound {
+            return lowerBound
         }
 
-        let midIdx = lowIdx + (highIdx - lowIdx) / 2
+        if lowerBound == resolvedUpperBound - 1 {
+            // we're in between two elements. pick the one that's closer in value
+            let a = self[lowerBound]
+            let b = self[resolvedUpperBound]
+            let closerToA = query - a < b - query
+            return closerToA ? lowerBound : resolvedUpperBound
+        }
 
-        if self[midIdx] > query {
-            return fuzzyBinarySearchRecursive(lowIdx: lowIdx, highIdx: midIdx, query: query)
-        } else if self[midIdx] < query {
-            return fuzzyBinarySearchRecursive(lowIdx: midIdx + 1, highIdx: highIdx, query: query)
+        let midIdx = lowerBound + (resolvedUpperBound - lowerBound) / 2
+
+        let a = self[midIdx]
+        let b = self[midIdx + 1]
+        if query - a < b - query {
+            return fuzzyBinarySearchRecursive(lowerBound: lowerBound, upperBound: midIdx, query: query)
         } else {
-            return midIdx
+            return fuzzyBinarySearchRecursive(lowerBound: midIdx + 1, upperBound: resolvedUpperBound, query: query)
         }
     }
 

@@ -12,8 +12,8 @@ import XCTest
 class Array_Search_Test: XCTest {
 
     func testBinarySearch() {
-        let array = [ 1, 4, 7, 9, 14 ]
-        let testCases: [Int: Int?] = [
+        let integers = [ 1, 4, 7, 9, 14 ]
+        let integerTestCases: [Int: Int?] = [
             1: 0,
             2: nil,
             4: 1,
@@ -25,15 +25,34 @@ class Array_Search_Test: XCTest {
             12: nil,
             14: 4,
             ]
-        for (query, expectedIndex) in testCases {
-            let computedIndex = array.binarySearchRecursive(lowIdx: 0, highIdx: array.count - 1, query: query)
+        for (query, expectedIndex) in integerTestCases {
+            let computedIndex = integers.binarySearchRecursive(query: query)
+            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be found at index \(expectedIndex) but was reported at \(computedIndex)")
+        }
+
+        let doubles: [Double] = [ 1, 4, 7, 9, 14 ]
+        let doubleTestCases: [Double: Int?] = [
+            1: 0,
+            2: nil,
+            4: 1,
+            5: nil,
+            7: 2,
+            8: nil,
+            9: 3,
+            10: nil,
+            12: nil,
+            14: 4,
+            ]
+        for (query, expectedIndex) in doubleTestCases {
+            let computedIndex = doubles.binarySearchRecursive(query: query)
             XCTAssert(computedIndex == expectedIndex, "expected \(query) to be found at index \(expectedIndex) but was reported at \(computedIndex)")
         }
     }
 
     func testFuzzyBinarySearch() {
-        let array = [ 1, 4, 7, 9, 14 ]
-        let testCases: [Int: Int] = [
+        let integers = [ 1, 4, 7, 9, 14 ]
+        let integerTestCases: [Int: Int] = [
+            -1000: 0,
             1: 0,
             2: 0,
             4: 1,
@@ -44,9 +63,42 @@ class Array_Search_Test: XCTest {
             10: 3,
             12: 4,
             14: 4,
+            1000: 4,
             ]
-        for (query, expectedIndex) in testCases {
-            let computedIndex = array.fuzzyBinarySearchRecursive(lowIdx: 0, highIdx: array.count - 1, query: query)
+        for (query, expectedIndex) in integerTestCases {
+            let computedIndex = integers.fuzzyBinarySearchRecursive(query: query)
+            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be closest to index \(expectedIndex) but was reported at \(computedIndex)")
+        }
+
+        let doubles: [Double] = [ 1, 4, 7, 9, 14 ]
+        let doubleTestCases: [Double: Int] = [
+            -1000: 0,
+            1: 0,
+            2: 0,
+            2.5: 0, // equidistant between 1 and 4, chooses 1
+            4: 1,
+            5: 1,
+            7: 2,
+            8: 2, // equidistant from 7 and 9, chooses 7
+            9: 3,
+            10: 3,
+            12: 4,
+            14: 4,
+            1000: 4,
+            ]
+        for (query, expectedIndex) in doubleTestCases {
+            let computedIndex = doubles.fuzzyBinarySearchRecursive(query: query)
+            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be closest to index \(expectedIndex) but was reported at \(computedIndex)")
+        }
+    }
+
+    func testFuzzyBinarySearchWithQueryBetweenSplit() {
+        let doubles: [Double] = [ 0, 90, 180, 270 ]
+        let doubleTestCases: [Double: Int] = [
+            117: 1,
+            ]
+        for (query, expectedIndex) in doubleTestCases {
+            let computedIndex = doubles.fuzzyBinarySearchRecursive(query: query)
             XCTAssert(computedIndex == expectedIndex, "expected \(query) to be closest to index \(expectedIndex) but was reported at \(computedIndex)")
         }
     }
