@@ -10,12 +10,13 @@ import UIKit
 
 extension UITextField {
 
-    static func textField(withPlaceholder placeholder: String? = nil, text: String? = nil, keyboardType: UIKeyboardType = .default) -> UITextField {
+    static func textField(withPlaceholder placeholder: String? = nil, text: String? = nil, keyboardType: UIKeyboardType = .default, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)) -> UITextField {
         let textField = UITextField(frame: .zero)
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder
         textField.text = text
         textField.keyboardType = keyboardType
+        textField.font = font
         return textField
     }
     
