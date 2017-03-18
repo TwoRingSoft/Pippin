@@ -43,6 +43,7 @@
 		49A5BE271E7A4F6A00F59393 /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE261E7A4F6A00F59393 /* Array+Search.swift */; };
 		49A5BE291E7A4FA400F59393 /* Array+Search_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */; };
 		49A5BE2B1E7A4FBD00F59393 /* Tribool_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */; };
+		49B1AD9E1E7D90D60062A232 /* IndexPath+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B1AD9D1E7D90D60062A232 /* IndexPath+Common.swift */; };
 		49C4DF821E78E91600103663 /* String+NumericValues_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,7 @@
 		49A5BE261E7A4F6A00F59393 /* Array+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search.swift"; sourceTree = "<group>"; };
 		49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search_Test.swift"; sourceTree = "<group>"; };
 		49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tribool_Test.swift; sourceTree = "<group>"; };
+		49B1AD9D1E7D90D60062A232 /* IndexPath+Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "IndexPath+Common.swift"; path = "IndexPath/IndexPath+Common.swift"; sourceTree = "<group>"; };
 		49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumericValues_Test.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 				494822FA1E6BBDF4003DD4EC /* CGRect */,
 				494822FC1E6BBDF4003DD4EC /* CLLocationManager */,
 				494822FE1E6BBDF4003DD4EC /* CoreData */,
+				49B1AD9F1E7D91170062A232 /* IndexPath */,
 				494823001E6BBDF4003DD4EC /* NSBundle */,
 				494823021E6BBDF4003DD4EC /* NSDate */,
 				494823071E6BBDF4003DD4EC /* NSObject */,
@@ -391,6 +394,14 @@
 			path = Array;
 			sourceTree = "<group>";
 		};
+		49B1AD9F1E7D91170062A232 /* IndexPath */ = {
+			isa = PBXGroup;
+			children = (
+				49B1AD9D1E7D90D60062A232 /* IndexPath+Common.swift */,
+			);
+			name = IndexPath;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -560,6 +571,7 @@
 				494823291E6BBDF4003DD4EC /* Operations.swift in Sources */,
 				4948232B1E6BBDF4003DD4EC /* CoreData+Utils.swift in Sources */,
 				494823321E6BBDF4003DD4EC /* Types.swift in Sources */,
+				49B1AD9E1E7D90D60062A232 /* IndexPath+Common.swift in Sources */,
 				4948232A1E6BBDF4003DD4EC /* AuthorizedCLLocationManager.swift in Sources */,
 				494823341E6BBDF4003DD4EC /* String+NumericValues.swift in Sources */,
 				494823431E6BBDF5003DD4EC /* ULLONG_MAX.swift in Sources */,
