@@ -87,7 +87,7 @@ extension FormController {
     }
 
     func accessoryViewForTextField(textField: UITextField) -> UIView {
-        let previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(previousTextField))
+        let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
         if let idx = textFields.index(of: textField) {
             previousButton.isEnabled = idx > 0
         } else {
@@ -102,12 +102,18 @@ extension FormController {
 
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePressed))
 
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        space.width = 12
+
         let toolbar = UIToolbar(frame: .zero)
         toolbar.items = [
+            space,
             previousButton,
+            space,
             nextButton,
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            doneButton
+            doneButton,
+            space,
         ]
 
         let view = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
