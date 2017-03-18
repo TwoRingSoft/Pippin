@@ -23,6 +23,11 @@ class FormController: NSObject {
             oldTextFieldDelegates[textField] = textField.delegate
             textField.delegate = self
             textField.inputAccessoryView = accessoryViewForTextField(textField: textField)
+            if textFields.index(of: textField)! < textFields.count - 1 {
+                textField.returnKeyType = .next
+            } else {
+                textField.returnKeyType = .done
+            }
         }
     }
 
