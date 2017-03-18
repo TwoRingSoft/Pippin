@@ -1,6 +1,6 @@
 //
 //  Array+Search.swift
-//  Trigonometry
+//  shared-utils
 //
 //  Created by Andrew McKnight on 3/12/17.
 //  Copyright © 2017 Two Ring Software. All rights reserved.

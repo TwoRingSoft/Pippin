@@ -1,6 +1,6 @@
 //
 //  InfoViewController.swift
-//  Trigonometry
+//  shared-utils
 //
 //  Created by Andrew McKnight on 1/16/17.
 //  Copyright © 2017 Two Ring Software. All rights reserved.
