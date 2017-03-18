@@ -44,6 +44,7 @@
 		49A5BE291E7A4FA400F59393 /* Array+Search_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */; };
 		49A5BE2B1E7A4FBD00F59393 /* Tribool_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */; };
 		49B1AD9E1E7D90D60062A232 /* IndexPath+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B1AD9D1E7D90D60062A232 /* IndexPath+Common.swift */; };
+		49B1ADA41E7D9F020062A232 /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B1ADA31E7D9F020062A232 /* LogController.swift */; };
 		49C4DF821E78E91600103663 /* String+NumericValues_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,7 @@
 		49A5BE281E7A4FA400F59393 /* Array+Search_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search_Test.swift"; sourceTree = "<group>"; };
 		49A5BE2A1E7A4FBD00F59393 /* Tribool_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tribool_Test.swift; sourceTree = "<group>"; };
 		49B1AD9D1E7D90D60062A232 /* IndexPath+Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "IndexPath+Common.swift"; path = "IndexPath/IndexPath+Common.swift"; sourceTree = "<group>"; };
+		49B1ADA31E7D9F020062A232 /* LogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
 		49C4DF811E78E91600103663 /* String+NumericValues_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NumericValues_Test.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				494823081E6BBDF4003DD4EC /* FormController.swift */,
+				49B1ADA31E7D9F020062A232 /* LogController.swift */,
 				494823091E6BBDF4003DD4EC /* Types.swift */,
 			);
 			path = NSObject;
@@ -575,6 +578,7 @@
 				4948232A1E6BBDF4003DD4EC /* AuthorizedCLLocationManager.swift in Sources */,
 				494823341E6BBDF4003DD4EC /* String+NumericValues.swift in Sources */,
 				494823431E6BBDF5003DD4EC /* ULLONG_MAX.swift in Sources */,
+				49B1ADA41E7D9F020062A232 /* LogController.swift in Sources */,
 				494823361E6BBDF4003DD4EC /* UIButtonFactory.swift in Sources */,
 				4948233D1E6BBDF4003DD4EC /* UIView+Layout.swift in Sources */,
 			);
