@@ -7,14 +7,15 @@
 #  Copyright © 2017 Two Ring Software. All rights reserved.
 
 XCODE_ICON_TAGGER_SCRIPT_MODE="$1"
+XCODE_ICON_TAGGER_IMAGES_DIRECTORY="$2"
 
 function invoke_tagger() {
     XCODE_ICON_TAGGER_TOOL_MODE="$1"
     OPTIONAL_CUSTOM_ICON_TAG_TEXT="$2"
 
-    sh ${SRCROOT}/Vendor/XcodeIconTagger/tagIcons.sh            \
-        $XCODE_ICON_TAGGER_TOOL_MODE                            \
-        ${SRCROOT}/Trgnmtry/Assets.xcassets/AppIcon.appiconset  \
+    sh ${SRCROOT}/Vendor/XcodeIconTagger/tagIcons.sh    \
+        $XCODE_ICON_TAGGER_TOOL_MODE                    \
+        "$XCODE_ICON_TAGGER_IMAGES_DIRECTORY"           \
         $OPTIONAL_CUSTOM_ICON_TAG_TEXT
 }
 
