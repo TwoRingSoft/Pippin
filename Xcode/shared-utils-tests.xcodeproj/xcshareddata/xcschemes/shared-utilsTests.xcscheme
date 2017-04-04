@@ -26,9 +26,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "494822DC1E6B7BC8003DD4EC"
-            BuildableName = "shared-utils-harness-ios.app"
-            BlueprintName = "shared-utils-harness-ios"
+            BlueprintIdentifier = "49835A021E934995009CC53E"
+            BuildableName = "shared-utilsTests-harness-ios.app"
+            BlueprintName = "shared-utilsTests-harness-ios"
             ReferencedContainer = "container:shared-utils-tests.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

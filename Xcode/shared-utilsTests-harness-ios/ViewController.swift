@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  shared-utils-harness-ios
+//  shared-utilsTests-harness-ios
 //
-//  Created by Andrew McKnight on 3/4/17.
+//  Created by Andrew McKnight on 4/3/17.
 //
 //
 
