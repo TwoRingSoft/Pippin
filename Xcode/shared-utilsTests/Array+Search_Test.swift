@@ -7,9 +7,8 @@
 //
 
 import XCTest
-@testable import SharedUtils
 
-class Array_Search_Test: XCTest {
+class Array_Search_Test: XCTestCase {
 
     func testBinarySearch() {
         let integers = [ 1, 4, 7, 9, 14 ]
@@ -49,7 +48,7 @@ class Array_Search_Test: XCTest {
         }
     }
 
-    func testFuzzyBinarySearch() {
+    func testFuzzyBinarySearchInteger() {
         let integers = [ 1, 4, 7, 9, 14 ]
         let integerTestCases: [Int: Int] = [
             -1000: 0,
@@ -69,7 +68,9 @@ class Array_Search_Test: XCTest {
             let computedIndex = integers.fuzzyBinarySearchRecursive(query: query)
             XCTAssert(computedIndex == expectedIndex, "expected \(query) to be closest to index \(expectedIndex) but was reported at \(computedIndex)")
         }
+    }
 
+    func testFuzzyBinarySearchDouble() {
         let doubles: [Double] = [ 1, 4, 7, 9, 14 ]
         let doubleTestCases: [Double: Int] = [
             -1000: 0,

@@ -7,9 +7,8 @@
 //
 
 import XCTest
-@testable import SharedUtils
 
-class Tribool_Test: XCTest {
+class Tribool_Test: XCTestCase {
 
     func testTribool() {
         let p: [Tribool] = [ false, false, false, nil, nil, nil, true, true, true ]
