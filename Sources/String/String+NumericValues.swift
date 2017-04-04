@@ -11,6 +11,10 @@ import Foundation
 extension String {
 
     func isAllDigits() -> Bool {
+        if self.characters.count == 0 {
+            return false
+        }
+
         let nondecimalDigitSet = NSCharacterSet.decimalDigits.inverted
 
         let nondecimalCharacters = self.characters.filter { char in
