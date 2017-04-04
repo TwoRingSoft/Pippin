@@ -27,7 +27,7 @@ class Array_Search_Test: XCTest {
             ]
         for (query, expectedIndex) in integerTestCases {
             let computedIndex = integers.binarySearchRecursive(query: query)
-            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be found at index \(expectedIndex) but was reported at \(computedIndex)")
+            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be found at index \(String(describing: expectedIndex)) but was reported at \(String(describing: computedIndex))")
         }
 
         let doubles: [Double] = [ 1, 4, 7, 9, 14 ]
@@ -45,7 +45,7 @@ class Array_Search_Test: XCTest {
             ]
         for (query, expectedIndex) in doubleTestCases {
             let computedIndex = doubles.binarySearchRecursive(query: query)
-            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be found at index \(expectedIndex) but was reported at \(computedIndex)")
+            XCTAssert(computedIndex == expectedIndex, "expected \(query) to be found at index \(String(describing: expectedIndex)) but was reported at \(String(describing: computedIndex))")
         }
     }
 

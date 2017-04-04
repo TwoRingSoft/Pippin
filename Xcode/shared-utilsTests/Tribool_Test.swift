@@ -34,15 +34,15 @@ class Tribool_Test: XCTest {
 
             let a_or_b = a || b
             let a_or_b_expected = p_or_q[i]
-            XCTAssert(a_or_b == a_or_b_expected, "\(a) || \(b): expected \(a_or_b_expected) but got \(a_or_b)")
+            XCTAssert(a_or_b == a_or_b_expected, "\(String(describing: a)) || \(String(describing: b)): expected \(String(describing: a_or_b_expected)) but got \(String(describing: a_or_b))")
 
             let a_implies_b_Kleene = a →* b
             let a_implies_b_Kleene_expected = p_implies_q_Kleene[i]
-            XCTAssert(a_implies_b_Kleene == a_implies_b_Kleene_expected, "\(a) ->K \(b): expected \(a_implies_b_Kleene_expected) but got \(a_implies_b_Kleene)")
+            XCTAssert(a_implies_b_Kleene == a_implies_b_Kleene_expected, "\(String(describing: a)) ->K \(String(describing: b)): expected \(String(describing: a_implies_b_Kleene_expected)) but got \(String(describing: a_implies_b_Kleene))")
 
             let a_implies_b_Łukasiewicz = a →→ b
             let a_implies_b_Łukasiewicz_expected = p_implies_q_Łukasiewicz[i]
-            XCTAssert(a_implies_b_Łukasiewicz == a_implies_b_Łukasiewicz_expected, "\(a) ->Ł \(b): expected \(a_implies_b_Łukasiewicz_expected) but got \(a_implies_b_Łukasiewicz)")
+            XCTAssert(a_implies_b_Łukasiewicz == a_implies_b_Łukasiewicz_expected, "\(String(describing: a)) ->Ł \(String(describing: b)): expected \(String(describing: a_implies_b_Łukasiewicz_expected)) but got \(String(describing: a_implies_b_Łukasiewicz))")
         }
     }
 

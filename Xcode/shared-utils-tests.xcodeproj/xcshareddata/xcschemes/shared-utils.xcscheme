@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "494822DC1E6B7BC8003DD4EC"
-            BuildableName = "shared-utils-harness-ios.app"
-            BlueprintName = "shared-utils-harness-ios"
+            BlueprintIdentifier = "494822C11E6B7945003DD4EC"
+            BuildableName = "SharedUtils.framework"
+            BlueprintName = "shared-utils"
             ReferencedContainer = "container:shared-utils-tests.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,6 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "494822C11E6B7945003DD4EC"
+            BuildableName = "SharedUtils.framework"
+            BlueprintName = "shared-utils"
+            ReferencedContainer = "container:shared-utils-tests.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
