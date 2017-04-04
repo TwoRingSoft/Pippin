@@ -21,15 +21,23 @@ extension Array where Element: Strideable {
     func binarySearchRecursive(lowerBound: Int = 0, upperBound: Int? = nil, query: Element) -> Int? {
         let resolvedUpperBound = upperBound ?? count - 1
 
-        if lowerBound >= resolvedUpperBound {
+        if lowerBound == resolvedUpperBound {
+            if query != self[lowerBound] {
+                return nil
+            }
+            return lowerBound
+        }
+
+        if lowerBound > resolvedUpperBound {
             return nil
         }
 
         let midIdx = lowerBound + (resolvedUpperBound - lowerBound) / 2
+        let midValue = self[midIdx]
 
-        if self[midIdx] > query {
+        if midValue > query {
             return binarySearchRecursive(lowerBound: lowerBound, upperBound: midIdx, query: query)
-        } else if self[midIdx] < query {
+        } else if midValue < query {
             return binarySearchRecursive(lowerBound: midIdx + 1, upperBound: resolvedUpperBound, query: query)
         } else {
             return midIdx
@@ -53,21 +61,22 @@ extension Array where Element: Strideable {
         }
 
         if lowerBound == resolvedUpperBound - 1 {
-            // we're in between two elements. pick the one that's closer in value
+            // we're in between two elements. pick the one that's closer in value, or the lower if equidistant
             let a = self[lowerBound]
             let b = self[resolvedUpperBound]
+            if query - a == b - query {
+                return lowerBound
+            }
             let closerToA = query - a < b - query
             return closerToA ? lowerBound : resolvedUpperBound
         }
 
         let midIdx = lowerBound + (resolvedUpperBound - lowerBound) / 2
 
-        let a = self[midIdx]
-        let b = self[midIdx + 1]
-        if query - a < b - query {
-            return fuzzyBinarySearchRecursive(lowerBound: lowerBound, upperBound: midIdx, query: query)
-        } else {
+        if query > self[midIdx] && query - self[midIdx] > self[midIdx + 1] - query {
             return fuzzyBinarySearchRecursive(lowerBound: midIdx + 1, upperBound: resolvedUpperBound, query: query)
+        } else   {
+            return fuzzyBinarySearchRecursive(lowerBound: lowerBound, upperBound: midIdx, query: query)
         }
     }
 
