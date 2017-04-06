@@ -29,6 +29,7 @@
 		495E02431E9348A4000282FF /* ULLONG_MAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */; };
 		495E02441E9348A8000282FF /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823261E6BBDF4003DD4EC /* Build.swift */; };
 		495E02451E9348A8000282FF /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823271E6BBDF4003DD4EC /* SemanticVersion.swift */; };
+		4967395C1E94C93700E2F501 /* DebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4967395B1E94C93700E2F501 /* DebugController.swift */; };
 		49835A061E934995009CC53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A051E934995009CC53E /* AppDelegate.swift */; };
 		49835A081E934995009CC53E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A071E934995009CC53E /* ViewController.swift */; };
 		49835A0B1E934995009CC53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49835A091E934995009CC53E /* Main.storyboard */; };
@@ -82,6 +83,7 @@
 		494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ULLONG_MAX.swift; sourceTree = "<group>"; };
 		494823261E6BBDF4003DD4EC /* Build.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Build.swift; sourceTree = "<group>"; };
 		494823271E6BBDF4003DD4EC /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
+		4967395B1E94C93700E2F501 /* DebugController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugController.swift; sourceTree = "<group>"; };
 		49835A031E934995009CC53E /* shared-utilsTests-harness-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shared-utilsTests-harness-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49835A051E934995009CC53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49835A071E934995009CC53E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		494823071E6BBDF4003DD4EC /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				4967395B1E94C93700E2F501 /* DebugController.swift */,
 				494823081E6BBDF4003DD4EC /* FormController.swift */,
 				49B1ADA31E7D9F020062A232 /* LogController.swift */,
 				494823091E6BBDF4003DD4EC /* Types.swift */,
@@ -483,6 +486,7 @@
 				495E02331E934899000282FF /* Types.swift in Sources */,
 				495E023A1E934899000282FF /* UILabelFactory.swift in Sources */,
 				495E022F1E934899000282FF /* IndexPath+Common.swift in Sources */,
+				4967395C1E94C93700E2F501 /* DebugController.swift in Sources */,
 				495E022E1E934899000282FF /* CoreData+Utils.swift in Sources */,
 				495E02431E9348A4000282FF /* ULLONG_MAX.swift in Sources */,
 				495E02371E934899000282FF /* ColorComponents.swift in Sources */,
@@ -790,6 +794,7 @@
 				49835A141E934995009CC53E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
