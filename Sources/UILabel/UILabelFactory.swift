@@ -10,12 +10,13 @@ import UIKit
 
 extension UILabel {
 
-    static func label(withText text: String? = nil, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize), textColor: UIColor = .black, alignment: NSTextAlignment = .left) -> UILabel {
+    static func label(withText text: String? = nil, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize), textColor: UIColor = .black, alignment: NSTextAlignment = .left, numberOfLines: Int = 1) -> UILabel {
         let label = UILabel(frame: .zero)
         label.text = text
         label.font = font
         label.textColor = textColor
         label.textAlignment = alignment
+        label.numberOfLines = numberOfLines
         return label
     }
     
