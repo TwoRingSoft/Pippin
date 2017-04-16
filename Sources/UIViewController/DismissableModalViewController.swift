@@ -18,7 +18,7 @@ class DismissableModalViewController: UIViewController {
 
         view.backgroundColor = backgroundColor
 
-        addChildViewController(newChildViewController)
+        addNewChildViewController(newChildViewController: childViewController)
         title = childViewController.title
 
         let titleAndCloseButtonView = UIView(frame: .zero)
