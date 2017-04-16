@@ -9,11 +9,27 @@
 import Anchorage
 import UIKit
 
+enum DebugControllerError: Error {
+    case databaseExportError(message: String, underlyingError: Error)
+    case noAppsToImportDatabase
+}
+
+protocol DebugControllerDelegate {
+    func exportedDatabaseData() -> Data?
+    func failedToExportDatabase(error: DebugControllerError)
+}
+
 class DebugController: NSObject {
 
     weak var presentingVC: UIViewController!
+    fileprivate var delegate: DebugControllerDelegate!
 
     var documentInteractionController: UIDocumentInteractionController!
+
+    init(delegate: DebugControllerDelegate) {
+        super.init()
+        self.delegate = delegate
+    }
 
     func displayDebugMenu(fromViewController viewController: UIViewController, databaseFilename: String) {
         presentingVC = viewController
@@ -33,20 +49,23 @@ class DebugController: NSObject {
 private extension DebugController {
 
     func exportDatabase(databaseFileName: String) {
-        let data = CoreDataController.exportData()
+        guard let data = delegate.exportedDatabaseData() else {
+            return
+        }
+
         let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
         let url = URL(fileURLWithPath: applicationSupportDirectory.appendingPathComponent(databaseFileName))
 
         do {
             try data.write(to: url)
         } catch {
-            DoughLogController.logError(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), String(describing: url)), error: error)
+            delegate.failedToExportDatabase(error: .databaseExportError(message: String(format: "Failed to write imported data to file: %@.", String(describing: url)), underlyingError: error))
             return
         }
 
         documentInteractionController = UIDocumentInteractionController(url: url)
         if !documentInteractionController.presentOpenInMenu(from: .zero, in: presentingVC.view, animated: true) {
-            DoughLogController.logInfo(message: String(format: "[%@] Nothing to display in document interaction controller.", instanceType(self)))
+            delegate.failedToExportDatabase(error: .noAppsToImportDatabase)
         }
     }
 
