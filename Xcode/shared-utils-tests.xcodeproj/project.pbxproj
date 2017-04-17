@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493962DA1EA41CFE00C1BAEB /* String+rDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493962D91EA41CFE00C1BAEB /* String+rDNS.swift */; };
 		495E022A1E934899000282FF /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE261E7A4F6A00F59393 /* Array+Search.swift */; };
 		495E022B1E934899000282FF /* Tribool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822F91E6BBDF4003DD4EC /* Tribool.swift */; };
 		495E022C1E934899000282FF /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822FB1E6BBDF4003DD4EC /* Operations.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		493962D91EA41CFE00C1BAEB /* String+rDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+rDNS.swift"; sourceTree = "<group>"; };
 		494822CA1E6B7945003DD4EC /* SharedUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		494822D11E6B7945003DD4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		494822F91E6BBDF4003DD4EC /* Tribool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tribool.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				4948230C1E6BBDF4003DD4EC /* String+NumericValues.swift */,
+				493962D91EA41CFE00C1BAEB /* String+rDNS.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				49A5BE291E7A4FA400F59393 /* Array+Search_Test.swift in Sources */,
 				495E02451E9348A8000282FF /* SemanticVersion.swift in Sources */,
 				495E02331E934899000282FF /* Types.swift in Sources */,
+				493962DA1EA41CFE00C1BAEB /* String+rDNS.swift in Sources */,
 				495E023A1E934899000282FF /* UILabelFactory.swift in Sources */,
 				495E022F1E934899000282FF /* IndexPath+Common.swift in Sources */,
 				495E022E1E934899000282FF /* CoreData+Utils.swift in Sources */,
