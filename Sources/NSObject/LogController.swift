@@ -10,6 +10,11 @@ import Crashlytics
 import Foundation
 import XCGLogger
 
+enum LoggingError: Swift.Error {
+    case noLoggingFile(String)
+    case couldNotReadLogFile(String, NSError)
+}
+
 enum LogLevel: Int {
 
     case unknown = 0
@@ -212,9 +217,7 @@ private extension LogController {
                 contents = try String(contentsOf: logFileURL, encoding: .utf8)
             }
         } catch {
-            let message = String(format: "[%@] Could not read logging file.", instanceType(self))
-            let wrappedError = LoggingErrorCode.CouldNotReadLogFile.error(withDescription: message, userInfo: [ NSUnderlyingErrorKey: error as NSError ])
-            logError(message: message, error: wrappedError)
+            logError(message: String(format: "[%@] Could not read logging file: %@.", instanceType(self), error as NSError), error: error)
         }
         return contents
     }
@@ -232,26 +235,7 @@ private extension LogController {
     }
 
     func reportMissingLogFile() {
-        let message = String(format: "[%@] Could not locate log file.", instanceType(self))
-        let wrappedError = LoggingErrorCode.NoLoggingFile.error(withDescription: message)
-        logError(message: message, error: wrappedError)
+        logError(message: String(format: "[%@] Could not locate log file.", instanceType(self)), error: LoggingError.noLoggingFile("Could not locate log file."))
     }
     
-}
-
-// MARK: Errors
-
-let LogControllerErrorUserFacingDescriptionKey = String(asRDNSForApp: "dough", domain: "error", subpaths: [ "logging", "user-info", "key", "user-facing-description" ])
-
-enum LoggingErrorCode: Int {
-
-    case NoLoggingFile
-    case CouldNotReadLogFile
-
-    func error(withDescription description: String, userInfo: [ AnyHashable: Any ]? = nil) -> NSError {
-        let domain = String(asRDNSForApp: "dough", domain: "error", subpaths: [ "logging" ])
-        var info: [ AnyHashable: Any ] = [ LogControllerErrorUserFacingDescriptionKey: description ]
-        userInfo?.forEach { info[$0.key] = $0.value }
-        return NSError(domain: domain, code: self.rawValue, userInfo: info)
-    }
 }
