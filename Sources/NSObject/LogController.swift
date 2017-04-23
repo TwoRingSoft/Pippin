@@ -43,7 +43,7 @@ extension LogLevel: CustomDebugStringConvertible {
 
     var debugDescription: String {
         get {
-            let s = String(asRDNSForApp: "dough", domain: "log-level", subpaths: [ description ])
+            let s = String(asRDNSForApp: Bundle.getAppName(), domain: "log-level", subpaths: [ description ])
             return s
         }
     }
