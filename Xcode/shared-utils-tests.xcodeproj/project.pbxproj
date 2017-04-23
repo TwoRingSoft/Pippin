@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11DD44AEC74BEC084D13C7DA /* Pods_shared_utilsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13064931EC56E6C2F07C2041 /* Pods_shared_utilsTests.framework */; };
+		493962D81EA3D8F600C1BAEB /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493962D71EA3D8F600C1BAEB /* CoreDataController.swift */; };
 		493962DA1EA41CFE00C1BAEB /* String+rDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493962D91EA41CFE00C1BAEB /* String+rDNS.swift */; };
 		493962E31EAC63FB00C1BAEB /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493962E21EAC63FB00C1BAEB /* LogController.swift */; };
 		493FE8C61EAC6CB700D15C6A /* DebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4967395B1E94C93700E2F501 /* DebugController.swift */; };
@@ -96,6 +97,7 @@
 		023D01EAC04DE8D1C9C60559 /* Pods_shared_utilsTests_harness_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shared_utilsTests_harness_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13064931EC56E6C2F07C2041 /* Pods_shared_utilsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shared_utilsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		176905A8E3910FA5BFC75E8D /* Pods-shared-utilsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shared-utilsTests.release.xcconfig"; path = "../../../Pods/Target Support Files/Pods-shared-utilsTests/Pods-shared-utilsTests.release.xcconfig"; sourceTree = "<group>"; };
+		493962D71EA3D8F600C1BAEB /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		493962D91EA41CFE00C1BAEB /* String+rDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+rDNS.swift"; sourceTree = "<group>"; };
 		493962E21EAC63FB00C1BAEB /* LogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
 		494822CA1E6B7945003DD4EC /* SharedUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +286,7 @@
 		494823071E6BBDF4003DD4EC /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				493962D71EA3D8F600C1BAEB /* CoreDataController.swift */,
 				4967395B1E94C93700E2F501 /* DebugController.swift */,
 				494823081E6BBDF4003DD4EC /* FormController.swift */,
 				493962E21EAC63FB00C1BAEB /* LogController.swift */,
@@ -650,6 +653,7 @@
 				493FE8CB1EAC6CB700D15C6A /* TransparentModalPresentingViewController.swift in Sources */,
 				493FE8CA1EAC6CB700D15C6A /* InfoViewController.swift in Sources */,
 				495E023E1E9348A4000282FF /* BlurViewController.swift in Sources */,
+				493962D81EA3D8F600C1BAEB /* CoreDataController.swift in Sources */,
 				493FE8CC1EAC6CB700D15C6A /* AppDelegate.swift in Sources */,
 				495E022D1E934899000282FF /* AuthorizedCLLocationManager.swift in Sources */,
 				495E022A1E934899000282FF /* Array+Search.swift in Sources */,
@@ -693,6 +697,7 @@
 				493FE8DA1EAC6CB800D15C6A /* Types.swift in Sources */,
 				493FE8E21EAC6CB800D15C6A /* UILabelFactory.swift in Sources */,
 				493FE8D21EAC6CB800D15C6A /* CoreData+Utils.swift in Sources */,
+				493FE8D51EAC6CB800D15C6A /* CoreDataController.swift in Sources */,
 				493FE8E71EAC6CB800D15C6A /* DismissableModalViewController.swift in Sources */,
 				493FE8D31EAC6CB800D15C6A /* IndexPath+Common.swift in Sources */,
 				493FE8CE1EAC6CB800D15C6A /* Array+Search.swift in Sources */,
