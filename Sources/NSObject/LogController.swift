@@ -37,6 +37,18 @@ enum LogLevel: Int {
         }
     }
 
+    init(xcgLevel: XCGLogger.Level) {
+        switch xcgLevel {
+        case .verbose: self = .verbose
+        case .debug: self = .debug
+        case .info: self = .info
+        case .warning: self = .warning
+        case .error: self = .error
+        case .severe: self = .error
+        case .none: self = .info // default to info
+        }
+    }
+
 }
 
 extension LogLevel: CustomDebugStringConvertible {
