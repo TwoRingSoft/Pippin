@@ -50,6 +50,7 @@
 		493FE8EB1EAC6CB800D15C6A /* ULLONG_MAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823241E6BBDF4003DD4EC /* ULLONG_MAX.swift */; };
 		493FE8EC1EAC6CB800D15C6A /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823261E6BBDF4003DD4EC /* Build.swift */; };
 		493FE8ED1EAC6CB800D15C6A /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494823271E6BBDF4003DD4EC /* SemanticVersion.swift */; };
+		49433CBB1EADAC580018C5FD /* BugReportingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49433CBA1EADAC580018C5FD /* BugReportingController.swift */; };
 		495E022A1E934899000282FF /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A5BE261E7A4F6A00F59393 /* Array+Search.swift */; };
 		495E022B1E934899000282FF /* Tribool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822F91E6BBDF4003DD4EC /* Tribool.swift */; };
 		495E022C1E934899000282FF /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494822FB1E6BBDF4003DD4EC /* Operations.swift */; };
@@ -100,6 +101,7 @@
 		493962D71EA3D8F600C1BAEB /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		493962D91EA41CFE00C1BAEB /* String+rDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+rDNS.swift"; sourceTree = "<group>"; };
 		493962E21EAC63FB00C1BAEB /* LogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
+		49433CBA1EADAC580018C5FD /* BugReportingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugReportingController.swift; sourceTree = "<group>"; };
 		494822CA1E6B7945003DD4EC /* SharedUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		494822D11E6B7945003DD4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		494822F91E6BBDF4003DD4EC /* Tribool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tribool.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		494823071E6BBDF4003DD4EC /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				49433CBA1EADAC580018C5FD /* BugReportingController.swift */,
 				493962D71EA3D8F600C1BAEB /* CoreDataController.swift */,
 				4967395B1E94C93700E2F501 /* DebugController.swift */,
 				494823081E6BBDF4003DD4EC /* FormController.swift */,
@@ -673,6 +676,7 @@
 				495E023A1E934899000282FF /* UILabelFactory.swift in Sources */,
 				495E022F1E934899000282FF /* IndexPath+Common.swift in Sources */,
 				495E022E1E934899000282FF /* CoreData+Utils.swift in Sources */,
+				49433CBB1EADAC580018C5FD /* BugReportingController.swift in Sources */,
 				495E02431E9348A4000282FF /* ULLONG_MAX.swift in Sources */,
 				493FE8C71EAC6CB700D15C6A /* FormController.swift in Sources */,
 				495E02371E934899000282FF /* ColorComponents.swift in Sources */,

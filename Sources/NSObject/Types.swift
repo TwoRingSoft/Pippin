@@ -16,6 +16,10 @@ func classType(_ klass: AnyClass) -> String {
     return lastClassComponent(identifier: NSStringFromClass(klass))
 }
 
+func valueType(_ value: Any) -> String {
+    return String(describing: type(of: value))
+}
+
 fileprivate func lastClassComponent(identifier: String) -> String {
     return (identifier as NSString).components(separatedBy: ".").last!
 }
