@@ -21,13 +21,18 @@ class CoreDataController: NSObject {
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Dough")
+        self.logger?.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                self.logger?.logError(message: String(format: "[%@] Failed to load persistent stores.", instanceType(self)), error: error)
+                self.logger?.logError(message: String(format: "[%@] Failed to load persistent store.", instanceType(self)), error: error)
             }
         })
         return container
     }()
+
+    class func setLogger(logger: LogController) {
+        singleton.logger = logger
+    }
 
 }
 
