@@ -25,8 +25,12 @@ struct BugReportingController {
 
 extension BugReportingController {
 
-    func show(fromViewController viewController: UIViewController) {
-        pinpointKit.show(from: viewController)
+    func show(fromViewController viewController: UIViewController, screenshot: UIImage? = nil) {
+        if let screenshot = screenshot {
+            pinpointKit.show(from: viewController, screenshot: screenshot)
+        } else {
+            pinpointKit.show(from: viewController)
+        }
     }
 
 }
