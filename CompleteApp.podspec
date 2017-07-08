@@ -11,8 +11,4 @@ Pod::Spec.new do |s|
   s.platform = :ios, '9.0'
   s.source = { :git => "https://github.com/tworingsoft/shared-utils", :tag => "#{s.version}" }
   s.source_files  = "Sources/**/*.{h,m,swift}"
-  s.preserve_paths = "Scripts"
-  s.dependency "Anchorage"
-  s.dependency "PinpointKit"
-  s.dependency "XCGLogger"
 end
