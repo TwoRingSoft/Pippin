@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
   s.author             = { "Andrew McKnight" => "andrew@tworingsoft.com" }
-  s.source       = { :git => "http://EXAMPLE/CompleteApp.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/tworingsoft/shared-utils", :tag => "#{s.version}" }
 
   s.source_files  = "Sources/**/*"
 
