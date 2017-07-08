@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "CompleteApp"
-  s.version = "1.0.0"
+  s.version = "1.0.1"
   s.summary = "A collection of classes and utilities to rapidly create iOS applications."
   s.description = <<-DESC
     Two Ring's CompleteApp iOS app SDK delivers reusable UI components, factories, utilities and tools to help speed up the development of apps.
