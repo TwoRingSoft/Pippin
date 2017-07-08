@@ -1,0 +1,6 @@
+framework module Pods_shared_utilsTests_harness_ios {
+  umbrella header "Pods-shared-utilsTests-harness-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}
