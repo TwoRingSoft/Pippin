@@ -7,18 +7,14 @@
 //
 
 import UIKit
-import PinpointKit
 
 struct BugReportingController {
 
-    var pinpointKit: PinpointKit!
     var logger: LogController?
 
     init() {
-        logger?.logDebug(message: String(format: "[%@] Initializing PinpointKit.", valueType(self)))
-        let feedbackConfig = FeedbackConfiguration(recipients: [ String(format: "andrew+%@@tworingsoft.com", Bundle.getAppName()) ])
-        let config = Configuration(logCollector: self, feedbackConfiguration: feedbackConfig)
-        pinpointKit = PinpointKit(configuration: config)
+        logger?.logDebug(message: String(format: "[%@] Initializing bug reporter.", valueType(self)))
+        // TODO: reimplement
     }
 
 }
@@ -27,9 +23,9 @@ extension BugReportingController {
 
     func show(fromViewController viewController: UIViewController, screenshot: UIImage? = nil) {
         if let screenshot = screenshot {
-            pinpointKit.show(from: viewController, screenshot: screenshot)
+
         } else {
-            pinpointKit.show(from: viewController)
+
         }
     }
 

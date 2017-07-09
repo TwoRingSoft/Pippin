@@ -6,7 +6,6 @@ target 'shared-utilsTests-harness-ios' do
 
   pod 'Anchorage', :git => 'https://github.com/Raizlabs/Anchorage.git', :branch => 'feature/xcode-9'
   pod 'Crashlytics'
-  pod 'PinpointKit'
   pod 'XCGLogger'
   
   target 'shared-utilsTests' do
