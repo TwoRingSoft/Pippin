@@ -66,16 +66,16 @@ extension FormController: UITextFieldDelegate {
 
 extension FormController {
 
-    func donePressed() {
+    @objc func donePressed() {
         resignResponders()
     }
 
-    func nextTextField() {
+    @objc func nextTextField() {
         let nextIdx = textFields.index(of: currentTextField!)! + 1
         textFields[nextIdx].becomeFirstResponder()
     }
 
-    func previousTextField() {
+    @objc func previousTextField() {
         let previousIdx = textFields.index(of: currentTextField!)! - 1
         textFields[previousIdx].becomeFirstResponder()
     }

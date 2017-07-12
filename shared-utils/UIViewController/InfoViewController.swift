@@ -54,19 +54,19 @@ class InfoViewController: UIViewController {
 // MARK: Actions
 extension InfoViewController {
 
-    func twitterPressed() {
+    @objc func twitterPressed() {
         openURL(URLString: SocialIcon.twitter.url())
     }
 
-    func facebookPressed() {
+    @objc func facebookPressed() {
         openURL(URLString: SocialIcon.facebook.url())
     }
 
-    func linkedinPressed() {
+    @objc func linkedinPressed() {
         openURL(URLString: SocialIcon.linkedin.url())
     }
 
-    func secretTestCrash() {
+    @objc func secretTestCrash() {
         Crashlytics.sharedInstance().crash()
     }
 
@@ -136,8 +136,8 @@ private extension InfoViewController {
 
         // insert two ring logo and style copyright text to match
         let copyrightRange = (string.string as NSString).range(of: copyrightString)
-        string.addAttributes([NSForegroundColorAttributeName: UIColor.lightGray], range: copyrightRange)
-        string.addAttributes([NSFontAttributeName: textFont], range: NSMakeRange(0, string.length))
+        string.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.lightGray], range: copyrightRange)
+        string.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(0, string.length))
 
         replace(attachmentImage: .twoRing, in: string, font: textFont)
 
@@ -153,7 +153,7 @@ private extension InfoViewController {
         textView.textAlignment = .center
         textView.dataDetectorTypes = .link
         textView.isScrollEnabled = false
-        textView.linkTextAttributes = [ NSForegroundColorAttributeName: UIColor.lightGray, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ]
+        textView.linkTextAttributes = [ NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightGray, NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue ]
 
         let version = Bundle.getSemanticVersion()
         let build = Bundle.getBuild()
@@ -171,15 +171,15 @@ private extension InfoViewController {
 
         // style the title
         let titleRange = (attributedString.string as NSString).range(of: appNameString)
-        attributedString.addAttributes([NSFontAttributeName : titleFont], range: titleRange)
+        attributedString.addAttributes([NSAttributedStringKey.font : titleFont], range: titleRange)
 
         // center everything
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        attributedString.addAttributes([NSParagraphStyleAttributeName: paragraphStyle], range: NSMakeRange(0, attributedString.string.characters.count))
+        attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.string.characters.count))
 
         // set all non-title text to text font
-        attributedString.addAttributes([NSFontAttributeName: textFont], range: NSMakeRange(titleRange.location + titleRange.length, attributedString.string.characters.count - titleRange.location - titleRange.length))
+        attributedString.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(titleRange.location + titleRange.length, attributedString.string.characters.count - titleRange.location - titleRange.length))
 
         // set the string
         textView.attributedText = attributedString

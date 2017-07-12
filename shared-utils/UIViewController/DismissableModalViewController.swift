@@ -11,9 +11,9 @@ import UIKit
 
 class DismissableModalViewController: UIViewController {
 
-    private var closeBlock: ((Void) -> Void)?
+    private var closeBlock: (() -> ())?
 
-    init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, onClose closeBlock: ((Void) -> Void)? = nil) {
+    init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, onClose closeBlock: (() -> ())? = nil) {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = backgroundColor
@@ -28,8 +28,8 @@ class DismissableModalViewController: UIViewController {
         closeButton.topAnchor == titleAndCloseButtonView.topAnchor
         closeButton.bottomAnchor == titleAndCloseButtonView.bottomAnchor
         closeButton.trailingAnchor == titleAndCloseButtonView.trailingAnchor - 10
-        closeButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .horizontal)
-        closeButton.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        closeButton.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
+        closeButton.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         let titleLabel = UILabel.label(withText: title ?? "", font: titleFont, alignment: .center)
@@ -64,7 +64,7 @@ class DismissableModalViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func closeButtonTapped() {
+    @objc func closeButtonTapped() {
         guard let closeBlock = closeBlock else { return }
         DispatchQueue.main.async(execute: closeBlock)
     }

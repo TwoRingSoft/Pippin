@@ -34,9 +34,9 @@ extension TextFieldTableViewCell {
     func setUpUI(title: String, font: UIFont) {
         titleLabel.text = title
         titleLabel.font = font
-        titleLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        titleLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
 
-        textField.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        textField.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
 
         let stack = UIStackView(arrangedSubviews: [ titleLabel, textField ])
         stack.axis = .horizontal

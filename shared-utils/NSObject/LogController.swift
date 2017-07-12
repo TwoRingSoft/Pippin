@@ -8,7 +8,60 @@
 
 import Crashlytics
 import Foundation
-import XCGLogger
+
+/* begin xcode 9 workaround - xcglogger not yet ready, so polyfill here until we get it back */
+//import XCGLogger
+
+struct XCGLogger {
+    enum Level {
+        case verbose
+        case debug
+        case info
+        case warning
+        case error
+        case severe
+        case none
+
+        var description: String {
+            get {
+                return ""
+            }
+            set(newValue) {
+
+            }
+        }
+    }
+
+    enum Constants {
+        case fileDestinationIdentifier
+    }
+
+    init(identifier: XCGLogger.Constants, includeDefaultDestinations: Bool) {
+        outputLevel = .debug
+    }
+
+    func setup(level: XCGLogger.Level,
+               showLogIdentifier: Bool,
+               showFunctionName: Bool,
+               showThreadName: Bool,
+               showLevel: Bool,
+               showFileNames: Bool,
+               showLineNumbers: Bool,
+               showDate: Bool,
+               writeToFile: URL,
+               fileLevel: XCGLogger.Level
+        ) {}
+
+    var outputLevel: XCGLogger.Level
+
+    func logln(_ message: String, level: XCGLogger.Level) {}
+}
+
+protocol LogCollector {
+    func retrieveLogs() -> [String]
+}
+
+/* end xcode 9 workaround */
 
 enum LoggingError: Swift.Error {
     case noLoggingFile(String)
@@ -121,7 +174,7 @@ final class LogController: NSObject {
     var logLevel: LogLevel = .info
     fileprivate var loggingQueue: DispatchQueue!
     fileprivate var logFileURL: URL?
-    fileprivate let xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
+    fileprivate var xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
 
     init(name: String, logLevel: LogLevel) {
         super.init()

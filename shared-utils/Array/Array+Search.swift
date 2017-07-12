@@ -64,16 +64,22 @@ extension Array where Element: Strideable {
             // we're in between two elements. pick the one that's closer in value, or the lower if equidistant
             let a = self[lowerBound]
             let b = self[resolvedUpperBound]
-            if query - a == b - query {
+            let diffA = a.distance(to: query)
+            let diffB = query.distance(to: b)
+            if diffA == diffB {
                 return lowerBound
             }
-            let closerToA = query - a < b - query
+            let closerToA = diffA < diffB
             return closerToA ? lowerBound : resolvedUpperBound
         }
 
         let midIdx = lowerBound + (resolvedUpperBound - lowerBound) / 2
 
-        if query > self[midIdx] && query - self[midIdx] > self[midIdx + 1] - query {
+        let midValue = self[midIdx]
+        let midNeighborValue = self[midIdx + 1]
+        let diffMidA = midValue.distance(to: query)
+        let diffMidB = query.distance(to: midNeighborValue)
+        if query > midValue && diffMidA > diffMidB {
             return fuzzyBinarySearchRecursive(lowerBound: midIdx + 1, upperBound: resolvedUpperBound, query: query)
         } else   {
             return fuzzyBinarySearchRecursive(lowerBound: lowerBound, upperBound: midIdx, query: query)

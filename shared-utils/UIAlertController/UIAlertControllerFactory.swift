@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
 
-    func confirmDestructiveAction(actionName: String, message: String, cancelLabel: String, actionBlock: @escaping ((Void) -> Void)) {
+    func confirmDestructiveAction(actionName: String, message: String, cancelLabel: String, actionBlock: @escaping (() -> ())) {
         showCancellableAlert(withTitle: "Confirm \(actionName)", message: message, confirmTitle: "Yes, \(actionName)", cancelTitle: cancelLabel, style: .actionSheet, completion: { confirmed in
             if confirmed {
                 actionBlock()
@@ -18,7 +18,7 @@ extension UIViewController {
         })
     }
 
-    func showAlert(withTitle title: String, message: String, confirmTitle: String = "OK", completion: ((Void) -> Void)? = nil) {
+    func showAlert(withTitle title: String, message: String, confirmTitle: String = "OK", completion: (() -> ())? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .destructive, handler: { action in
             completion?()
