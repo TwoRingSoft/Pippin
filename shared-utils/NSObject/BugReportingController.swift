@@ -6,6 +6,7 @@
 //  Copyright © 2017 Two Ring Software. All rights reserved.
 //
 
+import XCGLogger
 import UIKit
 
 struct BugReportingController {
@@ -15,6 +16,7 @@ struct BugReportingController {
     init() {
         logger?.logDebug(message: String(format: "[%@] Initializing bug reporter.", valueType(self)))
         // TODO: reimplement
+        fatalError("not implemented")
     }
 
 }
@@ -22,23 +24,7 @@ struct BugReportingController {
 extension BugReportingController {
 
     func show(fromViewController viewController: UIViewController, screenshot: UIImage? = nil) {
-        if let screenshot = screenshot {
-
-        } else {
-
-        }
-    }
-
-}
-
-extension BugReportingController: LogCollector {
-
-    func retrieveLogs() -> [String] {
-        guard let logContents = logger?.getLogContents() else {
-            return []
-        }
-
-        return [ logContents ]
+        fatalError("not implemented")
     }
 
 }
