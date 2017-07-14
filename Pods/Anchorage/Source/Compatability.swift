@@ -29,45 +29,12 @@
 #if os(macOS)
     import Cocoa
 
-    #if swift(>=4.0)
-        public typealias LayoutPriority = NSLayoutConstraint.Priority
-        public typealias EdgeInsets = NSEdgeInsets
-        public typealias ConstraintAttribute = NSLayoutConstraint.Attribute
-    #else
-        public typealias LayoutPriority = NSLayoutPriority
-        public typealias ConstraintAttribute = NSLayoutAttribute
-    #endif
+    public typealias LayoutPriority = NSLayoutPriority
 #else
     import UIKit
 
     public typealias LayoutPriority = UILayoutPriority
     public typealias EdgeInsets = UIEdgeInsets
-    public typealias ConstraintAttribute = NSLayoutAttribute
-#endif
-
-#if swift(>=4.0)
-    typealias UIntMax = UInt64
-    typealias IntMax = Int64
-
-    extension SignedInteger {
-
-        func toIntMax() -> IntMax {
-            return IntMax(self)
-        }
-
-    }
-
-#else
-    extension LayoutPriority {
-
-        var rawValue: Float {
-            return self
-        }
-
-        init(rawValue: Float) {
-            self.init(rawValue)
-        }
-    }
 #endif
 
 public extension BinaryFloatingPoint {
@@ -97,11 +64,7 @@ public extension BinaryFloatingPoint {
         default:
             pattern.exp = UIntMax(bitPattern: value.exponent.toIntMax() + IntMax(Self.exponentBias))
 
-            #if swift(>=4.0)
-                let sig = UIntMax(value.significandBitPattern)
-            #else
-                let sig = value.significandBitPattern.toUIntMax()
-            #endif
+            let sig = value.significandBitPattern.toUIntMax()
             if Self.significandBitCount >= T.significandBitCount {
                 pattern.sig = sig << UIntMax(bitPattern: IntMax(Self.significandBitCount - T.significandBitCount))
             }

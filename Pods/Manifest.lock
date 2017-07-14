@@ -12,27 +12,17 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - Anchorage (from `https://github.com/Raizlabs/Anchorage.git`, branch `feature/xcode-9`)
+  - Anchorage
   - Crashlytics
   - XCGLogger
 
-EXTERNAL SOURCES:
-  Anchorage:
-    :branch: feature/xcode-9
-    :git: https://github.com/Raizlabs/Anchorage.git
-
-CHECKOUT OPTIONS:
-  Anchorage:
-    :commit: 3108a3741a4baf56e7669180e6212549a10712e7
-    :git: https://github.com/Raizlabs/Anchorage.git
-
 SPEC CHECKSUMS:
-  Anchorage: b4ed6555296ae9ee9264def6efd8e7352ea7b893
+  Anchorage: fe50dca4e20846b8cb15c859d26fec5132b41577
   Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
 
-PODFILE CHECKSUM: 8b0f958281f5a0372695c7b472239f7bc923fc91
+PODFILE CHECKSUM: 72d4b2aaa6f0b406166bd4ecb29a0988f0cee38d
 
 COCOAPODS: 1.2.1

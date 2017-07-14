@@ -50,8 +50,8 @@ public enum Priority: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Eq
         }
     }
 
-    public init(floatLiteral value: Float) {
-        self.init(Int(value))
+    public init(floatLiteral value: LayoutPriority) {
+        self.init(value)
     }
 
     public init(integerLiteral value: Int) {
@@ -59,11 +59,11 @@ public enum Priority: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Eq
     }
 
     public init(_ value: Int) {
-        self = .custom(LayoutPriority(Float(value)))
+        self = .custom(LayoutPriority(value))
     }
 
     public init<T: BinaryFloatingPoint>(_ value: T) {
-        self = .custom(LayoutPriority(Float(value)))
+        self = .custom(LayoutPriority(value))
     }
 
 }
@@ -73,17 +73,17 @@ public func == (lhs: Priority, rhs: Priority) -> Bool {
 }
 
 public func + <T: BinaryFloatingPoint>(lhs: Priority, rhs: T) -> Priority {
-    return .custom(LayoutPriority(rawValue: lhs.value.rawValue + Float(rhs)))
+    return .custom(lhs.value + LayoutPriority(rhs))
 }
 
 public func + <T: BinaryFloatingPoint>(lhs: T, rhs: Priority) -> Priority {
-    return .custom(LayoutPriority(rawValue: Float(lhs) + rhs.value.rawValue))
+    return .custom(LayoutPriority(lhs) + rhs.value)
 }
 
 public func - <T: BinaryFloatingPoint>(lhs: Priority, rhs: T) -> Priority {
-    return .custom(LayoutPriority(rawValue: lhs.value.rawValue - Float(rhs)))
+    return .custom(lhs.value - LayoutPriority(rhs))
 }
 
 public func - <T: BinaryFloatingPoint>(lhs: T, rhs: Priority) -> Priority {
-    return .custom(LayoutPriority(rawValue: Float(lhs) - rhs.value.rawValue))
+    return .custom(LayoutPriority(lhs) - rhs.value)
 }
