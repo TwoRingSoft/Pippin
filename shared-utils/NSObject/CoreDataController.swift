@@ -16,47 +16,49 @@ enum CoreDataError: Swift.Error {
 
 class CoreDataController: NSObject {
 
-    fileprivate static let singleton = CoreDataController()
-    fileprivate var logger: LogController?
+    private var modelName: String
+    private var logger: LogController
+
+    init(_ modelName: String, _ logger: LogController) {
+        self.logger = logger
+        self.modelName = modelName
+        super.init()
+    }
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Dough")
-        self.logger?.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
+        let container = NSPersistentContainer(name: modelName)
+        self.logger.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                self.logger?.logError(message: String(format: "[%@] Failed to load persistent store.", instanceType(self)), error: error)
+                self.logger.logError(message: String(format: "[%@] Failed to load persistent store.", instanceType(self)), error: error)
             }
         })
         return container
     }()
-
-    class func setLogger(logger: LogController) {
-        singleton.logger = logger
-    }
 
 }
 
 // MARK: Access
 extension CoreDataController {
 
-    class func perform(block: ((NSManagedObjectContext) -> Void)) {
-        let context = singleton.persistentContainer.newBackgroundContext()
-        singleton.logger?.logDebug(message: String(format: "[%@] Vending new context <%@>.", classType(self), context))
+    func perform(block: ((NSManagedObjectContext) -> Void)) {
+        let context = persistentContainer.newBackgroundContext()
+        logger.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))
         block(context)
     }
 
-    class func fetch<T>(_ request: NSFetchRequest<T>, context: NSManagedObjectContext) -> [T] {
+    func fetch<T>(_ request: NSFetchRequest<T>, context: NSManagedObjectContext) -> [T] {
         var results = [T]()
         do {
             results.append(contentsOf: try context.fetch(request))
         } catch {
-          let message = String(format: "[%@] Error executing fetch request <%@> on context <%@>.", classType(self), request, context)
-            singleton.logger?.logError(message: message, error: error)
+          let message = String(format: "[%@] Error executing fetch request <%@> on context <%@>.", instanceType(self), request, context)
+            logger.logError(message: message, error: error)
         }
         return results
     }
 
-    class func exportData() -> Data {
+    func exportData() -> Data {
         let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
 
         let sqlitePath = applicationSupportDirectory.appendingPathComponent(String(format: "%@.sqlite", Bundle.getAppName()))
@@ -66,7 +68,7 @@ extension CoreDataController {
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
             guard let data = NSData(contentsOfFile: $0) else {
-                singleton.logger?.logWarning(message: String(format: "[%@] No data read from %@.", classType(self), $0))
+                logger.logWarning(message: String(format: "[%@] No data read from %@.", instanceType(self), $0))
                 return
             }
 
@@ -76,9 +78,9 @@ extension CoreDataController {
         return NSKeyedArchiver.archivedData(withRootObject: fileData)
     }
 
-    class func importData(data: Data) {
+    func importData(data: Data) {
         guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
-            singleton.logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", classType(self)))
+            logger.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
             return
         }
 
@@ -86,7 +88,7 @@ extension CoreDataController {
             let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
             let path = applicationSupportDirectory.appendingPathComponent($0.key)
             if !$0.value.write(toFile: path, atomically: true) {
-                singleton.logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", classType(self), $0.key))
+                logger.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
             }
         }
 
@@ -98,19 +100,19 @@ extension CoreDataController {
 // MARK: Persistence
 extension CoreDataController {
 
-    class func save(context: NSManagedObjectContext) {
-        singleton.logger?.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", classType(self), context))
-        singleton.logger?.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", classType(self), context.insertedObjects, context.deletedObjects, context.updatedObjects))
+    func save(context: NSManagedObjectContext) {
+        logger.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), context))
+        logger.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", instanceType(self), context.insertedObjects, context.deletedObjects, context.updatedObjects))
         if !context.hasChanges {
-            singleton.logger?.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", classType(self), context))
+            logger.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", instanceType(self), context))
             return
         }
 
         do {
             try context.save()
         } catch {
-            let message = String(format: "[%@] Could not save context <%@>.", classType(self), context)
-            singleton.logger?.logError(message: message, error: error)
+            let message = String(format: "[%@] Could not save context <%@>.", instanceType(self), context)
+            logger.logError(message: message, error: error)
         }
     }
 
@@ -119,8 +121,8 @@ extension CoreDataController {
 // MARK: Deletion
 extension CoreDataController {
 
-    class func delete(object: NSManagedObject, context: NSManagedObjectContext) {
-        singleton.logger?.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", classType(self), object, context))
+    func delete(object: NSManagedObject, context: NSManagedObjectContext) {
+        logger.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", instanceType(self), object, context))
         context.delete(object)
         save(context: context)
     }
