@@ -21,8 +21,8 @@ protocol DebugControllerDelegate {
 
 class DebugController: NSObject {
 
-    weak var presentingVC: UIViewController!
-    fileprivate var delegate: DebugControllerDelegate!
+    private weak var presentingVC: UIViewController!
+    private var delegate: DebugControllerDelegate!
 
     var documentInteractionController: UIDocumentInteractionController!
 
