@@ -20,7 +20,7 @@ class CoreDataController: NSObject {
     fileprivate var logger: LogController?
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Dough")
+        let container = NSPersistentContainer(name: Bundle.getAppName())
         self.logger?.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
