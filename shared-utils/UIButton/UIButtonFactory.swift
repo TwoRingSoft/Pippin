@@ -36,7 +36,9 @@ extension UIButton {
         button.setTitle(title, for: .normal)
         button.setTitleColor(color, for: .normal)
         if let rgb = color.rgb() {
-            button.setTitleColor(UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5), for: .highlighted)
+            let lightColor = UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5)
+            button.setTitleColor(lightColor, for: .highlighted)
+            button.setTitleColor(lightColor, for: .disabled)
         }
         if selector != nil {
             button.addTarget(target, action: selector!, for: .touchUpInside)
