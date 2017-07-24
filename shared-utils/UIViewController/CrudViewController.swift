@@ -1,5 +1,5 @@
 //
-//  FetchedResultsSearchableListViewController.swift
+//  CrudViewController.swift
 //  Dough
 //
 //  Created by Andrew McKnight on 1/12/17.
@@ -11,45 +11,43 @@ import CoreData
 import UIKit
 
 enum ListViewControllerMode {
-
     case editor
     case picker
-    
 }
 
-protocol FetchedResultsSearchableListViewControllerDelegate {
-
-    func cell(forObject object: NSFetchRequestResult, atIndexPath indexPath: IndexPath, inTableView tableView: UITableView, withReuseIdentifier reuseIdentifier: String) -> UITableViewCell
-    func refresh(tableViewCell: UITableViewCell, forObject object: NSFetchRequestResult)
-
-    func selected(object: NSFetchRequestResult)
-
-    func addObject()
-    func edit(object: NSFetchRequestResult)
-    func delete(object: NSFetchRequestResult)
-
-    func canEdit(object: NSFetchRequestResult) -> Bool
-
+protocol CrudViewControllerCRUDDelegate {
+    func crudViewControllerWantsToAddObject(crudViewController: CrudViewController)
+    func crudViewController(crudViewController: CrudViewController, wantsToEdit object: NSFetchRequestResult)
+    func crudViewController(crudViewController: CrudViewController, wantsToDelete object: NSFetchRequestResult)
 }
 
-class FetchedResultsSearchableListViewController: UIViewController {
+protocol CrudViewControllerUITableViewDelegate {
+    func crudViewController(crudViewController: CrudViewController, configure cell: UITableViewCell, forObject object: NSFetchRequestResult)
+    func crudViewController(crudViewController: CrudViewController, selected object: NSFetchRequestResult)
+    func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
+    func crudViewController(crudViewController: CrudViewController, editActionsFor tableView: UITableView) -> [UITableViewRowAction]?
+}
 
-    fileprivate let cellReuseIdentifier = "FetchedResultsSearchableListViewControllerCell"
-    fileprivate var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
-    fileprivate var tableView = UITableView(frame: .zero, style: .plain)
-    fileprivate var searchField: UITextField!
-    fileprivate var searchCancelButton: UIButton!
-    fileprivate var searchCancelButtonWidthConstraint: NSLayoutConstraint!
-    fileprivate var searchCancelButtonLeadingConstraint: NSLayoutConstraint!
-    fileprivate var context: NSManagedObjectContext!
-    fileprivate var delegate: FetchedResultsSearchableListViewControllerDelegate!
-    fileprivate var hideAddItemRow = false
-    fileprivate var tableUpdates: [String: [IndexPath]]?
+class CrudViewController: UIViewController {
+
+    private let cellReuseIdentifier = "CrudViewControllerCell"
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var tableView = UITableView(frame: .zero, style: .plain)
+    private var searchField: UITextField!
+    private var searchCancelButton: UIButton!
+    private var searchCancelButtonWidthConstraint: NSLayoutConstraint!
+    private var searchCancelButtonLeadingConstraint: NSLayoutConstraint!
+    private var context: NSManagedObjectContext!
+    private var crudDelegate: CrudViewControllerCRUDDelegate!
+    private var tableViewDelegate: CrudViewControllerUITableViewDelegate!
+    private var hideAddItemRow = false
+    private var tableUpdates: [String: [IndexPath]]?
     var logger: LogController?
 
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, delegate: FetchedResultsSearchableListViewControllerDelegate) {
+    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate) {
         super.init(nibName: nil, bundle: nil)
-        self.delegate = delegate
+        self.crudDelegate = crudDelegate
+        self.tableViewDelegate = tableViewDelegate
         self.context = context
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
         setUpUI()
@@ -62,7 +60,7 @@ class FetchedResultsSearchableListViewController: UIViewController {
 }
 
 // MARK: Public
-extension FetchedResultsSearchableListViewController {
+extension CrudViewController {
 
     func reloadData() {
         logger?.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), fetchedResultsController.fetchRequest.entityName!, fetchedResultsController, tableView))
@@ -87,10 +85,10 @@ extension FetchedResultsSearchableListViewController {
 }
 
 // MARK: Actions
-@objc extension FetchedResultsSearchableListViewController {
+@objc extension CrudViewController {
 
     func addPressed() {
-        delegate.addObject()
+        crudDelegate.crudViewControllerWantsToAddObject(crudViewController: self)
     }
 
     func cancelSearch() {
@@ -102,7 +100,7 @@ extension FetchedResultsSearchableListViewController {
 }
 
 // MARK: Private
-private extension FetchedResultsSearchableListViewController {
+private extension CrudViewController {
 
     func resetSearch() {
         fetchedResultsController.fetchRequest.predicate = nil
@@ -126,6 +124,7 @@ private extension FetchedResultsSearchableListViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
 
         searchField = UITextField.textField(withPlaceholder: "Search")
         searchField.delegate = self
@@ -272,7 +271,7 @@ private extension FetchedResultsSearchableListViewController {
 }
 
 // MARK: UITextFieldDelegate
-extension FetchedResultsSearchableListViewController: UITextFieldDelegate {
+extension CrudViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         setTableView(toHideAddItemRow: true)
@@ -308,7 +307,7 @@ extension FetchedResultsSearchableListViewController: UITextFieldDelegate {
 }
 
 // MARK: NSFetchedResultsControllerDelegate
-extension FetchedResultsSearchableListViewController: NSFetchedResultsControllerDelegate {
+extension CrudViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         logger?.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
@@ -334,7 +333,7 @@ extension FetchedResultsSearchableListViewController: NSFetchedResultsController
 }
 
 // MARK: UITableViewDataSource
-extension FetchedResultsSearchableListViewController: UITableViewDataSource {
+extension CrudViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else {
@@ -375,9 +374,10 @@ extension FetchedResultsSearchableListViewController: UITableViewDataSource {
         }
 
         let object = fetchedResultsController.object(at: indexPath)
-        let cell = self.delegate.cell(forObject: object, atIndexPath: indexPath, inTableView: tableView, withReuseIdentifier: cellReuseIdentifier)
-        cell.textLabel?.font = .text
-        cell.detailTextLabel?.font = .subtitle
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+        tableViewDelegate.crudViewController(crudViewController: self, configure: cell, forObject: object)
+
         return cell
     }
 
@@ -386,7 +386,7 @@ extension FetchedResultsSearchableListViewController: UITableViewDataSource {
             return false
         }
 
-        return delegate.canEdit(object: fetchedResultsController.object(at: indexPath))
+        return tableViewDelegate.crudViewController(crudViewController: self, canEdit: fetchedResultsController.object(at: indexPath))
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -394,26 +394,17 @@ extension FetchedResultsSearchableListViewController: UITableViewDataSource {
             return nil
         }
 
-        if !delegate.canEdit(object: fetchedResultsController.object(at: indexPath)) {
+        if !tableViewDelegate.crudViewController(crudViewController: self, canEdit: fetchedResultsController.object(at: indexPath)) {
             return nil
         }
 
-        return [
-            UITableViewRowAction(style: .destructive, title: "Delete", handler: { _, indexPath in
-                self.tableView.setEditing(false, animated: true)
-                self.delegate.delete(object: self.fetchedResultsController.object(at: indexPath))
-            }),
-            UITableViewRowAction(style: .normal, title: "Edit", handler: { _, indexPath in
-                self.tableView.setEditing(false, animated: true)
-                self.delegate.edit(object: self.fetchedResultsController.object(at: indexPath))
-            })
-        ]
+        return tableViewDelegate.crudViewController(crudViewController: self, editActionsFor: tableView)
     }
     
 }
 
 // MARK: UITableViewDelegate
-extension FetchedResultsSearchableListViewController: UITableViewDelegate {
+extension CrudViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         logger?.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(reflecting: indexPath)))
@@ -421,7 +412,7 @@ extension FetchedResultsSearchableListViewController: UITableViewDelegate {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
 
-            delegate.addObject()
+            crudDelegate.crudViewControllerWantsToAddObject(crudViewController: self)
             return
         }
 
@@ -431,7 +422,7 @@ extension FetchedResultsSearchableListViewController: UITableViewDelegate {
 
         logger?.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, object as! NSManagedObject))
 
-        delegate.selected(object: object)
+        tableViewDelegate.crudViewController(crudViewController: self, selected: object)
     }
     
 }
