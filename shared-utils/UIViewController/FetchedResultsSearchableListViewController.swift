@@ -45,6 +45,7 @@ class FetchedResultsSearchableListViewController: UIViewController {
     fileprivate var delegate: FetchedResultsSearchableListViewControllerDelegate!
     fileprivate var hideAddItemRow = false
     fileprivate var tableUpdates: [String: [IndexPath]]?
+    var logger: LogController?
 
     init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, delegate: FetchedResultsSearchableListViewControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
@@ -64,13 +65,13 @@ class FetchedResultsSearchableListViewController: UIViewController {
 extension FetchedResultsSearchableListViewController {
 
     func reloadData() {
-        DoughLogController.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), fetchedResultsController.fetchRequest.entityName!, fetchedResultsController, tableView))
+        logger?.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), fetchedResultsController.fetchRequest.entityName!, fetchedResultsController, tableView))
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
         } catch {
             let message = String(format: "[%@(%@)] Could not perform a new fetch on NSFetchedResultsController: %@.", instanceType(self), fetchedResultsController.fetchRequest.entityName!, fetchedResultsController)
-            DoughLogController.logError(message: message, error: error)
+            logger?.logError(message: message, error: error)
         }
     }
 
@@ -86,7 +87,7 @@ extension FetchedResultsSearchableListViewController {
 }
 
 // MARK: Actions
-extension FetchedResultsSearchableListViewController {
+@objc extension FetchedResultsSearchableListViewController {
 
     func addPressed() {
         delegate.addObject()
@@ -155,10 +156,6 @@ private extension FetchedResultsSearchableListViewController {
         tableView.topAnchor == searchContainer.bottomAnchor + 10
         tableView.horizontalAnchors == view.horizontalAnchors
         tableView.bottomAnchor == view.bottomAnchor
-
-        NotificationController.subscribe(toNotificationName: .tabBarSelectedNewTab) { notification in
-            self.cancelSearch()
-        }
     }
 
     func addItemRowIndexPath() -> IndexPath {
@@ -218,14 +215,14 @@ private extension FetchedResultsSearchableListViewController {
     func execute(tableUpdates: [String: [IndexPath]]) {
         var performedUpdates = false
         if let inserts = tableUpdates[name(forFetchedResultsChangeType: .insert)] {
-            DoughLogController.logDebug(message: String(format: "[%@(%@)] inserts: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, inserts))
+            logger?.logDebug(message: String(format: "[%@(%@)] inserts: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, inserts))
             performedUpdates = true
             tableView.beginUpdates()
             tableView.insertRows(at: inserts, with: .automatic)
         }
 
         if let deletes = tableUpdates[name(forFetchedResultsChangeType: .delete)] {
-            DoughLogController.logDebug(message: String(format: "[%@(%@)] deletes: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, deletes))
+            logger?.logDebug(message: String(format: "[%@(%@)] deletes: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, deletes))
             performedUpdates = true
             tableView.beginUpdates()
             tableView.deleteRows(at: deletes, with: .automatic)
@@ -262,10 +259,10 @@ private extension FetchedResultsSearchableListViewController {
             self.tableView.beginUpdates()
             let indexPaths = [ self.addItemRowIndexPath() ]
             if hideAddItemRow {
-                DoughLogController.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+                self.logger?.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
                 self.tableView.deleteRows(at: indexPaths, with: .fade)
             } else {
-                DoughLogController.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+                self.logger?.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
                 self.tableView.insertRows(at: indexPaths, with: .fade)
             }
             self.tableView.endUpdates()
@@ -314,21 +311,21 @@ extension FetchedResultsSearchableListViewController: UITextFieldDelegate {
 extension FetchedResultsSearchableListViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        DoughLogController.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+        logger?.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
         tableUpdates = nil
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        DoughLogController.logVerbose(message: String(format: "[%@(%@)] changed object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(describing: anObject)))
-        DoughLogController.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, name(forFetchedResultsChangeType: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
+        logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(describing: anObject)))
+        logger?.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, name(forFetchedResultsChangeType: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
         update(indexPath: indexPath, for: type, newIndexPath: newIndexPath)
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        DoughLogController.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, controller))
+        logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, controller))
         DispatchQueue.main.async {
             if let updates = self.tableUpdates {
-                DoughLogController.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+                self.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
                 self.execute(tableUpdates: updates)
             }
         }
@@ -342,7 +339,7 @@ extension FetchedResultsSearchableListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else {
             let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!)
-            DoughLogController.logWarning(message: message)
+            logger?.logWarning(message: message)
             return 0
         }
         return sections.count
@@ -351,16 +348,16 @@ extension FetchedResultsSearchableListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController.sections else {
             let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!)
-            DoughLogController.logWarning(message: message)
+            logger?.logWarning(message: message)
             return 0
         }
         var rows = sections[section].numberOfObjects
-        DoughLogController.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows))
+        logger?.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows))
         if !hideAddItemRow && section == 0 {
-            DoughLogController.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+            logger?.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
             rows += 1 // add one row for the "add object" row
         }
-        DoughLogController.logDebug(message: String(format: "[%@(%@)] Reporting %i rows in section %i", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows, section))
+        logger?.logDebug(message: String(format: "[%@(%@)] Reporting %i rows in section %i", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows, section))
         return rows
     }
 
@@ -419,10 +416,10 @@ extension FetchedResultsSearchableListViewController: UITableViewDataSource {
 extension FetchedResultsSearchableListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DoughLogController.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(reflecting: indexPath)))
+        logger?.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(reflecting: indexPath)))
 
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            DoughLogController.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+            logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
 
             delegate.addObject()
             return
@@ -432,7 +429,7 @@ extension FetchedResultsSearchableListViewController: UITableViewDelegate {
 
         let object = fetchedResultsController.object(at: indexPath)
 
-        DoughLogController.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, object as! NSManagedObject))
+        logger?.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, object as! NSManagedObject))
 
         delegate.selected(object: object)
     }
