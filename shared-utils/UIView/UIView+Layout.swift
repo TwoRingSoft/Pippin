@@ -6,6 +6,7 @@
 //  Copyright © 2016 andrew mcknight. All rights reserved.
 //
 
+import Anchorage
 import UIKit
 
 extension UIView {
@@ -21,6 +22,12 @@ extension UIView {
             ] {
                 constraint.isActive = true
         }
+    }
+
+    func fillSafeArea(inViewController viewController: UIViewController) {
+        topAnchor == viewController.topLayoutGuide.bottomAnchor
+        horizontalAnchors == viewController.view.horizontalAnchors
+        bottomAnchor == viewController.bottomLayoutGuide.topAnchor
     }
 
 }
