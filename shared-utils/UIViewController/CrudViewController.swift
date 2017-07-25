@@ -26,6 +26,11 @@ protocol CrudViewControllerUITableViewDelegate {
     func crudViewController(crudViewController: CrudViewController, selected object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
     func crudViewController(crudViewController: CrudViewController, editActionsFor tableView: UITableView) -> [UITableViewRowAction]?
+    func crudViewControllerShouldShowAddItemRow(crudViewController: CrudViewController) -> Bool
+}
+
+protocol CrudViewControllerSearchDelegate {
+    func crudViewController(crudViewController: CrudViewController, predicateForSearchString string: String) -> NSPredicate
 }
 
 class CrudViewController: UIViewController {
@@ -40,14 +45,16 @@ class CrudViewController: UIViewController {
     private var context: NSManagedObjectContext!
     private var crudDelegate: CrudViewControllerCRUDDelegate!
     private var tableViewDelegate: CrudViewControllerUITableViewDelegate!
+    private var searchDelegate: CrudViewControllerSearchDelegate!
     private var hideAddItemRow = false
     private var tableUpdates: [String: [IndexPath]]?
     var logger: LogController?
 
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate) {
+    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate) {
         super.init(nibName: nil, bundle: nil)
         self.crudDelegate = crudDelegate
         self.tableViewDelegate = tableViewDelegate
+        self.searchDelegate = searchDelegate
         self.context = context
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
         setUpUI()
@@ -166,7 +173,7 @@ private extension CrudViewController {
     }
 
     func indexPathPointsToAddObjectRow(indexPath: IndexPath) -> Bool {
-        if hideAddItemRow {
+        if !tableViewDelegate.crudViewControllerShouldShowAddItemRow(crudViewController: self) || hideAddItemRow {
             return false
         }
         
@@ -278,12 +285,16 @@ private extension CrudViewController {
 extension CrudViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        setTableView(toHideAddItemRow: true)
+        if tableViewDelegate.crudViewControllerShouldShowAddItemRow(crudViewController: self) {
+            setTableView(toHideAddItemRow: true)
+        }
         return true
     }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        setTableView(toHideAddItemRow: false)
+        if tableViewDelegate.crudViewControllerShouldShowAddItemRow(crudViewController: self) {
+            setTableView(toHideAddItemRow: false)
+        }
         return true
     }
 
@@ -301,8 +312,7 @@ extension CrudViewController: UITextFieldDelegate {
             return true
         }
 
-        let term = [ "*", endingText.characters.map { String($0) }.joined(separator: "*"), "*"].joined()
-        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "%K LIKE[cd] %@", "name", term)
+        fetchedResultsController.fetchRequest.predicate = searchDelegate.crudViewController(crudViewController: self, predicateForSearchString: endingText)
         reloadData()
 
         return true
@@ -356,7 +366,7 @@ extension CrudViewController: UITableViewDataSource {
         }
         var rows = sections[section].numberOfObjects
         logger?.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows))
-        if !hideAddItemRow && section == 0 {
+        if tableViewDelegate.crudViewControllerShouldShowAddItemRow(crudViewController: self) && !hideAddItemRow && section == 0 {
             logger?.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
             rows += 1 // add one row for the "add object" row
         }
