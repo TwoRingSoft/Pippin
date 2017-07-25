@@ -82,6 +82,10 @@ extension CrudViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func object(locatedAt indexPath: IndexPath) -> NSFetchRequestResult {
+        return fetchedResultsController.object(at: indexPath)
+    }
+
 }
 
 // MARK: Actions
