@@ -10,13 +10,20 @@ import UIKit
 
 extension UITextField {
 
-    static func textField(withPlaceholder placeholder: String? = nil, text: String? = nil, keyboardType: UIKeyboardType = .default, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)) -> UITextField {
+    static func textField(
+        withPlaceholder placeholder: String? = nil,
+        text: String? = nil,
+        keyboardType: UIKeyboardType = .default,
+        font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize),
+        capitalization: UITextAutocapitalizationType = .sentences
+    ) -> UITextField {
         let textField = UITextField(frame: .zero)
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder
         textField.text = text
         textField.keyboardType = keyboardType
         textField.font = font
+        textField.autocapitalizationType = capitalization
         return textField
     }
     
