@@ -71,6 +71,22 @@ enum TriboolValue: Int {
         }
     }
 
+    func negativelyBiasedBoolean() -> Bool {
+        if self == ._true {
+            return true
+        }
+
+        return false
+    }
+
+    func positivelyBiasedBoolean() -> Bool {
+        if self == ._false {
+            return false
+        }
+
+        return true
+    }
+
 }
 
 // MARK: Logical OR
