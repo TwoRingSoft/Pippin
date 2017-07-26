@@ -16,8 +16,8 @@ enum ListViewControllerMode {
 }
 
 protocol CrudViewControllerCRUDDelegate {
-    func crudViewControllerWantsToAddObject(crudViewController: CrudViewController)
-    func crudViewController(crudViewController: CrudViewController, wantsToEdit object: NSFetchRequestResult)
+    func crudViewControllerWantsToCreateObject(crudViewController: CrudViewController)
+    func crudViewController(crudViewController: CrudViewController, wantsToUpdate object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, wantsToDelete object: NSFetchRequestResult)
 }
 
@@ -99,7 +99,7 @@ extension CrudViewController {
 @objc extension CrudViewController {
 
     func addPressed() {
-        crudDelegate.crudViewControllerWantsToAddObject(crudViewController: self)
+        crudDelegate.crudViewControllerWantsToCreateObject(crudViewController: self)
     }
 
     func cancelSearch() {
@@ -426,7 +426,7 @@ extension CrudViewController: UITableViewDelegate {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
 
-            crudDelegate.crudViewControllerWantsToAddObject(crudViewController: self)
+            crudDelegate.crudViewControllerWantsToCreateObject(crudViewController: self)
             return
         }
 
