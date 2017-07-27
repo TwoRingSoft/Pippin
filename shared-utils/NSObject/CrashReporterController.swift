@@ -1,9 +1,9 @@
 //
 //  CrashReporterController.swift
-//  InformedConsent
+//  shared-utils
 //
 //  Created by Andrew McKnight on 7/15/17.
-//  Copyright © 2017 Insight Therapeutics. All rights reserved.
+//  Copyright © 2017 Two Ring Software. All rights reserved.
 //
 
 import Crashlytics
