@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>log</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeExpression</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>DoughLogController.log&lt;#Debug#&gt;&lt;#Info#&gt;&lt;#Warning#&gt;&lt;#Error#&gt;(message: String(format: "[%@] &lt;#log message#&gt;", &lt;#class#&gt;&lt;#instance#&gt;Type(self)&lt;#, #&gt;&lt;#args#&gt;)&lt;#, error: #&gt;)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>16A57AB6-2F73-4F8A-983A-A77F7EF8B745</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Call to logger for multiple levels and class/instance types to choose from.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Log statement</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
