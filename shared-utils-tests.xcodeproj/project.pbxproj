@@ -572,7 +572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-shared-utilsTests-harness-ios-shared-utilsTests/Pods-shared-utilsTests-harness-ios-shared-utilsTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shared-utilsTests-harness-ios-shared-utilsTests/Pods-shared-utilsTests-harness-ios-shared-utilsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3257794A19D9EF6841558573 /* [CP] Copy Pods Resources */ = {
@@ -587,7 +587,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-shared-utilsTests-harness-ios-shared-utilsTests/Pods-shared-utilsTests-harness-ios-shared-utilsTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shared-utilsTests-harness-ios-shared-utilsTests/Pods-shared-utilsTests-harness-ios-shared-utilsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A31E43B48882043B5287760F /* [CP] Embed Pods Frameworks */ = {
@@ -602,7 +602,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-shared-utilsTests-harness-ios/Pods-shared-utilsTests-harness-ios-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shared-utilsTests-harness-ios/Pods-shared-utilsTests-harness-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C74BC4FCBB1AACB6C007E9B9 /* [CP] Copy Pods Resources */ = {
@@ -617,7 +617,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-shared-utilsTests-harness-ios/Pods-shared-utilsTests-harness-ios-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shared-utilsTests-harness-ios/Pods-shared-utilsTests-harness-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

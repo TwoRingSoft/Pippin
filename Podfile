@@ -1,6 +1,3 @@
-project 'Xcode/shared-utils-tests.xcodeproj/'
-workspace 'Xcode/shared-utils-tests.xcworkspace/'
-
 target 'shared-utilsTests-harness-ios' do
   use_frameworks!
   
