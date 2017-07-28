@@ -22,4 +22,4 @@ extension String {
         return "<\(tag)>\(self)</\(tag)>"
     }
 
-    }
+}
