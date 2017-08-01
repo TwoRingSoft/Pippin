@@ -33,6 +33,8 @@ class DebugViewController: UIViewController {
         stack.centerAnchors == view.centerAnchors
 
         view.backgroundColor = .white
+
+        modalPresentationStyle = .formSheet
     }
 
     required init?(coder aDecoder: NSCoder) {
