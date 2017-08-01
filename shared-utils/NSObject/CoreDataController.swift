@@ -56,6 +56,14 @@ extension CoreDataController {
         return results
     }
 
+}
+
+// MARK: Import/Export
+extension CoreDataController {
+
+    typealias ConfirmBlock = ((Bool) -> ())
+    typealias ConfirmCompletionBlock = ((Bool, @escaping ConfirmBlock) -> ())
+
     class func exportData() -> Data {
         let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
 
@@ -76,21 +84,50 @@ extension CoreDataController {
         return NSKeyedArchiver.archivedData(withRootObject: fileData)
     }
 
-    class func importData(data: Data) {
+    class func importFromSQLitePath(sqlitePath: String, completion: ConfirmCompletionBlock? = nil ) {
+        let shmPath = sqlitePath.appending("-shm")
+        let walPath = sqlitePath.appending("-wal")
+
+        let data = archivedData(sqlitePath: sqlitePath, sqliteWALPath: walPath, sqliteSHMPath: shmPath)
+        importData(data: data, completion: completion)
+    }
+
+    class func importData(data: Data, completion: ConfirmCompletionBlock? = nil) {
         guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
             singleton.logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", classType(self)))
             return
         }
 
+        var success = true
         fileData.forEach {
             let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
             let path = applicationSupportDirectory.appendingPathComponent($0.key)
             if !$0.value.write(toFile: path, atomically: true) {
                 singleton.logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", classType(self), $0.key))
+                success = false
             }
         }
 
-        fatalError("Restarting to load new database.")
+        completion?(success, { confirm in
+            if confirm {
+                fatalError("Restarting to load new database.")
+            }
+        })
+
+    }
+
+    private class func archivedData(sqlitePath: String, sqliteWALPath: String, sqliteSHMPath: String) -> Data {
+        var fileData = [String: NSData]()
+        [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
+            guard let data = NSData(contentsOfFile: $0) else {
+                singleton.logger?.logWarning(message: String(format: "[%@] No data read from %@.", classType(self), $0))
+                return
+            }
+
+            fileData[($0 as NSString).lastPathComponent] = data
+        }
+
+        return NSKeyedArchiver.archivedData(withRootObject: fileData)
     }
 
 }
