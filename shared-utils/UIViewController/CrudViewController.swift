@@ -27,6 +27,7 @@ protocol CrudViewControllerUITableViewDelegate {
     func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
     func crudViewController(crudViewController: CrudViewController, editActionsFor tableView: UITableView) -> [UITableViewRowAction]?
     func crudViewControllerShouldShowAddItemRow(crudViewController: CrudViewController) -> Bool
+    func crudViewControllerShouldShowAllowMultipleSelections(crudViewController: CrudViewController) -> Bool
 }
 
 protocol CrudViewControllerSearchDelegate {
@@ -84,13 +85,18 @@ extension CrudViewController {
         tableView.reloadData()
     }
 
-    func deselectTableViewRow() {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
     func object(locatedAt indexPath: IndexPath) -> NSFetchRequestResult {
         return fetchedResultsController.object(at: indexPath)
+    }
+
+    func selectedRows() -> [IndexPath]? {
+        return tableView.indexPathsForSelectedRows
+    }
+
+    func deselectRows(atIndexPaths indexPaths: [IndexPath]?) {
+        indexPaths?.forEach { indexPath in
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
 }
@@ -136,6 +142,7 @@ private extension CrudViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.allowsMultipleSelection = tableViewDelegate.crudViewControllerShouldShowAllowMultipleSelections(crudViewController: self)
 
         searchField = UITextField.textField(withPlaceholder: "Search")
         searchField.delegate = self
