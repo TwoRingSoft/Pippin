@@ -1,5 +1,5 @@
 //
-//  DebugController.swift
+//  DebugFlowController.swift
 //  shared-utils
 //
 //  Created by Andrew McKnight on 4/5/17.
@@ -9,44 +9,51 @@
 import Anchorage
 import UIKit
 
-enum DebugControllerError: Error {
+enum DebugFlowControllerError: Error {
     case databaseExportError(message: String, underlyingError: Error)
     case noAppsToImportDatabase
 }
 
-protocol DebugControllerDelegate {
+protocol DebugFlowControllerDelegate {
     func exportedDatabaseData() -> Data?
-    func failedToExportDatabase(error: DebugControllerError)
+    func failedToExportDatabase(error: DebugFlowControllerError)
 }
 
-class DebugController: NSObject {
+class DebugFlowController: NSObject {
 
     private weak var presentingVC: UIViewController!
-    private var delegate: DebugControllerDelegate!
+    private var databaseFilename: String!
+    private var delegate: DebugFlowControllerDelegate!
 
     var documentInteractionController: UIDocumentInteractionController!
 
-    init(delegate: DebugControllerDelegate) {
+    init(delegate: DebugFlowControllerDelegate) {
         super.init()
         self.delegate = delegate
     }
 
     func displayDebugMenu(fromViewController viewController: UIViewController, databaseFilename: String) {
-        presentingVC = viewController
-        let alert = UIAlertController(title: "\(Bundle.getAppName()) Debugging", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Export Database", style: .default, handler: { action in
-            self.exportDatabase(databaseFileName: databaseFilename)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            self.presentingVC.dismiss(animated: true)
-        }))
-        presentingVC.present(alert, animated: true)
+        self.databaseFilename = databaseFilename
+        let debugVC = DebugViewController(delegate: self)
+        viewController.present(debugVC, animated: true)
+    }
+
+}
+
+extension DebugFlowController: DebugViewControllerDelegate {
+
+    func debugViewControllerExported(debugViewController: DebugViewController) {
+        exportDatabase(databaseFileName: databaseFilename)
+    }
+
+    func debugViewControllerCanceled(debugViewController: DebugViewController) {
+        presentingVC.dismiss(animated: true)
     }
 
 }
 
 // MARK: Private
-private extension DebugController {
+private extension DebugFlowController {
 
     func exportDatabase(databaseFileName: String) {
         guard let data = delegate.exportedDatabaseData() else {
