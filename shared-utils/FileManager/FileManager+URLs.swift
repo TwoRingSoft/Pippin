@@ -12,7 +12,8 @@ extension FileManager {
 
     enum FileManagerURLError: Error {
         case failedToLocateUserDocumentsDirectory
-        case failedToConstructURLWithFileName
+        case failedToConstructDocumentURLWithFileName
+        case failedToConstructTemporaryURLWithFileName
     }
 
     class func urlForDocument(named fileName: String) throws -> URL {
@@ -21,7 +22,16 @@ extension FileManager {
         }
 
         guard let url = (docs as NSURL).appendingPathComponent(fileName) else {
-            throw FileManagerURLError.failedToConstructURLWithFileName
+            throw FileManagerURLError.failedToConstructDocumentURLWithFileName
+        }
+
+        return url
+    }
+
+    class func url(forTemporaryFileNamed fileName: String) throws -> URL {
+        let tempDir = URL(fileURLWithPath: NSTemporaryDirectory())
+        guard let url = (tempDir as NSURL).appendingPathComponent(fileName) else {
+            throw FileManagerURLError.failedToConstructTemporaryURLWithFileName
         }
 
         return url
