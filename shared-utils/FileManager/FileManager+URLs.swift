@@ -27,4 +27,10 @@ extension FileManager {
         return url
     }
 
+    class func url(forApplicationSupportFile fileName: String) -> URL {
+        let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
+        return URL(fileURLWithPath: applicationSupportDirectory.appendingPathComponent(fileName))
+
+    }
+
 }

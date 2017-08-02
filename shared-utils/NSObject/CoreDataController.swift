@@ -65,20 +65,18 @@ extension CoreDataController {
     typealias ConfirmCompletionBlock = ((Bool, @escaping ConfirmBlock) -> ())
 
     class func exportData() -> Data {
-        let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
-
-        let sqlitePath = applicationSupportDirectory.appendingPathComponent(String(format: "%@.sqlite", Bundle.getAppName()))
-        let sqliteWALPath = applicationSupportDirectory.appendingPathComponent(String(format: "%@.sqlite-wal", Bundle.getAppName()))
-        let sqliteSHMPath = applicationSupportDirectory.appendingPathComponent(String(format: "%@.sqlite-shm", Bundle.getAppName()))
+        let sqlitePath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", Bundle.getAppName()))
+        let sqliteWALPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", Bundle.getAppName()))
+        let sqliteSHMPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", Bundle.getAppName()))
 
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
-            guard let data = NSData(contentsOfFile: $0) else {
-                singleton.logger?.logWarning(message: String(format: "[%@] No data read from %@.", classType(self), $0))
+            guard let data = NSData(contentsOf: $0) else {
+                singleton.logger?.logWarning(message: String(format: "[%@] No data read from %@.", classType(self), String(describing: $0)))
                 return
             }
 
-            fileData[($0 as NSString).lastPathComponent] = data
+            fileData[$0.lastPathComponent] = data
         }
 
         return NSKeyedArchiver.archivedData(withRootObject: fileData)

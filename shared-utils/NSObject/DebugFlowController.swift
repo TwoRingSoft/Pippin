@@ -61,8 +61,7 @@ private extension DebugFlowController {
             return
         }
 
-        let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
-        let url = URL(fileURLWithPath: applicationSupportDirectory.appendingPathComponent(databaseFileName))
+        let url = FileManager.url(forApplicationSupportFile: databaseFileName)
 
         do {
             try data.write(to: url)
