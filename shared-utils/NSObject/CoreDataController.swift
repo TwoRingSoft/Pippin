@@ -156,7 +156,7 @@ extension CoreDataController {
 extension CoreDataController {
 
     class func delete(object: NSManagedObject, context: NSManagedObjectContext) {
-        singleton.logger?.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", classType(self), object, context))
+        singleton.logger?.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", classType(self), String(describing: object), context))
         context.delete(object)
         save(context: context)
     }
