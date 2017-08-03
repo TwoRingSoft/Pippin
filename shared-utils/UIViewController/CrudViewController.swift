@@ -49,14 +49,16 @@ class CrudViewController: UIViewController {
     private var searchDelegate: CrudViewControllerSearchDelegate!
     private var hideAddItemRow = false
     private var tableUpdates: [String: [IndexPath]]?
+    private var crudName: String!
     var logger: LogController?
 
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate) {
+    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.crudDelegate = crudDelegate
         self.tableViewDelegate = tableViewDelegate
         self.searchDelegate = searchDelegate
         self.context = context
+        self.crudName = name ?? fetchedResultsController.fetchRequest.entityName!
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
         setUpUI()
     }
@@ -71,12 +73,12 @@ class CrudViewController: UIViewController {
 extension CrudViewController {
 
     func reloadData() {
-        logger?.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), fetchedResultsController.fetchRequest.entityName!, fetchedResultsController, tableView))
+        logger?.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), crudName, fetchedResultsController, tableView))
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
         } catch {
-            let message = String(format: "[%@(%@)] Could not perform a new fetch on NSFetchedResultsController: %@.", instanceType(self), fetchedResultsController.fetchRequest.entityName!, fetchedResultsController)
+            let message = String(format: "[%@(%@)] Could not perform a new fetch on NSFetchedResultsController: %@.", instanceType(self), crudName, fetchedResultsController)
             logger?.logError(message: message, error: error)
         }
     }
@@ -231,15 +233,18 @@ private extension CrudViewController {
 
     func execute(tableUpdates: [String: [IndexPath]]) {
         var performedUpdates = false
+        var insertedRows = 0
         if let inserts = tableUpdates[name(forFetchedResultsChangeType: .insert)] {
-            logger?.logDebug(message: String(format: "[%@(%@)] inserts: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, inserts))
+            logger?.logDebug(message: String(format: "[%@(%@)] inserts: %@", instanceType(self), self.crudName, inserts))
             performedUpdates = true
             tableView.beginUpdates()
             tableView.insertRows(at: inserts, with: .automatic)
+            insertedRows = inserts.count
         }
 
-        if let deletes = tableUpdates[name(forFetchedResultsChangeType: .delete)] {
-            logger?.logDebug(message: String(format: "[%@(%@)] deletes: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, deletes))
+        let tableViewHasRows = tableView.numberOfRows(inSection: 0) + insertedRows > 0
+        if let deletes = tableUpdates[name(forFetchedResultsChangeType: .delete)], tableViewHasRows {
+            logger?.logDebug(message: String(format: "[%@(%@)] deletes: %@", instanceType(self), self.crudName, deletes))
             performedUpdates = true
             tableView.beginUpdates()
             tableView.deleteRows(at: deletes, with: .automatic)
@@ -276,10 +281,10 @@ private extension CrudViewController {
             self.tableView.beginUpdates()
             let indexPaths = [ self.addItemRowIndexPath() ]
             if hideAddItemRow {
-                self.logger?.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+                self.logger?.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.crudName))
                 self.tableView.deleteRows(at: indexPaths, with: .fade)
             } else {
-                self.logger?.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+                self.logger?.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.crudName))
                 self.tableView.insertRows(at: indexPaths, with: .fade)
             }
             self.tableView.endUpdates()
@@ -331,21 +336,21 @@ extension CrudViewController: UITextFieldDelegate {
 extension CrudViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        logger?.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+        logger?.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.crudName))
         tableUpdates = nil
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(describing: anObject)))
-        logger?.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, name(forFetchedResultsChangeType: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
+        logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@", instanceType(self), self.crudName, String(describing: anObject)))
+        logger?.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, name(forFetchedResultsChangeType: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
         update(indexPath: indexPath, for: type, newIndexPath: newIndexPath)
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, controller))
+        logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.crudName, controller))
         DispatchQueue.main.async {
             if let updates = self.tableUpdates {
-                self.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+                self.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.crudName))
                 self.execute(tableUpdates: updates)
             }
         }
@@ -358,7 +363,7 @@ extension CrudViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else {
-            let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!)
+            let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.crudName)
             logger?.logWarning(message: message)
             return 0
         }
@@ -367,17 +372,17 @@ extension CrudViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController.sections else {
-            let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!)
+            let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.crudName)
             logger?.logWarning(message: message)
             return 0
         }
         var rows = sections[section].numberOfObjects
-        logger?.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows))
+        logger?.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.crudName, rows))
         if tableViewDelegate.crudViewControllerShouldShowAddItemRow(crudViewController: self) && !hideAddItemRow && section == 0 {
-            logger?.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+            logger?.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.crudName))
             rows += 1 // add one row for the "add object" row
         }
-        logger?.logDebug(message: String(format: "[%@(%@)] Reporting %i rows in section %i", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, rows, section))
+        logger?.logDebug(message: String(format: "[%@(%@)] Reporting %i rows in section %i", instanceType(self), self.crudName, rows, section))
         return rows
     }
 
@@ -428,10 +433,10 @@ extension CrudViewController: UITableViewDataSource {
 extension CrudViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        logger?.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, String(reflecting: indexPath)))
+        logger?.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.crudName, String(reflecting: indexPath)))
 
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!))
+            logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.crudName))
 
             crudDelegate.crudViewControllerWantsToCreateObject(crudViewController: self)
             return
@@ -441,7 +446,7 @@ extension CrudViewController: UITableViewDelegate {
 
         let object = fetchedResultsController.object(at: indexPath)
 
-        logger?.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.fetchedResultsController.fetchRequest.entityName!, object as! NSManagedObject))
+        logger?.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.crudName, object as! NSManagedObject))
 
         tableViewDelegate.crudViewController(crudViewController: self, selected: object)
     }
