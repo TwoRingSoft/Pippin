@@ -18,8 +18,12 @@ extension String {
         return enclose(withTag: "b")
     }
 
-    func enclose(withTag tag: String) -> String {
-        return "<\(tag)>\(self)</\(tag)>"
+    var afterPageBreak: String {
+        return enclose(withTag: "div", parameters: "style=\"page-break-before: always\"")
+    }
+
+    func enclose(withTag tag: String, parameters: String = "") -> String {
+        return "<\(tag) \(parameters)>\(self)</\(tag)>"
     }
 
 }
