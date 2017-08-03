@@ -12,6 +12,7 @@ enum CoreDataError: Swift.Error {
     case entityContainsNoManagedObjectContext(String)
     case entityNotInserted(String)
     case cannotCreateEditingCopyOfEntity(String)
+    case entityNotDeleted(String)
 }
 
 class CoreDataController: NSObject {
