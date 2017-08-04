@@ -316,7 +316,7 @@ extension CrudViewController: UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let startingText = textField.text ?? ""
+        let startingText textField.nonemptyText ?? ""
         let endingText = (startingText as NSString).replacingCharacters(in: range, with: string)
 
         if endingText.characters.count == 0 {
