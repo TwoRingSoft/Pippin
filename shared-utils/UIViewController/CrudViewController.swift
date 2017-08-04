@@ -58,7 +58,7 @@ class CrudViewController: UIViewController {
         self.tableViewDelegate = tableViewDelegate
         self.searchDelegate = searchDelegate
         self.context = context
-        self.crudName = name ?? fetchedResultsController.fetchRequest.entityName!
+        self.crudName = name ?? fetchRequest.entityName!
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
         setUpUI()
     }
