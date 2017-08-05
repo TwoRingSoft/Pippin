@@ -12,6 +12,7 @@ import UIKit
 protocol DebugViewControllerDelegate {
     func debugViewControllerCanceled(debugViewController: DebugViewController)
     func debugViewControllerExported(debugViewController: DebugViewController)
+    func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController)
 }
 
 class DebugViewController: UIViewController {
@@ -24,8 +25,9 @@ class DebugViewController: UIViewController {
 
         let exportButton = UIButton.button(withTitle: "Export Database", target: self, selector: #selector(exportPressed))
         let importButton = UIButton.button(withTitle: "Import Database", target: self, selector: #selector(importPressed))
+        let generateButton = UIButton.button(withTitle: "Generate Test Models", target: self, selector: #selector(generatePressed))
         let cancelButton = UIButton.button(withTitle: "Cancel", target: self, selector: #selector(cancelPressed))
-        let stack = UIStackView(arrangedSubviews: [exportButton, importButton, cancelButton])
+        let stack = UIStackView(arrangedSubviews: [exportButton, importButton, generateButton, cancelButton])
         stack.axis = .vertical
 
         view.addSubview(stack)
@@ -43,6 +45,10 @@ class DebugViewController: UIViewController {
 
     @objc func exportPressed() {
         delegate.debugViewControllerExported(debugViewController: self)
+    }
+
+    @objc func generatePressed() {
+        delegate.debugViewControllerWantsToGenerateTestModels(debugViewController: self)
     }
 
     @objc func importPressed() {
