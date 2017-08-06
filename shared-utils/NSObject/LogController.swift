@@ -239,11 +239,13 @@ private extension LogController {
             self.xcgLogger.logln(message, level: logLevel)
         }
 
-        DispatchQueue.main.async {
-            withVaList([ logLevel.description, message ]) { args in
-                CLSLogv("[%@] %@", args)
+        #if !TEST
+            DispatchQueue.main.async {
+                withVaList([ logLevel.description, message ]) { args in
+                    CLSLogv("[%@] %@", args)
+                }
             }
-        }
+        #endif
     }
 
     func reportMissingLogFile() {
