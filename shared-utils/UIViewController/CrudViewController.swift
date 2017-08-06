@@ -350,6 +350,7 @@ extension CrudViewController: NSFetchedResultsControllerDelegate {
         logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.crudName, controller))
         DispatchQueue.main.async {
             if let updates = self.tableUpdates {
+                self.tableUpdates = nil
                 self.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.crudName))
                 self.execute(tableUpdates: updates)
             }
