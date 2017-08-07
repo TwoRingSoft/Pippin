@@ -26,8 +26,9 @@ class DebugViewController: UIViewController {
         let exportButton = UIButton.button(withTitle: "Export Database", target: self, selector: #selector(exportPressed))
         let importButton = UIButton.button(withTitle: "Import Database", target: self, selector: #selector(importPressed))
         let generateButton = UIButton.button(withTitle: "Generate Test Models", target: self, selector: #selector(generatePressed))
+        let deleteButton = UIButton.button(withTitle: "Delete Database", target: self, selector: #selector(deletePressed))
         let cancelButton = UIButton.button(withTitle: "Cancel", target: self, selector: #selector(cancelPressed))
-        let stack = UIStackView(arrangedSubviews: [exportButton, importButton, generateButton, cancelButton])
+        let stack = UIStackView(arrangedSubviews: [exportButton, importButton, generateButton, deleteButton, cancelButton])
         stack.axis = .vertical
 
         view.addSubview(stack)
@@ -45,6 +46,20 @@ class DebugViewController: UIViewController {
 
     @objc func exportPressed() {
         delegate.debugViewControllerExported(debugViewController: self)
+    }
+
+    @objc func deletePressed() {
+        let url = FileManager.url(forApplicationSupportFile: "InformedConsent.sqlite")
+        let shmURL = FileManager.url(forApplicationSupportFile: "InformedConsent.sqlite-shm")
+        let walURL = FileManager.url(forApplicationSupportFile: "InformedConsent.sqlite-wal")
+        do {
+            try FileManager.default.removeItem(at: url)
+            try FileManager.default.removeItem(at: shmURL)
+            try FileManager.default.removeItem(at: walURL)
+            fatalError("Restarting to complete database removal.")
+        } catch {
+            showAlert(withTitle: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)))
+        }
     }
 
     @objc func generatePressed() {
