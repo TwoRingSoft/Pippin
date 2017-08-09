@@ -13,7 +13,11 @@ let rDNSDomain = "com.tworingsoft"
 extension String {
 
     init(asRDNSForApp app: String, domain: String, subpaths: [String]? = nil) {
-        self = String(format: "%@.%@.%@%@", rDNSDomain, app, domain, subpaths != nil && subpaths!.count > 0 ? ".".appending(subpaths!.joined(separator: ".")) : "").lowercased()
+        var subpathString = ""
+        if let subpaths = subpaths, subpaths.count > 0 {
+            subpathString = ".".appending(subpaths.joined(separator: "."))
+        }
+        self = String(format: "%@.%@.%@%@", rDNSDomain, app, domain, subpathString).lowercased()
     }
 
 }
