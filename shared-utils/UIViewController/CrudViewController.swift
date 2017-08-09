@@ -50,6 +50,7 @@ class CrudViewController: UIViewController {
     private var hideAddItemRow = false
     private var tableUpdates: [String: [IndexPath]]?
     private var crudName: String!
+    private var originalFetchRequestPredicate: NSPredicate?
     var logger: LogController?
 
     init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil) {
@@ -122,7 +123,7 @@ extension CrudViewController {
 private extension CrudViewController {
 
     func resetSearch() {
-        fetchedResultsController.fetchRequest.predicate = nil
+        fetchedResultsController.fetchRequest.predicate = originalFetchRequestPredicate
         reloadData()
     }
 
@@ -133,7 +134,7 @@ private extension CrudViewController {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-
+        originalFetchRequestPredicate = fetchRequest.predicate
         fetchedResultsController.delegate = self
         reloadData()
     }
