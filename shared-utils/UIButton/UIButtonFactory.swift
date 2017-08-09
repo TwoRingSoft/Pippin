@@ -31,19 +31,29 @@ extension UIButton {
         return button
     }
 
-    class func button(withTitle title: String, tintColor color: UIColor = .black, target: Any? = nil, selector: Selector? = nil) -> UIButton {
-        let button = UIButton(type: .custom)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(color, for: .normal)
+    func configure(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil) {
+        setTitle(title, for: .normal)
+
+        if selector != nil {
+            addTarget(target, action: selector!, for: .touchUpInside)
+        }
+
+        // universal styles
+        tintColor = color
+        titleLabel?.font = font
+
+        // style normal state
+        setTitleColor(color, for: .normal)
+
+        // style disabled state
         if let rgb = color.rgb() {
             let lightColor = UIColor(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 0.5)
-            button.setTitleColor(lightColor, for: .highlighted)
-            button.setTitleColor(lightColor, for: .disabled)
+            setTitleColor(lightColor, for: .disabled)
         }
-        if selector != nil {
-            button.addTarget(target, action: selector!, for: .touchUpInside)
-        }
-        return button
+
+        // style highlighted state
+        setTitleColor(.white, for: .highlighted)
+        clipsToBounds = true
     }
     
 }

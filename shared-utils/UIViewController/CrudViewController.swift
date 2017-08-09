@@ -151,8 +151,8 @@ private extension CrudViewController {
         searchField.clearButtonMode = .whileEditing
         searchField.rightViewMode = .always
 
-        searchCancelButton = UIButton.button(withTitle: "Cancel")
-        searchCancelButton.addTarget(self, action: #selector(cancelSearch), for: .touchUpInside)
+        searchCancelButton = UIButton(frame: .zero)
+        searchCancelButton.configure(title: "Cancel", target: self, selector: #selector(cancelSearch))
         searchCancelButton.alpha = 0
 
         let searchContainer = UIView(frame: .zero)

@@ -23,11 +23,16 @@ class DebugViewController: UIViewController {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
 
-        let exportButton = UIButton.button(withTitle: "Export Database", target: self, selector: #selector(exportPressed))
-        let importButton = UIButton.button(withTitle: "Import Database", target: self, selector: #selector(importPressed))
-        let generateButton = UIButton.button(withTitle: "Generate Test Models", target: self, selector: #selector(generatePressed))
-        let deleteButton = UIButton.button(withTitle: "Delete Database", target: self, selector: #selector(deletePressed))
-        let cancelButton = UIButton.button(withTitle: "Cancel", target: self, selector: #selector(cancelPressed))
+        let exportButton = UIButton(frame: .zero)
+        exportButton.configure(title: "Export Database", target: self, selector: #selector(exportPressed))
+        let importButton = UIButton(frame: .zero)
+        importButton.configure(title: "Import Database", target: self, selector: #selector(importPressed))
+        let generateButton = UIButton(frame: .zero)
+        generateButton.configure(title: "Generate Test Models", target: self, selector: #selector(generatePressed))
+        let deleteButton = UIButton(frame: .zero)
+        deleteButton.configure(title: "Delete Database", target: self, selector: #selector(deletePressed))
+        let cancelButton = UIButton(frame: .zero)
+        cancelButton.configure(title: "Cancel", target: self, selector: #selector(cancelPressed))
         let stack = UIStackView(arrangedSubviews: [exportButton, importButton, generateButton, deleteButton, cancelButton])
         stack.axis = .vertical
 
