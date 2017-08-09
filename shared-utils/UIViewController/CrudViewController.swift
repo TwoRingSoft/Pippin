@@ -186,7 +186,7 @@ private extension CrudViewController {
         if !tableViewDelegate.crudViewControllerShouldShowAddItemRow(crudViewController: self) || hideAddItemRow {
             return false
         }
-        
+
         return indexPath.compare(addItemRowIndexPath()) == .orderedSame
     }
 
@@ -318,16 +318,31 @@ extension CrudViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let startingText = textField.nonemptyText ?? ""
+        logger?.logDebug(message: String(format: "[%@(%@)] Text before search term update: %@.", instanceType(self), self.crudName, startingText))
+
         let endingText = (startingText as NSString).replacingCharacters(in: range, with: string)
+        logger?.logDebug(message: String(format: "[%@(%@)] New search term: %@.", instanceType(self), self.crudName, endingText))
 
         if endingText.characters.count == 0 {
+            logger?.logDebug(message: String(format: "[%@(%@)] User cleared search term. Resetting.", instanceType(self), self.crudName))
             resetSearch()
             return true
         }
 
-        fetchedResultsController.fetchRequest.predicate = searchDelegate.crudViewController(crudViewController: self, predicateForSearchString: endingText)
-        reloadData()
+        let predicate = searchDelegate.crudViewController(crudViewController: self, predicateForSearchString: endingText)
+        logger?.logDebug(message: String(format: "[%@(%@)] Received fetch request predicate %@.", instanceType(self), self.crudName, predicate))
 
+        var predicates = [ predicate ]
+        if let original = originalFetchRequestPredicate {
+            predicates.append(original)
+        }
+
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        logger?.logDebug(message: String(format: "[%@(%@)] Searching with compound predicate %@.", instanceType(self), self.crudName, compoundPredicate))
+
+        fetchedResultsController.fetchRequest.predicate = compoundPredicate
+
+        reloadData()
         return true
     }
 
