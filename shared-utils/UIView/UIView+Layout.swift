@@ -24,10 +24,15 @@ extension UIView {
         }
     }
 
-    func fillSafeArea(inViewController viewController: UIViewController) {
-        topAnchor == viewController.topLayoutGuide.bottomAnchor
-        horizontalAnchors == viewController.view.horizontalAnchors
-        bottomAnchor == viewController.bottomLayoutGuide.topAnchor
+    func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
+        let top = topAnchor == viewController.topLayoutGuide.bottomAnchor
+        let horiz = horizontalAnchors == viewController.view.horizontalAnchors
+        let bottom = bottomAnchor == viewController.bottomLayoutGuide.topAnchor
+
+        top.constant = insets.top
+        horiz.first.constant = insets.left
+        horiz.second.constant = -insets.right
+        bottom.constant = -insets.bottom
     }
 
 }
