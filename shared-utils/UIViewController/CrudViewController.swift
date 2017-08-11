@@ -406,8 +406,8 @@ extension CrudViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             let cell = UITableViewCell(style: .default, reuseIdentifier: "AddObjectCell")
-            cell.textLabel?.text = "Create new \(fetchedResultsController.fetchRequest.entityName!)"
-            cell.textLabel?.font = .header
+            cell.textLabel?.text = String(format: "Create new %@", crudName)
+            cell.textLabel?.font = TextType.header.font()
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.allowsDefaultTighteningForTruncation = true
