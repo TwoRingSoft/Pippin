@@ -11,7 +11,7 @@ import WebKit
 
 extension WKWebView {
 
-    func loadHTML(fromFile file: String, htmlPrologueFile: String? = nil, htmlEpilogueFile: String? = nil) throws {
+    func loadHTML(fromFile file: String, htmlPrologueFile: String? = nil, htmlEpilogueFile: String? = nil, baseURL: URL? = nil) throws {
         var htmlComponents = [String]()
 
         if let prologue = htmlPrologueFile {
@@ -24,7 +24,7 @@ extension WKWebView {
             try htmlComponents.append(String(contentsOfResource: epilogue, withExtension: "html"))
         }
 
-        loadHTMLString(htmlComponents.joined(), baseURL: nil)
+        loadHTMLString(htmlComponents.joined(), baseURL: baseURL)
     }
 
 }
