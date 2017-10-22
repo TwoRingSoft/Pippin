@@ -19,6 +19,7 @@ protocol CrudViewControllerCRUDDelegate {
     func crudViewControllerWantsToCreateObject(crudViewController: CrudViewController)
     func crudViewController(crudViewController: CrudViewController, wantsToUpdate object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, wantsToDelete object: NSFetchRequestResult)
+    func crudViewController(crudViewController: CrudViewController, configureAddEntityCell cell: UITableViewCell)
 }
 
 protocol CrudViewControllerUITableViewDelegate {
@@ -407,12 +408,7 @@ extension CrudViewController: UITableViewDataSource {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             let cell = UITableViewCell(style: .default, reuseIdentifier: "AddObjectCell")
             cell.textLabel?.text = String(format: "Create new %@", crudName)
-            cell.textLabel?.font = TextType.header.font()
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.allowsDefaultTighteningForTruncation = true
-            cell.accessoryView = UIImageView(image: UIImage(named: "add"))
-            cell.selectionStyle = .none
+            crudDelegate.crudViewController(crudViewController: self, configureAddEntityCell: cell)
             return cell
         }
 
