@@ -17,7 +17,7 @@ enum DebugFlowControllerError: Error {
 protocol DebugFlowControllerDelegate {
     func exportedDatabaseData() -> Data?
     func failedToExportDatabase(error: DebugFlowControllerError)
-    func debugFlowControllerErrorWantsToGenerateTestModels(debugFlowControllerError: DebugFlowController)
+    func debugFlowControllerWantsToGenerateTestModels(debugFlowControllerError: DebugFlowController)
 }
 
 class DebugFlowController: NSObject {
@@ -53,7 +53,7 @@ extension DebugFlowController: DebugViewControllerDelegate {
     }
 
     func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController) {
-        delegate.debugFlowControllerErrorWantsToGenerateTestModels(debugFlowControllerError: self)
+        delegate.debugFlowControllerWantsToGenerateTestModels(debugFlowControllerError: self)
     }
 
 }
