@@ -1,6 +1,6 @@
 //
 //  String+rDNS.swift
-//  Dough
+//  shared-utils
 //
 //  Created by Andrew McKnight on 3/5/17.
 //  Copyright © 2017 Two Ring Software. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  UIDevice+Idioms.swift
-//  Dough
+//  shared-utils
 //
 //  Created by Andrew McKnight on 3/14/17.
 //  Copyright © 2017 Two Ring Software. All rights reserved.
