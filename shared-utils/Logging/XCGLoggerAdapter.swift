@@ -1,5 +1,5 @@
 //
-//  LogController.swift
+//  XCGLoggerAdapter.swift
 //  shared-utils
 //
 //  Created by Andrew McKnight on 1/28/17.
@@ -10,21 +10,7 @@ import Crashlytics
 import Foundation
 import XCGLogger
 
-enum LoggingError: Swift.Error {
-    case noLoggingFile(String)
-    case couldNotReadLogFile(String, NSError)
-}
-
-enum LogLevel: Int {
-
-    case unknown = 0
-    case verbose
-    case debug
-    case info
-    case warning
-    case error
-
-    static func defaultLevel() -> LogLevel { return .info }
+extension LogLevel {
 
     func xcgLogLevel() -> XCGLogger.Level {
         switch self {
@@ -51,72 +37,7 @@ enum LogLevel: Int {
 
 }
 
-extension LogLevel: CustomDebugStringConvertible {
-
-    var debugDescription: String {
-        get {
-            let s = String(asRDNSForApp: Bundle.getAppName(), domain: "log-level", subpaths: [ description ])
-            return s
-        }
-    }
-
-    /// This isn't actually a function in `CustomdebugStringConvertible` but it's provided for consistent API.
-    init?(debugDescription: String) {
-        if debugDescription == String(reflecting: LogLevel.unknown) {
-            self = .unknown
-        } else if debugDescription == String(reflecting: LogLevel.verbose) {
-            self = .verbose
-        } else if debugDescription == String(reflecting: LogLevel.debug) {
-            self = .debug
-        } else if debugDescription == String(reflecting: LogLevel.info) {
-            self = .info
-        } else if debugDescription == String(reflecting: LogLevel.warning) {
-            self = .warning
-        } else if debugDescription == String(reflecting: LogLevel.error) {
-            self = .error
-        } else {
-            return nil
-        }
-    }
-
-}
-
-extension LogLevel: CustomStringConvertible {
-
-    var description: String {
-        get {
-            switch self {
-            case .unknown: return "unknown"
-            case .verbose: return "verbose"
-            case .debug: return "debug"
-            case .info: return "info"
-            case .warning: return "warning"
-            case .error: return "error"
-            }
-        }
-    }
-
-    init?(_ description: String) {
-        if description == String(describing: LogLevel.unknown) {
-            self = .unknown
-        } else if description == String(describing: LogLevel.verbose) {
-            self = .verbose
-        } else if description == String(describing: LogLevel.debug) {
-            self = .debug
-        } else if description == String(describing: LogLevel.info) {
-            self = .info
-        } else if description == String(describing: LogLevel.warning) {
-            self = .warning
-        } else if description == String(describing: LogLevel.error) {
-            self = .error
-        } else {
-            return nil
-        }
-    }
-
-}
-
-final class LogController: NSObject {
+final class XCGLoggerAdapter: NSObject {
 
     var logLevel: LogLevel = .info
     fileprivate var loggingQueue: DispatchQueue!
@@ -154,7 +75,7 @@ final class LogController: NSObject {
 }
 
 // MARK: Public
-extension LogController {
+extension XCGLoggerAdapter {
 
     func setLoggingLevel(newLevel: XCGLogger.Level) {
         xcgLogger.outputLevel = newLevel
@@ -181,7 +102,7 @@ extension LogController {
 }
 
 // MARK: Logging
-extension LogController {
+extension XCGLoggerAdapter: Logger {
 
     func logDebug(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.debug)
@@ -208,7 +129,7 @@ extension LogController {
 }
 
 // MARK: Private
-private extension LogController {
+private extension XCGLoggerAdapter {
 
     func resetContentsOfLog() {
         guard let logFileURL = logFileURL else {
@@ -249,7 +170,7 @@ private extension LogController {
     }
 
     func reportMissingLogFile() {
-        logError(message: String(format: "[%@] Could not locate log file.", instanceType(self)), error: LoggingError.noLoggingFile("Could not locate log file."))
+        logError(message: String(format: "[%@] Could not locate log file.", instanceType(self)), error: LoggerError.noLoggingFile("Could not locate log file."))
     }
     
 }

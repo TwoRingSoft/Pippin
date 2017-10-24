@@ -1,6 +1,6 @@
 //
 //  CrudViewController.swift
-//  Dough
+//  shared-utils
 //
 //  Created by Andrew McKnight on 1/12/17.
 //  Copyright © 2017 Two Ring Software. All rights reserved.
@@ -52,7 +52,7 @@ class CrudViewController: UIViewController {
     private var tableUpdates: [String: [IndexPath]]?
     private var crudName: String!
     private var originalFetchRequestPredicate: NSPredicate?
-    var logger: LogController?
+    var logger: Logger?
 
     init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil) {
         super.init(nibName: nil, bundle: nil)

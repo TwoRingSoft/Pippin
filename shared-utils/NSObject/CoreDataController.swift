@@ -18,7 +18,7 @@ enum CoreDataError: Swift.Error {
 class CoreDataController: NSObject {
 
     fileprivate static let singleton = CoreDataController()
-    fileprivate var logger: LogController?
+    fileprivate var logger: Logger?
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: Bundle.getAppName())
@@ -31,7 +31,7 @@ class CoreDataController: NSObject {
         return container
     }()
 
-    class func setLogger(logger: LogController) {
+    class func setLogger(logger: Logger) {
         singleton.logger = logger
     }
 

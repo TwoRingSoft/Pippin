@@ -11,7 +11,7 @@ import UIKit
 
 struct BugReportingController {
 
-    var logger: LogController?
+    var logger: Logger?
 
     init() {
         logger?.logDebug(message: String(format: "[%@] Initializing bug reporter.", valueType(self)))

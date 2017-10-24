@@ -18,9 +18,11 @@ protocol DebugViewControllerDelegate {
 class DebugViewController: UIViewController {
 
     private var delegate: DebugViewControllerDelegate!
+    private var logger: Logger?
 
-    init(delegate: DebugViewControllerDelegate) {
+    init(delegate: DebugViewControllerDelegate, logger: Logger?) {
         self.delegate = delegate
+        self.logger = logger
         super.init(nibName: nil, bundle: nil)
 
         let exportButton = UIButton(frame: .zero)
@@ -73,7 +75,7 @@ class DebugViewController: UIViewController {
 
     @objc func importPressed() {
         do {
-            try present(DatabaseFixturePickerViewController(), animated: true)
+            try present(DatabaseFixturePickerViewController(logger: logger), animated: true)
         } catch {
             showAlert(withTitle: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)))
         }
