@@ -11,10 +11,13 @@ import UIKit
 class DatabaseFixturePickerViewController: UIViewController {
 
     var fixtures: [URL]!
+    private var coreDataController: CoreDataController!
     private var logger: Logger?
 
-    init(logger: Logger?) throws {
+    init(coreDataController: CoreDataController, logger: Logger?) throws {
         super.init(nibName: nil, bundle: nil)
+
+        self.coreDataController = coreDataController
 
         if let path = Bundle.main.resourcePath {
             let fixturesDirectoryURL = URL(fileURLWithPath: (path as NSString).appendingPathComponent("fixtures"))
@@ -63,7 +66,7 @@ extension DatabaseFixturePickerViewController: UITableViewDelegate {
         let fixtureName = fixtures[indexPath.row]
         let fixtureSQLitePath = fixtureName.appendingPathComponent(Bundle.getAppName()).appendingPathExtension("sqlite").path
 
-        CoreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
+        coreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
             if success {
                 self.showConfirmationAlert(withTitle: nil, message: "The app must now close to finish the import. Relaunch to continue.", confirmTitle: "OK, Restart!", cancelTitle: "Cancel", style: .alert, completion: { (confirmed) in
                     confirmation(confirmed)

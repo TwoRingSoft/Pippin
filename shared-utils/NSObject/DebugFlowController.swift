@@ -33,9 +33,9 @@ class DebugFlowController: NSObject {
         self.delegate = delegate
     }
 
-    func displayDebugMenu(fromViewController viewController: UIViewController, databaseFilename: String) {
+    func displayDebugMenu(fromViewController viewController: UIViewController, databaseFilename: String, coreDataController: CoreDataController) {
         self.databaseFilename = databaseFilename
-        let debugVC = DebugViewController(delegate: self, logger: nil)
+        let debugVC = DebugViewController(delegate: self, logger: nil, coreDataController: coreDataController)
         presentingVC = viewController
         viewController.present(debugVC, animated: true)
     }
