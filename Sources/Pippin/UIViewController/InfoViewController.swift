@@ -17,13 +17,17 @@ enum SocialIcon: String {
     case facebook = "facebook-logo"
     case linkedin = "linkedin-logo"
 
-    func image() -> UIImage {
+    func image() -> UIImage? {
         switch self {
-        case .twoRing: return #imageLiteral(resourceName: "trs-logo")
-        case .twitter: return #imageLiteral(resourceName: "twitter-logo")
-        case .facebook: return #imageLiteral(resourceName: "facebook-logo")
-        case .linkedin: return #imageLiteral(resourceName: "linkedin-logo")
+        case .twoRing: return imageAsset(withName: "trs-logo")
+        case .twitter: return imageAsset(withName: "twitter-logo")
+        case .facebook: return imageAsset(withName: "facebook-logo")
+        case .linkedin: return imageAsset(withName: "linkedin-logo")
         }
+    }
+
+    func imageAsset(withName name: String) -> UIImage? {
+        return UIImage(named: name, in: Bundle(for: InfoViewController.self), compatibleWith: nil)
     }
 
     func url() -> String {
@@ -189,7 +193,8 @@ private extension InfoViewController {
 
     func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, font: UIFont) {
         let attachment = NSTextAttachment()
-        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: font.capHeight * attachmentImage.image().size.width / attachmentImage.image().size.height, height: font.capHeight))
+        let size = attachmentImage.image() != nil ? attachmentImage.image()!.size : .zero
+        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: font.capHeight * size.width / size.height, height: font.capHeight))
         attachment.image = attachmentImage.image()
         let attachmentString = NSAttributedString(attachment: attachment)
         let range = (attributedString.string as NSString).range(of: attachmentImage.rawValue)
