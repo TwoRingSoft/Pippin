@@ -9,18 +9,18 @@
 import Anchorage
 import UIKit
 
-enum DebugFlowControllerError: Error {
+public enum DebugFlowControllerError: Error {
     case databaseExportError(message: String, underlyingError: Error)
     case noAppsToImportDatabase
 }
 
-protocol DebugFlowControllerDelegate {
+public protocol DebugFlowControllerDelegate {
     func exportedDatabaseData() -> Data?
     func failedToExportDatabase(error: DebugFlowControllerError)
     func debugFlowControllerWantsToGenerateTestModels(debugFlowControllerError: DebugFlowController)
 }
 
-class DebugFlowController: NSObject {
+public class DebugFlowController: NSObject {
 
     private weak var presentingVC: UIViewController!
     private var databaseFilename: String!
@@ -28,10 +28,15 @@ class DebugFlowController: NSObject {
 
     var documentInteractionController: UIDocumentInteractionController!
 
-    init(delegate: DebugFlowControllerDelegate) {
+    public init(delegate: DebugFlowControllerDelegate) {
         super.init()
         self.delegate = delegate
     }
+
+}
+
+// MARK: Public
+public extension DebugFlowController {
 
     func displayDebugMenu(fromViewController viewController: UIViewController, databaseFilename: String, coreDataController: CoreDataController) {
         self.databaseFilename = databaseFilename

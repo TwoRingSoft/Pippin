@@ -8,15 +8,15 @@
 
 import Foundation
 
-func instanceType(_ object: NSObject) -> String {
+public func instanceType(_ object: NSObject) -> String {
     return lastClassComponent(identifier: NSStringFromClass(type(of: object)))
 }
 
-func classType(_ klass: AnyClass) -> String {
+public func classType(_ klass: AnyClass) -> String {
     return lastClassComponent(identifier: NSStringFromClass(klass))
 }
 
-func valueType(_ value: Any) -> String {
+public func valueType(_ value: Any) -> String {
     return String(describing: type(of: value))
 }
 

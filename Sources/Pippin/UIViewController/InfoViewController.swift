@@ -37,13 +37,13 @@ enum SocialIcon: String {
     
 }
 
-class InfoViewController: UIViewController {
+public class InfoViewController: UIViewController {
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
+    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
         super.init(nibName: nil, bundle: nil)
         setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
         setUpSecretCrash()
@@ -52,25 +52,29 @@ class InfoViewController: UIViewController {
 }
 
 // MARK: Actions
-extension InfoViewController {
+@objc extension InfoViewController {
 
-    @objc func twitterPressed() {
+    func twitterPressed() {
         openURL(URLString: SocialIcon.twitter.url())
     }
 
-    @objc func facebookPressed() {
+    func facebookPressed() {
         openURL(URLString: SocialIcon.facebook.url())
     }
 
-    @objc func linkedinPressed() {
+    func linkedinPressed() {
         openURL(URLString: SocialIcon.linkedin.url())
     }
 
-    @objc func secretTestCrash() {
+    func secretTestCrash() {
         Crashlytics.sharedInstance().crash()
     }
 
-    private func openURL(URLString: String) {
+}
+
+private extension InfoViewController {
+
+    func openURL(URLString: String) {
         let url = URL(string: URLString)!
         if #available(iOS 10, *) {
             UIApplication.shared.open(url, options: [String: Any](), completionHandler: nil)
@@ -78,10 +82,6 @@ extension InfoViewController {
             UIApplication.shared.openURL(url)
         }
     }
-
-}
-
-private extension InfoViewController {
 
     func setUpUI(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
         view.backgroundColor = UIColor.white

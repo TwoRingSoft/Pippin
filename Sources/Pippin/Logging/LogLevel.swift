@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum LogLevel: Int {
+public enum LogLevel: Int {
 
     case unknown = 0
     case verbose
@@ -17,13 +17,13 @@ enum LogLevel: Int {
     case warning
     case error
 
-    static func defaultLevel() -> LogLevel { return .info }
+    public static func defaultLevel() -> LogLevel { return .info }
 
 }
 
 extension LogLevel: CustomDebugStringConvertible {
 
-    var debugDescription: String {
+    public var debugDescription: String {
         get {
             let s = String(asRDNSForApp: Bundle.getAppName(), domain: "log-level", subpaths: [ description ])
             return s
@@ -31,7 +31,7 @@ extension LogLevel: CustomDebugStringConvertible {
     }
 
     /// This isn't actually a function in `CustomdebugStringConvertible` but it's provided for consistent API.
-    init?(debugDescription: String) {
+    public init?(debugDescription: String) {
         if debugDescription == String(reflecting: LogLevel.unknown) {
             self = .unknown
         } else if debugDescription == String(reflecting: LogLevel.verbose) {
@@ -53,7 +53,7 @@ extension LogLevel: CustomDebugStringConvertible {
 
 extension LogLevel: CustomStringConvertible {
 
-    var description: String {
+    public var description: String {
         get {
             switch self {
             case .unknown: return "unknown"
@@ -66,7 +66,7 @@ extension LogLevel: CustomStringConvertible {
         }
     }
 
-    init?(_ description: String) {
+    public init?(_ description: String) {
         if description == String(describing: LogLevel.unknown) {
             self = .unknown
         } else if description == String(describing: LogLevel.verbose) {

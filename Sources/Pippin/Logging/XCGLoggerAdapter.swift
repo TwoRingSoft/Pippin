@@ -37,14 +37,14 @@ extension LogLevel {
 
 }
 
-final class XCGLoggerAdapter: NSObject {
+public final class XCGLoggerAdapter: NSObject {
 
-    var logLevel: LogLevel = .info
+    public var logLevel: LogLevel = .info
     fileprivate var loggingQueue: DispatchQueue!
     fileprivate var logFileURL: URL?
     fileprivate var xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
 
-    init(name: String, logLevel: LogLevel) {
+    public init(name: String, logLevel: LogLevel) {
         super.init()
         let appName = Bundle.getAppName()
         self.loggingQueue = DispatchQueue(label: "com.tworingsoft.\(appName).logger.\(name).queue")
@@ -84,7 +84,16 @@ extension XCGLoggerAdapter {
     /**
      - returns: contents of all log files
      */
-    func getLogContents() -> String? {
+    func openURL(URLString: String) {
+        let url = URL(string: URLString)!
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [String: Any](), completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+
+    public func getLogContents() -> String? {
         var logContentsString = String()
 
         if let logContents = getContentsOfLog() {
@@ -104,23 +113,23 @@ extension XCGLoggerAdapter {
 // MARK: Logging
 extension XCGLoggerAdapter: Logger {
 
-    func logDebug(message: String) {
+    public func logDebug(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.debug)
     }
 
-    func logInfo(message: String) {
+    public func logInfo(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.info)
     }
 
-    func logWarning(message: String) {
+    public func logWarning(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.warning)
     }
 
-    func logVerbose(message: String) {
+    public func logVerbose(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.verbose)
     }
 
-    func logError(message: String, error: Error) {
+    public func logError(message: String, error: Error) {
         let messageWithErrorDescription = String(format: "%@: %@", message, error as NSError)
         self.log(message: messageWithErrorDescription, logLevel: XCGLogger.Level.error)
         Crashlytics.sharedInstance().recordError(error as NSError)

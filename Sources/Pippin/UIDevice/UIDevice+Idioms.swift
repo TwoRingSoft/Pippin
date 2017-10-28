@@ -10,7 +10,7 @@ import UIKit
 
 extension UIDevice {
 
-    class var isPhone: Bool {
+    public class var isPhone: Bool {
         get {
             return current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
         }

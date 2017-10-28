@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BugReporter {
+public protocol BugReporter {
 
     var logger: Logger? { get set }
     func show(fromViewController viewController: UIViewController, screenshot: UIImage?)

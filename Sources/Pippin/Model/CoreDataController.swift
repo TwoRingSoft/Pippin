@@ -8,14 +8,14 @@
 
 import CoreData
 
-enum CoreDataError: Swift.Error {
+public enum CoreDataError: Swift.Error {
     case entityContainsNoManagedObjectContext(String)
     case entityNotInserted(String)
     case cannotCreateEditingCopyOfEntity(String)
     case entityNotDeleted(String)
 }
 
-class CoreDataController: NSObject {
+public class CoreDataController: NSObject {
 
     fileprivate var logger: Logger?
     fileprivate var modelName: String!
@@ -24,7 +24,7 @@ class CoreDataController: NSObject {
         self.modelName = Bundle.getAppName()
     }
 
-    init(modelName: String) {
+    public init(modelName: String) {
         self.modelName = modelName
     }
 
@@ -39,6 +39,11 @@ class CoreDataController: NSObject {
         return container
     }()
 
+}
+
+// MARK: Public
+public extension CoreDataController {
+
     func setLogger(logger: Logger) {
         self.logger = logger
     }
@@ -46,7 +51,7 @@ class CoreDataController: NSObject {
 }
 
 // MARK: Access
-extension CoreDataController {
+public extension CoreDataController {
 
     func perform(block: ((NSManagedObjectContext) -> Void)) {
         let context = persistentContainer.newBackgroundContext()
@@ -68,7 +73,7 @@ extension CoreDataController {
 }
 
 // MARK: Import/Export
-extension CoreDataController {
+public extension CoreDataController {
 
     typealias ConfirmBlock = ((Bool) -> ())
     typealias ConfirmCompletionBlock = ((Bool, @escaping ConfirmBlock) -> ())
@@ -140,7 +145,7 @@ extension CoreDataController {
 }
 
 // MARK: Persistence
-extension CoreDataController {
+public extension CoreDataController {
 
     func save(context: NSManagedObjectContext) {
         logger?.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), context))
@@ -161,7 +166,7 @@ extension CoreDataController {
 }
 
 // MARK: Deletion
-extension CoreDataController {
+public extension CoreDataController {
 
     func delete(object: NSManagedObject, context: NSManagedObjectContext) {
         logger?.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", instanceType(self), String(describing: object), context))

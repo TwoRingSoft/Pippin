@@ -10,13 +10,13 @@ import Foundation
 
 typealias SemanticRevision = UInt
 
-struct SemanticVersion {
+public struct SemanticVersion {
 
     var major: SemanticRevision
     var minor: SemanticRevision
     var patch: SemanticRevision
 
-    static var zero: SemanticVersion {
+    public static var zero: SemanticVersion {
         return SemanticVersion(major: 0, minor: 0, patch: 0)
     }
     
@@ -24,7 +24,7 @@ struct SemanticVersion {
 
 extension SemanticVersion: CustomStringConvertible {
 
-    var description: String {
+    public var description: String {
         return String(format: "%llu.%llu.%llu", major, minor, patch)
     }
 
@@ -37,7 +37,7 @@ extension SemanticVersion: LosslessStringConvertible {
     /// "A.B.C" -> major: A; minor: B; patch: C
     /// "A.B" -> major: A; minor: B; patch: 0
     /// "A" -> major: A; minor: 0; patch: 0
-    init?(_ description: String) {
+    public init?(_ description: String) {
         major = 0
         minor = 0
         patch = 0

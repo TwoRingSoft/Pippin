@@ -10,31 +10,31 @@ import UIKit
 
 extension UIColor {
 
-    static var darkGreen: UIColor {
+    public static var darkGreen: UIColor {
         return UIColor(red: 0, green: 0.5, blue: 0, alpha: 1)
     }
 
-    static var darkBlue: UIColor {
+    public static var darkBlue: UIColor {
         return UIColor(red: 0, green: 0, blue: 0.5, alpha: 1)
     }
 
-    static var darkRed: UIColor {
+    public static var darkRed: UIColor {
         return UIColor(red: 0.7, green: 0, blue: 0, alpha: 1)
     }
 
-    static var lightLightGray: UIColor {
+    public static var lightLightGray: UIColor {
         return UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
     }
 
-    static var lightBlue: UIColor {
+    public static var lightBlue: UIColor {
         return UIColor(red: 0.7, green: 0.7, blue: 0.9, alpha: 1)
     }
 
-    static var lightGreen: UIColor {
+    public static var lightGreen: UIColor {
         return UIColor(red: 0.7, green: 0.9, blue: 0.7, alpha: 1)
     }
 
-    static var placeholder: UIColor {
+    public static var placeholder: UIColor {
         return UIColor.color(red: 199, blue: 199, green: 205, alpha: 255)
     }
 

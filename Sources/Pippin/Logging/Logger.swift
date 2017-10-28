@@ -15,7 +15,7 @@ enum LoggerError: Swift.Error {
 
 }
 
-protocol Logger {
+public protocol Logger {
 
     var logLevel: LogLevel { get set }
 

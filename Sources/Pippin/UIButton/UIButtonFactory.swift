@@ -31,7 +31,7 @@ extension UIButton {
         return button
     }
 
-    func configure(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil) {
+    public func configure(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil) {
         setTitle(title, for: .normal)
 
         if selector != nil {

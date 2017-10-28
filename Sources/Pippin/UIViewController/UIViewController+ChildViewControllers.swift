@@ -16,7 +16,7 @@ extension UIViewController {
     }
 
     /// Call on the instance of the parent view controller to add the child to
-    func addNewChildViewController(newChildViewController childViewController: UIViewController) {
+    public func addNewChildViewController(newChildViewController childViewController: UIViewController) {
         view.addSubview(childViewController.view)
         addChildViewController(childViewController)
     }

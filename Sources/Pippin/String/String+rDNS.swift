@@ -12,7 +12,7 @@ let rDNSDomain = "com.tworingsoft"
 
 extension String {
 
-    init(asRDNSForApp app: String, domain: String, subpaths: [String]? = nil) {
+    public init(asRDNSForApp app: String, domain: String, subpaths: [String]? = nil) {
         var subpathString = ""
         if let subpaths = subpaths, subpaths.count > 0 {
             subpathString = ".".appending(subpaths.joined(separator: "."))

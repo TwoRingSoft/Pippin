@@ -9,13 +9,13 @@
 import Anchorage
 import UIKit
 
-class FormController: NSObject {
+public class FormController: NSObject {
 
     fileprivate var textFields: [UITextField]!
     fileprivate var oldTextFieldDelegates: [UITextField: UITextFieldDelegate?] = [:]
     fileprivate var currentTextField: UITextField?
 
-    init(textFields: [UITextField]) {
+    public init(textFields: [UITextField]) {
         super.init()
         self.textFields = textFields
 
@@ -33,52 +33,8 @@ class FormController: NSObject {
 
 }
 
-extension FormController: UITextFieldDelegate {
-
-    // MARK: UITextField traversal
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        currentTextField = textField
-    }
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
-            if unwrappedDelegate.responds(to: #selector(UITextFieldDelegate.textField(_:shouldChangeCharactersIn:replacementString:))) {
-                return unwrappedDelegate.textField!(textField, shouldChangeCharactersIn: range, replacementString: string)
-            }
-        }
-
-        return true
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let idx = textFields.index(of: textField)!
-        if idx == textFields.count - 1 {
-            resignResponders()
-        } else {
-            nextTextField()
-        }
-
-        return true
-    }
-
-}
-
-extension FormController {
-
-    @objc func donePressed() {
-        resignResponders()
-    }
-
-    @objc func nextTextField() {
-        let nextIdx = textFields.index(of: currentTextField!)! + 1
-        textFields[nextIdx].becomeFirstResponder()
-    }
-
-    @objc func previousTextField() {
-        let previousIdx = textFields.index(of: currentTextField!)! - 1
-        textFields[previousIdx].becomeFirstResponder()
-    }
+// MARK: Public
+public extension FormController {
 
     func resignResponders() {
         for responder in textFields {
@@ -121,6 +77,55 @@ extension FormController {
         view.addSubview(toolbar)
         toolbar.edgeAnchors == view.edgeAnchors
         return view
+    }
+
+}
+
+extension FormController: UITextFieldDelegate {
+
+    // MARK: UITextField traversal
+
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        currentTextField = textField
+    }
+
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
+            if unwrappedDelegate.responds(to: #selector(UITextFieldDelegate.textField(_:shouldChangeCharactersIn:replacementString:))) {
+                return unwrappedDelegate.textField!(textField, shouldChangeCharactersIn: range, replacementString: string)
+            }
+        }
+
+        return true
+    }
+
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let idx = textFields.index(of: textField)!
+        if idx == textFields.count - 1 {
+            resignResponders()
+        } else {
+            nextTextField()
+        }
+
+        return true
+    }
+
+}
+
+@objc extension FormController {
+
+    func donePressed() {
+        resignResponders()
+    }
+
+    func nextTextField() {
+        let nextIdx = textFields.index(of: currentTextField!)! + 1
+        textFields[nextIdx].becomeFirstResponder()
+    }
+
+    func previousTextField() {
+        let previousIdx = textFields.index(of: currentTextField!)! - 1
+        textFields[previousIdx].becomeFirstResponder()
     }
 
 }

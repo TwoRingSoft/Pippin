@@ -9,15 +9,15 @@
 import PinpointKit
 import UIKit
 
-final class PinpointKitAdapter {
+public final class PinpointKitAdapter: NSObject {
 
-    var logger: Logger?
+    public var logger: Logger?
 
 }
 
 extension PinpointKitAdapter: BugReporter {
 
-    func show(fromViewController viewController: UIViewController, screenshot: UIImage? = nil) {
+    public func show(fromViewController viewController: UIViewController, screenshot: UIImage? = nil) {
         // TODO: implement
     }
 

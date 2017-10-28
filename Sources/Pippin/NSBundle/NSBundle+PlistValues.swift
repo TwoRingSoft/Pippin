@@ -24,15 +24,15 @@ enum BundleKey: String {
 
 extension Bundle {
 
-    class func getSemanticVersion() -> SemanticVersion {
+    public class func getSemanticVersion() -> SemanticVersion {
         return SemanticVersion(BundleKey.semanticVersion.getStringValue()) ?? .zero
     }
 
-    class func getBuild() -> Build {
+    public class func getBuild() -> Build {
         return Build(BundleKey.buildNumber.getStringValue()) ?? .zero
     }
 
-    class func getAppName() -> String {
+    public class func getAppName() -> String {
         return BundleKey.name.getStringValue()
     }
 
