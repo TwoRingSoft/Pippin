@@ -9,11 +9,11 @@
 import Anchorage
 import UIKit
 
-class DismissableModalViewController: UIViewController {
+public class DismissableModalViewController: UIViewController {
 
     private var closeBlock: (() -> ())?
 
-    init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, onClose closeBlock: (() -> ())? = nil) {
+    public init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, onClose closeBlock: (() -> ())? = nil) {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = backgroundColor
@@ -60,7 +60,7 @@ class DismissableModalViewController: UIViewController {
         self.closeBlock = closeBlock
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

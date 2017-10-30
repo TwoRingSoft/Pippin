@@ -9,7 +9,7 @@
 import Foundation
 
 enum LoggerError: Swift.Error {
-    
+
     case noLoggingFile(String)
     case couldNotReadLogFile(String, NSError)
 

@@ -9,27 +9,26 @@
 import Anchorage
 import UIKit
 
-class TextFieldTableViewCell: UITableViewCell {
+open class TextFieldTableViewCell: UITableViewCell {
 
     static let reuseIdentifier = "TextFieldTableViewCell"
 
-    let textField = UITextField(frame: .zero)
+    public let textField = UITextField(frame: .zero)
     let titleLabel = UILabel(frame: .zero)
 
-    init(title: String, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)) {
+    public init(title: String, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)) {
         super.init(style: .default, reuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         setUpUI(title: title, font: font)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 }
 
 // MARK: UI Setup
-
-extension TextFieldTableViewCell {
+public extension TextFieldTableViewCell {
 
     func setUpUI(title: String, font: UIFont) {
         titleLabel.text = title
