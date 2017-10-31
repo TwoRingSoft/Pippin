@@ -16,6 +16,7 @@
     "tag": "0.0.1"
   },
   "source_files": "Sources/Pippin/**/*.{h,m,swift}",
+  "resources": "Resources/Assets.xcassets",
   "frameworks": [
     "Crashlytics",
     "Fabric"

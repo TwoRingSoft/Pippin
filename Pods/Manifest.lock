@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   Fabric: c7cfc652f036180a72fe2539646c8a624420419d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: b444d66d8b10420c1ffc22c176dee37c1c12b4e7
-  Pippin: 09174ac3f90b391c8f32139117a6ebeeeb94baf6
+  Pippin: 57acc51d853721a86fd0df20a48d4bffe098efda
   XCGLogger: b4ca980580108cfeaf221afe158f5d89c1be22e0
 
 PODFILE CHECKSUM: 2b2b04e5cc3b9e80fe8eb5bbb2f2df086e29a69c

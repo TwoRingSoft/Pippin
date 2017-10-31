@@ -6,7 +6,6 @@
 //  Copyright © 2017 Two Ring Software. All rights reserved.
 //
 
-import Crashlytics
 import Foundation
 import XCGLogger
 
@@ -39,7 +38,8 @@ extension LogLevel {
 
 public final class XCGLoggerAdapter: NSObject {
 
-    public var logLevel: LogLevel = .info
+    fileprivate var _logLevel: LogLevel = .info
+    fileprivate var _crashReporter: CrashReporter? = nil
     fileprivate var loggingQueue: DispatchQueue!
     fileprivate var logFileURL: URL?
     fileprivate var xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
@@ -55,6 +55,8 @@ public final class XCGLoggerAdapter: NSObject {
         }
         self.logFileURL = logFileURL
 
+        self.logLevel = logLevel
+
         xcgLogger.setup(level: logLevel.xcgLogLevel(),
                         showLogIdentifier: false,
                         showFunctionName: false,
@@ -68,50 +70,29 @@ public final class XCGLoggerAdapter: NSObject {
         )
     }
 
-    private func urlForFilename(fileName: String, inDirectoryType directoryType: FileManager.SearchPathDirectory) -> URL? {
-        return FileManager.default.urls(for: directoryType, in: .userDomainMask).last?.appendingPathComponent(fileName)
-    }
-
 }
 
-// MARK: Public
-extension XCGLoggerAdapter {
-
-    func setLoggingLevel(newLevel: XCGLogger.Level) {
-        xcgLogger.outputLevel = newLevel
-    }
-
-    /**
-     - returns: contents of all log files
-     */
-    func openURL(URLString: String) {
-        let url = URL(string: URLString)!
-        if #available(iOS 10, *) {
-            UIApplication.shared.open(url, options: [String: Any](), completionHandler: nil)
-        } else {
-            UIApplication.shared.openURL(url)
-        }
-    }
-
-    public func getLogContents() -> String? {
-        var logContentsString = String()
-
-        if let logContents = getContentsOfLog() {
-            logContentsString.append(logContents)
-            logContentsString.append("\n")
-        }
-
-        return logContentsString
-    }
-
-    func resetLogs() {
-        resetContentsOfLog()
-    }
-
-}
-
-// MARK: Logging
+// MARK: Logger
 extension XCGLoggerAdapter: Logger {
+
+    public var logLevel: LogLevel {
+        get {
+            return _logLevel
+        }
+        set(newValue) {
+            _logLevel = newValue
+            xcgLogger.outputLevel = newValue.xcgLogLevel()
+        }
+    }
+
+    public var crashReporter: CrashReporter? {
+        get {
+            return _crashReporter
+        }
+        set(newValue) {
+            _crashReporter = newValue
+        }
+    }
 
     public func logDebug(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.debug)
@@ -132,7 +113,22 @@ extension XCGLoggerAdapter: Logger {
     public func logError(message: String, error: Error) {
         let messageWithErrorDescription = String(format: "%@: %@", message, error as NSError)
         self.log(message: messageWithErrorDescription, logLevel: XCGLogger.Level.error)
-        Crashlytics.sharedInstance().recordError(error as NSError)
+        crashReporter?.recordNonfatalError(error: error, metadata: nil)
+    }
+
+    public func logContents() -> String? {
+        var logContentsString = String()
+
+        if let logContents = getContentsOfLog() {
+            logContentsString.append(logContents)
+            logContentsString.append("\n")
+        }
+
+        return logContentsString
+    }
+
+    public func resetLogs() {
+        resetContentsOfLog()
     }
 
 }
@@ -168,18 +164,17 @@ private extension XCGLoggerAdapter {
         loggingQueue.async {
             self.xcgLogger.logln(message, level: logLevel)
         }
-
-        #if !TEST
-            DispatchQueue.main.async {
-                withVaList([ logLevel.description, message ]) { args in
-                    CLSLogv("[%@] %@", args)
-                }
-            }
-        #endif
+        if self.logLevel.xcgLogLevel() >= logLevel {
+            crashReporter?.log(message: String(format: "[%@] %@", logLevel.description, message))
+        }
     }
 
     func reportMissingLogFile() {
         logError(message: String(format: "[%@] Could not locate log file.", instanceType(self)), error: LoggerError.noLoggingFile("Could not locate log file."))
+    }
+
+    private func urlForFilename(fileName: String, inDirectoryType directoryType: FileManager.SearchPathDirectory) -> URL? {
+        return FileManager.default.urls(for: directoryType, in: .userDomainMask).last?.appendingPathComponent(fileName)
     }
     
 }

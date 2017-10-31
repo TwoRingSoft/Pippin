@@ -18,6 +18,7 @@ enum LoggerError: Swift.Error {
 public protocol Logger {
 
     var logLevel: LogLevel { get set }
+    var crashReporter: CrashReporter? { get set }
 
     func logDebug(message: String)
     func logInfo(message: String)
@@ -25,4 +26,7 @@ public protocol Logger {
     func logVerbose(message: String)
     func logError(message: String, error: Error)
 
+    func logContents() -> String?
+    func resetLogs()
+    
 }
