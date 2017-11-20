@@ -40,14 +40,12 @@ public final class XCGLoggerAdapter: NSObject {
 
     fileprivate var _logLevel: LogLevel = .info
     fileprivate var _crashReporter: CrashReporter? = nil
-    fileprivate var loggingQueue: DispatchQueue!
     fileprivate var logFileURL: URL?
     fileprivate var xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
 
     public init(name: String, logLevel: LogLevel) {
         super.init()
         let appName = Bundle.getAppName()
-        self.loggingQueue = DispatchQueue(label: "com.tworingsoft.\(appName).logger.\(name).queue")
 
         guard let logFileURL = urlForFilename(fileName: "\(appName)-\(name).log", inDirectoryType: .libraryDirectory) else {
             reportMissingLogFile()
@@ -161,9 +159,7 @@ private extension XCGLoggerAdapter {
     }
 
     func log(message: String, logLevel: XCGLogger.Level) {
-        loggingQueue.async {
-            self.xcgLogger.logln(message, level: logLevel)
-        }
+        self.xcgLogger.logln(message, level: logLevel)
         if self.logLevel.xcgLogLevel() >= logLevel {
             crashReporter?.log(message: String(format: "[%@] %@", logLevel.description, message))
         }
