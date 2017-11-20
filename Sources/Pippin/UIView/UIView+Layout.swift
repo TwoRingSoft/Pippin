@@ -11,7 +11,7 @@ import UIKit
 
 extension UIView {
 
-    func fillSuperview(insets: UIEdgeInsets = .zero) {
+    public func fillSuperview(insets: UIEdgeInsets = .zero) {
         self.translatesAutoresizingMaskIntoConstraints = false
         guard let superview = superview else { return }
         for constraint in [
@@ -24,7 +24,7 @@ extension UIView {
         }
     }
 
-    func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
+    public func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
         let top = topAnchor == viewController.topLayoutGuide.bottomAnchor
         let horiz = horizontalAnchors == viewController.view.horizontalAnchors
         let bottom = bottomAnchor == viewController.bottomLayoutGuide.topAnchor
