@@ -94,23 +94,23 @@ extension XCGLoggerAdapter: Logger {
         }
     }
 
-    public func logDebug(message: String) {
+    @objc public func logDebug(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.debug)
     }
 
-    public func logInfo(message: String) {
+    @objc public func logInfo(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.info)
     }
 
-    public func logWarning(message: String) {
+    @objc public func logWarning(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.warning)
     }
 
-    public func logVerbose(message: String) {
+    @objc public func logVerbose(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.verbose)
     }
 
-    public func logError(message: String, error: Error) {
+    @objc public func logError(message: String, error: Error) {
         let messageWithErrorDescription = String(format: "%@: %@", message, error as NSError)
         self.log(message: messageWithErrorDescription, logLevel: XCGLogger.Level.error)
         crashReporter?.recordNonfatalError(error: error, metadata: nil)
