@@ -71,6 +71,7 @@ public enum TriboolValue: Int {
         }
     }
 
+    /// - returns: `false` if either `_false` or `_undecided`, `true` otherwise
     func negativelyBiasedBoolean() -> Bool {
         if self == ._true {
             return true
@@ -79,6 +80,7 @@ public enum TriboolValue: Int {
         return false
     }
 
+    /// - returns: `true` if either `_true` or `_undecided`, `false` otherwise
     func positivelyBiasedBoolean() -> Bool {
         if self == ._false {
             return false
