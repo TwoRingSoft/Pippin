@@ -14,5 +14,6 @@ public protocol CrashReporter {
     func log(message: String)
     func recordNonfatalError(error: Error, metadata: [String: Any]?)
     func setSessionMetadata(keysAndValues: [String: Any])
+    func testCrash()
 
 }

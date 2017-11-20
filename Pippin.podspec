@@ -116,7 +116,6 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
-  s.frameworks  = "Crashlytics", "Fabric"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"
@@ -130,8 +129,6 @@ Pod::Spec.new do |s|
   #  you can include multiple dependencies to ensure it works.
 
   # s.requires_arc = true
-
-  s.xcconfig = { "FRAMEWORK_SEARCH_PATHS" => "$(PODS_ROOT)/Crashlytics/iOS $(PODS_ROOT)/Fabric/iOS" }
 
   s.dependency "Anchorage", "~> 4"
   s.dependency "PinpointKit", "~> 1"

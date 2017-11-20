@@ -7,7 +7,6 @@
 //
 
 import Anchorage
-import Crashlytics
 import UIKit
 
 enum SocialIcon: String {
@@ -43,6 +42,8 @@ enum SocialIcon: String {
 
 public class InfoViewController: UIViewController {
 
+    var crashReporter: CrashReporter?
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -71,7 +72,7 @@ public class InfoViewController: UIViewController {
     }
 
     func secretTestCrash() {
-        Crashlytics.sharedInstance().crash()
+        crashReporter?.testCrash()
     }
 
 }

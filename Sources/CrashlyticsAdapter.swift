@@ -8,6 +8,7 @@
 import Crashlytics
 import Fabric
 import Foundation
+import Pippin
 
 public class CrashlyticsAdapter: NSObject {
 
@@ -36,6 +37,10 @@ extension CrashlyticsAdapter: CrashReporter {
 
     public func setSessionMetadata(keysAndValues: [String: Any]) {
         Crashlytics.sharedInstance().setValuesForKeys(keysAndValues)
+    }
+
+    public func testCrash() {
+        Crashlytics.sharedInstance().crash()
     }
 
 }
