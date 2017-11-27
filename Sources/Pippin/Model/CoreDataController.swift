@@ -20,11 +20,13 @@ public class CoreDataController: NSObject {
     fileprivate var logger: Logger?
     fileprivate var modelName: String!
 
-    override init() {
+    public init(logger: Logger?) {
+        self.logger = logger
         self.modelName = Bundle.getAppName()
     }
 
-    public init(modelName: String) {
+    public init(modelName: String, logger: Logger?) {
+        self.logger = logger
         self.modelName = modelName
     }
 
