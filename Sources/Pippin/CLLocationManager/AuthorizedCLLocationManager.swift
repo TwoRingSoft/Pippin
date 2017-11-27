@@ -11,12 +11,12 @@ import Foundation
 
 private let firstLaunchTokenUserDefaultKey = "com.tworingsoft.can-i-haz.authorized-location-manager.user-defaults.key.first-launch-token"
 
-@objc enum AuthorizationScope: Int {
+public enum AuthorizationScope: Int {
     case whenInUse
     case always
 }
 
-typealias AuthorizedLocationManagerResult = (locationManager: CLLocationManager?, error: NSError?)
+public typealias AuthorizedLocationManagerResult = (locationManager: CLLocationManager?, error: NSError?)
 
 enum AuthorizationErrorCode: Int {
     case denied
@@ -26,7 +26,7 @@ enum AuthorizationErrorCode: Int {
 private let AuthorizationErrorDomain = "com.tworingsoft.can-i-haz.authorized-location-manager.error"
 private let AuthorizationErrorDescription = "Location services not available."
 
-@objc class AuthorizedCLLocationManager: NSObject {
+public class AuthorizedCLLocationManager: NSObject {
 
     fileprivate static let singleton = AuthorizedCLLocationManager()
 
@@ -91,7 +91,7 @@ private let AuthorizationErrorDescription = "Location services not available."
 
 extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 
         var authorized = false
 

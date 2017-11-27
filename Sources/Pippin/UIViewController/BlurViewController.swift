@@ -8,13 +8,13 @@
 
 import UIKit
 
-final class BlurViewController: UIViewController {
+public final class BlurViewController: UIViewController {
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    required init(viewController: UIViewController) {
+    public required init(viewController: UIViewController) {
         super.init(nibName: nil, bundle: nil)
 
         addNewChildViewController(newChildViewController: viewController)

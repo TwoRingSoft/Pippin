@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
 
-    func fillWithChildViewController(childViewController: UIViewController) {
+    public func fillWithChildViewController(childViewController: UIViewController) {
         addNewChildViewController(newChildViewController: childViewController)
         childViewController.view.fillSuperview()
     }
@@ -22,7 +22,7 @@ extension UIViewController {
     }
 
     /// Call on the instance of the child view controller to remove
-    func removeAsChildViewController() {
+    public func removeAsChildViewController() {
         view.removeFromSuperview()
         removeFromParentViewController()
     }
