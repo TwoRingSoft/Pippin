@@ -7,56 +7,16 @@
 #
 
 Pod::Spec.new do |s|
-
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
-
   s.name         = "Pippin"
   s.version      = "0.0.1"
   s.summary      = "A basic framework for an app's various components, like logging and crash reporting, and various Swift utilities for working with Apple frameworks."
-
-  # This description is used to generate tags and improve search results.
-  #   * Think: What does it do? Why did you write it? What is the focus?
-  #   * Try to keep it short, snappy and to the point.
-  #   * Write the description between the DESC delimiters below.
-  #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.
                    DESC
-
   s.homepage     = "http://github.com/tworingsoft/Pippin"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-
-
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Licensing your code is important. See http://choosealicense.com for more info.
-  #  CocoaPods will detect a license file if there is a named LICENSE*
-  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
-  #
-
   s.license      = "MIT"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
-  #  accepts just a name if you'd rather not provide an email address.
-  #
-  #  Specify a social_media_url where others can refer to, for example a twitter
-  #  profile URL.
-  #
-
-  s.author             = { "Andrew McKnight" => "andrew@tworingsoft.com" }
-  # Or just: s.author    = "Andrew McKnight"
-  # s.authors            = { "Andrew McKnight" => "amcknight2718@gmail.com" }
-  # s.social_media_url   = "http://twitter.com/Andrew McKnight"
+  s.author       = { "Andrew McKnight" => "andrew@tworingsoft.com" }
+  s.source       = { :git => "https://github.com/tworingsoft/Pippin.git", :tag => "#{s.version}" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -72,66 +32,48 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
-
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
-  #
-
-  s.source       = { :git => "http://github.com/tworingsoft/Pippin.git", :tag => "#{s.version}" }
-
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  CocoaPods is smart about how it includes source code. For source files
-  #  giving a folder will include any swift, h, m, mm, c & cpp files.
-  #  For header files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
-  #
-
-  s.source_files  = "Sources/Pippin/**/*.{h,m,swift}"
-
-  # s.public_header_files = "Classes/**/*.h"
-
-
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  A list of resources included with the Pod. These are copied into the
-  #  target bundle with a build phase script. Anything else will be cleaned.
-  #  You can preserve files from being cleaned, please don't preserve
-  #  non-essential files like tests, examples and documentation.
-  #
-
-  s.resource  = "Resources/Assets.xcassets"
-  # s.resources = "Resources/*.png"
-
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
-
-
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
-
-  # s.frameworks = "SomeFramework", "AnotherFramework"
-
-  # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
-
-
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If your library depends on compiler flags you can set them in the xcconfig hash
-  #  where they will only apply to your library. If you depend on other Podspecs
-  #  you can include multiple dependencies to ensure it works.
-
-  # s.requires_arc = true
+  
+  s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters', 'Assets'
+  
+  s.subspec 'Assets' do |ss|
+    ss.resource  = "Resources/Assets.xcassets"
+  end
+  
+  s.subspec 'Adapters' do |ss|
+    ss.subspec 'PinpointKit' do |sss|
+      sss.source_files = "Sources/Pippin/Adapters/PinpointKit/**/*.{h,m,swift}"
+      sss.dependency "PinpointKit", "~> 1"
+    end
+    ss.subspec 'XCGLogger' do |sss|
+      sss.source_files = "Sources/Pippin/Adapters/XCGLogger/**/*.{h,m,swift}"
+      sss.dependency "XCGLogger", "~> 6"
+    end
+  end
+  
+  s.subspec "Core" do |ss|
+    ss.source_files = "Sources/Pippin/Core/**/*.{h,m,swift}"
+  end
+  
+  s.subspec "CanIHaz" do |ss|
+    ss.source_files = "Sources/Pippin/CanIHaz/**/*.{h,m,swift}"
+  end
+  
+  s.subspec "Extensions" do |ss|
+    ss.subspec "CoreData" do |sss|
+      sss.source_files = "Sources/Pippin/Extensions/CoreData/**/*.{h,m,swift}"
+    end
+    ss.subspec "Foundation" do |sss|
+      sss.source_files = "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
+    end
+    ss.subspec "UIKit" do |sss|
+      sss.source_files = "Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}"
+    end
+    ss.subspec "WebKit" do |sss|
+      sss.source_files = "Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}"
+    end
+  end
 
   s.dependency "Anchorage", "~> 4"
-  s.dependency "PinpointKit", "~> 1"
   s.dependency "XCGLogger", "~> 6"
 
 end
