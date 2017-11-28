@@ -21,7 +21,7 @@ public final class BlurViewController: UIViewController {
 
         let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.addSubview(viewController.view)
+        blurView.contentView.addSubview(viewController.view)
         viewController.view.fillSuperview()
 
         view.addSubview(blurView)
