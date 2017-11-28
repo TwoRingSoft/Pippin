@@ -9,7 +9,7 @@
 import AVFoundation
 import Foundation
 
-enum MediaType {
+public enum MediaType {
     case video
     case audio
     case text
@@ -41,24 +41,38 @@ enum MediaType {
     }
 }
 
-private let CaptureDeviceAuthorizationErrorDomain = "com.tworingsoft.can-i-haz.authorized-capture-device.error"
+private let CaptureDeviceAuthorizationErrorDomain = "com.tworingsoft.authorized-capture-device.error"
 
 private enum CaptureDeviceAuthorizationErrorCode: Int {
     case denied
 }
 
-typealias CaptureDeviceAuthorizationResult = (captureDevice: AVCaptureDevice?, authorizationError: NSError?)
-typealias CaptureDeviceAuthorizationCompletionBlock = ((CaptureDeviceAuthorizationResult) -> Void)
+public typealias CaptureDeviceAuthorizationResult = (captureDevice: AVCaptureDevice?, authorizationError: NSError?)
+public typealias CaptureDeviceAuthorizationCompletionBlock = ((CaptureDeviceAuthorizationResult) -> Void)
 
-final class AuthorizedAVCaptureDevice: NSObject {
+public final class AuthorizedAVCaptureDevice: NSObject {
 
-    class func authorizedCaptureDevice(_ mediaType: MediaType, completion: CaptureDeviceAuthorizationCompletionBlock?) {
+    public class func authorizedCaptureDevice(_ mediaType: MediaType, completion: CaptureDeviceAuthorizationCompletionBlock?) {
 
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             completion?((nil, NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device not available on iOS Simulator."])))
             return
         #endif
 
+        if currentlyAuthorized(forMediaType: mediaType) {
+            completion?(createCaptureDevice(mediaType))
+            return
+        }
+
+        checkRequiredPlistValues()
+        requestAccess(mediaType: mediaType, completion: completion)
+    }
+
+}
+
+fileprivate extension AuthorizedAVCaptureDevice {
+
+    class func currentlyAuthorized(forMediaType mediaType: MediaType) -> Bool {
         var authorized = false
         switch(AVCaptureDevice.authorizationStatus(for: mediaType.stringConstant())) {
         case .authorized:
@@ -75,13 +89,10 @@ final class AuthorizedAVCaptureDevice: NSObject {
             break
         }
 
-        if authorized {
-            completion?(createCaptureDevice(mediaType))
-            return
-        }
+        return authorized
+    }
 
-        checkRequiredPlistValues()
-
+    class func requestAccess(mediaType: MediaType, completion: CaptureDeviceAuthorizationCompletionBlock?) {
         AVCaptureDevice.requestAccess(for: mediaType.stringConstant()) { authorizationGranted in
             if !authorizationGranted {
                 let authorizationError: NSError? = NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.", NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."])
@@ -93,7 +104,7 @@ final class AuthorizedAVCaptureDevice: NSObject {
         }
     }
 
-    fileprivate class func checkRequiredPlistValues() {
+    class func checkRequiredPlistValues() {
         let requiredPlistKey = "NSCameraUsageDescription"
 
         guard let infoDictionary = Bundle.main.infoDictionary else {
@@ -107,7 +118,7 @@ final class AuthorizedAVCaptureDevice: NSObject {
         }
     }
 
-    fileprivate class func createCaptureDevice(_ mediaType: MediaType) -> CaptureDeviceAuthorizationResult {
+    class func createCaptureDevice(_ mediaType: MediaType) -> CaptureDeviceAuthorizationResult {
         let captureDevice = AVCaptureDevice.default(for: mediaType.stringConstant())
         return (captureDevice: captureDevice, authorizationError: nil)
     }
