@@ -8,31 +8,84 @@
   "authors": {
     "Andrew McKnight": "andrew@tworingsoft.com"
   },
+  "source": {
+    "git": "https://github.com/tworingsoft/Pippin.git",
+    "tag": "0.0.1"
+  },
   "platforms": {
     "ios": "10.0"
   },
-  "source": {
-    "git": "http://github.com/tworingsoft/Pippin.git",
-    "tag": "0.0.1"
+  "pod_target_xcconfig": {
+    "SWIFT_VERSION": "4.0"
   },
-  "source_files": "Sources/Pippin/**/*.{h,m,swift}",
-  "resources": "Resources/Assets.xcassets",
-  "frameworks": [
-    "Crashlytics",
-    "Fabric"
+  "default_subspecs": [
+    "Core",
+    "CanIHaz",
+    "Extensions",
+    "Adapters",
+    "Assets"
   ],
-  "xcconfig": {
-    "FRAMEWORK_SEARCH_PATHS": "$(PODS_ROOT)/Crashlytics/iOS $(PODS_ROOT)/Fabric/iOS"
-  },
-  "dependencies": {
-    "Anchorage": [
-      "~> 4"
-    ],
-    "PinpointKit": [
-      "~> 1"
-    ],
-    "XCGLogger": [
-      "~> 6"
-    ]
-  }
+  "subspecs": [
+    {
+      "name": "Assets",
+      "resources": "Resources/Assets.xcassets"
+    },
+    {
+      "name": "Adapters",
+      "subspecs": [
+        {
+          "name": "PinpointKit",
+          "source_files": "Sources/Pippin/Adapters/PinpointKit/**/*.{h,m,swift}",
+          "dependencies": {
+            "PinpointKit": [
+              "~> 1"
+            ]
+          }
+        },
+        {
+          "name": "XCGLogger",
+          "source_files": "Sources/Pippin/Adapters/XCGLogger/**/*.{h,m,swift}",
+          "dependencies": {
+            "XCGLogger": [
+              "~> 6"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Core",
+      "source_files": "Sources/Pippin/Core/**/*.{h,m,swift}"
+    },
+    {
+      "name": "CanIHaz",
+      "source_files": "Sources/Pippin/CanIHaz/**/*.{h,m,swift}"
+    },
+    {
+      "name": "Extensions",
+      "subspecs": [
+        {
+          "name": "CoreData",
+          "source_files": "Sources/Pippin/Extensions/CoreData/**/*.{h,m,swift}"
+        },
+        {
+          "name": "Foundation",
+          "source_files": "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
+        },
+        {
+          "name": "UIKit",
+          "source_files": "Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}",
+          "dependencies": {
+            "Anchorage": [
+              "~> 4"
+            ]
+          }
+        },
+        {
+          "name": "WebKit",
+          "source_files": "Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}"
+        }
+      ]
+    }
+  ]
 }

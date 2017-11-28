@@ -1,0 +1,6 @@
+framework module Pippin {
+  umbrella header "Pippin-Adapters-Adapters_PinpointKit-Adapters_XCGLogger-umbrella.h"
+
+  export *
+  module * { export * }
+}

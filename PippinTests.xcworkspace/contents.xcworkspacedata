@@ -5,6 +5,9 @@
       location = "group:Pippin.podspec">
    </FileRef>
    <FileRef
+      location = "group:Gemfile">
+   </FileRef>
+   <FileRef
       location = "group:Rakefile">
    </FileRef>
    <FileRef

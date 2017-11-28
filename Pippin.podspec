@@ -32,6 +32,8 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
+
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
   
   s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters', 'Assets'
   
@@ -67,13 +69,11 @@ Pod::Spec.new do |s|
     end
     ss.subspec "UIKit" do |sss|
       sss.source_files = "Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}"
+      sss.dependency "Anchorage", "~> 4"
     end
     ss.subspec "WebKit" do |sss|
       sss.source_files = "Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}"
     end
   end
-
-  s.dependency "Anchorage", "~> 4"
-  s.dependency "XCGLogger", "~> 6"
 
 end
