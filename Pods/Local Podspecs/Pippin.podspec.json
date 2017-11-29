@@ -25,6 +25,13 @@
     "Adapters",
     "Assets"
   ],
+  "testspecs": [
+    {
+      "name": "Tests",
+      "test_type": "unit",
+      "source_files": "Tests/**/*.swift"
+    }
+  ],
   "subspecs": [
     {
       "name": "Assets",
@@ -39,6 +46,9 @@
           "dependencies": {
             "PinpointKit": [
               "~> 1"
+            ],
+            "Pippin/Core": [
+
             ]
           }
         },
@@ -48,6 +58,9 @@
           "dependencies": {
             "XCGLogger": [
               "~> 6"
+            ],
+            "Pippin/Core": [
+
             ]
           }
         }

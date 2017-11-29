@@ -6,7 +6,6 @@
 //
 //
 
-import Pippin
 import XCTest
 
 class String_NumericValues_Test: XCTestCase {
