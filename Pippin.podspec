@@ -46,6 +46,11 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'Adapters' do |ss|
+    ss.subspec 'Crashlytics' do |sss|
+      sss.source_files = 'Sources/Pippin/Adapters/Crashlytics/**/*.{h,m,swift}'
+      sss.dependency 'Crashlytics'
+      sss.dependency 'Pippin/Core'
+    end
     ss.subspec 'PinpointKit' do |sss|
       sss.source_files = 'Sources/Pippin/Adapters/PinpointKit/**/*.{h,m,swift}'
       sss.dependency 'PinpointKit', '~> 1'
@@ -60,25 +65,31 @@ Pod::Spec.new do |s|
   
   s.subspec 'Core' do |ss|
     ss.source_files = 'Sources/Pippin/Core/**/*.{h,m,swift}'
+    ss.dependency 'Pippin/Extensions/Foundation'
   end
   
   s.subspec 'CanIHaz' do |ss|
-    ss.source_files = 'Sources/Pippin/CanIHaz/**/*.{h,m,swift}'
-  end
-  
-  s.subspec 'Extensions' do |ss|
-    ss.subspec 'CoreData' do |sss|
-      sss.source_files = 'Sources/Pippin/Extensions/CoreData/**/*.{h,m,swift}'
+    ss.subspec 'AVCaptureDevice' do |sss|
+      sss.source_files = 'Sources/Pippin/CanIHaz/AVCaptureDevice/**/*.{h,m,swift}'
     end
+    ss.subspec 'CLLocationManager' do |sss|
+      sss.source_files = 'Sources/Pippin/CanIHaz/CLLocationManager/**/*.{h,m,swift}'
+    end
+  end
+    
+  s.subspec 'Extensions' do |ss|
     ss.subspec 'Foundation' do |sss|
       sss.source_files = 'Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}'
     end
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}'
       sss.dependency 'Anchorage', '~> 4'
+      sss.dependency 'Pippin/Core'
+      sss.dependency 'Pippin/Extensions/Foundation'
     end
     ss.subspec 'WebKit' do |sss|
       sss.source_files = 'Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}'
+      sss.dependency 'Pippin/Extensions/Foundation'
     end
   end
 

@@ -10,27 +10,118 @@ task :test do
 	Open3.pipeline(['xcrun xcodebuild -project PippinTests.xcodeproj -scheme PippinTests -destination \'platform=iOS Simulator,name=iPhone SE,OS=10.3.1\' test'], ['xcpretty -t' ])
 end
 
-desc 'Try to integrate and build the individual subspecs into each of the corresponding app targets.'
+desc 'Try to integrate and build the individual subspecs into test app targets.'
 task :smoke_test do
+    require 'fileutils'
 
-    scheme_suffixes = ['Core', 'Extensions', 'CanIHaz', 'Adapters', 'Extensions-CoreData', 'Extensions-Foundation', 'Extensions-UIKit', 'Extensions-WebKit']
+    scheme_suffixes = ['Core', 'Extensions', 'CanIHaz-CLLocationManager', 'CanIHaz-AVCaptureDevice', 'Adapters-Crashlytics', 'Adapters-PinpointKit', 'Adapters-XCGLogger', 'Extensions-Foundation', 'Extensions-UIKit', 'Extensions-WebKit']
     languages = [ :swift, :objc ]
 
+    # create dir to contain all tests
+    root_test_path = 'PippinTests/SmokeTests'
+    if Dir.exists?(root_test_path) then
+        FileUtils.rm_rf(root_test_path)
+    end
+    Dir.mkdir(root_test_path)
 
-    # platform => [ sdks ]
-    sdks = {
-        'phone' => ['iphonesimulator11.1'],
-        #'mac' => ['macosx10.13'],
-        #'tv' => ['appletvsimulator11.1'],
-        #'watch' => ['watchsimulator4.1']
-    }
+    # test integrating each subspec into a project in each language
+    scheme_suffixes.product(languages).each do |subspec_language_combo|
+        subspec = subspec_language_combo[0]
+        language = subspec_language_combo[1]
+        language_name = language == :swift ? 'Swift' : 'Objc'
+        test_name = subspec + '-' + language_name
 
-    sdks.each_key do |platform|
-        sdks_for_platform = sdks[platform]
-        sdks_for_platform.product(scheme_suffixes).each do |scheme_sdk_combo|
-            sdk = scheme_sdk_combo[0]
-            scheme_suffix = scheme_sdk_combo[1]
-            sh "xcrun xcodebuild -project PippinTests.xcodeproj -scheme Subspec-#{scheme_suffix} -sdk #{sdk}"
+        # prepare for xcode generation
+        xcodegen_spec_yml = make_xcodegen_spec_yml test_name, test_name
+        test_path = File.join(root_test_path, test_name)
+        FileUtils.mkdir_p(test_path)
+
+        Dir.chdir(test_path) do
+            # copy in the source files
+            FileUtils.cp_r('../../' + language_name + 'App', test_name)
+
+            # generate the xcode project
+            spec_filename = 'xcodegen-spec.yml'
+            File.open(spec_filename, 'w', File::CREAT) do |spec_file|
+                spec_file << xcodegen_spec_yml
+                File.chmod(0644, spec_file.path)
+            end
+            sh "xcodegen --spec #{spec_filename} >> #{test_name}.log"
+
+            sdk_versions_per_platform = {
+                # platform => [ sdk versionss ]
+                'phone' => ['11.1'],
+                #'mac' => ['10.13'],
+                #'tv' => ['11.1'],
+                #'watch' => ['4.1']
+            }
+
+            platform_to_device_prefix = {
+                # platform => [ prefix ]
+                'phone' => 'iphonesimulator',
+                'mac' => 'macosx',
+                'tv' => 'appletvsimulator',
+                'watch' => 'watchsimulator'
+            }
+
+            platform_to_cocoapods_names = {
+                # platform => cocoapods platform name
+                'phone' => 'ios',
+                'mac' => 'osx',
+                'tv' => 'tvos',
+                'watch' => 'watchos'
+            }
+
+            # build for each sdk on each platform
+            sdk_versions_per_platform.each_key do |platform|
+                sdk_versions_per_platform[platform].each do |sdk_version|
+                    # create podfile and insert correct subspec name
+                    File.open(File.join('../..', 'Podfile')) do |podfile|
+                        replaced_podfile_contents = [
+                            ['{{PLATFORM}}', platform_to_cocoapods_names[platform]],
+                            ['{{SDK_VERSION}}', sdk_version],
+                            ['{{TARGET_NAME}}', test_name],
+                            ['{{SUBSPEC}}', subspec.gsub('-', '/')]
+                        ].inject(podfile.read) do |acc, item|
+                            acc.gsub(item[0], item[1])
+                        end
+                        File.open('Podfile', 'w', File::CREAT) do |new_podfile|
+                            new_podfile << replaced_podfile_contents
+                            File.chmod(0644, new_podfile.path)
+                        end
+                    end
+
+                    sh "pod install >> #{test_name}.log"
+
+                    sdk_value = platform_to_device_prefix[platform] + sdk_version
+                    derived_data_path = 'derivedData'
+                    FileUtils.remove_dir(derived_data_path, true) if Dir.exists?(derived_data_path)
+                    sh "xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path} >> #{test_name}.log"
+                end
+            end
         end
     end
+end
+
+def make_xcodegen_spec_yml test_name, sources_path
+<<-XCODEGEN_SPEC_YML
+name: #{test_name}
+targets:
+  #{test_name}:
+    scheme: {}
+    platform: iOS
+    type: application
+    sources:
+      - path: #{sources_path}
+        type: group
+    settings:
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      CODE_SIGN_STYLE: Automatic
+      INFOPLIST_FILE: #{sources_path}/Info.plist
+      LD_RUNPATH_SEARCH_PATHS: $(inherited) @executable_path/Frameworks
+      PRODUCT_BUNDLE_IDENTIFIER: com.two-ring-soft.test
+      PRODUCT_NAME: #{test_name}
+      SWIFT_VERSION: 4.0
+      TARGETED_DEVICE_FAMILY: 1,2
+XCODEGEN_SPEC_YML
 end

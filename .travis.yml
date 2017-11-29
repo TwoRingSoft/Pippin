@@ -1,10 +1,11 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode9.1
 script: 
     - rake test
+    - rake smoke_test
 notifications:
     email:
         recipients:
-         - andrew+travis+shared-utils@tworingsoft.com
+         - andrew+travis+Pippin@tworingsoft.com
         on_success: change
         on_failure: always
