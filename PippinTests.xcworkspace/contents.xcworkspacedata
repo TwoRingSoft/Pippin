@@ -8,9 +8,6 @@
       location = "group:Rakefile">
    </FileRef>
    <FileRef
-      location = "group:test-project-spec.yml">
-   </FileRef>
-   <FileRef
       location = "group:README.md">
    </FileRef>
    <FileRef

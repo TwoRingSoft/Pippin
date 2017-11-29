@@ -46,11 +46,6 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'Adapters' do |ss|
-    ss.subspec 'Crashlytics' do |sss|
-      sss.source_files = 'Sources/Pippin/Adapters/Crashlytics/**/*.{h,m,swift}'
-      sss.dependency 'Crashlytics'
-      sss.dependency 'Pippin/Core'
-    end
     ss.subspec 'PinpointKit' do |sss|
       sss.source_files = 'Sources/Pippin/Adapters/PinpointKit/**/*.{h,m,swift}'
       sss.dependency 'PinpointKit', '~> 1'
@@ -69,11 +64,11 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'CanIHaz' do |ss|
-    ss.subspec 'AVCaptureDevice' do |sss|
-      sss.source_files = 'Sources/Pippin/CanIHaz/AVCaptureDevice/**/*.{h,m,swift}'
+    ss.subspec 'Camera' do |sss|
+      sss.source_files = 'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}'
     end
-    ss.subspec 'CLLocationManager' do |sss|
-      sss.source_files = 'Sources/Pippin/CanIHaz/CLLocationManager/**/*.{h,m,swift}'
+    ss.subspec 'Location' do |sss|
+      sss.source_files = 'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
     end
   end
     

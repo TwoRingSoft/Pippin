@@ -7,14 +7,16 @@ end
 desc 'Run Pippin unit tests.'
 task :test do
 	require 'open3'
-	Open3.pipeline(['xcrun xcodebuild -project PippinTests.xcodeproj -scheme PippinTests -destination \'platform=iOS Simulator,name=iPhone SE,OS=10.3.1\' test'], ['xcpretty -t' ])
+  sh 'pod install'
+	Open3.pipeline(['xcrun xcodebuild -workspace PippinTests.xcworkspace -scheme Pippin-Unit-Tests -destination \'platform=iOS Simulator,name=iPhone SE,OS=10.3.1\' test'], ['tee Pippin-Unit-Tests.log'], ['xcpretty -t'])
 end
 
 desc 'Try to integrate and build the individual subspecs into test app targets.'
 task :smoke_test do
     require 'fileutils'
+  	require 'open3'
 
-    scheme_suffixes = ['Core', 'Extensions', 'CanIHaz-CLLocationManager', 'CanIHaz-AVCaptureDevice', 'Adapters-Crashlytics', 'Adapters-PinpointKit', 'Adapters-XCGLogger', 'Extensions-Foundation', 'Extensions-UIKit', 'Extensions-WebKit']
+    scheme_suffixes = ['Core', 'Extensions', 'CanIHaz-Location', 'CanIHaz-Camera', 'Adapters-PinpointKit', 'Adapters-XCGLogger', 'Extensions-Foundation', 'Extensions-UIKit', 'Extensions-WebKit']
     languages = [ :swift, :objc ]
 
     # create dir to contain all tests
@@ -96,7 +98,7 @@ task :smoke_test do
                     sdk_value = platform_to_device_prefix[platform] + sdk_version
                     derived_data_path = 'derivedData'
                     FileUtils.remove_dir(derived_data_path, true) if Dir.exists?(derived_data_path)
-                    sh "xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path} >> #{test_name}.log"
+                  	Open3.pipeline(["xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path}"], ["tee #{test_name}.log"], ['xcpretty -t'])
                 end
             end
         end

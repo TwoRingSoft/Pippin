@@ -68,19 +68,29 @@
     },
     {
       "name": "Core",
-      "source_files": "Sources/Pippin/Core/**/*.{h,m,swift}"
+      "source_files": "Sources/Pippin/Core/**/*.{h,m,swift}",
+      "dependencies": {
+        "Pippin/Extensions/Foundation": [
+
+        ]
+      }
     },
     {
       "name": "CanIHaz",
-      "source_files": "Sources/Pippin/CanIHaz/**/*.{h,m,swift}"
+      "subspecs": [
+        {
+          "name": "Camera",
+          "source_files": "Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}"
+        },
+        {
+          "name": "Location",
+          "source_files": "Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}"
+        }
+      ]
     },
     {
       "name": "Extensions",
       "subspecs": [
-        {
-          "name": "CoreData",
-          "source_files": "Sources/Pippin/Extensions/CoreData/**/*.{h,m,swift}"
-        },
         {
           "name": "Foundation",
           "source_files": "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
@@ -91,12 +101,23 @@
           "dependencies": {
             "Anchorage": [
               "~> 4"
+            ],
+            "Pippin/Core": [
+
+            ],
+            "Pippin/Extensions/Foundation": [
+
             ]
           }
         },
         {
           "name": "WebKit",
-          "source_files": "Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}"
+          "source_files": "Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}",
+          "dependencies": {
+            "Pippin/Extensions/Foundation": [
+
+            ]
+          }
         }
       ]
     }

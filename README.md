@@ -6,9 +6,11 @@
 
 Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift.
 
-## Organization
+## Code
 
-### App prototyping
+Pippin is split up into some top-level components: Core, Extensions and CanIHaz.
+
+### Core
 
 Pippin is designed to immediately abstract and handle the major components that usually go into an app: 
 
@@ -23,10 +25,28 @@ Each of these has a top-level protocol defined, which can either have concrete o
 
 **Note:** Crashlytics is a special case, because it delivers a static framework, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Where Pippin decalares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
-
 #### Components to add:
 
 - error display/alerting
 - settings bundles
-- analyticss
+- analytics
+- push notifications
+
+### CanIHaz
+
+Provides a way to acquire an object that is gated by user interaction to allow access to that particular part of a device, such as a camera or location, as are currently provided. Each component has its own subspec so you can take just what you need.
+
+### Extensions
+
+These are currently split into extensions on Foundation API, UIKit and Webkit.
+
+## Testing
+
+Files under Tests/ are brought into the Pippin `test_spec`. These are brought into the PippinTests Xcode project to run as unit tests. This is automated in `rake test`.
+
+An integration smoke test can be run with `rake smoke_test`. This generates an Xcode project for each subspec, in each of Swift and Objective-C, to try building after `pod install` with the appropriate subspec written into its Podfile. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
+
+## Contributing
+
+Got something you'd like to add, or needs fixing? Feel free to file an issue and if you'd like, a PR!
 
