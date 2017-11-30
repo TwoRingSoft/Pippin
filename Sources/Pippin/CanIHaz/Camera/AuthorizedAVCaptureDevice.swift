@@ -57,15 +57,15 @@ public final class AuthorizedAVCaptureDevice: NSObject {
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             completion?((nil, NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device not available on iOS Simulator."])))
             return
+        #else
+            if currentlyAuthorized(forMediaType: mediaType) {
+                completion?(createCaptureDevice(mediaType))
+                return
+            }
+
+            checkRequiredPlistValues()
+            requestAccess(mediaType: mediaType, completion: completion)
         #endif
-
-        if currentlyAuthorized(forMediaType: mediaType) {
-            completion?(createCaptureDevice(mediaType))
-            return
-        }
-
-        checkRequiredPlistValues()
-        requestAccess(mediaType: mediaType, completion: completion)
     }
 
 }
