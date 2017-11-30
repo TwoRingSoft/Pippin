@@ -49,10 +49,12 @@ public class CrudViewController: UIViewController {
     private var tableViewDelegate: CrudViewControllerUITableViewDelegate!
     private var searchDelegate: CrudViewControllerSearchDelegate!
     private var hideAddItemRow = false
-    private var tableUpdates: [String: [IndexPath]]?
     private var crudName: String!
     private var originalFetchRequestPredicate: NSPredicate?
     var logger: Logger?
+
+    typealias UpdateTable = [NSFetchedResultsChangeType: [IndexPath]]
+    private var tableUpdates: UpdateTable?
 
     public init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil) {
         super.init(nibName: nil, bundle: nil)
@@ -145,7 +147,6 @@ private extension CrudViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.allowsMultipleSelection = tableViewDelegate.crudViewControllerShouldShowAllowMultipleSelections(crudViewController: self)
 
         searchField = UITextField.textField(withPlaceholder: "Search")
@@ -218,25 +219,23 @@ private extension CrudViewController {
     }
 
     func addUpdate(type: NSFetchedResultsChangeType, indexPath: IndexPath) {
-        let updateName = name(forFetchedResultsChangeType: type)
-
         if tableUpdates == nil {
-            tableUpdates = [ updateName: [ indexPath ]]
+            tableUpdates = [ type: [ indexPath ]]
             return
         }
 
-        if tableUpdates![updateName] == nil {
-            tableUpdates![updateName] = [ indexPath ]
+        if tableUpdates![type] == nil {
+            tableUpdates![type] = [ indexPath ]
             return
         }
 
-        tableUpdates![updateName]!.append(indexPath)
+        tableUpdates![type]!.append(indexPath)
     }
 
-    func execute(tableUpdates: [String: [IndexPath]]) {
+    func execute(tableUpdates: UpdateTable) {
         var performedUpdates = false
         var insertedRows = 0
-        if let inserts = tableUpdates[name(forFetchedResultsChangeType: .insert)] {
+        if let inserts = tableUpdates[NSFetchedResultsChangeType.insert] {
             logger?.logDebug(message: String(format: "[%@(%@)] inserts: %@", instanceType(self), self.crudName, inserts))
             performedUpdates = true
             tableView.beginUpdates()
@@ -245,7 +244,7 @@ private extension CrudViewController {
         }
 
         let tableViewHasRows = tableView.numberOfRows(inSection: 0) + insertedRows > 0
-        if let deletes = tableUpdates[name(forFetchedResultsChangeType: .delete)], tableViewHasRows {
+        if let deletes = tableUpdates[NSFetchedResultsChangeType.delete], tableViewHasRows {
             logger?.logDebug(message: String(format: "[%@(%@)] deletes: %@", instanceType(self), self.crudName, deletes))
             performedUpdates = true
             tableView.beginUpdates()
@@ -359,7 +358,7 @@ extension CrudViewController: NSFetchedResultsControllerDelegate {
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@", instanceType(self), self.crudName, String(describing: anObject)))
-        logger?.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, name(forFetchedResultsChangeType: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
+        logger?.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
         update(indexPath: indexPath, for: type, newIndexPath: newIndexPath)
     }
 
@@ -414,7 +413,7 @@ extension CrudViewController: UITableViewDataSource {
 
         let object = fetchedResultsController.object(at: indexPath)
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellReuseIdentifier)
         tableViewDelegate.crudViewController(crudViewController: self, configure: cell, forObject: object)
 
         return cell
