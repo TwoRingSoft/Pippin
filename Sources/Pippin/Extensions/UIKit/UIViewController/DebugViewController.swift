@@ -65,10 +65,10 @@ class DebugViewController: UIViewController {
             try FileManager.default.removeItem(at: url)
             try FileManager.default.removeItem(at: shmURL)
             try FileManager.default.removeItem(at: walURL)
-            fatalError("Restarting to complete database removal.")
         } catch {
             showAlert(withTitle: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)))
         }
+        fatalError("Restarting to complete database removal.")
     }
 
     @objc func generatePressed() {
