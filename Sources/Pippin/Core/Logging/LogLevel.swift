@@ -43,11 +43,6 @@ public enum LogLevel: Int {
      */
     case error
 
-    /**
-     The default logging level that should be used.
-     */
-    public static func defaultLevel() -> LogLevel { return .info }
-
 }
 
 /**
