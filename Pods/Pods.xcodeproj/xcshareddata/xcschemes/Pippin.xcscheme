@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DEC59D20556EB063486FEE5CDE6501A2'
+               BlueprintIdentifier = 'DB138AD6EB3C1ED6926A7EEFB78B75A1'
                BlueprintName = 'Pippin'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pippin.framework'>
