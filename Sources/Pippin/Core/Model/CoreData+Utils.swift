@@ -8,15 +8,18 @@
 
 import CoreData
 
-func name(forFetchedResultsChangeType type: NSFetchedResultsChangeType) -> String {
-    switch type {
-    case .delete:
-        return "delete"
-    case .insert:
-        return "insert"
-    case .update:
-        return "update"
-    case .move:
-        return "move"
+extension NSFetchedResultsChangeType: CustomStringConvertible {
+
+    /**
+     - returns: human readable string representation of `NSFetchedResultsChangeType` case values
+     */
+    public var description: String {
+        switch self {
+            case .delete: return "delete"
+            case .insert: return "insert"
+            case .update: return "update"
+            case .move: return "move"
+        }
     }
+
 }

@@ -8,21 +8,56 @@
 
 import Foundation
 
+/**
+ Enumeration of logging levels.
+ */
 public enum LogLevel: Int {
 
+    /**
+     A value was supplied that doesn't correspond to a known logging level.
+     */
     case unknown = 0
+
+    /**
+     Logging level for large amounts of data, for dumping memory and data structures.
+     */
     case verbose
+
+    /**
+     Logging Level for debugging execution, like tracing code paths.
+     */
     case debug
+
+    /**
+     Logging level for general information about usage of the app.
+     */
     case info
+
+    /**
+     Logging level to point out bad code behavior that doesn't impede app UX.
+     */
     case warning
+
+    /**
+     Logging level to record an error that will affect app UX.
+     */
     case error
 
+    /**
+     The default logging level that should be used.
+     */
     public static func defaultLevel() -> LogLevel { return .info }
 
 }
 
+/**
+ Adopt `CustomDebugStringConvertible` to convert between debug description strings and `LogLevel` cases.
+ */
 extension LogLevel: CustomDebugStringConvertible {
 
+    /**
+     The debugging description for the log level. A reverse-DNS style string.
+     */
     public var debugDescription: String {
         get {
             let s = String(asRDNSForApp: Bundle.getAppName(), domain: "log-level", subpaths: [ description ])
@@ -30,7 +65,11 @@ extension LogLevel: CustomDebugStringConvertible {
         }
     }
 
-    /// This isn't actually a function in `CustomdebugStringConvertible` but it's provided for consistent API.
+    /**
+     Construct a `LogLevel` case from a debug description.
+     - returns: the corresponding `LogLevel` case, or `nil` if none match.
+     - Note: This isn't actually a function in `CustomdebugStringConvertible` but it's provided for consistent API. It is a failable initializer just like its counterpart.
+     */
     public init?(debugDescription: String) {
         if debugDescription == String(reflecting: LogLevel.unknown) {
             self = .unknown
@@ -51,8 +90,15 @@ extension LogLevel: CustomDebugStringConvertible {
 
 }
 
+
+/**
+ Adopt `CustomStringConvertible` to convert between description strings and `LogLevel` cases.
+ */
 extension LogLevel: CustomStringConvertible {
 
+    /**
+     The description for the log level.
+     */
     public var description: String {
         get {
             switch self {
@@ -66,6 +112,10 @@ extension LogLevel: CustomStringConvertible {
         }
     }
 
+    /**
+     Construct a `LogLevel` case from a description.
+     - returns: the corresponding `LogLevel` case, or `nil` if none match.
+     */
     public init?(_ description: String) {
         if description == String(describing: LogLevel.unknown) {
             self = .unknown
