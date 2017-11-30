@@ -51,13 +51,14 @@ public class CrudViewController: UIViewController {
     private var hideAddItemRow = false
     private var crudName: String!
     private var originalFetchRequestPredicate: NSPredicate?
-    var logger: Logger?
+    fileprivate var logger: Logger?
 
     typealias UpdateTable = [NSFetchedResultsChangeType: [IndexPath]]
     private var tableUpdates: UpdateTable?
 
-    public init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil) {
+    public init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil, logger: Logger?) {
         super.init(nibName: nil, bundle: nil)
+        self.logger = logger
         self.crudDelegate = crudDelegate
         self.tableViewDelegate = tableViewDelegate
         self.searchDelegate = searchDelegate
@@ -193,6 +194,7 @@ private extension CrudViewController {
     }
 
     func update(indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        self.logger?.logDebug(message: String(format: "[%@(%@)] Processing update: %@ at %@%@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath), newIndexPath != nil ? String(format: "to %@", String(describing: newIndexPath)) : ""))
         switch type {
         case .delete:
             guard let indexPath = indexPath else { break }
@@ -219,6 +221,7 @@ private extension CrudViewController {
     }
 
     func addUpdate(type: NSFetchedResultsChangeType, indexPath: IndexPath) {
+        self.logger?.logDebug(message: String(format: "[%@(%@)] Memoizing update: %@ at %@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath)))
         if tableUpdates == nil {
             tableUpdates = [ type: [ indexPath ]]
             return
@@ -357,8 +360,8 @@ extension CrudViewController: NSFetchedResultsControllerDelegate {
     }
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@", instanceType(self), self.crudName, String(describing: anObject)))
-        logger?.logDebug(message: String(format: "[%@(%@)] Parsing change: %@ object: %@ with context: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), instanceType(anObject as! NSObject), (anObject as! NSManagedObject).managedObjectContext!, String(describing: indexPath), String(describing: newIndexPath)))
+        logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@\nin context: %@", instanceType(self), self.crudName, String(describing: anObject), (anObject as! NSManagedObject).managedObjectContext!))
+        logger?.logDebug(message: String(format: "[%@(%@)] Received change: %@ object: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), instanceType(anObject as! NSObject), String(describing: indexPath), String(describing: newIndexPath)))
         update(indexPath: indexPath, for: type, newIndexPath: newIndexPath)
     }
 
