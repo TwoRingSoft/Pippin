@@ -25,14 +25,11 @@ extension UIView {
     }
 
     public func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
-        let top = topAnchor == viewController.topLayoutGuide.bottomAnchor
-        let horiz = horizontalAnchors == viewController.view.horizontalAnchors
-        let bottom = bottomAnchor == viewController.bottomLayoutGuide.topAnchor
-
-        top.constant = insets.top
-        horiz.first.constant = insets.left
-        horiz.second.constant = -insets.right
-        bottom.constant = -insets.bottom
+        let edges = edgeAnchors == viewController.view.safeAreaLayoutGuide.edgeAnchors
+        edges.top.constant = insets.top
+        edges.leading.constant = insets.left
+        edges.trailing.constant = -insets.right
+        edges.bottom.constant = -insets.bottom
     }
 
 }
