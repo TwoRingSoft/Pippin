@@ -181,10 +181,10 @@ private extension InfoViewController {
         // center everything
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.string.characters.count))
+        attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.string.count))
 
         // set all non-title text to text font
-        attributedString.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(titleRange.location + titleRange.length, attributedString.string.characters.count - titleRange.location - titleRange.length))
+        attributedString.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(titleRange.location + titleRange.length, attributedString.string.count - titleRange.location - titleRange.length))
 
         // set the string
         textView.attributedText = attributedString

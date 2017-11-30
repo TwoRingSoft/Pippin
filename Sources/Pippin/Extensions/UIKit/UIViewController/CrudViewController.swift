@@ -323,7 +323,7 @@ extension CrudViewController: UITextFieldDelegate {
         let endingText = (startingText as NSString).replacingCharacters(in: range, with: string)
         logger?.logDebug(message: String(format: "[%@(%@)] New search term: %@.", instanceType(self), self.crudName, endingText))
 
-        if endingText.characters.count == 0 {
+        if endingText.count == 0 {
             logger?.logDebug(message: String(format: "[%@(%@)] User cleared search term. Resetting.", instanceType(self), self.crudName))
             resetSearch()
             return true

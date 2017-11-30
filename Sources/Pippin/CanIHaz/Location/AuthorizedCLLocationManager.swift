@@ -63,7 +63,7 @@ public class AuthorizedCLLocationManager: NSObject {
         guard let requiredLocationRequestDescriptionValue = infoDictionary[requiredPlistKey] as? String else {
             fatalError("You must provide a value for \(requiredPlistKey) in your app's Info.plist for the location services request dialog to be shown to the user.")
         }
-        if requiredLocationRequestDescriptionValue.characters.count == 0 {
+        if requiredLocationRequestDescriptionValue.count == 0 {
             fatalError("You provided a description value for \(requiredPlistKey) with length 0. This string is displayed to the user in the request prompt; consider providing more information why you are requesting location services.")
         }
     }

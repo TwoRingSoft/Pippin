@@ -11,13 +11,13 @@ import Foundation
 public extension String {
 
     func isAllDigits() -> Bool {
-        if self.characters.count == 0 {
+        if self.count == 0 {
             return false
         }
 
         let nondecimalDigitSet = NSCharacterSet.decimalDigits.inverted
 
-        let nondecimalCharacters = self.characters.filter { char in
+        let nondecimalCharacters = self.filter { char in
             let str = String(char)
             guard let uni = UnicodeScalar(str) else { return false }
             return nondecimalDigitSet.contains(uni)
