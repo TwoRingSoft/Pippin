@@ -108,7 +108,8 @@ public extension CoreDataController {
      Import data from archived data on disk into Core Data.
      - parameters:
          - sqlitePath: path to the database on disk
-         - completion: the confirming completion block
+         - completion: the confirming completion block, allowing the consumer
+            app to acquire permission to restart
      */
     func importFromSQLitePath(sqlitePath: String, completion: ConfirmCompletionBlock? = nil ) {
         let shmPath = sqlitePath.appending("-shm")
@@ -116,6 +117,36 @@ public extension CoreDataController {
 
         let data = archivedData(sqlitePath: sqlitePath, sqliteWALPath: walPath, sqliteSHMPath: shmPath)
         importData(data: data, completion: completion)
+    }
+
+    /**
+     Import data in memory to Core Data.
+     - parameters:
+         - data: the `Data` instance to unarchive
+         - completion: the confirming completion block, allowing the consumer
+             app to acquire permission to restart
+     */
+    func importData(data: Data, completion: ConfirmCompletionBlock? = nil) {
+        guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
+            logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
+            return
+        }
+
+        var success = true
+        fileData.forEach {
+            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
+            let path = applicationSupportDirectory.appendingPathComponent($0.key)
+            if !$0.value.write(toFile: path, atomically: true) {
+                logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
+                success = false
+            }
+        }
+
+        completion?(success, { confirm in
+            if confirm {
+                fatalError("Restarting to load new database.")
+            }
+        })
     }
 
     /**
@@ -187,29 +218,6 @@ public extension CoreDataController {
 }
 
 private extension CoreDataController {
-
-    func importData(data: Data, completion: ConfirmCompletionBlock? = nil) {
-        guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
-            logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
-            return
-        }
-
-        var success = true
-        fileData.forEach {
-            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
-            let path = applicationSupportDirectory.appendingPathComponent($0.key)
-            if !$0.value.write(toFile: path, atomically: true) {
-                logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
-                success = false
-            }
-        }
-
-        completion?(success, { confirm in
-            if confirm {
-                fatalError("Restarting to load new database.")
-            }
-        })
-    }
 
     func archivedData(sqlitePath: String, sqliteWALPath: String, sqliteSHMPath: String) -> Data {
         var fileData = [String: NSData]()
