@@ -9,5 +9,5 @@ notifications:
   email:
     recipients:
       - andrew+travis+Pippin@tworingsoft.com
-      on_success: change
-      on_failure: always
+        on_success: change
+        on_failure: always
