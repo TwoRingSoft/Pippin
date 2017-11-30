@@ -23,8 +23,7 @@ end
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
 task :release do
   version = `vrsn --file Vrsnr/Config/Project.xcconfig --read`
-  build = `vrsn --file Vrsnr/Config/Project.xcconfig --read --numeric --key BUILD_VERSION`
-  sh "git tag #{version.strip}+b#{build.strip}"
+  sh "git tag #{version.strip}"
   sh "git push"
   sh "git push --tags"
 end
