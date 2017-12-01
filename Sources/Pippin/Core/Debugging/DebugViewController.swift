@@ -21,8 +21,6 @@ public class DebugViewController: UIViewController {
     private var coreDataController: CoreDataController!
     private var debugMenu: UIView!
 
-    
-
     init(delegate: DebugViewControllerDelegate, logger: Logger?, coreDataController: CoreDataController) {
         self.delegate = delegate
         self.logger = logger
@@ -44,9 +42,9 @@ public class DebugViewController: UIViewController {
     }
 
     func deletePressed() {
-        let url = FileManager.url(forApplicationSupportFile: "InformedConsent.sqlite")
-        let shmURL = FileManager.url(forApplicationSupportFile: "InformedConsent.sqlite-shm")
-        let walURL = FileManager.url(forApplicationSupportFile: "InformedConsent.sqlite-wal")
+        let url = FileManager.url(forApplicationSupportFile: "\(coreDataController.modelName!).sqlite")
+        let shmURL = FileManager.url(forApplicationSupportFile: "\(coreDataController.modelName!).sqlite-shm")
+        let walURL = FileManager.url(forApplicationSupportFile: "\(coreDataController.modelName!).sqlite-wal")
         do {
             try FileManager.default.removeItem(at: url)
             try FileManager.default.removeItem(at: shmURL)
@@ -54,7 +52,9 @@ public class DebugViewController: UIViewController {
         } catch {
             showAlert(withTitle: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)))
         }
-        fatalError("Restarting to complete database removal.")
+        showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
+            fatalError("Restarting to complete database removal.")
+        }
     }
 
     func generatePressed() {
