@@ -24,24 +24,21 @@ public class DebugFlowController: NSObject {
     private weak var presentingVC: UIViewController!
     private var databaseFilename: String!
     private var delegate: DebugFlowControllerDelegate!
+    private var debugWindow: UIWindow?
+    private var logger: Logger
 
     var documentInteractionController: UIDocumentInteractionController!
 
-    public init(delegate: DebugFlowControllerDelegate) {
+    public init(databaseFileName: String, delegate: DebugFlowControllerDelegate, coreDataController: CoreDataController, logger: Logger) {
+        self.logger = logger
         super.init()
         self.delegate = delegate
-    }
+        self.databaseFilename = databaseFileName
 
-}
-
-// MARK: Public
-public extension DebugFlowController {
-
-    func displayDebugMenu(fromViewController viewController: UIViewController, databaseFilename: String, coreDataController: CoreDataController) {
-        self.databaseFilename = databaseFilename
-        let debugVC = DebugViewController(delegate: self, logger: nil, coreDataController: coreDataController)
-        presentingVC = viewController
-        viewController.present(debugVC, animated: true)
+        debugWindow = DebugWindow(frame: UIScreen.main.bounds)
+        debugWindow?.windowLevel = UIWindowLevelAlert + 1
+        debugWindow?.isHidden = false
+        debugWindow?.rootViewController = DebugViewController(delegate: self, logger: logger, coreDataController: coreDataController)
     }
 
 }
