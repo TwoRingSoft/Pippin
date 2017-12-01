@@ -66,6 +66,7 @@ public class CrudViewController: UIViewController {
         self.crudName = name ?? fetchRequest.entityName!
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
         setUpUI()
+        logger?.logDebug(message: String(format: "[%@(%@)] Initialized CrudViewController with context %@.", instanceType(self), crudName, context))
     }
     
     public required init?(coder aDecoder: NSCoder) {
