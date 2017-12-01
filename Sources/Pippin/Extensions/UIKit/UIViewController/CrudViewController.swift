@@ -236,27 +236,18 @@ private extension CrudViewController {
     }
 
     func execute(tableUpdates: UpdateTable) {
-        var performedUpdates = false
-        var insertedRows = 0
-        if let inserts = tableUpdates[NSFetchedResultsChangeType.insert] {
-            logger?.logDebug(message: String(format: "[%@(%@)] inserts: %@", instanceType(self), self.crudName, inserts))
-            performedUpdates = true
-            tableView.beginUpdates()
-            tableView.insertRows(at: inserts, with: .automatic)
-            insertedRows = inserts.count
-        }
-
-        let tableViewHasRows = tableView.numberOfRows(inSection: 0) + insertedRows > 0
-        if let deletes = tableUpdates[NSFetchedResultsChangeType.delete], tableViewHasRows {
-            logger?.logDebug(message: String(format: "[%@(%@)] deletes: %@", instanceType(self), self.crudName, deletes))
-            performedUpdates = true
-            tableView.beginUpdates()
-            tableView.deleteRows(at: deletes, with: .automatic)
-        }
-
-        if performedUpdates {
-            tableView.endUpdates()
-        }
+        self.logger?.logDebug(message: String(format: "[%@(%@)] Executing updates: %@.", instanceType(self), self.crudName, tableUpdates))
+        tableView.performBatchUpdates({
+            tableUpdates.forEach({ arg in
+                let (updateType, indexPaths) = arg
+                switch updateType {
+                case .delete: tableView.deleteRows(at: indexPaths, with: .automatic); break
+                case .update: tableView.reloadRows(at: indexPaths, with: .automatic); break
+                case .insert: tableView.insertRows(at: indexPaths, with: .automatic); break
+                case .move: fatalError("Moving currently not supported.")
+                }
+            })
+        }, completion: nil)
     }
 
     func setTableView(toHideAddItemRow hideAddItemRow: Bool) {
@@ -368,7 +359,7 @@ extension CrudViewController: NSFetchedResultsControllerDelegate {
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.crudName, controller))
         DispatchQueue.main.async {
-            if let updates = self.tableUpdates {
+            if let updates = self.tableUpdates, updates.count > 0 {
                 self.tableUpdates = nil
                 self.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.crudName))
                 self.execute(tableUpdates: updates)
