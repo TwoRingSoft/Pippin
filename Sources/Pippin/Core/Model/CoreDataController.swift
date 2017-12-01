@@ -30,7 +30,7 @@ public typealias ConfirmCompletionBlock = ((_ success: Bool, _ confirmBlock: @es
 public class CoreDataController: NSObject {
 
     fileprivate var logger: Logger?
-    fileprivate var modelName: String!
+    var modelName: String!
 
     /**
      Initialize a new Core Data helper.
