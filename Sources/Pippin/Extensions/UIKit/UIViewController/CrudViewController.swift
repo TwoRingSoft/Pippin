@@ -399,9 +399,12 @@ extension CrudViewController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "AddObjectCell")
+            let reuseIdentifier = "AddObjectCell"
+            let cell = UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
             cell.textLabel?.text = String(format: "Create new %@", crudName)
             crudDelegate.crudViewController(crudViewController: self, configureAddEntityCell: cell)
+            cell.accessibilityLabel = reuseIdentifier
+            cell.isAccessibilityElement = true
             return cell
         }
 
