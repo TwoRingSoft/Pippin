@@ -31,6 +31,7 @@ public class CoreDataController: NSObject {
 
     fileprivate var logger: Logger?
     var modelName: String!
+    fileprivate var managedObjectModel: NSManagedObjectModel?
 
     /**
      Initialize a new Core Data helper.
@@ -48,15 +49,23 @@ public class CoreDataController: NSObject {
      Initialize a new Core Data helper.
      - parameters:
         - modelName: name of the managed object model to load
+        - managedObjectModel: optional instance passed in if the momd file is
+        is delivered from a nonstandard location, like a framework
         - logger: optional `Logger` conforming instance, defaults to `nil`
      */
-    public init(modelName: String, logger: Logger? = nil) {
+    public init(modelName: String, managedObjectModel: NSManagedObjectModel? = nil, logger: Logger? = nil) {
         self.logger = logger
         self.modelName = modelName
+        self.managedObjectModel = managedObjectModel
     }
 
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: modelName)
+        var container: NSPersistentContainer
+        if let managedObjectModel = managedObjectModel {
+            container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
+        } else {
+            container = NSPersistentContainer(name: modelName)
+        }
         self.logger?.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
