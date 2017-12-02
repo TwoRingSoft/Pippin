@@ -10,6 +10,8 @@ import Anchorage
 import CoreData
 import UIKit
 
+public let addObjectCellReuseIdentifier = "AddObjectCell"
+
 public enum ListViewControllerMode {
     case editor
     case picker
@@ -400,7 +402,7 @@ extension CrudViewController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            let reuseIdentifier = "AddObjectCell"
+            let reuseIdentifier = addObjectCellReuseIdentifier
             let cell = UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
             cell.textLabel?.text = String(format: "Create new %@", crudName)
             crudDelegate.crudViewController(crudViewController: self, configureAddEntityCell: cell)
