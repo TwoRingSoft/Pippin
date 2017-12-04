@@ -12,20 +12,55 @@ import UIKit
 
 public let addObjectCellReuseIdentifier = "AddObjectCell"
 
+public class CrudAddItemCell: UITableViewCell {
+
+    public var titleLabel: UILabel!
+    public var imageAccessoryView: UIImageView!
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        titleLabel = UILabel.label(withText: nil, alignment: .center, numberOfLines: 0)
+        imageAccessoryView = UIImageView(frame: .zero)
+
+        [titleLabel, imageAccessoryView].forEach { self.contentView.addSubview($0) }
+
+        titleLabel.leadingAnchor == contentView.leadingAnchor + 12
+        titleLabel.verticalAnchors == contentView.verticalAnchors + 8
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+
+        imageAccessoryView.centerYAnchor == contentView.centerYAnchor
+        imageAccessoryView.leadingAnchor == titleLabel.trailingAnchor + 20
+        imageAccessoryView.widthAnchor == imageAccessoryView.heightAnchor
+        imageAccessoryView.verticalAnchors == contentView.verticalAnchors + 8
+        imageAccessoryView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        imageAccessoryView.trailingAnchor == contentView.trailingAnchor - 20
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
 public enum ListViewControllerMode {
     case editor
     case picker
+}
+
+@objc public protocol CrudViewControllerThemeDelegate {
+    @objc optional func crudViewController(crudViewController: CrudViewController, themeSearchField searchField: UITextField)
+    @objc optional func crudViewController(crudViewController: CrudViewController, themeAddItemCell addItemCell: CrudAddItemCell)
 }
 
 public protocol CrudViewControllerCRUDDelegate {
     func crudViewControllerWantsToCreateObject(crudViewController: CrudViewController)
     func crudViewController(crudViewController: CrudViewController, wantsToUpdate object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, wantsToDelete object: NSFetchRequestResult)
-    func crudViewController(crudViewController: CrudViewController, configureAddEntityCell cell: UITableViewCell)
 }
 
 public protocol CrudViewControllerUITableViewDelegate {
-    func crudViewController(crudViewController: CrudViewController, configure cell: UITableViewCell, forObject object: NSFetchRequestResult)
+    func crudViewController(crudViewController: CrudViewController, configure cell: UITableViewCell, forObject object: NSFetchRequestResult, lastObject: Bool)
     func crudViewController(crudViewController: CrudViewController, selected object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
     func crudViewController(crudViewController: CrudViewController, editActionsFor tableView: UITableView) -> [UITableViewRowAction]?
@@ -50,6 +85,7 @@ public class CrudViewController: UIViewController {
     private var crudDelegate: CrudViewControllerCRUDDelegate!
     private var tableViewDelegate: CrudViewControllerUITableViewDelegate!
     private var searchDelegate: CrudViewControllerSearchDelegate!
+    private var themeDelegate: CrudViewControllerThemeDelegate?
     private var hideAddItemRow = false
     private var crudName: String!
     private var originalFetchRequestPredicate: NSPredicate?
@@ -58,12 +94,13 @@ public class CrudViewController: UIViewController {
     typealias UpdateTable = [NSFetchedResultsChangeType: [IndexPath]]
     private var tableUpdates: UpdateTable?
 
-    public init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, name: String? = nil, logger: Logger?) {
+    public init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, crudDelegate: CrudViewControllerCRUDDelegate, tableViewDelegate: CrudViewControllerUITableViewDelegate, searchDelegate: CrudViewControllerSearchDelegate, themeDelegate: CrudViewControllerThemeDelegate?, name: String? = nil, logger: Logger?) {
         super.init(nibName: nil, bundle: nil)
         self.logger = logger
         self.crudDelegate = crudDelegate
         self.tableViewDelegate = tableViewDelegate
         self.searchDelegate = searchDelegate
+        self.themeDelegate = themeDelegate
         self.context = context
         self.crudName = name ?? fetchRequest.entityName!
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
@@ -147,16 +184,18 @@ private extension CrudViewController {
     }
 
     func setUpUI() {
-        view.backgroundColor = .white
-
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsMultipleSelection = tableViewDelegate.crudViewControllerShouldShowAllowMultipleSelections(crudViewController: self)
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        view.addSubview(tableView)
 
         searchField = UITextField.textField(withPlaceholder: "Search")
         searchField.delegate = self
         searchField.clearButtonMode = .whileEditing
         searchField.rightViewMode = .always
+        themeDelegate?.crudViewController?(crudViewController: self, themeSearchField: searchField)
 
         searchCancelButton = UIButton(frame: .zero)
         searchCancelButton.configure(title: "Cancel", target: self, selector: #selector(cancelSearch))
@@ -165,7 +204,7 @@ private extension CrudViewController {
         let searchContainer = UIView(frame: .zero)
         [ searchField, searchCancelButton ].forEach { searchContainer.addSubview($0) }
         searchField.leadingAnchor == searchContainer.leadingAnchor
-        searchField.heightAnchor == 36
+        searchField.heightAnchor == 30
         searchField.verticalAnchors == searchContainer.verticalAnchors
 
         searchCancelButton.verticalAnchors == searchField.verticalAnchors
@@ -174,12 +213,12 @@ private extension CrudViewController {
         searchCancelButtonWidthConstraint = searchCancelButton.widthAnchor == 0
 
         view.addSubview(searchContainer)
-        view.addSubview(tableView)
 
         searchContainer.topAnchor == view.topAnchor + 10
         searchContainer.horizontalAnchors == view.horizontalAnchors + 20
 
         tableView.topAnchor == searchContainer.bottomAnchor + 10
+
         tableView.horizontalAnchors == view.horizontalAnchors
         tableView.bottomAnchor == view.bottomAnchor
     }
@@ -402,19 +441,18 @@ extension CrudViewController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            let reuseIdentifier = addObjectCellReuseIdentifier
-            let cell = UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-            cell.textLabel?.text = String(format: "Create new %@", crudName)
-            crudDelegate.crudViewController(crudViewController: self, configureAddEntityCell: cell)
-            cell.accessibilityLabel = reuseIdentifier
+            let cell = CrudAddItemCell(style: .default, reuseIdentifier: cellReuseIdentifier)
+            cell.titleLabel.text = String(format: "Create new %@", crudName)
+            themeDelegate?.crudViewController?(crudViewController: self, themeAddItemCell: cell)
+            cell.accessibilityLabel = addObjectCellReuseIdentifier
             cell.isAccessibilityElement = true
             return cell
         }
 
         let object = fetchedResultsController.object(at: indexPath)
-
+        let lastObject = indexPath.row == tableView.numberOfRows(inSection: 0) - 1
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellReuseIdentifier)
-        tableViewDelegate.crudViewController(crudViewController: self, configure: cell, forObject: object)
+        tableViewDelegate.crudViewController(crudViewController: self, configure: cell, forObject: object, lastObject: lastObject)
 
         return cell
     }
