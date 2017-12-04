@@ -222,6 +222,7 @@ private extension CrudViewController {
         tableView.allowsMultipleSelection = tableViewDelegate.crudViewControllerShouldShowAllowMultipleSelections(crudViewController: self)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .interactive
         view.addSubview(tableView)
 
         searchField = UITextField.textField(withPlaceholder: "Search")
