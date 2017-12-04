@@ -194,7 +194,6 @@ private extension CrudViewController {
         }
 
         searchField.layer.borderColor = searchField.tintColor.cgColor
-        searchField.tintColor = nil
         searchCancelButton.layer.borderColor = searchCancelButton.tintColor.cgColor
 
         searchCancelButton.setTitleColor(searchCancelButton.tintColor, for: .normal)
