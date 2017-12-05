@@ -412,18 +412,9 @@ extension CrudViewController: UITextFieldDelegate {
 
         let predicate = searchDelegate.crudViewController(crudViewController: self, predicateForSearchString: endingText)
         logger?.logDebug(message: String(format: "[%@(%@)] Received fetch request predicate %@.", instanceType(self), self.crudName, predicate))
-
-        var predicates = [ predicate ]
-        if let original = originalFetchRequestPredicate {
-            predicates.append(original)
-        }
-
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        logger?.logDebug(message: String(format: "[%@(%@)] Searching with compound predicate %@.", instanceType(self), self.crudName, compoundPredicate))
-
-        fetchedResultsController.fetchRequest.predicate = compoundPredicate
-
+        fetchedResultsController.fetchRequest.predicate = predicate
         reloadData()
+
         return true
     }
 
