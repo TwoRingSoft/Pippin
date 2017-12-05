@@ -10,14 +10,14 @@ import UIKit
 
 extension UIEdgeInsets {
 
-    init(all value: CGFloat) {
+    public init(all value: CGFloat) {
         self.top = value
         self.bottom = value
         self.left = value
         self.right = value
     }
 
-    init(horizontal: CGFloat, vertical: CGFloat) {
+    public init(horizontal: CGFloat = 0, vertical: CGFloat = 0) {
         self.top = vertical
         self.bottom = vertical
         self.left = horizontal
