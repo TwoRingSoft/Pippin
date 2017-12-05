@@ -60,6 +60,7 @@ public protocol CrudViewControllerCRUDDelegate {
 
 public protocol CrudViewControllerUITableViewDelegate {
     func crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: CrudViewController) -> (String, AnyClass)?
+    func crudViewControllerTableViewContentInsets(crudViewController: CrudViewController) -> UIEdgeInsets?
     func crudViewController(crudViewController: CrudViewController, configure cell: UITableViewCell, forObject object: NSFetchRequestResult, lastObject: Bool)
     func crudViewController(crudViewController: CrudViewController, selected object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
@@ -225,6 +226,9 @@ private extension CrudViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .interactive
+        if let insets = tableViewDelegate?.crudViewControllerTableViewContentInsets(crudViewController: self) {
+            tableView.contentInset = insets
+        }
         if let (reuseIdentifier, klass) = tableViewDelegate?.crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: self) {
             tableView.register(klass, forCellReuseIdentifier: reuseIdentifier)
             customCellReuseIdentifier = reuseIdentifier
