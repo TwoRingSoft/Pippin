@@ -59,6 +59,7 @@ public protocol CrudViewControllerCRUDDelegate {
 }
 
 public protocol CrudViewControllerUITableViewDelegate {
+    func crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: CrudViewController) -> (String, AnyClass)?
     func crudViewController(crudViewController: CrudViewController, configure cell: UITableViewCell, forObject object: NSFetchRequestResult, lastObject: Bool)
     func crudViewController(crudViewController: CrudViewController, selected object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
@@ -75,9 +76,10 @@ public protocol CrudViewControllerSearchDelegate {
 
 public class CrudViewController: UIViewController {
 
-    private let cellReuseIdentifier = "CrudViewControllerCell"
+    private let stockCellReuseIdentifier = "CrudViewControllerCell"
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     private var tableView = UITableView(frame: .zero, style: .plain)
+    private var customCellReuseIdentifier: String?
     private var searchField: UITextField!
     private var searchContainer: CrudSearchContainer!
     private var searchCancelButton: UIButton!
@@ -223,6 +225,10 @@ private extension CrudViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .interactive
+        if let (reuseIdentifier, klass) = tableViewDelegate?.crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: self) {
+            tableView.register(klass, forCellReuseIdentifier: reuseIdentifier)
+            customCellReuseIdentifier = reuseIdentifier
+        }
         view.addSubview(tableView)
 
         searchField = UITextField.textField(withPlaceholder: "Search")
@@ -475,7 +481,7 @@ extension CrudViewController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            let cell = CrudAddItemCell(style: .default, reuseIdentifier: cellReuseIdentifier)
+            let cell = CrudAddItemCell(style: .default, reuseIdentifier: addObjectCellReuseIdentifier)
             cell.titleLabel.text = String(format: "Create new %@", crudName)
             themeDelegate?.crudViewController?(crudViewController: self, themeAddItemCell: cell)
             cell.accessibilityLabel = addObjectCellReuseIdentifier
@@ -485,9 +491,8 @@ extension CrudViewController: UITableViewDataSource {
 
         let object = fetchedResultsController.object(at: indexPath)
         let lastObject = indexPath.row == tableView.numberOfRows(inSection: 0) - 1
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellReuseIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: customCellReuseIdentifier ?? stockCellReuseIdentifier, for: indexPath)
         tableViewDelegate.crudViewController(crudViewController: self, configure: cell, forObject: object, lastObject: lastObject)
-
         return cell
     }
 
