@@ -393,6 +393,11 @@ extension CrudViewController: UITextFieldDelegate {
     }
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            logger?.logInfo(message: String(format: "[%@(%@)] Ignoring Return key press in search.", instanceType(self), self.crudName))
+            return false
+        }
+
         let startingText = textField.nonemptyText ?? ""
         logger?.logDebug(message: String(format: "[%@(%@)] Text before search term update: %@.", instanceType(self), self.crudName, startingText))
 
