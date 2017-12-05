@@ -232,6 +232,8 @@ private extension CrudViewController {
         if let (reuseIdentifier, klass) = tableViewDelegate?.crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: self) {
             tableView.register(klass, forCellReuseIdentifier: reuseIdentifier)
             customCellReuseIdentifier = reuseIdentifier
+        } else {
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: stockCellReuseIdentifier)
         }
         view.addSubview(tableView)
 
