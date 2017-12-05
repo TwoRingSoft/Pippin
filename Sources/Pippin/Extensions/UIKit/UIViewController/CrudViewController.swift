@@ -189,7 +189,7 @@ private extension CrudViewController {
         cancelButtonBlurView.edgeAnchors == searchCancelButton.edgeAnchors
 
         let searchViews: [UIView] = [ searchField, searchCancelButton ]
-        searchViews.forEach { $0.layer.borderWidth = 1 }
+        searchViews.forEach { $0.layer.borderWidth = 2 * UIScreen.main.hairlineWidth }
 
         (blurs + searchViews).forEach {
             $0.clipsToBounds = true
