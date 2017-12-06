@@ -72,6 +72,7 @@ public protocol CrudViewControllerUITableViewDelegate {
 public class CrudSearchContainer: UIView {}
 
 public protocol CrudViewControllerSearchDelegate {
+    func crudViewControllerShouldEnableSearch(crudViewController: CrudViewController) -> Bool
     func crudViewController(crudViewController: CrudViewController, predicateForSearchString string: String) -> NSPredicate
 }
 
@@ -81,12 +82,12 @@ public class CrudViewController: UIViewController {
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     private var tableView = UITableView(frame: .zero, style: .plain)
     private var customCellReuseIdentifier: String?
-    private var searchField: UITextField!
-    private var searchContainer: CrudSearchContainer!
-    private var searchCancelButton: UIButton!
-    private var cancelButtonBlurView: UIVisualEffectView!
-    private var searchCancelButtonWidthConstraint: NSLayoutConstraint!
-    private var searchCancelButtonLeadingConstraint: NSLayoutConstraint!
+    private var searchField: UITextField?
+    private var searchContainer: CrudSearchContainer?
+    private var searchCancelButton: UIButton?
+    private var cancelButtonBlurView: UIVisualEffectView?
+    private var searchCancelButtonWidthConstraint: NSLayoutConstraint?
+    private var searchCancelButtonLeadingConstraint: NSLayoutConstraint?
     private var context: NSManagedObjectContext!
     private var crudDelegate: CrudViewControllerCRUDDelegate!
     private var tableViewDelegate: CrudViewControllerUITableViewDelegate!
@@ -168,8 +169,8 @@ public extension CrudViewController {
 
     func cancelSearch() {
         resetSearch()
-        searchField.text = nil
-        searchField.resignFirstResponder()
+        searchField?.text = nil
+        searchField?.resignFirstResponder()
     }
 
 }
@@ -178,28 +179,31 @@ public extension CrudViewController {
 private extension CrudViewController {
 
     func setLookAndFeel() {
-        let fieldBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-        cancelButtonBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-        cancelButtonBlurView.alpha = 0
-        let blurs: [UIView] = [ fieldBlurView, cancelButtonBlurView ]
-        blurs.forEach {
-            self.view.insertSubview($0, belowSubview: searchContainer)
+        if searchDelegate.crudViewControllerShouldEnableSearch(crudViewController: self), let searchField = searchField, let searchContainer = searchContainer, let searchCancelButton = searchCancelButton {
+            let fieldBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+            cancelButtonBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+            guard let cancelButtonBlurView = cancelButtonBlurView else { return }
+            cancelButtonBlurView.alpha = 0
+            let blurs: [UIView] = [ fieldBlurView, cancelButtonBlurView ]
+            blurs.forEach {
+                self.view.insertSubview($0, belowSubview: searchContainer)
+            }
+            fieldBlurView.edgeAnchors == searchField.edgeAnchors
+            cancelButtonBlurView.edgeAnchors == searchCancelButton.edgeAnchors
+
+            let searchViews: [UIView] = [ searchField, searchCancelButton ]
+            searchViews.forEach { $0.layer.borderWidth = 2 * UIScreen.main.hairlineWidth }
+
+            (blurs + searchViews).forEach {
+                $0.clipsToBounds = true
+                $0.layer.cornerRadius = 10
+            }
+
+            searchField.layer.borderColor = searchField.tintColor.cgColor
+            searchCancelButton.layer.borderColor = searchCancelButton.tintColor.cgColor
+
+            searchCancelButton.setTitleColor(searchCancelButton.tintColor, for: .normal)
         }
-        fieldBlurView.edgeAnchors == searchField.edgeAnchors
-        cancelButtonBlurView.edgeAnchors == searchCancelButton.edgeAnchors
-
-        let searchViews: [UIView] = [ searchField, searchCancelButton ]
-        searchViews.forEach { $0.layer.borderWidth = 2 * UIScreen.main.hairlineWidth }
-
-        (blurs + searchViews).forEach {
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 10
-        }
-
-        searchField.layer.borderColor = searchField.tintColor.cgColor
-        searchCancelButton.layer.borderColor = searchCancelButton.tintColor.cgColor
-
-        searchCancelButton.setTitleColor(searchCancelButton.tintColor, for: .normal)
     }
 
     func resetSearch() {
@@ -228,6 +232,7 @@ private extension CrudViewController {
         tableView.keyboardDismissMode = .interactive
         if let insets = tableViewDelegate?.crudViewControllerTableViewContentInsets(crudViewController: self) {
             tableView.contentInset = insets
+            tableView.contentOffset = CGPoint.zero.offset(yDelta: -insets.top)
         }
         if let (reuseIdentifier, klass) = tableViewDelegate?.crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: self) {
             tableView.register(klass, forCellReuseIdentifier: reuseIdentifier)
@@ -237,35 +242,42 @@ private extension CrudViewController {
         }
         view.addSubview(tableView)
 
-        searchField = UITextField.textField(withPlaceholder: "Search")
-        searchField.delegate = self
-        searchField.clearButtonMode = .whileEditing
-        searchField.rightViewMode = .always
+        if searchDelegate.crudViewControllerShouldEnableSearch(crudViewController: self) {
+            searchField = UITextField.textField(withPlaceholder: "Search")
+            guard let searchField = searchField else { return }
+            searchField.delegate = self
+            searchField.clearButtonMode = .whileEditing
+            searchField.rightViewMode = .always
 
-        searchCancelButton = UIButton(frame: .zero)
-        searchCancelButton.configure(title: "Cancel", target: self, selector: #selector(cancelSearch))
-        searchCancelButton.alpha = 0
+            searchCancelButton = UIButton(frame: .zero)
+            guard let searchCancelButton = searchCancelButton else { return }
+            searchCancelButton.configure(title: "Cancel", target: self, selector: #selector(cancelSearch))
+            searchCancelButton.alpha = 0
 
-        searchContainer = CrudSearchContainer(frame: .zero)
-        [ searchField, searchCancelButton ].forEach { searchContainer.addSubview($0) }
-        searchField.leadingAnchor == searchContainer.leadingAnchor
-        searchField.heightAnchor == 30
-        searchField.verticalAnchors == searchContainer.verticalAnchors
+            searchContainer = CrudSearchContainer(frame: .zero)
+            guard let searchContainer = searchContainer else { return }
+            [ searchField, searchCancelButton ].forEach { searchContainer.addSubview($0) }
+            searchField.leadingAnchor == searchContainer.leadingAnchor
+            searchField.heightAnchor == 30
+            searchField.verticalAnchors == searchContainer.verticalAnchors
 
-        searchCancelButton.verticalAnchors == searchField.verticalAnchors
-        searchCancelButtonLeadingConstraint = searchCancelButton.leadingAnchor == searchField.trailingAnchor
-        searchCancelButton.trailingAnchor == searchContainer.trailingAnchor
-        searchCancelButtonWidthConstraint = searchCancelButton.widthAnchor == 0
+            searchCancelButton.verticalAnchors == searchField.verticalAnchors
+            searchCancelButtonLeadingConstraint = searchCancelButton.leadingAnchor == searchField.trailingAnchor
+            searchCancelButton.trailingAnchor == searchContainer.trailingAnchor
+            searchCancelButtonWidthConstraint = searchCancelButton.widthAnchor == 0
 
-        view.addSubview(searchContainer)
+            view.addSubview(searchContainer)
 
-        searchContainer.topAnchor == view.topAnchor + 10
-        searchContainer.horizontalAnchors == view.horizontalAnchors + 20
+            searchContainer.topAnchor == view.topAnchor + 10
+            searchContainer.horizontalAnchors == view.horizontalAnchors + 20
 
-        tableView.topAnchor == searchContainer.bottomAnchor + 10
+            tableView.topAnchor == searchContainer.bottomAnchor + 10
+            tableView.horizontalAnchors == view.horizontalAnchors
+            tableView.bottomAnchor == view.bottomAnchor
+        } else {
+            tableView.fillSuperview()
+        }
 
-        tableView.horizontalAnchors == view.horizontalAnchors
-        tableView.bottomAnchor == view.bottomAnchor
     }
 
     func addItemRowIndexPath() -> IndexPath {
@@ -338,16 +350,23 @@ private extension CrudViewController {
     }
 
     func setTableView(toHideAddItemRow hideAddItemRow: Bool) {
+        guard
+            let searchCancelButton = searchCancelButton,
+            let cancelButtonBlurView = cancelButtonBlurView,
+            let searchCancelButtonWidthConstraint = searchCancelButtonWidthConstraint,
+            let searchCancelButtonLeadingConstraint = searchCancelButtonLeadingConstraint
+        else { return }
+
         DispatchQueue.main.async {
             let constraintAnimations = {
-                self.searchCancelButtonWidthConstraint.constant = hideAddItemRow ? 60 : 0
-                self.searchCancelButtonLeadingConstraint.constant = hideAddItemRow ? 20 : 0
+                searchCancelButtonWidthConstraint.constant = hideAddItemRow ? 60 : 0
+                searchCancelButtonLeadingConstraint.constant = hideAddItemRow ? 20 : 0
                 self.view.layoutIfNeeded()
             }
 
             let alphaAnimations = {
-                self.searchCancelButton.alpha = hideAddItemRow ? 1 : 0
-                self.cancelButtonBlurView.alpha = hideAddItemRow ? 1 : 0
+                searchCancelButton.alpha = hideAddItemRow ? 1 : 0
+                cancelButtonBlurView.alpha = hideAddItemRow ? 1 : 0
             }
 
             if hideAddItemRow {
@@ -533,7 +552,7 @@ extension CrudViewController: UITableViewDelegate {
             return
         }
 
-        searchField.resignFirstResponder()
+        searchField?.resignFirstResponder()
 
         let object = fetchedResultsController.object(at: indexPath)
 
