@@ -10,46 +10,13 @@ import Anchorage
 import CoreData
 import UIKit
 
-public let addObjectCellReuseIdentifier = "AddObjectCell"
-
-public class CrudAddItemCell: UITableViewCell {
-
-    public var titleLabel: UILabel!
-    public var imageAccessoryView: UIImageView!
-
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        titleLabel = UILabel.label(withText: nil, alignment: .center, numberOfLines: 0)
-        imageAccessoryView = UIImageView(frame: .zero)
-
-        [titleLabel, imageAccessoryView].forEach { self.contentView.addSubview($0) }
-
-        titleLabel.leadingAnchor == contentView.leadingAnchor + 12
-        titleLabel.verticalAnchors == contentView.verticalAnchors + 8
-        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-
-        imageAccessoryView.centerYAnchor == contentView.centerYAnchor
-        imageAccessoryView.leadingAnchor == titleLabel.trailingAnchor + 20
-        imageAccessoryView.widthAnchor == imageAccessoryView.heightAnchor
-        imageAccessoryView.verticalAnchors == contentView.verticalAnchors + 8
-        imageAccessoryView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        imageAccessoryView.trailingAnchor == contentView.trailingAnchor - 20
-    }
-
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
 public enum ListViewControllerMode {
     case editor
     case picker
 }
 
 @objc public protocol CrudViewControllerThemeDelegate {
-    @objc optional func crudViewController(crudViewController: CrudViewController, themeAddItemCell addItemCell: CrudAddItemCell)
+    @objc optional func crudViewController(crudViewController: CrudViewController, themeAddItemCell addItemCell: TextAndAccessoryCell)
 }
 
 public protocol CrudViewControllerCRUDDelegate {
@@ -502,10 +469,10 @@ extension CrudViewController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            let cell = CrudAddItemCell(style: .default, reuseIdentifier: addObjectCellReuseIdentifier)
-            cell.titleLabel.text = String(format: "Create new %@", crudName)
+            let cell = TextAndAccessoryCell(style: .default, reuseIdentifier: textAndAccessoryCellReuseIdentifier)
+            cell.label.text = String(format: "Create new %@", crudName)
             themeDelegate?.crudViewController?(crudViewController: self, themeAddItemCell: cell)
-            cell.accessibilityLabel = addObjectCellReuseIdentifier
+            cell.accessibilityLabel = textAndAccessoryCellReuseIdentifier
             cell.isAccessibilityElement = true
             return cell
         }
