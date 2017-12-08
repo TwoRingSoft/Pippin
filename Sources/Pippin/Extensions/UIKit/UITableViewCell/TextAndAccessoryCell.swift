@@ -10,17 +10,16 @@ import UIKit
 
 public let textAndAccessoryCellReuseIdentifier = "AddObjectCell"
 
+/**
+ A `UITableViewCell` subclass providing a label on the left and an image view on the right. By default the label's `numberOfLines` is not set to 0, but it is layed out such that the label may extend to multiple lines and leave the image view centered on its Y axis.
+ */
 public class TextAndAccessoryCell: UITableViewCell {
 
-    public var label: UILabel!
-    public var imageAccessoryView: UIImageView!
+    public var label = UILabel(frame: .zero)
+    public var imageAccessoryView = UIImageView(frame: .zero)
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        label = UILabel(frame: .zero)
-        imageAccessoryView = UIImageView(frame: .zero)
-
         [label, imageAccessoryView].forEach { self.contentView.addSubview($0) }
 
         label.leadingAnchor == contentView.leadingAnchor + 12
