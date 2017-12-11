@@ -22,6 +22,7 @@ public class FormController: NSObject {
 
     private var receivedDelegateCallback = false
     private var notification: Notification?
+    private var notificationObservers = [AnyObject]()
 
     private var logger: Logger?
 
@@ -58,6 +59,10 @@ public class FormController: NSObject {
         _init()
     }
 
+    deinit {
+        removeKeyboardObservers()
+    }
+
 }
 
 // MARK: Public
@@ -67,6 +72,10 @@ public extension FormController {
         for inputView in inputViews {
             inputView.resignFirstResponder()
         }
+    }
+
+    func removeKeyboardObservers() {
+        notificationObservers.forEach { NotificationCenter.default.removeObserver($0) }
     }
 
 }
@@ -268,7 +277,7 @@ private extension FormController {
 
     func _init() {
         [ NSNotification.Name.UIKeyboardWillChangeFrame, NSNotification.Name.UIKeyboardWillHide ].forEach {
-            NotificationCenter.default.addObserver(forName: $0, object: nil, queue: .main) { notification in
+            let observer = NotificationCenter.default.addObserver(forName: $0, object: nil, queue: .main) { notification in
                 switch notification.name {
                 case NSNotification.Name.UIKeyboardWillChangeFrame:
                     self.logger?.logDebug(message: String(format: "[%@] UIKeyboardWillChangeFrame", instanceType(self)))
@@ -287,6 +296,7 @@ private extension FormController {
                 default: fatalError("Unexpected notification received")
                 }
             }
+            self.notificationObservers.append(observer)
         }
 
         for inputView in inputViews {
