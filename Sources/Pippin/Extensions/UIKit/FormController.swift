@@ -14,9 +14,9 @@ public class FormController: NSObject {
     fileprivate var inputViews: [UIView]!
     fileprivate var oldTextFieldDelegates: [UITextField: UITextFieldDelegate?] = [:]
     fileprivate var oldTextViewDelegates: [UITextView: UITextViewDelegate?] = [:]
-    fileprivate var currentInputView: UIView?
+    fileprivate weak var currentInputView: UIView?
 
-    private var tableView: UITableView?
+    private weak var tableView: UITableView?
     private var originalContentInset: UIEdgeInsets?
     private var originalContentOffset: CGPoint?
 
@@ -60,7 +60,7 @@ public class FormController: NSObject {
     }
 
     deinit {
-        removeKeyboardObservers()
+        deinitialize()
     }
 
 }
@@ -74,8 +74,23 @@ public extension FormController {
         }
     }
 
-    func removeKeyboardObservers() {
+    func deinitialize() {
+        currentInputView = nil
+
         notificationObservers.forEach { NotificationCenter.default.removeObserver($0) }
+        notificationObservers.removeAll()
+
+        oldTextViewDelegates.forEach { entry in
+            let (textView, delegate) = entry
+            textView.delegate = delegate
+        }
+        oldTextViewDelegates.removeAll()
+
+        oldTextFieldDelegates.forEach { entry in
+            let (textField, delegate) = entry
+            textField.delegate = delegate
+        }
+        oldTextFieldDelegates.removeAll()
     }
 
 }
@@ -88,9 +103,9 @@ public extension FormController {
     }
 
     func nextInputView() {
-        logger?.logDebug(message: String(format: "[%@] nextInputView", instanceType(self)))
         let nextIdx = inputViews.index(of: currentInputView!)! + 1
         let nextField = inputViews[nextIdx]
+        logger?.logDebug(message: String(format: "[%@] nextInputView: %@;", instanceType(self), String(describing: nextField), String(reflecting: nextField)))
         if !nextField.becomeFirstResponder() {
             guard let currentInputView = currentInputView else {
                 fatalError("no current input view")
@@ -104,9 +119,9 @@ public extension FormController {
     }
 
     func previousTextField() {
-        logger?.logDebug(message: String(format: "[%@] previousTextField", instanceType(self)))
         let previousIdx = inputViews.index(of: currentInputView!)! - 1
         let previousField = inputViews[previousIdx]
+        logger?.logDebug(message: String(format: "[%@] previousTextField: %@;", instanceType(self), String(describing: previousField), String(reflecting: previousField)))
         if !previousField.becomeFirstResponder() {
             guard let currentInputView = currentInputView else {
                 fatalError("no current input view")
@@ -167,7 +182,7 @@ private extension FormController {
         return inputViews.filter { view in
             let absoluteInputViewFrame = window.convert(view.frame, from: view.superview)
             return absoluteCellFrame.intersects(absoluteInputViewFrame)
-            }.first
+        }.first
     }
 
     func visibleCell(forInputView inputView: UIView) -> UITableViewCell? {
