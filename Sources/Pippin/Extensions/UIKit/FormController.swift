@@ -233,15 +233,14 @@ private extension FormController {
         guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
         guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
 
-        let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
-        let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
-
-        if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
-            // don't need to unhide the target cell
-            return
-        }
-
         let unhide: ((Bool) -> ()) = { completed in
+            let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
+            let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
+            if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
+                // don't need to unhide the target cell
+                return
+            }
+
             if let indexPath = tableView.indexPath(for: targetCell) {
                 if let superview = currentInputView.superview {
                     let a = currentInputView.center.y / superview.bounds.height
