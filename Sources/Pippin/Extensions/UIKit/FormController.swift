@@ -328,11 +328,6 @@ private extension FormController {
                 oldTextViewDelegates[textView] = textView.delegate
                 textView.delegate = self
                 textView.inputAccessoryView = accessoryViewForInputView(view: textView)
-                if inputViews.index(of: textView)! < inputViews.count - 1 {
-                    textView.returnKeyType = .next
-                } else {
-                    textView.returnKeyType = .done
-                }
             } else {
                 fatalError("Unsupported responder type.")
             }
