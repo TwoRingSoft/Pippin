@@ -30,13 +30,13 @@ public class TextFieldTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
 
         titleLabel.leadingAnchor == contentView.leadingAnchor + 12
-        titleLabel.firstBaselineAnchor == textField.firstBaselineAnchor
-        titleLabel.bottomAnchor >= contentView.bottomAnchor - 8
+        titleLabel.topAnchor == contentView.topAnchor + 8
+        titleLabel.bottomAnchor <= contentView.bottomAnchor - 8
 
         textField.leadingAnchor == titleLabel.trailingAnchor + 12
         textField.trailingAnchor == contentView.trailingAnchor - 12
-        textField.topAnchor == contentView.topAnchor + 8
-        textField.bottomAnchor >= contentView.bottomAnchor - 8
+        textField.firstBaselineAnchor == titleLabel.firstBaselineAnchor
+        textField.bottomAnchor <= contentView.bottomAnchor - 8
     }
     
     public required init?(coder aDecoder: NSCoder) {

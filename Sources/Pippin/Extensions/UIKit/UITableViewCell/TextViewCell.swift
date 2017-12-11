@@ -27,15 +27,15 @@ public class TextViewCell: UITableViewCell {
 
         contentView.addSubview(titleLabel)
         contentView.addSubview(textView)
-
+        
         titleLabel.leadingAnchor == contentView.leadingAnchor + 12
         titleLabel.topAnchor == contentView.topAnchor + 8
-        titleLabel.bottomAnchor >= contentView.bottomAnchor - 8
+        titleLabel.bottomAnchor <= contentView.bottomAnchor - 8
 
         textView.leadingAnchor == titleLabel.trailingAnchor + 12
         textView.topAnchor == titleLabel.topAnchor
         textView.trailingAnchor == contentView.trailingAnchor - 12
-        textView.bottomAnchor >= contentView.bottomAnchor - 8
+        textView.bottomAnchor <= contentView.bottomAnchor - 8
     }
 
     public required init?(coder aDecoder: NSCoder) {
