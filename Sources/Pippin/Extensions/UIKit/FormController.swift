@@ -169,7 +169,6 @@ private extension FormController {
         ]
 
         let view = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
-        view.backgroundColor = .lightGray
         view.addSubview(toolbar)
         toolbar.edgeAnchors == view.edgeAnchors
         return view
