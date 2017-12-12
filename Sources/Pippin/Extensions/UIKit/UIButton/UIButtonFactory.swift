@@ -21,15 +21,15 @@ extension UIButton {
      */
     public class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) -> UIButton {
         let button = UIButton(type: .custom)
-        button.tintColor = tintColor
-        let normalImage = UIImage(named: "\(imageSetName)", in: imageBundle, compatibleWith: nil)
+        let normalImage = UIImage(named: "\(imageSetName)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         button.setImage(normalImage, for: .normal)
-        let emphasizedImage = UIImage(named: "\(imageSetName)\(emphasisSuffix)", in: imageBundle, compatibleWith: nil)
+        let emphasizedImage = UIImage(named: "\(imageSetName)\(emphasisSuffix)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         button.setImage(emphasizedImage, for: .highlighted)
         button.setImage(emphasizedImage, for: .selected)
         if selector != nil {
             button.addTarget(target, action: selector!, for: .touchUpInside)
         }
+        button.tintColor = tintColor
         return button
     }
 
