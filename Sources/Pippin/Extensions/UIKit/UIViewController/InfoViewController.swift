@@ -48,9 +48,9 @@ public class InfoViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
+    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor) {
         super.init(nibName: nil, bundle: nil)
-        setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
+        setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont, textColor: textColor)
         setUpSecretCrash()
     }
 
@@ -88,12 +88,10 @@ private extension InfoViewController {
         }
     }
 
-    func setUpUI(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) {
-        view.backgroundColor = UIColor.white
-
-        let textView = configureTextView(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont)
-        let socialLinks = configureSocialLinks()
-        let copyright = configureCopyright(textFont: textFont)
+    func setUpUI(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor) {
+        let textView = configureTextView(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont, textColor: textColor)
+        let socialLinks = configureSocialLinks(textColor: textColor)
+        let copyright = configureCopyright(textFont: textFont, textColor: textColor)
 
         view.addSubview(textView)
         view.addSubview(socialLinks)
@@ -118,47 +116,48 @@ private extension InfoViewController {
         copyright.centerXAnchor == socialLinks.centerXAnchor
     }
 
-    func configureSocialLinks() -> UIView {
-        let twitterButton = UIButton.button(withImageSetName: "twitter-logo")
-        let facebookButton = UIButton.button(withImageSetName: "facebook-logo")
-        let linkedinButton = UIButton.button(withImageSetName: "linkedin-logo")
-        let views = [ twitterButton, facebookButton, linkedinButton ]
-        views.forEach { $0.tintColor = .lightLightGray }
+    func configureSocialLinks(textColor: UIColor) -> UIView {
+        let twitterButton = UIButton.button(withImageSetName: "twitter-logo", tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let facebookButton = UIButton.button(withImageSetName: "facebook-logo", tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let linkedinButton = UIButton.button(withImageSetName: "linkedin-logo", tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
 
         twitterButton.addTarget(self, action: #selector(twitterPressed), for: .touchUpInside)
         facebookButton.addTarget(self, action: #selector(facebookPressed), for: .touchUpInside)
         linkedinButton.addTarget(self, action: #selector(linkedinPressed), for: .touchUpInside)
 
-        let stack = UIStackView(arrangedSubviews: views)
+        let stack = UIStackView(arrangedSubviews: [ twitterButton, facebookButton, linkedinButton ])
         stack.spacing = 20
 
         return stack
     }
 
-    func configureCopyright(textFont: UIFont) -> UILabel {
+    func configureCopyright(textFont: UIFont, textColor: UIColor) -> UILabel {
         let copyrightString = "© 2017"
         let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
 
         // insert two ring logo and style copyright text to match
-        let copyrightRange = (string.string as NSString).range(of: copyrightString)
-        string.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.lightGray], range: copyrightRange)
         string.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(0, string.length))
 
-        replace(attachmentImage: .twoRing, in: string, font: textFont)
+        replace(attachmentImage: .twoRing, in: string, font: textFont, textColor: textColor)
+
+        let range = NSMakeRange(0, string.length)
+        string.addAttributes([NSAttributedStringKey.foregroundColor: textColor], range: range)
 
         let label = UILabel(frame: .zero)
         label.attributedText = string
+        label.textColor = textColor
+        label.tintColor = textColor
         return label
     }
 
-    func configureTextView(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont) -> UITextView {
+    func configureTextView(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor) -> UITextView {
         let textView = UITextView(frame: CGRect.zero)
         textView.isEditable = false
         textView.backgroundColor = nil
         textView.textAlignment = .center
         textView.dataDetectorTypes = .link
         textView.isScrollEnabled = false
-        textView.linkTextAttributes = [ NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightGray, NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue ]
+        textView.linkTextAttributes = [ NSAttributedStringKey.foregroundColor.rawValue: textColor.withAlphaComponent(0.6), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue ]
 
         let version = Bundle.getSemanticVersion()
         let build = Bundle.getBuild()
@@ -192,12 +191,13 @@ private extension InfoViewController {
         return textView
     }
 
-    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, font: UIFont) {
+    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, font: UIFont, textColor: UIColor) {
         let attachment = NSTextAttachment()
         let size = attachmentImage.image() != nil ? attachmentImage.image()!.size : .zero
         attachment.bounds = CGRect(origin: .zero, size: CGSize(width: font.capHeight * size.width / size.height, height: font.capHeight))
         attachment.image = attachmentImage.image()
         let attachmentString = NSAttributedString(attachment: attachment)
+
         let range = (attributedString.string as NSString).range(of: attachmentImage.rawValue)
         attributedString.replaceCharacters(in: range, with: attachmentString)
     }
