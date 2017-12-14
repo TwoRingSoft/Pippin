@@ -9,6 +9,12 @@
 import Anchorage
 import UIKit
 
+/**
+ Provided as a `UIAppearanceContainer` specifically to style the contents of the
+ input views created by the `FormController`.
+ */
+public class FormControllerInputAccessoryToolbar: UIToolbar {}
+
 public class FormController: NSObject {
 
     fileprivate var inputViews: [UIView]!
@@ -157,7 +163,7 @@ private extension FormController {
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         space.width = 12
 
-        let toolbar = UIToolbar(frame: .zero)
+        let toolbar = FormControllerInputAccessoryToolbar(frame: .zero)
         toolbar.items = [
             space,
             previousButton,
