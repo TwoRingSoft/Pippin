@@ -30,7 +30,8 @@ public protocol BugReporter {
          - screenshot: an optional image to use in the bug report
          - metadata: optional dictionary with any extra data to send with the bug
             report, like logs/database
+         - fonts: optional object describing fonts to use for theming the bug reporter UI
      */
-    func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?)
+    func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?, fonts: Fonts?)
 
 }

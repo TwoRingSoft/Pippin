@@ -19,11 +19,17 @@ public final class PinpointKitAdapter: NSObject {
 
 extension PinpointKitAdapter: BugReporter {
 
-    public func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?) {
+    public func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?, fonts: Fonts?) {
         guard let recipients = recipients else { return }
         var feedbackConfig = FeedbackConfiguration(recipients: recipients)
         feedbackConfig.additionalInformation = metadata
-        let config = Configuration(feedbackConfiguration: feedbackConfig)
+        var config: Configuration
+        if let fonts = fonts {
+            let appearance = InterfaceCustomization.Appearance(navigationTitleFont: fonts.title, feedbackSendButtonFont: fonts.subtitle, feedbackCancelButtonFont: fonts.subtitle, feedbackEditHintFont: fonts.text, feedbackBackButtonFont: fonts.subtitle, logCollectionPermissionFont: fonts.italic, logFont: fonts.text, editorDoneButtonFont: fonts.subtitle)
+            config = Configuration(appearance: appearance, feedbackConfiguration: feedbackConfig)
+        } else {
+            config = Configuration(feedbackConfiguration: feedbackConfig)
+        }
         pinpointKit = PinpointKit(configuration: config)
 
         if let screenshot = screenshot {
