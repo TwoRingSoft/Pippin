@@ -15,14 +15,10 @@ enum SocialIcon: String {
     case twitter = "twitter-logo"
     case facebook = "facebook-logo"
     case linkedin = "linkedin-logo"
+    case github = "github-logo"
 
     func image() -> UIImage? {
-        switch self {
-        case .twoRing: return imageAsset(withName: "trs-logo")
-        case .twitter: return imageAsset(withName: "twitter-logo")
-        case .facebook: return imageAsset(withName: "facebook-logo")
-        case .linkedin: return imageAsset(withName: "linkedin-logo")
-        }
+        return imageAsset(withName: rawValue)
     }
 
     func imageAsset(withName name: String) -> UIImage? {
@@ -35,6 +31,7 @@ enum SocialIcon: String {
         case .twitter: return "https://twitter.com/tworingsoft"
         case .facebook: return "https://www.facebook.com/tworingsoft"
         case .linkedin: return "https://www.linkedin.com/company/11026810"
+        case .github: return "https://github.com/tworingsoft"
         }
     }
     
@@ -69,6 +66,10 @@ public class InfoViewController: UIViewController {
 
     func linkedinPressed() {
         openURL(URLString: SocialIcon.linkedin.url())
+    }
+
+    func githubPressed() {
+        openURL(URLString: SocialIcon.github.url())
     }
 
     func secretTestCrash() {
@@ -117,15 +118,17 @@ private extension InfoViewController {
     }
 
     func configureSocialLinks(textColor: UIColor) -> UIView {
-        let twitterButton = UIButton.button(withImageSetName: "twitter-logo", tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
-        let facebookButton = UIButton.button(withImageSetName: "facebook-logo", tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
-        let linkedinButton = UIButton.button(withImageSetName: "linkedin-logo", tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let twitterButton = UIButton.button(withImageSetName: SocialIcon.twitter.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let facebookButton = UIButton.button(withImageSetName: SocialIcon.facebook.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let linkedinButton = UIButton.button(withImageSetName: SocialIcon.linkedin.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let githubButton = UIButton.button(withImageSetName: SocialIcon.github.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
 
         twitterButton.addTarget(self, action: #selector(twitterPressed), for: .touchUpInside)
         facebookButton.addTarget(self, action: #selector(facebookPressed), for: .touchUpInside)
         linkedinButton.addTarget(self, action: #selector(linkedinPressed), for: .touchUpInside)
+        githubButton.addTarget(self, action: #selector(githubPressed), for: .touchUpInside)
 
-        let stack = UIStackView(arrangedSubviews: [ twitterButton, facebookButton, linkedinButton ])
+        let stack = UIStackView(arrangedSubviews: [ githubButton, twitterButton, facebookButton, linkedinButton ])
         stack.spacing = 20
 
         return stack
