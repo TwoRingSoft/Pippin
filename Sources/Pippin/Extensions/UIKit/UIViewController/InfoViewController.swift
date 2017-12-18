@@ -37,6 +37,12 @@ enum SocialIcon: String {
     
 }
 
+/**
+ A view that shows social network icons with links, web link, acknowledgements,
+ copyright info.
+
+ Importantly, provides a secret crash button to test crash reporting in the wild.
+ */
 public class InfoViewController: UIViewController {
 
     var crashReporter: CrashReporter?
