@@ -109,15 +109,20 @@ public extension FormController {
     }
 
     func nextInputView() {
-        let nextIdx = inputViews.index(of: currentInputView!)! + 1
+        guard let currentInputView = currentInputView else {
+            logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
+            return
+        }
+        guard let currentInputViewIndex = inputViews.index(of: currentInputView) else {
+            logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
+            return
+        }
+        let nextIdx = currentInputViewIndex + 1
         let nextField = inputViews[nextIdx]
         logger?.logDebug(message: String(format: "[%@] nextInputView: %@;", instanceType(self), String(describing: nextField), String(reflecting: nextField)))
         if !nextField.becomeFirstResponder() {
-            guard let currentInputView = currentInputView else {
-                fatalError("no current input view")
-            }
             if !currentInputView.resignFirstResponder() && !currentInputView.endEditing(true) {
-                fatalError("could not end editing in input field")
+                logger?.logWarning(message: String(format: "[%@] could not end editing in input field: %@", instanceType(self), String(describing: currentInputView)))
             } else {
                 nextField.becomeFirstResponder()
             }
@@ -125,15 +130,20 @@ public extension FormController {
     }
 
     func previousTextField() {
-        let previousIdx = inputViews.index(of: currentInputView!)! - 1
+        guard let currentInputView = currentInputView else {
+            logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
+            return
+        }
+        guard let currentInputViewIndex = inputViews.index(of: currentInputView) else {
+            logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
+            return
+        }
+        let previousIdx = currentInputViewIndex - 1
         let previousField = inputViews[previousIdx]
         logger?.logDebug(message: String(format: "[%@] previousTextField: %@;", instanceType(self), String(describing: previousField), String(reflecting: previousField)))
         if !previousField.becomeFirstResponder() {
-            guard let currentInputView = currentInputView else {
-                fatalError("no current input view")
-            }
             if !currentInputView.resignFirstResponder() && !currentInputView.endEditing(true) {
-                fatalError("could not end editing in input field")
+                logger?.logWarning(message: String(format: "[%@] could not end editing in input field: %@", instanceType(self), String(describing: currentInputView)))
             } else {
                 previousField.becomeFirstResponder()
             }
@@ -271,7 +281,9 @@ private extension FormController {
             self.originalContentInset = tableView.contentInset
             let curveOption = UIViewAnimationOptions(rawValue: curveRawValue)
             UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
-                tableView.contentInset = tableView.contentInset.inset(bottomDelta: keyboardFrame.height).inset(bottomDelta: -49)
+                var insets = tableView.contentInset
+                insets.bottom = keyboardFrame.height - 49
+                tableView.contentInset = insets
                 tableView.scrollIndicatorInsets = tableView.contentInset.inset(bottomDelta: keyboardFrame.height)
             }, completion: unhide)
         } else {
@@ -282,12 +294,12 @@ private extension FormController {
     func handleKeyboardHide(notification: Notification) {
         guard let tableView = self.tableView else { return }
         guard let originalContentInset = self.originalContentInset else { return }
+        self.originalContentInset = nil
 
         guard let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
         guard let curveRawValue = (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
         let curveOption = UIViewAnimationOptions(rawValue: curveRawValue)
 
-        self.originalContentInset = nil
         UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
             tableView.contentInset = originalContentInset
             tableView.scrollIndicatorInsets = originalContentInset
