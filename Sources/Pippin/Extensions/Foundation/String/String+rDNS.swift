@@ -12,12 +12,16 @@ let rDNSDomain = "com.tworingsoft"
 
 extension String {
 
-    public init(asRDNSForApp app: String, domain: String, subpaths: [String]? = nil) {
-        var subpathString = ""
-        if let subpaths = subpaths, subpaths.count > 0 {
-            subpathString = ".".appending(subpaths.joined(separator: "."))
-        }
-        self = String(format: "%@.%@.%@%@", rDNSDomain, app, domain, subpathString).lowercased()
+    public init(subpaths: [String]) {
+        precondition(subpaths.count > 0)
+        precondition(subpaths.filter({ $0.count > 0 }).count > 0)
+        self = String(format: "%@.%@", rDNSDomain, subpaths.joined(separator: ".")).lowercased()
+    }
+
+    public init(asRDNSForCurrentAppWithSubpaths subpaths: [String]) {
+        precondition(subpaths.count > 0)
+        precondition(subpaths.filter({ $0.count > 0 }).count > 0)
+        self = String(subpaths: [ Bundle.getAppName() ] + subpaths)
     }
 
 }
