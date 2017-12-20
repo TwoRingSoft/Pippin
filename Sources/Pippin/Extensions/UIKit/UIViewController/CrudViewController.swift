@@ -17,6 +17,7 @@ public enum ListViewControllerMode {
 
 @objc public protocol CrudViewControllerThemeDelegate {
     @objc optional func crudViewController(crudViewController: CrudViewController, themeAddItemCell addItemCell: TextAndAccessoryCell)
+    @objc optional func crudViewControllerEmptyStateView(crudViewController: CrudViewController) -> UIView
 }
 
 public protocol CrudViewControllerCRUDDelegate {
@@ -64,7 +65,7 @@ public class CrudViewController: UIViewController {
     private var crudName: String!
     private var originalFetchRequestPredicate: NSPredicate?
     fileprivate var logger: Logger?
-
+    private var emptyView: UIView?
     typealias UpdateTable = [NSFetchedResultsChangeType: [IndexPath]]
     private var tableUpdates: UpdateTable?
 
@@ -100,7 +101,11 @@ public extension CrudViewController {
         logger?.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), crudName, fetchedResultsController, tableView))
         do {
             try fetchedResultsController.performFetch()
-            tableView.reloadData()
+            if fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
+                toggle(emptyState: true, animated: true)
+            } else {
+                tableView.reloadData()
+            }
         } catch {
             let message = String(format: "[%@(%@)] Could not perform a new fetch on NSFetchedResultsController: %@.", instanceType(self), crudName, fetchedResultsController)
             logger?.logError(message: message, error: error)
@@ -144,6 +149,24 @@ public extension CrudViewController {
 
 // MARK: Private
 private extension CrudViewController {
+
+    func numberOfEntities() -> Int {
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+
+    func toggle(emptyState: Bool, animated: Bool) {
+        guard let emptyView = emptyView else { return }
+        let animations = {
+            emptyView.alpha = emptyState ? 1 : 0
+            self.tableView.alpha = emptyState ? 0 : 1
+        }
+
+        if animated {
+            UIView.animate(withDuration: 0.3, animations: animations)
+        } else {
+            animations()
+        }
+    }
 
     func setLookAndFeel() {
         if searchDelegate.crudViewControllerShouldEnableSearch(crudViewController: self), let searchField = searchField, let searchContainer = searchContainer, let searchCancelButton = searchCancelButton {
@@ -245,6 +268,12 @@ private extension CrudViewController {
             tableView.fillSuperview()
         }
 
+        if let emptyView = themeDelegate?.crudViewControllerEmptyStateView?(crudViewController: self) {
+            self.emptyView = emptyView
+            view.addSubview(emptyView)
+            emptyView.edgeAnchors == view.edgeAnchors
+            self.toggle(emptyState: self.numberOfEntities() == 0, animated: false)
+        }
     }
 
     func addItemRowIndexPath() -> IndexPath {
@@ -313,7 +342,9 @@ private extension CrudViewController {
                 case .move: fatalError("Moving currently not supported.")
                 }
             })
-        }, completion: nil)
+        }) { finished in
+            self.toggle(emptyState: self.numberOfEntities() == 0, animated: true)
+        }
     }
 
     func setTableView(toHideAddItemRow hideAddItemRow: Bool) {
