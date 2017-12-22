@@ -40,6 +40,11 @@ Pod::Spec.new do |s|
       sss.dependency 'XCGLogger', '~> 6'
       sss.dependency 'Pippin/Core'
     end
+    ss.subspec 'SwiftMessages' do |sss|
+      sss.source_files = 'Sources/Pippin/Adapters/SwiftMessages/**/*.{h,m,swift}'
+      sss.dependency 'SwiftMessages', '~> 4'
+      sss.dependency 'Pippin/Core'
+    end
   end
   
   s.subspec 'Core' do |ss|
