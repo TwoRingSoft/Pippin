@@ -21,7 +21,7 @@ extension String {
     public init(asRDNSForCurrentAppWithSubpaths subpaths: [String]) {
         precondition(subpaths.count > 0)
         precondition(subpaths.filter({ $0.count > 0 }).count > 0)
-        self = String(subpaths: [ Bundle.getAppName() ] + subpaths)
+        self = String(subpaths: [ Bundle.main.getAppName() ] + subpaths)
     }
 
 }

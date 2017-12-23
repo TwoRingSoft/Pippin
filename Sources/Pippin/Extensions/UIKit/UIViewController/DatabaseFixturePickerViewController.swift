@@ -64,7 +64,7 @@ extension DatabaseFixturePickerViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let fixtureName = fixtures[indexPath.row]
-        let fixtureSQLitePath = fixtureName.appendingPathComponent(Bundle.getAppName()).appendingPathExtension("sqlite").path
+        let fixtureSQLitePath = fixtureName.appendingPathComponent(coreDataController.modelName).appendingPathExtension("sqlite").path
 
         coreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
             if success {

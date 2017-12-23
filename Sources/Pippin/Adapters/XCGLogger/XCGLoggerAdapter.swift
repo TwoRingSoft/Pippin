@@ -45,9 +45,8 @@ public final class XCGLoggerAdapter: NSObject {
 
     public init(name: String, logLevel: LogLevel) {
         super.init()
-        let appName = Bundle.getAppName()
 
-        guard let logFileURL = urlForFilename(fileName: "\(appName)-\(name).log", inDirectoryType: .libraryDirectory) else {
+        guard let logFileURL = urlForFilename(fileName: "\(name).log", inDirectoryType: .libraryDirectory) else {
             reportMissingLogFile()
             return
         }

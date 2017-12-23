@@ -45,13 +45,14 @@ enum SocialIcon: String {
  */
 public class InfoViewController: UIViewController {
 
-    var crashReporter: CrashReporter?
+    fileprivate var environment: Environment
 
     public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) not implemented")
     }
 
-    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor) {
+    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor, environment: Environment) {
+        self.environment = environment
         super.init(nibName: nil, bundle: nil)
         setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont, textColor: textColor)
         setUpSecretCrash()
@@ -79,7 +80,7 @@ public class InfoViewController: UIViewController {
     }
 
     func secretTestCrash() {
-        crashReporter?.testCrash()
+        environment.crashReporter?.testCrash()
     }
 
 }
@@ -168,9 +169,9 @@ private extension InfoViewController {
         textView.isScrollEnabled = false
         textView.linkTextAttributes = [ NSAttributedStringKey.foregroundColor.rawValue: textColor.withAlphaComponent(0.6), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue ]
 
-        let version = Bundle.getSemanticVersion()
-        let build = Bundle.getBuild()
-        let appNameString = Bundle.getAppName()
+        let version = environment.semanticVersion!
+        let build = environment.currentBuild!
+        let appNameString = environment.appName!
         let tworingURL = "http://tworingsoft.com"
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string:
             "\(appNameString)" +

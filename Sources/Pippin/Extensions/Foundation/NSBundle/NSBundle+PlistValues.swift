@@ -8,49 +8,38 @@
 
 import Foundation
 
-let noValueString = "?"
-
 enum BundleKey: String {
 
     case semanticVersion = "CFBundleShortVersionString"
     case buildNumber = "CFBundleVersion"
     case name = "CFBundleName"
 
-    func getStringValue() -> String {
-        return Bundle.getValue(forKey: self.rawValue)
-    }
-
 }
 
 extension Bundle {
 
-    public class func getSemanticVersion() -> SemanticVersion {
-        return SemanticVersion(BundleKey.semanticVersion.getStringValue()) ?? .zero
-    }
-
-    public class func getBuild() -> Build {
-        return Build(BundleKey.buildNumber.getStringValue()) ?? .zero
-    }
-
-    public class func getAppName() -> String {
-        return BundleKey.name.getStringValue()
-    }
-
-}
-
-private extension Bundle {
-
-    class func getValue(forKey key: String) -> String {
-        guard let infoDict = Bundle.main.infoDictionary else {
-            print("[%s] could not get infoDictionary from mainBundle", classType(self))
-            return noValueString
+    public func getSemanticVersion(defaultVersion: SemanticVersion = .zero) -> SemanticVersion {
+        guard
+        let version = infoDictionary?[BundleKey.semanticVersion.rawValue] as? String,
+        let versionStruct = SemanticVersion(version)
+        else {
+            return defaultVersion
         }
+        return versionStruct
+    }
 
-        guard let version = infoDict[key] as? String else {
-            print("[%s] could not get value from bundle dictionary for key %@", classType(self), key)
-            return noValueString
+    public func getBuild(defaultBuild: Build = .zero) -> Build {
+        guard
+        let build = infoDictionary?[BundleKey.buildNumber.rawValue] as? String,
+        let buildStruct = Build(build)
+        else {
+            return defaultBuild
         }
-        return version
+        return buildStruct
+    }
+
+    public func getAppName(defaultName: String = "?") -> String {
+        return infoDictionary?[BundleKey.name.rawValue] as? String ?? defaultName
     }
 
 }

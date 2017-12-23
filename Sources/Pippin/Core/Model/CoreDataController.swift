@@ -37,12 +37,11 @@ public class CoreDataController: NSObject {
      Initialize a new Core Data helper.
      - Note: this function computes the app name from the bundle to determine
      the model name.
-     - parameter logger: optional `Logger` conforming instance, defaults to
+     - parameter modelName: the model to initialize for core data
      `nil`
      */
-    public init(logger: Logger? = nil) {
-        self.logger = logger
-        self.modelName = Bundle.getAppName()
+    public init(modelName: String) {
+        self.modelName = modelName
     }
 
     /**
@@ -165,9 +164,9 @@ public extension CoreDataController {
      the raw `Data` from each of those files.
      */
     func exportData() -> Data {
-        let sqlitePath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", Bundle.getAppName()))
-        let sqliteWALPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", Bundle.getAppName()))
-        let sqliteSHMPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", Bundle.getAppName()))
+        let sqlitePath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", modelName))
+        let sqliteWALPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", modelName))
+        let sqliteSHMPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", modelName))
 
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
