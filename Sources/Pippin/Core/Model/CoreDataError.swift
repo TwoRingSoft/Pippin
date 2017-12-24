@@ -32,4 +32,9 @@ public enum CoreDataError: Swift.Error {
      Failed to delete an entity.
      */
     case entityNotDeleted(String)
+
+    /**
+     Failed to convert a `NSFetchRequestResult` to a specific `NSManagedObject` subtype.
+     */
+    case unexpectedEntityType(String)
 }
