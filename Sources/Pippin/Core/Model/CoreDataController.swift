@@ -38,7 +38,6 @@ public class CoreDataController: NSObject {
      - Note: this function computes the app name from the bundle to determine
      the model name.
      - parameter modelName: the model to initialize for core data
-     `nil`
      */
     public init(modelName: String) {
         self.modelName = modelName
@@ -91,6 +90,7 @@ public extension CoreDataController {
     }
 
     /**
+     Returns a typed array of entities fetched, and provides some boilerplate error handling.
      - parameters:
          - request: the fetch request to perform, generic on the type of results
          - context: the context to fetch from
