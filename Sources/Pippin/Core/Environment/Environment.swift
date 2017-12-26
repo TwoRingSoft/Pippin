@@ -20,6 +20,8 @@ public struct Environment {
     public var logger: Logger!
     public var alerter: Alerter!
 
+    public var inAppPurchaseVendor: InAppPurchaseVendor!
+
     public init() {}
 
 }
