@@ -9,41 +9,41 @@ PODS:
   - PinpointKit (1.1.0):
     - PinpointKit/Core (= 1.1.0)
   - PinpointKit/Core (1.1.0)
-  - Pippin (0.0.1):
-    - Pippin/Adapters (= 0.0.1)
-    - Pippin/Assets (= 0.0.1)
-    - Pippin/CanIHaz (= 0.0.1)
-    - Pippin/Core (= 0.0.1)
-    - Pippin/Extensions (= 0.0.1)
-  - Pippin/Adapters (0.0.1):
-    - Pippin/Adapters/PinpointKit (= 0.0.1)
-    - Pippin/Adapters/XCGLogger (= 0.0.1)
-  - Pippin/Adapters/PinpointKit (0.0.1):
+  - Pippin (1.0.0):
+    - Pippin/Adapters (= 1.0.0)
+    - Pippin/Assets (= 1.0.0)
+    - Pippin/CanIHaz (= 1.0.0)
+    - Pippin/Core (= 1.0.0)
+    - Pippin/Extensions (= 1.0.0)
+  - Pippin/Adapters (1.0.0):
+    - Pippin/Adapters/PinpointKit (= 1.0.0)
+    - Pippin/Adapters/XCGLogger (= 1.0.0)
+  - Pippin/Adapters/PinpointKit (1.0.0):
     - PinpointKit (~> 1)
     - Pippin/Core
-  - Pippin/Adapters/XCGLogger (0.0.1):
+  - Pippin/Adapters/XCGLogger (1.0.0):
     - Pippin/Core
     - XCGLogger (~> 6)
-  - Pippin/Assets (0.0.1)
-  - Pippin/CanIHaz (0.0.1):
-    - Pippin/CanIHaz/Camera (= 0.0.1)
-    - Pippin/CanIHaz/Location (= 0.0.1)
-  - Pippin/CanIHaz/Camera (0.0.1)
-  - Pippin/CanIHaz/Location (0.0.1)
-  - Pippin/Core (0.0.1):
+  - Pippin/Assets (1.0.0)
+  - Pippin/CanIHaz (1.0.0):
+    - Pippin/CanIHaz/Camera (= 1.0.0)
+    - Pippin/CanIHaz/Location (= 1.0.0)
+  - Pippin/CanIHaz/Camera (1.0.0)
+  - Pippin/CanIHaz/Location (1.0.0)
+  - Pippin/Core (1.0.0):
     - Pippin/Extensions/Foundation
-  - Pippin/Extensions (0.0.1):
-    - Pippin/Extensions/Foundation (= 0.0.1)
-    - Pippin/Extensions/UIKit (= 0.0.1)
-    - Pippin/Extensions/WebKit (= 0.0.1)
-  - Pippin/Extensions/Foundation (0.0.1)
-  - Pippin/Extensions/UIKit (0.0.1):
+  - Pippin/Extensions (1.0.0):
+    - Pippin/Extensions/Foundation (= 1.0.0)
+    - Pippin/Extensions/UIKit (= 1.0.0)
+    - Pippin/Extensions/WebKit (= 1.0.0)
+  - Pippin/Extensions/Foundation (1.0.0)
+  - Pippin/Extensions/UIKit (1.0.0):
     - Anchorage (~> 4)
     - Pippin/Core
     - Pippin/Extensions/Foundation
-  - Pippin/Extensions/WebKit (0.0.1):
+  - Pippin/Extensions/WebKit (1.0.0):
     - Pippin/Extensions/Foundation
-  - Pippin/Tests (0.0.1)
+  - Pippin/Tests (1.0.0)
   - XCGLogger (6.0.1):
     - XCGLogger/Core (= 6.0.1)
   - XCGLogger/Core (6.0.1):
@@ -64,7 +64,7 @@ SPEC CHECKSUMS:
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: b444d66d8b10420c1ffc22c176dee37c1c12b4e7
-  Pippin: d103d9283b8b8f73aaaffc56f4fa044e955edf9e
+  Pippin: ed6aa04b34ef89031f8f1519c50fab303ef11ed1
   XCGLogger: b4ca980580108cfeaf221afe158f5d89c1be22e0
 
 PODFILE CHECKSUM: d5ed82f9f391f28903df753240ecfc6c3813dbd8

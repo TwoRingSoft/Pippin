@@ -43,11 +43,6 @@ public enum LogLevel: Int {
      */
     case error
 
-    /**
-     The default logging level that should be used.
-     */
-    public static func defaultLevel() -> LogLevel { return .info }
-
 }
 
 /**
@@ -60,8 +55,7 @@ extension LogLevel: CustomDebugStringConvertible {
      */
     public var debugDescription: String {
         get {
-            let s = String(asRDNSForApp: Bundle.getAppName(), domain: "log-level", subpaths: [ description ])
-            return s
+            return String(asRDNSForPippinSubpaths: [ "log-level", description ])
         }
     }
 

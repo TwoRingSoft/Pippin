@@ -15,6 +15,7 @@ extension UITextField {
         text: String? = nil,
         keyboardType: UIKeyboardType = .default,
         font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize),
+        textColor: UIColor = .black,
         capitalization: UITextAutocapitalizationType = .sentences
     ) -> UITextField {
         let textField = UITextField(frame: .zero)
@@ -23,6 +24,7 @@ extension UITextField {
         textField.text = text
         textField.keyboardType = keyboardType
         textField.font = font
+        textField.textColor = textColor
         textField.autocapitalizationType = capitalization
         return textField
     }

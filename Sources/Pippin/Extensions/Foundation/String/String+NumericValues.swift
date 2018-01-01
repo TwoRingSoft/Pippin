@@ -11,13 +11,13 @@ import Foundation
 public extension String {
 
     func isAllDigits() -> Bool {
-        if self.characters.count == 0 {
+        if self.count == 0 {
             return false
         }
 
         let nondecimalDigitSet = NSCharacterSet.decimalDigits.inverted
 
-        let nondecimalCharacters = self.characters.filter { char in
+        let nondecimalCharacters = self.filter { char in
             let str = String(char)
             guard let uni = UnicodeScalar(str) else { return false }
             return nondecimalDigitSet.contains(uni)
@@ -40,12 +40,12 @@ public extension String {
         let scanner = Scanner(string: self)
         if scanner.scanUnsignedLongLong(&value) {
             if value == UInt64(ULLONG_MAX) {
-                print("[%@] could not extract unsigned integer from %@ due to overflow.", instanceType(self as NSObject), self)
+                print(String(format: "[%@] could not extract unsigned integer from %@ due to overflow.", instanceType(self as NSObject), self))
             }
 
             return UInt(value)
         } else {
-            print("[%@] could not extract unsigned integer from %@.", instanceType(self as NSObject), self)
+            print(String(format: "[%@] could not extract unsigned integer from %@.", instanceType(self as NSObject), self))
             return 0
         }
 

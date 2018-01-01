@@ -19,15 +19,17 @@ extension UIButton {
      - target: target to receive a `touchUpInside` event
      - selector: function to call for a `touchUpInside` event
      */
-    public class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil) -> UIButton {
+    public class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) -> UIButton {
         let button = UIButton(type: .custom)
-        button.tintColor = tintColor
-        button.setImage(UIImage(named: "\(imageSetName)"), for: .normal)
-        button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .highlighted)
-        button.setImage(UIImage(named: "\(imageSetName)\(emphasisSuffix)"), for: .selected)
+        let normalImage = UIImage(named: "\(imageSetName)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        button.setImage(normalImage, for: .normal)
+        let emphasizedImage = UIImage(named: "\(imageSetName)\(emphasisSuffix)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        button.setImage(emphasizedImage, for: .highlighted)
+        button.setImage(emphasizedImage, for: .selected)
         if selector != nil {
             button.addTarget(target, action: selector!, for: .touchUpInside)
         }
+        button.tintColor = tintColor
         return button
     }
 

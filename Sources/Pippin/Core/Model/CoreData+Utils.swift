@@ -23,3 +23,20 @@ extension NSFetchedResultsChangeType: CustomStringConvertible {
     }
 
 }
+
+extension NSFetchRequestResult {
+
+    /**
+     Convert an entity of type `NSFetchRequestResult` to the desired `NSManagedObject`
+     subclass via generics.
+     - Throws: if the object cannot be converted to the expected type.
+     */
+    public func convert<T>() throws -> T {
+        guard let typedObject = self as? T else {
+            throw CoreDataError.unexpectedEntityType(String(format: "Encountered object  %@ of unexpected type", String(reflecting: self)))
+        }
+
+        return typedObject
+    }
+
+}

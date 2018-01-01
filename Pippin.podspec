@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = 'Pippin'
-  s.version      = '1.0.0'
+  s.version      = '2.0.0'
   s.summary      = "A basic framework for an app's various components, like logging and crash reporting, and various Swift utilities for working with Apple frameworks."
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.
@@ -17,23 +17,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.version}" }
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
-  #
-
-  # s.platform     = :ios
-  # s.platform     = :ios, '5.0'
-
-  #  When using multiple platforms
-  s.ios.deployment_target = '10.0'
-  # s.osx.deployment_target = '10.7'
-  # s.watchos.deployment_target = '2.0'
-  # s.tvos.deployment_target = '9.0'
-
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
+  s.platform     = :ios, '11.0'
 
   s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = 'Tests/**/*.swift'
@@ -54,6 +38,11 @@ Pod::Spec.new do |s|
     ss.subspec 'XCGLogger' do |sss|
       sss.source_files = 'Sources/Pippin/Adapters/XCGLogger/**/*.{h,m,swift}'
       sss.dependency 'XCGLogger', '~> 6'
+      sss.dependency 'Pippin/Core'
+    end
+    ss.subspec 'SwiftMessages' do |sss|
+      sss.source_files = 'Sources/Pippin/Adapters/SwiftMessages/**/*.{h,m,swift}'
+      sss.dependency 'SwiftMessages', '~> 4'
       sss.dependency 'Pippin/Core'
     end
   end

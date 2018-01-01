@@ -30,33 +30,40 @@ public typealias ConfirmCompletionBlock = ((_ success: Bool, _ confirmBlock: @es
 public class CoreDataController: NSObject {
 
     fileprivate var logger: Logger?
-    fileprivate var modelName: String!
+    var modelName: String!
+    fileprivate var managedObjectModel: NSManagedObjectModel?
 
     /**
      Initialize a new Core Data helper.
      - Note: this function computes the app name from the bundle to determine
      the model name.
-     - parameter logger: optional `Logger` conforming instance, defaults to
-     `nil`
+     - parameter modelName: the model to initialize for core data
      */
-    public init(logger: Logger? = nil) {
-        self.logger = logger
-        self.modelName = Bundle.getAppName()
+    public init(modelName: String) {
+        self.modelName = modelName
     }
 
     /**
      Initialize a new Core Data helper.
      - parameters:
         - modelName: name of the managed object model to load
+        - managedObjectModel: optional instance passed in if the momd file is
+        is delivered from a nonstandard location, like a framework
         - logger: optional `Logger` conforming instance, defaults to `nil`
      */
-    public init(modelName: String, logger: Logger? = nil) {
+    public init(modelName: String, managedObjectModel: NSManagedObjectModel? = nil, logger: Logger? = nil) {
         self.logger = logger
         self.modelName = modelName
+        self.managedObjectModel = managedObjectModel
     }
 
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: modelName)
+        var container: NSPersistentContainer
+        if let managedObjectModel = managedObjectModel {
+            container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
+        } else {
+            container = NSPersistentContainer(name: modelName)
+        }
         self.logger?.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -83,6 +90,7 @@ public extension CoreDataController {
     }
 
     /**
+     Returns a typed array of entities fetched, and provides some boilerplate error handling.
      - parameters:
          - request: the fetch request to perform, generic on the type of results
          - context: the context to fetch from
@@ -108,7 +116,8 @@ public extension CoreDataController {
      Import data from archived data on disk into Core Data.
      - parameters:
          - sqlitePath: path to the database on disk
-         - completion: the confirming completion block
+         - completion: the confirming completion block, allowing the consumer
+            app to acquire permission to restart
      */
     func importFromSQLitePath(sqlitePath: String, completion: ConfirmCompletionBlock? = nil ) {
         let shmPath = sqlitePath.appending("-shm")
@@ -119,15 +128,45 @@ public extension CoreDataController {
     }
 
     /**
+     Import data in memory to Core Data.
+     - parameters:
+         - data: the `Data` instance to unarchive
+         - completion: the confirming completion block, allowing the consumer
+             app to acquire permission to restart
+     */
+    func importData(data: Data, completion: ConfirmCompletionBlock? = nil) {
+        guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
+            logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
+            return
+        }
+
+        var success = true
+        fileData.forEach {
+            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
+            let path = applicationSupportDirectory.appendingPathComponent($0.key)
+            if !$0.value.write(toFile: path, atomically: true) {
+                logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
+                success = false
+            }
+        }
+
+        completion?(success, { confirm in
+            if confirm {
+                fatalError("Restarting to load new database.")
+            }
+        })
+    }
+
+    /**
      Export data.
      - returns: `Data` object containing `NSKeyedArchiver` archived data from
      the array: `[db.sqlite, db.sqlite-wal, db.sqlite-shm]`, where each item is
      the raw `Data` from each of those files.
      */
     func exportData() -> Data {
-        let sqlitePath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", Bundle.getAppName()))
-        let sqliteWALPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", Bundle.getAppName()))
-        let sqliteSHMPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", Bundle.getAppName()))
+        let sqlitePath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", modelName))
+        let sqliteWALPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", modelName))
+        let sqliteSHMPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", modelName))
 
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
@@ -187,29 +226,6 @@ public extension CoreDataController {
 }
 
 private extension CoreDataController {
-
-    func importData(data: Data, completion: ConfirmCompletionBlock? = nil) {
-        guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
-            logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
-            return
-        }
-
-        var success = true
-        fileData.forEach {
-            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
-            let path = applicationSupportDirectory.appendingPathComponent($0.key)
-            if !$0.value.write(toFile: path, atomically: true) {
-                logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
-                success = false
-            }
-        }
-
-        completion?(success, { confirm in
-            if confirm {
-                fatalError("Restarting to load new database.")
-            }
-        })
-    }
 
     func archivedData(sqlitePath: String, sqliteWALPath: String, sqliteSHMPath: String) -> Data {
         var fileData = [String: NSData]()

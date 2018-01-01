@@ -8,8 +8,13 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
 
+    /**
+     - returns: `nil` if the values couldn't be extracted from the color, or a
+     tuple with labeled members `red`, `green`, `blue` and `alpha` with values
+     in `[0,1]`.
+     */
     func rgb() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)? {
         var fRed : CGFloat = 0
         var fGreen : CGFloat = 0
