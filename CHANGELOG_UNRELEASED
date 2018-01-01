@@ -1,1 +1,0 @@
-- remove deprecation warnings for using the `characters` property of a Swift string to determine its length
