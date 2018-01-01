@@ -5,19 +5,30 @@ task :init do
     sh 'brew install XcodeGen vrsn'
 end
 
-desc 'Bump either major, minor or patch, e.g. rake bump[major].'
+desc 'Bump version number, commit the changes, and tag that commit. Can supply argument to bump one of: major, minor, patch or build. E.g., `rake bump[major]` or `rake bump[build]`.'
 task :bump,[:component] do |t, args|
-  component = args[:component]
-  file = 'Pippin.podspec'
-  if component == 'major' then
-    sh "vrsn major --file #{file}"
-  elsif component == 'minor' then
-    sh "vrsn minor --file #{file}"
-  elsif component == 'patch' then
-    sh "vrsn patch --file #{file}"
-  else
-    fail 'Unrecognized version component.'
-  end
+    require 'open3'
+
+    sh "git stash --all"
+ 
+    version_file = 'Pippin.podspec'
+    component = args[:component]
+    if component == 'major' then
+        stdout, stderr, status = Open3.capture3("vrsn major --file #{version_file}")
+    elsif component == 'minor' then
+        stdout, stderr, status = Open3.capture3("vrsn minor --file #{version_file}")
+    elsif component == 'patch' then
+        stdout, stderr, status = Open3.capture3("vrsn patch --file #{version_file}")
+    elsif component == 'build' then
+        stdout, stderr, status = Open3.capture3("vrsn --numeric --file #{version_file}")
+    else
+        fail 'Unrecognized version component.'
+    end
+
+    sh "git add #{version_file}"
+    sh "git commit --message \"#{stdout}\""
+    sh "git tag `vrsn --read --file #{version_file}`"
+    sh "git stash pop"
 end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
