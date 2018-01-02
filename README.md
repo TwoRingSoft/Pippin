@@ -52,3 +52,5 @@ An integration smoke test can be run with `rake smoke_test`. This generates an X
 
 Got something you'd like to add, or needs fixing? Feel free to file an issue and if you'd like, a PR!
 
+All development is branched off of `develop`, which is merged into `master` for releases.
+
