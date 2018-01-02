@@ -20,6 +20,9 @@ Pippin is designed to immediately abstract and handle the major components that 
 - data persistence
 - in-app debug utilities
 - app information/acknowledgements
+- alerting
+- licensing
+- appearance
 
 Each of these has a top-level protocol defined, which can either have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. Currently, bug reporting is adapted from [PinpointKit](https://github.com/Lickability/PinpointKit), and logging to [XCGLogger](https://github.com/DaveWoodCom/XCGLogger). 
 
@@ -27,7 +30,6 @@ Each of these has a top-level protocol defined, which can either have concrete o
 
 #### Components to add:
 
-- error display/alerting
 - settings bundles
 - analytics
 - push notifications
@@ -38,7 +40,7 @@ Provides a way to acquire an object that is gated by user interaction to allow a
 
 ### Extensions
 
-These are currently split into extensions on Foundation API, UIKit and Webkit.
+These are currently split into extensions on Foundation, UIKit and Webkit.
 
 ## Testing
 
