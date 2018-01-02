@@ -346,7 +346,7 @@
 		46FBB25B0E5D3D9A25B43D91280BBFBE /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
 		4704998AADD503983A9DF223A45C0D63 /* ObjcExceptionBridging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ObjcExceptionBridging.h; path = Sources/ObjcExceptionBridging/include/ObjcExceptionBridging.h; sourceTree = "<group>"; };
 		491EEE953646FD3C99417E2961AD6CD7 /* ArrowAnnotationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArrowAnnotationView.swift; path = PinpointKit/PinpointKit/Sources/Core/ArrowAnnotationView.swift; sourceTree = "<group>"; };
-		4933EB6A1FEDA09A0070288E /* SwiftMessagesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftMessagesAdapter.swift; path = ../Sources/Pippin/Adapters/SwiftMessages/SwiftMessagesAdapter.swift; sourceTree = "<group>"; };
+		4933EB6A1FEDA09A0070288E /* SwiftMessagesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesAdapter.swift; sourceTree = "<group>"; };
 		4C30055C6F55AF3A35427A7B3B620988 /* UIButtonFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIButtonFactory.swift; sourceTree = "<group>"; };
 		4CE53B5EADE24A76E5DF4540501B0B50 /* WKWebView+Load.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "WKWebView+Load.swift"; path = "Sources/Pippin/Extensions/WebKit/WKWebView+Load.swift"; sourceTree = "<group>"; };
 		4DCB9A7674159D7D078403791E335725 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "SourceSansPro-Regular.ttf"; path = "PinpointKit/PinpointKit/Resources/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
@@ -828,7 +828,8 @@
 			children = (
 				4933EB6A1FEDA09A0070288E /* SwiftMessagesAdapter.swift */,
 			);
-			path = SwiftMessages;
+			name = SwiftMessages;
+			path = Sources/Pippin/Adapters/SwiftMessages;
 			sourceTree = "<group>";
 		};
 		4EA55E3F8C6B8E29EAD07989364E3584 /* UITextField */ = {
