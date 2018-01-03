@@ -9,7 +9,10 @@ desc 'Bump version number, commit the changes, and tag that commit. Can supply a
 task :bump,[:component] do |t, args|
     require 'open3'
 
-    sh "git stash --all"
+    modified_file_count, stderr, status = Open3.capture3("git status --porcelain | egrep '^(M| M)' | wc -l")
+    if modified_file_count.to_i > 0 then
+        sh "git stash --all"
+    end
  
     version_file = 'Pippin.podspec'
     component = args[:component]
@@ -28,7 +31,10 @@ task :bump,[:component] do |t, args|
     sh "git add #{version_file}"
     sh "git commit --message \"#{stdout}\""
     sh "git tag `vrsn --read --file #{version_file}`"
-    sh "git stash pop"
+    
+    if modified_file_count.to_i > 0 then
+        sh "git stash pop"
+    end
 end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
