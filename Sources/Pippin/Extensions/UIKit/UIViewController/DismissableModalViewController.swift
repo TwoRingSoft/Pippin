@@ -13,7 +13,7 @@ public class DismissableModalViewController: UIViewController {
 
     private var closeBlock: (() -> ())?
 
-    public init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, onClose closeBlock: (() -> ())? = nil) {
+    public init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, tintColor: UIColor = .white, onClose closeBlock: (() -> ())? = nil) {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = backgroundColor
@@ -23,7 +23,7 @@ public class DismissableModalViewController: UIViewController {
 
         let titleAndCloseButtonView = UIView(frame: .zero)
 
-        let closeButton = UIButton.button(withImageSetName: "close", emphasisSuffix: "-filled", tintColor: .black)
+        let closeButton = UIButton.button(withImageSetName: "close", emphasisSuffix: "-filled", tintColor: tintColor, imageBundle: Bundle(for: DismissableModalViewController.self))
         titleAndCloseButtonView.addSubview(closeButton)
         closeButton.topAnchor == titleAndCloseButtonView.topAnchor
         closeButton.bottomAnchor == titleAndCloseButtonView.bottomAnchor
@@ -32,7 +32,7 @@ public class DismissableModalViewController: UIViewController {
         closeButton.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
-        let titleLabel = UILabel.label(withText: title ?? "", font: titleFont, alignment: .center)
+        let titleLabel = UILabel.label(withText: title ?? "", font: titleFont, textColor: tintColor, alignment: .center)
         titleLabel.minimumScaleFactor = 0.5
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.allowsDefaultTighteningForTruncation = true
