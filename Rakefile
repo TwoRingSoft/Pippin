@@ -5,7 +5,9 @@ task :init do
     sh 'brew install XcodeGen vrsn'
 end
 
-desc 'Bump version number, commit the changes, and tag that commit. Can supply argument to bump one of: major, minor, patch or build. E.g., `rake bump[major]` or `rake bump[build]`.'
+version_file = 'Pippin.podspec'
+
+desc 'Bump version number and commit the changes with message as the output from vrsn. Can supply argument to bump one of: major, minor, patch or build. E.g., `rake bump[major]` or `rake bump[build]`.'
 task :bump,[:component] do |t, args|
     require 'open3'
 
@@ -13,8 +15,7 @@ task :bump,[:component] do |t, args|
     if modified_file_count.to_i > 0 then
         sh "git stash --all"
     end
- 
-    version_file = 'Pippin.podspec'
+  
     component = args[:component]
     if component == 'major' then
         stdout, stderr, status = Open3.capture3("vrsn major --file #{version_file}")
@@ -30,19 +31,20 @@ task :bump,[:component] do |t, args|
 
     sh "git add #{version_file}"
     sh "git commit --message \"#{stdout}\""
-    sh "git tag `vrsn --read --file #{version_file}`"
     
     if modified_file_count.to_i > 0 then
         sh "git stash pop"
     end
 end
 
+
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
 task :release do
-  version = `vrsn --file Pippin.podspec --read`
+  version = `vrsn --read --file #{version_file}`
   sh "git tag #{version.strip}"
-  sh "git push"
-  sh "git push --tags"
+  sh 'git push --tags'
+  sh 'git push'
+  sh 'pod trunk push'
 end
 
 desc 'Run Pippin unit tests.'
