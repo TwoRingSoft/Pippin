@@ -11,6 +11,7 @@ public enum LaunchArgument: String {
 
     case uiTest = "ui-test"
     case unlockIAP = "unlock-in-app-purchases"
+    case simulateIAPFlow = "simulate-in-app-purchases-flow"
 
     public func activated() -> Bool {
         return ProcessInfo.processInfo.arguments.contains(String(describing: self))
