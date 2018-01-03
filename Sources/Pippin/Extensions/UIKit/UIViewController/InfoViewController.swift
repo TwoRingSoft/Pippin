@@ -18,11 +18,7 @@ enum SocialIcon: String {
     case github = "github-logo"
 
     func image() -> UIImage? {
-        return imageAsset(withName: rawValue)
-    }
-
-    func imageAsset(withName name: String) -> UIImage? {
-        return UIImage(named: name, in: Bundle(for: InfoViewController.self), compatibleWith: nil)
+        return UIImage(sharedAssetName: rawValue)
     }
 
     func url() -> String {
