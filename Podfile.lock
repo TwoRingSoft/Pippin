@@ -1,5 +1,5 @@
 PODS:
-  - Anchorage (4.1.0)
+  - Anchorage (4.2.1)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
   - Fabric (1.7.2)
@@ -15,9 +15,13 @@ PODS:
     - Pippin/Core (= 3.0.0)
     - Pippin/Extensions (= 3.0.0)
   - Pippin/Adapters (3.0.0):
+    - Pippin/Adapters/DebugController (= 3.0.0)
     - Pippin/Adapters/PinpointKit (= 3.0.0)
     - Pippin/Adapters/SwiftMessages (= 3.0.0)
     - Pippin/Adapters/XCGLogger (= 3.0.0)
+  - Pippin/Adapters/DebugController (3.0.0):
+    - Anchorage (~> 4)
+    - Pippin/Extensions/UIKit
   - Pippin/Adapters/PinpointKit (3.0.0):
     - PinpointKit (~> 1)
     - Pippin/Core
@@ -47,9 +51,9 @@ PODS:
     - Pippin/Extensions/Foundation
   - Pippin/Tests (3.0.0)
   - SwiftMessages (4.1.0)
-  - XCGLogger (6.0.1):
-    - XCGLogger/Core (= 6.0.1)
-  - XCGLogger/Core (6.0.1):
+  - XCGLogger (6.0.2):
+    - XCGLogger/Core (= 6.0.2)
+  - XCGLogger/Core (6.0.2):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
@@ -62,14 +66,14 @@ EXTERNAL SOURCES:
     :path: .
 
 SPEC CHECKSUMS:
-  Anchorage: 6c20225cb7f44fdf9609ec99949ee160c803969c
+  Anchorage: f4dbf32771115b8ef9c9cc4e55a002ad87711f48
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: b444d66d8b10420c1ffc22c176dee37c1c12b4e7
-  Pippin: 300fb7f195a10b1dd9495cdb9b571c04ffb2baa0
+  Pippin: 4b6125ce661201c1b0076afa139c1254881b1cc5
   SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591
-  XCGLogger: b4ca980580108cfeaf221afe158f5d89c1be22e0
+  XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
 
 PODFILE CHECKSUM: ae3ff7abb958348c3c5a37ca75e7a0b2dc301a4a
 
