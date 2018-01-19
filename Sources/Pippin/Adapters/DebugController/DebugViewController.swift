@@ -17,14 +17,12 @@ protocol DebugViewControllerDelegate {
 public class DebugViewController: UIViewController {
 
     private var delegate: DebugViewControllerDelegate!
-    private var logger: Logger?
-    private var coreDataController: CoreDataController!
+    private var environment: Environment
     private var debugMenu: UIView!
 
-    init(delegate: DebugViewControllerDelegate, logger: Logger?, coreDataController: CoreDataController) {
+    init(delegate: DebugViewControllerDelegate, environment: Environment) {
         self.delegate = delegate
-        self.logger = logger
-        self.coreDataController = coreDataController
+        self.environment = environment
         super.init(nibName: nil, bundle: nil)
         setUpUI()
     }
@@ -42,15 +40,15 @@ public class DebugViewController: UIViewController {
     }
 
     func deletePressed() {
-        let url = FileManager.url(forApplicationSupportFile: "\(coreDataController.modelName!).sqlite")
-        let shmURL = FileManager.url(forApplicationSupportFile: "\(coreDataController.modelName!).sqlite-shm")
-        let walURL = FileManager.url(forApplicationSupportFile: "\(coreDataController.modelName!).sqlite-wal")
+        let url = FileManager.url(forApplicationSupportFile: "\(environment.coreDataController.modelName!).sqlite")
+        let shmURL = FileManager.url(forApplicationSupportFile: "\(environment.coreDataController.modelName!).sqlite-shm")
+        let walURL = FileManager.url(forApplicationSupportFile: "\(environment.coreDataController.modelName!).sqlite-wal")
         do {
             try FileManager.default.removeItem(at: url)
             try FileManager.default.removeItem(at: shmURL)
             try FileManager.default.removeItem(at: walURL)
         } catch {
-            showAlert(withTitle: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)))
+            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }
         showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
             fatalError("Restarting to complete database removal.")
@@ -63,9 +61,9 @@ public class DebugViewController: UIViewController {
 
     func importPressed() {
         do {
-            try present(DatabaseFixturePickerViewController(coreDataController: coreDataController, logger: logger), animated: true)
+            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController, logger: environment.logger), animated: true)
         } catch {
-            showAlert(withTitle: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)))
+            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }
     }
 

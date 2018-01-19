@@ -41,6 +41,11 @@ Pod::Spec.new do |s|
       sss.dependency 'SwiftMessages', '~> 4'
       sss.dependency 'Pippin/Core'
     end
+    ss.subspec 'DebugController' do |sss|
+      sss.source_files = 'Sources/Pippin/Adapters/DebugController/**/*.{h,m,swift}'
+      sss.dependency 'Pippin/Extensions/UIKit'
+      sss.dependency 'Anchorage', '~> 4'
+    end
   end
   
   s.subspec 'Core' do |ss|
