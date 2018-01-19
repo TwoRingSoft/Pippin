@@ -1,6 +1,6 @@
 {
   "name": "Pippin",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "summary": "A basic framework for an app's various components, like logging and crash reporting, and various Swift utilities for working with Apple frameworks.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,20 +10,16 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "1.0.0"
+    "tag": "3.0.0"
   },
   "platforms": {
-    "ios": "10.0"
-  },
-  "pod_target_xcconfig": {
-    "SWIFT_VERSION": "4.0"
+    "ios": "11.0"
   },
   "default_subspecs": [
     "Core",
     "CanIHaz",
     "Extensions",
-    "Adapters",
-    "Assets"
+    "Adapters"
   ],
   "testspecs": [
     {
@@ -33,10 +29,6 @@
     }
   ],
   "subspecs": [
-    {
-      "name": "Assets",
-      "resources": "Resources/Assets.xcassets"
-    },
     {
       "name": "Adapters",
       "subspecs": [
@@ -58,6 +50,18 @@
           "dependencies": {
             "XCGLogger": [
               "~> 6"
+            ],
+            "Pippin/Core": [
+
+            ]
+          }
+        },
+        {
+          "name": "SwiftMessages",
+          "source_files": "Sources/Pippin/Adapters/SwiftMessages/**/*.{h,m,swift}",
+          "dependencies": {
+            "SwiftMessages": [
+              "~> 4"
             ],
             "Pippin/Core": [
 
