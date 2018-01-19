@@ -95,7 +95,7 @@ task :smoke_test do
 
             sdk_versions_per_platform = {
                 # platform => [ sdk versionss ]
-                'phone' => ['11.1'],
+                'phone' => ['11.2'],
                 #'mac' => ['10.13'],
                 #'tv' => ['11.1'],
                 #'watch' => ['4.1']
