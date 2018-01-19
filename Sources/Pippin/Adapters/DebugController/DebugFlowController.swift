@@ -8,17 +8,6 @@
 
 import UIKit
 
-public enum DebugFlowControllerError: Error {
-    case databaseExportError(message: String, underlyingError: Error)
-    case noAppsToImportDatabase
-}
-
-public protocol DebugFlowControllerDelegate {
-    func exportedDatabaseData() -> Data?
-    func failedToExportDatabase(error: DebugFlowControllerError)
-    func debugFlowControllerWantsToGenerateTestModels(debugFlowControllerError: DebugFlowController)
-}
-
 public class DebugFlowController: NSObject {
 
     private weak var presentingVC: UIViewController!
