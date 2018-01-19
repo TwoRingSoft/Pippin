@@ -15,7 +15,7 @@ public struct Environment {
 
     public var bugReporter: BugReporter!
     public var crashReporter: CrashReporter!
-    public var debugFlowController: DebugFlowController!
+    public var debugging: Debugging!
     public var coreDataController: CoreDataController!
     public var logger: Logger!
     public var alerter: Alerter!
