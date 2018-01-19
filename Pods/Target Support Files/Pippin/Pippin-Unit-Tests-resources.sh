@@ -84,11 +84,11 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/../Resources/Assets.xcassets"
   install_resource "${PODS_ROOT}/PinpointKit/PinpointKit/PinpointKit/Resources/SourceSansPro-Bold.ttf"
   install_resource "${PODS_ROOT}/PinpointKit/PinpointKit/PinpointKit/Resources/SourceSansPro-Regular.ttf"
   install_resource "${PODS_ROOT}/PinpointKit/PinpointKit/PinpointKit/Resources/SourceSansPro-Semibold.ttf"
   install_resource "${PODS_ROOT}/PinpointKit/PinpointKit/PinpointKit/Resources/PinpointKit.xcassets"
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/SwiftMessages/SwiftMessages.bundle"
   install_resource "${PODS_ROOT}/XCGLogger/.swift-version"
 fi
 
