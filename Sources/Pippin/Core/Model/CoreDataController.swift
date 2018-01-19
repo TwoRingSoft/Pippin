@@ -9,11 +9,6 @@
 import CoreData
 
 /**
- A closure that accepts a boolean parameter.
- */
-public typealias ConfirmBlock = ((_ confirmed: Bool) -> ())
-
-/**
  A closure that accepts a boolean representing if an operation completed
  successfully, to decide whether to retrieve confirmation from
  `confirmBlock`.
@@ -22,7 +17,7 @@ public typealias ConfirmBlock = ((_ confirmed: Bool) -> ())
  before returning control here to e.g. kill the app to reload a debug
  database.
  */
-public typealias ConfirmCompletionBlock = ((_ success: Bool, _ confirmBlock: @escaping ConfirmBlock) -> ())
+public typealias ConfirmCompletionBlock = ((_ success: Bool, _ confirmBlock: @escaping BooleanBlock) -> ())
 
 /**
  A class providing convenience API to work with Apple's Core Data.
