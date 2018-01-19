@@ -1,5 +1,5 @@
 //
-//  DebugFlow.swift
+//  Debugging.swift
 //  Pippin
 //
 //  Created by Andrew McKnight on 1/18/18.
@@ -13,7 +13,11 @@ public enum DebugFlowError: Error {
 }
 
 public protocol Debugging {
+    func installViews()
+}
+
+public protocol DebuggingDelegate {
     func exportedDatabaseData() -> Data?
     func failedToExportDatabase(error: DebugFlowError)
-    func debugFlowControllerWantsToGenerateTestModels(debugFlowControllerError: Debugging)
+    func debugFlowControllerWantsToGenerateTestModels(debugFlowController: Debugging)
 }

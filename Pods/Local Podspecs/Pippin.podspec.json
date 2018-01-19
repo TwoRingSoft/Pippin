@@ -67,6 +67,18 @@
 
             ]
           }
+        },
+        {
+          "name": "DebugController",
+          "source_files": "Sources/Pippin/Adapters/DebugController/**/*.{h,m,swift}",
+          "dependencies": {
+            "Pippin/Extensions/UIKit": [
+
+            ],
+            "Anchorage": [
+              "~> 4"
+            ]
+          }
         }
       ]
     },
