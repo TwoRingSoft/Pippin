@@ -34,6 +34,26 @@ extension SwiftMessagesAdapter: Alerter {
         view.button?.isHidden = true
         view.configureContent(title: title, body: message)
         SwiftMessages.show(view: view)
+        var config = SwiftMessages.Config()
+        config.duration = dismissal == .interactive ? .forever : .automatic
+        config.dimMode = occlusion == .strong ? .gray(interactive: true) : .none
+        config.presentationContext = .window(windowLevel: UIWindowLevelAlert)
+        SwiftMessages.show(config: config, view: view)
+    }
+
+    public func showConfirmationAlert(title: String, message: String, type: AlertType, confirmationCompletion: @escaping EmptyBlock) {
+        let view = MessageView.viewFromNib(layout: .messageView)
+        view.configureTheme(type.swiftMessagesType())
+        view.configureDropShadow()
+        view.buttonTapHandler = { button in
+            confirmationCompletion()
+        }
+        view.configureContent(title: title, body: message)
+        var config = SwiftMessages.Config()
+        config.presentationContext = .window(windowLevel: UIWindowLevelAlert)
+        config.duration = .forever
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
     }
 
 }
