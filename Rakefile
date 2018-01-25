@@ -50,7 +50,6 @@ end
 desc 'Run Pippin unit tests.'
 task :test do
 	require 'open3'
-  sh 'pod install'
 	Open3.pipeline(['xcrun xcodebuild -workspace PippinTests.xcworkspace -scheme Pippin-Unit-Tests -destination \'platform=iOS Simulator,name=iPhone SE,OS=10.3.1\' test'], ['tee Pippin-Unit-Tests.log'], ['xcpretty -t'])
 end
 
