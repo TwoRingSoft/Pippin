@@ -21,9 +21,7 @@ public class TextCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         label = UILabel(frame: .zero)
 
-        let image = UIImage(sharedAssetName: "disclosure")
-        let highlightedImage = UIImage(sharedAssetName: "disclosure-pressed")
-        indicator = UIImageView(image: image, highlightedImage: highlightedImage)
+        indicator = UIImageView()
         indicator.tintColor = .white
         indicator.contentMode = .scaleAspectFit
 
@@ -43,7 +41,9 @@ public class TextCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func showIndicator() {
+    public func showIndicator(image: UIImage?, highlightedImage: UIImage?) {
+        indicator.image = image
+        indicator.highlightedImage = highlightedImage
         indicatorWidthConstraint.constant = 35
     }
 

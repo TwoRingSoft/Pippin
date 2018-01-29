@@ -17,8 +17,8 @@ enum SocialIcon: String {
     case linkedin = "linkedin-logo"
     case github = "github-logo"
 
-    func image() -> UIImage? {
-        return UIImage(sharedAssetName: rawValue)
+    func image(bundle: Bundle) -> UIImage? {
+        return UIImage(named: rawValue, in: bundle, compatibleWith: nil)
     }
 
     func url() -> String {
@@ -42,12 +42,14 @@ enum SocialIcon: String {
 public class InfoViewController: UIViewController {
 
     fileprivate var environment: Environment
+    fileprivate var sharedAssetBundle: Bundle
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not implemented")
     }
 
-    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor, environment: Environment) {
+    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor, environment: Environment, sharedAssetBundle: Bundle) {
+        self.sharedAssetBundle = sharedAssetBundle
         self.environment = environment
         super.init(nibName: nil, bundle: nil)
         setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont, textColor: textColor)
@@ -121,10 +123,10 @@ private extension InfoViewController {
     }
 
     func configureSocialLinks(textColor: UIColor) -> UIView {
-        let twitterButton = UIButton.button(withImageSetName: SocialIcon.twitter.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
-        let facebookButton = UIButton.button(withImageSetName: SocialIcon.facebook.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
-        let linkedinButton = UIButton.button(withImageSetName: SocialIcon.linkedin.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
-        let githubButton = UIButton.button(withImageSetName: SocialIcon.github.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: Bundle(for: InfoViewController.self))
+        let twitterButton = UIButton.button(withImageSetName: SocialIcon.twitter.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: sharedAssetBundle)
+        let facebookButton = UIButton.button(withImageSetName: SocialIcon.facebook.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: sharedAssetBundle)
+        let linkedinButton = UIButton.button(withImageSetName: SocialIcon.linkedin.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: sharedAssetBundle)
+        let githubButton = UIButton.button(withImageSetName: SocialIcon.github.rawValue, tintColor: textColor.withAlphaComponent(0.6), imageBundle: sharedAssetBundle)
 
         twitterButton.addTarget(self, action: #selector(twitterPressed), for: .touchUpInside)
         facebookButton.addTarget(self, action: #selector(facebookPressed), for: .touchUpInside)
@@ -199,9 +201,9 @@ private extension InfoViewController {
 
     func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, font: UIFont, textColor: UIColor) {
         let attachment = NSTextAttachment()
-        let size = attachmentImage.image() != nil ? attachmentImage.image()!.size : .zero
+        let size = attachmentImage.image(bundle: sharedAssetBundle) != nil ? attachmentImage.image(bundle: sharedAssetBundle)!.size : .zero
         attachment.bounds = CGRect(origin: .zero, size: CGSize(width: font.capHeight * size.width / size.height, height: font.capHeight))
-        attachment.image = attachmentImage.image()
+        attachment.image = attachmentImage.image(bundle: sharedAssetBundle)
         let attachmentString = NSAttributedString(attachment: attachment)
 
         let range = (attributedString.string as NSString).range(of: attachmentImage.rawValue)
