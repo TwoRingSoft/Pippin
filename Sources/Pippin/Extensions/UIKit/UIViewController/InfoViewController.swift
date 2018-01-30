@@ -176,8 +176,8 @@ private extension InfoViewController {
             "\n\n" +
             "version \(version) build \(build)" +
             (acknowledgements != nil ? "\n\n\(acknowledgements!)" : "") +
-            (thirdPartyKits != nil ? "\n\n3rd party software used in this app:\n \(thirdPartyKits!.joined(separator: "\n"))" : "") +
-            "\n\n\n" +
+            (thirdPartyKits != nil ? "\n\n3rd party software used in this app:\n \(thirdPartyKits!.joined(separator: ", "))" : "") +
+            "\n\n" +
             "\(tworingURL)"
         )
 
