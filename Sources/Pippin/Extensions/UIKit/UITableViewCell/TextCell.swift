@@ -16,6 +16,8 @@ public class TextCell: UITableViewCell {
     public var label: UILabel!
     private var indicator: UIImageView!
     private var indicatorWidthConstraint: NSLayoutConstraint!
+    private var separator: UIView!
+    private var separatorHeightConstraint: NSLayoutConstraint!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,6 +42,13 @@ public class TextCell: UITableViewCell {
         indicator.trailingAnchor == contentView.trailingAnchor - 12
         indicator.centerYAnchor == contentView.centerYAnchor
         indicatorWidthConstraint = indicator.widthAnchor == 0
+
+        separator = UIView(frame: .zero)
+        separator.backgroundColor = .white
+        contentView.addSubview(separator)
+        separator.horizontalAnchors == contentView.horizontalAnchors + 30
+        separatorHeightConstraint = separator.heightAnchor == 0
+        separator.bottomAnchor == contentView.bottomAnchor
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -55,6 +64,10 @@ public class TextCell: UITableViewCell {
     public func setDimmed(dimmed: Bool) {
         label.isEnabled = dimmed
         indicator.alpha = dimmed ? 1 : 0.5
+    }
+
+    public func showSeparator(visible: Bool) {
+        separatorHeightConstraint.constant = visible ? UIScreen.main.hairlineWidth : 0
     }
 
 }
