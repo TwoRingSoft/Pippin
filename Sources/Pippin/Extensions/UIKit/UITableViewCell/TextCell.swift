@@ -52,4 +52,9 @@ public class TextCell: UITableViewCell {
         indicatorWidthConstraint.constant = 35
     }
 
+    public func setDimmed(dimmed: Bool) {
+        label.isEnabled = dimmed
+        indicator.alpha = dimmed ? 1 : 0.5
+    }
+
 }
