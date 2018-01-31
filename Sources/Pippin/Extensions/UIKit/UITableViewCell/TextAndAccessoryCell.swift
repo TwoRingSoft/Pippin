@@ -20,6 +20,11 @@ public class TextAndAccessoryCell: UITableViewCell {
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        selectionStyle = .none
+
         [label, imageAccessoryView].forEach { self.contentView.addSubview($0) }
 
         label.leadingAnchor == contentView.leadingAnchor + 12
