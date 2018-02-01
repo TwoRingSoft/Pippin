@@ -40,8 +40,6 @@ end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
 task :release do
-  sh 'pod spec lint Pippin.podspec'
-    
   version = `vrsn --read --file #{version_file}`
   sh "git tag #{version.strip}"
   sh 'git push --tags'
