@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Environment {
+public class Environment: NSObject {
 
     public var appName: String!
     public var currentBuild: Build!
@@ -21,7 +21,5 @@ public struct Environment {
     public var alerter: Alerter!
 
     public var inAppPurchaseVendor: InAppPurchaseVendor!
-
-    public init() {}
-
+    
 }

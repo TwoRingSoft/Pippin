@@ -40,7 +40,7 @@ public class FormController: NSObject {
          - inputViews: the array of form input fields to manage
          - environment: optional instance of an app's environment
      */
-    public init(inputViews: [UIView], environment: Environment?) {
+    @objc public init(inputViews: [UIView], environment: Environment?) {
         super.init()
         self.inputViews = inputViews
         self.environment = environment
