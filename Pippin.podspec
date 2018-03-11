@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = 'Pippin'
-  s.version      = '4.0.0'
+  s.version      = '4.1.0'
   s.summary      = "A Swift framework to scaffold an app and make development and maintenance easier."
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.version}" }
-  s.platform     = :ios, '11.0'
+  s.platform     = :ios, '9.0'
 
   s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = 'Tests/**/*.swift'

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 11.0, *)
 public class DebugFlowController: NSObject {
 
     private weak var presentingVC: UIViewController!
@@ -27,6 +28,7 @@ public class DebugFlowController: NSObject {
 
 }
 
+@available(iOS 11.0, *)
 extension DebugFlowController: Debugging {
 
     public func installViews() {
@@ -38,6 +40,7 @@ extension DebugFlowController: Debugging {
 
 }
 
+@available(iOS 11.0, *)
 extension DebugFlowController: DebugViewControllerDelegate {
 
     func debugViewControllerExported(debugViewController: DebugViewController) {
@@ -55,6 +58,7 @@ extension DebugFlowController: DebugViewControllerDelegate {
 }
 
 // MARK: Private
+@available(iOS 11.0, *)
 private extension DebugFlowController {
 
     func exportDatabase(databaseFileName: String) {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 11.0, *)
 class DatabaseFixturePickerViewController: UIViewController {
 
     var fixtures: [URL]!
@@ -46,6 +47,7 @@ class DatabaseFixturePickerViewController: UIViewController {
 
 }
 
+@available(iOS 11.0, *)
 extension DatabaseFixturePickerViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +62,7 @@ extension DatabaseFixturePickerViewController: UITableViewDataSource {
 
 }
 
+@available(iOS 11.0, *)
 extension DatabaseFixturePickerViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

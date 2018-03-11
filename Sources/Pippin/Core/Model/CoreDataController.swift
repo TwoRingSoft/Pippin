@@ -52,6 +52,7 @@ public class CoreDataController: NSObject {
         self.managedObjectModel = managedObjectModel
     }
 
+    @available(iOS 10.0, *)
     private lazy var persistentContainer: NSPersistentContainer = {
         var container: NSPersistentContainer
         if let managedObjectModel = managedObjectModel {
@@ -78,6 +79,7 @@ public extension CoreDataController {
      worry about managing it.
      - parameter block: a closure accepting a `NSManagedObjectContext` parameter
      */
+    @available(iOS 10.0, *)
     func perform(block: ((NSManagedObjectContext) -> Void)) {
         let context = persistentContainer.newBackgroundContext()
         logger?.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))

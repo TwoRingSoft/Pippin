@@ -15,17 +15,20 @@ public enum ListViewControllerMode {
     case picker
 }
 
+@available(iOS 11.0, *)
 @objc public protocol CrudViewControllerThemeDelegate {
     @objc optional func crudViewController(crudViewController: CrudViewController, themeAddItemCell addItemCell: TextAndAccessoryCell)
     @objc optional func crudViewControllerEmptyStateView(crudViewController: CrudViewController) -> UIView
 }
 
+@available(iOS 11.0, *)
 public protocol CrudViewControllerCRUDDelegate {
     func crudViewControllerWantsToCreateObject(crudViewController: CrudViewController)
     func crudViewController(crudViewController: CrudViewController, wantsToUpdate object: NSFetchRequestResult)
     func crudViewController(crudViewController: CrudViewController, wantsToDelete object: NSFetchRequestResult)
 }
 
+@available(iOS 11.0, *)
 public protocol CrudViewControllerUITableViewDelegate {
     func crudViewControllerCellClassToRegisterForReuseIdentifiers(crudViewController: CrudViewController) -> (String, AnyClass)?
     func crudViewControllerTableViewContentInsets(crudViewController: CrudViewController) -> UIEdgeInsets?
@@ -39,11 +42,13 @@ public protocol CrudViewControllerUITableViewDelegate {
 
 public class CrudSearchContainer: UIView {}
 
+@available(iOS 11.0, *)
 public protocol CrudViewControllerSearchDelegate {
     func crudViewControllerShouldEnableSearch(crudViewController: CrudViewController) -> Bool
     func crudViewController(crudViewController: CrudViewController, predicateForSearchString string: String) -> NSPredicate
 }
 
+@available(iOS 11.0, *)
 public class CrudViewController: UIViewController {
 
     private let stockCellReuseIdentifier = "CrudViewControllerCell"
@@ -95,6 +100,7 @@ public class CrudViewController: UIViewController {
 }
 
 // MARK: Public
+@available(iOS 11.0, *)
 public extension CrudViewController {
 
     func reloadData() {
@@ -133,6 +139,7 @@ public extension CrudViewController {
 }
 
 // MARK: Actions
+@available(iOS 11.0, *)
 @objc extension CrudViewController {
 
     func addPressed() {
@@ -148,6 +155,7 @@ public extension CrudViewController {
 }
 
 // MARK: Private
+@available(iOS 11.0, *)
 private extension CrudViewController {
 
     func numberOfEntities() -> Int {
@@ -394,6 +402,7 @@ private extension CrudViewController {
 }
 
 // MARK: UITextFieldDelegate
+@available(iOS 11.0, *)
 extension CrudViewController: UITextFieldDelegate {
 
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -444,6 +453,7 @@ extension CrudViewController: UITextFieldDelegate {
 }
 
 // MARK: NSFetchedResultsControllerDelegate
+@available(iOS 11.0, *)
 extension CrudViewController: NSFetchedResultsControllerDelegate {
 
     public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -471,6 +481,7 @@ extension CrudViewController: NSFetchedResultsControllerDelegate {
 }
 
 // MARK: UITableViewDataSource
+@available(iOS 11.0, *)
 extension CrudViewController: UITableViewDataSource {
 
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -538,6 +549,7 @@ extension CrudViewController: UITableViewDataSource {
 }
 
 // MARK: UITableViewDelegate
+@available(iOS 11.0, *)
 extension CrudViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

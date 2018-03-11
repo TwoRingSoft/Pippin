@@ -24,6 +24,7 @@ extension UIView {
         }
     }
 
+    @available(iOS 11.0, *)
     public func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
         let edges = edgeAnchors == viewController.view.safeAreaLayoutGuide.edgeAnchors
         edges.top.constant = insets.top
