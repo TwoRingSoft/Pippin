@@ -23,6 +23,7 @@ public class FormController: NSObject {
     fileprivate weak var currentInputView: UIView?
 
     private weak var tableView: UITableView?
+    private weak var scrollView: UIScrollView?
     private var originalContentInset: UIEdgeInsets?
     private var originalContentOffset: CGPoint?
 
@@ -57,10 +58,18 @@ public class FormController: NSObject {
             avoidance
         - environment: optional instance of an app's environment
      */
-    public init(inputViews: [UIView], in tableView: UITableView, environment: Environment?) {
+    @objc public init(inputViews: [UIView], in tableView: UITableView, environment: Environment?) {
         super.init()
         self.inputViews = inputViews
         self.tableView = tableView
+        self.environment = environment
+        _init()
+    }
+
+    @objc public init(inputViews: [UIView], inScrollView scrollView: UIScrollView, environment: Environment?) {
+        super.init()
+        self.inputViews = inputViews
+        self.scrollView = scrollView
         self.environment = environment
         _init()
     }
@@ -240,15 +249,15 @@ private extension FormController {
     }
 
     func handleKeyboardDisplay(notification: Notification) {
-        guard let tableView = self.tableView else { return }
         guard let currentInputView = self.currentInputView else { return }
-
         guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
 
-        guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
-        guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
 
         let unhide: ((Bool) -> ()) = { completed in
+            guard let tableView = self.tableView else { return }
+            guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
+            guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
+
             let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
             let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
             if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
@@ -277,14 +286,14 @@ private extension FormController {
         if self.originalContentInset == nil {
             guard let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
             guard let curveRawValue = (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
-
-            self.originalContentInset = tableView.contentInset
+            guard let scrollView = self.tableView ?? self.scrollView else { return }
+            self.originalContentInset = scrollView.contentInset
             let curveOption = UIViewAnimationOptions(rawValue: curveRawValue)
             UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
-                var insets = tableView.contentInset
+                var insets = scrollView.contentInset
                 insets.bottom = keyboardFrame.height - 49
-                tableView.contentInset = insets
-                tableView.scrollIndicatorInsets = tableView.contentInset.inset(bottomDelta: keyboardFrame.height)
+                scrollView.contentInset = insets
+                scrollView.scrollIndicatorInsets = scrollView.contentInset.inset(bottomDelta: keyboardFrame.height)
             }, completion: unhide)
         } else {
             unhide(true)
