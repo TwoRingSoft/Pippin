@@ -15,6 +15,11 @@ public final class PinpointKitAdapter: NSObject {
     public var recipients: [String]?
     fileprivate var pinpointKit: PinpointKit?
 
+    public init(logger: Logger?) {
+        super.init()
+        self.logger = logger
+    }
+
 }
 
 extension PinpointKitAdapter: BugReporter {
