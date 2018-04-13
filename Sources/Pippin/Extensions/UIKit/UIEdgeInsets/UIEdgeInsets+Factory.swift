@@ -11,17 +11,11 @@ import UIKit
 extension UIEdgeInsets {
 
     public init(all value: CGFloat) {
-        self.top = value
-        self.bottom = value
-        self.left = value
-        self.right = value
+        self = UIEdgeInsetsMake(value, value, value, value)
     }
 
     public init(horizontal: CGFloat = 0, vertical: CGFloat = 0) {
-        self.top = vertical
-        self.bottom = vertical
-        self.left = horizontal
-        self.right = horizontal
+        self = UIEdgeInsetsMake(vertical, horizontal, vertical, horizontal)
     }
 
     public func inset(topDelta: CGFloat = 0, leftDelta: CGFloat = 0, bottomDelta: CGFloat = 0, rightDelta: CGFloat = 0) -> UIEdgeInsets {
