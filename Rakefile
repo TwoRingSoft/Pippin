@@ -31,6 +31,7 @@ task :bump,[:component] do |t, args|
 
     sh "git add #{version_file}"
     sh "git commit --message \"#{stdout}\""
+    sh 'git push'
     
     if modified_file_count.to_i > 0 then
         sh "git stash pop"
@@ -43,7 +44,6 @@ task :release do
   version = `vrsn --read --file #{version_file}`
   sh "git tag #{version.strip}"
   sh 'git push --tags'
-  sh 'git push'
   
   sh 'pod trunk push'
 end
