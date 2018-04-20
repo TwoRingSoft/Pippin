@@ -1,6 +1,6 @@
 # Pippin
 
-[![Build Status](https://travis-ci.org/TwoRingSoft/Pippin.svg?branch=xcode-9)](https://travis-ci.org/TwoRingSoft/Pippin)
+[![Build Status](https://travis-ci.org/TwoRingSoft/Pippin.svg?branch=master)](https://travis-ci.org/TwoRingSoft/Pippin)
 ![Swift 4](https://img.shields.io/badge/Swift-4-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
