@@ -1,4 +1,5 @@
-PippinTests/SmokeTests
+Pippin/SmokeTests/generated_xcode_projects
+Pippin-Unit-Tests.log
 
 # Created by https://www.gitignore.io/api/swift
 

@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pippin_Adapters_Adapters_PinpointKit_Adapters_XCGLogger : NSObject
-@end
-@implementation PodsDummy_Pippin_Adapters_Adapters_PinpointKit_Adapters_XCGLogger
-@end

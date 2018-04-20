@@ -1,6 +1,0 @@
-framework module Pods_Subspec_Extensions_UIKit {
-  umbrella header "Pods-Subspec-Extensions-UIKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

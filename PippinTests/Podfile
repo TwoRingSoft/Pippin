@@ -1,8 +1,0 @@
-use_frameworks!
-install! 'cocoapods', :share_schemes_for_development_pods => true
-platform :{{PLATFORM}}, '{{SDK_VERSION}}'
-
-target '{{TARGET_NAME}}' do
-  pod 'Pippin/{{SUBSPEC}}', path: '../../..'
-  pod 'Crashlytics'
-end

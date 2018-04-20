@@ -1,6 +1,0 @@
-framework module Pods_Subspec_Core {
-  umbrella header "Pods-Subspec-Core-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -63,7 +63,7 @@ task :smoke_test do
     languages = [ :swift, :objc ]
 
     # create dir to contain all tests
-    root_test_path = 'PippinTests/SmokeTests'
+    root_test_path = 'Pippin/SmokeTests/generated_xcode_projects'
     if Dir.exists?(root_test_path) then
         FileUtils.rm_rf(root_test_path)
     end

@@ -1,6 +1,0 @@
-framework module Pippin {
-  umbrella header "Pippin-Extensions_Foundation-umbrella.h"
-
-  export *
-  module * { export * }
-}
