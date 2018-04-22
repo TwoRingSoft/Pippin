@@ -49,5 +49,6 @@ public protocol Alerter {
     func initialize()
     func showAlert(title: String, message: String, type: AlertType, dismissal: AlertDismissal, occlusion: AlertOcclusion)
     func showConfirmationAlert(title: String, message: String, type: AlertType, confirmationCompletion: @escaping EmptyBlock)
+    func hide()
 
 }

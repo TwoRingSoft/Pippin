@@ -55,4 +55,8 @@ extension SwiftMessagesAdapter: Alerter {
         SwiftMessages.show(config: config, view: view)
     }
 
+    public func hide() {
+        SwiftMessages.hide()
+    }
+
 }
