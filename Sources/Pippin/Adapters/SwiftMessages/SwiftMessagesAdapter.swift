@@ -33,11 +33,10 @@ extension SwiftMessagesAdapter: Alerter {
         view.configureDropShadow()
         view.button?.isHidden = true
         view.configureContent(title: title, body: message)
-        SwiftMessages.show(view: view)
         var config = SwiftMessages.Config()
         config.duration = dismissal == .interactive ? .forever : .automatic
         config.dimMode = occlusion == .strong ? .gray(interactive: true) : .none
-        config.presentationContext = .window(windowLevel: UIWindowLevelAlert)
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         SwiftMessages.show(config: config, view: view)
     }
 
@@ -50,7 +49,7 @@ extension SwiftMessagesAdapter: Alerter {
         }
         view.configureContent(title: title, body: message)
         var config = SwiftMessages.Config()
-        config.presentationContext = .window(windowLevel: UIWindowLevelAlert)
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         config.duration = .forever
         config.dimMode = .gray(interactive: true)
         SwiftMessages.show(config: config, view: view)
