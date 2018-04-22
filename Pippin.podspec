@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = 'Pippin'
-  s.version      = '4.4.0'
+  s.version      = '4.4.1'
   s.summary      = "A Swift framework to scaffold an app and make development and maintenance easier."
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.
