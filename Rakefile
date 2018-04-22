@@ -45,7 +45,7 @@ task :release do
   sh "git tag #{version.strip}"
   sh 'git push --tags'
   
-  sh 'pod trunk push'
+  sh 'pod trunk push --allow-warnings'
 end
 
 desc 'Run Pippin unit tests.'
