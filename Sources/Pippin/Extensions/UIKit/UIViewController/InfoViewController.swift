@@ -118,7 +118,7 @@ private extension InfoViewController {
         socialLinks.topAnchor == textView.bottomAnchor
         socialLinks.centerXAnchor == textView.centerXAnchor
 
-        copyright.topAnchor == socialLinks.bottomAnchor + 30
+        copyright.topAnchor == socialLinks.bottomAnchor + 3 * CGFloat.verticalSpacing
         copyright.centerXAnchor == socialLinks.centerXAnchor
     }
 

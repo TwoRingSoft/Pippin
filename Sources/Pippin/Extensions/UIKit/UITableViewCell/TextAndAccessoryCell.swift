@@ -22,7 +22,7 @@ public class TextAndAccessoryCell: UITableViewCell {
     fileprivate var leadingImageLeadingWidth: NSLayoutConstraint?
     fileprivate var leadingImageAccessoryWidth: NSLayoutConstraint?
     fileprivate var trailingImageAccessoryWidth: NSLayoutConstraint?
-    fileprivate var trailingImageTrailingWIdth: NSLayoutConstraint?
+    fileprivate var trailingImageTrailingWidth: NSLayoutConstraint?
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,22 +35,22 @@ public class TextAndAccessoryCell: UITableViewCell {
 
         [trailingImageAccessory, leadingImageAccessory].forEach { $0.contentMode = .scaleAspectFill }
 
-        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor == contentView.leadingAnchor + 12
+        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor == contentView.leadingAnchor + CGFloat.horizontalMargin
         leadingImageAccessory.centerYAnchor == contentView.centerYAnchor
         leadingImageAccessoryWidth = leadingImageAccessory.widthAnchor == 0
-        leadingImageAccessory.verticalAnchors == contentView.verticalAnchors + 8
+        leadingImageAccessory.verticalAnchors == contentView.verticalAnchors + CGFloat.verticalMargin
         leadingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
-        label.leadingAnchor == leadingImageAccessory.trailingAnchor + 12
+        label.leadingAnchor == leadingImageAccessory.trailingAnchor + CGFloat.horizontalMargin
         label.verticalAnchors == contentView.verticalAnchors + 8
         label.setContentCompressionResistancePriority(.required, for: .vertical)
 
         trailingImageAccessory.centerYAnchor == contentView.centerYAnchor
-        trailingImageAccessory.leadingAnchor == label.trailingAnchor + 12
+        trailingImageAccessory.leadingAnchor == label.trailingAnchor + CGFloat.horizontalMargin
         trailingImageAccessoryWidth = trailingImageAccessory.widthAnchor == 0
-        trailingImageAccessory.verticalAnchors == contentView.verticalAnchors + 8
+        trailingImageAccessory.verticalAnchors == contentView.verticalAnchors + CGFloat.verticalMargin
         trailingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        trailingImageTrailingWIdth = trailingImageAccessory.trailingAnchor == contentView.trailingAnchor - 12
+        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor == contentView.trailingAnchor - CGFloat.horizontalMargin
 
         [leadingImageAccessoryWidth, trailingImageAccessoryWidth].forEach { $0?.priority = .required }
     }
@@ -79,15 +79,15 @@ public class TextAndAccessoryCell: UITableViewCell {
         case .trailing:
             accessory = trailingImageAccessory
             widthConstraint = trailingImageAccessoryWidth
-            spacingConstraint = trailingImageTrailingWIdth
+            spacingConstraint = trailingImageTrailingWidth
             spacingSign = -1
         }
 
         if let image = image {
             accessory.image = image
             accessory.tintColor = tintColor
-            widthConstraint?.constant = 35
-            spacingConstraint?.constant = 12 * spacingSign
+            widthConstraint?.constant = .iconSize
+            spacingConstraint?.constant = .horizontalMargin * spacingSign
         } else {
             accessory.image = nil
             widthConstraint?.constant = 0

@@ -266,10 +266,10 @@ private extension CrudViewController {
 
             view.addSubview(searchContainer)
 
-            searchContainer.topAnchor == view.topAnchor + 10
-            searchContainer.horizontalAnchors == view.horizontalAnchors + 20
+            searchContainer.topAnchor == view.topAnchor + CGFloat.verticalMargin
+            searchContainer.horizontalAnchors == view.horizontalAnchors + CGFloat.horizontalMargin
 
-            tableView.topAnchor == searchContainer.bottomAnchor + 10
+            tableView.topAnchor == searchContainer.bottomAnchor + CGFloat.verticalMargin
             tableView.horizontalAnchors == view.horizontalAnchors
             tableView.bottomAnchor == view.bottomAnchor
         } else {
@@ -366,7 +366,7 @@ private extension CrudViewController {
         DispatchQueue.main.async {
             let constraintAnimations = {
                 searchCancelButtonWidthConstraint.constant = hideAddItemRow ? 60 : 0
-                searchCancelButtonLeadingConstraint.constant = hideAddItemRow ? 20 : 0
+                searchCancelButtonLeadingConstraint.constant = hideAddItemRow ? CGFloat.horizontalSpacing : 0
                 self.view.layoutIfNeeded()
             }
 

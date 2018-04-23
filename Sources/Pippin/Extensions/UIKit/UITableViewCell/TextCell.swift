@@ -36,17 +36,17 @@ public class TextCell: UITableViewCell {
             contentView.addSubview($0)
         }
 
-        label.verticalAnchors == contentView.verticalAnchors + 8
-        label.leadingAnchor == contentView.leadingAnchor + 12
-        indicator.leadingAnchor == label.trailingAnchor + 12
-        indicator.trailingAnchor == contentView.trailingAnchor - 12
+        label.verticalAnchors == contentView.verticalAnchors + CGFloat.verticalMargin
+        label.leadingAnchor == contentView.leadingAnchor + CGFloat.horizontalMargin
+        indicator.leadingAnchor == label.trailingAnchor + CGFloat.horizontalSpacing
+        indicator.trailingAnchor == contentView.trailingAnchor - CGFloat.horizontalSpacing
         indicator.centerYAnchor == contentView.centerYAnchor
         indicatorWidthConstraint = indicator.widthAnchor == 0
 
         separator = UIView(frame: .zero)
         separator.backgroundColor = .white
         contentView.addSubview(separator)
-        separator.horizontalAnchors == contentView.horizontalAnchors + 30
+        separator.horizontalAnchors == contentView.horizontalAnchors + 3 * CGFloat.horizontalMargin
         separatorHeightConstraint = separator.heightAnchor == 0
         separator.bottomAnchor == contentView.bottomAnchor
     }
@@ -58,7 +58,7 @@ public class TextCell: UITableViewCell {
     public func showIndicator(image: UIImage?, highlightedImage: UIImage?) {
         indicator.image = image
         indicator.highlightedImage = highlightedImage
-        indicatorWidthConstraint.constant = 35
+        indicatorWidthConstraint.constant = .iconSize
     }
 
     public func setDimmed(dimmed: Bool) {

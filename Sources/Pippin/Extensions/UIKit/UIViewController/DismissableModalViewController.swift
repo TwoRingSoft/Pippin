@@ -27,7 +27,7 @@ public class DismissableModalViewController: UIViewController {
         titleAndCloseButtonView.addSubview(closeButton)
         closeButton.topAnchor == titleAndCloseButtonView.topAnchor
         closeButton.bottomAnchor == titleAndCloseButtonView.bottomAnchor
-        closeButton.trailingAnchor == titleAndCloseButtonView.trailingAnchor - 10
+        closeButton.trailingAnchor == titleAndCloseButtonView.trailingAnchor - CGFloat.horizontalSpacing
         closeButton.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         closeButton.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
@@ -39,8 +39,8 @@ public class DismissableModalViewController: UIViewController {
 
         titleAndCloseButtonView.addSubview(titleLabel)
         titleLabel.centerYAnchor == titleAndCloseButtonView.centerYAnchor
-        titleLabel.leadingAnchor == titleAndCloseButtonView.leadingAnchor + 10
-        titleLabel.trailingAnchor == closeButton.leadingAnchor - 10
+        titleLabel.leadingAnchor == titleAndCloseButtonView.leadingAnchor + CGFloat.horizontalSpacing
+        titleLabel.trailingAnchor == closeButton.leadingAnchor - CGFloat.horizontalSpacing
 
         let contentView = UIView(frame: .zero)
         contentView.addSubview(childViewController.view)

@@ -28,14 +28,14 @@ public class TextViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(textView)
         
-        titleLabel.leadingAnchor == contentView.leadingAnchor + 12
-        titleLabel.topAnchor == contentView.topAnchor + 8
-        titleLabel.bottomAnchor <= contentView.bottomAnchor - 8
+        titleLabel.leadingAnchor == contentView.leadingAnchor + CGFloat.horizontalMargin
+        titleLabel.topAnchor == contentView.topAnchor + CGFloat.verticalMargin
+        titleLabel.bottomAnchor <= contentView.bottomAnchor - CGFloat.verticalMargin
 
-        textView.leadingAnchor == titleLabel.trailingAnchor + 12
+        textView.leadingAnchor == titleLabel.trailingAnchor + CGFloat.horizontalSpacing
         textView.topAnchor == titleLabel.topAnchor
-        textView.trailingAnchor == contentView.trailingAnchor - 12
-        textView.bottomAnchor <= contentView.bottomAnchor - 8
+        textView.trailingAnchor == contentView.trailingAnchor - CGFloat.horizontalMargin
+        textView.bottomAnchor <= contentView.bottomAnchor - CGFloat.verticalMargin
     }
 
     public required init?(coder aDecoder: NSCoder) {
