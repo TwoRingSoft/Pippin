@@ -40,10 +40,11 @@ extension SwiftMessagesAdapter: Alerter {
         SwiftMessages.show(config: config, view: view)
     }
 
-    public func showConfirmationAlert(title: String, message: String, type: AlertType, confirmationCompletion: @escaping EmptyBlock) {
+    public func showConfirmationAlert(title: String, message: String, type: AlertType, confirmButtonTitle: String = NSLocalizedString("Confirm", comment: ""), confirmationCompletion: @escaping EmptyBlock) {
         let view = MessageView.viewFromNib(layout: .messageView)
         view.configureTheme(type.swiftMessagesType())
         view.configureDropShadow()
+        view.button?.setTitle(confirmButtonTitle, for: .normal)
         view.buttonTapHandler = { button in
             confirmationCompletion()
         }
