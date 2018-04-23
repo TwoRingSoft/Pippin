@@ -19,6 +19,9 @@ public enum EnvironmentVariable: String {
     /// A set of product IDs to use when simulating the restoration of in app purchases, to return as the set being restored.
     case simulatedRestoredInAppPurchaseIdentifiers = "simulated-restored-in-app-purchase-identifiers"
 
+    /// A set of product IDs to use when simulating checking the local disk for persisted purchases.
+    case simulatedPurchasedInAppPurchaseIdentifiers = "simulated-purchased-in-app-purchase-identifiers"
+
     /// Get the value passed in for the calling environment variable.
     ///
     /// - Returns: The string contents assigned to the calling environment variable, if one was provided.
