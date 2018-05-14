@@ -20,7 +20,7 @@ public class FormController: NSObject {
     fileprivate var inputViews: [UIView]!
     fileprivate var oldTextFieldDelegates: [UITextField: UITextFieldDelegate?] = [:]
     fileprivate var oldTextViewDelegates: [UITextView: UITextViewDelegate?] = [:]
-    fileprivate weak var currentInputView: UIView?
+    @objc public weak var currentInputView: UIView?
 
     private weak var tableView: UITableView?
     private weak var scrollView: UIScrollView?
