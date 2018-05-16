@@ -22,6 +22,7 @@ public class FormController: NSObject {
     fileprivate var oldTextViewDelegates: [UITextView: UITextViewDelegate?] = [:]
     @objc public weak var currentInputView: UIView?
 
+    private var allowTraversal: Bool = true
     private weak var tableView: UITableView?
     private weak var scrollView: UIScrollView?
     private var originalContentInset: UIEdgeInsets?
@@ -56,13 +57,17 @@ public class FormController: NSObject {
         - inputViews: the array of form input fields to iterate through, in order
         - tableView: tableView with cells containing input fields, for keyboard
             avoidance
+        - allowTraversal: if `true`, provide Next/Prev buttons to navigate to
+            other text fields managed by the `FormController`; if `false`, only
+            provide the Done button to dismiss an input view
         - environment: optional instance of an app's environment
      */
-    @objc public init(inputViews: [UIView], in tableView: UITableView, environment: Environment?) {
+    @objc public init(inputViews: [UIView], in tableView: UITableView, allowTraversal: Bool = true, environment: Environment?) {
         super.init()
         self.inputViews = inputViews
         self.tableView = tableView
         self.environment = environment
+        self.allowTraversal = allowTraversal
         _init()
     }
 
@@ -183,15 +188,21 @@ private extension FormController {
         space.width = 12
 
         let toolbar = FormControllerInputAccessoryToolbar(frame: .zero)
-        toolbar.items = [
-            space,
-            previousButton,
-            space,
-            nextButton,
+        var items = [UIBarButtonItem]()
+        if allowTraversal {
+            items.append(contentsOf: [
+                space,
+                previousButton,
+                space,
+                nextButton
+            ])
+        }
+        items.append(contentsOf: [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             doneButton,
-            space,
-        ]
+            space
+        ])
+        toolbar.items = items
 
         let view = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
         view.addSubview(toolbar)
