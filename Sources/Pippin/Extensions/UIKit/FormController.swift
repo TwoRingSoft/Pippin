@@ -394,11 +394,25 @@ extension FormController: UITextViewDelegate {
 
     public func textViewDidEndEditing(_ textView: UITextView) {
         environment?.logger.logDebug(message: String(format: "[%@] textViewDidEndEditing: %@", instanceType(self), textView))
+        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
+            unwrappedDelegate.textViewDidEndEditing?(textView)
+        }
     }
 
     public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         environment?.logger.logDebug(message: String(format: "[%@] textViewShouldEndEditing: %@", instanceType(self), textView))
-        return true
+        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate, let result = unwrappedDelegate.textViewShouldEndEditing?(textView) {
+            return result
+        } else {
+            return true
+        }
+    }
+
+    public func textViewDidChange(_ textView: UITextView) {
+        environment?.logger.logDebug(message: String(format: "[%@] textViewDidChange: %@", instanceType(self), textView))
+        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
+            unwrappedDelegate.textViewDidChange?(textView)
+        }
     }
 
 }
@@ -420,6 +434,14 @@ extension FormController: UITextFieldDelegate {
 
         if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
             unwrappedDelegate.textFieldDidBeginEditing?(textField)
+        }
+    }
+
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        environment?.logger.logDebug(message: String(format: "[%@] textFieldDidEndEditing: %@", instanceType(self), textField))
+
+        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
+            unwrappedDelegate.textFieldDidEndEditing?(textField)
         }
     }
 
