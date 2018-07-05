@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITextField {
+public extension UITextField {
 
     var isEmpty: Bool {
         return text == nil || text == ""

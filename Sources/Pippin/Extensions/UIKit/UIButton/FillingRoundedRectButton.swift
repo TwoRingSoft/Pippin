@@ -46,7 +46,7 @@ public class FillingRoundedRectButton: UIButton {
         }
     }
 
-    func configureRoundedRectButton(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), borderWidth: CGFloat = 1, cornerRadius: CGFloat = 15, target: Any? = nil, selector: Selector? = nil) {
+    public func configureRoundedRectButton(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), borderWidth: CGFloat = 1, cornerRadius: CGFloat = 15, target: Any? = nil, selector: Selector? = nil) {
         configure(title: title, tintColor: color, font: font, target: target, selector: selector)
 
         // style border

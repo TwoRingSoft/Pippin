@@ -12,7 +12,7 @@ enum StringContentsOfFileError: Error {
     case noSuchFileInBundle(String, String?, Bundle)
 }
 
-extension String {
+public extension String {
 
     init(contentsOfResource resource: String, withExtension fileExtension: String? = nil, inBundle bundle: Bundle = Bundle.main) throws {
         guard let htmlStartURL = bundle.url(forResource: resource, withExtension: fileExtension) else {

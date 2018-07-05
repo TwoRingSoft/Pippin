@@ -12,7 +12,7 @@ enum DictionaryJSONError: Error {
     case deserializedObjectNotDictionary
 }
 
-extension Dictionary where Key == String, Value == Any {
+public extension Dictionary where Key == String, Value == Any {
 
     init(withJSONFromFileAtURL url:URL) throws {
         let data = try Data(contentsOf: url)

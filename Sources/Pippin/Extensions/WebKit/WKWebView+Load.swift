@@ -9,7 +9,7 @@
 import Foundation
 import WebKit
 
-extension WKWebView {
+public extension WKWebView {
 
     func loadHTML(fromFile file: String, htmlPrologueFile: String? = nil, htmlEpilogueFile: String? = nil, baseURL: URL? = nil) throws {
         var htmlComponents = [String]()

@@ -13,7 +13,7 @@ enum DataConversionError: Error {
     case filedConvertingStringToData
 }
 
-extension Data {
+public extension Data {
 
     func toString() throws -> String {
         let nsdata = self as NSData
@@ -25,7 +25,7 @@ extension Data {
 
 }
 
-extension String {
+public extension String {
 
     func toData() throws -> Data {
         guard let data = self.data(using: String.Encoding.utf8) else {
