@@ -30,8 +30,6 @@ public class CoreDataController: NSObject {
 
     /**
      Initialize a new Core Data helper.
-     - Note: this function computes the app name from the bundle to determine
-     the model name.
      - parameter modelName: the model to initialize for core data
      */
     public init(modelName: String) {
