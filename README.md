@@ -25,6 +25,7 @@ Pippin is designed to immediately abstract and handle the major components that 
 - alerting
 - licensing
 - appearance
+- indicators for activity and progress
 
 Each of these has a top-level protocol defined, which can either have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. 
 
@@ -34,6 +35,7 @@ The following adapters are currently available:
 - BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
 - Debugging: DebugController
 - Logger: [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
+- Activity indicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
 
 **Note:** Crashlytics is a special case, because it delivers a static framework, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Where Pippin decalares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 

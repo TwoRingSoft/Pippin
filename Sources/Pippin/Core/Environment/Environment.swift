@@ -19,6 +19,7 @@ public class Environment: NSObject {
     public var coreDataController: CoreDataController!
     public var logger: Logger!
     public var alerter: Alerter!
+    public var activityIndicator: ActivityIndicator?
 
     public var inAppPurchaseVendor: InAppPurchaseVendor!
     

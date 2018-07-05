@@ -46,6 +46,11 @@ Pod::Spec.new do |s|
       sss.dependency 'Pippin/Extensions/UIKit'
       sss.dependency 'Anchorage', '~> 4'
     end
+    ss.subspec 'JGProgressHUD' do |sss|
+      sss.source_files = 'Sources/Pippin/Adapters/JGProgressHUD/**/*.{h,m,swift}'
+      sss.dependency 'Pippin/Core'
+      sss.dependency 'JGProgressHUD'
+    end
   end
   
   s.subspec 'Core' do |ss|
