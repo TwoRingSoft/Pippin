@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension FileManager {
+public extension FileManager {
 
     enum FileManagerURLError: Error {
         case failedToLocateUserDocumentsDirectory

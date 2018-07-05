@@ -9,21 +9,21 @@
 import QuartzCore
 import UIKit
 
-class FillingRoundedRectButton: UIButton {
+public class FillingRoundedRectButton: UIButton {
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         set(highlighted: true, animated: true)
         super.touchesBegan(touches, with: event)
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let location = touches.first?.location(in: self) else { return }
         let contained = self.bounds.contains(location)
         set(highlighted: contained, animated: contained)
         super.touchesMoved(touches, with: event)
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         set(highlighted: false, animated: false)
         super.touchesEnded(touches, with: event)
     }
