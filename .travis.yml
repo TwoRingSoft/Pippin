@@ -1,13 +1,12 @@
 language: objective-c
-osx_image: xcode9.3
+osx_image: xcode9.4
 install:
-    - rake init
+  - rake init
 script: 
-    - rake test
-    - rake smoke_test
+  - rake test
 notifications:
-    email:
-        recipients:
-         - andrew+travis+Pippin@tworingsoft.com
-        on_success: change
-        on_failure: always
+  email:
+    recipients:
+      - andrew+travis+Pippin@tworingsoft.com
+    on_success: change
+    on_failure: always

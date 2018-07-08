@@ -6,11 +6,11 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
 
-Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift.
+Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift, as well as XCTest.
 
 ## Code
 
-Pippin is split up into some top-level components: Core, Extensions and CanIHaz.
+Pippin is split up into some top-level components: Core, Extensions and CanIHaz. The separate PippinTesting delivers tools to work with XCTest.
 
 ### Core
 
@@ -56,9 +56,11 @@ These are currently split into extensions on Foundation, UIKit and Webkit.
 
 ## Testing
 
-Files under Tests/ are brought into the Pippin `test_spec`. These are brought into the PippinTests Xcode project to run as unit tests. This is automated in `rake test`.
+`rake test`
 
-An integration smoke test can be run with `rake smoke_test`. This generates an Xcode project for each subspec, in each of Swift and Objective-C, to try building after `pod install` with the appropriate subspec written into its Podfile. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
+Files under Pippin/Tests/ are declared in Pippin's `test_spec`, and likewise for PippinTesting. These are brought into the Pippin Xcode project to run as unit tests using the Podfile's `testspecs` declaration.
+
+Also runs an integration smoke test, which generates an Xcode project for each subspec, in each of Swift and Objective-C, to try building after `pod install` with the appropriate subspec written into its Podfile. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
 
 ## Contributing
 

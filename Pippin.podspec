@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '9.0'
 
   s.test_spec 'Tests' do |test_spec|
-      test_spec.source_files = 'Tests/**/*.swift'
+      test_spec.source_files = 'Tests/Pippin/**/*.swift'
   end
   
   s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters'

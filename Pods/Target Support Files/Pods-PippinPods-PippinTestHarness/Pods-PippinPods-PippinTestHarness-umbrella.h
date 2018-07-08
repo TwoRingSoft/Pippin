@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_PippinTestHarnessVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_PippinTestHarnessVersionString[];
+FOUNDATION_EXPORT double Pods_PippinPods_PippinTestHarnessVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_PippinPods_PippinTestHarnessVersionString[];
 

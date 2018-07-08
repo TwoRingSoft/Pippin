@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "495CE05120F25BE900A72C80"
+               BuildableName = "PippinUnitTests.xctest"
+               BlueprintName = "PippinUnitTests"
+               ReferencedContainer = "container:Pippin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "495CE05F20F25BF700A72C80"
+               BuildableName = "PippinUITests.xctest"
+               BlueprintName = "PippinUITests"
+               ReferencedContainer = "container:Pippin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
