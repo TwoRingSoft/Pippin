@@ -17,6 +17,8 @@ public final class JGProgressHUDAdapter: NSObject {
     public override init() {
         super.init()
         window.rootViewController = rootView
+        window.windowLevel = UIWindowLevelAlert
+        indicator.delegate = self
     }
 }
 
