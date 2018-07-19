@@ -1,6 +1,5 @@
 desc 'Initialize development environment.'
 task :init do
-    sh 'brew tap yonaskolb/XcodeGen https://github.com/yonaskolb/XcodeGen.git'
     sh 'brew tap tworingsoft/formulae'
     sh 'brew install XcodeGen vrsn'
 end
