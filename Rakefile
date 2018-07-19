@@ -1,5 +1,6 @@
 desc 'Initialize development environment.'
 task :init do
+    sh 'brew update'
     sh 'brew tap tworingsoft/formulae'
     sh 'brew install XcodeGen vrsn'
 end
