@@ -158,7 +158,6 @@
 				49835A001E934995009CC53E /* Frameworks */,
 				49835A011E934995009CC53E /* Resources */,
 				7E81D8DD46CBACD166CF9DD1 /* [CP] Embed Pods Frameworks */,
-				434ED6016878BC2837F62340 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,21 +217,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		434ED6016878BC2837F62340 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7E81D8DD46CBACD166CF9DD1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +225,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework",
@@ -250,6 +235,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PinpointKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",

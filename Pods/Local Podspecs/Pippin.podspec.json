@@ -1,6 +1,6 @@
 {
   "name": "Pippin",
-  "version": "4.1.0",
+  "version": "5.7.0",
   "summary": "A Swift framework to scaffold an app and make development and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "4.1.0"
+    "tag": "5.7.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -77,6 +77,18 @@
             ],
             "Anchorage": [
               "~> 4"
+            ]
+          }
+        },
+        {
+          "name": "JGProgressHUD",
+          "source_files": "Sources/Pippin/Adapters/JGProgressHUD/**/*.{h,m,swift}",
+          "dependencies": {
+            "Pippin/Core": [
+
+            ],
+            "JGProgressHUD": [
+
             ]
           }
         }

@@ -3,53 +3,58 @@ PODS:
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
   - Fabric (1.7.2)
+  - JGProgressHUD (2.0.3)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PinpointKit (1.1.0):
     - PinpointKit/Core (= 1.1.0)
   - PinpointKit/Core (1.1.0)
-  - Pippin (4.1.0):
-    - Pippin/Adapters (= 4.1.0)
-    - Pippin/CanIHaz (= 4.1.0)
-    - Pippin/Core (= 4.1.0)
-    - Pippin/Extensions (= 4.1.0)
-  - Pippin/Adapters (4.1.0):
-    - Pippin/Adapters/DebugController (= 4.1.0)
-    - Pippin/Adapters/PinpointKit (= 4.1.0)
-    - Pippin/Adapters/SwiftMessages (= 4.1.0)
-    - Pippin/Adapters/XCGLogger (= 4.1.0)
-  - Pippin/Adapters/DebugController (4.1.0):
+  - Pippin (5.7.0):
+    - Pippin/Adapters (= 5.7.0)
+    - Pippin/CanIHaz (= 5.7.0)
+    - Pippin/Core (= 5.7.0)
+    - Pippin/Extensions (= 5.7.0)
+  - Pippin/Adapters (5.7.0):
+    - Pippin/Adapters/DebugController (= 5.7.0)
+    - Pippin/Adapters/JGProgressHUD (= 5.7.0)
+    - Pippin/Adapters/PinpointKit (= 5.7.0)
+    - Pippin/Adapters/SwiftMessages (= 5.7.0)
+    - Pippin/Adapters/XCGLogger (= 5.7.0)
+  - Pippin/Adapters/DebugController (5.7.0):
     - Anchorage (~> 4)
     - Pippin/Extensions/UIKit
-  - Pippin/Adapters/PinpointKit (4.1.0):
+  - Pippin/Adapters/JGProgressHUD (5.7.0):
+    - JGProgressHUD
+    - Pippin/Core
+  - Pippin/Adapters/PinpointKit (5.7.0):
     - PinpointKit (~> 1)
     - Pippin/Core
-  - Pippin/Adapters/SwiftMessages (4.1.0):
+  - Pippin/Adapters/SwiftMessages (5.7.0):
     - Pippin/Core
     - SwiftMessages (~> 4)
-  - Pippin/Adapters/XCGLogger (4.1.0):
+  - Pippin/Adapters/XCGLogger (5.7.0):
     - Pippin/Core
     - XCGLogger (~> 6)
-  - Pippin/CanIHaz (4.1.0):
-    - Pippin/CanIHaz/Camera (= 4.1.0)
-    - Pippin/CanIHaz/Location (= 4.1.0)
-  - Pippin/CanIHaz/Camera (4.1.0)
-  - Pippin/CanIHaz/Location (4.1.0)
-  - Pippin/Core (4.1.0):
+  - Pippin/CanIHaz (5.7.0):
+    - Pippin/CanIHaz/Camera (= 5.7.0)
+    - Pippin/CanIHaz/Location (= 5.7.0)
+  - Pippin/CanIHaz/Camera (5.7.0)
+  - Pippin/CanIHaz/Location (5.7.0)
+  - Pippin/Core (5.7.0):
     - Pippin/Extensions/Foundation
-  - Pippin/Extensions (4.1.0):
-    - Pippin/Extensions/Foundation (= 4.1.0)
-    - Pippin/Extensions/UIKit (= 4.1.0)
-    - Pippin/Extensions/WebKit (= 4.1.0)
-  - Pippin/Extensions/Foundation (4.1.0)
-  - Pippin/Extensions/UIKit (4.1.0):
+  - Pippin/Extensions (5.7.0):
+    - Pippin/Extensions/Foundation (= 5.7.0)
+    - Pippin/Extensions/UIKit (= 5.7.0)
+    - Pippin/Extensions/WebKit (= 5.7.0)
+  - Pippin/Extensions/Foundation (5.7.0)
+  - Pippin/Extensions/UIKit (5.7.0):
     - Anchorage (~> 4)
     - Pippin/Core
     - Pippin/Extensions/Foundation
-  - Pippin/Extensions/WebKit (4.1.0):
+  - Pippin/Extensions/WebKit (5.7.0):
     - Pippin/Extensions/Foundation
-  - Pippin/Tests (4.1.0)
+  - Pippin/Tests (5.7.0)
   - SwiftMessages (4.1.0)
   - XCGLogger (6.0.2):
     - XCGLogger/Core (= 6.0.2)
@@ -61,20 +66,32 @@ DEPENDENCIES:
   - Pippin (from `.`)
   - Pippin/Tests (from `.`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Anchorage
+    - Crashlytics
+    - Fabric
+    - JGProgressHUD
+    - ObjcExceptionBridging
+    - PinpointKit
+    - SwiftMessages
+    - XCGLogger
+
 EXTERNAL SOURCES:
   Pippin:
-    :path: .
+    :path: "."
 
 SPEC CHECKSUMS:
   Anchorage: f4dbf32771115b8ef9c9cc4e55a002ad87711f48
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: b444d66d8b10420c1ffc22c176dee37c1c12b4e7
-  Pippin: 3bca2d0ae278b69fb679d20c1a50878eaf851774
+  Pippin: 380fa6481f8ee2150cf9f6372840beb57e1faa63
   SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
 
 PODFILE CHECKSUM: ae3ff7abb958348c3c5a37ca75e7a0b2dc301a4a
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
