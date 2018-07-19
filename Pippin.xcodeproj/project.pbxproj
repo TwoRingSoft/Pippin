@@ -12,7 +12,7 @@
 		49835A0B1E934995009CC53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49835A091E934995009CC53E /* Main.storyboard */; };
 		49835A0D1E934995009CC53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49835A0C1E934995009CC53E /* Assets.xcassets */; };
 		49835A101E934995009CC53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49835A0E1E934995009CC53E /* LaunchScreen.storyboard */; };
-		6BA0A7D49EE3586A1D3F32E4 /* Pods_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541FD72F22225AD8E1ADAA8E /* Pods_PippinTestHarness.framework */; };
+		A25FE44CCF369F734FF2CA0A /* Pods_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D43C8C8ABD31D29EA63A8B5 /* Pods_PippinTestHarness.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +39,9 @@
 		49DA33BF208A5CF0002DC24C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DA33C0208A5CF0002DC24C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DA33C1208A5CF0002DC24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		541FD72F22225AD8E1ADAA8E /* Pods_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A27908AE46B6F362207519 /* Pods-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestHarness.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
-		A137B559179E88E5AEC8970A /* Pods-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestHarness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
+		6D43C8C8ABD31D29EA63A8B5 /* Pods_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8880FBEB57EB64F8D3667838 /* Pods-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestHarness.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
+		A5E6327D8A5D7F6948EA7C94 /* Pods-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestHarness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,18 +49,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BA0A7D49EE3586A1D3F32E4 /* Pods_PippinTestHarness.framework in Frameworks */,
+				A25FE44CCF369F734FF2CA0A /* Pods_PippinTestHarness.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1872404B5BDB283F64E9EBBB /* Pods */ = {
+		2750E41DC1FD53F37942B4B8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A137B559179E88E5AEC8970A /* Pods-PippinTestHarness.debug.xcconfig */,
-				93A27908AE46B6F362207519 /* Pods-PippinTestHarness.release.xcconfig */,
+				A5E6327D8A5D7F6948EA7C94 /* Pods-PippinTestHarness.debug.xcconfig */,
+				8880FBEB57EB64F8D3667838 /* Pods-PippinTestHarness.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -68,11 +68,11 @@
 		494821561E6B4E28003DD4EC = {
 			isa = PBXGroup;
 			children = (
-				AA2737597B4D77E6CEBDBFBF /* Frameworks */,
 				49835A041E934995009CC53E /* PippinTestHarness */,
-				1872404B5BDB283F64E9EBBB /* Pods */,
 				494821621E6B4EA5003DD4EC /* Products */,
 				49DAE8D6208A5CB8002DC24C /* SmokeTests */,
+				2750E41DC1FD53F37942B4B8 /* Pods */,
+				8D8CF10B94FF544DCEC057D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,10 +138,10 @@
 			path = Pippin/SmokeTests;
 			sourceTree = "<group>";
 		};
-		AA2737597B4D77E6CEBDBFBF /* Frameworks */ = {
+		8D8CF10B94FF544DCEC057D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				541FD72F22225AD8E1ADAA8E /* Pods_PippinTestHarness.framework */,
+				6D43C8C8ABD31D29EA63A8B5 /* Pods_PippinTestHarness.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -153,11 +153,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49835A121E934995009CC53E /* Build configuration list for PBXNativeTarget "PippinTestHarness" */;
 			buildPhases = (
-				982767248E695D2D7F2FC354 /* [CP] Check Pods Manifest.lock */,
+				75EA68097B61716C0A030B55 /* [CP] Check Pods Manifest.lock */,
 				498359FF1E934995009CC53E /* Sources */,
 				49835A001E934995009CC53E /* Frameworks */,
 				49835A011E934995009CC53E /* Resources */,
-				7E81D8DD46CBACD166CF9DD1 /* [CP] Embed Pods Frameworks */,
+				CEC97257EAAB4A0580A11A85 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -217,7 +217,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7E81D8DD46CBACD166CF9DD1 /* [CP] Embed Pods Frameworks */ = {
+		75EA68097B61716C0A030B55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PippinTestHarness-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CEC97257EAAB4A0580A11A85 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,24 +263,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestHarness/Pods-PippinTestHarness-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		982767248E695D2D7F2FC354 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PippinTestHarness-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -401,7 +401,7 @@
 		};
 		49835A131E934995009CC53E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A137B559179E88E5AEC8970A /* Pods-PippinTestHarness.debug.xcconfig */;
+			baseConfigurationReference = A5E6327D8A5D7F6948EA7C94 /* Pods-PippinTestHarness.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -442,7 +442,7 @@
 		};
 		49835A141E934995009CC53E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93A27908AE46B6F362207519 /* Pods-PippinTestHarness.release.xcconfig */;
+			baseConfigurationReference = 8880FBEB57EB64F8D3667838 /* Pods-PippinTestHarness.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

@@ -3,7 +3,7 @@ task :init do
     sh 'brew update'
     sh 'brew tap tworingsoft/formulae'
     sh 'brew install XcodeGen vrsn'
-    sh 'pod install'
+    sh 'pod install --repo-update --verbose'
 end
 
 version_file = 'Pippin.podspec'
