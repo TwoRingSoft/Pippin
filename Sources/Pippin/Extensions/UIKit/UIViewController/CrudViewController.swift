@@ -18,6 +18,21 @@ public enum ListViewControllerMode {
 @available(iOS 11.0, *)
 @objc public protocol CrudViewControllerThemeDelegate {
     @objc optional func crudViewController(crudViewController: CrudViewController, themeAddItemCell addItemCell: TextAndAccessoryCell)
+    
+    /// Sylize the search controls.
+    ///
+    /// - Parameters:
+    ///   - crudViewController: the crud controller containing the search controls to style
+    ///   - searchField: the text input for search
+    ///   - cancelButton: the cancel button to end search
+    @objc optional func crudViewController(crudViewController: CrudViewController, theme searchField: UITextField, cancelButton: UIButton)
+    
+    /// Ask the theme delegate if the search controls should be given blur backgrounds and vibrancy effects. Defaults to `false`.
+    ///
+    /// - Parameter crudViewController: the crud controller containing the search controls
+    /// - Returns: `true` if the search field and cancel button should be blurred, `false` otherwise
+    @objc optional func crudViewControllerShouldBlurSearchControls(crudViewController: CrudViewController) -> Bool
+    
     @objc optional func crudViewControllerEmptyStateView(crudViewController: CrudViewController) -> UIView
 }
 
@@ -85,16 +100,12 @@ public class CrudViewController: UIViewController {
         self.crudName = name ?? fetchRequest.entityName!
         setUpFetchedResultsController(withFetchRequest: fetchRequest)
         setUpUI()
+        setLookAndFeel()
         logger?.logDebug(message: String(format: "[%@(%@)] Initialized CrudViewController with context %@.", instanceType(self), crudName, context))
     }
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setLookAndFeel()
     }
 
 }
@@ -178,29 +189,18 @@ private extension CrudViewController {
 
     func setLookAndFeel() {
         if searchDelegate.crudViewControllerShouldEnableSearch(crudViewController: self), let searchField = searchField, let searchContainer = searchContainer, let searchCancelButton = searchCancelButton {
-            let fieldBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-            cancelButtonBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-            guard let cancelButtonBlurView = cancelButtonBlurView else { return }
-            cancelButtonBlurView.alpha = 0
-            let blurs: [UIView] = [ fieldBlurView, cancelButtonBlurView ]
-            blurs.forEach {
-                self.view.insertSubview($0, belowSubview: searchContainer)
+            themeDelegate?.crudViewController?(crudViewController: self, theme: searchField, cancelButton: searchCancelButton)
+            if let shouldBlur = themeDelegate?.crudViewControllerShouldBlurSearchControls?(crudViewController: self), shouldBlur {
+                let fieldBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+                cancelButtonBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+                guard let cancelButtonBlurView = cancelButtonBlurView else { return }
+                cancelButtonBlurView.alpha = 0
+                [ fieldBlurView, cancelButtonBlurView ].forEach {
+                    self.view.insertSubview($0, belowSubview: searchContainer)
+                }
+                fieldBlurView.edgeAnchors == searchField.edgeAnchors
+                cancelButtonBlurView.edgeAnchors == searchCancelButton.edgeAnchors
             }
-            fieldBlurView.edgeAnchors == searchField.edgeAnchors
-            cancelButtonBlurView.edgeAnchors == searchCancelButton.edgeAnchors
-
-            let searchViews: [UIView] = [ searchField, searchCancelButton ]
-            searchViews.forEach { $0.layer.borderWidth = 2 * UIScreen.main.hairlineWidth }
-
-            (blurs + searchViews).forEach {
-                $0.clipsToBounds = true
-                $0.layer.cornerRadius = 10
-            }
-
-            searchField.layer.borderColor = searchField.tintColor.cgColor
-            searchCancelButton.layer.borderColor = searchCancelButton.tintColor.cgColor
-
-            searchCancelButton.setTitleColor(searchCancelButton.tintColor, for: .normal)
         }
     }
 
@@ -358,7 +358,6 @@ private extension CrudViewController {
     func setTableView(toHideAddItemRow hideAddItemRow: Bool) {
         guard
             let searchCancelButton = searchCancelButton,
-            let cancelButtonBlurView = cancelButtonBlurView,
             let searchCancelButtonWidthConstraint = searchCancelButtonWidthConstraint,
             let searchCancelButtonLeadingConstraint = searchCancelButtonLeadingConstraint
         else { return }
@@ -372,7 +371,9 @@ private extension CrudViewController {
 
             let alphaAnimations = {
                 searchCancelButton.alpha = hideAddItemRow ? 1 : 0
-                cancelButtonBlurView.alpha = hideAddItemRow ? 1 : 0
+                if let cancelButtonBlurView = self.cancelButtonBlurView {
+                    cancelButtonBlurView.alpha = hideAddItemRow ? 1 : 0
+                }
             }
 
             if hideAddItemRow {
