@@ -44,6 +44,7 @@ The following adapters are currently available:
 - settings bundles
 - analytics
 - push notifications
+- state restoration
 
 ### CanIHaz
 
