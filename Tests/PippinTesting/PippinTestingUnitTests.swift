@@ -6,7 +6,7 @@
 //
 //
 
-
+import PippinTesting
 import XCTest
 
 class PippinTestingUnitTests: XCTestCase {
