@@ -61,3 +61,9 @@ extension SwiftMessagesAdapter: Alerter {
     }
 
 }
+
+extension SwiftMessagesAdapter: Themeable {
+    public func appearanceContainerClassHierarchy() -> [UIAppearanceContainer.Type] {
+        return [MessageView.self]
+    }
+}

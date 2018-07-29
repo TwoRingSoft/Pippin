@@ -22,24 +22,41 @@ public final class JGProgressHUDAdapter: NSObject {
     }
 }
 
+// MARK: ActivityIndicator
 extension JGProgressHUDAdapter: ActivityIndicator {
-
     public func show(withText text: String? = nil) {
         indicator.textLabel.text = text
-        window.isHidden = false
-        indicator.show(in: rootView.view, animated: true)
+        display()
+    }
+
+    public func show(withAttributedText attributedText: NSAttributedString? = nil) {
+        indicator.textLabel.attributedText = attributedText
+        display()
     }
 
     public func hide() {
         indicator.dismiss(animated: true)
     }
-
 }
 
-extension JGProgressHUDAdapter: JGProgressHUDDelegate {
+// MARK: Themeable
+extension JGProgressHUDAdapter: Themeable {
+    public func appearanceContainerClassHierarchy() -> [UIAppearanceContainer.Type] {
+        return [] // couldn't find a hierarchy that would make this work!
+    }
+}
 
+// MARK: JGProgressHUDDelegate
+extension JGProgressHUDAdapter: JGProgressHUDDelegate {
     public func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
         window.isHidden = true
     }
+}
 
+// MARK: Private
+private extension JGProgressHUDAdapter {
+    func display() {
+        window.isHidden = false
+        indicator.show(in: rootView.view, animated: true)
+    }
 }

@@ -8,12 +8,17 @@
 import Foundation
 
 /// A protocol describing the functions needed to use an activity indicator–showing and hiding.
-public protocol ActivityIndicator {
-
+public protocol ActivityIndicator: Themeable {
+    
     /// Display an activity indicator.
     ///
     /// - Parameter text: optional text to display in a label with the activity indicator.
     func show(withText text: String?)
+
+    /// Display an activity indicator with attributed text.
+    ///
+    /// - Parameter attributedText: optional attributed text to display in a label with the activity indicator.
+    func show(withAttributedText attributedText: NSAttributedString?)
 
     /// Hide any visible activity indicators.
     func hide()

@@ -44,7 +44,7 @@ public enum AlertOcclusion {
 
 }
 
-public protocol Alerter {
+public protocol Alerter: Themeable {
 
     func initialize()
     func showAlert(title: String, message: String, type: AlertType, dismissal: AlertDismissal, occlusion: AlertOcclusion)
