@@ -18,16 +18,16 @@ task :init do
     sh "#{ruby_environment_prefixes} pod install --repo-update --verbose"
 end
 
-version_file = 'Pippin.podspec'
-
-desc 'Bump version number and commit the changes with message as the output from vrsn. Can supply argument to bump one of: major, minor, patch or build. E.g., `rake bump[major]` or `rake bump[build]`.'
-task :bump,[:component] do |t, args|
+desc 'Bump version number for the specified podspec and commit the changes with message as the output from vrsn.'
+task :bump,[:component, :podspec] do |t, args|
     require 'open3'
 
     modified_file_count, stderr, status = Open3.capture3("git status --porcelain | egrep '^(M| M)' | wc -l")
     if modified_file_count.to_i > 0 then
         sh "git stash --all"
     end
+    
+    version_file = version_file_from_podspec args[:podspec]
   
     component = args[:component]
     if component == 'major' then
@@ -51,14 +51,25 @@ task :bump,[:component] do |t, args|
     end
 end
 
+def version_file_from_podspec podspec
+  if podspec == 'Pippin' then
+    'Pippin.podspec'
+  elsif podspec == 'PippinTesting' then
+    'PippinTesting.podspec'
+  else
+    fail 'Unrecognized podspec name.'
+  end
+end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
-task :release do
+task :release,[:podspec] do |t, args|
+  podspec = args[:podspec]
+  version_file = version_file_from_podspec podspec
   version = `vrsn --read --file #{version_file}`
-  sh "git tag #{version.strip}"
+  sh "git tag #{podspec}-#{version.strip}"
   sh 'git push --tags'
   
-  sh 'pod trunk push --allow-warnings'
+  sh "pod trunk push #{podspec}.podspec --allow-warnings"
 end
 
 desc 'Run Pippin unit and smoke tests.'

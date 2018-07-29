@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'http://github.com/tworingsoft/Pippin'
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
-  s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.version}" }
+  s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
   s.platform     = :ios, '9.0'
 
   s.source_files = 'Sources/PippinTesting/Extensions/XCTest/**/*.{h,m,swift}'
