@@ -21,13 +21,13 @@ end
 desc 'Bump version number for the specified podspec and commit the changes with message as the output from vrsn.'
 task :bump,[:component, :podspec] do |t, args|
     require 'open3'
+    
+    version_file = version_file_from_podspec args[:podspec]
 
     modified_file_count, stderr, status = Open3.capture3("git status --porcelain | egrep '^(M| M)' | wc -l")
     if modified_file_count.to_i > 0 then
-        sh "git stash --all"
+        sh "git stash"
     end
-    
-    version_file = version_file_from_podspec args[:podspec]
   
     component = args[:component]
     if component == 'major' then
@@ -44,7 +44,6 @@ task :bump,[:component, :podspec] do |t, args|
 
     sh "git add #{version_file}"
     sh "git commit --message \"#{stdout}\""
-    sh 'git push'
     
     if modified_file_count.to_i > 0 then
         sh "git stash pop"
