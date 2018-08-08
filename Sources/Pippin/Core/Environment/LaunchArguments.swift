@@ -17,7 +17,7 @@ import Foundation
     case unlockIAP
 
     /// Simulate request of available purchase IDs.
-    case simulateIAPFlow
+    case simulateProductFetch
 
     /// Any time a purchase is initiated, short circuit to a success callback.
     case simulateProductPurchaseSuccess
@@ -45,7 +45,7 @@ import Foundation
         switch self {
         case .uiTest: return "ui-test"
         case .unlockIAP: return "unlock-in-app-purchases"
-        case .simulateIAPFlow: return "simulate-in-app-purchases-flow"
+        case .simulateProductFetch: return "simulate-in-app-purchases-fetch"
         case .simulateProductPurchaseSuccess: return "simulate-product-purchase-success"
         case .simulateProductPurchaseFailure: return "simulate-product-purchase-failure"
         case .simulateInAppPurchaseRestoreSuccess: return "simulate-in-app-purchase-restore-success"
