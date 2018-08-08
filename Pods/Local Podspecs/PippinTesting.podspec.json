@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "1.0.0"
+    "tag": "PippinTesting-1.0.0"
   },
   "platforms": {
     "ios": "9.0"

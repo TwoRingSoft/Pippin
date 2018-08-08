@@ -1,6 +1,6 @@
 {
   "name": "Pippin",
-  "version": "5.6.1",
+  "version": "5.9.0",
   "summary": "A Swift framework to scaffold an app and make development and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "5.6.1"
+    "tag": "Pippin-5.9.0"
   },
   "platforms": {
     "ios": "9.0"
