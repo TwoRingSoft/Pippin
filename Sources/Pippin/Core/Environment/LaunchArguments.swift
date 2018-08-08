@@ -64,12 +64,10 @@ extension LaunchArgument: CustomStringConvertible {
 
 }
 
-
 /// A class to expose the functionality of `LaunchArgument` to Objective C. The
 /// `activated()` function is a function on an enum and is not able to be
 /// exposed to Objective C.
 @objc public class LaunchArgumentObjc: NSObject {
-
 
     /// Test whether the app was launched with a particular launch argument.
     ///
@@ -78,4 +76,5 @@ extension LaunchArgument: CustomStringConvertible {
     @objc public class func applicationLaunched(argument: LaunchArgument) -> Bool {
         return argument.activated()
     }
+
 }
