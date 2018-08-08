@@ -123,20 +123,21 @@ public extension FormController {
     }
 
     func nextInputView() {
+        let logger = environment?.logger
         guard let currentInputView = currentInputView else {
-            environment?.logger.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
+            logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
             return
         }
         guard let currentInputViewIndex = inputViews.index(of: currentInputView) else {
-            environment?.logger.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
+            logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
             return
         }
         let nextIdx = currentInputViewIndex + 1
         let nextField = inputViews[nextIdx]
-        environment?.logger.logDebug(message: String(format: "[%@] nextInputView: %@;", instanceType(self), String(describing: nextField), String(reflecting: nextField)))
+        logger?.logDebug(message: String(format: "[%@] nextInputView: %@;", instanceType(self), String(describing: nextField), String(reflecting: nextField)))
         if !nextField.becomeFirstResponder() {
             if !currentInputView.resignFirstResponder() && !currentInputView.endEditing(true) {
-                environment?.logger.logWarning(message: String(format: "[%@] could not end editing in input field: %@", instanceType(self), String(describing: currentInputView)))
+                logger?.logWarning(message: String(format: "[%@] could not end editing in input field: %@", instanceType(self), String(describing: currentInputView)))
             } else {
                 nextField.becomeFirstResponder()
             }
@@ -144,20 +145,21 @@ public extension FormController {
     }
 
     func previousTextField() {
+        let logger = environment?.logger
         guard let currentInputView = currentInputView else {
-            environment?.logger.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
+            logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
             return
         }
         guard let currentInputViewIndex = inputViews.index(of: currentInputView) else {
-            environment?.logger.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
+            logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
             return
         }
         let previousIdx = currentInputViewIndex - 1
         let previousField = inputViews[previousIdx]
-        environment?.logger.logDebug(message: String(format: "[%@] previousTextField: %@;", instanceType(self), String(describing: previousField), String(reflecting: previousField)))
+        logger?.logDebug(message: String(format: "[%@] previousTextField: %@;", instanceType(self), String(describing: previousField), String(reflecting: previousField)))
         if !previousField.becomeFirstResponder() {
             if !currentInputView.resignFirstResponder() && !currentInputView.endEditing(true) {
-                environment?.logger.logWarning(message: String(format: "[%@] could not end editing in input field: %@", instanceType(self), String(describing: currentInputView)))
+                logger?.logWarning(message: String(format: "[%@] could not end editing in input field: %@", instanceType(self), String(describing: currentInputView)))
             } else {
                 previousField.becomeFirstResponder()
             }
@@ -329,9 +331,10 @@ private extension FormController {
     func _init() {
         [ NSNotification.Name.UIKeyboardWillChangeFrame, NSNotification.Name.UIKeyboardWillHide ].forEach {
             let observer = NotificationCenter.default.addObserver(forName: $0, object: nil, queue: .main) { notification in
+                let logger = self.environment?.logger
                 switch notification.name {
                 case NSNotification.Name.UIKeyboardWillChangeFrame:
-                    self.environment?.logger.logDebug(message: String(format: "[%@] UIKeyboardWillChangeFrame", instanceType(self)))
+                    logger?.logDebug(message: String(format: "[%@] UIKeyboardWillChangeFrame", instanceType(self)))
                     if self.receivedDelegateCallback {
                         self.receivedDelegateCallback = false
                         self.notification = nil
@@ -341,7 +344,7 @@ private extension FormController {
                     }
                     break
                 case NSNotification.Name.UIKeyboardWillHide:
-                    self.environment?.logger.logDebug(message: String(format: "[%@] UIKeyboardWillHide", instanceType(self)))
+                    logger?.logDebug(message: String(format: "[%@] UIKeyboardWillHide", instanceType(self)))
                     self.handleKeyboardHide(notification: notification)
                     break
                 default: fatalError("Unexpected notification received")
@@ -376,7 +379,7 @@ private extension FormController {
 extension FormController: UITextViewDelegate {
 
     public func textViewDidBeginEditing(_ textView: UITextView) {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewDidBeginEditing: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewDidBeginEditing: %@", instanceType(self), textView))
         currentInputView = textView
 
         if let notification = self.notification {
@@ -393,14 +396,14 @@ extension FormController: UITextViewDelegate {
     }
 
     public func textViewDidEndEditing(_ textView: UITextView) {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewDidEndEditing: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewDidEndEditing: %@", instanceType(self), textView))
         if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
             unwrappedDelegate.textViewDidEndEditing?(textView)
         }
     }
 
     public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewShouldEndEditing: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewShouldEndEditing: %@", instanceType(self), textView))
         if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate, let result = unwrappedDelegate.textViewShouldEndEditing?(textView) {
             return result
         } else {
@@ -409,7 +412,7 @@ extension FormController: UITextViewDelegate {
     }
 
     public func textViewDidChange(_ textView: UITextView) {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewDidChange: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewDidChange: %@", instanceType(self), textView))
         if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
             unwrappedDelegate.textViewDidChange?(textView)
         }
@@ -421,7 +424,7 @@ extension FormController: UITextViewDelegate {
 extension FormController: UITextFieldDelegate {
 
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        environment?.logger.logDebug(message: String(format: "[%@] textFieldDidBeginEditing: %@", instanceType(self), textField))
+        environment?.logger?.logDebug(message: String(format: "[%@] textFieldDidBeginEditing: %@", instanceType(self), textField))
         currentInputView = textField
 
         if let notification = self.notification {
@@ -438,7 +441,7 @@ extension FormController: UITextFieldDelegate {
     }
 
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        environment?.logger.logDebug(message: String(format: "[%@] textFieldDidEndEditing: %@", instanceType(self), textField))
+        environment?.logger?.logDebug(message: String(format: "[%@] textFieldDidEndEditing: %@", instanceType(self), textField))
 
         if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
             unwrappedDelegate.textFieldDidEndEditing?(textField)

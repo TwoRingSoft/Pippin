@@ -43,15 +43,16 @@ public class DebugViewController: UIViewController {
     }
 
     func deletePressed() {
-        let url = FileManager.url(forApplicationSupportFile: "\(environment.coreDataController.modelName!).sqlite")
-        let shmURL = FileManager.url(forApplicationSupportFile: "\(environment.coreDataController.modelName!).sqlite-shm")
-        let walURL = FileManager.url(forApplicationSupportFile: "\(environment.coreDataController.modelName!).sqlite-wal")
+        let coreDataController = environment.coreDataController
+        let url = FileManager.url(forApplicationSupportFile: "\(coreDataController?.modelName!).sqlite")
+        let shmURL = FileManager.url(forApplicationSupportFile: "\(coreDataController?.modelName!).sqlite-shm")
+        let walURL = FileManager.url(forApplicationSupportFile: "\(coreDataController?.modelName!).sqlite-wal")
         do {
             try FileManager.default.removeItem(at: url)
             try FileManager.default.removeItem(at: shmURL)
             try FileManager.default.removeItem(at: walURL)
         } catch {
-            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
+            environment.alerter?.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }
         showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
             fatalError("Restarting to complete database removal.")
@@ -64,9 +65,11 @@ public class DebugViewController: UIViewController {
 
     func importPressed() {
         do {
-            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController, logger: environment.logger), animated: true)
+            if let coreDataController = environment.coreDataController {
+                try present(DatabaseFixturePickerViewController(coreDataController: coreDataController, logger: environment.logger), animated: true)
+            }
         } catch {
-            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
+            environment.alerter?.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }
     }
 

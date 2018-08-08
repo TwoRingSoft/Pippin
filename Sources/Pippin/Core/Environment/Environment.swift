@@ -7,20 +7,30 @@
 
 import Foundation
 
+/// A collection of references to objects containing app information and infrastructure.
 public class Environment: NSObject {
 
-    public var appName: String!
-    public var currentBuild: Build!
-    public var semanticVersion: SemanticVersion!
+    // MARK: app information
+    
+    public var appName: String?
+    public var currentBuild: Build?
+    public var semanticVersion: SemanticVersion?
 
-    public var bugReporter: BugReporter!
-    public var crashReporter: CrashReporter!
-    public var debugging: Debugging!
-    public var coreDataController: CoreDataController!
-    public var logger: Logger!
-    public var alerter: Alerter!
+    // MARK: infrastructure
+    
+    public var crashReporter: CrashReporter?
+    public var coreDataController: CoreDataController?
+    public var logger: Logger?
+    public var alerter: Alerter?
     public var activityIndicator: ActivityIndicator?
 
-    public var inAppPurchaseVendor: InAppPurchaseVendor!
+    // MARK: components
+    
+    public var bugReporter: BugReporter?
+    public var inAppPurchaseVendor: InAppPurchaseVendor?
+    
+    // MARK: testing/development utilities
+    
+    public var debugging: Debugging?
     
 }
