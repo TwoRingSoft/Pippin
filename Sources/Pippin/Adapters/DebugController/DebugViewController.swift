@@ -43,19 +43,35 @@ public class DebugViewController: UIViewController {
     }
 
     func deletePressed() {
-        let coreDataController = environment.coreDataController
-        let url = FileManager.url(forApplicationSupportFile: "\(coreDataController?.modelName!).sqlite")
-        let shmURL = FileManager.url(forApplicationSupportFile: "\(coreDataController?.modelName!).sqlite-shm")
-        let walURL = FileManager.url(forApplicationSupportFile: "\(coreDataController?.modelName!).sqlite-wal")
+        func failureAction(error: Error? = nil, message: String? = nil) {
+            let errorMessage: String
+            if let unwrappedError = error {
+                errorMessage = String(describing: unwrappedError)
+            } else if let unwrappedMessage = message {
+                errorMessage = unwrappedMessage
+            } else {
+                fatalError("must provide a message or error object")
+            }
+            environment.alerter?.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", errorMessage), type: .error, dismissal: .automatic, occlusion: .weak)
+        }
+        
+        guard let modelName = environment.coreDataController?.modelName else {
+            failureAction()
+            return
+        }
+        let url = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite")
+        let shmURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-shm")
+        let walURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-wal")
+        
         do {
             try FileManager.default.removeItem(at: url)
             try FileManager.default.removeItem(at: shmURL)
             try FileManager.default.removeItem(at: walURL)
+            showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
+                fatalError("Restarting to complete database removal.")
+            }
         } catch {
-            environment.alerter?.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
-        }
-        showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
-            fatalError("Restarting to complete database removal.")
+            failureAction(error: error)
         }
     }
 
