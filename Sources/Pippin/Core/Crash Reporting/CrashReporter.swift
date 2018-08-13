@@ -12,7 +12,7 @@ import Foundation
  `CrashReporter` provides a common interface for working with crash reporter
  objects or SDKs.
  */
-public protocol CrashReporter {
+public protocol CrashReporter: Loggable {
 
     /**
      Log a message to the crash reporter's breadcrumb log.

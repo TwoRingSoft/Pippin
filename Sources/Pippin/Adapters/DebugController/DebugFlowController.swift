@@ -9,13 +9,14 @@
 import UIKit
 
 @available(iOS 11.0, *)
-public class DebugFlowController: NSObject {
+public class DebugFlowController: NSObject, Debugging {
 
     private weak var presentingVC: UIViewController!
     private var databaseFilename: String
     private var delegate: DebuggingDelegate
     private var debugWindow: UIWindow?
     private var environment: Environment
+    public var logger: Logger?
 
     var documentInteractionController: UIDocumentInteractionController!
 
@@ -25,11 +26,6 @@ public class DebugFlowController: NSObject {
         self.databaseFilename = databaseFileName
         super.init()
     }
-
-}
-
-@available(iOS 11.0, *)
-extension DebugFlowController: Debugging {
 
     public func installViews() {
         debugWindow = DebugWindow(frame: UIScreen.main.bounds)

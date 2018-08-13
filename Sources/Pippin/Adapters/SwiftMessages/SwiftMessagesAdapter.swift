@@ -21,9 +21,9 @@ extension AlertType {
 
 }
 
-public final class SwiftMessagesAdapter: NSObject {}
-
-extension SwiftMessagesAdapter: Alerter {
+public final class SwiftMessagesAdapter: NSObject, Alerter {
+    
+    public var logger: Logger?
 
     public func showAlert(title: String, message: String, type: AlertType, dismissal: AlertDismissal, occlusion: AlertOcclusion) {
         let view = MessageView.viewFromNib(layout: .messageView)

@@ -9,10 +9,11 @@ import Foundation
 import JGProgressHUD
 import UIKit
 
-public final class JGProgressHUDAdapter: NSObject {
+public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {
     fileprivate let indicator = JGProgressHUD(style: .dark)
     fileprivate let window = UIWindow(frame: UIScreen.main.bounds)
     fileprivate let rootView = UIViewController(nibName: nil, bundle: nil)
+    public var logger: Logger?
 
     public override init() {
         super.init()
@@ -20,10 +21,7 @@ public final class JGProgressHUDAdapter: NSObject {
         window.windowLevel = UIWindowLevelAlert
         indicator.delegate = self
     }
-}
-
-// MARK: ActivityIndicator
-extension JGProgressHUDAdapter: ActivityIndicator {
+    
     public func show(withText text: String? = nil) {
         indicator.textLabel.text = text
         display()

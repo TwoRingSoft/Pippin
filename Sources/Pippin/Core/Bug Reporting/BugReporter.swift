@@ -11,12 +11,7 @@ import UIKit
 /**
  `BugReporter` provides a common interface for working with a bug reporter object or SDK.
  */
-public protocol BugReporter {
-
-    /**
-     An instance conforming to `Logger` may be supplied for use by instances conforming to `BugReporter`.
-     */
-    var logger: Logger? { get set }
+public protocol BugReporter: Loggable {
 
     /**
      Array of email addresses to which the bug report should be sent.
