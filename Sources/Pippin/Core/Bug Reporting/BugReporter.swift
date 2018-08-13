@@ -11,7 +11,7 @@ import UIKit
 /**
  `BugReporter` provides a common interface for working with a bug reporter object or SDK.
  */
-public protocol BugReporter: Loggable {
+public protocol BugReporter: EnvironmentallyConscious {
 
     /**
      Array of email addresses to which the bug report should be sent.

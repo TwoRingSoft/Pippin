@@ -44,7 +44,7 @@ public enum AlertOcclusion {
 
 }
 
-public protocol Alerter: Themeable, Loggable {
+public protocol Alerter: Themeable, EnvironmentallyConscious {
     
     func showAlert(title: String, message: String, type: AlertType, dismissal: AlertDismissal, occlusion: AlertOcclusion)
     func showConfirmationAlert(title: String, message: String, type: AlertType, confirmButtonTitle: String, confirmationCompletion: @escaping EmptyBlock)

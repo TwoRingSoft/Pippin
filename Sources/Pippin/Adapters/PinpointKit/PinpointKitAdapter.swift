@@ -11,7 +11,7 @@ import UIKit
 
 public final class PinpointKitAdapter: NSObject {
 
-    public var logger: Logger?
+    public var environment: Environment?
     public var recipients: [String]?
     fileprivate var pinpointKit: PinpointKit?
 

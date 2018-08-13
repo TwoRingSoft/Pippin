@@ -8,7 +8,7 @@
 import Foundation
 
 /// A protocol describing the functions needed to use an activity indicator–showing and hiding.
-public protocol ActivityIndicator: Themeable, Loggable {
+public protocol ActivityIndicator: Themeable, EnvironmentallyConscious {
     
     /// Display an activity indicator.
     ///

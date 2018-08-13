@@ -10,7 +10,9 @@ import Fabric
 import Foundation
 import Pippin
 
-public class CrashlyticsAdapter: NSObject {
+public class CrashlyticsAdapter: NSObject, EnvironmentallyConscious {
+    
+    public var environment: Environment?
     
     init(debug: Bool) {
         Fabric.sharedSDK().debug = debug

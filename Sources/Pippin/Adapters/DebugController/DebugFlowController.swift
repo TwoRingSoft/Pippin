@@ -15,8 +15,7 @@ public class DebugFlowController: NSObject, Debugging {
     private var databaseFilename: String
     private var delegate: DebuggingDelegate
     private var debugWindow: UIWindow?
-    private var environment: Environment
-    public var logger: Logger?
+    public var environment: Environment?
 
     var documentInteractionController: UIDocumentInteractionController!
 
@@ -31,7 +30,7 @@ public class DebugFlowController: NSObject, Debugging {
         debugWindow = DebugWindow(frame: UIScreen.main.bounds)
         debugWindow?.windowLevel = UIWindowLevelAlert + 1
         debugWindow?.isHidden = false
-        debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment)
+        debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment!)
     }
 
 }

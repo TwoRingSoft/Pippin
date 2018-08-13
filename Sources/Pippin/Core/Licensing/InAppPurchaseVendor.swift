@@ -16,7 +16,7 @@ public protocol InAppPurchase {
     var product: Product { get set }
 }
 
-public protocol InAppPurchaseVendor: Loggable {
+public protocol InAppPurchaseVendor: EnvironmentallyConscious {
 
     func fetchProducts<T>(completion: @escaping IAPProductsCompletion<T>) where T: InAppPurchase
     func checkLicense(forInAppPurchase identifier: String) -> Bool

@@ -13,7 +13,7 @@ public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {
     fileprivate let indicator = JGProgressHUD(style: .dark)
     fileprivate let window = UIWindow(frame: UIScreen.main.bounds)
     fileprivate let rootView = UIViewController(nibName: nil, bundle: nil)
-    public var logger: Logger?
+    public var environment: Environment?
 
     public override init() {
         super.init()

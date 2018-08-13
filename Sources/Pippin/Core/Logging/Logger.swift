@@ -17,19 +17,10 @@ enum LoggerError: Swift.Error {
     case couldNotReadLogFile(String, NSError)
 }
 
-/// Protocol declaring that conformers provide a property to store a reference to an object conforming to the `Logger` protocol. The property is left optional to ease setup for e.g. testing.
-public protocol Loggable {
-    /// An instance conforming to the `Logger` protocol to be used internally in components conformin to `Loggable`.
-    var logger: Logger? { get set }
-}
-
 /// `Logger` provides a common interface to logging mechanisms.
-public protocol Logger {
+public protocol Logger: EnvironmentallyConscious {
     /// The current log level the instance operates at.
     var logLevel: LogLevel { get set }
-
-    /// Optional reference to a `CrashReporter` instance, to help automatically record log messages to the reporter's breadcrumb log.
-    var crashReporter: CrashReporter? { get set }
 
     /// Log a message at the verbose level.
     /// - parameter message: The message to log at verbose level.

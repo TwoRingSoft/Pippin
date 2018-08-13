@@ -38,8 +38,8 @@ extension LogLevel {
 
 public final class XCGLoggerAdapter: NSObject {
 
+    public var environment: Environment?
     fileprivate var _logLevel: LogLevel = .info
-    fileprivate var _crashReporter: CrashReporter? = nil
     fileprivate var logFileURL: URL?
     fileprivate var xcgLogger = XCGLogger(identifier: XCGLogger.Constants.fileDestinationIdentifier, includeDefaultDestinations: true)
 
@@ -82,15 +82,6 @@ extension XCGLoggerAdapter: Logger {
         }
     }
 
-    public var crashReporter: CrashReporter? {
-        get {
-            return _crashReporter
-        }
-        set(newValue) {
-            _crashReporter = newValue
-        }
-    }
-
     @objc public func logDebug(message: String) {
         self.log(message: message, logLevel: XCGLogger.Level.debug)
     }
@@ -110,7 +101,7 @@ extension XCGLoggerAdapter: Logger {
     @objc public func logError(message: String, error: Error) {
         let messageWithErrorDescription = String(format: "%@: %@", message, error as NSError)
         self.log(message: messageWithErrorDescription, logLevel: XCGLogger.Level.error)
-        crashReporter?.recordNonfatalError(error: error, metadata: nil)
+        environment?.crashReporter.recordNonfatalError(error: error, metadata: nil)
     }
 
     public func logContents() -> String? {
@@ -160,7 +151,7 @@ private extension XCGLoggerAdapter {
     func log(message: String, logLevel: XCGLogger.Level) {
         self.xcgLogger.logln(message, level: logLevel)
         if self.logLevel.xcgLogLevel() >= logLevel {
-            crashReporter?.log(message: String(format: "[%@] %@", logLevel.description, message))
+            environment?.crashReporter.log(message: String(format: "[%@] %@", logLevel.description, message))
         }
     }
 

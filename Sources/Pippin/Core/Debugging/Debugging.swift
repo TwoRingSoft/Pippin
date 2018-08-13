@@ -12,7 +12,7 @@ public enum DebugFlowError: Error {
     case noAppsToImportDatabase
 }
 
-public protocol Debugging: Loggable {
+public protocol Debugging: EnvironmentallyConscious {
     func installViews()
 }
 
