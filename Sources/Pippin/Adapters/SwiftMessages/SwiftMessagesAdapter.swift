@@ -25,8 +25,6 @@ public final class SwiftMessagesAdapter: NSObject {}
 
 extension SwiftMessagesAdapter: Alerter {
 
-    public func initialize() {}
-
     public func showAlert(title: String, message: String, type: AlertType, dismissal: AlertDismissal, occlusion: AlertOcclusion) {
         let view = MessageView.viewFromNib(layout: .messageView)
         view.configureTheme(type.swiftMessagesType())

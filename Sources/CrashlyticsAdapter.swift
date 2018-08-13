@@ -11,14 +11,17 @@ import Foundation
 import Pippin
 
 public class CrashlyticsAdapter: NSObject {
+    
+    init(debug: Bool) {
+        Fabric.sharedSDK().debug = debug
+        Fabric.with([ Crashlytics.self ])
+    }
 
 }
 
 extension CrashlyticsAdapter: CrashReporter {
 
     public func initializeReporting() {
-        Fabric.sharedSDK().debug = true
-        Fabric.with([ Crashlytics.self ])
     }
 
     public func log(message: String) {

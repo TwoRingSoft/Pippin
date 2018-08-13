@@ -15,11 +15,6 @@ import Foundation
 public protocol CrashReporter {
 
     /**
-     Start the crash reporter session.
-     */
-    func initializeReporting()
-
-    /**
      Log a message to the crash reporter's breadcrumb log.
      - parameter message: the message to write to the log
      */
