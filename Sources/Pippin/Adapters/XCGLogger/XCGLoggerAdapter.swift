@@ -151,7 +151,7 @@ private extension XCGLoggerAdapter {
     func log(message: String, logLevel: XCGLogger.Level) {
         self.xcgLogger.logln(message, level: logLevel)
         if self.logLevel.xcgLogLevel() >= logLevel {
-            environment?.crashReporter.log(message: String(format: "[%@] %@", logLevel.description, message))
+            environment?.crashReporter?.log(message: String(format: "[%@] %@", logLevel.description, message))
         }
     }
 
