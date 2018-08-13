@@ -12,20 +12,21 @@ import UIKit
 class DatabaseFixturePickerViewController: UIViewController {
 
     var fixtures: [URL]!
-    private var coreDataController: CoreDataController!
-    private var logger: Logger?
+    private var coreDataController: CoreDataController
+    private var logger: Logger
 
-    init(coreDataController: CoreDataController, logger: Logger?) throws {
-        super.init(nibName: nil, bundle: nil)
-
+    init(coreDataController: CoreDataController, logger: Logger) throws {
         self.coreDataController = coreDataController
+        self.logger = logger
+        
+        super.init(nibName: nil, bundle: nil)
 
         if let path = Bundle.main.resourcePath {
             let fixturesDirectoryURL = URL(fileURLWithPath: (path as NSString).appendingPathComponent("fixtures"))
             do {
                 fixtures = try FileManager.default.contentsOfDirectory(at: fixturesDirectoryURL, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions(rawValue: 0))
             } catch {
-                logger?.logDebug(message: String(format:"[%@] Failed to retrieve contents of directory %@: %@.", instanceType(self), fixturesDirectoryURL.path, String(describing: error)))
+                logger.logDebug(message: String(format:"[%@] Failed to retrieve contents of directory %@: %@.", instanceType(self), fixturesDirectoryURL.path, String(describing: error)))
             }
         }
 

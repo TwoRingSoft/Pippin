@@ -78,7 +78,7 @@ public class InfoViewController: UIViewController {
     }
 
     func secretTestCrash() {
-        environment.crashReporter?.testCrash()
+        environment.crashReporter.testCrash()
     }
 
 }
@@ -167,9 +167,9 @@ private extension InfoViewController {
         textView.isScrollEnabled = false
         textView.linkTextAttributes = [ NSAttributedStringKey.foregroundColor.rawValue: textColor.withAlphaComponent(0.6), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue ]
 
-        let version = environment.semanticVersion!
-        let build = environment.currentBuild!
-        let appNameString = environment.appName!
+        let version = environment.semanticVersion
+        let build = environment.currentBuild
+        let appNameString = environment.appName
         let tworingURL = "http://tworingsoft.com"
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string:
             "\(appNameString)" +
