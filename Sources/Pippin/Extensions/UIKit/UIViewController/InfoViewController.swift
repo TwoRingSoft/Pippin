@@ -78,7 +78,7 @@ public class InfoViewController: UIViewController {
     }
 
     func secretTestCrash() {
-        environment.crashReporter.testCrash()
+        environment.crashReporter?.testCrash()
     }
 
 }

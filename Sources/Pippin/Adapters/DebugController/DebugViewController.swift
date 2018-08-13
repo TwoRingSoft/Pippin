@@ -43,7 +43,7 @@ public class DebugViewController: UIViewController {
     }
 
     func deletePressed() {
-        let modelName = environment.coreDataController.modelName
+        let modelName = environment.coreDataController!.modelName
         let url = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite")
         let shmURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-shm")
         let walURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-wal")
@@ -66,7 +66,7 @@ public class DebugViewController: UIViewController {
 
     func importPressed() {
         do {
-            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController, logger: environment.logger), animated: true)
+            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController!, logger: environment.logger), animated: true)
         } catch {
             environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }
