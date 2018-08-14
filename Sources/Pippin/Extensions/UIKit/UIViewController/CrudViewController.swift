@@ -103,14 +103,11 @@ public class CrudSearchContainer: UIView {}
 @available(iOS 11.0, *) private extension CrudViewController {
     
     func shouldShowAddItemCell() -> Bool {
-        switch configuration.mode {
-        case .editor: return configuration.tableViewDelegate.crudViewControllerShouldShowAddItemRow?(crudViewController: self) ?? true
-        case .picker: return false
-        }
+        return configuration.tableViewDelegate.crudViewControllerShouldShowAddItemRow?(crudViewController: self) ?? (configuration.mode == .editor)
     }
     
     func canEditRow(atIndexPath indexPath: IndexPath) -> Bool {
-        return configuration.tableViewDelegate.crudViewController?(crudViewController: self, canEdit: fetchedResultsController.object(at: indexPath)) ?? false
+        return configuration.tableViewDelegate.crudViewController?(crudViewController: self, canEdit: fetchedResultsController.object(at: indexPath)) ?? (configuration.mode == .editor)
     }
 
     func numberOfEntities() -> Int {
