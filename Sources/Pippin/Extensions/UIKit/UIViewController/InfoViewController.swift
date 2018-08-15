@@ -80,6 +80,10 @@ public class InfoViewController: UIViewController {
     func secretTestCrash() {
         environment.crashReporter?.testCrash()
     }
+    
+    func reportBugPressed() {
+        environment.bugReporter?.show(fromViewController: self, screenshot: nil, metadata: nil)
+    }
 
 }
 
@@ -117,6 +121,14 @@ private extension InfoViewController {
 
         socialLinks.topAnchor == textView.bottomAnchor
         socialLinks.centerXAnchor == textView.centerXAnchor
+        
+        let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", tintColor: .black, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
+        view.addSubview(bugReportButton)
+        bugReportButton.leadingAnchor == textView.leadingAnchor + CGFloat.horizontalMargin
+        bugReportButton.topAnchor == socialLinks.bottomAnchor + 3 * CGFloat.verticalSpacing
+        bugReportButton.centerYAnchor == copyright.centerYAnchor
+        bugReportButton.widthAnchor == 25
+        bugReportButton.heightAnchor == bugReportButton.widthAnchor
 
         copyright.topAnchor == socialLinks.bottomAnchor + 3 * CGFloat.verticalSpacing
         copyright.centerXAnchor == socialLinks.centerXAnchor
@@ -140,7 +152,7 @@ private extension InfoViewController {
     }
 
     func configureCopyright(textFont: UIFont, textColor: UIColor) -> UILabel {
-        let copyrightString = "© 2017"
+        let copyrightString = "© 2018"
         let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
 
         // insert two ring logo and style copyright text to match
