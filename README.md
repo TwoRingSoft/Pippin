@@ -14,12 +14,18 @@ Pippin is split up into some top-level components: Core, Extensions and CanIHaz.
 
 ### Core
 
+#### Data Structures
+
+`Environment` contains a property for each protocol type. They are currently implicitly unwrapped optionals, so that you can use only the components you need. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components; e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
+
+#### Protocols
+
 Pippin is designed to immediately abstract and handle the major components that usually go into an app: 
 
 - crash reporting
 - bug reporting
 - logging
-- data persistence
+- data model
 - in-app debug utilities
 - app information/acknowledgements
 - alerting
@@ -29,15 +35,15 @@ Pippin is designed to immediately abstract and handle the major components that 
 
 Each of these has a top-level protocol defined, which can either have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. 
 
-The following adapters are currently available:
+The following adapters for third-party frameworks are currently available:
 
 - Alerter: [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages)
 - BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
-- Debugging: DebugController
 - Logger: [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
-- Activity indicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
+- ActivityIndicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
+- CrashReporter: *[Crashlytics](https://fabric.io)
 
-**Note:** Crashlytics is a special case, because it delivers a static framework, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Where Pippin decalares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
+**\*Note:** Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
 #### Components to add:
 
