@@ -18,6 +18,8 @@ public protocol BugReporter: EnvironmentallyConscious {
     /// - Parameters:
     ///   - viewController: The view controller to display the flow from.
     ///   - screenshot: An optional image to use in the bug report.
-    ///   - metadata: Optional dictionary with any extra data to send with the bug report, like logs/database.
+    ///   - metadata: Optional dictionary with any extra data to send with the bug report.
+    ///
+    /// - Note: the core data backing store is compiled into a base64 string, if `Environment.coreDataController` exists, and all logs are compiled if `Environment.logger` exists.
     func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?)
 }

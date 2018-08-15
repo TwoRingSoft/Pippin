@@ -22,7 +22,20 @@ public final class PinpointKitAdapter: NSObject, BugReporter {
 
     public func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?) {
         var feedbackConfig = FeedbackConfiguration(recipients: recipients)
-        feedbackConfig.additionalInformation = metadata
+        
+        var allMetadata = [String: AnyObject]()
+        if let dbData = environment?.coreDataController?.exportData() as NSData? {
+            let encodedDBDataString = dbData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) as NSString
+            allMetadata["db"] = encodedDBDataString
+        }
+        if let logs = environment?.logger?.logContents() {
+            allMetadata["logs"] = logs as NSString
+        }
+        if let callsiteMetadata = metadata {
+            allMetadata["callsite-metadata"] = callsiteMetadata as NSDictionary
+        }
+        feedbackConfig.additionalInformation = allMetadata
+        
         var config: Configuration
         if let fonts = environment?.fonts {
             let appearance = InterfaceCustomization.Appearance(navigationTitleFont: fonts.title, feedbackSendButtonFont: fonts.subtitle, feedbackCancelButtonFont: fonts.subtitle, feedbackEditHintFont: fonts.text, feedbackBackButtonFont: fonts.subtitle, logCollectionPermissionFont: fonts.italic, logFont: fonts.text, editorDoneButtonFont: fonts.subtitle)
