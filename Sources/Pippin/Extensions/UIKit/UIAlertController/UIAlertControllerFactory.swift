@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
 
     func confirmDestructiveAction(actionName: String, message: String, cancelLabel: String, actionBlock: @escaping (() -> ())) {
         showConfirmationAlert(withTitle: "Confirm \(actionName)", message: message, confirmTitle: "Yes, \(actionName)", cancelTitle: cancelLabel, style: .actionSheet, completion: { confirmed in

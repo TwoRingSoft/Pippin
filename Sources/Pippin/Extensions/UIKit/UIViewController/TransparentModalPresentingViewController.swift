@@ -14,28 +14,27 @@ import Foundation
  
     Provide a fully finished UIViewController instance to this view controller's init, then call `presentTransparently(animated:completion:)` to present the objective view controller. Use `dismiss(animated:completion:)` to hide.
  */
-class TransparentModalPresentingViewController: UIViewController {
+public class TransparentModalPresentingViewController: UIViewController {
 
     var addStopBlurVCTopConstraint: NSLayoutConstraint!
     var addStopBlurVCBottomConstraint: NSLayoutConstraint!
 
     var childViewController: UIViewController!
 
-    init(childViewController: UIViewController) {
+    public init(childViewController: UIViewController) {
         super.init(nibName: nil, bundle: nil)
         self.childViewController = childViewController
         setUpUI(childViewController: childViewController)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 }
 
-extension TransparentModalPresentingViewController {
-
-    // MARK: Public
+// MARK: Public
+public extension TransparentModalPresentingViewController {
 
     func presentTransparently(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         animateViewWithConstraintConstant(constant: 0, animated: animated, completion: { finished in
@@ -53,9 +52,8 @@ extension TransparentModalPresentingViewController {
 
 }
 
+// MARK: Private
 extension TransparentModalPresentingViewController {
-
-    // MARK: Private
 
     func setUpUI(childViewController: UIViewController) {
         view.isUserInteractionEnabled = false
