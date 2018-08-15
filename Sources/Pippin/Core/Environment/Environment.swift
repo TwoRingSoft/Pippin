@@ -38,6 +38,10 @@ public class Environment: NSObject {
     
     public var debugging: Debugging!
     
+    // MARK: look/feel
+    
+    public var fonts: Fonts!
+    
     /// Initialize a new app environment. Sets up `appName`, `semanticVersion` and `currentBuild` propertiew from the main bundle.
     override public init() {
         let bundle = Bundle.main

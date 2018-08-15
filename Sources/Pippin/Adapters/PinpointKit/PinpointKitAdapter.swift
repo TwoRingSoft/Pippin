@@ -9,29 +9,29 @@
 import PinpointKit
 import UIKit
 
-public final class PinpointKitAdapter: NSObject {
+public final class PinpointKitAdapter: NSObject, BugReporter {
 
     public var environment: Environment?
-    public var recipients: [String]?
+    private var recipients: [String]
     fileprivate var pinpointKit: PinpointKit?
+    
+    public init(recipients: [String]) {
+        self.recipients = recipients
+        super.init()
+    }
 
-}
-
-extension PinpointKitAdapter: BugReporter {
-
-    public func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?, fonts: Fonts?) {
-        guard let recipients = recipients else { return }
+    public func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?) {
         var feedbackConfig = FeedbackConfiguration(recipients: recipients)
         feedbackConfig.additionalInformation = metadata
         var config: Configuration
-        if let fonts = fonts {
+        if let fonts = environment?.fonts {
             let appearance = InterfaceCustomization.Appearance(navigationTitleFont: fonts.title, feedbackSendButtonFont: fonts.subtitle, feedbackCancelButtonFont: fonts.subtitle, feedbackEditHintFont: fonts.text, feedbackBackButtonFont: fonts.subtitle, logCollectionPermissionFont: fonts.italic, logFont: fonts.text, editorDoneButtonFont: fonts.subtitle)
             config = Configuration(appearance: appearance, feedbackConfiguration: feedbackConfig)
         } else {
             config = Configuration(feedbackConfiguration: feedbackConfig)
         }
         pinpointKit = PinpointKit(configuration: config)
-
+        
         if let screenshot = screenshot {
             pinpointKit?.show(from: viewController, screenshot: screenshot)
         } else {
@@ -39,4 +39,20 @@ extension PinpointKitAdapter: BugReporter {
         }
     }
 
+}
+
+extension PinpointKitAdapter: PinpointKitDelegate {
+    public func pinpointKit(_ pinpointKit: PinpointKit, willSend feedback: Feedback) {
+        environment?.activityIndicator?.show(withText: "Sending report...")
+    }
+    
+    public func pinpointKit(_ pinpointKit: PinpointKit, didSend feedback: Feedback) {
+        environment?.activityIndicator?.hide()
+    }
+    
+    public func pinpointKit(_ pinpointKit: PinpointKit, didFailToSend feedback: Feedback, error: Error) {
+        environment?.logger?.logError(message: String(format: "[%@] Failed to send bug report: %@", instanceType(self)), error: error)
+        environment?.activityIndicator?.hide()
+        environment?.alerter?.showAlert(title: "Error", message: "Failed to send bug report. Please check your device's email settings, or contact us directly to help solve the problem.", type: .error, dismissal: .interactive, occlusion: .strong)
+    }
 }
