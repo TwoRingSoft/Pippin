@@ -8,6 +8,7 @@
 
 import CoreLocation
 import Foundation
+import Result
 
 private let firstLaunchTokenUserDefaultKey = "com.tworingsoft.can-i-haz.authorized-location-manager.user-defaults.key.first-launch-token"
 
@@ -16,7 +17,7 @@ public enum AuthorizationScope: Int {
     case always
 }
 
-public typealias AuthorizedLocationManagerResult = (locationManager: CLLocationManager?, error: NSError?)
+public typealias AuthorizedLocationManagerResult = Result<CLLocationManager, NSError>
 
 enum AuthorizationErrorCode: Int {
     case denied
@@ -30,13 +31,13 @@ public class AuthorizedCLLocationManager: NSObject {
 
     fileprivate static let singleton = AuthorizedCLLocationManager()
 
-    fileprivate var authorizationCompletion: ((Bool) -> Void)!
+    fileprivate var authorizationCompletion: ((AuthorizedLocationManagerResult) -> Void)!
     fileprivate var authorizationScope: AuthorizationScope!
 
     public class func authorizedLocationManager(scope: AuthorizationScope, completion: @escaping (AuthorizedLocationManagerResult) -> Void) {
-
         if !CLLocationManager.locationServicesEnabled() {
-            completion((locationManager: nil, error: NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.disabled.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has disabled location services for their device."])))
+            let error = NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.disabled.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has disabled location services for their device."])
+            completion(.failure(error))
             return
         }
 
@@ -46,7 +47,6 @@ public class AuthorizedCLLocationManager: NSObject {
     }
 
     fileprivate class func checkRequiredPlistValues(_ scope: AuthorizationScope) {
-
         var requiredPlistKey: String!
         switch scope {
         case .always:
@@ -69,22 +69,21 @@ public class AuthorizedCLLocationManager: NSObject {
     }
 
     fileprivate func createAndAuthorizeNewLocationManager(_ scope: AuthorizationScope, completion: @escaping ((AuthorizedLocationManagerResult) -> Void)) {
-
         authorizationScope = scope
 
-        var locationManager: CLLocationManager?
-        self.authorizationCompletion = { authorized in
-
-            if authorized {
-                locationManager?.delegate = nil
-                completion((locationManager: locationManager, error: nil))
-            } else {
-                completion((locationManager: nil, error: NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has denied location services for this app."])))
+        self.authorizationCompletion = { authorizationResult in
+            switch authorizationResult {
+            case .success(let authorizedLocationManager):
+                authorizedLocationManager.delegate = nil
+                completion(.success(authorizedLocationManager))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
 
-        locationManager = CLLocationManager()
-        locationManager!.delegate = self
+        // just by instantiating, we'll get a callback to `locationManager(_:didChangeAuthorization:)`
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
     }
 
 }
@@ -92,7 +91,6 @@ public class AuthorizedCLLocationManager: NSObject {
 extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
 
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-
         var authorized = false
 
         switch status {
@@ -114,7 +112,7 @@ extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
         }
 
         if authorized {
-            authorizationCompletion(true)
+            authorizationCompletion(.success(manager))
             return
         }
 
@@ -138,7 +136,8 @@ extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
             return
         }
         
-        authorizationCompletion(false)
+        let error = NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has denied location services for this app."])
+        authorizationCompletion(.failure(error))
     }
     
 }

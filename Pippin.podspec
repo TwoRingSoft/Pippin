@@ -24,6 +24,11 @@ Pod::Spec.new do |s|
   end
   
   s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters'
+  s.subspec 'Core' do |ss|
+    ss.source_files = 'Sources/Pippin/Core/**/*.{h,m,swift}'
+    ss.dependency 'Pippin/Extensions/Foundation'
+    ss.dependency 'Result'
+  end
   
   s.subspec 'Adapters' do |ss|
     ss.subspec 'PinpointKit' do |sss|
@@ -51,11 +56,6 @@ Pod::Spec.new do |s|
       sss.dependency 'Pippin/Core'
       sss.dependency 'JGProgressHUD'
     end
-  end
-  
-  s.subspec 'Core' do |ss|
-    ss.source_files = 'Sources/Pippin/Core/**/*.{h,m,swift}'
-    ss.dependency 'Pippin/Extensions/Foundation'
   end
   
   s.subspec 'CanIHaz' do |ss|
