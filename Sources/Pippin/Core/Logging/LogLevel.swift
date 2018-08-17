@@ -64,7 +64,9 @@ extension LogLevel: CustomDebugStringConvertible {
      - returns: the corresponding `LogLevel` case, or `nil` if none match.
      - Note: This isn't actually a function in `CustomdebugStringConvertible` but it's provided for consistent API. It is a failable initializer just like its counterpart.
      */
-    public init?(debugDescription: String) {
+    public init?(debugDescription: String?) {
+        guard let debugDescription = debugDescription else { return nil }
+        
         if debugDescription == String(reflecting: LogLevel.unknown) {
             self = .unknown
         } else if debugDescription == String(reflecting: LogLevel.verbose) {

@@ -12,42 +12,70 @@ public protocol EnvironmentallyConscious {
     var environment: Environment? { get set }
 }
 
+public protocol EnvironmentTypes {
+    associatedtype DefaultsKey
+}
+
 /// A collection of references to objects containing app information and infrastructure.
 public class Environment: NSObject {
-    
     // MARK: app information
-    
-    public var appName: String
-    public var currentBuild: Build
-    public var semanticVersion: SemanticVersion
+    public let appName: String
+    public let currentBuild: Build
+    public let semanticVersion: SemanticVersion
+    public let lastLaunchedBuild: Build?
     
     // MARK: infrastructure
-    
     public var coreDataController: CoreDataController!
     public var crashReporter: CrashReporter!
     public var logger: Logger!
     public var alerter: Alerter!
     public var activityIndicator: ActivityIndicator!
+    public var defaults: Defaults
     
     // MARK: components
-    
     public var bugReporter: BugReporter!
     public var inAppPurchaseVendor: InAppPurchaseVendor!
     
     // MARK: testing/development utilities
-    
     public var debugging: Debugging!
     
     // MARK: look/feel
-    
     public var fonts: Fonts!
     
     /// Initialize a new app environment. Sets up `appName`, `semanticVersion` and `currentBuild` propertiew from the main bundle.
-    override public init() {
+    /// - Parameters:
+    ///    - defaults: Optionally provide an object conforming to `Defaults`. If you don't need this, an instance of `DefaultDefaults` is generated for Pippin's internal use.
+    public init(defaults: Defaults = DefaultDefaults()) {
         let bundle = Bundle.main
         self.appName = bundle.getAppName()
         self.semanticVersion = bundle.getSemanticVersion()
         self.currentBuild = bundle.getBuild()
+        self.defaults = defaults
+        
+        // get previous launch version
+        self.lastLaunchedBuild = self.defaults.lastLaunchedBuild
+        
+        // memoize this launch version
+        self.defaults.lastLaunchedVersion = semanticVersion
+        self.defaults.lastLaunchedBuild = currentBuild
+        
+        super.init()
     }
     
+    /// Check a few standard override locations for the logging level to use with a new `Logger`.
+    ///
+    /// - Returns: A `LogLevel` found in an override, or `nil` if no override was set.
+    public func logLevel() -> LogLevel? {
+        // see if we have an xcode scheme launch argument
+        if let launchArgumentValue = EnvironmentVariable.logLevel.value(), let logLevel = LogLevel(launchArgumentValue), logLevel != LogLevel.unknown {
+            return logLevel
+        }
+        
+        // see if we have a user default saved
+        if let defaultsLevel = defaults.logLevel, defaultsLevel != LogLevel.unknown {
+            return defaultsLevel
+        }
+        
+        return nil
+    }
 }
