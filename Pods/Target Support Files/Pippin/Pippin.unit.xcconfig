@@ -1,7 +1,7 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage" "${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ObjcExceptionBridging" "${PODS_CONFIGURATION_BUILD_DIR}/PinpointKit" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages" "${PODS_CONFIGURATION_BUILD_DIR}/XCGLogger" "${PODS_CONFIGURATION_BUILD_DIR}/Pippin"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage" "${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ObjcExceptionBridging" "${PODS_CONFIGURATION_BUILD_DIR}/PinpointKit" "${PODS_CONFIGURATION_BUILD_DIR}/Result" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages" "${PODS_CONFIGURATION_BUILD_DIR}/XCGLogger" "${PODS_CONFIGURATION_BUILD_DIR}/Pippin"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = -ObjC -framework "Anchorage" -framework "JGProgressHUD" -framework "ObjcExceptionBridging" -framework "PinpointKit" -framework "Pippin" -framework "SwiftMessages" -framework "XCGLogger"
+OTHER_LDFLAGS = -ObjC -framework "Anchorage" -framework "JGProgressHUD" -framework "ObjcExceptionBridging" -framework "PinpointKit" -framework "Pippin" -framework "Result" -framework "SwiftMessages" -framework "XCGLogger"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

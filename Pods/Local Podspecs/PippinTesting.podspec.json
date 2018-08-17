@@ -1,6 +1,6 @@
 {
   "name": "PippinTesting",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "summary": "A Swift framework to make Xcode testing easier..",
   "description": "A collection of Swift and Objective-C utilities delivering helper functions to work with XCTest and XCUIApplication API in service of concise, readable and robust test code.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinTesting-1.0.0"
+    "tag": "PippinTesting-1.1.0"
   },
   "platforms": {
     "ios": "9.0"

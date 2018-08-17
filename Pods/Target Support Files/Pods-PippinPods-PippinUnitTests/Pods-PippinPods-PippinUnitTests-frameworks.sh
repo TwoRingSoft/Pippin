@@ -149,6 +149,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
@@ -159,6 +160,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
