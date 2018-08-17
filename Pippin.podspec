@@ -23,7 +23,8 @@ Pod::Spec.new do |s|
       test_spec.source_files = 'Tests/Pippin/**/*.swift'
   end
   
-  s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters'
+  s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters', 'Sensors'
+  
   s.subspec 'Core' do |ss|
     ss.source_files = 'Sources/Pippin/Core/**/*.{h,m,swift}'
     ss.dependency 'Pippin/Extensions/Foundation'
@@ -64,6 +65,13 @@ Pod::Spec.new do |s|
     end
     ss.subspec 'Location' do |sss|
       sss.source_files = 'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
+    end
+  end
+  
+  s.subspec 'Sensors' do |ss|
+    ss.subspec 'Location' do |sss|
+      sss.source_files = 'Sources/Pippin/Sensors/Location/**/*.{h,m,swift}'
+      sss.framework = 'CoreLocation'
     end
   end
     

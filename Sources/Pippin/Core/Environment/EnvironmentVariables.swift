@@ -12,6 +12,11 @@ public enum EnvironmentVariable: String {
 
     /// The string separator for simulated restored in app purchases, used in the value for `simulatedRestoredInAppPurchaseIdentifiers`.
     public static let simulatedInAppPurchaseIdentifierSeparator = ":"
+    
+    /// The string separator for simulated locations.
+    public static let simulatedLocationListDelimiter = ";"
+    public static let simulatedLocationTimeDelimiter = ":"
+    public static let simulatedLocationCoordinateDelimiter = ","
 
     /// A log leve to use as an override to the default.
     case logLevel = "log-level"
@@ -21,6 +26,11 @@ public enum EnvironmentVariable: String {
 
     /// A set of product IDs to use when simulating checking the local disk for persisted purchases.
     case simulatedPurchasedInAppPurchaseIdentifiers = "simulated-purchased-in-app-purchase-identifiers"
+    
+    /// A set of locations with time offsets, in the format
+    ///     <time-offset>:<latitude>,<longitude>
+    /// supplied in a list delimited by the value in `simulatedLocationListDelimiter`.
+    case simulatedLocations = "simulated-locations"
 
     /// Get the value passed in for the calling environment variable.
     ///
