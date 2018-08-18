@@ -65,6 +65,7 @@ Pod::Spec.new do |s|
     end
     ss.subspec 'Location' do |sss|
       sss.source_files = 'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
+      sss.dependency 'Result'
     end
   end
   
@@ -72,6 +73,7 @@ Pod::Spec.new do |s|
     ss.subspec 'Location' do |sss|
       sss.source_files = 'Sources/Pippin/Sensors/Location/**/*.{h,m,swift}'
       sss.framework = 'CoreLocation'
+      sss.dependency 'Result'
     end
   end
     
