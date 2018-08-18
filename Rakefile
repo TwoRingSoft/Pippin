@@ -73,6 +73,16 @@ task :release,[:podspec, :retry] do |t, args|
   sh "pod trunk push #{podspec}.podspec --allow-warnings"
 end
 
+desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
+task :reverse_last_tag,[:podspec] do |t, args|
+    podspec = args[:podspec]
+    version_file = version_file_from_podspec podspec
+    version = `vrsn --read --file #{version_file}`
+    tag = "#{podspec}-#{version.strip}"
+    sh "git tag --delete #{tag}"
+    sh "git push --delete origin #{tag}"
+end
+
 desc 'Run Pippin unit and smoke tests.'
 task :test do
   unit_tests
