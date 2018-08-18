@@ -9,7 +9,7 @@ import Foundation
 
 /// A protocol providing a type for a collection of keys used in the defaults' backing store, and a way to convert them to their canonical `String` forms.
 ///
-/// - Note: There is a default implementation, `DefaultDefaultKey`, that Pippin uses in case you don't provide your own `Defaults` when initializing a new `Environment`. Check its implementation for reference when creating your own, both for its usage of an `enum` and its usage of `String(asRDNSForCurrentAppWithSubpaths:)` to create a likely-unique key for the backing store.
+/// - Note: There is a default implementation, `DefaultDefaultsKey`, that Pippin uses in case you don't provide your own `Defaults` when initializing a new `Environment`. Check its implementation for reference when creating your own, both for its usage of an `enum` and its usage of `String(asRDNSForCurrentAppWithSubpaths:)` to create a likely-unique key for the backing store.
 public protocol DefaultsKey {
     /// - Returns: A canonical `String` representation of your key for usage in the defaults backing store.
     ///

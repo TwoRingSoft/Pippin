@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum DefaultDefaultKey: String {
+public enum DefaultDefaultsKey: String {
     case debugLogging = "debug-logging"
     case lastLaunchedSemanticVersion = "last-launched-semantic-version"
     case lastLaunchedBuildNumber = "last-launched-build-number"
@@ -23,10 +23,10 @@ public struct DefaultDefaults: Defaults {
     
     public var logLevel: LogLevel? {
         get {
-            return LogLevel(debugDescription: UserDefaults.standard.string(forKey: DefaultDefaultKey.debugLogging.keyString()))
+            return LogLevel(debugDescription: UserDefaults.standard.string(forKey: DefaultDefaultsKey.debugLogging.keyString()))
         }
         set(newValue) {
-            let key = DefaultDefaultKey.debugLogging.keyString()
+            let key = DefaultDefaultsKey.debugLogging.keyString()
             guard let value = newValue else {
                 setAndSynchronize(key: key, value: nil)
                 return
@@ -37,11 +37,11 @@ public struct DefaultDefaults: Defaults {
     
     public var lastLaunchedBuild: Build? {
         get {
-            guard let stringValue = UserDefaults.standard.string(forKey: DefaultDefaultKey.lastLaunchedBuildNumber.keyString()) else { return nil }
+            guard let stringValue = UserDefaults.standard.string(forKey: DefaultDefaultsKey.lastLaunchedBuildNumber.keyString()) else { return nil }
             return Build(stringValue)
         }
         set(newValue) {
-            let key = DefaultDefaultKey.lastLaunchedBuildNumber.keyString()
+            let key = DefaultDefaultsKey.lastLaunchedBuildNumber.keyString()
             guard let value = newValue else {
                 setAndSynchronize(key: key, value: nil)
                 return
@@ -52,11 +52,11 @@ public struct DefaultDefaults: Defaults {
     
     public var lastLaunchedVersion: SemanticVersion? {
         get {
-            guard let stringValue = UserDefaults.standard.string(forKey: DefaultDefaultKey.lastLaunchedSemanticVersion.keyString()) else { return nil }
+            guard let stringValue = UserDefaults.standard.string(forKey: DefaultDefaultsKey.lastLaunchedSemanticVersion.keyString()) else { return nil }
             return SemanticVersion(stringValue)
         }
         set(newValue) {
-            let key = DefaultDefaultKey.lastLaunchedSemanticVersion.keyString()
+            let key = DefaultDefaultsKey.lastLaunchedSemanticVersion.keyString()
             guard let value = newValue else {
                 setAndSynchronize(key: key, value: nil)
                 return
