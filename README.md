@@ -22,20 +22,21 @@ Pippin is split up into some top-level components: Core, Extensions and CanIHaz.
 
 Pippin is designed to immediately abstract and handle the major components that usually go into an app: 
 
-- crash reporting
-- bug reporting
-- logging
-- data model
-- in-app debug utilities
-- app information/acknowledgements
-- alerting
-- licensing
-- appearance
-- indicators for activity and progress
+- CrashReporting
+- BugReporter: in-app ui for users to send reports
+- Logger
+- Debugging: in-app debug/test/qa utilities
+- Alerting: popups displayed to users
+- InAppPurchaseVendor: licensing
+- Appearance: look and feel, style, theming
+- ActivityIndicator: indicators for activity and progress
+- Defaults: user configurable settings
 
-Each of these has a top-level protocol defined, which can either have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. 
+##### Sensors
 
-The following adapters for third-party frameworks are currently available:
+- Locator: location/gps
+
+These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. The following adapters for third-party frameworks are currently available:
 
 - Alerter: [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages)
 - BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
@@ -43,10 +44,17 @@ The following adapters for third-party frameworks are currently available:
 - ActivityIndicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
 - CrashReporter: *[Crashlytics](https://fabric.io)
 
+The following hand rolled implementations are available:
+
+- CoreDataController (wip extracting Model protocol)
+- Locator: CoreLocationAdapter (and CoreLocationSimulator–wip)
+- Defaults and DefaultsKey: DefaultDefaults and DefaultDefaultsKey (say _that_ fast five times)
+
 **\*Note:** Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
 #### Components to add:
 
+- data model
 - settings bundles
 - analytics
 - push notifications
@@ -54,11 +62,19 @@ The following adapters for third-party frameworks are currently available:
 
 ### CanIHaz
 
-Provides a way to acquire an object that is gated by user interaction to allow access to that particular part of a device, such as a camera or location, as are currently provided. Each component has its own subspec so you can take just what you need.
+Provides a UI flow to acquire an object that is gated by user interaction to allow access to a hardware device component. Each component type has its own subspec so you can take just what you need. So far there are stock flows for the following: 
+
+- Location: AuthorizedCLLocationManager
+- Camera: AuthorizedAVCaptureDevice
 
 ### Extensions
 
 These are currently split into extensions on Foundation, UIKit and Webkit.
+
+#### UIKit
+
+- CrudViewController: table view with search controls wrapped around an FRC
+- InfoViewController: app information/acknowledgements
 
 ## Testing
 
