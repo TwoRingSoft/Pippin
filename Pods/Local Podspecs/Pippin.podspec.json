@@ -1,6 +1,6 @@
 {
   "name": "Pippin",
-  "version": "7.1.0",
+  "version": "8.0.0",
   "summary": "A Swift framework to scaffold an app and make development and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "Pippin-7.1.0"
+    "tag": "Pippin-8.0.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -19,7 +19,8 @@
     "Core",
     "CanIHaz",
     "Extensions",
-    "Adapters"
+    "Adapters",
+    "Sensors"
   ],
   "testspecs": [
     {
@@ -29,6 +30,18 @@
     }
   ],
   "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Sources/Pippin/Core/**/*.{h,m,swift}",
+      "dependencies": {
+        "Pippin/Extensions/Foundation": [
+
+        ],
+        "Result": [
+
+        ]
+      }
+    },
     {
       "name": "Adapters",
       "subspecs": [
@@ -95,18 +108,6 @@
       ]
     },
     {
-      "name": "Core",
-      "source_files": "Sources/Pippin/Core/**/*.{h,m,swift}",
-      "dependencies": {
-        "Pippin/Extensions/Foundation": [
-
-        ],
-        "Result": [
-
-        ]
-      }
-    },
-    {
       "name": "CanIHaz",
       "subspecs": [
         {
@@ -115,7 +116,30 @@
         },
         {
           "name": "Location",
-          "source_files": "Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}"
+          "source_files": "Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}",
+          "dependencies": {
+            "Result": [
+
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sensors",
+      "subspecs": [
+        {
+          "name": "Location",
+          "source_files": "Sources/Pippin/Sensors/Location/**/*.{h,m,swift}",
+          "frameworks": "CoreLocation",
+          "dependencies": {
+            "Pippin/Core": [
+
+            ],
+            "Result": [
+
+            ]
+          }
         }
       ]
     },
