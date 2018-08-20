@@ -48,11 +48,11 @@ public class InfoViewController: UIViewController {
         fatalError("init(coder:) not implemented")
     }
 
-    public required init(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor, environment: Environment, sharedAssetBundle: Bundle) {
+    public required init(thirdPartyKits: [String]?, acknowledgements: String?, textColor: UIColor, environment: Environment, sharedAssetBundle: Bundle) {
         self.sharedAssetBundle = sharedAssetBundle
         self.environment = environment
         super.init(nibName: nil, bundle: nil)
-        setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont, textColor: textColor)
+        setUpUI(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, textColor: textColor)
         setUpSecretCrash()
     }
 
@@ -98,10 +98,10 @@ private extension InfoViewController {
         }
     }
 
-    func setUpUI(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor) {
-        let textView = configureTextView(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, titleFont: titleFont, textFont: textFont, textColor: textColor)
+    func setUpUI(thirdPartyKits: [String]?, acknowledgements: String?, textColor: UIColor) {
+        let textView = configureTextView(thirdPartyKits: thirdPartyKits, acknowledgements: acknowledgements, textColor: textColor)
         let socialLinks = configureSocialLinks(textColor: textColor)
-        let copyright = configureCopyright(textFont: textFont, textColor: textColor)
+        let copyright = configureCopyright(textColor: textColor)
 
         view.addSubview(textView)
         view.addSubview(socialLinks)
@@ -151,14 +151,14 @@ private extension InfoViewController {
         return stack
     }
 
-    func configureCopyright(textFont: UIFont, textColor: UIColor) -> UILabel {
+    func configureCopyright(textColor: UIColor) -> UILabel {
         let copyrightString = "© 2018"
         let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
 
         // insert two ring logo and style copyright text to match
-        string.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(0, string.length))
+        string.addAttributes([NSAttributedStringKey.font: environment.fonts.text], range: NSMakeRange(0, string.length))
 
-        replace(attachmentImage: .twoRing, in: string, font: textFont, textColor: textColor)
+        replace(attachmentImage: .twoRing, in: string, textColor: textColor)
 
         let range = NSMakeRange(0, string.length)
         string.addAttributes([NSAttributedStringKey.foregroundColor: textColor], range: range)
@@ -170,7 +170,7 @@ private extension InfoViewController {
         return label
     }
 
-    func configureTextView(thirdPartyKits: [String]?, acknowledgements: String?, titleFont: UIFont, textFont: UIFont, textColor: UIColor) -> UITextView {
+    func configureTextView(thirdPartyKits: [String]?, acknowledgements: String?, textColor: UIColor) -> UITextView {
         let textView = UITextView(frame: CGRect.zero)
         textView.isEditable = false
         textView.backgroundColor = nil
@@ -195,7 +195,7 @@ private extension InfoViewController {
 
         // style the title
         let titleRange = (attributedString.string as NSString).range(of: appNameString)
-        attributedString.addAttributes([NSAttributedStringKey.font : titleFont], range: titleRange)
+        attributedString.addAttributes([NSAttributedStringKey.font : environment.fonts.superhero], range: titleRange)
 
         // center everything
         let paragraphStyle = NSMutableParagraphStyle()
@@ -203,7 +203,7 @@ private extension InfoViewController {
         attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.string.count))
 
         // set all non-title text to text font
-        attributedString.addAttributes([NSAttributedStringKey.font: textFont], range: NSMakeRange(titleRange.location + titleRange.length, attributedString.string.count - titleRange.location - titleRange.length))
+        attributedString.addAttributes([NSAttributedStringKey.font: environment.fonts.text], range: NSMakeRange(titleRange.location + titleRange.length, attributedString.string.count - titleRange.location - titleRange.length))
 
         // set the string
         textView.attributedText = attributedString
@@ -211,10 +211,11 @@ private extension InfoViewController {
         return textView
     }
 
-    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, font: UIFont, textColor: UIColor) {
+    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, textColor: UIColor) {
         let attachment = NSTextAttachment()
         let size = attachmentImage.image(bundle: sharedAssetBundle) != nil ? attachmentImage.image(bundle: sharedAssetBundle)!.size : .zero
-        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: font.capHeight * size.width / size.height, height: font.capHeight))
+        let capHeight = environment.fonts.text.capHeight
+        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: capHeight * size.width / size.height, height: capHeight))
         attachment.image = attachmentImage.image(bundle: sharedAssetBundle)
         let attachmentString = NSAttributedString(attachment: attachment)
 
