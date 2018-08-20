@@ -120,7 +120,19 @@ def app_smoke_test
   require 'fileutils'
   require 'open3'
   
-  scheme_suffixes = ['Core', 'Extensions', 'CanIHaz-Location', 'CanIHaz-Camera', 'Adapters-PinpointKit', 'Adapters-XCGLogger', 'Adapters-DebugController', 'Extensions-Foundation', 'Extensions-UIKit', 'Extensions-WebKit']
+  scheme_suffixes = [
+      'Core',
+      'Extensions',
+      'CanIHaz-Location',
+      'CanIHaz-Camera',
+      'Adapters-PinpointKit',
+      'Adapters-XCGLogger',
+      'Adapters-DebugController',
+      'Extensions-Foundation',
+      'Extensions-UIKit',
+      'Extensions-WebKit',
+      'Sensors-Location'
+  ]
   languages = [ :swift, :objc ]
   
   # create dir to contain all tests
