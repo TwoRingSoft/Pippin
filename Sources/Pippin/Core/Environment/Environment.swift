@@ -40,17 +40,19 @@ public class Environment: NSObject {
     public var debugging: Debugging!
     
     // MARK: look/feel
-    public var fonts: Fonts!
+    public var fonts: Fonts
     
     /// Initialize a new app environment. Sets up `appName`, `semanticVersion` and `currentBuild` propertiew from the main bundle.
     /// - Parameters:
     ///    - defaults: Optionally provide an object conforming to `Defaults`. If you don't need this, an instance of `DefaultDefaults` is generated for Pippin's internal use.
-    public init(defaults: Defaults = DefaultDefaults()) {
+    ///    - fonts: Optionally provide an object conforming to `Fonts`, otherwise Pippin constructs an instance of `DefaultFonts` for use in UI extensions like `InfoViewController`.
+    public init(defaults: Defaults = DefaultDefaults(), fonts: Fonts = DefaultFonts()) {
         let bundle = Bundle.main
         self.appName = bundle.getAppName()
         self.semanticVersion = bundle.getSemanticVersion()
         self.currentBuild = bundle.getBuild()
         self.defaults = defaults
+        self.fonts = fonts
         
         // get previous launch version
         self.lastLaunchedBuild = self.defaults.lastLaunchedBuild
