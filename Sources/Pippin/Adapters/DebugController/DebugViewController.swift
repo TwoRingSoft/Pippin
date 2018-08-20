@@ -21,12 +21,14 @@ public class DebugViewController: UIViewController {
     private var delegate: DebugViewControllerDelegate!
     private var environment: Environment
     private var debugMenu: UIView!
+    private var assetBundle: Bundle?
 
-    init(delegate: DebugViewControllerDelegate, environment: Environment) {
+    init(delegate: DebugViewControllerDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor, buttonStartLocation: CGPoint) {
         self.delegate = delegate
         self.environment = environment
+        self.assetBundle = assetBundle
         super.init(nibName: nil, bundle: nil)
-        setUpUI()
+        setUpUI(buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -92,7 +94,7 @@ public class DebugViewController: UIViewController {
 @available(iOS 11.0, *)
 private extension DebugViewController {
 
-    func setUpUI() {
+    func setUpUI(buttonTintColor: UIColor, buttonStartLocation: CGPoint) {
         debugMenu = UIView(frame: .zero)
         debugMenu.isHidden = true
         debugMenu.backgroundColor = .white
@@ -115,14 +117,14 @@ private extension DebugViewController {
         debugMenu.addSubview(stack)
         stack.fillSuperview()
 
-        let displayButton = UIButton.button(withImageSetName: "debug", emphasisSuffix: "-pressed", tintColor: .black, target: self, selector: #selector(displayPressed), imageBundle: Bundle(for: DebugViewController.self))
+        let displayButton = UIButton.button(withImageSetName: "debug", emphasisSuffix: "-pressed", tintColor: buttonTintColor, target: self, selector: #selector(displayPressed), imageBundle: assetBundle)
         let size: CGFloat = 50
         let padding: CGFloat = 20
         let screenBounds = UIScreen.main.bounds
-        displayButton.frame = CGRect(x: screenBounds.maxX - size - padding, y: screenBounds.maxY - size - padding, width: size, height: size)
+        displayButton.frame = CGRect(x: buttonStartLocation.x, y: buttonStartLocation.y, width: size, height: size)
         displayButton.layer.cornerRadius = size / 2
         displayButton.layer.borderWidth = 2
-        displayButton.layer.borderColor = UIColor.black.cgColor
+        displayButton.layer.borderColor = buttonTintColor.cgColor
         view.addSubview(displayButton)
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(draggedDisplayButton))

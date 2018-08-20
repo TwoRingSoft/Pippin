@@ -16,13 +16,19 @@ public class DebugFlowController: NSObject, Debugging {
     private var delegate: DebuggingDelegate
     private var debugWindow: UIWindow?
     public var environment: Environment?
+    private var assetBundle: Bundle?
+    private var buttonTintColor: UIColor
+    private var buttonStartLocation: CGPoint
 
     var documentInteractionController: UIDocumentInteractionController!
 
-    public init(databaseFileName: String, delegate: DebuggingDelegate, environment: Environment) {
+    public init(databaseFileName: String, delegate: DebuggingDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor = .black, buttonStartLocation: CGPoint = .zero) {
         self.environment = environment
         self.delegate = delegate
         self.databaseFilename = databaseFileName
+        self.assetBundle = assetBundle
+        self.buttonTintColor = buttonTintColor
+        self.buttonStartLocation = buttonStartLocation
         super.init()
     }
 
@@ -30,7 +36,7 @@ public class DebugFlowController: NSObject, Debugging {
         debugWindow = DebugWindow(frame: UIScreen.main.bounds)
         debugWindow?.windowLevel = UIWindowLevelAlert + 1
         debugWindow?.isHidden = false
-        debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment!)
+        debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment!, assetBundle: assetBundle, buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation)
     }
 
 }
