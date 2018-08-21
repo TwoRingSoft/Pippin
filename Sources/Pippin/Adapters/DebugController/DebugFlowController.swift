@@ -25,7 +25,7 @@ public class DebugFlowController: NSObject, Debugging {
     private weak var presentingVC: UIViewController!
     private var databaseFilename: String
     private var delegate: DebugFlowControllerDelegate
-    private var debugWindow: UIWindow?
+    private var debugWindow: DebugWindow?
     public var environment: Environment?
     private var assetBundle: Bundle?
     private var buttonTintColor: UIColor
@@ -54,13 +54,17 @@ public class DebugFlowController: NSObject, Debugging {
 
 @available(iOS 11.0, *)
 extension DebugFlowController: DebugViewControllerDelegate {
+    func debugViewControllerDisplayedMenu(debugViewController: DebugViewController) {
+        debugWindow?.menuDisplayed = true
+    }
+    
+    func debugViewControllerHidMenu(debugViewController: DebugViewController) {
+        debugWindow?.menuDisplayed = false
+    }
+    
 
     func debugViewControllerExported(debugViewController: DebugViewController) {
         exportDatabase(databaseFileName: databaseFilename)
-    }
-
-    func debugViewControllerCanceled(debugViewController: DebugViewController) {
-        presentingVC.dismiss(animated: true)
     }
 
     func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController) {

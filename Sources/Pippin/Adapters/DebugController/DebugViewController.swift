@@ -13,6 +13,9 @@ import UIKit
 protocol DebugViewControllerDelegate {
     func debugViewControllerExported(debugViewController: DebugViewController)
     func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController)
+    
+    func debugViewControllerDisplayedMenu(debugViewController: DebugViewController)
+    func debugViewControllerHidMenu(debugViewController: DebugViewController)
 }
 
 @available(iOS 11.0, *)
@@ -42,10 +45,12 @@ public class DebugViewController: UIViewController {
 
     func closePressed() {
         debugMenu.isHidden = true
+        delegate.debugViewControllerHidMenu(debugViewController: self)
     }
 
     func displayPressed() {
         debugMenu.isHidden = false
+        delegate.debugViewControllerDisplayedMenu(debugViewController: self)
     }
 
     func draggedDisplayButton(recognizer: UIPanGestureRecognizer) {
