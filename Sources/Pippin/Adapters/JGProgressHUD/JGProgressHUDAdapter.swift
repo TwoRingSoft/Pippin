@@ -51,6 +51,31 @@ extension JGProgressHUDAdapter: JGProgressHUDDelegate {
     }
 }
 
+// MARK: Debuggable
+extension JGProgressHUDAdapter: Debuggable {
+    public func debuggingControlPanel() -> UIView {
+        let titleLabel = UILabel.label(withText: "ActivityIndicator:", font: environment!.fonts.title, textColor: .black)
+        
+        let button = UIButton(type: .custom)
+        button.setTitle("Show activity indicator", for: .normal)
+        button.addTarget(self, action: #selector(showTestActivityIndicatorPressed), for: .touchUpInside)
+        button.setTitleColor(.black, for: .normal)
+        
+        let stack = UIStackView(arrangedSubviews: [titleLabel, button])
+        stack.axis = .vertical
+        stack.spacing = 20
+        
+        return stack
+    }
+    
+    @objc private func showTestActivityIndicatorPressed() {
+        show(withText: "Wait...")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.hide()
+        }
+    }
+}
+
 // MARK: Private
 private extension JGProgressHUDAdapter {
     func display() {

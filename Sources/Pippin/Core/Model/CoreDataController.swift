@@ -27,6 +27,7 @@ public class CoreDataController: NSObject, EnvironmentallyConscious {
     public var environment: Environment?
     var modelName: String
     fileprivate var managedObjectModel: NSManagedObjectModel?
+    public var debuggingDelegate: CoreDataControllerDebugging?
 
     /**
      Initialize a new Core Data helper.

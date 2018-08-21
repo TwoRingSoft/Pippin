@@ -40,41 +40,7 @@ public class DebugViewController: UIViewController {
 @available(iOS 11.0, *)
 @objc extension DebugViewController {
 
-    func exportPressed() {
-        delegate.debugViewControllerExported(debugViewController: self)
-    }
-
-    func deletePressed() {
-        let modelName = environment.coreDataController!.modelName
-        let url = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite")
-        let shmURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-shm")
-        let walURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-wal")
-        
-        do {
-            try FileManager.default.removeItem(at: url)
-            try FileManager.default.removeItem(at: shmURL)
-            try FileManager.default.removeItem(at: walURL)
-            showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
-                fatalError("Restarting to complete database removal.")
-            }
-        } catch {
-            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
-        }
-    }
-
-    func generatePressed() {
-        delegate.debugViewControllerWantsToGenerateTestModels(debugViewController: self)
-    }
-
-    func importPressed() {
-        do {
-            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController!, logger: environment.logger), animated: true)
-        } catch {
-            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
-        }
-    }
-
-    func cancelPressed() {
+    func closePressed() {
         debugMenu.isHidden = true
     }
 
@@ -100,27 +66,40 @@ private extension DebugViewController {
         debugMenu.backgroundColor = .white
         view.addSubview(debugMenu)
         debugMenu.fillSuperview()
+        
+        let scrollView = UIScrollView(frame: .zero)
+        debugMenu.addSubview(scrollView)
+        scrollView.fillSuperview()
+        
+        let stackWidthSizingView = UIView(frame: .zero)
+        debugMenu.addSubview(stackWidthSizingView)
+        stackWidthSizingView.horizontalAnchors == debugMenu.horizontalAnchors
+        stackWidthSizingView.heightAnchor == 0
+        stackWidthSizingView.topAnchor == debugMenu.topAnchor
 
-        let exportButton = UIButton(frame: .zero)
-        exportButton.configure(title: "Export Database", target: self, selector: #selector(exportPressed))
-        let importButton = UIButton(frame: .zero)
-        importButton.configure(title: "Import Database", target: self, selector: #selector(importPressed))
-        let generateButton = UIButton(frame: .zero)
-        generateButton.configure(title: "Generate Test Models", target: self, selector: #selector(generatePressed))
-        let deleteButton = UIButton(frame: .zero)
-        deleteButton.configure(title: "Delete Database", target: self, selector: #selector(deletePressed))
-        let cancelButton = UIButton(frame: .zero)
-        cancelButton.configure(title: "Cancel", target: self, selector: #selector(cancelPressed))
+        var controlPanels = [UIView]()
+    
+        environment.coreDataController.debuggingDelegate = self
+        controlPanels.append(environment.coreDataController.debuggingControlPanel())
+        
+        controlPanels.append(environment.activityIndicator.debuggingControlPanel())
+        controlPanels.append(environment.alerter.debuggingControlPanel())
+        controlPanels.append(environment.crashReporter.debuggingControlPanel())
+        
+        let closeButton = UIButton(frame: .zero)
+        closeButton.configure(title: "Close", target: self, selector: #selector(closePressed))
+        controlPanels.append(closeButton)
 
-        let stack = UIStackView(arrangedSubviews: [exportButton, importButton, generateButton, deleteButton, cancelButton])
+        let stack = UIStackView(arrangedSubviews: controlPanels)
         stack.axis = .vertical
-        debugMenu.addSubview(stack)
-        stack.fillSuperview()
+        stack.distribution = .equalSpacing
+        
+        scrollView.addSubview(stack)
+        stack.edgeAnchors == scrollView.edgeAnchors
+        stack.widthAnchor == stackWidthSizingView.widthAnchor
 
         let displayButton = UIButton.button(withImageSetName: "debug", emphasisSuffix: "-pressed", tintColor: buttonTintColor, target: self, selector: #selector(displayPressed), imageBundle: assetBundle)
         let size: CGFloat = 50
-        let padding: CGFloat = 20
-        let screenBounds = UIScreen.main.bounds
         displayButton.frame = CGRect(x: buttonStartLocation.x, y: buttonStartLocation.y, width: size, height: size)
         displayButton.layer.cornerRadius = size / 2
         displayButton.layer.borderWidth = 2
@@ -131,4 +110,29 @@ private extension DebugViewController {
         displayButton.addGestureRecognizer(panGestureRecognizer)
     }
 
+}
+
+@available(iOS 11.0, *)
+extension DebugViewController: CoreDataControllerDebugging {
+    public func coreDataControllerExported(coreDataController: CoreDataController) {
+        delegate.debugViewControllerExported(debugViewController: self)
+    }
+    
+    public func coreDataControllerWantsToGenerateTestModels(coreDataController: CoreDataController) {
+        delegate.debugViewControllerWantsToGenerateTestModels(debugViewController: self)
+    }
+    
+    public func coreDataControllerDeletedModels(coreDataController: CoreDataController) {
+        showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
+            fatalError("Restarting to complete database removal.")
+        }
+    }
+    
+    public func coreDataControllerWantsToImportFixture(coreDataController: CoreDataController) {
+        do {
+            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController!, logger: environment.logger), animated: true)
+        } catch {
+            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
+        }
+    }
 }

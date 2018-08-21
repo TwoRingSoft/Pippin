@@ -7,17 +7,12 @@
 
 import Foundation
 
-public enum DebugFlowError: Error {
-    case databaseExportError(message: String, underlyingError: Error)
-    case noAppsToImportDatabase
-}
-
+/// Protocol providing a single method for a conforming debugging utility to inject its UI at the time of calling.
 public protocol Debugging: EnvironmentallyConscious {
     func installViews()
 }
 
-public protocol DebuggingDelegate {
-    func exportedDatabaseData() -> Data?
-    func failedToExportDatabase(error: DebugFlowError)
-    func debugFlowControllerWantsToGenerateTestModels(debugFlowController: Debugging)
+/// For protocols that touch UI, conformers provide a `UIView` containing controls a tester can manipulate to exercise the protocol API and view a representative collection of UI states.
+public protocol Debuggable {
+    func debuggingControlPanel() -> UIView
 }

@@ -46,11 +46,20 @@ These may have concrete objects implementing the functionality directly, or if t
 
 The following hand rolled implementations are available:
 
+- Debugging: DebugViewController 
 - CoreDataController (wip extracting Model protocol)
 - Locator: CoreLocationAdapter (and CoreLocationSimulator–wip)
 - Defaults and DefaultsKey: DefaultDefaults and DefaultDefaultsKey (say _that_ fast five times)
 
 **\*Note:** Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
+
+#### Aspects
+
+There are a few protocols defining cross cutting concerns across components, like theming and debugging of components that deliver UI.
+
+- Themeable: provide access to `UIAppearanceProxy` based theming of UI elements
+- Debuggable: deliver UI controls to exercise and manipulate UI components, for use by developers and testers
+- EnvironmentallyConscious: provide a back reference to the `Environment` to use other PIppin components, e.g. the `CrashReporter` and `Logger` working together
 
 #### Components to add:
 

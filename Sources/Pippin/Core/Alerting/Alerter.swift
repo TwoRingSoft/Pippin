@@ -13,7 +13,18 @@ public enum AlertType {
     case info
     case warning
     case error
+    
+    static let types: [AlertType] = [.error, .info, .warning, .success]
 
+    func name() -> String {
+        switch self {
+        case .success: return "Success"
+        case .info: return "Info"
+        case .warning: return "Warning"
+        case .error: return "Error"
+        }
+    }
+    
 }
 
 public enum AlertDismissal {
@@ -27,7 +38,16 @@ public enum AlertDismissal {
      An alert where the user must act to dismiss or confirm it.
     */
     case interactive
+    
+    static let dismissalTypes: [AlertDismissal] = [.automatic, .interactive]
 
+    func name() -> String {
+        switch self {
+        case .automatic: return "Automatic"
+        case .interactive: return "Interactive"
+        }
+    }
+    
 }
 
 public enum AlertOcclusion {
@@ -41,10 +61,19 @@ public enum AlertOcclusion {
     Shade the window and prevents user interaction until dismissed.
      */
     case strong
+    
+    static let occlusionTypes: [AlertOcclusion] = [.strong, .weak]
+    
+    func name() -> String {
+        switch self {
+        case .strong: return "Strong"
+        case .weak: return "Weak"
+        }
+    }
 
 }
 
-public protocol Alerter: Themeable, EnvironmentallyConscious {
+public protocol Alerter: Debuggable, Themeable, EnvironmentallyConscious {
     
     func showAlert(title: String, message: String, type: AlertType, dismissal: AlertDismissal, occlusion: AlertOcclusion)
     func showConfirmationAlert(title: String, message: String, type: AlertType, confirmButtonTitle: String, confirmationCompletion: @escaping EmptyBlock)

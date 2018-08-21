@@ -1,9 +1,9 @@
 //
 //  DatabaseFixturePickerViewController.swift
-//  InformedConsent
+//  Pippin
 //
 //  Created by Andrew McKnight on 7/31/17.
-//  Copyright © 2017 Insight Therapeutics. All rights reserved.
+//  Copyright © 2018 Two Ring Software. All rights reserved.
 //
 
 import UIKit

@@ -44,8 +44,25 @@ extension CrashlyticsAdapter: CrashReporter {
         Crashlytics.sharedInstance().setValuesForKeys(keysAndValues)
     }
 
-    public func testCrash() {
+    @objc public func testCrash() {
         Crashlytics.sharedInstance().crash()
     }
 
+}
+
+extension CrashlyticsAdapter: Debuggable {
+    public func debuggingControlPanel() -> UIView {
+        let titleLabel = UILabel.label(withText: "CrashReporter:", font: environment!.fonts.title, textColor: .black)
+        
+        let button = UIButton(type: .custom)
+        button.setTitle("Test crash", for: .normal)
+        button.addTarget(self, action: #selector(testCrash), for: .touchUpInside)
+        button.setTitleColor(.black, for: .normal)
+        
+        let stack = UIStackView(arrangedSubviews: [titleLabel, button])
+        stack.axis = .vertical
+        stack.spacing = 20
+        
+        return stack
+    }
 }

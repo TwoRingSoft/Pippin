@@ -8,12 +8,23 @@
 
 import UIKit
 
+public enum DebugFlowError: Error {
+    case databaseExportError(message: String, underlyingError: Error)
+    case noAppsToImportDatabase
+}
+
+public protocol DebugFlowControllerDelegate {
+    func exportedDatabaseData() -> Data?
+    func failedToExportDatabase(error: DebugFlowError)
+    func debugFlowControllerWantsToGenerateTestModels(debugFlowController: Debugging)
+}
+
 @available(iOS 11.0, *)
 public class DebugFlowController: NSObject, Debugging {
 
     private weak var presentingVC: UIViewController!
     private var databaseFilename: String
-    private var delegate: DebuggingDelegate
+    private var delegate: DebugFlowControllerDelegate
     private var debugWindow: UIWindow?
     public var environment: Environment?
     private var assetBundle: Bundle?
@@ -22,7 +33,7 @@ public class DebugFlowController: NSObject, Debugging {
 
     var documentInteractionController: UIDocumentInteractionController!
 
-    public init(databaseFileName: String, delegate: DebuggingDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor = .black, buttonStartLocation: CGPoint = .zero) {
+    public init(databaseFileName: String, delegate: DebugFlowControllerDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor = .black, buttonStartLocation: CGPoint = .zero) {
         self.environment = environment
         self.delegate = delegate
         self.databaseFilename = databaseFileName
