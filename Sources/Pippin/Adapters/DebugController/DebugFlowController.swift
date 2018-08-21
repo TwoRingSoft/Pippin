@@ -45,7 +45,7 @@ public class DebugFlowController: NSObject, Debugging {
 
     public func installViews() {
         debugWindow = DebugWindow(frame: UIScreen.main.bounds)
-        debugWindow?.windowLevel = UIWindowLevelAlert + 1
+        debugWindow?.windowLevel = WindowLevel.debugging.windowLevel()
         debugWindow?.isHidden = false
         debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment!, assetBundle: assetBundle, buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation)
     }
