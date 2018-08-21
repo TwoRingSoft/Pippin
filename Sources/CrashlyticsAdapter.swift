@@ -23,9 +23,6 @@ public class CrashlyticsAdapter: NSObject, EnvironmentallyConscious {
 
 extension CrashlyticsAdapter: CrashReporter {
 
-    public func initializeReporting() {
-    }
-
     public func log(message: String) {
         #if !TEST
             DispatchQueue.main.async {
