@@ -34,6 +34,8 @@ public final class BlurViewController: UIViewController {
 
         view.addSubview(blurView)
         blurView.fillSuperview()
+        
+        self.title = viewController.title
     }
 
 }
