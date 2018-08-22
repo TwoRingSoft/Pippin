@@ -29,6 +29,7 @@ Pod::Spec.new do |s|
     ss.source_files = 'Sources/Pippin/Core/**/*.{h,m,swift}'
     ss.dependency 'Pippin/Extensions/Foundation'
     ss.dependency 'Result'
+    ss.dependency 'Anchorage', '~> 4'
   end
   
   s.subspec 'Adapters' do |ss|
@@ -85,7 +86,6 @@ Pod::Spec.new do |s|
     end
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}'
-      sss.dependency 'Anchorage', '~> 4'
       sss.dependency 'Pippin/Core'
       sss.dependency 'Pippin/Extensions/Foundation'
     end

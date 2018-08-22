@@ -23,6 +23,14 @@ extension UIView {
                 constraint.isActive = true
         }
     }
+    
+    public func fillLayoutMargins(insets: UIEdgeInsets = .zero) {
+        guard let superview = superview else { return }
+        layoutMarginsGuide.leadingAnchor == superview.layoutMarginsGuide.leadingAnchor + insets.left
+        layoutMarginsGuide.trailingAnchor == superview.layoutMarginsGuide.trailingAnchor - insets.right
+        layoutMarginsGuide.topAnchor == superview.layoutMarginsGuide.topAnchor + insets.top
+        layoutMarginsGuide.bottomAnchor == superview.layoutMarginsGuide.bottomAnchor - insets.bottom
+    }
 
     @available(iOS 11.0, *)
     public func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {

@@ -19,7 +19,7 @@ extension UIButton {
      - target: target to receive a `touchUpInside` event
      - selector: function to call for a `touchUpInside` event
      */
-    public class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) -> UIButton {
+    public class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", title: String? = nil, tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) -> UIButton {
         let button = UIButton(type: .custom)
         let normalImage = UIImage(named: "\(imageSetName)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         button.setImage(normalImage, for: .normal)
@@ -30,6 +30,10 @@ extension UIButton {
             button.addTarget(target, action: selector!, for: .touchUpInside)
         }
         button.tintColor = tintColor
+        if let title = title {
+            button.setTitle(title, for: .normal)
+            button.setTitleColor(tintColor, for: .normal)
+        }
         return button
     }
 
