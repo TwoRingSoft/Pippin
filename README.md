@@ -50,6 +50,7 @@ The following hand rolled implementations are available:
 - CoreDataController (wip extracting Model protocol)
 - Locator: CoreLocationAdapter (and CoreLocationSimulator–wip)
 - Defaults and DefaultsKey: DefaultDefaults and DefaultDefaultsKey (say _that_ fast five times)
+- Fonts: DefaultFonts 
 
 **\*Note:** Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
@@ -83,7 +84,7 @@ These are currently split into extensions on Foundation, UIKit and Webkit.
 #### UIKit
 
 - CrudViewController: table view with search controls wrapped around an FRC
-- InfoViewController: app information/acknowledgements
+- InfoViewController: app name and version info, links to two ring properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
 
 ## Testing
 
@@ -96,3 +97,5 @@ Also runs an integration smoke test, which generates an Xcode project for each s
 ## Contributing
 
 Got something you'd like to add, or needs fixing? Feel free to file an issue and if you'd like, a PR!
+
+You can also help support this project by donating: [Paypal Me!](https://www.paypal.me/armcknight)
