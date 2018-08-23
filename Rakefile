@@ -61,15 +61,12 @@ def version_file_from_podspec podspec
 end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
-task :release,[:podspec, :retry] do |t, args|
+task :release,[:podspec] do |t, args|
   podspec = args[:podspec]
   version_file = version_file_from_podspec podspec
   version = `vrsn --read --file #{version_file}`
-  unless args[:retry] then
-      sh "git tag #{podspec}-#{version.strip}"
-      sh 'git push --tags'
-  end
-  
+  sh "git tag #{podspec}-#{version.strip}"
+  sh 'git push --tags'
   sh "pod trunk push #{podspec}.podspec --allow-warnings"
 end
 
