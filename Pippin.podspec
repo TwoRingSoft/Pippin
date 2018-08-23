@@ -23,11 +23,13 @@ Pod::Spec.new do |s|
       test_spec.source_files = 'Tests/Pippin/**/*.swift'
   end
   
-  s.default_subspecs = 'Core', 'CanIHaz', 'Extensions', 'Adapters', 'Sensors'
+  s.default_subspecs = 'Core', 'CanIHaz', 'Adapters', 'Sensors'
   
   s.subspec 'Core' do |ss|
-    ss.source_files = 'Sources/Pippin/Core/**/*.{h,m,swift}'
-    ss.dependency 'Pippin/Extensions/Foundation'
+    ss.source_files = [
+        'Sources/Pippin/Core/**/*.{h,m,swift}',
+        'Sources/Pippin/Extensions/**/*.{h,m,swift}'
+    ]
     ss.dependency 'Result'
     ss.dependency 'Anchorage', '~> 4'
   end
@@ -50,8 +52,7 @@ Pod::Spec.new do |s|
     end
     ss.subspec 'DebugController' do |sss|
       sss.source_files = 'Sources/Pippin/Adapters/DebugController/**/*.{h,m,swift}'
-      sss.dependency 'Pippin/Extensions/UIKit'
-      sss.dependency 'Anchorage', '~> 4'
+      sss.dependency 'Pippin/Core'
     end
     ss.subspec 'JGProgressHUD' do |sss|
       sss.source_files = 'Sources/Pippin/Adapters/JGProgressHUD/**/*.{h,m,swift}'
@@ -75,23 +76,7 @@ Pod::Spec.new do |s|
       sss.source_files = 'Sources/Pippin/Sensors/Location/**/*.{h,m,swift}'
       sss.framework = 'CoreLocation'
       sss.dependency 'Pippin/Core'
-      sss.dependency 'Result'
       sss.dependency 'Pippin/CanIHaz'
-    end
-  end
-    
-  s.subspec 'Extensions' do |ss|
-    ss.subspec 'Foundation' do |sss|
-      sss.source_files = 'Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}'
-    end
-    ss.subspec 'UIKit' do |sss|
-      sss.source_files = 'Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}'
-      sss.dependency 'Pippin/Core'
-      sss.dependency 'Pippin/Extensions/Foundation'
-    end
-    ss.subspec 'WebKit' do |sss|
-      sss.source_files = 'Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}'
-      sss.dependency 'Pippin/Extensions/Foundation'
     end
   end
 

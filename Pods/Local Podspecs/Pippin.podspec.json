@@ -18,7 +18,6 @@
   "default_subspecs": [
     "Core",
     "CanIHaz",
-    "Extensions",
     "Adapters",
     "Sensors"
   ],
@@ -32,11 +31,11 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "Sources/Pippin/Core/**/*.{h,m,swift}",
+      "source_files": [
+        "Sources/Pippin/Core/**/*.{h,m,swift}",
+        "Sources/Pippin/Extensions/**/*.{h,m,swift}"
+      ],
       "dependencies": {
-        "Pippin/Extensions/Foundation": [
-
-        ],
         "Result": [
 
         ],
@@ -88,11 +87,8 @@
           "name": "DebugController",
           "source_files": "Sources/Pippin/Adapters/DebugController/**/*.{h,m,swift}",
           "dependencies": {
-            "Pippin/Extensions/UIKit": [
+            "Pippin/Core": [
 
-            ],
-            "Anchorage": [
-              "~> 4"
             ]
           }
         },
@@ -139,40 +135,7 @@
             "Pippin/Core": [
 
             ],
-            "Result": [
-
-            ],
             "Pippin/CanIHaz": [
-
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Extensions",
-      "subspecs": [
-        {
-          "name": "Foundation",
-          "source_files": "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
-        },
-        {
-          "name": "UIKit",
-          "source_files": "Sources/Pippin/Extensions/UIKit/**/*.{h,m,swift}",
-          "dependencies": {
-            "Pippin/Core": [
-
-            ],
-            "Pippin/Extensions/Foundation": [
-
-            ]
-          }
-        },
-        {
-          "name": "WebKit",
-          "source_files": "Sources/Pippin/Extensions/WebKit/**/*.{h,m,swift}",
-          "dependencies": {
-            "Pippin/Extensions/Foundation": [
 
             ]
           }

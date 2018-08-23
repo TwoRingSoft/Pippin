@@ -14,7 +14,6 @@ PODS:
     - Pippin/Adapters (= 9.0.0)
     - Pippin/CanIHaz (= 9.0.0)
     - Pippin/Core (= 9.0.0)
-    - Pippin/Extensions (= 9.0.0)
     - Pippin/Sensors (= 9.0.0)
   - Pippin/Adapters (9.0.0):
     - Pippin/Adapters/DebugController (= 9.0.0)
@@ -23,8 +22,7 @@ PODS:
     - Pippin/Adapters/SwiftMessages (= 9.0.0)
     - Pippin/Adapters/XCGLogger (= 9.0.0)
   - Pippin/Adapters/DebugController (9.0.0):
-    - Anchorage (~> 4)
-    - Pippin/Extensions/UIKit
+    - Pippin/Core
   - Pippin/Adapters/JGProgressHUD (9.0.0):
     - JGProgressHUD
     - Pippin/Core
@@ -45,24 +43,12 @@ PODS:
     - Result
   - Pippin/Core (9.0.0):
     - Anchorage (~> 4)
-    - Pippin/Extensions/Foundation
     - Result
-  - Pippin/Extensions (9.0.0):
-    - Pippin/Extensions/Foundation (= 9.0.0)
-    - Pippin/Extensions/UIKit (= 9.0.0)
-    - Pippin/Extensions/WebKit (= 9.0.0)
-  - Pippin/Extensions/Foundation (9.0.0)
-  - Pippin/Extensions/UIKit (9.0.0):
-    - Pippin/Core
-    - Pippin/Extensions/Foundation
-  - Pippin/Extensions/WebKit (9.0.0):
-    - Pippin/Extensions/Foundation
   - Pippin/Sensors (9.0.0):
     - Pippin/Sensors/Location (= 9.0.0)
   - Pippin/Sensors/Location (9.0.0):
     - Pippin/CanIHaz
     - Pippin/Core
-    - Result
   - Pippin/Tests (9.0.0)
   - PippinTesting (1.1.0)
   - PippinTesting/Tests (1.1.0)
@@ -105,7 +91,7 @@ SPEC CHECKSUMS:
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: b444d66d8b10420c1ffc22c176dee37c1c12b4e7
-  Pippin: 2bac09a15a5dae0db09f8bdaeba02ad602197e98
+  Pippin: e9e5e418606c5aeb1b3f67910f9e4e9ff53dd2b5
   PippinTesting: 2217b9ebc0ec21adb3f62b7383f912c4e39744d7
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591
