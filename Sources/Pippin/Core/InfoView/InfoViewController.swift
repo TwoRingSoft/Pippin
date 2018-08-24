@@ -56,6 +56,10 @@ public class InfoViewController: UIViewController {
         let mailVC = MFMailComposeViewController(nibName: nil, bundle: nil)
         mailVC.mailComposeDelegate = self
         mailVC.setToRecipients(contactEmails)
+        let appInfo = "\(environment.appName) \(environment.semanticVersion) (\(environment.currentBuild))"
+        let subject = "\(appInfo) Feedback"
+        mailVC.setSubject(subject)
+        mailVC.setMessageBody("\n\n\n\(appInfo)", isHTML: false)
         present(mailVC, animated: true)
     }
     
