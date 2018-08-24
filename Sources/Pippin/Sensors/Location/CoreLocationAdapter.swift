@@ -23,6 +23,7 @@ public class CoreLocationAdapter: NSObject, Locator {
         self.authorizedLocationManager = authorizedLocationManager
         self.locatorDelegate = locatorDelegate
         super.init()
+        authorizedLocationManager?.delegate = self
     }
     
     public func startMonitoringLocation() {
@@ -33,6 +34,7 @@ public class CoreLocationAdapter: NSObject, Locator {
                 switch authorizationResult {
                 case .success(let authorizedLocationManager):
                     self.authorizedLocationManager = authorizedLocationManager
+                    authorizedLocationManager.delegate = self
                     authorizedLocationManager.startUpdatingLocation()
                 case .failure(let error):
                     self.locatorDelegate.locator(locator: self, encounteredError: error)
