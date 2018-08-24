@@ -27,6 +27,7 @@ public class FormController: NSObject {
     private weak var scrollView: UIScrollView?
     private var originalContentInset: UIEdgeInsets?
     private var originalContentOffset: CGPoint?
+    private var insetScrollViewContentForAccessoryView: Bool = false
 
     private var receivedDelegateCallback = false
     private var notification: Notification?
@@ -267,31 +268,36 @@ private extension FormController {
 
 
         let unhide: ((Bool) -> ()) = { completed in
-            guard let tableView = self.tableView else { return }
-            guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
-            guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
-
-            let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
-            let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
-            if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
-                // don't need to unhide the target cell
-                return
-            }
-
-            if let indexPath = tableView.indexPath(for: targetCell) {
-                if let superview = currentInputView.superview {
-                    let a = currentInputView.center.y / superview.bounds.height
-                    var position: UITableViewScrollPosition
-                    if a < 0.34 {
-                        position = .top
-                    } else if a < 0.67 {
-                        position = .middle
+            if let scrollView = self.scrollView, !self.insetScrollViewContentForAccessoryView, let inputAccessoryView = currentInputView.inputAccessoryView {
+                self.insetScrollViewContentForAccessoryView = true
+                scrollView.contentInset = scrollView.contentInset.inset(topDelta: 12, bottomDelta: (inputAccessoryView.bounds.height + 12))
+            } else {
+                guard let tableView = self.tableView else { return }
+                guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
+                guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
+                
+                let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
+                let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
+                if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
+                    // don't need to unhide the target cell
+                    return
+                }
+                
+                if let indexPath = tableView.indexPath(for: targetCell) {
+                    if let superview = currentInputView.superview {
+                        let a = currentInputView.center.y / superview.bounds.height
+                        var position: UITableViewScrollPosition
+                        if a < 0.34 {
+                            position = .top
+                        } else if a < 0.67 {
+                            position = .middle
+                        } else {
+                            position = .bottom
+                        }
+                        tableView.scrollToRow(at: indexPath, at: position, animated: true)
                     } else {
-                        position = .bottom
+                        tableView.scrollToRow(at: indexPath, at: .none, animated: true)
                     }
-                    tableView.scrollToRow(at: indexPath, at: position, animated: true)
-                } else {
-                    tableView.scrollToRow(at: indexPath, at: .none, animated: true)
                 }
             }
         }
@@ -314,18 +320,22 @@ private extension FormController {
     }
 
     func handleKeyboardHide(notification: Notification) {
-        guard let tableView = self.tableView else { return }
         guard let originalContentInset = self.originalContentInset else { return }
         self.originalContentInset = nil
-
+        
         guard let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
         guard let curveRawValue = (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
         let curveOption = UIViewAnimationOptions(rawValue: curveRawValue)
 
-        UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
-            tableView.contentInset = originalContentInset
-            tableView.scrollIndicatorInsets = originalContentInset
-        })
+        if let tableView = tableView {
+            UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
+                tableView.contentInset = originalContentInset
+                tableView.scrollIndicatorInsets = originalContentInset
+            })
+        } else if let scrollView = scrollView {
+            scrollView.contentInset = originalContentInset
+            insetScrollViewContentForAccessoryView = false
+        }
     }
 
     func _init() {
