@@ -270,7 +270,7 @@ private extension FormController {
         let unhide: ((Bool) -> ()) = { completed in
             if let scrollView = self.scrollView, !self.insetScrollViewContentForAccessoryView, let inputAccessoryView = currentInputView.inputAccessoryView {
                 self.insetScrollViewContentForAccessoryView = true
-                scrollView.contentInset = scrollView.contentInset.inset(topDelta: 12, bottomDelta: (inputAccessoryView.bounds.height + 12))
+                scrollView.contentInset = scrollView.contentInset.inset(bottomDelta: (inputAccessoryView.bounds.height + 12))
             } else {
                 guard let tableView = self.tableView else { return }
                 guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
