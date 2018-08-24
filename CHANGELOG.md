@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [Pippin 9.0.3] 2018-08-24
+
+### Fixed
+
+- Improved keyboard avoidance in `FormController` when used in conjunction with a `UIScrollView`.
+- Fixed issues in `AuthorizedCLLocationManager` and `CoreLocationAdapter` that prevented themt from calling back to consumers.
+
 ## [Pippin 9.0.2] 2018-08-24
 
 ### Changed
