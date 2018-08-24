@@ -18,7 +18,7 @@ extension UIEdgeInsets {
         self = UIEdgeInsetsMake(vertical, horizontal, vertical, horizontal)
     }
     
-    public init(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0) {
+    public init(withTop top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0) {
         self = UIEdgeInsetsMake(top, left, bottom, right)
     }
 
