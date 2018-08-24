@@ -33,9 +33,11 @@ public class AuthorizedCLLocationManager: NSObject {
 
     fileprivate var authorizationCompletion: ((AuthorizedLocationManagerResult) -> Void)!
     fileprivate var authorizationScope: AuthorizationScope!
+    
+    fileprivate var locationManager: CLLocationManager?
 
     public class func authorizedLocationManager(scope: AuthorizationScope, completion: @escaping (AuthorizedLocationManagerResult) -> Void) {
-        if !CLLocationManager.locationServicesEnabled() {
+        guard CLLocationManager.locationServicesEnabled() else {
             let error = NSError(domain: AuthorizationErrorDomain, code: AuthorizationErrorCode.disabled.rawValue, userInfo: [NSLocalizedDescriptionKey: AuthorizationErrorDescription, NSLocalizedFailureReasonErrorKey: "The user has disabled location services for their device."])
             completion(.failure(error))
             return
@@ -74,6 +76,7 @@ public class AuthorizedCLLocationManager: NSObject {
         self.authorizationCompletion = { authorizationResult in
             switch authorizationResult {
             case .success(let authorizedLocationManager):
+                self.locationManager = nil
                 authorizedLocationManager.delegate = nil
                 completion(.success(authorizedLocationManager))
             case .failure(let error):
@@ -82,8 +85,8 @@ public class AuthorizedCLLocationManager: NSObject {
         }
 
         // just by instantiating, we'll get a callback to `locationManager(_:didChangeAuthorization:)`
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
     }
 
 }
