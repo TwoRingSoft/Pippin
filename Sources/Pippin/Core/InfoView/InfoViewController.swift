@@ -273,6 +273,7 @@ private extension InfoViewController {
     
 }
 
+// MARK: MFMailComposeViewControllerDelegate
 extension InfoViewController: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
@@ -286,5 +287,6 @@ extension InfoViewController: MFMailComposeViewControllerDelegate {
         case .sent:
             environment.alerter.showAlert(title: "Sent", message: "Thank you for your feedback!", type: .error, dismissal: .automatic, occlusion: .weak)
         }
+        dismiss(animated: true)
     }
 }
