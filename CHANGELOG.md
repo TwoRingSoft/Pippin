@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [Pippin 9.0.1] 2018-08-23
+
+### Fixed
+
+- Prepopulated app name and version into subject and body of feedback emails sent from InfoViewController. Also dismiss the mail view, where it previously hung on the screen.
+
 ## [Pippin 9.0.0] 2018-08-23
 
 ### Changed
