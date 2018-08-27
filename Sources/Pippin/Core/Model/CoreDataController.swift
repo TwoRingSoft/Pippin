@@ -76,20 +76,27 @@ public extension CoreDataController {
         environment?.logger.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))
         block(context)
     }
+    
+    @available(iOS 10.0, *)
+    func context() -> NSManagedObjectContext {
+        return persistentContainer.newBackgroundContext()
+    }
 
     /**
      Returns a typed array of entities fetched, and provides some boilerplate error handling.
      - parameters:
          - request: the fetch request to perform, generic on the type of results
-         - context: the context to fetch from
+     - context: the context to fetch from. If none is provided, a new context is vendored.
      - returns: array populated with the results of the fetch request
      */
-    func fetch<T>(_ request: NSFetchRequest<T>, context: NSManagedObjectContext) -> [T] {
+    @available(iOS 10.0, *)
+    func fetch<T>(_ request: NSFetchRequest<T>, context: NSManagedObjectContext? = nil) -> [T] {
         var results = [T]()
+        let resolvedContext = context ?? self.context()
         do {
-            results.append(contentsOf: try context.fetch(request))
+            results.append(contentsOf: try resolvedContext.fetch(request))
         } catch {
-          let message = String(format: "[%@] Error executing fetch request <%@> on context <%@>.", instanceType(self), request, context)
+          let message = String(format: "[%@] Error executing fetch request <%@> on context <%@>.", instanceType(self), request, resolvedContext)
             environment?.logger.logError(message: message, error: error)
         }
         return results
@@ -175,21 +182,23 @@ public extension CoreDataController {
 public extension CoreDataController {
 
     /**
-     Save any outstanding changes to a context, logging any changes and errors.
+     Save any outstanding changes to a context, logging any changes and errors. If no context is provided, then all changes to the underlying model are saved via a new vendored context.
      - parameter context: the context to save changes in.
      */
-    func save(context: NSManagedObjectContext) {
-        environment?.logger.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), context))
-        environment?.logger.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", instanceType(self), context.insertedObjects, context.deletedObjects, context.updatedObjects))
-        if !context.hasChanges {
-            environment?.logger.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", instanceType(self), context))
+    @available(iOS 10.0, *)
+    func save(context: NSManagedObjectContext? = nil) {
+        let resolvedContext = context ?? self.context()
+        environment?.logger.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), resolvedContext))
+        environment?.logger.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", instanceType(self), resolvedContext.insertedObjects, resolvedContext.deletedObjects, resolvedContext.updatedObjects))
+        if !resolvedContext.hasChanges {
+            environment?.logger.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", instanceType(self), resolvedContext))
             return
         }
-
+        
         do {
-            try context.save()
+            try resolvedContext.save()
         } catch {
-            let message = String(format: "[%@] Could not save context <%@>.", instanceType(self), context)
+            let message = String(format: "[%@] Could not save context <%@>.", instanceType(self), resolvedContext)
             environment?.logger.logError(message: message, error: error)
         }
     }
@@ -204,7 +213,8 @@ public extension CoreDataController {
      - parameters:
      - object: the object to delete
      - context: the context from which to remove the object
-     */
+     */ 
+    @available(iOS 10.0, *)
     func delete(object: NSManagedObject, context: NSManagedObjectContext) {
         environment?.logger.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", instanceType(self), String(describing: object), context))
         context.delete(object)
