@@ -37,7 +37,7 @@ public class CoreLocationAdapter: NSObject, Locator {
                     authorizedLocationManager.delegate = self
                     authorizedLocationManager.startUpdatingLocation()
                 case .failure(let error):
-                    self.locatorDelegate.locator(locator: self, encounteredError: error)
+                    self.locatorDelegate.locator(locator: self, encounteredError: LocatorError.coreLocationError(error))
                 }
             }
         }
