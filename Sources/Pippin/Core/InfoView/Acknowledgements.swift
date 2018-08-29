@@ -26,7 +26,6 @@ public struct Acknowledgements {
                         }
                         return "\(name) (\(license))\n\(footer)"
                     }.joined(separator: "\n\n")
-                    print(String(describing: acknowledgementsList))
                 }
             } catch {
                 environment.logger.logError(message: String(format: "[%@] Failed to decode CocoaPods acknowledgements plist at %@", valueType(self), String(describing: cocoaPodsAcknowledgementsPlistURL)), error: error)
