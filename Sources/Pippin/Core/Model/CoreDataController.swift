@@ -29,17 +29,25 @@ public class CoreDataController: NSObject, EnvironmentallyConscious {
     fileprivate var managedObjectModel: NSManagedObjectModel?
     public var debuggingDelegate: CoreDataControllerDebugging?
 
-    /**
-     Initialize a new Core Data helper.
-     - parameters:
-        - modelName: name of the managed object model to load
-        - managedObjectModel: optional instance passed in if the momd file is
-        is delivered from a nonstandard location, like a framework
-        - logger: optional `Logger` conforming instance, defaults to `nil`
-     */
-    public init(modelName: String, managedObjectModel: NSManagedObjectModel? = nil) {
+    /// Initialize a new Core Data helper.
+    /// - Parameters:
+    ///  - modelName: Name of the managed object model to load.
+    ///  - bundleIdentifier: Optional `String` containing identifier for bundle containing the Core Data model files. If `nil`, the main app bundle is used.
+    public init(modelName: String, bundleIdentifier: String? = nil) {
         self.modelName = modelName
-        self.managedObjectModel = managedObjectModel
+        
+        if let bundleIdentifier = bundleIdentifier {
+            guard let bundle = Bundle(identifier: bundleIdentifier) else {
+                fatalError("No bundle with identifier \(bundleIdentifier)")
+            }
+            guard let modelURL = bundle.url(forResource: modelName, withExtension: "momd") else {
+                fatalError("No \(modelName).momd in bundle \(String(describing: bundle))")
+            }
+            guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
+                fatalError("Failed to load the managed object model at \(modelURL).")
+            }
+            self.managedObjectModel = managedObjectModel
+        }
         super.init()
     }
 
@@ -223,6 +231,7 @@ public extension CoreDataController {
     
 }
 
+// MARK: Private
 private extension CoreDataController {
 
     func archivedData(sqlitePath: String, sqliteWALPath: String, sqliteSHMPath: String) -> Data {
