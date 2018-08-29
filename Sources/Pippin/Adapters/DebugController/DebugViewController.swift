@@ -16,6 +16,7 @@ protocol DebugViewControllerDelegate {
     
     func debugViewControllerDisplayedMenu(debugViewController: DebugViewController)
     func debugViewControllerHidMenu(debugViewController: DebugViewController)
+    func debugViewControllerWantsToDeleteModels(debugViewController: DebugViewController)
 }
 
 @available(iOS 11.0, *)
@@ -128,9 +129,7 @@ extension DebugViewController: CoreDataControllerDebugging {
     }
     
     public func coreDataControllerDeletedModels(coreDataController: CoreDataController) {
-        showAlert(withTitle: "Complete", message: "The app needs to restart to complete deletion.") {
-            fatalError("Restarting to complete database removal.")
-        }
+        delegate.debugViewControllerWantsToDeleteModels(debugViewController: self)
     }
     
     public func coreDataControllerWantsToImportFixture(coreDataController: CoreDataController) {

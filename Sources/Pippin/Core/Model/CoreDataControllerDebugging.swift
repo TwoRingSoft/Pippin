@@ -42,19 +42,7 @@ extension CoreDataController: Debuggable {
     }
     
     func deletePressed() {
-        let modelName = environment!.coreDataController.modelName
-        let url = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite")
-        let shmURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-shm")
-        let walURL = FileManager.url(forApplicationSupportFile: "\(modelName).sqlite-wal")
-        
-        do {
-            try FileManager.default.removeItem(at: url)
-            try FileManager.default.removeItem(at: shmURL)
-            try FileManager.default.removeItem(at: walURL)
-            debuggingDelegate?.coreDataControllerDeletedModels(coreDataController: self)
-        } catch {
-            environment!.alerter.showAlert(title: "Error", message: String(format: "Failed to delete database file: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
-        }
+        debuggingDelegate?.coreDataControllerDeletedModels(coreDataController: self)
     }
     
     func generatePressed() {

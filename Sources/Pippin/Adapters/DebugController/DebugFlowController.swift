@@ -17,6 +17,7 @@ public protocol DebugFlowControllerDelegate {
     func exportedDatabaseData() -> Data?
     func failedToExportDatabase(error: DebugFlowError)
     func debugFlowControllerWantsToGenerateTestModels(debugFlowController: Debugging)
+    func debugFlowControllerWantsToDeleteModels(debugFlowController: Debugging)
 }
 
 @available(iOS 11.0, *)
@@ -65,6 +66,10 @@ extension DebugFlowController: DebugViewControllerDelegate {
 
     func debugViewControllerExported(debugViewController: DebugViewController) {
         exportDatabase(databaseFileName: databaseFilename)
+    }
+    
+    func debugViewControllerWantsToDeleteModels(debugViewController: DebugViewController) {
+        delegate.debugFlowControllerWantsToDeleteModels(debugFlowController: self)
     }
 
     func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController) {
