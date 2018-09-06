@@ -33,6 +33,9 @@ import Foundation
 
     /// Wipe any persisted purchases on device on app launch, to test a "clean slate" run
     case wipePersistedInAppPurchases
+    
+    /// Upon initializing the app's model layer, remove any entities stored in it.
+    case wipeDataModel
 
     /// Determine if the calling launch argument was activated on the app launch.
     ///
@@ -51,6 +54,7 @@ import Foundation
         case .simulateInAppPurchaseRestoreSuccess: return "simulate-in-app-purchase-restore-success"
         case .simulateInAppPurchaseRestoreFailure: return "simulate-in-app-purchase-restore-failure"
         case .wipePersistedInAppPurchases: return "wipe-in-app-purchases"
+        case .wipeDataModel: return "wipe-data-model"
         }
     }
 
