@@ -90,17 +90,15 @@ public extension CoreDataController {
         return persistentContainer.newBackgroundContext()
     }
 
-    /**
-     Returns a typed array of entities fetched, and provides some boilerplate error handling.
-     - parameters:
-         - request: the fetch request to perform, generic on the type of results
-     - context: the context to fetch from. If none is provided, a new context is vendored.
-     - returns: array populated with the results of the fetch request
-     */
+    /// Returns a typed array of entities fetched, and provides some boilerplate error handling.
+    /// - Parameters:
+    ///   - request: The fetch request to perform, generic on the type of results.
+    ///   - context: The context to fetch from.
+    /// - Returns: Array populated with the results of the fetch request.
     @available(iOS 10.0, *)
-    func fetch<T>(_ request: NSFetchRequest<T>, context: NSManagedObjectContext? = nil) -> [T] {
+    func fetch<T>(_ request: NSFetchRequest<T>, context: NSManagedObjectContext) -> [T] {
         var results = [T]()
-        let resolvedContext = context ?? self.context()
+        let resolvedContext = context
         do {
             results.append(contentsOf: try resolvedContext.fetch(request))
         } catch {
