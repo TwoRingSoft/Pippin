@@ -134,7 +134,7 @@ extension DebugViewController: CoreDataControllerDebugging {
     
     public func coreDataControllerWantsToImportFixture(coreDataController: CoreDataController) {
         do {
-            try present(DatabaseFixturePickerViewController(coreDataController: environment.coreDataController!, logger: environment.logger), animated: true)
+            try present(DatabaseFixturePickerViewController(environment: environment, logger: environment.logger), animated: true)
         } catch {
             environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }

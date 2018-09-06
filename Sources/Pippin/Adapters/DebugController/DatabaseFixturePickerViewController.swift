@@ -12,11 +12,11 @@ import UIKit
 class DatabaseFixturePickerViewController: UIViewController {
 
     var fixtures: [URL]!
-    private var coreDataController: CoreDataController
+    private var environment: Environment
     private var logger: Logger
 
-    init(coreDataController: CoreDataController, logger: Logger) throws {
-        self.coreDataController = coreDataController
+    init(environment: Environment, logger: Logger) throws {
+        self.environment = environment
         self.logger = logger
         
         super.init(nibName: nil, bundle: nil)
@@ -68,15 +68,15 @@ extension DatabaseFixturePickerViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let fixtureName = fixtures[indexPath.row]
-        let fixtureSQLitePath = fixtureName.appendingPathComponent(coreDataController.modelName).appendingPathExtension("sqlite").path
+        let fixtureSQLitePath = fixtureName.appendingPathComponent(environment.coreDataController.modelName).appendingPathExtension("sqlite").path
 
-        coreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
+        environment.coreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
             if success {
-                self.showConfirmationAlert(withTitle: nil, message: "The app must now close to finish the import. Relaunch to continue.", confirmTitle: "OK, Restart!", cancelTitle: "Cancel", style: .alert, completion: { (confirmed) in
-                    confirmation(confirmed)
+                self.environment.alerter?.showConfirmationAlert(title: "Import complete", message: "The app must now close to finish the import. Relaunch to continue.", type: .info, confirmButtonTitle: "OK, Restart!", confirmationCompletion: { () -> (Void) in
+                    confirmation(true)
                 })
             } else {
-                self.showAlert(withTitle: "Error", message: "Failed to import data.")
+                self.environment.alerter?.showAlert(title: "Error", message: "Failed to import data.", type: .error, dismissal: .interactive, occlusion: .strong)
                 confirmation(false)
             }
         }
