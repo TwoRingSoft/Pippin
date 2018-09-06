@@ -20,12 +20,28 @@ public class CoreLocationSimulator: NSObject, Locator {
     
     public var environment: Environment?
     private var locatorDelegate: LocatorDelegate
-    public var locationsAndTimeOffsets: [LocationAndTimeOffset]?
+    private var locationsAndTimeOffsets: [LocationAndTimeOffset]?
     private var timer: Timer?
     
     public required init(authorizedLocationManager: CLLocationManager?, locatorDelegate: LocatorDelegate) {
         self.locatorDelegate = locatorDelegate
         super.init()
+    }
+    
+    public func setSimulatedLocations(locationsString: String) {
+        var i = -1
+        self.locationsAndTimeOffsets = locationsString.components(separatedBy:EnvironmentVariable.simulatedLocationListDelimiter).compactMap { (locationString) -> LocationAndTimeOffset? in
+            let components = locationString.components(separatedBy: EnvironmentVariable.simulatedLocationTimeDelimiter)
+            let time = components.first!
+            
+            let coordinates = components.last!
+            let coordinateComponents = coordinates.components(separatedBy: EnvironmentVariable.simulatedLocationCoordinateDelimiter)
+            let lat = coordinateComponents.first!
+            let long = coordinateComponents.last!
+            
+            i += 1
+            return LocationAndTimeOffset(locationID: i, location: CLLocation(latitude: lat.doubleValue, longitude: long.doubleValue), timeInterval: time.doubleValue)
+        }
     }
     
     public func startMonitoringLocation() {
