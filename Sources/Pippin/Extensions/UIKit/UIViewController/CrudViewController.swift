@@ -157,6 +157,16 @@ public class CrudSearchContainer: UIView {}
             sectionNameKeyPath: nil,
             cacheName: nil
         )
+        let notifications: [Notification.Name] = [
+            .NSManagedObjectContextDidSave,
+            .NSManagedObjectContextWillSave,
+            .NSManagedObjectContextObjectsDidChange
+        ]
+        notifications.forEach {
+            NotificationCenter.default.addObserver(forName: $0, object: nil, queue: nil) { (note) in
+                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Received NSManagedObjectContext notification: %@", instanceType(self), self.crudName, String(describing: note)))
+            }
+        }
         originalFetchRequestPredicate = fetchRequest.predicate
         fetchedResultsController.delegate = self
         reloadData()
@@ -239,8 +249,8 @@ public class CrudSearchContainer: UIView {}
         return indexPath.compare(addItemRowIndexPath()) == .orderedSame
     }
 
-    func update(indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        self.environment?.logger.logDebug(message: String(format: "[%@(%@)] Processing update: %@ at %@%@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath), newIndexPath != nil ? String(format: "to %@", String(describing: newIndexPath)) : ""))
+    func update(object: Any, indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        environment?.logger.logDebug(message: String(format: "[%@(%@)] Processing update: %@ at indexPath: %@; newIndexPath: %@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath), String(describing: newIndexPath)))
         switch type {
         case .delete:
             guard let indexPath = indexPath else { break }
@@ -248,6 +258,15 @@ public class CrudSearchContainer: UIView {}
             break
         case .insert:
             guard let newIndexPath = newIndexPath else { break }
+            guard let fetchRequestResult = object as? NSFetchRequestResult else {
+                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Could not convert inserted object to NSFetchRequestResult type", instanceType(self), self.crudName))
+                break
+            }
+            self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Object: %@", instanceType(self), self.crudName, String(describing: fetchRequestResult)))
+            guard !self.object(locatedAt: newIndexPath).isEqual(fetchRequestResult) else {
+                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Tried to reinsert object already present in the table view: %@", instanceType(self), self.crudName, String(describing: fetchRequestResult)))
+                break
+            }
             addUpdate(type: type, indexPath: newIndexPath)
             break
         case .move:
@@ -405,8 +424,8 @@ public class CrudSearchContainer: UIView {}
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         environment?.logger.logVerbose(message: String(format: "[%@(%@)] changed object: %@\nin context: %@", instanceType(self), self.crudName, String(describing: anObject), (anObject as! NSManagedObject).managedObjectContext!))
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Received change: %@ object: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), instanceType(anObject as! NSObject), String(describing: indexPath), String(describing: newIndexPath)))
-        update(indexPath: indexPath, for: type, newIndexPath: newIndexPath)
+        environment?.logger.logDebug(message: String(format: "[%@(%@)] Received change: %@ object: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), String(describing: anObject), String(describing: indexPath), String(describing: newIndexPath)))
+        update(object: anObject, indexPath: indexPath, for: type, newIndexPath: newIndexPath)
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
