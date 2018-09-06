@@ -68,10 +68,6 @@ public class CrudSearchContainer: UIView {}
         }
     }
 
-    func reloadTableView() {
-        tableView.reloadData()
-    }
-
     func object(locatedAt indexPath: IndexPath) -> NSFetchRequestResult {
         return fetchedResultsController.object(at: indexPath)
     }
