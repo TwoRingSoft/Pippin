@@ -474,7 +474,6 @@ public class CrudSearchContainer: UIView {}
             let cell = TextAndAccessoryCell(style: .default, reuseIdentifier: textAndAccessoryCellReuseIdentifier)
             cell.label.text = String(format: "Create new %@", crudName)
             configuration.themeDelegate?.crudViewController?(crudViewController: self, themeAddItemCell: cell)
-            cell.accessibilityLabel = textAndAccessoryCellReuseIdentifier
             cell.isAccessibilityElement = true
             return cell
         }
