@@ -8,6 +8,46 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [Pippin 10.0.0] 2018-09-05
+
+### Changed
+
+- Rewrite `NSDate+Components` and `NSDate+TimeSince` in Swift and rename to `Date+Components` and `Date+ElapsedTime`, respectively.
+
+#### Locator
+
+- Make `Locator`s conform to `Debuggable`, and provide debugging controls for `CoreLocationSimulator`.
+- Instead of setting a property on `CoreLocationSimulation` with the location data, pass in the raw string from e.g. the environment variable value and parse it internally.
+- Add new `LocationError` enum and change `Locator`'s callback to pass this type. Currently just wraps `NSError`s reported by `CoreLocation`.
+
+#### Debugging
+
+- `DebugFlowController` now delegates model deletion back to the consumer app, instead of directly deleting the sqlite database files. Prevents a forced restart of the app to reconstruct the database.
+- `DatabaseFixsturePickerViewController` now requires a parameter of type `Environment` instead of `CoreDataController`, which it can get from the environment parameter, as well as logging/alerting/etc.
+- 
+
+#### Model
+
+- Always require a `NSManagedObjectContext` for fetching, instead of falling back to acquiring a new vended context. Helps with context confinement of model entity instances.
+- Instead of requiring an instantiated `NSManagedObjectModel` in init, just get the bundle identifer of the bundle that contains it, and use the model name it already has to construct the instance internally.
+
+#### CrudViewController
+
+- No longer sets the Add Item cell's accessibility label to the reuse identifier of the cell. Now just lets the accessibility subsystem automatically infer it.
+- Remove `reloadTableView()` as it is already used in `reloadData()`.
+
+### Added
+
+- Add case to `LaunchArgument` to delete all core data models on launch.
+- Add asynchronous `Operation` subclass, `AsyncOperation`.
+- Add function on `CoreDataController` to directly vend a context, instead of through a closure parameter via `perform(with:)`.
+- Added property on `Environment` to hold reference to a `Locator?`.
+
+### Fixed
+
+- Hide debugging menu button when the menu is visible.
+- Prevent double insertions of the same row in `CrudViewController`, due to multiple callbacks from the `NSFetchedResultsController` (in testing, also observed multiple `Notification`s sent for the same insertion).
+
 ## [Pippin 9.0.3] 2018-08-24
 
 ### Fixed
