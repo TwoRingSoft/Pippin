@@ -25,6 +25,7 @@ public class DebugViewController: UIViewController {
     private var delegate: DebugViewControllerDelegate!
     private var environment: Environment
     private var debugMenu: UIView!
+    private var displayButton: UIButton!
     private var assetBundle: Bundle?
 
     init(delegate: DebugViewControllerDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor, buttonStartLocation: CGPoint) {
@@ -46,11 +47,13 @@ public class DebugViewController: UIViewController {
 
     func closePressed() {
         debugMenu.isHidden = true
+        displayButton.isHidden = false
         delegate.debugViewControllerHidMenu(debugViewController: self)
     }
 
     func displayPressed() {
         debugMenu.isHidden = false
+        displayButton.isHidden = true
         delegate.debugViewControllerDisplayedMenu(debugViewController: self)
     }
 
@@ -106,7 +109,7 @@ private extension DebugViewController {
         stack.edgeAnchors == scrollView.edgeAnchors
         stack.widthAnchor == stackWidthSizingView.widthAnchor
 
-        let displayButton = UIButton.button(withImageSetName: "debug", emphasisSuffix: "-pressed", tintColor: buttonTintColor, target: self, selector: #selector(displayPressed), imageBundle: assetBundle)
+        displayButton = UIButton.button(withImageSetName: "debug", emphasisSuffix: "-pressed", tintColor: buttonTintColor, target: self, selector: #selector(displayPressed), imageBundle: assetBundle)
         let size: CGFloat = 50
         displayButton.frame = CGRect(x: buttonStartLocation.x, y: buttonStartLocation.y, width: size, height: size)
         displayButton.layer.cornerRadius = size / 2
