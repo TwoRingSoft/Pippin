@@ -12,7 +12,7 @@ public enum LocatorError: Error {
     case coreLocationError(NSError)
 }
 
-public protocol Locator: EnvironmentallyConscious {
+public protocol Locator: Debuggable, EnvironmentallyConscious {
     init(authorizedLocationManager: CLLocationManager?, locatorDelegate: LocatorDelegate)
     func startMonitoringLocation()
     func stopMonitoringLocation()

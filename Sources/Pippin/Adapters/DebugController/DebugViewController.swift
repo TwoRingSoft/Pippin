@@ -87,10 +87,12 @@ private extension DebugViewController {
     
         environment.coreDataController.debuggingDelegate = self
         controlPanels.append(environment.coreDataController.debuggingControlPanel())
-        
         controlPanels.append(environment.activityIndicator.debuggingControlPanel())
         controlPanels.append(environment.alerter.debuggingControlPanel())
         controlPanels.append(environment.crashReporter.debuggingControlPanel())
+        if let locatorDebugging = environment.locator?.debuggingControlPanel() {
+            controlPanels.append(locatorDebugging)
+        }
         
         let closeButton = UIButton(frame: .zero)
         closeButton.configure(title: "Close", target: self, selector: #selector(closePressed))

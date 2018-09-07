@@ -36,6 +36,9 @@ public class Environment: NSObject {
     public var bugReporter: BugReporter!
     public var inAppPurchaseVendor: InAppPurchaseVendor!
     
+    // MARK: sensors
+    public var locator: Locator?
+    
     // MARK: testing/development utilities
     public var debugging: Debugging!
     

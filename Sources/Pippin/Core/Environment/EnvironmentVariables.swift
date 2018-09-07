@@ -15,7 +15,8 @@ public enum EnvironmentVariable: String {
     
     /// The string separator for simulated locations.
     public static let simulatedLocationListDelimiter = ";"
-    public static let simulatedLocationTimeDelimiter = ":"
+    
+    /// The string separator for lat and long values in simulated locations.
     public static let simulatedLocationCoordinateDelimiter = ","
 
     /// A log leve to use as an override to the default.

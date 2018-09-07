@@ -26,6 +26,11 @@ public class CoreLocationAdapter: NSObject, Locator {
         authorizedLocationManager?.delegate = self
     }
     
+    // MARK: Debuggable
+    public func debuggingControlPanel() -> UIView {
+        return UILabel.label(withText: "No current CoreLocationAdapter debugging controls")
+    }
+    
     public func startMonitoringLocation() {
         if let authorizedLocationManager = authorizedLocationManager {
             authorizedLocationManager.startUpdatingLocation()

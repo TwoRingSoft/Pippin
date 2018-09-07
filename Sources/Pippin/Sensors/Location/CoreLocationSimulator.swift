@@ -5,23 +5,18 @@
 //  Created by Andrew McKnight on 8/15/18.
 //
 
+import Anchorage
 import CoreLocation
 import Foundation
-
-/// A tuple with a location id number, `CLLocation` and a `TimeInterval` representing the amount of time spent at that location.
-public typealias LocationAndTimeOffset = (locationID: Int, location: CLLocation, timeInterval: TimeInterval)
-
-typealias TimerUserInfo = [String: Int]
-enum TimerUserInfoKey: String {
-    case lastLocationID
-}
 
 public class CoreLocationSimulator: NSObject, Locator {
     
     public var environment: Environment?
     private var locatorDelegate: LocatorDelegate
-    private var locationsAndTimeOffsets: [LocationAndTimeOffset]?
-    private var timer: Timer?
+    private var locations: [CLLocation]?
+    private var lastLocationID: Int?
+    private let textView = UITextView(frame: .zero)
+    private var delay: UInt32 = 0
     
     public required init(authorizedLocationManager: CLLocationManager?, locatorDelegate: LocatorDelegate) {
         self.locatorDelegate = locatorDelegate
@@ -29,49 +24,66 @@ public class CoreLocationSimulator: NSObject, Locator {
     }
     
     public func setSimulatedLocations(locationsString: String) {
-        var i = -1
-        self.locationsAndTimeOffsets = locationsString.components(separatedBy:EnvironmentVariable.simulatedLocationListDelimiter).compactMap { (locationString) -> LocationAndTimeOffset? in
-            let components = locationString.components(separatedBy: EnvironmentVariable.simulatedLocationTimeDelimiter)
-            let time = components.first!
-            
-            let coordinates = components.last!
-            let coordinateComponents = coordinates.components(separatedBy: EnvironmentVariable.simulatedLocationCoordinateDelimiter)
+        self.locations = locationsString.components(separatedBy:EnvironmentVariable.simulatedLocationListDelimiter).compactMap { (locationString) -> CLLocation? in
+            let coordinateComponents = locationString.components(separatedBy: EnvironmentVariable.simulatedLocationCoordinateDelimiter)
             let lat = coordinateComponents.first!
             let long = coordinateComponents.last!
-            
-            i += 1
-            return LocationAndTimeOffset(locationID: i, location: CLLocation(latitude: lat.doubleValue, longitude: long.doubleValue), timeInterval: time.doubleValue)
+            return CLLocation(latitude: lat.doubleValue, longitude: long.doubleValue)
         }
+    }
+    
+    public func setSimulatedLocationDelay(delay: UInt32) {
+        self.delay = delay
     }
     
     public func startMonitoringLocation() {
-        guard let firstLocation = locationsAndTimeOffsets?.first else {
-            // TODO: error
-            return
+        guard let locations = locations else {
+            fatalError("Tried to use CoreLocationSimulator without provided any simulated locations. Use the environment variable.")
         }
-        startTimer(forLocation: firstLocation)
+        let location = locations[(lastLocationID ?? 0) % locations.count]
+        sleep(delay)
+        locatorDelegate.locator(locator: self, updatedToLocation: location)
     }
     
     public func stopMonitoringLocation() {
+        // noop
+    }
+}
+
+// MARK: Debuggable
+extension CoreLocationSimulator: Debuggable {
+    public func debuggingControlPanel() -> UIView {
+        let titleLabel = UILabel.label(withText: "Locator:", font: environment!.fonts.title, textColor: .black)
+        let button = UIButton(type: .custom)
+        button.configure(title: "Next location", target: self, selector: #selector(nextLocationPressed))
+        reloadDebuggingTextView()
         
+        let stack = UIStackView(arrangedSubviews: [titleLabel, textView, button])
+        stack.axis = .vertical
+        textView.heightAnchor == 100
+        return stack
     }
     
-    @objc private func timerFired(timer: Timer) {
-        guard let userInfo = timer.userInfo as? TimerUserInfo, let lastLocationID = userInfo[TimerUserInfoKey.lastLocationID.rawValue] as Int? else {
-            // TODO: error
-            return
-        }
-        
-        if let nextLocation = locationsAndTimeOffsets?.filter({ (locationAndTimeOffset) -> Bool in
-            locationAndTimeOffset.locationID == lastLocationID + 1
-        }).first {
-            startTimer(forLocation: nextLocation)
-        }
+    private func reloadDebuggingTextView() {
+        var i = 0
+        textView.text = locations?.map {
+            let string = "\(lastLocationID ?? 0 == i ? "* " : "")\(i): lat: \($0.coordinate.latitude), long: \($0.coordinate.longitude)"
+            i += 1
+            return string
+            }.joined(separator: "\n")
     }
     
-    private func startTimer(forLocation location: LocationAndTimeOffset) {
-        let userInfo: TimerUserInfo = [TimerUserInfoKey.lastLocationID.rawValue: location.locationID]
-        timer = Timer(timeInterval: location.timeInterval, target: self, selector: #selector(timerFired(timer:)), userInfo: userInfo, repeats: false)
-        
+    @objc private func nextLocationPressed() {
+        guard let locations = locations else {
+            fatalError("Tried to use CoreLocationSimulator without provided any simulated locations. Use the environment variable.")
+        }
+        if let lastLocationID = lastLocationID {
+            locatorDelegate.locator(locator: self, updatedToLocation: locations[(lastLocationID + 1) % locations.count])
+            self.lastLocationID? += 1
+        } else {
+            locatorDelegate.locator(locator: self, updatedToLocation: locations[1])
+            self.lastLocationID = 1
+        }
+        reloadDebuggingTextView()
     }
 }
