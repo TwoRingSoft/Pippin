@@ -22,19 +22,21 @@ Pippin is split up into some top-level components: Core, Extensions and CanIHaz.
 
 Pippin is designed to immediately abstract and handle the major components that usually go into an app: 
 
-- CrashReporting
-- BugReporter: in-app ui for users to send reports
-- Logger
-- Debugging: in-app debug/test/qa utilities
-- Alerting: popups displayed to users
-- InAppPurchaseVendor: licensing
-- Appearance: look and feel, style, theming
-- ActivityIndicator: indicators for activity and progress
-- Defaults: user configurable settings
+- Crash Reporting
+- Bug reporting via in-app ui
+- Logging
+- Debugging via in-app debug/test/qa utilities
+- Alerting via popups displayed to users
+- In app purchases and licensing
+- Appearance: look and feel, style, theming, fonts, layout
+- Activity indicators for long-running activities and progress
+- Defaults: user configurable settings and storage
 
 ##### Sensors
 
 - Locator: location/gps
+
+#### Adapters
 
 These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. The following adapters for third-party frameworks are currently available:
 
@@ -44,7 +46,7 @@ These may have concrete objects implementing the functionality directly, or if t
 - ActivityIndicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
 - CrashReporter: *[Crashlytics](https://fabric.io)
 
-The following hand rolled implementations are available:
+The following hand rolled adapters are available:
 
 - Debugging: DebugViewController 
 - CoreDataController (wip extracting Model protocol)
@@ -64,11 +66,12 @@ There are a few protocols defining cross cutting concerns across components, lik
 
 #### Components to add:
 
-- data model
-- settings bundles
-- analytics
-- push notifications
-- state restoration
+- Data model
+- Settings bundles
+- Analytics
+- Push notifications
+- State restoration
+- App walkthrough
 
 ### CanIHaz
 
