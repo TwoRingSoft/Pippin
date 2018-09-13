@@ -214,7 +214,7 @@ def app_smoke_test
           FileUtils.remove_dir(derived_data_path, true) if Dir.exists?(derived_data_path)
           Open3.pipeline(
             ["xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path}"], 
-            ["tee #{test_name}.log"], 
+            ["tee #{test_name}-#{platform}-#{sdk_version}.log"], 
             ["#{ruby_environment_prefixes} xcpretty -t"]
           )
 
