@@ -23,15 +23,18 @@ Pod::Spec.new do |s|
       test_spec.source_files = 'Tests/Pippin/**/*.swift'
   end
   
-  s.default_subspecs = 'Core', 'CanIHaz', 'Adapters', 'Sensors'
+  s.default_subspecs = 'Core', 'Adapters'
   
   s.subspec 'Core' do |ss|
-    ss.source_files = [
+      ss.source_files = [
         'Sources/Pippin/Core/**/*.{h,m,swift}',
-        'Sources/Pippin/Extensions/**/*.{h,m,swift}'
-    ]
-    ss.dependency 'Result'
-    ss.dependency 'Anchorage', '~> 4'
+        'Sources/Pippin/Extensions/**/*.{h,m,swift}',
+        'Sources/Pippin/Sensors/**/*.{h,m,swift}',
+        'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}',
+        'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
+      ]
+      ss.dependency 'Result'
+      ss.dependency 'Anchorage', '~> 4'
   end
   
   s.subspec 'Adapters' do |ss|
@@ -58,25 +61,6 @@ Pod::Spec.new do |s|
       sss.source_files = 'Sources/Pippin/Adapters/JGProgressHUD/**/*.{h,m,swift}'
       sss.dependency 'Pippin/Core'
       sss.dependency 'JGProgressHUD'
-    end
-  end
-  
-  s.subspec 'CanIHaz' do |ss|
-    ss.subspec 'Camera' do |sss|
-      sss.source_files = 'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}'
-    end
-    ss.subspec 'Location' do |sss|
-      sss.source_files = 'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
-      sss.dependency 'Result'
-    end
-  end
-  
-  s.subspec 'Sensors' do |ss|
-    ss.subspec 'Location' do |sss|
-      sss.source_files = 'Sources/Pippin/Sensors/Location/**/*.{h,m,swift}'
-      sss.framework = 'CoreLocation'
-      sss.dependency 'Pippin/Core'
-      sss.dependency 'Pippin/CanIHaz'
     end
   end
 

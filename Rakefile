@@ -119,12 +119,9 @@ def app_smoke_test
   
   scheme_suffixes = [
       'Core',
-      'CanIHaz-Location',
-      'CanIHaz-Camera',
       'Adapters-PinpointKit',
       'Adapters-XCGLogger',
       'Adapters-DebugController',
-      'Sensors-Location'
   ]
   languages = [ :swift, :objc ]
   
