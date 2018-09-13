@@ -10,7 +10,7 @@ Pippin is a collection of utilities to quickly prototype iOS apps and simplify w
 
 ## Code
 
-Pippin is split up into some top-level components: Core, Extensions and CanIHaz. The separate PippinTesting delivers tools to work with XCTest.
+Pippin is split up into some top-level components: Core, Extensions, Sensors and CanIHaz; these are organized under the `Core` and `Adapters` subspecs. The separate PippinTesting delivers tools to work with XCTest.
 
 ### Core
 
@@ -38,7 +38,7 @@ Pippin is designed to immediately abstract and handle the major components that 
 
 #### Adapters
 
-These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. The following adapters for third-party frameworks are currently available:
+These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. Each Adapter has a separate CocoaPods subspec (or should–some still are in Core; this will be straightened out more when multiple implementations may be chosen from). The following adapters for third-party frameworks are currently available:
 
 - Alerter: [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages)
 - BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
