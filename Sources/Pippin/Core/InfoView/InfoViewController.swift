@@ -221,22 +221,22 @@ private extension InfoViewController {
         var detailItems = [UIButton]()
         
         if acknowledgements.containsAcknowledgements() {
-            let acknowledgementsButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Acknowledgements", tintColor: .black, target: self, selector: #selector(acknowledgementsPressed), imageBundle: sharedAssetBundle)
+            let acknowledgementsButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Acknowledgements", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(acknowledgementsPressed), imageBundle: sharedAssetBundle)
             detailItems.append(acknowledgementsButton)
         }
         
         if let _ = environment.inAppPurchaseVendor {
-            let inAppPurchaseButton = UIButton.button(withImageSetName: "money", emphasisSuffix: "pressed", title: "In App Purchases", tintColor: .black, target: self, selector: #selector(inAppPurchasesPressed), imageBundle: sharedAssetBundle)
+            let inAppPurchaseButton = UIButton.button(withImageSetName: "money", emphasisSuffix: "pressed", title: "In App Purchases", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(inAppPurchasesPressed), imageBundle: sharedAssetBundle)
             detailItems.append(inAppPurchaseButton)
         }
         
         if let _ = environment.bugReporter {
-            let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", title: "Report a Bug", tintColor: .black, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
+            let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", title: "Report a Bug", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
             detailItems.append(bugReportButton)
         }
         
         if MFMailComposeViewController.canSendMail() {
-            let contactButton = UIButton.button(withImageSetName: "contact", emphasisSuffix: "pressed", title: "Send a Note", tintColor: .black, target: self, selector: #selector(contactPressed), imageBundle: sharedAssetBundle)
+            let contactButton = UIButton.button(withImageSetName: "contact", emphasisSuffix: "pressed", title: "Send a Note", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(contactPressed), imageBundle: sharedAssetBundle)
             detailItems.append(contactButton)
         }
         

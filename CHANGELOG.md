@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
 - Extension on `UserDefaults` to set and a key/value pair and immediately synchronize the backing store.
+- Parameter to specify a title font on `UIButton` factory function, and use it in `InfoViewController` for the app detail stack buttons.
 
 ### Fixed
 
