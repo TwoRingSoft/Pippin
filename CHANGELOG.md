@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Changed
+
+
+
+### Added
+
+- Extension on `UserDefaults` to set and a key/value pair and immediately synchronize the backing store.
+
+### Fixed
+
+
+
 ---
 
 ## [Pippin 10.0.0] 2018-09-05

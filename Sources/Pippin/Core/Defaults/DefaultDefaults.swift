@@ -28,10 +28,10 @@ public struct DefaultDefaults: Defaults {
         set(newValue) {
             let key = DefaultDefaultsKey.debugLogging.keyString()
             guard let value = newValue else {
-                setAndSynchronize(key: key, value: nil)
+                UserDefaults.setAndSynchronize(key: key, value: nil)
                 return
             }
-            setAndSynchronize(key: key, value: String(reflecting: value))
+            UserDefaults.setAndSynchronize(key: key, value: String(reflecting: value))
         }
     }
     
@@ -43,10 +43,10 @@ public struct DefaultDefaults: Defaults {
         set(newValue) {
             let key = DefaultDefaultsKey.lastLaunchedBuildNumber.keyString()
             guard let value = newValue else {
-                setAndSynchronize(key: key, value: nil)
+                UserDefaults.setAndSynchronize(key: key, value: nil)
                 return
             }
-            setAndSynchronize(key: key, value: String(describing: value))
+            UserDefaults.setAndSynchronize(key: key, value: String(describing: value))
         }
     }
     
@@ -58,16 +58,11 @@ public struct DefaultDefaults: Defaults {
         set(newValue) {
             let key = DefaultDefaultsKey.lastLaunchedSemanticVersion.keyString()
             guard let value = newValue else {
-                setAndSynchronize(key: key, value: nil)
+                UserDefaults.setAndSynchronize(key: key, value: nil)
                 return
             }
-            setAndSynchronize(key: key, value: String(describing: value))
+            UserDefaults.setAndSynchronize(key: key, value: String(describing: value))
         }
     }
     
-    private func setAndSynchronize(key: String, value: String?) {
-        let defaults = UserDefaults.standard
-        defaults.set(value, forKey: key)
-        defaults.synchronize()
-    }
 }
