@@ -19,6 +19,8 @@ public enum DefaultDefaultsKey: String {
 
 public struct DefaultDefaults: Defaults {
     
+    public var environment: Environment?
+    
     public init() {}
     
     public var logLevel: LogLevel? {

@@ -19,7 +19,7 @@ public protocol DefaultsKey {
 /// A protocol defining a type to pass around an access object to work with the underlying defaults mechanism. Provided are some standard defaults Pippin uses, and you can add your own as well.
 ///
 /// - Note: There is a default implementation, `DefaultDefaults`, that Pippin uses in case you don't provide your own when initializing `Environment`; just copy that implementation to get started with your own.
-public protocol Defaults {
+public protocol Defaults: EnvironmentallyConscious {
     var logLevel: LogLevel? { get set }
     var lastLaunchedBuild: Build? { get set }
     var lastLaunchedVersion: SemanticVersion? { get set }

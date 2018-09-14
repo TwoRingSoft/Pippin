@@ -47,7 +47,7 @@ public class Environment: NSObject {
     
     /// Initialize a new app environment. Sets up `appName`, `semanticVersion` and `currentBuild` propertiew from the main bundle.
     /// - Parameters:
-    ///    - defaults: Optionally provide an object conforming to `Defaults`. If you don't need this, an instance of `DefaultDefaults` is generated for Pippin's internal use.
+    ///    - defaults: Optionally provide an object conforming to `Defaults`. It's `environment?` property will be automatically set. If you don't need this, an instance of `DefaultDefaults` is generated for Pippin's internal use.
     ///    - fonts: Optionally provide an object conforming to `Fonts`, otherwise Pippin constructs an instance of `DefaultFonts` for use in UI extensions like `InfoViewController`.
     public init(defaults: Defaults = DefaultDefaults(), fonts: Fonts = DefaultFonts()) {
         let bundle = Bundle.main
@@ -65,6 +65,8 @@ public class Environment: NSObject {
         self.defaults.lastLaunchedBuild = currentBuild
         
         super.init()
+        
+        self.defaults.environment = self
     }
     
     /// Check a few standard override locations for the logging level to use with a new `Logger`.
