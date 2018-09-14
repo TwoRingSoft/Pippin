@@ -104,12 +104,17 @@ public class InfoViewController: UIViewController {
         textView.backgroundColor = .clear
         textView.fillSuperview()
         
-        let modal = DismissableModalViewController(childViewController: BlurViewController(viewController: vc), titleFont: environment.fonts.title, tintColor: .black, imageBundle: sharedAssetBundle) {
+        let modal = DismissableModalViewController(childViewController: BlurViewController(viewController: vc), titleFont: environment.fonts.title, tintColor: .black, imageBundle: sharedAssetBundle, insets: UIEdgeInsets.zero.inset(topDelta: 30)) {
             self.modalPresenter?.dismissTransparently(animated: true)
         }
         let modalPresenter = TransparentModalPresentingViewController(childViewController: modal)
-        modalPresenter.presentTransparently(animated: true)
         addNewChildViewController(newChildViewController: modalPresenter)
+        if #available(iOS 11.0, *) {
+            modalPresenter.view.fillSafeArea(inViewController: self)
+        } else {
+            modalPresenter.view.fillLayoutMargins()
+        }
+        modalPresenter.presentTransparently(animated: true)
         self.modalPresenter = modalPresenter
     }
 

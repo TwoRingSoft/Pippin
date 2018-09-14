@@ -13,7 +13,7 @@ public class DismissableModalViewController: UIViewController {
 
     private var closeBlock: (() -> ())?
 
-    public init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, tintColor: UIColor = .white, imageBundle: Bundle = Bundle(for: DismissableModalViewController.self), onClose closeBlock: (() -> ())? = nil) {
+    public init(childViewController: UIViewController, titleFont: UIFont, backgroundColor: UIColor = .clear, tintColor: UIColor = .white, imageBundle: Bundle = Bundle(for: DismissableModalViewController.self), insets: UIEdgeInsets = .zero, onClose closeBlock: (() -> ())? = nil) {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = backgroundColor
@@ -55,7 +55,7 @@ public class DismissableModalViewController: UIViewController {
         stack.distribution = .fill
         view.addSubview(stack)
         titleAndCloseButtonView.widthAnchor == stack.widthAnchor
-        stack.fillSuperview(insets: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0))
+        stack.fillSuperview(insets: insets)
 
         self.closeBlock = closeBlock
     }
