@@ -41,6 +41,7 @@ public class Environment: NSObject {
     
     // MARK: testing/development utilities
     public var debugging: Debugging!
+    public var touchVisualizer: TouchVisualization?
     
     // MARK: look/feel
     public var fonts: Fonts

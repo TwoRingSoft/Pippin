@@ -43,6 +43,11 @@ Pod::Spec.new do |s|
       sss.dependency 'PinpointKit', '~> 1'
       sss.dependency 'Pippin/Core'
     end
+    ss.subspec 'COSTouchVisualizer' do |sss|
+      sss.source_files = 'Sources/Pippin/Adapters/COSTouchVisualizer/**/*.{h,m,swift}'
+      sss.dependency 'COSTouchVisualizer', '~> 1'
+      sss.dependency 'Pippin/Core'
+    end
     ss.subspec 'XCGLogger' do |sss|
       sss.source_files = 'Sources/Pippin/Adapters/XCGLogger/**/*.{h,m,swift}'
       sss.dependency 'XCGLogger', '~> 6'

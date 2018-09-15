@@ -36,6 +36,8 @@ import Foundation
     
     /// Upon initializing the app's model layer, remove any entities stored in it.
     case wipeDataModel
+    
+    case visualizeTouches
 
     /// Determine if the calling launch argument was activated on the app launch.
     ///
@@ -55,6 +57,7 @@ import Foundation
         case .simulateInAppPurchaseRestoreFailure: return "simulate-in-app-purchase-restore-failure"
         case .wipePersistedInAppPurchases: return "wipe-in-app-purchases"
         case .wipeDataModel: return "wipe-data-model"
+        case .visualizeTouches: return "visualize-touches"
         }
     }
 

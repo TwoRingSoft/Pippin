@@ -44,6 +44,7 @@ These may have concrete objects implementing the functionality directly, or if t
 - BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
 - Logger: [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
 - ActivityIndicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
+- TouchVisualization: [COSTouchVisualizer](https://github.com/conopsys/COSTouchVisualizer)
 - CrashReporter: *[Crashlytics](https://fabric.io)
 
 The following hand rolled adapters are available:

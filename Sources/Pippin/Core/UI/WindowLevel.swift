@@ -8,6 +8,7 @@
 import Foundation
 
 /// `enum` defining the `CGFloat` offsets to be added to the `UIWindowLevelAlert` level of the respective component's display `UIWindow`.
+/// 
 enum WindowLevel: CGFloat {
     case debugging = 1
     case indicator = 2
