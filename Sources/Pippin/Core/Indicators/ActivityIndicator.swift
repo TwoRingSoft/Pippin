@@ -12,14 +12,19 @@ public protocol ActivityIndicator: Debuggable, Themeable, EnvironmentallyConscio
     
     /// Display an activity indicator.
     ///
-    /// - Parameter text: optional text to display in a label with the activity indicator.
-    func show(withText text: String?)
+    /// - Parameters:
+    ///   - text: Optional text to display in a label with the activity indicator.
+    ///   - completion: An optional closure to execute when the indicator has been displayed.
+    func show(withText text: String?, completion: EmptyBlock?)
 
     /// Display an activity indicator with attributed text.
     ///
-    /// - Parameter attributedText: optional attributed text to display in a label with the activity indicator.
-    func show(withAttributedText attributedText: NSAttributedString?)
+    /// - Parameters:
+    ///   - attributedText: Optional attributed text to display in a label with the activity indicator.
+    ///   - completion: An optional closure to execute when the indicator has been displayed.
+    func show(withAttributedText attributedText: NSAttributedString?, completion: EmptyBlock?)
 
     /// Hide any visible activity indicators.
-    func hide()
+    /// - Parameter completion: An optional closure to execute when the indicator has been dismissed.
+    func hide(completion: EmptyBlock?)
 }

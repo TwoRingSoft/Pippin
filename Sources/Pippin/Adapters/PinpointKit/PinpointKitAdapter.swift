@@ -56,16 +56,16 @@ public final class PinpointKitAdapter: NSObject, BugReporter {
 
 extension PinpointKitAdapter: PinpointKitDelegate {
     public func pinpointKit(_ pinpointKit: PinpointKit, willSend feedback: Feedback) {
-        environment?.activityIndicator?.show(withText: "Sending report...")
+        environment?.activityIndicator?.show(withText: "Sending report...", completion: nil)
     }
     
     public func pinpointKit(_ pinpointKit: PinpointKit, didSend feedback: Feedback) {
-        environment?.activityIndicator?.hide()
+        environment?.activityIndicator?.hide(completion: nil)
     }
     
     public func pinpointKit(_ pinpointKit: PinpointKit, didFailToSend feedback: Feedback, error: Error) {
         environment?.logger?.logError(message: String(format: "[%@] Failed to send bug report: %@", instanceType(self)), error: error)
-        environment?.activityIndicator?.hide()
+        environment?.activityIndicator?.hide(completion: nil)
         environment?.alerter?.showAlert(title: "Error", message: "Failed to send bug report. Please check your device's email settings, or contact us directly to help solve the problem.", type: .error, dismissal: .interactive, occlusion: .strong)
     }
 }

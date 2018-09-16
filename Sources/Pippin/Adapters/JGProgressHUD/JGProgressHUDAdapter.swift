@@ -14,6 +14,7 @@ public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {
     fileprivate let window = UIWindow(frame: UIScreen.main.bounds)
     fileprivate let rootView = UIViewController(nibName: nil, bundle: nil)
     public var environment: Environment?
+    private var completion: EmptyBlock?
 
     public override init() {
         super.init()
@@ -22,17 +23,20 @@ public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {
         indicator.delegate = self
     }
     
-    public func show(withText text: String? = nil) {
+    public func show(withText text: String? = nil, completion: EmptyBlock? = nil) {
         indicator.textLabel.text = text
+        self.completion = completion
         display()
     }
 
-    public func show(withAttributedText attributedText: NSAttributedString? = nil) {
+    public func show(withAttributedText attributedText: NSAttributedString? = nil, completion: EmptyBlock? = nil) {
         indicator.textLabel.attributedText = attributedText
+        self.completion = completion
         display()
     }
 
-    public func hide() {
+    public func hide(completion: EmptyBlock? = nil) {
+        self.completion = completion
         indicator.dismiss(animated: true)
     }
 }
@@ -46,8 +50,13 @@ extension JGProgressHUDAdapter: Themeable {
 
 // MARK: JGProgressHUDDelegate
 extension JGProgressHUDAdapter: JGProgressHUDDelegate {
+    public func progressHUD(_ progressHUD: JGProgressHUD, didPresentIn view: UIView) {
+        completion?()
+    }
+    
     public func progressHUD(_ progressHUD: JGProgressHUD, didDismissFrom view: UIView) {
         window.isHidden = true
+        completion?()
     }
 }
 
