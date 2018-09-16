@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Parameterize `DismissableModalViewController`'s insets instead of hardcoding it to inset by 30 from the top to avoid a status bar, something not all apps may want to do.
 - Extension on `UIView` to round corners and style borders.
 - Keep a reference to the `Bundle` containing any shared assets catalog, which defaults to the main bundle if one isn't specified in `Environment`'s init.
+- A `LaunchArgument` to wipe any stored user defaults the app uses at launch. 
 
 ### Fixed
 
