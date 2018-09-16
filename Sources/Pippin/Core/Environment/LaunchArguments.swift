@@ -44,7 +44,16 @@ import Foundation
     ///
     /// - Returns: `true` if the launch argument was configured in the app launch, `false` othewise.
     public func activated() -> Bool {
-        return ProcessInfo.processInfo.arguments.contains(String(describing: self))
+        return LaunchArgument.activated(launchArgument: String(describing: self))
+    }
+    
+    /// Determine if the provided launch argument was activated on the app launch.
+    ///
+    /// - Parameter launchArgument: The `String` description of the launch argument to test, as it was provided to the app launcher.
+    ///
+    /// - Returns: `true` if the launch argument was configured in the app launch, `false` othewise.
+    public static func activated(launchArgument: String) -> Bool {
+        return ProcessInfo.processInfo.arguments.contains(launchArgument)
     }
 
     private func name() -> String {
