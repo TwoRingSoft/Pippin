@@ -33,9 +33,6 @@ public extension Date {
             return "No elpased time"
         }
         
-        let firstComponents = date.dateComponents()
-        let secondComponents = self.dateComponents()
-        
         let interval = self.timeIntervalSince(date)
         let totalYears = interval / secondsInYear
         let totalMonths = interval / secondsInMonth
@@ -47,17 +44,19 @@ public extension Date {
         let totalMinutes = interval / secondsInMinute
         let remainingMinutes = fmod(totalMinutes, minutesInHour)
         
-        let sameYear = firstComponents.year == secondComponents.year
-        let sameMonth = firstComponents.month == secondComponents.month
-        let sameDay = firstComponents.day == secondComponents.day
-        let sameHour = firstComponents.hour == secondComponents.hour
-        let sameMinute = firstComponents.minute == secondComponents.minute
+        let differAtMostBySeconds = totalMinutes < 1
+        let differAtMostByMinutes = totalHours < 1
+        let differAtMostByHours = totalDays < 1
+        let differAtMostByDays = totalMonths < 1
+        let differAtMostByMonths = totalYears < 1
         
-        if sameMinute { return "< 1 minute" }
-        let differAtMostByMinutes = sameYear && sameMonth && sameDay && sameHour && secondComponents.minute != firstComponents.minute
-        let differAtMostByHours = sameYear && sameMonth && sameDay && secondComponents.hour != firstComponents.hour
-        let differAtMostByDays = sameYear && sameMonth && secondComponents.day != firstComponents.day
-        let differAtMostByMonths = sameYear && secondComponents.month != firstComponents.month
+        guard !differAtMostBySeconds else {
+            return String(
+                format: "%.2f %@",
+                interval,
+                "second".pluralized(forValue: interval)
+            )
+        }
 
         guard !differAtMostByMinutes else {
             return String(
