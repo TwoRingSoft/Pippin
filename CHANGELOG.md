@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - Make `Defaults` `EnvironmentallyConscious`.
+- Functions on `ActivityIndicator` to show and hide UI now have completion block parameters.
 
 ### Added
 
@@ -19,10 +20,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Extension on `UIView` to round corners and style borders.
 - Keep a reference to the `Bundle` containing any shared assets catalog, which defaults to the main bundle if one isn't specified in `Environment`'s init.
 - A `LaunchArgument` to wipe any stored user defaults the app uses at launch. 
+- A static extension function on `ProcessInfo` to test if any launch argument was provided during app launch, to help test app-specific launch arguments.
 
 ### Fixed
 
-- Fixed layout issues in `DismissableModalViewController` when there is no title to display or in less than full-screen layouts. 
+- Fixed layout issues in `DismissableModalViewController` when there is no title to display or in less than full-screen layouts.
+- `Date+TimeElapsed` now returns sub-minute scale results as a string describing seconds elapsed.
+- `InfoViewController` now shows in-app acknowledgements using a styled `NSAttributedString`.
 
 ---
 

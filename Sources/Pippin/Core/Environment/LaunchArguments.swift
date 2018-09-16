@@ -40,22 +40,6 @@ import Foundation
     /// Upon launch, remove any stored user defaults used by the app.
     case wipeDefaults
 
-    /// Determine if the calling launch argument was activated on the app launch.
-    ///
-    /// - Returns: `true` if the launch argument was configured in the app launch, `false` othewise.
-    public func activated() -> Bool {
-        return LaunchArgument.activated(launchArgument: String(describing: self))
-    }
-    
-    /// Determine if the provided launch argument was activated on the app launch.
-    ///
-    /// - Parameter launchArgument: The `String` description of the launch argument to test, as it was provided to the app launcher.
-    ///
-    /// - Returns: `true` if the launch argument was configured in the app launch, `false` othewise.
-    public static func activated(launchArgument: String) -> Bool {
-        return ProcessInfo.processInfo.arguments.contains(launchArgument)
-    }
-
     private func name() -> String {
         switch self {
         case .uiTest: return "ui-test"
@@ -91,7 +75,7 @@ extension LaunchArgument: CustomStringConvertible {
     /// - Parameter argument: the argument with which we'd like to know whether or not the app was launched
     /// - Returns: `YES` if the app contained the specified launch argument, `NO` otherwise
     @objc public class func applicationLaunched(argument: LaunchArgument) -> Bool {
-        return argument.activated()
+        return ProcessInfo.launchedWith(launchArgument: argument)
     }
 
 }

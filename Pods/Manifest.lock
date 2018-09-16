@@ -1,5 +1,6 @@
 PODS:
   - Anchorage (4.2.1)
+  - COSTouchVisualizer (1.0.6)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
   - Fabric (1.7.2)
@@ -10,46 +11,37 @@ PODS:
   - PinpointKit (1.1.0):
     - PinpointKit/Core (= 1.1.0)
   - PinpointKit/Core (1.1.0)
-  - Pippin (10.0.0):
-    - Pippin/Adapters (= 10.0.0)
-    - Pippin/CanIHaz (= 10.0.0)
-    - Pippin/Core (= 10.0.0)
-    - Pippin/Sensors (= 10.0.0)
-  - Pippin/Adapters (10.0.0):
-    - Pippin/Adapters/DebugController (= 10.0.0)
-    - Pippin/Adapters/JGProgressHUD (= 10.0.0)
-    - Pippin/Adapters/PinpointKit (= 10.0.0)
-    - Pippin/Adapters/SwiftMessages (= 10.0.0)
-    - Pippin/Adapters/XCGLogger (= 10.0.0)
-  - Pippin/Adapters/DebugController (10.0.0):
+  - Pippin (10.0.1):
+    - Pippin/Adapters (= 10.0.1)
+    - Pippin/Core (= 10.0.1)
+  - Pippin/Adapters (10.0.1):
+    - Pippin/Adapters/COSTouchVisualizer (= 10.0.1)
+    - Pippin/Adapters/DebugController (= 10.0.1)
+    - Pippin/Adapters/JGProgressHUD (= 10.0.1)
+    - Pippin/Adapters/PinpointKit (= 10.0.1)
+    - Pippin/Adapters/SwiftMessages (= 10.0.1)
+    - Pippin/Adapters/XCGLogger (= 10.0.1)
+  - Pippin/Adapters/COSTouchVisualizer (10.0.1):
+    - COSTouchVisualizer (~> 1)
     - Pippin/Core
-  - Pippin/Adapters/JGProgressHUD (10.0.0):
+  - Pippin/Adapters/DebugController (10.0.1):
+    - Pippin/Core
+  - Pippin/Adapters/JGProgressHUD (10.0.1):
     - JGProgressHUD
     - Pippin/Core
-  - Pippin/Adapters/PinpointKit (10.0.0):
+  - Pippin/Adapters/PinpointKit (10.0.1):
     - PinpointKit (~> 1)
     - Pippin/Core
-  - Pippin/Adapters/SwiftMessages (10.0.0):
+  - Pippin/Adapters/SwiftMessages (10.0.1):
     - Pippin/Core
     - SwiftMessages (~> 4)
-  - Pippin/Adapters/XCGLogger (10.0.0):
+  - Pippin/Adapters/XCGLogger (10.0.1):
     - Pippin/Core
     - XCGLogger (~> 6)
-  - Pippin/CanIHaz (10.0.0):
-    - Pippin/CanIHaz/Camera (= 10.0.0)
-    - Pippin/CanIHaz/Location (= 10.0.0)
-  - Pippin/CanIHaz/Camera (10.0.0)
-  - Pippin/CanIHaz/Location (10.0.0):
-    - Result
-  - Pippin/Core (10.0.0):
+  - Pippin/Core (10.0.1):
     - Anchorage (~> 4)
     - Result
-  - Pippin/Sensors (10.0.0):
-    - Pippin/Sensors/Location (= 10.0.0)
-  - Pippin/Sensors/Location (10.0.0):
-    - Pippin/CanIHaz
-    - Pippin/Core
-  - Pippin/Tests (10.0.0)
+  - Pippin/Tests (10.0.1)
   - PippinTesting (1.1.0)
   - PippinTesting/Tests (1.1.0)
   - Result (4.0.0)
@@ -69,6 +61,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Anchorage
+    - COSTouchVisualizer
     - Crashlytics
     - Fabric
     - JGProgressHUD
@@ -86,12 +79,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Anchorage: f4dbf32771115b8ef9c9cc4e55a002ad87711f48
+  COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: b444d66d8b10420c1ffc22c176dee37c1c12b4e7
-  Pippin: 69f3115b3b36551af560f1fe52b6116f270a4410
+  Pippin: c4585609a202fa48bff9adeb1296373ecf573609
   PippinTesting: 2217b9ebc0ec21adb3f62b7383f912c4e39744d7
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591

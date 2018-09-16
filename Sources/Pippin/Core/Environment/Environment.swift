@@ -72,7 +72,7 @@ public class Environment: NSObject {
         
         self.defaults.environment = self
         
-        if LaunchArgument.wipeDefaults.activated() {
+        if ProcessInfo.launchedWith(launchArgument: LaunchArgument.wipeDefaults) {
             let defaults = UserDefaults.standard
             defaults.dictionaryRepresentation().keys.forEach {
                 defaults.setValue(nil, forKey: $0)
