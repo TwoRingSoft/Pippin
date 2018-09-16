@@ -9,7 +9,6 @@
 import XCTest
 
 public extension XCUIApplication {
-    
     func selectTableViewCell(containingText text: String) {
         tables.cells[text].tap()
     }
@@ -26,6 +25,7 @@ public extension XCUIApplication {
         print("here")
     }
     
+    /// Enter a value using the on-screen keyboard.
     func enterNumericValue(value: String) {
         for character in value.characters {
             let characterValue = String(character)
@@ -33,4 +33,8 @@ public extension XCUIApplication {
         }
     }
     
+    /// Simulate a tap on the screen at a location relative to the screen boundaries.
+    func tap(point: CGPoint) {
+        windows.firstMatch.tap(location: point)
+    }
 }
