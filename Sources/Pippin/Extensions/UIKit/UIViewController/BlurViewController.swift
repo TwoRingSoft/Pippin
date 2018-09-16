@@ -25,11 +25,9 @@ public final class BlurViewController: UIViewController {
     public required init(viewController: UIViewController, blurStyle: UIBlurEffectStyle = .light) {
         super.init(nibName: nil, bundle: nil)
 
-        addNewChildViewController(newChildViewController: viewController)
-
         let blurEffect = UIBlurEffect(style: blurStyle)
         let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.contentView.addSubview(viewController.view)
+        addNewChildViewController(newChildViewController: viewController, containerView: blurView.contentView)
         viewController.view.fillSuperview()
 
         view.addSubview(blurView)
