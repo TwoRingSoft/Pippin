@@ -97,7 +97,9 @@ public class InfoViewController: UIViewController {
     
     func acknowledgementsPressed() {
         let textView = UITextView(frame: .zero)
-        textView.text = acknowledgements.acknowledgementsString()
+        textView.attributedText = acknowledgements.acknowledgementsString()
+        textView.isEditable = false
+        textView.dataDetectorTypes = UIDataDetectorTypes.link
         let vc = UIViewController(nibName: nil, bundle: nil)
         vc.view.addSubview(textView)
         vc.title = "Acknowledgements"

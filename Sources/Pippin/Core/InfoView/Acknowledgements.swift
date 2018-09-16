@@ -10,9 +10,11 @@ import Foundation
 public struct Acknowledgements {
     private var customAcknowledgements: String?
     private var cocoaPodsAcknowledgements: String?
+    private unowned var environment: Environment
     
     public init(customAcknowledgements: String? = nil, cocoaPodsAcknowledgementsPlistURL: URL? = nil, environment: Environment) {
         self.customAcknowledgements = customAcknowledgements
+        self.environment = environment
         
         if let cocoaPodPlistURL = cocoaPodsAcknowledgementsPlistURL {
             do {
@@ -39,14 +41,24 @@ public struct Acknowledgements {
         return customAcknowledgements != nil || (cocoaPodsAcknowledgements != nil && cocoaPodsAcknowledgements?.count ?? 0 > 0)
     }
     
-    func acknowledgementsString() -> String? {
+    func acknowledgementsString() -> NSAttributedString? {
         var strings = [String]()
+        var headings = [String]()
         if let customAcknowledgements = customAcknowledgements {
-            strings.append("Special thanks:\n\(customAcknowledgements)")
+            let heading = "Special thanks"
+            strings.append("\(heading):\n\(customAcknowledgements)")
+            headings.append(heading)
         }
         if let cocoaPodsAcknowledgements = cocoaPodsAcknowledgements {
-            strings.append("CocoaPods libraries:\n\(cocoaPodsAcknowledgements)")
+            let heading = "CocoaPods libraries"
+            strings.append("\(heading):\n\(cocoaPodsAcknowledgements)")
+            headings.append(heading)
         }
-        return strings.joined(separator: "\n\n")
+        let string = strings.joined(separator: "\n\n")
+        let attributedString = NSMutableAttributedString(string: string)
+        attributedString.setAttributes([NSAttributedStringKey.font: environment.fonts.text], range: NSMakeRange(0, string.count))
+        let boldAttribute = [NSAttributedStringKey.font: environment.fonts.subtitle]
+        headings.forEach { attributedString.setAttributes(boldAttribute, range: (string as NSString).range(of: $0)) }
+        return NSAttributedString(attributedString: attributedString)
     }
 }
