@@ -85,6 +85,11 @@ public class Environment: NSObject {
     ///
     /// - Returns: A `LogLevel` found in an override, or `nil` if no override was set.
     public func logLevel() -> LogLevel? {
+        // log verbosely for ui tests
+        if ProcessInfo.launchedWith(launchArgument: LaunchArgument.uiTest) {
+            return .verbose
+        }
+        
         // see if we have an xcode scheme launch argument
         if let launchArgumentValue = EnvironmentVariable.logLevel.value(), let logLevel = LogLevel(launchArgumentValue), logLevel != LogLevel.unknown {
             return logLevel

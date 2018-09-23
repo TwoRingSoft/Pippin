@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Make `Defaults` `EnvironmentallyConscious`.
 - Functions on `ActivityIndicator` to show and hide UI now have completion block parameters.
+- In `Environment.logLevel`, always return `LogLevel.verbose` when running UI tests.
 
 ### Added
 
