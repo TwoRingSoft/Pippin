@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+---
+
+## [Pippin 11.0.0] 2018-09-23
+
 ### Changed
 
 - Make `Defaults` `EnvironmentallyConscious`.
@@ -28,8 +32,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Fixed layout issues in `DismissableModalViewController` when there is no title to display or in less than full-screen layouts.
 - `Date+TimeElapsed` now returns sub-minute scale results as a string describing seconds elapsed.
 - `InfoViewController` now shows in-app acknowledgements using a styled `NSAttributedString`.
-
----
 
 ## [Pippin 10.0.0] 2018-09-05
 

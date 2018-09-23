@@ -6,9 +6,15 @@ workspace 'Pippin.xcworkspace'
 
 abstract_target 'PippinPods' do
   pod 'Pippin', path: '.', :testspecs => ['Tests']
-  pod 'PippinTesting', path: '.', :testspecs => ['Tests']
+  
   target 'PippinTestHarness' do
     pod 'Crashlytics', '~> 3'
   end
-  target 'PippinUnitTests'
+  
+  abstract_target 'PippinTestPods' do
+      pod 'PippinTesting', path: '.', :testspecs => ['Tests']
+      
+      target 'PippinUITests'
+      target 'PippinUnitTests'
+  end
 end

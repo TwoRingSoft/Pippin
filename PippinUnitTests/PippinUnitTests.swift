@@ -8,4 +8,6 @@
 import PippinTesting
 import XCTest
 
-class PippinUnitTests: XCTestCase {}
+class PippinUnitTests: XCTestCase {
+    func testTests() {}
+}

@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "495CE05F20F25BF700A72C80"
+               BlueprintIdentifier = "4907828321585E3D0024748B"
                BuildableName = "PippinUITests.xctest"
                BlueprintName = "PippinUITests"
                ReferencedContainer = "container:Pippin.xcodeproj">
