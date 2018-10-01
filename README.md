@@ -98,8 +98,10 @@ Files under Pippin/Tests/ are declared in Pippin's `test_spec`, and likewise for
 
 Also runs an integration smoke test, which generates an Xcode project for each subspec, in each of Swift and Objective-C, to try building after `pod install` with the appropriate subspec written into its Podfile. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
 
-## Contributing
+# Contribute
 
-Got something you'd like to add, or needs fixing? Feel free to file an issue and if you'd like, a PR!
+Issues and pull requests are welcome! 
 
-You can also help support this project by donating: [Paypal Me!](https://www.paypal.me/armcknight)
+If this project helped you, please consider <a href="https://www.paypal.me/armcknight">leaving a tip</a> 🤗
+
+Do you need help with a project? [I'm currently available for hire or contract.](http://tworingsoft.com/contracts).
