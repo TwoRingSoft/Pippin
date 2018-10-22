@@ -75,6 +75,7 @@ fastlane/test_output
 
 # End of https://www.gitignore.io/api/swift
 
+vendor/bundle/**/*
 /PippinTesting-Unit-Tests.log
 /PippinUnitTests_smoke_test.log
 /PippinUITests_smoke_test.log

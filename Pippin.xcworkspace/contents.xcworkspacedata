@@ -2,15 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:CHANGELOG.md">
+      location = "group:Pippin.podspec">
    </FileRef>
    <FileRef
-      location = "group:Pippin.podspec"
-      assignedFileDataType = "public.ruby-script">
-   </FileRef>
-   <FileRef
-      location = "group:PippinTesting.podspec"
-      assignedFileDataType = "public.ruby-script">
+      location = "group:PippinTesting.podspec">
    </FileRef>
    <FileRef
       location = "group:PippinAdapters.podspec"

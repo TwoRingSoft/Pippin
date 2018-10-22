@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FDA8672D8DE619F1FF35FA8 /* Pods_PippinPods_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D751F1ACBE627AF5A23EEC /* Pods_PippinPods_PippinTestHarness.framework */; };
 		4907828721585E3D0024748B /* PippinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907828621585E3D0024748B /* PippinUITests.swift */; };
 		495CE05520F25BE900A72C80 /* PippinUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CE05420F25BE900A72C80 /* PippinUnitTests.swift */; };
 		49835A061E934995009CC53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A051E934995009CC53E /* AppDelegate.swift */; };
@@ -304,10 +305,56 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00499019910FB15E19D64180 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PippinPods-PippinTestHarness-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		08D321FEFF37BC54C1CDC45F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PippinPods-PippinTestPods-PippinUnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1FE89405D9C8487DC4987802 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-PippinTestPods-PippinUITests/Pods-PippinPods-PippinTestPods-PippinUITests-frameworks.sh",
@@ -324,6 +371,8 @@
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/COSTouchVisualizer.framework",
@@ -347,6 +396,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-PippinTestPods-PippinUnitTests/Pods-PippinPods-PippinTestPods-PippinUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
@@ -362,6 +413,8 @@
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/COSTouchVisualizer.framework",
@@ -385,6 +438,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
@@ -399,6 +454,8 @@
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/COSTouchVisualizer.framework",
@@ -421,6 +478,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
@@ -437,7 +496,7 @@
 		D0298A2226FF0734FB9F9F8E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
-			files = (
+			outputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
