@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
   s.platform     = :ios, '9.0'
+  s.swift_version = '4.0'
 
   s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = 'Tests/Pippin/**/*.swift'
