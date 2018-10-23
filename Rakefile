@@ -68,7 +68,7 @@ task :release,[:podspec] do |t, args|
   sh "pod trunk push #{podspec}.podspec --allow-warnings"
 end
 
-desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
+desc 'Reverse the last git tag, for use when a release fails.'
 task :reverse_last_tag,[:podspec] do |t, args|
     podspec = args[:podspec]
     version_file = version_file_from_podspec podspec
