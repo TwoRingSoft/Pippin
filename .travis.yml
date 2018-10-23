@@ -1,7 +1,7 @@
 language: objective-c
 osx_image: xcode10
 install:
-  - gem install cocoapods
+  - gem install rake
   - rake init
 script: 
   - rake test
