@@ -1,6 +1,7 @@
 language: objective-c
 osx_image: xcode10
 install:
+  - bundle
   - bundle exec rake init
 script: 
   - bundle exec rake test
