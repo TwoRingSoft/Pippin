@@ -125,17 +125,23 @@ def app_smoke_test
   require 'open3'
   
   scheme_suffixes = [
-      'Core',
-      'Adapters-PinpointKit',
-      'Adapters-XCGLogger',
-      'Adapters-DebugController',
+      'Pippin',
+      'PippinAdapters-PinpointKit',
+      'PippinAdapters-XCGLogger',
+      'PippinAdapters-DebugController',
+      'PippinAdapters-COSTouchVisualizer',
+      'PippinAdapters-JGProgressHUD',
+      'PippinAdapters-SwiftMessages',
   ]
   languages = [ :swift, :objc ]
   
   # create dir to contain all tests
   root_test_path = 'Pippin/SmokeTests/generated_xcode_projects'
   if Dir.exists?(root_test_path) then
+      puts "Removing #{root_test_path}"
     FileUtils.rm_rf(root_test_path)
+  else
+    puts "#{root_test_path} doesn't exist"
   end
   Dir.mkdir(root_test_path)
   
@@ -167,7 +173,7 @@ def app_smoke_test
       
       sdk_versions_per_platform = {
         # platform => [ sdk versionss ]
-        'phone' => ['11.4'],
+        'phone' => ['12.0'],
         #'mac' => ['10.13'],
         #'tv' => ['11.1'],
         #'watch' => ['4.1']
@@ -201,7 +207,7 @@ def app_smoke_test
             ['{{PLATFORM}}', platform_to_cocoapods_names[platform]],
             ['{{SDK_VERSION}}', sdk_version],
             ['{{TARGET_NAME}}', test_name],
-            ['{{SUBSPEC}}', subspec.gsub('-', '/')]
+            ['{{PODSPEC}}', subspec.gsub('-', '/')]
             ].inject(podfile.read) do |acc, item|
               acc.gsub(item[0], item[1])
             end
@@ -249,7 +255,8 @@ targets:
       LD_RUNPATH_SEARCH_PATHS: $(inherited) @executable_path/Frameworks
       PRODUCT_BUNDLE_IDENTIFIER: com.two-ring-soft.test
       PRODUCT_NAME: #{test_name}
-      SWIFT_VERSION: 4.0
+      SWIFT_VERSION: 4.2
       TARGETED_DEVICE_FAMILY: 1,2
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: $(inherited)
 XCODEGEN_SPEC_YML
 end

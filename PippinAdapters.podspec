@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'DebugController', 'JGProgressHUD'
 
   s.subspec 'PinpointKit' do |ss|
-    ss.source_files = 'Sources/Pippin/Adapters/PinpointKit/**/*.{h,m,swift}'
+    ss.source_files = 'Sources/PippinAdapters/PinpointKit/**/*.{h,m,swift}'
     ss.dependency 'PinpointKit', '~> 1'
     ss.dependency 'Pippin'
   end
