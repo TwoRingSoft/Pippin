@@ -27,7 +27,7 @@
   "subspecs": [
     {
       "name": "PinpointKit",
-      "source_files": "Sources/Pippin/Adapters/PinpointKit/**/*.{h,m,swift}",
+      "source_files": "Sources/PippinAdapters/PinpointKit/**/*.{h,m,swift}",
       "dependencies": {
         "PinpointKit": [
           "~> 1"
