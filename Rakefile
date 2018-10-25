@@ -1,6 +1,9 @@
+def travis?
+    return `whoami`.strip == 'travis'
+end
+
 def ruby_environment_prefixes
-  user = `whoami`.strip
-  if user == 'travis' then
+  if travis? then
     ''
   else
     'rbenv exec'
@@ -97,26 +100,26 @@ end
 def unit_tests
   require 'open3'
   ['Pippin-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
-    sh "echo travis_fold:start:#{scheme}"
-    Open3.pipeline(
-      ["xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"],
-      ["tee #{scheme}.log"],
-      ["#{ruby_environment_prefixes} xcpretty -t"]
-    )
-    sh "echo travis_fold:end:#{scheme}"
+    sh "echo travis_fold:start:#{scheme}" if travis?
+    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"
+    tee_pipe = "tee #{scheme}.log"
+    xcpretty_pipe = "#{ruby_environment_prefixes} xcpretty -t"
+    puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+    Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+    sh "echo travis_fold:end:#{scheme}" if travis?
   end
 end
 
 def test_smoke_test
   require 'open3'
   [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
-    sh "echo travis_fold:start:#{scheme}"
-    Open3.pipeline(
-      ["xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"],
-      ["tee #{scheme}_smoke_test.log"],
-      ["#{ruby_environment_prefixes} xcpretty -t"]
-    )
-    sh "echo travis_fold:end:#{scheme}"
+    sh "echo travis_fold:start:#{scheme}" if travis?
+    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"
+    tee_pipe = "tee #{scheme}_smoke_test.log"
+    xcpretty_pipe = "#{ruby_environment_prefixes} xcpretty -t"
+    puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+    Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+    sh "echo travis_fold:end:#{scheme}" if travis?
   end
 end
 
@@ -138,10 +141,7 @@ def app_smoke_test
   # create dir to contain all tests
   root_test_path = 'Pippin/SmokeTests/generated_xcode_projects'
   if Dir.exists?(root_test_path) then
-      puts "Removing #{root_test_path}"
     FileUtils.rm_rf(root_test_path)
-  else
-    puts "#{root_test_path} doesn't exist"
   end
   Dir.mkdir(root_test_path)
   
@@ -152,7 +152,7 @@ def app_smoke_test
     language_name = language == :swift ? 'Swift' : 'Objc'
     test_name = subspec + '-' + language_name
     
-    sh "echo travis_fold:start:#{test_name}"
+    sh "echo travis_fold:start:#{test_name}" if travis?
     
     # prepare for xcode generation
     xcodegen_spec_yml = make_xcodegen_spec_yml test_name, test_name
@@ -199,7 +199,7 @@ def app_smoke_test
       sdk_versions_per_platform.each_key do |platform|
         sdk_versions_per_platform[platform].each do |sdk_version|
           integration_test_name = [subspec, language_name, platform, sdk_version].join('-')
-          sh "echo travis_fold:start:#{integration_test_name}"
+          sh "echo travis_fold:start:#{integration_test_name}" if travis?
           
           # create podfile and insert correct subspec name
           File.open(File.join('../..', 'Podfile')) do |podfile|
@@ -222,18 +222,18 @@ def app_smoke_test
           sdk_value = platform_to_device_prefix[platform] + sdk_version
           derived_data_path = 'derivedData'
           FileUtils.remove_dir(derived_data_path, true) if Dir.exists?(derived_data_path)
-          Open3.pipeline(
-            ["xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path}"], 
-            ["tee #{test_name}-#{platform}-#{sdk_version}.log"], 
-            ["#{ruby_environment_prefixes} xcpretty -t"]
-          )
+          build_command = "xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path}"
+          tee_pipe = "tee #{test_name}-#{platform}-#{sdk_version}.log"
+          xcpretty_pipe = "#{ruby_environment_prefixes} xcpretty -t"
+          puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+          Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
 
-          sh "echo travis_fold:end:#{test_name}"
+          sh "echo travis_fold:end:#{test_name}" if travis?
         end
       end
     end
     
-    sh "echo travis_fold:end:#{test_name}"
+    sh "echo travis_fold:end:#{test_name}" if travis?
   end
 end
 
