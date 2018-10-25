@@ -1,7 +1,7 @@
 # Pippin
 
 [![Build Status](https://travis-ci.org/TwoRingSoft/Pippin.svg?branch=master)](https://travis-ci.org/TwoRingSoft/Pippin)
-![Swift 4](https://img.shields.io/badge/Swift-4-orange.svg)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
@@ -10,7 +10,7 @@ Pippin is a collection of utilities to quickly prototype iOS apps and simplify w
 
 ## Code
 
-Pippin is split up into some top-level components: Core, Extensions, Sensors and CanIHaz; these are organized under the `Core` and `Adapters` subspecs. The separate PippinTesting delivers tools to work with XCTest.
+Pippin is split up into some top-level components: Core, Extensions, Sensors and CanIHaz. PippinAdapters provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. PippinTesting delivers tools to work with XCTest.
 
 ### Core
 
@@ -89,6 +89,7 @@ These are currently split into extensions on Foundation, UIKit and Webkit.
 
 - CrudViewController: table view with search controls wrapped around an FRC
 - InfoViewController: app name and version info, links to two ring properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
+- FormController: manage traversal and keyboard avoidance for a collection of inputs
 
 ## Testing
 
