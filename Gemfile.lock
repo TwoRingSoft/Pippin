@@ -82,6 +82,7 @@ GEM
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
+    rake (12.3.1)
     rouge (2.0.7)
     ruby-macho (1.2.0)
     thread_safe (0.3.6)
@@ -113,6 +114,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods
+  rake
   travis
   xcpretty
 
