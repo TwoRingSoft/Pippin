@@ -26,13 +26,14 @@ Pod::Spec.new do |s|
       'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}',
       'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
     ]
-	  ss.dependency 'Result'
-	  ss.dependency 'Anchorage', '~> 4'
+    ss.dependency 'Result'
+    ss.dependency 'Anchorage', '~> 4'
   end
   s.subspec 'Extensions' do |ss|
     ss.source_files = [
       'Sources/Pippin/Extensions/**/*.{h,m,swift}'
     ]
+    ss.dependency 'Anchorage', '~> 4'
   end
 
 end
