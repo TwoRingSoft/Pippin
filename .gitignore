@@ -77,4 +77,3 @@ fastlane/test_output
 
 vendor/bundle/**/*
 *.log
-/PippinUnitTests_smoke_test.logvendor/bundle/**/*
