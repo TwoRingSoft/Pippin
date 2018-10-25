@@ -1,10 +1,9 @@
 language: objective-c
 osx_image: xcode10
 install:
-  - gem install rake
-  - rake init
+  - bundle exec rake init
 script: 
-  - rake test
+  - bundle exec rake test
 notifications:
   email:
     recipients:
