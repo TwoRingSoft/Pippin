@@ -103,7 +103,7 @@ def unit_tests
     sh "echo travis_fold:start:#{scheme}" if travis?
     build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"
     tee_pipe = "tee #{scheme}.log"
-    xcpretty_pipe = "#{ruby_environment_prefixes} xcpretty -t"
+    xcpretty_pipe = "#{ruby_environment_prefixes} bundle exec xcpretty -t"
     puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
     Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
     sh "echo travis_fold:end:#{scheme}" if travis?
@@ -116,7 +116,7 @@ def test_smoke_test
     sh "echo travis_fold:start:#{scheme}" if travis?
     build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"
     tee_pipe = "tee #{scheme}_smoke_test.log"
-    xcpretty_pipe = "#{ruby_environment_prefixes} xcpretty -t"
+    xcpretty_pipe = "#{ruby_environment_prefixes} bundle exec xcpretty -t"
     puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
     Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
     sh "echo travis_fold:end:#{scheme}" if travis?
@@ -224,7 +224,7 @@ def app_smoke_test
           FileUtils.remove_dir(derived_data_path, true) if Dir.exists?(derived_data_path)
           build_command = "xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path}"
           tee_pipe = "tee #{test_name}-#{platform}-#{sdk_version}.log"
-          xcpretty_pipe = "#{ruby_environment_prefixes} xcpretty -t"
+          xcpretty_pipe = "#{ruby_environment_prefixes} bundle exec xcpretty -t"
           puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
           Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
 
