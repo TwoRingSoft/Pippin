@@ -9,13 +9,8 @@ end
 
 desc 'Initialize development environment.'
 task :init do
-    sh 'brew update'
-    sh 'brew tap tworingsoft/formulae'
-    [ 'XcodeGen', 'tworingsoft/formulae/vrsn' ].each do |formula|
-        sh "brew install #{formula} || brew upgrade #{formula}"
-    end
-    sh "#{ruby_environment_prefixes} gem install xcpretty"
-    sh "#{ruby_environment_prefixes} pod install --repo-update --verbose"
+    sh 'brew bundle'
+    sh "#{ruby_environment_prefixes} bundle package"
 end
 
 desc 'Bump version number for the specified podspec and commit the changes with message as the output from vrsn.'
