@@ -25,9 +25,8 @@ public extension XCUIApplication {
         print("here")
     }
     
-    /// Enter a value using the on-screen keyboard.
-    func enterNumericValue(value: String) {
-        for character in value.characters {
+    func enterWithOnscreenKeyboard(value: String) {
+        for character in value {
             let characterValue = String(character)
             keys[characterValue].tap()
         }
