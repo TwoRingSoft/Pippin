@@ -12,6 +12,7 @@ end
 
 desc 'Initialize development environment.'
 task :init do
+    sh 'brew tap tworingsoft/formulae'
     sh 'brew bundle'
     sh "#{ruby_environment_prefixes} bundle package"
 end
