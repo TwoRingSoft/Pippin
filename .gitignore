@@ -74,3 +74,5 @@ fastlane/screenshots
 fastlane/test_output
 
 # End of https://www.gitignore.io/api/swift
+
+/PippinTesting-Unit-Tests.log
