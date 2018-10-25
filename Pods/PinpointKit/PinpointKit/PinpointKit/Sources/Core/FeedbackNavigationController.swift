@@ -122,7 +122,13 @@ public final class FeedbackNavigationController: UINavigationController, Feedbac
         
         feedbackViewController.screenshot = screenshot
         feedbackViewController.annotatedScreenshot = screenshot
-
+        self.modalPresentationStyle = feedbackConfiguration?.presentationStyle ?? .fullScreen
         viewController.present(self, animated: true, completion: nil)
+    }
+
+    // MARK: - UINavigationController
+
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return topViewController?.preferredStatusBarStyle ?? .default
     }
 }

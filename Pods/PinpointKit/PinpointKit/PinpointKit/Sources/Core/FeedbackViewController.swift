@@ -68,7 +68,7 @@ public final class FeedbackViewController: UITableViewController {
     }
     
     @available(*, unavailable)
-    override init(style: UITableViewStyle) {
+    override init(style: UITableView.Style) {
         super.init(style: .grouped)
     }
     
@@ -78,12 +78,18 @@ public final class FeedbackViewController: UITableViewController {
     }
     
     // MARK: - UIViewController
+
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        guard let interfaceCustomization = interfaceCustomization else { assertionFailure(); return .default }
+        let appearance = interfaceCustomization.appearance
+        return appearance.statusBarStyle
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 100.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         // Helps to prevent extra spacing from appearing at the top of the table.
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: .leastNormalMagnitude))
@@ -114,14 +120,17 @@ public final class FeedbackViewController: UITableViewController {
         let appearance = interfaceCustomization.appearance
 
         title = interfaceText.feedbackCollectorTitle
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: appearance.navigationTitleFont]
+        navigationController?.navigationBar.titleTextAttributes = [
+            .font: appearance.navigationTitleFont,
+            .foregroundColor: appearance.navigationTitleColor
+        ]
         
         let sendBarButtonItem = UIBarButtonItem(title: interfaceText.feedbackSendButtonTitle, style: .done, target: self, action: #selector(FeedbackViewController.sendButtonTapped))
-        sendBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font: appearance.feedbackSendButtonFont], for: UIControlState())
+        sendBarButtonItem.setTitleTextAttributesForAllStates([.font: appearance.feedbackSendButtonFont])
         navigationItem.rightBarButtonItem = sendBarButtonItem
         
         let backBarButtonItem = UIBarButtonItem(title: interfaceText.feedbackBackButtonTitle, style: .plain, target: nil, action: nil)
-        backBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font: appearance.feedbackBackButtonFont], for: UIControlState())
+        backBarButtonItem.setTitleTextAttributesForAllStates([.font: appearance.feedbackBackButtonFont])
         navigationItem.backBarButtonItem = backBarButtonItem
         
         let cancelBarButtonItem: UIBarButtonItem
@@ -132,7 +141,7 @@ public final class FeedbackViewController: UITableViewController {
             cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: cancelAction)
         }
         
-        cancelBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font: appearance.feedbackCancelButtonFont], for: UIControlState())
+        cancelBarButtonItem.setTitleTextAttributesForAllStates([.font: appearance.feedbackCancelButtonFont])
         
         if presentingViewController != nil {
             navigationItem.leftBarButtonItem = cancelBarButtonItem
@@ -193,6 +202,7 @@ extension FeedbackViewController: FeedbackCollector {
 extension FeedbackViewController: EditorDelegate {
     public func editorWillDismiss(_ editor: Editor, with screenshot: UIImage) {
         annotatedScreenshot = screenshot
+        tableView.reloadData()
     }
 }
 
@@ -236,6 +246,7 @@ extension FeedbackViewController: FeedbackTableViewDataSourceDelegate {
         
         let editImageViewController = NavigationController(rootViewController: editor.viewController)
         editImageViewController.view.tintColor = interfaceCustomization?.appearance.tintColor
+        editImageViewController.modalPresentationStyle = feedbackConfiguration?.presentationStyle ?? .fullScreen
         present(editImageViewController, animated: true, completion: nil)
     }
 }

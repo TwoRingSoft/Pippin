@@ -12,7 +12,7 @@ import UIKit
 public protocol Sender: class {
     
     /// A delegate that is informed of successful or failed feedback sending.
-    weak var delegate: SenderDelegate? { get set }
+    var delegate: SenderDelegate? { get set }
     
     /**
      Sends the feedback using the provided view controller as a presenting view controller.
@@ -45,7 +45,7 @@ public protocol SenderDelegate: class {
     func sender(_ sender: Sender, didFailToSend feedback: Feedback?, error: Error)
 }
 
-/// An extension on PinpointKitDelegate that makes some of the delegate methods optional by giving them empty implementations by default.
+/// An extension on `PinpointKitDelegate` that makes some of the delegate methods optional by giving them empty implementations by default.
 public extension SenderDelegate {
 
     func sender(_ sender: Sender, didFailToSend feedback: Feedback?, error: Error) { }

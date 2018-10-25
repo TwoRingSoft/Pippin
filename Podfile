@@ -18,3 +18,16 @@ abstract_target 'PippinPods' do
       target 'PippinUnitTests'
   end
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    next unless
+    target.build_configurations.each do |config|
+      if target.name == 'PinpointKit' or target.name == 'Anchorage' then
+        config.build_settings['SWIFT_VERSION'] = '4.2'
+      elsif target.name == 'SwiftMessages' then
+        config.build_settings['SWIFT_VERSION'] = '4'
+      end
+    end
+  end
+end

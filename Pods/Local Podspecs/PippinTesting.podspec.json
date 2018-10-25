@@ -15,6 +15,7 @@
   "platforms": {
     "ios": "9.0"
   },
+  "swift_version": "4.0",
   "source_files": "Sources/PippinTesting/Extensions/XCTest/**/*.{h,m,swift}",
   "frameworks": "XCTest",
   "pod_target_xcconfig": {
