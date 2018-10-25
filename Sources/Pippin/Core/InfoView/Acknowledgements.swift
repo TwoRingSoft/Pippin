@@ -56,8 +56,8 @@ public struct Acknowledgements {
         }
         let string = strings.joined(separator: "\n\n")
         let attributedString = NSMutableAttributedString(string: string)
-        attributedString.setAttributes([NSAttributedStringKey.font: environment.fonts.text], range: NSMakeRange(0, string.count))
-        let boldAttribute = [NSAttributedStringKey.font: environment.fonts.subtitle]
+        attributedString.setAttributes([NSAttributedString.Key.font: environment.fonts.text], range: NSMakeRange(0, string.count))
+        let boldAttribute = [NSAttributedString.Key.font: environment.fonts.subtitle]
         headings.forEach { attributedString.setAttributes(boldAttribute, range: (string as NSString).range(of: $0)) }
         return NSAttributedString(attributedString: attributedString)
     }

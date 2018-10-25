@@ -128,7 +128,7 @@ private extension InfoViewController {
     func openURL(URLString: String) {
         let url = URL(string: URLString)!
         if #available(iOS 10, *) {
-            UIApplication.shared.open(url, options: [String: Any](), completionHandler: nil)
+            UIApplication.shared.open(url, options: [UIApplication.OpenExternalURLOptionsKey: Any](), completionHandler: nil)
         } else {
             UIApplication.shared.openURL(url)
         }
@@ -205,12 +205,12 @@ private extension InfoViewController {
         let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
 
         // insert two ring logo and style copyright text to match
-        string.addAttributes([NSAttributedStringKey.font: environment.fonts.text], range: NSMakeRange(0, string.length))
+        string.addAttributes([NSAttributedString.Key.font: environment.fonts.text], range: NSMakeRange(0, string.length))
 
         replace(attachmentImage: .twoRing, in: string, textColor: textColor)
 
         let range = NSMakeRange(0, string.length)
-        string.addAttributes([NSAttributedStringKey.foregroundColor: textColor], range: range)
+        string.addAttributes([NSAttributedString.Key.foregroundColor: textColor], range: range)
 
         let label = UILabel(frame: .zero)
         label.attributedText = string

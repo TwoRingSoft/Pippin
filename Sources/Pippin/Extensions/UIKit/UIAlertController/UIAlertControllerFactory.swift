@@ -26,7 +26,7 @@ public extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func showConfirmationAlert(withTitle title: String? = nil, message: String? = nil, confirmTitle: String = "OK", cancelTitle: String = "Cancel", style: UIAlertControllerStyle = .alert, completion: ((Bool) -> Void)? = nil) {
+    func showConfirmationAlert(withTitle title: String? = nil, message: String? = nil, confirmTitle: String = "OK", cancelTitle: String = "Cancel", style: UIAlertController.Style = .alert, completion: ((Bool) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .default, handler: { action in
             completion?(true)

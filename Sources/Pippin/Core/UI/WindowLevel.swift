@@ -14,7 +14,7 @@ enum WindowLevel: CGFloat {
     case indicator = 2
     case alerter = 3
     
-    func windowLevel() -> CGFloat {
-        return UIWindowLevelAlert + self.rawValue
+    func windowLevel() -> UIWindow.Level {
+        return UIWindow.Level.statusBar
     }
 }

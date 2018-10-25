@@ -19,7 +19,7 @@ public class TextFieldTableViewCell: UITableViewCell {
     public let textField = UITextField(frame: .zero)
     public let titleLabel = UILabel(frame: .zero)
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         backgroundColor = .clear

@@ -23,13 +23,13 @@ extension UIViewController {
     public func addNewChildViewController(newChildViewController childViewController: UIViewController, containerView: UIView? = nil) {
         let resolvedView: UIView = containerView ?? view
         resolvedView.addSubview(childViewController.view)
-        addChildViewController(childViewController)
+        addChild(childViewController)
     }
 
     /// Call on the instance of the child view controller to remove
     public func removeAsChildViewController() {
         view.removeFromSuperview()
-        removeFromParentViewController()
+        removeFromParent()
     }
 
 }

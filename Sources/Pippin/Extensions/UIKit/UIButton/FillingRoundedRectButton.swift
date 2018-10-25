@@ -36,7 +36,7 @@ public class FillingRoundedRectButton: UIButton {
                 animation.fromValue = self.layer.backgroundColor
                 animation.toValue = newColor
                 animation.duration = 0.2
-                animation.fillMode = kCAFillModeForwards
+                animation.fillMode = CAMediaTimingFillMode.forwards
                 animation.isRemovedOnCompletion = false
                 self.layer.add(animation, forKey: "animation\(self.layer.animationKeys()?.count ?? 0)")
             }

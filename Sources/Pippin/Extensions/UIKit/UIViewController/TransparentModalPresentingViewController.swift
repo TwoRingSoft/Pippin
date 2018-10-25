@@ -78,7 +78,7 @@ extension TransparentModalPresentingViewController {
             return
         }
 
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
             self.view.layoutSubviews()
         }, completion: completion)
     }

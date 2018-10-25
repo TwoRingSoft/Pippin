@@ -18,7 +18,7 @@ public class TextViewCell: UITableViewCell {
     public let textView = UITextView(frame: .zero)
     public let titleLabel = UILabel(frame: .zero)
 
-    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         backgroundColor = .clear

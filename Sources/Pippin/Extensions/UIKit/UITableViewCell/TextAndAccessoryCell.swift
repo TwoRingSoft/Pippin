@@ -24,7 +24,7 @@ public class TextAndAccessoryCell: UITableViewCell {
     fileprivate var trailingImageAccessoryWidth: NSLayoutConstraint?
     fileprivate var trailingImageTrailingWidth: NSLayoutConstraint?
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         backgroundColor = .clear

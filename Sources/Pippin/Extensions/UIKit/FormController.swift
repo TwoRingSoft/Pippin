@@ -264,7 +264,7 @@ private extension FormController {
 
     func handleKeyboardDisplay(notification: Notification) {
         guard let currentInputView = self.currentInputView else { return }
-        guard let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
 
 
         let unhide: ((Bool) -> ()) = { completed in
@@ -286,7 +286,7 @@ private extension FormController {
                 if let indexPath = tableView.indexPath(for: targetCell) {
                     if let superview = currentInputView.superview {
                         let a = currentInputView.center.y / superview.bounds.height
-                        var position: UITableViewScrollPosition
+                        var position: UITableView.ScrollPosition
                         if a < 0.34 {
                             position = .top
                         } else if a < 0.67 {
@@ -303,11 +303,11 @@ private extension FormController {
         }
 
         if self.originalContentInset == nil {
-            guard let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-            guard let curveRawValue = (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
+            guard let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
+            guard let curveRawValue = (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
             guard let scrollView = self.tableView ?? self.scrollView else { return }
             self.originalContentInset = scrollView.contentInset
-            let curveOption = UIViewAnimationOptions(rawValue: curveRawValue)
+            let curveOption = UIView.AnimationOptions(rawValue: curveRawValue)
             UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
                 var insets = scrollView.contentInset
                 insets.bottom = keyboardFrame.height - 49
@@ -323,9 +323,9 @@ private extension FormController {
         guard let originalContentInset = self.originalContentInset else { return }
         self.originalContentInset = nil
         
-        guard let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-        guard let curveRawValue = (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
-        let curveOption = UIViewAnimationOptions(rawValue: curveRawValue)
+        guard let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
+        guard let curveRawValue = (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
+        let curveOption = UIView.AnimationOptions(rawValue: curveRawValue)
 
         if let tableView = tableView {
             UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
@@ -339,11 +339,11 @@ private extension FormController {
     }
 
     func _init() {
-        [ NSNotification.Name.UIKeyboardWillChangeFrame, NSNotification.Name.UIKeyboardWillHide ].forEach {
+        [ UIResponder.keyboardWillChangeFrameNotification, UIResponder.keyboardWillHideNotification ].forEach {
             let observer = NotificationCenter.default.addObserver(forName: $0, object: nil, queue: .main) { notification in
                 let logger = self.environment?.logger
                 switch notification.name {
-                case NSNotification.Name.UIKeyboardWillChangeFrame:
+                case UIResponder.keyboardWillChangeFrameNotification:
                     logger?.logDebug(message: String(format: "[%@] UIKeyboardWillChangeFrame", instanceType(self)))
                     if self.receivedDelegateCallback {
                         self.receivedDelegateCallback = false
@@ -353,7 +353,7 @@ private extension FormController {
                         self.notification = notification
                     }
                     break
-                case NSNotification.Name.UIKeyboardWillHide:
+                case UIResponder.keyboardWillHideNotification:
                     logger?.logDebug(message: String(format: "[%@] UIKeyboardWillHide", instanceType(self)))
                     self.handleKeyboardHide(notification: notification)
                     break

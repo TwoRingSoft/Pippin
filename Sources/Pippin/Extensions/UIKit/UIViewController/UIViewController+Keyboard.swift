@@ -15,12 +15,12 @@ extension UIViewController {
      using other animation information extracted from the notification.
      */
     public func animateLayout(afterNotification notification: Notification, keyboardHandler: (_ keyboardFrame: CGRect) -> (Void)) {
-        guard let frame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let frame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         keyboardHandler(frame)
 
-        guard let duration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-        guard let curveValue = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber else { return }
-        let curve = UIViewAnimationOptions(rawValue: curveValue.uintValue)
+        guard let duration: TimeInterval = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
+        guard let curveValue = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber else { return }
+        let curve = UIView.AnimationOptions(rawValue: curveValue.uintValue)
         UIView.animate(withDuration: duration, delay: 0, options: curve, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)

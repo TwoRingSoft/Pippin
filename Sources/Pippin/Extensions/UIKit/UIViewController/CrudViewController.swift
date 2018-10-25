@@ -132,8 +132,8 @@ public class CrudSearchContainer: UIView {}
         if shouldShowSearch(), let searchField = searchField, let searchContainer = searchContainer, let searchCancelButton = searchCancelButton {
             configuration.themeDelegate?.crudViewController?(crudViewController: self, theme: searchField, cancelButton: searchCancelButton)
             if let shouldBlur = configuration.themeDelegate?.crudViewControllerShouldBlurSearchControls?(crudViewController: self), shouldBlur {
-                let fieldBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-                cancelButtonBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+                let fieldBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
+                cancelButtonBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
                 guard let cancelButtonBlurView = cancelButtonBlurView else { return }
                 cancelButtonBlurView.alpha = 0
                 [ fieldBlurView, cancelButtonBlurView ].forEach {

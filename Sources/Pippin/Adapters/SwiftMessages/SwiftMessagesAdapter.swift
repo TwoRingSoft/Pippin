@@ -52,7 +52,7 @@ public final class SwiftMessagesAdapter: NSObject, Alerter {
         var config = SwiftMessages.Config()
         config.duration = dismissal == .interactive ? .forever : .automatic
         config.dimMode = occlusion == .strong ? .gray(interactive: true) : .none
-        config.presentationContext = .window(windowLevel: WindowLevel.alerter.windowLevel())
+        config.presentationContext = .window(windowLevel: WindowLevel.alerter.windowLevel().rawValue)
         SwiftMessages.show(config: config, view: view)
     }
 
@@ -66,7 +66,7 @@ public final class SwiftMessagesAdapter: NSObject, Alerter {
         }
         view.configureContent(title: title, body: message)
         var config = SwiftMessages.Config()
-        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar.rawValue)
         config.duration = .forever
         config.dimMode = .gray(interactive: true)
         SwiftMessages.show(config: config, view: view)
