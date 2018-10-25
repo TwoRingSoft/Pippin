@@ -25,7 +25,7 @@ public typealias ConfirmCompletionBlock = ((_ success: Bool, _ confirmBlock: @es
 public class CoreDataController: NSObject, EnvironmentallyConscious {
 
     public var environment: Environment?
-    var modelName: String
+    public var modelName: String
     fileprivate var managedObjectModel: NSManagedObjectModel?
     public var debuggingDelegate: CoreDataControllerDebugging?
 

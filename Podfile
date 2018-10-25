@@ -6,6 +6,7 @@ workspace 'Pippin.xcworkspace'
 
 abstract_target 'PippinPods' do
   pod 'Pippin', path: '.', :testspecs => ['Tests']
+  pod 'PippinAdapters', path: '.'
   
   target 'PippinTestHarness' do
     pod 'Crashlytics', '~> 3'
@@ -21,13 +22,15 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-    next unless
     target.build_configurations.each do |config|
-      if target.name == 'PinpointKit' or target.name == 'Anchorage' then
-        config.build_settings['SWIFT_VERSION'] = '4.2'
-      elsif target.name == 'SwiftMessages' then
-        config.build_settings['SWIFT_VERSION'] = '4'
-      end
+        
+        # manually set the SWIFT_VERSION value for pods that don't correctly specify it in their podspecs
+        if target.name == 'PinpointKit' or target.name == 'Anchorage' then
+            config.build_settings['SWIFT_VERSION'] = '4.2'
+        elsif target.name == 'SwiftMessages' then
+            config.build_settings['SWIFT_VERSION'] = '4'
+        end
+        
     end
   end
 end

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Two Ring Software. All rights reserved.
 //
 
+import Pippin
 import UIKit
 
 @available(iOS 11.0, *)

@@ -14,9 +14,9 @@ public enum AlertType {
     case warning
     case error
     
-    static let types: [AlertType] = [.error, .info, .warning, .success]
+    public static let types: [AlertType] = [.error, .info, .warning, .success]
 
-    func name() -> String {
+    public func name() -> String {
         switch self {
         case .success: return "Success"
         case .info: return "Info"
@@ -39,9 +39,9 @@ public enum AlertDismissal {
     */
     case interactive
     
-    static let dismissalTypes: [AlertDismissal] = [.automatic, .interactive]
+    public static let dismissalTypes: [AlertDismissal] = [.automatic, .interactive]
 
-    func name() -> String {
+    public func name() -> String {
         switch self {
         case .automatic: return "Automatic"
         case .interactive: return "Interactive"
@@ -62,9 +62,9 @@ public enum AlertOcclusion {
      */
     case strong
     
-    static let occlusionTypes: [AlertOcclusion] = [.strong, .weak]
+    public static let occlusionTypes: [AlertOcclusion] = [.strong, .weak]
     
-    func name() -> String {
+    public func name() -> String {
         switch self {
         case .strong: return "Strong"
         case .weak: return "Weak"

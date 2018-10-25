@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Pippin
 import XCGLogger
 
 extension LogLevel {

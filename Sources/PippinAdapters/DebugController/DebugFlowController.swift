@@ -6,6 +6,7 @@
 //  Copyright © 2017 Two Ring Software. All rights reserved.
 //
 
+import Pippin
 import UIKit
 
 public enum DebugFlowError: Error {

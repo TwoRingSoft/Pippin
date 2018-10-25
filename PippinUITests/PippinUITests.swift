@@ -5,6 +5,7 @@
 //  Created by Andrew McKnight on 9/23/18.
 //
 
+import Pippin
 import PippinTesting
 import XCTest
 

@@ -7,6 +7,7 @@
 
 import Anchorage
 import Foundation
+import Pippin
 import SwiftMessages
 
 extension AlertType {

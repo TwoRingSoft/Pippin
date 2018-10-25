@@ -7,6 +7,7 @@
 //
 
 import PinpointKit
+import Pippin
 import UIKit
 
 public final class PinpointKitAdapter: NSObject, BugReporter {

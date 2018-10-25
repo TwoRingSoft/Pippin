@@ -6,6 +6,8 @@
 //
 //
 
+import Pippin
+import PippinAdapters
 import UIKit
 
 @UIApplicationMain

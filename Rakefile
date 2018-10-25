@@ -79,7 +79,19 @@ desc 'Run Pippin unit and smoke tests.'
 task :test do
   unit_tests
   app_smoke_test
-  test_bundle_smoke_test
+  test_smoke_test
+end
+
+task :unit_test do
+    unit_tests
+end
+
+task :app_smoke_test do
+    app_smoke_test
+end
+
+task :test_smoke_test do
+    test_smoke_test
 end
 
 def unit_tests
@@ -87,7 +99,7 @@ def unit_tests
   ['Pippin-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
     sh "echo travis_fold:start:#{scheme}"
     Open3.pipeline(
-      ["xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=11.4\' test"],
+      ["xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"],
       ["tee #{scheme}.log"],
       ["#{ruby_environment_prefixes} xcpretty -t"]
     )
@@ -95,13 +107,13 @@ def unit_tests
   end
 end
 
-def test_bundle_smoke_test
+def test_smoke_test
   require 'open3'
-  [ 'PippinUnitTests' ].each do |scheme|
+  [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
     sh "echo travis_fold:start:#{scheme}"
     Open3.pipeline(
-      ["xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=11.4\' test"],
-      ['tee #{scheme}_smoke_test.log'],
+      ["xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"],
+      ["tee #{scheme}_smoke_test.log"],
       ["#{ruby_environment_prefixes} xcpretty -t"]
     )
     sh "echo travis_fold:end:#{scheme}"

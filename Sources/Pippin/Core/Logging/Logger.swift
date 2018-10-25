@@ -9,7 +9,7 @@
 import Foundation
 
 /// `Error` enum of errors a logger may encounter.
-enum LoggerError: Swift.Error {
+public enum LoggerError: Swift.Error {
     /// No file could be located, or no URL was supplied.
     case noLoggingFile(String)
 
