@@ -28,6 +28,7 @@ Pod::Spec.new do |s|
     ]
     ss.dependency 'Result'
     ss.dependency 'Anchorage', '~> 4'
+    ss.dependency 'Pippin/Extensions'
   end
   s.subspec 'Extensions' do |ss|
     ss.source_files = [
