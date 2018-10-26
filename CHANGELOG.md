@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [PippinAdapters 1.0.0] 2018-10-25
+
+### Added
+
+- Sources moved from the `Adapters` subspec in `Pippin`.
+
+## [Pippin 12.0.0] 2018-10-25
+
+### Changed
+
+- Adapters to Pippin protocols now live in the separate `PippinAdapters.podspec`.
+
 ## [Pippin 11.0.0] 2018-09-23
 
 ### Changed
