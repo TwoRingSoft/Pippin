@@ -208,7 +208,7 @@ def app_smoke_test
             end
           end
           
-          sh "pod install >> #{integration_test_name}.log"
+          sh "pod install | tee #{integration_test_name}.log"
           
           sdk_value = platform_to_device_prefix[platform] + sdk_version
           derived_data_path = 'derivedData'
