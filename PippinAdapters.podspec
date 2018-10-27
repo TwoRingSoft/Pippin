@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   end
   s.subspec 'SwiftMessages' do |ss|
     ss.source_files = 'Sources/PippinAdapters/SwiftMessages/**/*.{h,m,swift}'
-    ss.dependency 'SwiftMessages', '~> 4'
+    ss.dependency 'SwiftMessages', '~> 6'
     ss.dependency 'Pippin'
   end
   s.subspec 'DebugController' do |ss|
