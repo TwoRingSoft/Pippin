@@ -21,7 +21,7 @@ desc 'Bump version number for the specified podspec and commit the changes with 
 task :bump,[:component, :podspec] do |t, args|
     require 'open3'
     
-    version_file = version_file_from_podspec args[:podspec]
+    version_file = "#{args[:podspec]}.podspec"
 
     modified_file_count, stderr, status = Open3.capture3("git status --porcelain | egrep '^(M| M)' | wc -l")
     if modified_file_count.to_i > 0 then
@@ -49,20 +49,10 @@ task :bump,[:component, :podspec] do |t, args|
     end
 end
 
-def version_file_from_podspec podspec
-  if podspec == 'Pippin' then
-    'Pippin.podspec'
-  elsif podspec == 'PippinTesting' then
-    'PippinTesting.podspec'
-  else
-    fail 'Unrecognized podspec name.'
-  end
-end
-
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
 task :release,[:podspec] do |t, args|
   podspec = args[:podspec]
-  version_file = version_file_from_podspec podspec
+  version_file = "#{podspec}.podspec"
   version = `vrsn --read --file #{version_file}`
   sh "git tag #{podspec}-#{version.strip}"
   sh 'git push --tags'
@@ -72,7 +62,7 @@ end
 desc 'Reverse the last git tag, for use when a release fails.'
 task :reverse_last_tag,[:podspec] do |t, args|
     podspec = args[:podspec]
-    version_file = version_file_from_podspec podspec
+    version_file = "#{podspec}.podspec"
     version = `vrsn --read --file #{version_file}`
     tag = "#{podspec}-#{version.strip}"
     sh "git tag --delete #{tag}"
