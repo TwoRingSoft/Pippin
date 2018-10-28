@@ -6,7 +6,6 @@
 //  Copyright © 2016 Two Ring Software. All rights reserved.
 //
 
-import Anchorage
 import UIKit
 
 public let textFieldTableViewCellReuseIdentifier = "TextFieldTableViewCell"
@@ -26,17 +25,20 @@ public class TextFieldTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
-        contentView.addSubview(textField)
-        contentView.addSubview(titleLabel)
-
-        titleLabel.leadingAnchor == contentView.leadingAnchor + CGFloat.horizontalMargin
-        titleLabel.topAnchor == contentView.topAnchor + CGFloat.verticalMargin
-        titleLabel.bottomAnchor <= contentView.bottomAnchor - CGFloat.verticalMargin
-
-        textField.leadingAnchor == titleLabel.trailingAnchor + CGFloat.horizontalSpacing
-        textField.trailingAnchor == contentView.trailingAnchor - CGFloat.horizontalMargin
-        textField.firstBaselineAnchor == titleLabel.firstBaselineAnchor
-        textField.bottomAnchor <= contentView.bottomAnchor - CGFloat.verticalMargin
+        [textField, titleLabel].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        [
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat.horizontalMargin),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
+            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            textField.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: CGFloat.horizontalSpacing),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat.horizontalMargin),
+            textField.firstBaselineAnchor.constraint(equalTo: titleLabel.firstBaselineAnchor),
+            textField.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+        ].forEach { $0.isActive = true }
     }
     
     public required init?(coder aDecoder: NSCoder) {

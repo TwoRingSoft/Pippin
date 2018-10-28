@@ -6,7 +6,6 @@
 //  Copyright © 2018 Two Ring Software. All rights reserved.
 //
 
-import Anchorage
 import UIKit
 
 public extension UITableViewCell {
@@ -21,10 +20,13 @@ public extension UITableViewCell {
         let separator = UIView(frame: .zero)
         separator.backgroundColor = backgroundColor
         contentView.addSubview(separator)
-        separator.leadingAnchor == contentView.leadingAnchor + insets.left
-        separator.trailingAnchor == contentView.trailingAnchor - insets.right
-        separator.heightAnchor == thickness
-        separator.bottomAnchor == contentView.bottomAnchor - insets.bottom
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        [
+            separator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: insets.left),
+            separator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -insets.right),
+            separator.heightAnchor.constraint(equalToConstant: thickness),
+            separator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -insets.bottom),
+        ].forEach { $0.isActive = true }
     }
     
 }

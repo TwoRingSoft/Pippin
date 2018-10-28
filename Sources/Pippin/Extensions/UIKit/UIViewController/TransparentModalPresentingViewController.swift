@@ -6,7 +6,6 @@
 //  Copyright © 2016 andrew mcknight. All rights reserved.
 //
 
-import Anchorage
 import Foundation
 
 /**
@@ -60,11 +59,17 @@ extension TransparentModalPresentingViewController {
 
         addNewChildViewController(newChildViewController: childViewController)
 
-        childViewController.view.leadingAnchor == view.leadingAnchor
-        childViewController.view.trailingAnchor == view.trailingAnchor
+        childViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-        addStopBlurVCTopConstraint = childViewController.view.topAnchor == view.topAnchor + view.bounds.height
-        addStopBlurVCBottomConstraint = childViewController.view.bottomAnchor == view.bottomAnchor + view.bounds.height
+        addStopBlurVCTopConstraint = childViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: view.bounds.height)
+        addStopBlurVCBottomConstraint = childViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.bounds.height)
+        [
+            addStopBlurVCTopConstraint,
+            addStopBlurVCBottomConstraint,
+            childViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ].forEach { $0?.isActive = true }
+        
         view.layoutSubviews()
     }
 

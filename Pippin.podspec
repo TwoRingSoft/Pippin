@@ -34,7 +34,6 @@ Pod::Spec.new do |s|
     ss.source_files = [
       'Sources/Pippin/Extensions/**/*.{h,m,swift}'
     ]
-    ss.dependency 'Anchorage', '~> 4'
   end
 
 end

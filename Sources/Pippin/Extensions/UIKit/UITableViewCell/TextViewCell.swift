@@ -5,7 +5,6 @@
 //  Created by Andrew McKnight on 12/7/17.
 //
 
-import Anchorage
 import UIKit
 
 public let textViewCellReuseIdentifier = "TextViewCell"
@@ -25,17 +24,20 @@ public class TextViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(textView)
+        [titleLabel, textView].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        titleLabel.leadingAnchor == contentView.leadingAnchor + CGFloat.horizontalMargin
-        titleLabel.topAnchor == contentView.topAnchor + CGFloat.verticalMargin
-        titleLabel.bottomAnchor <= contentView.bottomAnchor - CGFloat.verticalMargin
-
-        textView.leadingAnchor == titleLabel.trailingAnchor + CGFloat.horizontalSpacing
-        textView.topAnchor == titleLabel.topAnchor
-        textView.trailingAnchor == contentView.trailingAnchor - CGFloat.horizontalMargin
-        textView.bottomAnchor <= contentView.bottomAnchor - CGFloat.verticalMargin
+        [
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat.horizontalMargin),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
+            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            textView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: CGFloat.horizontalSpacing),
+            textView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat.horizontalMargin),
+            textView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+        ].forEach { $0.isActive = true }
     }
 
     public required init?(coder aDecoder: NSCoder) {

@@ -5,7 +5,6 @@
 //  Created by Andrew McKnight on 12/6/17.
 //
 
-import Anchorage
 import UIKit
 
 public let textAndAccessoryCellReuseIdentifier = "AddObjectCell"
@@ -32,26 +31,35 @@ public class TextAndAccessoryCell: UITableViewCell {
         selectionStyle = .none
 
         [label, trailingImageAccessory, leadingImageAccessory].forEach { self.contentView.addSubview($0) }
-
         [trailingImageAccessory, leadingImageAccessory].forEach { $0.contentMode = .scaleAspectFill }
-
-        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor == contentView.leadingAnchor + CGFloat.horizontalMargin
-        leadingImageAccessory.centerYAnchor == contentView.centerYAnchor
-        leadingImageAccessoryWidth = leadingImageAccessory.widthAnchor == 0
-        leadingImageAccessory.verticalAnchors == contentView.verticalAnchors + CGFloat.verticalMargin
+        [leadingImageAccessory, label, trailingImageAccessory].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
         leadingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-
-        label.leadingAnchor == leadingImageAccessory.trailingAnchor + CGFloat.horizontalMargin
-        label.verticalAnchors == contentView.verticalAnchors + 8
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-
-        trailingImageAccessory.centerYAnchor == contentView.centerYAnchor
-        trailingImageAccessory.leadingAnchor == label.trailingAnchor + CGFloat.horizontalMargin
-        trailingImageAccessoryWidth = trailingImageAccessory.widthAnchor == 0
-        trailingImageAccessory.verticalAnchors == contentView.verticalAnchors + CGFloat.verticalMargin
         trailingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor == contentView.trailingAnchor - CGFloat.horizontalMargin
 
+        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat.horizontalMargin)
+        leadingImageAccessoryWidth = leadingImageAccessory.widthAnchor.constraint(equalToConstant: 0)
+        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: CGFloat.horizontalMargin)
+        trailingImageAccessoryWidth = trailingImageAccessory.widthAnchor.constraint(equalToConstant: 0)
+        
+        [
+            leadingImageLeadingWidth,
+            leadingImageAccessoryWidth,
+            trailingImageAccessoryWidth,
+            trailingImageTrailingWidth,
+            leadingImageAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            leadingImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
+            leadingImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            label.leadingAnchor.constraint(equalTo: leadingImageAccessory.trailingAnchor, constant: CGFloat.horizontalMargin),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            trailingImageAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            trailingImageAccessory.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: CGFloat.horizontalMargin),
+            trailingImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
+            trailingImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+        ].forEach { $0?.isActive = true }
+        
         [leadingImageAccessoryWidth, trailingImageAccessoryWidth].forEach { $0?.priority = .required }
     }
 
