@@ -43,6 +43,9 @@
         ],
         "Anchorage": [
           "~> 4"
+        ],
+        "Pippin/Extensions": [
+
         ]
       }
     },

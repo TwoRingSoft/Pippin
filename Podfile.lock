@@ -16,6 +16,7 @@ PODS:
     - Pippin/Extensions (= 12.0.0)
   - Pippin/Core (12.0.0):
     - Anchorage (~> 4)
+    - Pippin/Extensions
     - Result
   - Pippin/Extensions (12.0.0)
   - Pippin/Tests (12.0.0)
@@ -39,16 +40,16 @@ PODS:
     - Pippin
   - PippinAdapters/SwiftMessages (1.0.0):
     - Pippin
-    - SwiftMessages (~> 4)
+    - SwiftMessages (~> 6)
   - PippinAdapters/XCGLogger (1.0.0):
     - Pippin
     - XCGLogger (~> 6)
   - PippinTesting (1.1.0)
   - PippinTesting/Tests (1.1.0)
   - Result (4.0.0)
-  - SwiftMessages (4.1.4):
-    - SwiftMessages/App (= 4.1.4)
-  - SwiftMessages/App (4.1.4)
+  - SwiftMessages (6.0.0):
+    - SwiftMessages/App (= 6.0.0)
+  - SwiftMessages/App (6.0.0)
   - XCGLogger (6.1.0):
     - XCGLogger/Core (= 6.1.0)
   - XCGLogger/Core (6.1.0):
@@ -56,7 +57,9 @@ PODS:
 
 DEPENDENCIES:
   - Crashlytics (~> 3)
+  - PinpointKit (from `../../../automated-forks/PinpointKit`)
   - Pippin (from `.`)
+  - Pippin/Extensions (from `.`)
   - Pippin/Tests (from `.`)
   - PippinAdapters (from `.`)
   - PippinTesting (from `.`)
@@ -70,12 +73,13 @@ SPEC REPOS:
     - Fabric
     - JGProgressHUD
     - ObjcExceptionBridging
-    - PinpointKit
     - Result
     - SwiftMessages
     - XCGLogger
 
 EXTERNAL SOURCES:
+  PinpointKit:
+    :path: "../../../automated-forks/PinpointKit"
   Pippin:
     :path: "."
   PippinAdapters:
@@ -90,14 +94,14 @@ SPEC CHECKSUMS:
   Fabric: 4ac1cdfef3004ccd83ce0959b91eda8a6e37df72
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: 638241677a469601fb6284bed4507e27d2a58923
-  PippinAdapters: 927b1643a8fa5f067af1b807c071e73b28c22b49
+  PinpointKit: 2f71d896f817a653b18fd78fa730605080209700
+  Pippin: 9daee23b4be5cbf1b51ca69094d8b4ed0172697a
+  PippinAdapters: 670d2cb967c0aa2cfccd79b9ee78607bda97be9d
   PippinTesting: dd71c478f06201f750585ccd515b8feda4e9b20a
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
-  SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
+  SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
-PODFILE CHECKSUM: 2081cb003dd89b959ab601d8972c16ff6441f854
+PODFILE CHECKSUM: ab2e0daba8dd87ee66204f6b08f88adf3ab1307f
 
 COCOAPODS: 1.5.3
