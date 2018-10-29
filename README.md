@@ -17,7 +17,9 @@ Pippin is split into three top-level CocoaPod specs:
 
 > **Bitcode:** `PippinTesting` has bitcode disabled (for compatibility with XCTest, which does not support it); `Pippin` and `PippinTesting` have bitcode enabled by default. 
 
-## <a name="PippinCore">Pippin</a> [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
+## Pippin <a name="PippinCore" />
+
+[![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
 
 The main `Pippin` CocoaPod has two subspecs:
 
@@ -95,7 +97,9 @@ Provides a UI flow to acquire an object that is gated by user interaction to all
 
 These are currently split into extensions on Foundation, UIKit and Webkit.
 
-## PippinAdapters [![Cocoapod](http://img.shields.io/cocoapods/v/PippinAdapters.svg?style=flat)](http://cocoapods.org/pods/PippinAdapters) <a name="PippinAdapters" />
+## PippinAdapters
+
+[![Cocoapod](http://img.shields.io/cocoapods/v/PippinAdapters.svg?style=flat)](http://cocoapods.org/pods/PippinAdapters)
 
 These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an adapter implementation to that dependency. Each adapter has a separate CocoaPods subspec. The following adapters for third-party frameworks are currently available:
 
@@ -116,7 +120,9 @@ The following hand rolled adapters are available:
 
 > *Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
-## PippinTesting [![Cocoapod](http://img.shields.io/cocoapods/v/PippinTesting.svg?style=flat)](http://cocoapods.org/pods/PippinTesting) <a name="PippinTesting" />
+## PippinTesting
+
+[![Cocoapod](http://img.shields.io/cocoapods/v/PippinTesting.svg?style=flat)](http://cocoapods.org/pods/PippinTesting)
 
 A collection of extensions to simplify some tasks for testing and to make test code more readable.
 
