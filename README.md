@@ -6,19 +6,43 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
 
-Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift, as well as XCTest.
+Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift, as well as XCTest. It uses the concepts of [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to decouple your application code from its dependencies, whether they are the Cocoa frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable codebase and less noisy revision history.
 
-## Code
+## Organization
 
-Pippin is split up into some top-level components: Core, Extensions, Sensors and CanIHaz. PippinAdapters provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. PippinTesting delivers tools to work with XCTest.
+- [`Pippin`](#pippin) is split into two top-level components: the `Core` and `Extensions` subspecs. `Core` contains more sublevels: 
+- [`PippinAdapters`](#pippinadapters) provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. 
+- [`PippinTesting`](#pippintesting) delivers tools to work with XCTest.
+
+> **Bitcode:** `PippinTesting` has bitcode disabled (for compatibility with XCTest, which does not support it); `Pippin` and `PippinTesting` have bitcode enabled by default. 
+
+## Pippin
+
+The main `Pippin` CocoaPod has two subspecs:
+
+- [`Core`](#core)
+- [`Extensions`](#Extensions)
 
 ### Core
 
-#### Data Structures
+The `Pippin/Core` subspec is split into some subcomponents:
+
+- [CanIHaz](#canihaz)
+- [Controls](#controls)
+- [Seeds](#seeds)
+- [Sensors](#sensors)
+
+#### Seeds
+
+Seeds are the basic building blocks of Pippin. They are the Swift definitions you use in your code, that should persist in their same form across compatible versions of Pippin, regardless of changes in adapter dependencies targeting Cocoa or third-party frameworks, or Pippin implementations. **This is the main goal of Pippin:** to avoid source changes in applications that consume those dependencies, regardless of how their APIs change.
+
+Pippin delivers seeds as [data structures](#data-structures) and [protocols](#protocols).
+
+##### Data Structures
 
 `Environment` contains a property for each protocol type. They are currently implicitly unwrapped optionals, so that you can use only the components you need. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components; e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
 
-#### Protocols
+##### Protocols
 
 Pippin is designed to immediately abstract and handle the major components that usually go into an app: 
 
@@ -32,13 +56,47 @@ Pippin is designed to immediately abstract and handle the major components that 
 - Activity indicators for long-running activities and progress
 - Defaults: user configurable settings and storage
 
-##### Sensors
+###### Aspects
+
+There are a few protocols defining cross cutting concerns across components, like theming and debugging of components that deliver UI.
+
+- Themeable: provide access to `UIAppearanceProxy` based theming of UI elements
+- Debuggable: deliver UI controls to exercise and manipulate UI components, for use by developers and testers
+- EnvironmentallyConscious: provide a back reference to the `Environment` to use other PIppin components, e.g. the `CrashReporter` and `Logger` working together
+
+#### Sensors
 
 - Locator: location/gps
 
-#### Adapters
+#### CanIHaz
 
-These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an Adapter implementation to that dependency. Each Adapter has a separate CocoaPods subspec (or should–some still are in Core; this will be straightened out more when multiple implementations may be chosen from). The following adapters for third-party frameworks are currently available:
+Provides a UI flow to acquire an object that is gated by user interaction to allow access to a hardware device component. Each component type has its own subspec so you can take just what you need. So far there are stock flows for the following: 
+
+- Location: AuthorizedCLLocationManager
+- Camera: AuthorizedAVCaptureDevice
+
+#### Controls
+
+- CrudViewController: table view with search controls wrapped around an FRC
+- InfoViewController: app name and version info, links to two ring properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
+- FormController: manage traversal and keyboard avoidance for a collection of inputs
+
+#### Things to add:
+
+- Data model
+- Settings bundles
+- Analytics
+- Push notifications
+- State restoration
+- App walkthrough
+
+### Extensions
+
+These are currently split into extensions on Foundation, UIKit and Webkit.
+
+## PippinAdapters
+
+These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an adapter implementation to that dependency. Each adapter has a separate CocoaPods subspec. The following adapters for third-party frameworks are currently available:
 
 - Alerter: [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages)
 - BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
@@ -57,39 +115,13 @@ The following hand rolled adapters are available:
 
 **\*Note:** Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
-#### Aspects
+## PippinTesting
 
-There are a few protocols defining cross cutting concerns across components, like theming and debugging of components that deliver UI.
+A collection of extensions to simplify some tasks for testing and to make test code more readable.
 
-- Themeable: provide access to `UIAppearanceProxy` based theming of UI elements
-- Debuggable: deliver UI controls to exercise and manipulate UI components, for use by developers and testers
-- EnvironmentallyConscious: provide a back reference to the `Environment` to use other PIppin components, e.g. the `CrashReporter` and `Logger` working together
+# Contribute
 
-#### Components to add:
-
-- Data model
-- Settings bundles
-- Analytics
-- Push notifications
-- State restoration
-- App walkthrough
-
-### CanIHaz
-
-Provides a UI flow to acquire an object that is gated by user interaction to allow access to a hardware device component. Each component type has its own subspec so you can take just what you need. So far there are stock flows for the following: 
-
-- Location: AuthorizedCLLocationManager
-- Camera: AuthorizedAVCaptureDevice
-
-### Extensions
-
-These are currently split into extensions on Foundation, UIKit and Webkit.
-
-#### UIKit
-
-- CrudViewController: table view with search controls wrapped around an FRC
-- InfoViewController: app name and version info, links to two ring properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
-- FormController: manage traversal and keyboard avoidance for a collection of inputs
+Issues and pull requests are welcome! 
 
 ## Testing
 
@@ -99,9 +131,7 @@ Files under Pippin/Tests/ are declared in Pippin's `test_spec`, and likewise for
 
 Also runs an integration smoke test, which generates an Xcode project for each subspec, in each of Swift and Objective-C, to try building after `pod install` with the appropriate subspec written into its Podfile. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
 
-# Contribute
-
-Issues and pull requests are welcome! 
+# Thanks
 
 If this project helped you, please consider <a href="https://www.paypal.me/armcknight">leaving a tip</a> 🤗
 
