@@ -2,7 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Brewfile"
+      assignedFileDataType = "public.ruby-script">
+   </FileRef>
+   <FileRef
       location = "group:CHANGELOG.md">
+   </FileRef>
+   <FileRef
+      location = "group:Gemfile"
+      assignedFileDataType = "public.ruby-script">
    </FileRef>
    <FileRef
       location = "group:Pippin.podspec"
