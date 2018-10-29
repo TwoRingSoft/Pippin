@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'Core' do |ss|
     ss.source_files = [
-      'Sources/Pippin/Core/**/*.{h,m,swift}',
+      'Sources/Pippin/Seeds/**/*.{h,m,swift}',
       'Sources/Pippin/Sensors/**/*.{h,m,swift}',
       'Sources/Pippin/Controls/**/*.{h,m,swift}',
       'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}',
