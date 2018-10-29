@@ -17,7 +17,7 @@ Pippin is split into three top-level CocoaPod specs:
 
 > **Bitcode:** `PippinTesting` has bitcode disabled (for compatibility with XCTest, which does not support it); `Pippin` and `PippinTesting` have bitcode enabled by default. 
 
-## Pippin [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin) <a name="PippinCore" />
+## <a name="PippinCore">Pippin</a> [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
 
 The main `Pippin` CocoaPod has two subspecs:
 
