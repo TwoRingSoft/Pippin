@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 ---
+## [Pippin 12.0.1] 2018-10-29
+
+### Fixed
+
+- Remove all pod dependencies (so, just Anchorage) from `Pippin/Extensions` subspec.
+- Rename Core subdirectory to Seeds, to disambiguate between the Core subspec and the subdirectory containing the Core protocols and data structures.
 
 ## [PippinAdapters 1.0.0] 2018-10-25
 
