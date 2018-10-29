@@ -27,10 +27,10 @@ The main `Pippin` CocoaPod has two subspecs:
 
 The `Pippin/Core` subspec is split into some subcomponents:
 
-- [CanIHaz](#canihaz)
-- [Controls](#controls)
 - [Seeds](#seeds)
 - [Sensors](#sensors)
+- [CanIHaz](#canihaz)
+- [Controls](#controls)
 
 #### Seeds
 
@@ -113,7 +113,7 @@ The following hand rolled adapters are available:
 - Defaults and DefaultsKey: DefaultDefaults and DefaultDefaultsKey (say _that_ fast five times)
 - Fonts: DefaultFonts 
 
-**\*Note:** Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
+> *Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
 ## PippinTesting
 
@@ -129,9 +129,9 @@ Issues and pull requests are welcome!
 
 Files under Pippin/Tests/ are declared in Pippin's `test_spec`, and likewise for PippinTesting. These are brought into the Pippin Xcode project to run as unit tests using the Podfile's `testspecs` declaration.
 
-Also runs an integration smoke test, which generates an Xcode project for each subspec, in each of Swift and Objective-C, to try building after `pod install` with the appropriate subspec written into its Podfile. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
+Also runs an integration smoke test, which generates an Xcode project for each spec and subspec, in each of Swift and Objective-C, to try building after `pod install`. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
 
-# Thanks
+# Thanks!
 
 If this project helped you, please consider <a href="https://www.paypal.me/armcknight">leaving a tip</a> 🤗
 
