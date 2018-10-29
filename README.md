@@ -11,7 +11,7 @@ Pippin is a collection of utilities to quickly prototype iOS apps and simplify w
 
 Pippin is split into three top-level CocoaPod specs:
 
-- [`Pippin`](#pippincore) is split into two top-level components: the `Core` and `Extensions` subspecs. `Core` contains more sublevels: 
+- [`Pippin`](#pippin-1) is split into two top-level components: the `Core` and `Extensions` subspecs. `Core` contains more sublevels: 
 - [`PippinAdapters`](#pippinadapters) provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. 
 - [`PippinTesting`](#pippintesting) delivers tools to work with XCTest.
 
