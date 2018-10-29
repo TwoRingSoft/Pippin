@@ -4,11 +4,12 @@
 ![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
-[![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
 
 Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift, as well as XCTest. It uses the concepts of [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to decouple your application code from its dependencies, whether they are the Cocoa frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable codebase and less noisy revision history.
 
 ## Organization
+
+Pippin is split into three top-level CocoaPod specs:
 
 - [`Pippin`](#pippin) is split into two top-level components: the `Core` and `Extensions` subspecs. `Core` contains more sublevels: 
 - [`PippinAdapters`](#pippinadapters) provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. 
@@ -16,7 +17,7 @@ Pippin is a collection of utilities to quickly prototype iOS apps and simplify w
 
 > **Bitcode:** `PippinTesting` has bitcode disabled (for compatibility with XCTest, which does not support it); `Pippin` and `PippinTesting` have bitcode enabled by default. 
 
-## Pippin
+## Pippin [![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
 
 The main `Pippin` CocoaPod has two subspecs:
 
@@ -94,7 +95,7 @@ Provides a UI flow to acquire an object that is gated by user interaction to all
 
 These are currently split into extensions on Foundation, UIKit and Webkit.
 
-## PippinAdapters
+## PippinAdapters [![Cocoapod](http://img.shields.io/cocoapods/v/PippinAdapters.svg?style=flat)](http://cocoapods.org/pods/PippinAdapters)
 
 These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an adapter implementation to that dependency. Each adapter has a separate CocoaPods subspec. The following adapters for third-party frameworks are currently available:
 
@@ -115,7 +116,7 @@ The following hand rolled adapters are available:
 
 > *Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
 
-## PippinTesting
+## PippinTesting [![Cocoapod](http://img.shields.io/cocoapods/v/PippinTesting.svg?style=flat)](http://cocoapods.org/pods/PippinTesting)
 
 A collection of extensions to simplify some tasks for testing and to make test code more readable.
 
