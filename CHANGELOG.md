@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 ---
+
+## [PippinTesting 2.0.0] 2018-10-30
+
+### Changed
+
+- Removed function `popNavStackTop` that had no implementation.
+- Renamed `enterNumericValue(value:)` to `enterWithOnscreenKeyboard(value:)` for better semantics, as it can handle any keyboard type, not just number pads.
+
 ## [Pippin 12.0.1] 2018-10-29
 
 ### Fixed
