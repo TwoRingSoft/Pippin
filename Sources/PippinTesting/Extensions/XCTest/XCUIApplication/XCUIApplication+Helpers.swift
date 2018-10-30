@@ -21,10 +21,6 @@ public extension XCUIApplication {
         buttons[name].tap()
     }
     
-    func popNavStackTop() {
-        print("here")
-    }
-    
     func enterWithOnscreenKeyboard(value: String) {
         for character in value {
             let characterValue = String(character)
