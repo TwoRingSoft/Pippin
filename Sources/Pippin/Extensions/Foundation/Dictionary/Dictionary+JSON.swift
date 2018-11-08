@@ -8,12 +8,13 @@
 
 import Foundation
 
+public typealias JSONRoot = [String: Any]
+
 enum DictionaryJSONError: Error {
     case deserializedObjectNotDictionary
 }
 
 public extension Dictionary where Key == String, Value == Any {
-
     init(withJSONFromFileAtURL url:URL) throws {
         let data = try Data(contentsOf: url)
         guard let dict = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary else {
@@ -21,5 +22,4 @@ public extension Dictionary where Key == String, Value == Any {
         }
         self = dict
     }
-
 }
