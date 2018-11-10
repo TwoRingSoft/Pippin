@@ -1,0 +1,16 @@
+PODS:
+  - Pippin/Extensions (12.0.1)
+
+DEPENDENCIES:
+  - Pippin/Extensions (from `../..`)
+
+EXTERNAL SOURCES:
+  Pippin:
+    :path: "../.."
+
+SPEC CHECKSUMS:
+  Pippin: e3333bc23f19ce18cddaf4b6d7d8ec7cc549fa81
+
+PODFILE CHECKSUM: 76bbd5b11df80bbcce22c1836d3a207880f2fabf
+
+COCOAPODS: 1.5.3

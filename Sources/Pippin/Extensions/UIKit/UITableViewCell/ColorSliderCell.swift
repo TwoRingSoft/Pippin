@@ -17,7 +17,6 @@ public final class ColorSliderCell: UITableViewCell {
     fileprivate var slider: UISlider!
     private let gradient = ColorGradientLayer()
     var delegate: ColorSliderCellDelegate!
-    var logger: Logger?
 
     class func reuseIdentifier() -> String {
         return "com.tworingsoft.pippin.cell-reuse-identifier.color-picker-cell"

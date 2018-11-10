@@ -9,11 +9,14 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
-  s.platform     = :ios, '9.0'
+
+  s.ios.deployment_target = '9.0'
+  s.osx.deployment_target = '10.10'
+  
   s.swift_version = '4.2'
   
   s.test_spec 'Tests' do |test_spec|
-    test_spec.source_files = 'Tests/Pippin/**/*.swift'
+    test_spec.source_files = 'Tests/Pippin/**/*.{h,m,swift}'
   end
   
   s.default_subspecs = ['Core', 'Extensions']
@@ -31,8 +34,11 @@ Pod::Spec.new do |s|
     ss.dependency 'Pippin/Extensions'
   end
   s.subspec 'Extensions' do |ss|
-    ss.source_files = [
+    ss.ios.source_files = [
       'Sources/Pippin/Extensions/**/*.{h,m,swift}'
+    ]
+    ss.osx.source_files = [
+      'Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}'
     ]
   end
   

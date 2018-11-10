@@ -9,7 +9,6 @@
 import XCTest
 
 class Array_Search_Test: XCTestCase {
-
     func testBinarySearch() {
         let integers = [ 1, 4, 7, 9, 14 ]
         let integerTestCases: [Int: Int?] = [
