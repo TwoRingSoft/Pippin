@@ -21,3 +21,14 @@ abstract_target 'PippinTestPods' do
   target 'PippinUITests'
   target 'PippinUnitTests'
 end
+
+post_install do |installer|
+   # set SWIFT_VERSION for pods that don't declare it in their podspec
+   installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+         if target.name == 'PinpointKit' or target.name == 'Anchorage' then
+            config.build_settings['SWIFT_VERSION'] = '4.2'
+         end
+      end
+   end
+end
