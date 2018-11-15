@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
-   version = "1.0">
+   version = "1.1">
    <FileRef
       location = "group:Brewfile"
       assignedFileDataType = "public.ruby-script">
+   </FileRef>
+   <FileRef
+      location = "group:.travis.yml">
+   </FileRef>
+   <FileRef
+      location = "group:.gitignore">
+   </FileRef>
+   <FileRef
+      location = "group:.ruby-version">
+   </FileRef>
+   <FileRef
+      location = "group:.swift-version">
    </FileRef>
    <FileRef
       location = "group:CHANGELOG.md">
@@ -34,95 +46,16 @@
    <FileRef
       location = "group:Sources/CrashlyticsAdapter.swift">
    </FileRef>
-   <Group
-      location = "group:Pippin/SmokeTests"
-      name = "SmokeTests">
-      <FileRef
-         location = "group:Podfile"
-         assignedFileDataType = "public.ruby-script">
-      </FileRef>
-      <Group
-         location = "group:ObjcApp"
-         name = "ObjcApp">
-         <FileRef
-            location = "group:AppDelegate.h">
-         </FileRef>
-         <Group
-            location = "group:Assets.xcassets"
-            name = "Assets.xcassets">
-            <Group
-               location = "group:AppIcon.appiconset"
-               name = "AppIcon.appiconset">
-               <FileRef
-                  location = "group:Contents.json">
-               </FileRef>
-            </Group>
-         </Group>
-         <FileRef
-            location = "group:ViewController.m">
-         </FileRef>
-         <Group
-            location = "group:Base.lproj"
-            name = "Base.lproj">
-            <FileRef
-               location = "group:LaunchScreen.storyboard">
-            </FileRef>
-            <FileRef
-               location = "group:Main.storyboard">
-            </FileRef>
-         </Group>
-         <FileRef
-            location = "group:main.m">
-         </FileRef>
-         <FileRef
-            location = "group:AppDelegate.m">
-         </FileRef>
-         <FileRef
-            location = "group:Info.plist">
-         </FileRef>
-         <FileRef
-            location = "group:ViewController.h">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:SwiftApp"
-         name = "SwiftApp">
-         <FileRef
-            location = "group:ViewController.swift">
-         </FileRef>
-         <Group
-            location = "group:Assets.xcassets"
-            name = "Assets.xcassets">
-            <Group
-               location = "group:AppIcon.appiconset"
-               name = "AppIcon.appiconset">
-               <FileRef
-                  location = "group:Contents.json">
-               </FileRef>
-            </Group>
-         </Group>
-         <Group
-            location = "group:Base.lproj"
-            name = "Base.lproj">
-            <FileRef
-               location = "group:LaunchScreen.storyboard">
-            </FileRef>
-            <FileRef
-               location = "group:Main.storyboard">
-            </FileRef>
-         </Group>
-         <FileRef
-            location = "group:AppDelegate.swift">
-         </FileRef>
-         <FileRef
-            location = "group:Info.plist">
-         </FileRef>
-      </Group>
-   </Group>
+   <FileRef
+      location = "group:Pippin/SmokeTests">
+   </FileRef>
    <FileRef
       location = "group:Pippin.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <FolderRef
+      location = "group:.bundle">
+   </FolderRef>
 </Workspace>
