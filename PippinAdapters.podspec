@@ -37,6 +37,7 @@ Pod::Spec.new do |s|
   s.subspec 'DebugController' do |ss|
     ss.source_files = 'Sources/PippinAdapters/DebugController/**/*.{h,m,swift}'
     ss.dependency 'Pippin'
+    ss.dependency 'FLEX', '~> 2'
   end
   s.subspec 'JGProgressHUD' do |ss|
     ss.source_files = 'Sources/PippinAdapters/JGProgressHUD/**/*.{h,m,swift}'
