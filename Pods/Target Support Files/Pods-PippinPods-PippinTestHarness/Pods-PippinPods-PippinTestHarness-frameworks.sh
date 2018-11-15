@@ -143,24 +143,26 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework"

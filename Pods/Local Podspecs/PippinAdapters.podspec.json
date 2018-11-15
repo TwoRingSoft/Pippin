@@ -79,6 +79,9 @@
       "dependencies": {
         "Pippin": [
 
+        ],
+        "FLEX": [
+          "~> 2"
         ]
       }
     },
