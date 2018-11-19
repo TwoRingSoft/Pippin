@@ -7,6 +7,10 @@
 
 Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift, as well as XCTest. It uses the concepts of [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to decouple your application code from its dependencies, whether they are the Cocoa frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable codebase and less noisy revision history.
 
+## Try it out
+
+There are some unit tests under `Tests/` which can be run from `Pippin.xcworkspace`, and demo apps under `Examples/` which can be run from a local checkout or using `pod try https://github.com/tworingsoft/pippin`.
+
 ## Organization
 
 Pippin is split into three top-level CocoaPod specs:
@@ -112,7 +116,7 @@ These may have concrete objects implementing the functionality directly, or if t
 
 The following hand rolled adapters are available:
 
-- Debugging: DebugViewController 
+- Debugging: DebugViewController, and dependencies on 3rd party in app debugging tools: [FLEX](https://github.com/Flipboard/FLEX)
 - CoreDataController (wip extracting Model protocol)
 - Locator: CoreLocationAdapter (and CoreLocationSimulator–wip)
 - Defaults and DefaultsKey: DefaultDefaults and DefaultDefaultsKey (say _that_ fast five times)

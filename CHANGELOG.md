@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Added
+
+- `CompoundOperation` and test/demo code ported from [FABOperation](https://github.com/google-fabric/faboperation).
+- JSON extensions for `Dictionary`, `String` and `Data`.
+- Reusable `ColorGradientLayer` and `ColorSliderCell` subclasses of `CALayer` and `UITableViewCell`, respectively.
+
 ---
 
 ## [PippinTesting 2.0.0] 2018-10-30
