@@ -17,7 +17,8 @@ enum DictionaryJSONError: Error {
 public extension Dictionary where Key == String, Value == Any {
     init(withJSONFromFileAtURL url:URL) throws {
         let data = try Data(contentsOf: url)
-        guard let dict = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary else {
+        let options = JSONSerialization.ReadingOptions(rawValue: 0)
+        guard let dict = try JSONSerialization.jsonObject(with: data, options: options) as? Dictionary else {
             throw DictionaryJSONError.deserializedObjectNotDictionary
         }
         self = dict
