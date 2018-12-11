@@ -28,7 +28,11 @@ let daysInMonth: TimeInterval = 30
 let daysInYear: TimeInterval = 364.25
 
 public extension Date {
-    func elapsedTime(since date: Date) -> String {
+    /// Compute a conversational description of a moment of time in the past, w.r.t. the current time, using the largest unit possible. So, "3 years ago" instead of "1,095 days ago".
+    ///
+    /// - Parameter date: The date in the past to describe. If none is provided, defaults to the current instant of time.
+    /// - Returns: A `String` containing a conversational description of the past moment of time.
+    func elapsedTime(since date: Date = Date()) -> String {
         if date.compare(self) == ComparisonResult.orderedSame {
             return "No elpased time"
         }
