@@ -23,3 +23,9 @@ public func valueType(_ value: Any) -> String {
 fileprivate func lastClassComponent(identifier: String) -> String {
     return (identifier as NSString).components(separatedBy: ".").last!
 }
+
+public extension NSObject {
+    func isOneOfPossibleKinds(_ kinds: [AnyClass]) -> Bool {
+        return nil != kinds.first { isKind(of: $0) }
+    }
+}
