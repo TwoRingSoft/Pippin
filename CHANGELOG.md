@@ -11,6 +11,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - `CompoundOperation` and test/demo code ported from [FABOperation](https://github.com/google-fabric/faboperation).
 - JSON extensions for `Dictionary`, `String` and `Data`.
 - Reusable `ColorGradientLayer` and `ColorSliderCell` subclasses of `CALayer` and `UITableViewCell`, respectively.
+- Function to split an `Array` into subarrays of a specified size.
+- Function to test if an object instance is one of a set of types.
+- `Model` seed protocol.
+- Taught `UITableViewCell` how to draw a cell separator on its top edge.
+- Let `Date.elapsedTime(since:)` default to time since now if called with no parameter.
+- Teach `Dictionary` how to initialize from a Plist file.
 
 ---
 
