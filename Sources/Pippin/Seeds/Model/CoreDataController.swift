@@ -22,7 +22,7 @@ public typealias ConfirmCompletionBlock = ((_ success: Bool, _ confirmBlock: @es
 /**
  A class providing convenience API to work with Apple's Core Data.
  */
-public class CoreDataController: NSObject, EnvironmentallyConscious {
+public class CoreDataController: NSObject, Model {
 
     public var environment: Environment?
     public var modelName: String
