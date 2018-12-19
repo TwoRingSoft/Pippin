@@ -17,11 +17,17 @@ public class TextAndAccessoryCell: UITableViewCell {
     public var label = UILabel(frame: .zero)
     fileprivate var leadingImageAccessory = UIImageView(frame: .zero)
     fileprivate var trailingImageAccessory = UIImageView(frame: .zero)
+    fileprivate var topImageAccessory = UIImageView(frame: .zero)
+    fileprivate var bottomImageAccessory = UIImageView(frame: .zero)
 
     fileprivate var leadingImageLeadingWidth: NSLayoutConstraint?
     fileprivate var leadingImageAccessoryWidth: NSLayoutConstraint?
     fileprivate var trailingImageAccessoryWidth: NSLayoutConstraint?
     fileprivate var trailingImageTrailingWidth: NSLayoutConstraint?
+    fileprivate var topImageLeadingHeight: NSLayoutConstraint?
+    fileprivate var topImageAccessoryHeight: NSLayoutConstraint?
+    fileprivate var bottomImageAccessoryHeight: NSLayoutConstraint?
+    fileprivate var bottomImageTrailingHeight: NSLayoutConstraint?
 
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,34 +36,44 @@ public class TextAndAccessoryCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
-        [label, trailingImageAccessory, leadingImageAccessory].forEach { self.contentView.addSubview($0) }
-        [trailingImageAccessory, leadingImageAccessory].forEach { $0.contentMode = .scaleAspectFill }
-        [leadingImageAccessory, label, trailingImageAccessory].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [label, trailingImageAccessory, leadingImageAccessory, topImageAccessory, bottomImageAccessory].forEach { self.contentView.addSubview($0) }
+        [trailingImageAccessory, leadingImageAccessory, topImageAccessory, bottomImageAccessory].forEach { $0.contentMode = .scaleAspectFill }
+        [leadingImageAccessory, label, trailingImageAccessory, topImageAccessory, bottomImageAccessory].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         leadingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         trailingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-
-        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat.horizontalMargin)
+        
+        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0)
         leadingImageAccessoryWidth = leadingImageAccessory.widthAnchor.constraint(equalToConstant: 0)
-        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: CGFloat.horizontalMargin)
+        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
         trailingImageAccessoryWidth = trailingImageAccessory.widthAnchor.constraint(equalToConstant: 0)
+        topImageLeadingHeight = topImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0)
+        topImageAccessoryHeight = topImageAccessory.heightAnchor.constraint(equalToConstant: 0)
+        bottomImageTrailingHeight = bottomImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
+        bottomImageAccessoryHeight = bottomImageAccessory.heightAnchor.constraint(equalToConstant: 0)
         
         [
             leadingImageLeadingWidth,
             leadingImageAccessoryWidth,
             trailingImageAccessoryWidth,
             trailingImageTrailingWidth,
+            topImageLeadingHeight,
+            topImageAccessoryHeight,
+            bottomImageAccessoryHeight,
+            bottomImageTrailingHeight,
             leadingImageAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             leadingImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
             leadingImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            topImageAccessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
             label.leadingAnchor.constraint(equalTo: leadingImageAccessory.trailingAnchor, constant: CGFloat.horizontalMargin),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            label.topAnchor.constraint(equalTo: topImageAccessory.bottomAnchor, constant: CGFloat.verticalMargin),
+            label.bottomAnchor.constraint(equalTo: bottomImageAccessory.topAnchor, constant: -CGFloat.verticalMargin),
             trailingImageAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             trailingImageAccessory.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: CGFloat.horizontalMargin),
             trailingImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
             trailingImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            bottomImageAccessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
         ].forEach { $0?.isActive = true }
         
         [leadingImageAccessoryWidth, trailingImageAccessoryWidth].forEach { $0?.priority = .required }
@@ -67,38 +83,50 @@ public class TextAndAccessoryCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public enum AccessorySide {
+    public enum AccessoryLocation {
         case leading
         case trailing
+        case top
+        case bottom
     }
 
-    public func setAccessoryImage(image: UIImage?, side: AccessorySide, tintColor: UIColor) {
+    public func setAccessoryImage(image: UIImage?, location: AccessoryLocation, tintColor: UIColor) {
         let accessory: UIImageView
-        let widthConstraint: NSLayoutConstraint?
+        let sizeConstraint: NSLayoutConstraint?
         let spacingConstraint: NSLayoutConstraint?
         let spacingSign: CGFloat
 
-        switch side {
+        switch location {
         case .leading:
             accessory = leadingImageAccessory
-            widthConstraint = leadingImageAccessoryWidth
+            sizeConstraint = leadingImageAccessoryWidth
             spacingConstraint = leadingImageLeadingWidth
             spacingSign = 1
         case .trailing:
             accessory = trailingImageAccessory
-            widthConstraint = trailingImageAccessoryWidth
+            sizeConstraint = trailingImageAccessoryWidth
             spacingConstraint = trailingImageTrailingWidth
+            spacingSign = -1
+        case .top:
+            accessory = topImageAccessory
+            sizeConstraint = topImageAccessoryHeight
+            spacingConstraint = topImageLeadingHeight
+            spacingSign = 1
+        case .bottom:
+            accessory = bottomImageAccessory
+            sizeConstraint = bottomImageAccessoryHeight
+            spacingConstraint = bottomImageTrailingHeight
             spacingSign = -1
         }
 
         if let image = image {
             accessory.image = image
             accessory.tintColor = tintColor
-            widthConstraint?.constant = .iconSize
+            sizeConstraint?.constant = .iconSize
             spacingConstraint?.constant = .horizontalMargin * spacingSign
         } else {
             accessory.image = nil
-            widthConstraint?.constant = 0
+            sizeConstraint?.constant = 0
             spacingConstraint?.constant = 0
         }
     }
