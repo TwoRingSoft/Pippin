@@ -31,7 +31,6 @@
   "subspecs": [
     {
       "name": "Core",
-      "preserve_paths": "CHANGELOG.md",
       "source_files": [
         "Sources/Pippin/Seeds/**/*.{h,m,swift}",
         "Sources/Pippin/Sensors/**/*.{h,m,swift}",

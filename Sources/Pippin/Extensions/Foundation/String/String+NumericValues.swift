@@ -33,6 +33,10 @@ public extension String {
     var intValue: Int32 {
         return (self as NSString).intValue
     }
+    
+    var integerValue: Int {
+        return (self as NSString).integerValue
+    }
 
     /// 0 if no unsigned integer exists.
     var unsignedIntegerValue: UInt {

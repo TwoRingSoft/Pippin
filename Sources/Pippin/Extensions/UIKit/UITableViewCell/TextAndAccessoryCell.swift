@@ -44,13 +44,13 @@ public class TextAndAccessoryCell: UITableViewCell {
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         trailingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
-        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0)
+        leadingImageLeadingWidth = leadingImageAccessory.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 0)
         leadingImageAccessoryWidth = leadingImageAccessory.widthAnchor.constraint(equalToConstant: 0)
-        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
+        trailingImageTrailingWidth = trailingImageAccessory.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: 0)
         trailingImageAccessoryWidth = trailingImageAccessory.widthAnchor.constraint(equalToConstant: 0)
-        topImageLeadingHeight = topImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0)
+        topImageLeadingHeight = topImageAccessory.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: 0)
         topImageAccessoryHeight = topImageAccessory.heightAnchor.constraint(equalToConstant: 0)
-        bottomImageTrailingHeight = bottomImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
+        bottomImageTrailingHeight = bottomImageAccessory.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: 0)
         bottomImageAccessoryHeight = bottomImageAccessory.heightAnchor.constraint(equalToConstant: 0)
         
         [
@@ -62,17 +62,17 @@ public class TextAndAccessoryCell: UITableViewCell {
             topImageAccessoryHeight,
             bottomImageAccessoryHeight,
             bottomImageTrailingHeight,
-            leadingImageAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            leadingImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
-            leadingImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            leadingImageAccessory.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
+            leadingImageAccessory.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: CGFloat.verticalMargin),
+            leadingImageAccessory.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -CGFloat.verticalMargin),
             topImageAccessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
             label.leadingAnchor.constraint(equalTo: leadingImageAccessory.trailingAnchor, constant: CGFloat.horizontalMargin),
             label.topAnchor.constraint(equalTo: topImageAccessory.bottomAnchor, constant: CGFloat.verticalMargin),
             label.bottomAnchor.constraint(equalTo: bottomImageAccessory.topAnchor, constant: -CGFloat.verticalMargin),
-            trailingImageAccessory.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            trailingImageAccessory.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
             trailingImageAccessory.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: CGFloat.horizontalMargin),
-            trailingImageAccessory.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat.verticalMargin),
-            trailingImageAccessory.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat.verticalMargin),
+            trailingImageAccessory.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: CGFloat.verticalMargin),
+            trailingImageAccessory.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -CGFloat.verticalMargin),
             bottomImageAccessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
         ].forEach { $0?.isActive = true }
         

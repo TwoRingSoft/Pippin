@@ -28,48 +28,40 @@ let daysInMonth: TimeInterval = 30
 let daysInYear: TimeInterval = 364.25
 
 public extension Date {
-    /// Compute a conversational description of a moment of time in the past, w.r.t. the current time, using the largest unit possible. So, "3 years ago" instead of "1,095 days ago".
+    /// Compute a conversational description of a duration of time, using the largest unit possible. So, "3 years" instead of "1,095 days".
     ///
-    /// - Parameter date: The date in the past to describe. If none is provided, defaults to the current instant of time.
-    /// - Returns: A `String` containing a conversational description of the past moment of time.
-    func elapsedTime(since date: Date = Date()) -> String {
+    /// - Parameter date: The date in the past where the duration starts.
+    /// - Returns: A `String` containing a conversational description of the amount of time.
+    func elapsedTime(since date: Date) -> String {
         if date.compare(self) == ComparisonResult.orderedSame {
             return "No elpased time"
         }
         
         let interval = self.timeIntervalSince(date)
-        let totalYears = interval / secondsInYear
-        let totalMonths = interval / secondsInMonth
-        let remainingMonths = fmod(totalMonths, monthsInYear)
-        let totalDays = interval / secondsInDay
-        let remainingDays = fmod(totalDays, daysInMonth)
-        let totalHours = interval / secondsInHour
-        let remainingHours = fmod(totalHours, hoursInDay)
+        
         let totalMinutes = interval / secondsInMinute
         let remainingMinutes = fmod(totalMinutes, minutesInHour)
-        
-        let differAtMostBySeconds = totalMinutes < 1
-        let differAtMostByMinutes = totalHours < 1
-        let differAtMostByHours = totalDays < 1
-        let differAtMostByDays = totalMonths < 1
-        let differAtMostByMonths = totalYears < 1
-        
-        guard !differAtMostBySeconds else {
+        guard totalMinutes >= 1 else {
             return String(
                 format: "%.2f %@",
                 interval,
                 "second".pluralized(forValue: interval)
             )
         }
-
-        guard !differAtMostByMinutes else {
+        
+        let totalHours = interval / secondsInHour
+        let remainingHours = fmod(totalHours, hoursInDay)
+        guard totalHours >= 1 else {
             return String(
                 format: "%i %@",
                 Int(totalMinutes),
                 "minute".pluralized(forValue: totalMinutes)
             )
         }
-        guard !differAtMostByHours else {
+        
+        let totalDays = interval / secondsInDay
+        let remainingDays = fmod(totalDays, daysInMonth)
+        guard totalDays >= 1 else {
             return String(
                 format: "%i %@, %i %@",
                 Int(totalHours),
@@ -78,7 +70,10 @@ public extension Date {
                 "minute".pluralized(forValue: Int(remainingMinutes))
             )
         }
-        guard !differAtMostByDays else {
+        
+        let totalMonths = interval / secondsInMonth
+        let remainingMonths = fmod(totalMonths, monthsInYear)
+        guard totalMonths >= 1 else {
             let totalRemainingHours = remainingHours + remainingMinutes / minutesInHour
             return String(
                 format: "%i %@, %.2f %@",
@@ -88,7 +83,9 @@ public extension Date {
                 "hour".pluralized(forValue: totalRemainingHours)
             )
         }
-        guard !differAtMostByMonths else {
+        
+        let totalYears = interval / secondsInYear
+        guard totalYears >= 1 else {
             let totalRemainingDays = remainingDays + remainingHours / hoursInDay + remainingMinutes / minutesInDay
             return String(
                 format: "%i %@, %.2f %@",

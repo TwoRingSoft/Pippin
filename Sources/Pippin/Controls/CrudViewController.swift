@@ -10,6 +10,23 @@ import Anchorage
 import CoreData
 import UIKit
 
+public struct EmptyStateDecorator {
+    var tableView: UITableView
+    var emptyView: UIView
+    func toggle(emptyState: Bool, animated: Bool) {
+        let animations = {
+            self.emptyView.alpha = emptyState ? 1 : 0
+            self.tableView.alpha = emptyState ? 0 : 1
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.3, animations: animations)
+        } else {
+            animations()
+        }
+    }
+}
+
 public class CrudSearchContainer: UIView {}
 
 /// A subclass of `UIViewController` that presents UI to facility CRUD operations over a backing data model.
