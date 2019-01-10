@@ -22,16 +22,16 @@ Pod::Spec.new do |s|
   s.default_subspecs = ['Core', 'Extensions']
   
   s.subspec 'Core' do |ss|
-    ss.source_files = [
+    ss.ios.source_files = [
       'Sources/Pippin/Seeds/**/*.{h,m,swift}',
       'Sources/Pippin/Sensors/**/*.{h,m,swift}',
       'Sources/Pippin/Controls/**/*.{h,m,swift}',
       'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}',
       'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
     ]
-    ss.dependency 'Result'
-    ss.dependency 'Anchorage', '~> 4'
-    ss.dependency 'Pippin/Extensions'
+    ss.ios.dependency 'Result'
+    ss.ios.dependency 'Anchorage', '~> 4'
+    ss.dependency 'Pippin/Extensions' # just pass through the only thing compatible with macos currently, the extensions, to avoid the empty spec error
   end
   s.subspec 'Extensions' do |ss|
     ss.ios.source_files = [
