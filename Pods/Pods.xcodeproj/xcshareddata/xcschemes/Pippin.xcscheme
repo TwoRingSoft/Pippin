@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC1D97E59B16A2B6DC1D2457E3F8BD88"
+               BlueprintIdentifier = "4F60906E71ECDDB05C2BC1B1DFED273A"
                BlueprintName = "Pippin"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Pippin.framework">
@@ -34,7 +34,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "922715FD1F823FD8DF72EC9B1CECCE31"
+               BlueprintIdentifier = "04B3C61BEAAB4D67A039C2F883EAC7E9"
                BlueprintName = "Pippin-Unit-Tests"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Pippin-Unit-Tests.xctest">
