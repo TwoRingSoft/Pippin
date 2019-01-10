@@ -92,7 +92,7 @@ def unit_tests
   require 'open3'
   ['Pippin-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
     sh "echo travis_fold:start:#{scheme}" if travis?
-    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"
+    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.1\' test"
     tee_pipe = "tee #{scheme}.log"
     xcpretty_pipe = "#{ruby_environment_prefixes} bundle exec xcpretty -t"
     puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
@@ -105,7 +105,7 @@ def test_smoke_test
   require 'open3'
   [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
     sh "echo travis_fold:start:#{scheme}" if travis?
-    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.0\' test"
+    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.1\' test"
     tee_pipe = "tee #{scheme}_smoke_test.log"
     xcpretty_pipe = "#{ruby_environment_prefixes} bundle exec xcpretty -t"
     puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
@@ -163,15 +163,15 @@ def app_smoke_test
       sh "xcodegen --spec #{spec_filename} >> #{test_name}.log"
       
       sdk_versions_per_platform = {
-        # platform => [ sdk versionss ]
-        'phone' => ['12.0'],
+        # platform => [ sdk versions ]
+        'phone' => ['12.1'],
         #'mac' => ['10.13'],
         #'tv' => ['11.1'],
         #'watch' => ['4.1']
       }
       
       platform_to_device_prefix = {
-        # platform => [ prefix ]
+        # platform => prefix
         'phone' => 'iphonesimulator',
         'mac' => 'macosx',
         'tv' => 'appletvsimulator',
