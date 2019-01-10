@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Taught `UITableViewCell` how to draw a cell separator on its top edge.
 - Let `Date.elapsedTime(since:)` default to time since now if called with no parameter.
 - Taught `Dictionary` how to initialize from a Plist file, as well as how to return a list of its keys sorted by their associated values in various ways.
+- Definitions and an `String` extension function to parse CSV files.
 
 ---
 
