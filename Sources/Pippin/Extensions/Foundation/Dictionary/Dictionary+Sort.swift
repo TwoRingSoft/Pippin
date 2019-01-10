@@ -31,3 +31,24 @@ public extension Dictionary where Value: Comparable {
         return Array(sortedKeys[0..<topValuesToRetain])
     }
 }
+
+public extension Dictionary where Key: Comparable {
+    /// - Parameters:
+    ///   - maxCount: if provided, the maximum number of elements to return. Either the top N or bottom N depending on `ascending`.
+    ///   - ascending: if `true`, sort items from smallest to largest; if `false`, largest to smallest.
+    /// - Returns: An `Array` of 2-tuples containing the key and value of each element, sorted by key.
+    func sortedByKey(maxCount: Int? = nil, ascending: Bool = true) -> [(Key, Value)] {
+        if let maxCount = maxCount {
+            guard maxCount > 0 else { return [] }
+        }
+        guard count > 0 else { return [] }
+        
+        let tuples = sorted { (a, b) -> Bool in
+            return ascending ? a.0 < b.0 : a.0 > b.0
+        }
+        
+        guard let maxCount = maxCount, maxCount < count else { return tuples }
+        let topValuesToRetain = count < maxCount ? count : maxCount
+        return Array(tuples[0..<topValuesToRetain])
+    }
+}
