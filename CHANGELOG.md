@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
-## [Pippin]
+---
+
+## [Pippin 12.1.0] 2019-01-09
 
 ### Added
 
@@ -19,9 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Taught `UITableViewCell` how to draw a cell separator on its top edge.
 - Let `Date.elapsedTime(since:)` default to time since now if called with no parameter.
 - Taught `Dictionary` how to initialize from a Plist file, as well as how to return a list of its keys ordered by their associated values, or an array of `(key, value)` tuples ordered by key, in various ways.
-- Definitions and an `String` extension function to parse CSV files.
-
----
+- Definitions and a `String` extension function to parse CSV files.
 
 ## [PippinTesting 2.0.0] 2018-10-30
 
