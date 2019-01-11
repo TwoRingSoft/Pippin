@@ -92,7 +92,8 @@
 - (void)_addNormalExecutionExpectationsToOperation:(NSOperation *)operation async:(BOOL)async {
     [self expectOperation:operation toExecuteCompletionBlock:YES];
     if (async) {
-        [self addNormalExecutionKVOExpectationsToAsyncOperation:operation];
+        NSAssert([[operation class] isSubclassOfClass:[AsyncOperation class]], @"Expected an async operation");
+        [self addNormalExecutionKVOExpectationsToAsyncOperation:(AsyncOperation *)operation];
     } else {
         [self addNormalExecutionKVOExpectationsToOperation:operation];
     }
@@ -102,7 +103,8 @@
 - (void)_addInFlightCancellationExpectationsToOperation:(NSOperation *)operation async:(BOOL)async {
     [self expectOperation:operation toExecuteCompletionBlock:NO];
     if (async) {
-        [self addInFlightCancellationKVOExpectationsToAsyncOperation:operation];
+        NSAssert([[operation class] isSubclassOfClass:[AsyncOperation class]], @"Expected an async operation");
+        [self addInFlightCancellationKVOExpectationsToAsyncOperation:(AsyncOperation *)operation];
     } else {
         [self addInFlightCancellationKVOExpectationsToOperation:operation];
     }
@@ -111,7 +113,8 @@
 - (void)_addPreflightCancellationExpectationsToOperation:(NSOperation *)operation async:(BOOL)async {
     [self expectOperation:operation toExecuteCompletionBlock:YES];
     if (async) {
-        [self addPreflightCancellationKVOExpectationsToAsyncOperation:operation];
+        NSAssert([[operation class] isSubclassOfClass:[AsyncOperation class]], @"Expected an async operation");
+        [self addPreflightCancellationKVOExpectationsToAsyncOperation:(AsyncOperation *)operation];
     } else {
         [self addPreflightCancellationKVOExpectationsToOperation:operation];
     }

@@ -1,7 +1,8 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/PippinAdapters
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage" "${PODS_CONFIGURATION_BUILD_DIR}/COSTouchVisualizer" "${PODS_CONFIGURATION_BUILD_DIR}/FLEX" "${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ObjcExceptionBridging" "${PODS_CONFIGURATION_BUILD_DIR}/PinpointKit" "${PODS_CONFIGURATION_BUILD_DIR}/Pippin" "${PODS_CONFIGURATION_BUILD_DIR}/Result" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages" "${PODS_CONFIGURATION_BUILD_DIR}/XCGLogger"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage" "${PODS_CONFIGURATION_BUILD_DIR}/COSTouchVisualizer" "${PODS_CONFIGURATION_BUILD_DIR}/FLEX" "${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/ObjcExceptionBridging" "${PODS_CONFIGURATION_BUILD_DIR}/PinpointKit" "${PODS_CONFIGURATION_BUILD_DIR}/Pippin-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/Result" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages" "${PODS_CONFIGURATION_BUILD_DIR}/XCGLogger"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+OTHER_LDFLAGS = $(inherited) -l"sqlite3" -l"z" -framework "Anchorage" -framework "COSTouchVisualizer" -framework "CoreGraphics" -framework "FLEX" -framework "Foundation" -framework "JGProgressHUD" -framework "MessageUI" -framework "ObjcExceptionBridging" -framework "PinpointKit" -framework "Pippin" -framework "QuartzCore" -framework "Result" -framework "SwiftMessages" -framework "UIKit" -framework "XCGLogger"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}

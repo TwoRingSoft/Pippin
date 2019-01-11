@@ -1,0 +1,6 @@
+framework module Pippin {
+  umbrella header "Pippin-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		024D8CBC4084391D6361CAD5 /* Pods_PippinTestPods_PippinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C96F18B8C32947BCC1422DA1 /* Pods_PippinTestPods_PippinUITests.framework */; };
+		22BEE65B799E7D57CA38565A /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7532086271A43C8D0C7C0EAD /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */; };
 		4907828721585E3D0024748B /* PippinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907828621585E3D0024748B /* PippinUITests.swift */; };
+		495BEB5521E81D4C00FA478B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495BEB5421E81D4C00FA478B /* AppDelegate.swift */; };
+		495BEB5721E81D4D00FA478B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5621E81D4D00FA478B /* Assets.xcassets */; };
+		495BEB5A21E81D4D00FA478B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5821E81D4D00FA478B /* MainMenu.xib */; };
+		495BEB6621E81D4D00FA478B /* PippinTestHarness_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495BEB6521E81D4D00FA478B /* PippinTestHarness_macOSTests.swift */; };
+		495BEB7121E81D4E00FA478B /* PippinTestHarness_macOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495BEB7021E81D4E00FA478B /* PippinTestHarness_macOSUITests.swift */; };
 		495CE05520F25BE900A72C80 /* PippinUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CE05420F25BE900A72C80 /* PippinUnitTests.swift */; };
 		49835A061E934995009CC53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A051E934995009CC53E /* AppDelegate.swift */; };
 		49835A081E934995009CC53E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A071E934995009CC53E /* ViewController.swift */; };
@@ -17,6 +23,7 @@
 		49835A101E934995009CC53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49835A0E1E934995009CC53E /* LaunchScreen.storyboard */; };
 		4D62203FDAD88C5D56812650 /* Pods_PippinTestPods_PippinUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A6EBF3E65ABF9CF3469C9F /* Pods_PippinTestPods_PippinUnitTests.framework */; };
 		8271189AD3D05D944346322D /* Pods_PippinPods_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93ADDD6B188754B217C84495 /* Pods_PippinPods_PippinTestHarness.framework */; };
+		CC8FA15505D47F4D618CB0A1 /* Pods_PippinPods_iOS_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7902C8F0B739200BA8EF2F20 /* Pods_PippinPods_iOS_PippinTestHarness.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +33,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 49835A021E934995009CC53E;
 			remoteInfo = PippinTestHarness;
+		};
+		495BEB6221E81D4D00FA478B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494821571E6B4E28003DD4EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 495BEB5121E81D4C00FA478B;
+			remoteInfo = "PippinTestHarness-macOS";
+		};
+		495BEB6D21E81D4E00FA478B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494821571E6B4E28003DD4EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 495BEB5121E81D4C00FA478B;
+			remoteInfo = "PippinTestHarness-macOS";
 		};
 		495CE05720F25BE900A72C80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -40,6 +61,18 @@
 		4907828421585E3D0024748B /* PippinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PippinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907828621585E3D0024748B /* PippinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinUITests.swift; sourceTree = "<group>"; };
 		4907828821585E3D0024748B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		495BEB5221E81D4C00FA478B /* PippinTestHarness-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PippinTestHarness-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		495BEB5421E81D4C00FA478B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		495BEB5621E81D4D00FA478B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		495BEB5921E81D4D00FA478B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		495BEB5B21E81D4D00FA478B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		495BEB5C21E81D4D00FA478B /* PippinTestHarness_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PippinTestHarness_macOS.entitlements; sourceTree = "<group>"; };
+		495BEB6121E81D4D00FA478B /* PippinTestHarness-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PippinTestHarness-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		495BEB6521E81D4D00FA478B /* PippinTestHarness_macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinTestHarness_macOSTests.swift; sourceTree = "<group>"; };
+		495BEB6721E81D4D00FA478B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		495BEB6C21E81D4D00FA478B /* PippinTestHarness-macOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PippinTestHarness-macOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		495BEB7021E81D4E00FA478B /* PippinTestHarness_macOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinTestHarness_macOSUITests.swift; sourceTree = "<group>"; };
+		495BEB7221E81D4E00FA478B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		495CE05220F25BE900A72C80 /* PippinUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PippinUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		495CE05420F25BE900A72C80 /* PippinUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinUnitTests.swift; sourceTree = "<group>"; };
 		495CE05620F25BE900A72C80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,13 +84,19 @@
 		49835A0F1E934995009CC53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49835A111E934995009CC53E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54B57BB22B7692B235CE7CA4 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7532086271A43C8D0C7C0EAD /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_macOS_PippinTestHarness_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7902C8F0B739200BA8EF2F20 /* Pods_PippinPods_iOS_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_iOS_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89AD3D3E8B0A2B93169D5954 /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		928B13E6C8139E5FD5000207 /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		93ADDD6B188754B217C84495 /* Pods_PippinPods_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A6EBF3E65ABF9CF3469C9F /* Pods_PippinTestPods_PippinUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestPods_PippinUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EEC9B34A462BFD1F6055CDE /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A3119A32D141A6DFD975F4F8 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		B57D20439AE52810C2137ED0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
 		C96F18B8C32947BCC1422DA1 /* Pods_PippinTestPods_PippinUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestPods_PippinUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAA7B2090ADEAC32159C991F /* Pods-PippinPods-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-PippinTestHarness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
 		E267FC9BC4C60AC9929D9941 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		F87ABF6E6F2CA301367D41E0 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
 		FA50C5CD7B480034F0C6CA72 /* Pods-PippinPods-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-PippinTestHarness.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +106,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				024D8CBC4084391D6361CAD5 /* Pods_PippinTestPods_PippinUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB4F21E81D4C00FA478B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEE65B799E7D57CA38565A /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB5E21E81D4D00FA478B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB6921E81D4D00FA478B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8271189AD3D05D944346322D /* Pods_PippinPods_PippinTestHarness.framework in Frameworks */,
+				CC8FA15505D47F4D618CB0A1 /* Pods_PippinPods_iOS_PippinTestHarness.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +166,9 @@
 				49835A041E934995009CC53E /* PippinTestHarness */,
 				4907828521585E3D0024748B /* PippinUITests */,
 				495CE05320F25BE900A72C80 /* PippinUnitTests */,
+				495BEB5321E81D4C00FA478B /* PippinTestHarness-macOS */,
+				495BEB6421E81D4D00FA478B /* PippinTestHarness-macOSTests */,
+				495BEB6F21E81D4E00FA478B /* PippinTestHarness-macOSUITests */,
 				494821621E6B4EA5003DD4EC /* Products */,
 				8856670EBA1720F81947653B /* Pods */,
 				CED50ADD866B1A422491DBA4 /* Frameworks */,
@@ -116,8 +181,41 @@
 				49835A031E934995009CC53E /* PippinTestHarness.app */,
 				495CE05220F25BE900A72C80 /* PippinUnitTests.xctest */,
 				4907828421585E3D0024748B /* PippinUITests.xctest */,
+				495BEB5221E81D4C00FA478B /* PippinTestHarness-macOS.app */,
+				495BEB6121E81D4D00FA478B /* PippinTestHarness-macOSTests.xctest */,
+				495BEB6C21E81D4D00FA478B /* PippinTestHarness-macOSUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		495BEB5321E81D4C00FA478B /* PippinTestHarness-macOS */ = {
+			isa = PBXGroup;
+			children = (
+				495BEB5421E81D4C00FA478B /* AppDelegate.swift */,
+				495BEB5621E81D4D00FA478B /* Assets.xcassets */,
+				495BEB5821E81D4D00FA478B /* MainMenu.xib */,
+				495BEB5B21E81D4D00FA478B /* Info.plist */,
+				495BEB5C21E81D4D00FA478B /* PippinTestHarness_macOS.entitlements */,
+			);
+			path = "PippinTestHarness-macOS";
+			sourceTree = "<group>";
+		};
+		495BEB6421E81D4D00FA478B /* PippinTestHarness-macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				495BEB6521E81D4D00FA478B /* PippinTestHarness_macOSTests.swift */,
+				495BEB6721E81D4D00FA478B /* Info.plist */,
+			);
+			path = "PippinTestHarness-macOSTests";
+			sourceTree = "<group>";
+		};
+		495BEB6F21E81D4E00FA478B /* PippinTestHarness-macOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				495BEB7021E81D4E00FA478B /* PippinTestHarness_macOSUITests.swift */,
+				495BEB7221E81D4E00FA478B /* Info.plist */,
+			);
+			path = "PippinTestHarness-macOSUITests";
 			sourceTree = "<group>";
 		};
 		495CE05320F25BE900A72C80 /* PippinUnitTests */ = {
@@ -152,6 +250,10 @@
 				54B57BB22B7692B235CE7CA4 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */,
 				89AD3D3E8B0A2B93169D5954 /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */,
 				E267FC9BC4C60AC9929D9941 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */,
+				B57D20439AE52810C2137ED0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */,
+				F87ABF6E6F2CA301367D41E0 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */,
+				9EEC9B34A462BFD1F6055CDE /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */,
+				A3119A32D141A6DFD975F4F8 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -162,6 +264,8 @@
 				93ADDD6B188754B217C84495 /* Pods_PippinPods_PippinTestHarness.framework */,
 				C96F18B8C32947BCC1422DA1 /* Pods_PippinTestPods_PippinUITests.framework */,
 				94A6EBF3E65ABF9CF3469C9F /* Pods_PippinTestPods_PippinUnitTests.framework */,
+				7902C8F0B739200BA8EF2F20 /* Pods_PippinPods_iOS_PippinTestHarness.framework */,
+				7532086271A43C8D0C7C0EAD /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -187,6 +291,61 @@
 			name = PippinUITests;
 			productName = PippinUITests;
 			productReference = 4907828421585E3D0024748B /* PippinUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		495BEB5121E81D4C00FA478B /* PippinTestHarness-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 495BEB7921E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOS" */;
+			buildPhases = (
+				56C584E438DF5B2BD8348F16 /* [CP] Check Pods Manifest.lock */,
+				495BEB4E21E81D4C00FA478B /* Sources */,
+				495BEB4F21E81D4C00FA478B /* Frameworks */,
+				495BEB5021E81D4C00FA478B /* Resources */,
+				9D79B754F1505994F3D4FD19 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PippinTestHarness-macOS";
+			productName = "PippinTestHarness-macOS";
+			productReference = 495BEB5221E81D4C00FA478B /* PippinTestHarness-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		495BEB6021E81D4D00FA478B /* PippinTestHarness-macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 495BEB7A21E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOSTests" */;
+			buildPhases = (
+				495BEB5D21E81D4D00FA478B /* Sources */,
+				495BEB5E21E81D4D00FA478B /* Frameworks */,
+				495BEB5F21E81D4D00FA478B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				495BEB6321E81D4D00FA478B /* PBXTargetDependency */,
+			);
+			name = "PippinTestHarness-macOSTests";
+			productName = "PippinTestHarness-macOSTests";
+			productReference = 495BEB6121E81D4D00FA478B /* PippinTestHarness-macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		495BEB6B21E81D4D00FA478B /* PippinTestHarness-macOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 495BEB7B21E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOSUITests" */;
+			buildPhases = (
+				495BEB6821E81D4D00FA478B /* Sources */,
+				495BEB6921E81D4D00FA478B /* Frameworks */,
+				495BEB6A21E81D4D00FA478B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				495BEB6E21E81D4E00FA478B /* PBXTargetDependency */,
+			);
+			name = "PippinTestHarness-macOSUITests";
+			productName = "PippinTestHarness-macOSUITests";
+			productReference = 495BEB6C21E81D4D00FA478B /* PippinTestHarness-macOSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		495CE05120F25BE900A72C80 /* PippinUnitTests */ = {
@@ -244,6 +403,23 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 49835A021E934995009CC53E;
 					};
+					495BEB5121E81D4C00FA478B = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = APR23SDATL;
+						ProvisioningStyle = Automatic;
+					};
+					495BEB6021E81D4D00FA478B = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = APR23SDATL;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 495BEB5121E81D4C00FA478B;
+					};
+					495BEB6B21E81D4D00FA478B = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = APR23SDATL;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 495BEB5121E81D4C00FA478B;
+					};
 					495CE05120F25BE900A72C80 = {
 						CreatedOnToolsVersion = 9.4.1;
 						ProvisioningStyle = Automatic;
@@ -273,12 +449,38 @@
 				49835A021E934995009CC53E /* PippinTestHarness */,
 				495CE05120F25BE900A72C80 /* PippinUnitTests */,
 				4907828321585E3D0024748B /* PippinUITests */,
+				495BEB5121E81D4C00FA478B /* PippinTestHarness-macOS */,
+				495BEB6021E81D4D00FA478B /* PippinTestHarness-macOSTests */,
+				495BEB6B21E81D4D00FA478B /* PippinTestHarness-macOSUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4907828221585E3D0024748B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB5021E81D4C00FA478B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495BEB5721E81D4D00FA478B /* Assets.xcassets in Resources */,
+				495BEB5A21E81D4D00FA478B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB5F21E81D4D00FA478B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB6A21E81D4D00FA478B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,7 +536,29 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PippinPods-PippinTestHarness-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PippinPods-iOS-PippinTestHarness-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56C584E438DF5B2BD8348F16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PippinPods-macOS-PippinTestHarness-macOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -347,7 +571,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework",
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
@@ -358,7 +582,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		69F8E45CC4B5FD337AAB3905 /* [CP] Embed Pods Frameworks */ = {
@@ -367,7 +591,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework",
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
@@ -378,7 +602,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8277A4AA63548FCC6D1E38FE /* [CP] Embed Pods Frameworks */ = {
@@ -387,14 +611,14 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
 				"${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Pippin/Pippin.framework",
+				"${BUILT_PRODUCTS_DIR}/Pippin-iOS/Pippin.framework",
 				"${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
@@ -416,7 +640,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		937A1EAEE863E8002AD69227 /* [CP] Check Pods Manifest.lock */ = {
@@ -437,6 +661,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9D79B754F1505994F3D4FD19 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Pippin-macOS/Pippin.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -445,6 +691,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				4907828721585E3D0024748B /* PippinUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB4E21E81D4C00FA478B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495BEB5521E81D4C00FA478B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB5D21E81D4D00FA478B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495BEB6621E81D4D00FA478B /* PippinTestHarness_macOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		495BEB6821E81D4D00FA478B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495BEB7121E81D4E00FA478B /* PippinTestHarness_macOSUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +743,16 @@
 			target = 49835A021E934995009CC53E /* PippinTestHarness */;
 			targetProxy = 4907828921585E3D0024748B /* PBXContainerItemProxy */;
 		};
+		495BEB6321E81D4D00FA478B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 495BEB5121E81D4C00FA478B /* PippinTestHarness-macOS */;
+			targetProxy = 495BEB6221E81D4D00FA478B /* PBXContainerItemProxy */;
+		};
+		495BEB6E21E81D4E00FA478B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 495BEB5121E81D4C00FA478B /* PippinTestHarness-macOS */;
+			targetProxy = 495BEB6D21E81D4E00FA478B /* PBXContainerItemProxy */;
+		};
 		495CE05820F25BE900A72C80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 49835A021E934995009CC53E /* PippinTestHarness */;
@@ -481,6 +761,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		495BEB5821E81D4D00FA478B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				495BEB5921E81D4D00FA478B /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		49835A091E934995009CC53E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -655,6 +943,268 @@
 			};
 			name = Release;
 		};
+		495BEB7321E81D4E00FA478B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EEC9B34A462BFD1F6055CDE /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "PippinTestHarness-macOS/PippinTestHarness_macOS.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = APR23SDATL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "PippinTestHarness-macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tworingsoft.PippinTestHarness-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		495BEB7421E81D4E00FA478B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3119A32D141A6DFD975F4F8 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "PippinTestHarness-macOS/PippinTestHarness_macOS.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = APR23SDATL;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "PippinTestHarness-macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tworingsoft.PippinTestHarness-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		495BEB7521E81D4E00FA478B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = APR23SDATL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "PippinTestHarness-macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tworingsoft.PippinTestHarness-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PippinTestHarness-macOS.app/Contents/MacOS/PippinTestHarness-macOS";
+			};
+			name = Debug;
+		};
+		495BEB7621E81D4E00FA478B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = APR23SDATL;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "PippinTestHarness-macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tworingsoft.PippinTestHarness-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PippinTestHarness-macOS.app/Contents/MacOS/PippinTestHarness-macOS";
+			};
+			name = Release;
+		};
+		495BEB7721E81D4E00FA478B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = APR23SDATL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "PippinTestHarness-macOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tworingsoft.PippinTestHarness-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TEST_TARGET_NAME = "PippinTestHarness-macOS";
+			};
+			name = Debug;
+		};
+		495BEB7821E81D4E00FA478B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = APR23SDATL;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "PippinTestHarness-macOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tworingsoft.PippinTestHarness-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TEST_TARGET_NAME = "PippinTestHarness-macOS";
+			};
+			name = Release;
+		};
 		495CE05920F25BE900A72C80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89AD3D3E8B0A2B93169D5954 /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */;
@@ -740,7 +1290,7 @@
 		};
 		49835A131E934995009CC53E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAA7B2090ADEAC32159C991F /* Pods-PippinPods-PippinTestHarness.debug.xcconfig */;
+			baseConfigurationReference = B57D20439AE52810C2137ED0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -780,7 +1330,7 @@
 		};
 		49835A141E934995009CC53E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA50C5CD7B480034F0C6CA72 /* Pods-PippinPods-PippinTestHarness.release.xcconfig */;
+			baseConfigurationReference = F87ABF6E6F2CA301367D41E0 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -830,6 +1380,33 @@
 			buildConfigurations = (
 				4948215B1E6B4E28003DD4EC /* Debug */,
 				4948215C1E6B4E28003DD4EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		495BEB7921E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				495BEB7321E81D4E00FA478B /* Debug */,
+				495BEB7421E81D4E00FA478B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		495BEB7A21E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				495BEB7521E81D4E00FA478B /* Debug */,
+				495BEB7621E81D4E00FA478B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		495BEB7B21E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				495BEB7721E81D4E00FA478B /* Debug */,
+				495BEB7821E81D4E00FA478B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

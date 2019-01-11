@@ -7,8 +7,13 @@
 
 @import Pippin;
 @import XCTest;
-#import "Pippin_Unit_Tests-Swift.h"
 #import "XCTestCase+OperationTestHelpers.h"
+
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
+#import "Pippin_iOS_Unit_Tests-Swift.h"
+#else
+#import "Pippin_macOS_Unit_Tests-Swift.h"
+#endif
 
 @interface AsyncOperationTests : XCTestCase
 
@@ -38,8 +43,10 @@
 - (void)testIllegalEnqueuementOfFinishedAsynchronousOperations {
     TestAsyncOperation *operation = [[TestAsyncOperation alloc] initWithInfinite:NO];
     XCTestExpectation *expectation = [self expectationWithDescription:@"completion"];
+    __weak typeof(operation) weakOperation = operation;
     operation.completionBlock = ^{
-        XCTAssertThrows([self.operationQueue addOperation:operation]);
+        __strong typeof(weakOperation) strongOperation = weakOperation;
+        XCTAssertThrows([self.operationQueue addOperation:strongOperation]);
         [expectation fulfill];
     };
     [self.operationQueue addOperation:operation];
