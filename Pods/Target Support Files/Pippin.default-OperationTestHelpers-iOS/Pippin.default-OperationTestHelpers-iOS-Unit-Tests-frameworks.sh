@@ -153,12 +153,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Pippin-iOS/Pippin.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-iOS/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Pippin-iOS/Pippin.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-iOS/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework"
 fi

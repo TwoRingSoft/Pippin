@@ -9,12 +9,6 @@
 @import XCTest;
 #import "XCTestCase+OperationTestHelpers.h"
 
-#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
-#import "Pippin_iOS_Unit_Tests-Swift.h"
-#else
-#import "Pippin_macOS_Unit_Tests-Swift.h"
-#endif
-
 @interface CompoundOperationTests : XCTestCase
 
 @property (strong, nonatomic) NSOperationQueue *operationQueue;

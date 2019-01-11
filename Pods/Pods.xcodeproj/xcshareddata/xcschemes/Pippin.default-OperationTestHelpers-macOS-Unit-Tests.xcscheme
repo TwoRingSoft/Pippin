@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2F03E22D3B40880E3FE8E8A067AA08B"
-               BlueprintName = "PippinAdapters"
+               BlueprintIdentifier = "DF578804F02CDC926EA0DED462C5E921"
+               BlueprintName = "Pippin.default-OperationTestHelpers-macOS-Unit-Tests"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "PippinAdapters.framework">
+               BuildableName = "Pippin.default-OperationTestHelpers-macOS-Unit-Tests.xctest">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,18 @@
       buildConfiguration = "Debug">
       <AdditionalOptions>
       </AdditionalOptions>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DF578804F02CDC926EA0DED462C5E921"
+               BlueprintName = "Pippin.default-OperationTestHelpers-macOS-Unit-Tests"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Pippin.default-OperationTestHelpers-macOS-Unit-Tests.xctest">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"

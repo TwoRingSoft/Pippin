@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   
   s.test_spec 'Tests' do |test_spec|
     test_spec.source_files = 'Tests/Pippin/**/*.{h,m,swift}'
+    test_spec.dependency 'Pippin/OperationTestHelpers'
   end
   
   s.default_subspecs = ['Core', 'Extensions']
@@ -40,6 +41,9 @@ Pod::Spec.new do |s|
     ss.osx.source_files = [
       'Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}'
     ]
+  end
+  s.subspec 'OperationTestHelpers' do |ss|
+      ss.source_files = 'Tests/Helpers/Operations/**/*.{swift}'
   end
   
 end

@@ -618,7 +618,7 @@
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Pippin-iOS/Pippin.framework",
+				"${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-iOS/Pippin.framework",
 				"${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
@@ -670,7 +670,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Pippin-macOS/Pippin.framework",
+				"${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-macOS/Pippin.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (

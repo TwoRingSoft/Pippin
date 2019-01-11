@@ -9,12 +9,6 @@
 @import XCTest;
 #import "XCTestCase+OperationTestHelpers.h"
 
-#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
-#import "Pippin_iOS_Unit_Tests-Swift.h"
-#else
-#import "Pippin_macOS_Unit_Tests-Swift.h"
-#endif
-
 @interface AsyncOperationTests : XCTestCase
 
 @property (strong, nonatomic) NSOperationQueue *operationQueue;
@@ -46,8 +40,8 @@
     __weak typeof(operation) weakOperation = operation;
     operation.completionBlock = ^{
         __strong typeof(weakOperation) strongOperation = weakOperation;
-        XCTAssertThrows([self.operationQueue addOperation:strongOperation]);
         [expectation fulfill];
+        XCTAssertThrows([self.operationQueue addOperation:strongOperation]);
     };
     [self.operationQueue addOperation:operation];
     [self awaitExpectationsWithTimeout:1];

@@ -25,7 +25,12 @@
     {
       "name": "Tests",
       "test_type": "unit",
-      "source_files": "Tests/Pippin/**/*.{h,m,swift}"
+      "source_files": "Tests/Pippin/**/*.{h,m,swift}",
+      "dependencies": {
+        "Pippin/OperationTestHelpers": [
+
+        ]
+      }
     }
   ],
   "subspecs": [
@@ -66,6 +71,10 @@
           "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
         ]
       }
+    },
+    {
+      "name": "OperationTestHelpers",
+      "source_files": "Tests/Helpers/Operations/**/*.{swift}"
     }
   ]
 }

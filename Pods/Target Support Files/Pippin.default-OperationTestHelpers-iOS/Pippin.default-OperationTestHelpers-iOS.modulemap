@@ -1,0 +1,6 @@
+framework module Pippin {
+  umbrella header "Pippin.default-OperationTestHelpers-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
