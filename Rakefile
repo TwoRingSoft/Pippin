@@ -8,6 +8,7 @@ task :init do
     sh 'brew bundle'
     sh 'rbenv install'
     sh 'rbenv exec gem install bundler'
+    sh 'rbenv exec bundle update'
     sh 'rbenv exec bundle package'
 end
 
