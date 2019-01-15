@@ -7,6 +7,8 @@ task :init do
     sh 'brew tap tworingsoft/formulae'
     sh 'brew bundle'
     sh 'rbenv install'
+    sh 'rbenv exec gem install bundler'
+    sh 'rbenv exec bundle package'
 end
 
 desc 'Bump version number for the specified podspec and commit the changes with message as the output from vrsn.'
