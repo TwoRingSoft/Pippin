@@ -90,7 +90,7 @@
 #pragma mark -
 
 - (void)_addNormalExecutionExpectationsToOperation:(NSOperation *)operation async:(BOOL)async {
-    [self expectOperationToExecuteSyncCompletionBlock:operation];
+    [self expectOperation:operation toExecuteCompletionBlock:YES];
     if (async) {
         NSAssert([[operation class] isSubclassOfClass:[AsyncOperation class]], @"Expected an async operation");
         [self addNormalExecutionKVOExpectationsToAsyncOperation:(AsyncOperation *)operation];
@@ -101,7 +101,7 @@
 }
 
 - (void)_addInFlightCancellationExpectationsToOperation:(NSOperation *)operation async:(BOOL)async {
-    [self expectOperationToExecuteSyncCompletionBlock:operation];
+    [self expectOperation:operation toExecuteCompletionBlock:NO];
     if (async) {
         NSAssert([[operation class] isSubclassOfClass:[AsyncOperation class]], @"Expected an async operation");
         [self addInFlightCancellationKVOExpectationsToAsyncOperation:(AsyncOperation *)operation];
@@ -111,7 +111,7 @@
 }
 
 - (void)_addPreflightCancellationExpectationsToOperation:(NSOperation *)operation async:(BOOL)async {
-    [self expectOperationToExecuteSyncCompletionBlock:operation];
+    [self expectOperation:operation toExecuteCompletionBlock:YES];
     if (async) {
         NSAssert([[operation class] isSubclassOfClass:[AsyncOperation class]], @"Expected an async operation");
         [self addPreflightCancellationKVOExpectationsToAsyncOperation:(AsyncOperation *)operation];
@@ -183,8 +183,9 @@
 
 #pragma mark Completion Expectations
 
-- (void)expectOperationToExecuteSyncCompletionBlock:(NSOperation *)operation {
+- (void)expectOperation:(NSOperation *)operation toExecuteCompletionBlock:(BOOL)executeCompletionBlock {
     XCTestExpectation *syncCompletionExpectation = [self expectationWithDescription:[NSString stringWithFormat:@"%@ syncCompletionExpectation", operation.name]];
+    [syncCompletionExpectation setInverted:!executeCompletionBlock];
     operation.completionBlock = ^{
         [syncCompletionExpectation fulfill];
     };
