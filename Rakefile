@@ -56,7 +56,7 @@ task :release,[:podspec] do |t, args|
   version = `vrsn --read --file #{version_file}`
   sh "git tag #{podspec}-#{version.strip}"
   sh 'git push --tags'
-  sh "pod trunk push #{podspec}.podspec --allow-warnings"
+  sh "rbenv exec bundle exec pod trunk push #{podspec}.podspec --allow-warnings"
 end
 
 desc 'Reverse the last git tag, for use when a release fails.'
