@@ -118,16 +118,63 @@ def app_smoke_test
   require 'fileutils'
   require 'open3'
   
-  scheme_suffixes = [
-      'Pippin',
-      'PippinAdapters-PinpointKit',
-      'PippinAdapters-XCGLogger',
-      'PippinAdapters-DebugController',
-      'PippinAdapters-COSTouchVisualizer',
-      'PippinAdapters-JGProgressHUD',
-      'PippinAdapters-SwiftMessages',
+  sdk_versions_per_platform = {
+    # platform => [ sdk versions ]
+    'phone' => ['12.1'],
+    'mac' => ['10.14'],
+#    'tv' => ['11.1'],
+#    'watch' => ['4.1']
+  }
+  
+  platform_to_device_prefix = {
+    # platform => prefix
+    'phone' => 'iphonesimulator',
+    'mac' => 'macosx',
+    'tv' => 'appletvsimulator',
+    'watch' => 'watchsimulator'
+  }
+  
+  platform_to_cocoapods_names = {
+    # platform => cocoapods platform name
+    'phone' => 'ios',
+    'mac' => 'osx',
+    'tv' => 'tvos',
+    'watch' => 'watchos'
+  }
+  
+  platform_xcodegen_names = {
+    'phone' => 'iOS',
+    'mac' => 'macOS',
+    'tv' => 'tvOS',
+    'watch' => 'watchOS',
+  }
+  
+  scheme_names = [
+    'Pippin',
+    'PippinAdapters-PinpointKit',
+    'PippinAdapters-XCGLogger',
+    'PippinAdapters-DebugController',
+    'PippinAdapters-COSTouchVisualizer',
+    'PippinAdapters-JGProgressHUD',
+    'PippinAdapters-SwiftMessages',
+    'Pippin-OperationTestHelpers',
   ]
-  languages = [ :swift, :objc ]
+
+  extra_pod_dependencies = {
+    'Pippin' => [ 'Crashlytics' ],
+    'PippinAdapters-PinpointKit' => [],
+    'PippinAdapters-XCGLogger' => [],
+    'PippinAdapters-DebugController' => [],
+    'PippinAdapters-COSTouchVisualizer' => [],
+    'PippinAdapters-JGProgressHUD' => [],
+    'PippinAdapters-SwiftMessages' => [],
+    'Pippin-OperationTestHelpers' => [],
+  }
+  
+  languages = [
+    :swift,
+    :objc,
+  ]
   
   # create dir to contain all tests
   root_test_path = 'Pippin/SmokeTests/generated_xcode_projects'
@@ -137,68 +184,47 @@ def app_smoke_test
   Dir.mkdir(root_test_path)
   
   # test integrating each subspec into a project in each language
-  scheme_suffixes.product(languages).each do |subspec_language_combo|
+  scheme_names.product(languages).each do |subspec_language_combo|
     subspec = subspec_language_combo[0]
     language = subspec_language_combo[1]
     language_name = language == :swift ? 'Swift' : 'Objc'
-    test_name = subspec + '-' + language_name
     
-    sh "echo travis_fold:start:#{test_name}" if travis?
-    
-    # prepare for xcode generation
-    xcodegen_spec_yml = make_xcodegen_spec_yml test_name, test_name
-    test_path = File.join(root_test_path, test_name)
-    FileUtils.mkdir_p(test_path)
-    
-    Dir.chdir(test_path) do
-      # copy in the source files
-      FileUtils.cp_r('../../' + language_name + 'App', test_name)
+    sdk_versions_per_platform.each_key do |platform|
+      test_name = [subspec, platform, language_name].join('-')
       
-      # generate the xcode project
-      spec_filename = 'xcodegen-spec.yml'
-      File.open(spec_filename, 'w', File::CREAT) do |spec_file|
-        spec_file << xcodegen_spec_yml
-        File.chmod(0644, spec_file.path)
-      end
-      sh "xcodegen --spec #{spec_filename} >> #{test_name}.log"
+      sh "echo travis_fold:start:#{test_name}" if travis?
       
-      sdk_versions_per_platform = {
-        # platform => [ sdk versions ]
-        'phone' => ['12.1'],
-        #'mac' => ['10.13'],
-        #'tv' => ['11.1'],
-        #'watch' => ['4.1']
-      }
+      # prepare for xcode generation
+      xcodegen_spec_yml = make_xcodegen_spec_yml test_name, test_name, platform_xcodegen_names[platform]
+      test_path = File.join(root_test_path, test_name)
+      FileUtils.mkdir_p(test_path)
       
-      platform_to_device_prefix = {
-        # platform => prefix
-        'phone' => 'iphonesimulator',
-        'mac' => 'macosx',
-        'tv' => 'appletvsimulator',
-        'watch' => 'watchsimulator'
-      }
-      
-      platform_to_cocoapods_names = {
-        # platform => cocoapods platform name
-        'phone' => 'ios',
-        'mac' => 'osx',
-        'tv' => 'tvos',
-        'watch' => 'watchos'
-      }
-      
-      # build for each sdk on each platform
-      sdk_versions_per_platform.each_key do |platform|
+      Dir.chdir(test_path) do
+        # copy in the source files
+        FileUtils.cp_r('../../' + platform + '/' + language_name + 'App', test_name)
+        
+        # generate the xcode project
+        spec_filename = 'xcodegen-spec.yml'
+        File.open(spec_filename, 'w', File::CREAT) do |spec_file|
+          spec_file << xcodegen_spec_yml
+          File.chmod(0644, spec_file.path)
+        end
+        sh "xcodegen --spec #{spec_filename} >> #{test_name}.log"
+        
+        # build for each sdk on each platform
         sdk_versions_per_platform[platform].each do |sdk_version|
           integration_test_name = [subspec, language_name, platform, sdk_version].join('-')
           sh "echo travis_fold:start:#{integration_test_name}" if travis?
           
           # create podfile and insert correct subspec name
+          extra_dependencies = extra_pod_dependencies[subspec].map {|dependency| "pod '#{dependency}'" }
           File.open(File.join('../..', 'Podfile')) do |podfile|
             replaced_podfile_contents = [
             ['{{PLATFORM}}', platform_to_cocoapods_names[platform]],
             ['{{SDK_VERSION}}', sdk_version],
             ['{{TARGET_NAME}}', test_name],
-            ['{{PODSPEC}}', subspec.gsub('-', '/')]
+            ['{{PODSPEC}}', subspec.gsub('-', '/')],
+            ['{{EXTRA_POD_DEPENDENCIES}}', extra_dependencies.join("\n")],
             ].inject(podfile.read) do |acc, item|
               acc.gsub(item[0], item[1])
             end
@@ -208,7 +234,7 @@ def app_smoke_test
             end
           end
           
-          sh "pod install | tee #{integration_test_name}.log"
+          sh "rbenv exec bundle exec pod install | tee #{integration_test_name}.log"
           
           sdk_value = platform_to_device_prefix[platform] + sdk_version
           derived_data_path = 'derivedData'
@@ -218,23 +244,23 @@ def app_smoke_test
           xcpretty_pipe = "#{ruby_environment_prefixes} bundle exec xcpretty -t"
           puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
           Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
-
+          
           sh "echo travis_fold:end:#{test_name}" if travis?
         end
       end
+      
+      sh "echo travis_fold:end:#{test_name}" if travis?
     end
-    
-    sh "echo travis_fold:end:#{test_name}" if travis?
   end
 end
 
-def make_xcodegen_spec_yml test_name, sources_path
+def make_xcodegen_spec_yml test_name, sources_path, platform
 <<-XCODEGEN_SPEC_YML
 name: #{test_name}
 targets:
   #{test_name}:
     scheme: {}
-    platform: iOS
+    platform: #{platform}
     type: application
     sources:
       - path: #{sources_path}
@@ -247,7 +273,7 @@ targets:
       PRODUCT_BUNDLE_IDENTIFIER: com.two-ring-soft.test
       PRODUCT_NAME: #{test_name}
       SWIFT_VERSION: 4.2
-      TARGETED_DEVICE_FAMILY: 1,2
+      TARGETED_DEVICE_FAMILY: #{platform == 'iOS' ? '1,2' : '4'}
       ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: $(inherited)
 XCODEGEN_SPEC_YML
 end

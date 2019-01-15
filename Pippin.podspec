@@ -44,6 +44,7 @@ Pod::Spec.new do |s|
   end
   s.subspec 'OperationTestHelpers' do |ss|
       ss.source_files = 'Tests/Helpers/Operations/**/*.{swift}'
+      ss.dependency 'Pippin/Extensions'
   end
   
 end

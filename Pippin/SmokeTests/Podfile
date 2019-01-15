@@ -3,7 +3,6 @@ install! 'cocoapods', :share_schemes_for_development_pods => true
 platform :{{PLATFORM}}, '{{SDK_VERSION}}'
 
 target '{{TARGET_NAME}}' do
-  pod 'Pippin', path: '../../../..'
   pod '{{PODSPEC}}', path: '../../../..'
-  pod 'Crashlytics'
+  {{EXTRA_POD_DEPENDENCIES}}
 end
