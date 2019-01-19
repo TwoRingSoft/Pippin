@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		024D8CBC4084391D6361CAD5 /* Pods_PippinTestPods_PippinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C96F18B8C32947BCC1422DA1 /* Pods_PippinTestPods_PippinUITests.framework */; };
-		22BEE65B799E7D57CA38565A /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7532086271A43C8D0C7C0EAD /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */; };
 		4907828721585E3D0024748B /* PippinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907828621585E3D0024748B /* PippinUITests.swift */; };
 		495BEB5521E81D4C00FA478B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495BEB5421E81D4C00FA478B /* AppDelegate.swift */; };
 		495BEB5721E81D4D00FA478B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5621E81D4D00FA478B /* Assets.xcassets */; };
@@ -21,9 +19,10 @@
 		49835A0B1E934995009CC53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49835A091E934995009CC53E /* Main.storyboard */; };
 		49835A0D1E934995009CC53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49835A0C1E934995009CC53E /* Assets.xcassets */; };
 		49835A101E934995009CC53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49835A0E1E934995009CC53E /* LaunchScreen.storyboard */; };
-		4D62203FDAD88C5D56812650 /* Pods_PippinTestPods_PippinUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A6EBF3E65ABF9CF3469C9F /* Pods_PippinTestPods_PippinUnitTests.framework */; };
-		8271189AD3D05D944346322D /* Pods_PippinPods_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93ADDD6B188754B217C84495 /* Pods_PippinPods_PippinTestHarness.framework */; };
-		CC8FA15505D47F4D618CB0A1 /* Pods_PippinPods_iOS_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7902C8F0B739200BA8EF2F20 /* Pods_PippinPods_iOS_PippinTestHarness.framework */; };
+		6EF4C17C7B2009FA94A627C1 /* Pods_PippinPods_iOS_PippinTestHarness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4813F3A3899F07FEF34B5960 /* Pods_PippinPods_iOS_PippinTestHarness.framework */; };
+		95585530203C6872CF919397 /* Pods_PippinTestPods_PippinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF03FEFD39E462F23070DAE9 /* Pods_PippinTestPods_PippinUITests.framework */; };
+		A7715F3AC825C061AD79FED8 /* Pods_PippinTestPods_PippinUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598410670E31791451AD3B90 /* Pods_PippinTestPods_PippinUnitTests.framework */; };
+		ED6EA242FC9D83B235FB26EB /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0A2BB6819D006C13FDDD62 /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4813F3A3899F07FEF34B5960 /* Pods_PippinPods_iOS_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_iOS_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907828421585E3D0024748B /* PippinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PippinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907828621585E3D0024748B /* PippinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinUITests.swift; sourceTree = "<group>"; };
 		4907828821585E3D0024748B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,21 +83,17 @@
 		49835A0C1E934995009CC53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49835A0F1E934995009CC53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49835A111E934995009CC53E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		54B57BB22B7692B235CE7CA4 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests.release.xcconfig"; sourceTree = "<group>"; };
-		7532086271A43C8D0C7C0EAD /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_macOS_PippinTestHarness_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7902C8F0B739200BA8EF2F20 /* Pods_PippinPods_iOS_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_iOS_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89AD3D3E8B0A2B93169D5954 /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		928B13E6C8139E5FD5000207 /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		93ADDD6B188754B217C84495 /* Pods_PippinPods_PippinTestHarness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_PippinTestHarness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		94A6EBF3E65ABF9CF3469C9F /* Pods_PippinTestPods_PippinUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestPods_PippinUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EEC9B34A462BFD1F6055CDE /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A3119A32D141A6DFD975F4F8 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig"; sourceTree = "<group>"; };
-		B57D20439AE52810C2137ED0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
-		C96F18B8C32947BCC1422DA1 /* Pods_PippinTestPods_PippinUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestPods_PippinUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAA7B2090ADEAC32159C991F /* Pods-PippinPods-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-PippinTestHarness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
-		E267FC9BC4C60AC9929D9941 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests.release.xcconfig"; sourceTree = "<group>"; };
-		F87ABF6E6F2CA301367D41E0 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
-		FA50C5CD7B480034F0C6CA72 /* Pods-PippinPods-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-PippinTestHarness.release.xcconfig"; path = "Pods/Target Support Files/Pods-PippinPods-PippinTestHarness/Pods-PippinPods-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
+		508D2FAFCBA327CE0A19A99B /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5414C28DFDE02544636280E0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig"; path = "Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig"; sourceTree = "<group>"; };
+		598410670E31791451AD3B90 /* Pods_PippinTestPods_PippinUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestPods_PippinUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7116D2EDFE276388220840C4 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig"; path = "Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig"; sourceTree = "<group>"; };
+		8E0A2BB6819D006C13FDDD62 /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinPods_macOS_PippinTestHarness_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9579E37D8166D5E964DCA619 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig"; path = "Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		9AA4FB7EC7D43B5335CA84BA /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUITests.debug.xcconfig"; path = "Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B3CD6188C0ECB14E1824CF50 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig"; path = "Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		B873AB50A1D3C93582537FB0 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUITests.release.xcconfig"; path = "Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E80C39C8AB74B6C063D087E7 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PippinTestPods-PippinUnitTests.release.xcconfig"; path = "Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		EF03FEFD39E462F23070DAE9 /* Pods_PippinTestPods_PippinUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PippinTestPods_PippinUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				024D8CBC4084391D6361CAD5 /* Pods_PippinTestPods_PippinUITests.framework in Frameworks */,
+				95585530203C6872CF919397 /* Pods_PippinTestPods_PippinUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BEE65B799E7D57CA38565A /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework in Frameworks */,
+				ED6EA242FC9D83B235FB26EB /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D62203FDAD88C5D56812650 /* Pods_PippinTestPods_PippinUnitTests.framework in Frameworks */,
+				A7715F3AC825C061AD79FED8 /* Pods_PippinTestPods_PippinUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,14 +139,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8271189AD3D05D944346322D /* Pods_PippinPods_PippinTestHarness.framework in Frameworks */,
-				CC8FA15505D47F4D618CB0A1 /* Pods_PippinPods_iOS_PippinTestHarness.framework in Frameworks */,
+				6EF4C17C7B2009FA94A627C1 /* Pods_PippinPods_iOS_PippinTestHarness.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12DB0C5279014CFAD6567D4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4813F3A3899F07FEF34B5960 /* Pods_PippinPods_iOS_PippinTestHarness.framework */,
+				8E0A2BB6819D006C13FDDD62 /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */,
+				EF03FEFD39E462F23070DAE9 /* Pods_PippinTestPods_PippinUITests.framework */,
+				598410670E31791451AD3B90 /* Pods_PippinTestPods_PippinUnitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4907828521585E3D0024748B /* PippinUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,8 +176,8 @@
 				495BEB6421E81D4D00FA478B /* PippinTestHarness-macOSTests */,
 				495BEB6F21E81D4E00FA478B /* PippinTestHarness-macOSUITests */,
 				494821621E6B4EA5003DD4EC /* Products */,
-				8856670EBA1720F81947653B /* Pods */,
-				CED50ADD866B1A422491DBA4 /* Frameworks */,
+				BDF70133F6760B66627878A6 /* Pods */,
+				12DB0C5279014CFAD6567D4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -241,33 +247,20 @@
 			path = Pippin/PippinTestHarness;
 			sourceTree = "<group>";
 		};
-		8856670EBA1720F81947653B /* Pods */ = {
+		BDF70133F6760B66627878A6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DAA7B2090ADEAC32159C991F /* Pods-PippinPods-PippinTestHarness.debug.xcconfig */,
-				FA50C5CD7B480034F0C6CA72 /* Pods-PippinPods-PippinTestHarness.release.xcconfig */,
-				928B13E6C8139E5FD5000207 /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */,
-				54B57BB22B7692B235CE7CA4 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */,
-				89AD3D3E8B0A2B93169D5954 /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */,
-				E267FC9BC4C60AC9929D9941 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */,
-				B57D20439AE52810C2137ED0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */,
-				F87ABF6E6F2CA301367D41E0 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */,
-				9EEC9B34A462BFD1F6055CDE /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */,
-				A3119A32D141A6DFD975F4F8 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */,
+				5414C28DFDE02544636280E0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */,
+				7116D2EDFE276388220840C4 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */,
+				9579E37D8166D5E964DCA619 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */,
+				B3CD6188C0ECB14E1824CF50 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */,
+				9AA4FB7EC7D43B5335CA84BA /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */,
+				B873AB50A1D3C93582537FB0 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */,
+				508D2FAFCBA327CE0A19A99B /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */,
+				E80C39C8AB74B6C063D087E7 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		CED50ADD866B1A422491DBA4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				93ADDD6B188754B217C84495 /* Pods_PippinPods_PippinTestHarness.framework */,
-				C96F18B8C32947BCC1422DA1 /* Pods_PippinTestPods_PippinUITests.framework */,
-				94A6EBF3E65ABF9CF3469C9F /* Pods_PippinTestPods_PippinUnitTests.framework */,
-				7902C8F0B739200BA8EF2F20 /* Pods_PippinPods_iOS_PippinTestHarness.framework */,
-				7532086271A43C8D0C7C0EAD /* Pods_PippinPods_macOS_PippinTestHarness_macOS.framework */,
-			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,11 +270,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4907828D21585E3D0024748B /* Build configuration list for PBXNativeTarget "PippinUITests" */;
 			buildPhases = (
-				937A1EAEE863E8002AD69227 /* [CP] Check Pods Manifest.lock */,
+				AC8DDBD09B85D39ACBC5C5D1 /* [CP] Check Pods Manifest.lock */,
 				4907828021585E3D0024748B /* Sources */,
 				4907828121585E3D0024748B /* Frameworks */,
 				4907828221585E3D0024748B /* Resources */,
-				69F8E45CC4B5FD337AAB3905 /* [CP] Embed Pods Frameworks */,
+				950FD216669CC436444C281A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -297,11 +290,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495BEB7921E81D4E00FA478B /* Build configuration list for PBXNativeTarget "PippinTestHarness-macOS" */;
 			buildPhases = (
-				56C584E438DF5B2BD8348F16 /* [CP] Check Pods Manifest.lock */,
+				6EF0B20C172CF13ED15257D2 /* [CP] Check Pods Manifest.lock */,
 				495BEB4E21E81D4C00FA478B /* Sources */,
 				495BEB4F21E81D4C00FA478B /* Frameworks */,
 				495BEB5021E81D4C00FA478B /* Resources */,
-				9D79B754F1505994F3D4FD19 /* [CP] Embed Pods Frameworks */,
+				47846ADE30355FBF9083FB5D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -352,11 +345,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495CE05B20F25BE900A72C80 /* Build configuration list for PBXNativeTarget "PippinUnitTests" */;
 			buildPhases = (
-				1354BE39FB0190F5B5C53B64 /* [CP] Check Pods Manifest.lock */,
+				BAB168936654F63E6B551FED /* [CP] Check Pods Manifest.lock */,
 				495CE04E20F25BE900A72C80 /* Sources */,
 				495CE04F20F25BE900A72C80 /* Frameworks */,
 				495CE05020F25BE900A72C80 /* Resources */,
-				5B83F1B46B655D6564F85A5D /* [CP] Embed Pods Frameworks */,
+				5F6655F8641D41E2E4EF63E9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -372,11 +365,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49835A121E934995009CC53E /* Build configuration list for PBXNativeTarget "PippinTestHarness" */;
 			buildPhases = (
-				194E4375E6FC4F35F226E5BA /* [CP] Check Pods Manifest.lock */,
+				540F42C58CE9EFDD1EE75783 /* [CP] Check Pods Manifest.lock */,
 				498359FF1E934995009CC53E /* Sources */,
 				49835A001E934995009CC53E /* Frameworks */,
 				49835A011E934995009CC53E /* Resources */,
-				8277A4AA63548FCC6D1E38FE /* [CP] Embed Pods Frameworks */,
+				2CD8CED0A2F76EEC8455095C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -507,34 +500,84 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1354BE39FB0190F5B5C53B64 /* [CP] Check Pods Manifest.lock */ = {
+		2CD8CED0A2F76EEC8455095C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+			inputFileListPaths = (
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
+				"${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework",
+				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-iOS/Pippin.framework",
+				"${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PippinTestPods-PippinUnitTests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/COSTouchVisualizer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PinpointKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinAdapters.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		194E4375E6FC4F35F226E5BA /* [CP] Check Pods Manifest.lock */ = {
+		47846ADE30355FBF9083FB5D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-macOS/Pippin.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		540F42C58CE9EFDD1EE75783 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-PippinPods-iOS-PippinTestHarness-checkManifestLockResult.txt",
 			);
@@ -543,7 +586,31 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		56C584E438DF5B2BD8348F16 /* [CP] Check Pods Manifest.lock */ = {
+		5F6655F8641D41E2E4EF63E9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework",
+				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinTesting.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EF0B20C172CF13ED15257D2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -565,30 +632,12 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5B83F1B46B655D6564F85A5D /* [CP] Embed Pods Frameworks */ = {
+		950FD216669CC436444C281A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework",
-				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinTesting.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		69F8E45CC4B5FD337AAB3905 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh",
@@ -596,6 +645,8 @@
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinTesting.framework",
@@ -605,54 +656,20 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8277A4AA63548FCC6D1E38FE /* [CP] Embed Pods Frameworks */ = {
+		AC8DDBD09B85D39ACBC5C5D1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
-				"${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework",
-				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
-				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-iOS/Pippin.framework",
-				"${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/COSTouchVisualizer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PinpointKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinAdapters.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		937A1EAEE863E8002AD69227 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-PippinTestPods-PippinUITests-checkManifestLockResult.txt",
 			);
@@ -661,7 +678,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9D79B754F1505994F3D4FD19 /* [CP] Embed Pods Frameworks */ = {
+		BAB168936654F63E6B551FED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -669,18 +686,18 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Pippin.default-OperationTestHelpers-macOS/Pippin.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pippin.framework",
+				"$(DERIVED_FILE_DIR)/Pods-PippinTestPods-PippinUnitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -790,7 +807,7 @@
 /* Begin XCBuildConfiguration section */
 		4907828B21585E3D0024748B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 928B13E6C8139E5FD5000207 /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */;
+			baseConfigurationReference = 9AA4FB7EC7D43B5335CA84BA /* Pods-PippinTestPods-PippinUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -835,7 +852,7 @@
 		};
 		4907828C21585E3D0024748B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54B57BB22B7692B235CE7CA4 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */;
+			baseConfigurationReference = B873AB50A1D3C93582537FB0 /* Pods-PippinTestPods-PippinUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -945,7 +962,7 @@
 		};
 		495BEB7321E81D4E00FA478B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EEC9B34A462BFD1F6055CDE /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */;
+			baseConfigurationReference = 9579E37D8166D5E964DCA619 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -992,7 +1009,7 @@
 		};
 		495BEB7421E81D4E00FA478B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3119A32D141A6DFD975F4F8 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */;
+			baseConfigurationReference = B3CD6188C0ECB14E1824CF50 /* Pods-PippinPods-macOS-PippinTestHarness-macOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1207,7 +1224,7 @@
 		};
 		495CE05920F25BE900A72C80 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89AD3D3E8B0A2B93169D5954 /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */;
+			baseConfigurationReference = 508D2FAFCBA327CE0A19A99B /* Pods-PippinTestPods-PippinUnitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1251,7 +1268,7 @@
 		};
 		495CE05A20F25BE900A72C80 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E267FC9BC4C60AC9929D9941 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */;
+			baseConfigurationReference = E80C39C8AB74B6C063D087E7 /* Pods-PippinTestPods-PippinUnitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1290,7 +1307,7 @@
 		};
 		49835A131E934995009CC53E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B57D20439AE52810C2137ED0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */;
+			baseConfigurationReference = 5414C28DFDE02544636280E0 /* Pods-PippinPods-iOS-PippinTestHarness.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1330,7 +1347,7 @@
 		};
 		49835A141E934995009CC53E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F87ABF6E6F2CA301367D41E0 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */;
+			baseConfigurationReference = 7116D2EDFE276388220840C4 /* Pods-PippinPods-iOS-PippinTestHarness.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

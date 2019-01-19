@@ -20,7 +20,8 @@ PODS:
     - Pippin/Extensions
     - Result
   - Pippin/Extensions (12.1.0)
-  - Pippin/OperationTestHelpers (12.1.0)
+  - Pippin/OperationTestHelpers (12.1.0):
+    - Pippin/Extensions
   - Pippin/Tests (12.1.0):
     - Pippin/OperationTestHelpers
   - PippinAdapters (1.0.0):
@@ -99,7 +100,7 @@ SPEC CHECKSUMS:
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: 1942f2713f47de30200369bcda3f56930a551bba
+  Pippin: 7a3eb4670d60ac629ead2e133e47930d72cec784
   PippinAdapters: 4e260f9f0f21f166a9d34b968f2ca36bd213f4d6
   PippinTesting: 6622b94f6eab88eb7fd27a368d2e634ee720193e
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713

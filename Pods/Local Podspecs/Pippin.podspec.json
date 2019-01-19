@@ -74,7 +74,12 @@
     },
     {
       "name": "OperationTestHelpers",
-      "source_files": "Tests/Helpers/Operations/**/*.{swift}"
+      "source_files": "Tests/Helpers/Operations/**/*.{swift}",
+      "dependencies": {
+        "Pippin/Extensions": [
+
+        ]
+      }
     }
   ]
 }

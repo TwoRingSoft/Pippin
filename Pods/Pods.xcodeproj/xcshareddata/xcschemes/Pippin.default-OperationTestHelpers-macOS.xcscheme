@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "32638A12E9B0908A6655528A7F039179"
+               BlueprintIdentifier = "84A8050D1F474A643E63D33A53A03AB2"
                BuildableName = "Pippin.framework"
                BlueprintName = "Pippin.default-OperationTestHelpers-macOS"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DF578804F02CDC926EA0DED462C5E921"
+               BlueprintIdentifier = "DEB5551B93C6DCA61D18F91C8894F04F"
                BuildableName = "Pippin.default-OperationTestHelpers-macOS-Unit-Tests.xctest"
                BlueprintName = "Pippin.default-OperationTestHelpers-macOS-Unit-Tests"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -55,7 +55,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "32638A12E9B0908A6655528A7F039179"
+            BlueprintIdentifier = "84A8050D1F474A643E63D33A53A03AB2"
             BuildableName = "Pippin.framework"
             BlueprintName = "Pippin.default-OperationTestHelpers-macOS"
             ReferencedContainer = "container:Pods.xcodeproj">
