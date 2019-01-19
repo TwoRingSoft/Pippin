@@ -22,7 +22,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Let `Date.elapsedTime(since:)` default to time since now if called with no parameter.
 - Taught `Dictionary` how to initialize from a Plist file, as well as how to return a list of its keys ordered by their associated values, or an array of `(key, value)` tuples ordered by key, in various ways.
 - Definitions and a `String` extension function to parse CSV files.
-- Add a way to insert a new key/value pair into a `Dictionary`, or if there's already a value mapped to the key, a way to update the value using a block. 
+- Add a way to insert a new key/value pair into a `Dictionary`, or if there's already a value mapped to the key, a way to update the value using a block.
+
+### Fixed
+
+- When `AsyncOperation`s are cancelled in-flight, their `completionBlock` inherited from `Operation` is not executed, in accordance with `Operation`'s behavior.
 
 ## [PippinTesting 2.0.0] 2018-10-30
 

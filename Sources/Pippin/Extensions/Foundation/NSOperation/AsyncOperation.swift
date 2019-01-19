@@ -65,6 +65,9 @@ open class AsyncOperation: Operation {
     }
     
     open override func cancel() {
+        if _executing {
+            completionBlock = nil
+        }
         lock {
             updateObservedState(key: \AsyncOperation.isCancelled, closure: { () -> (Void) in
                 _cancelled = true
