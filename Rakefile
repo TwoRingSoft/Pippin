@@ -146,13 +146,14 @@ def app_smoke_test
   
   scheme_names = [
     'Pippin',
+    'Pippin-Extensions',
+    'Pippin-OperationTestHelpers',
     'PippinAdapters-PinpointKit',
     'PippinAdapters-XCGLogger',
     'PippinAdapters-DebugController',
     'PippinAdapters-COSTouchVisualizer',
     'PippinAdapters-JGProgressHUD',
     'PippinAdapters-SwiftMessages',
-    'Pippin-OperationTestHelpers',
   ]
 
   extra_pod_dependencies = {
@@ -185,6 +186,7 @@ def app_smoke_test
     language_name = language == :swift ? 'Swift' : 'Objc'
     
     sdk_versions_per_platform.each_key do |platform|
+      next if platform == 'mac' and subspec.include? 'Adapters'
       test_name = [subspec, platform, language_name].join('-')
       
       sh "echo travis_fold:start:#{test_name}" if travis?
