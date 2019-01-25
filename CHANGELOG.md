@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
+## [Pippin]
+
+### Added
+
+- Extension on `CGFloat` describing the amount of alpha a disabled UI element should have.
+
 ---
 
 ## [Pippin 12.1.0] 2019-01-09
