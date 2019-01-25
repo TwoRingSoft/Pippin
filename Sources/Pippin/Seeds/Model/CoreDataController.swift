@@ -59,10 +59,10 @@ public class CoreDataController: NSObject, Model {
         } else {
             container = NSPersistentContainer(name: modelName)
         }
-        self.environment?.logger.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
+        self.environment?.logger?.logDebug(message: String(format: "[%@] About to load persistent store.", instanceType(self)))
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                self.environment?.logger.logError(message: String(format: "[%@] Failed to load persistent store.", instanceType(self)), error: error)
+                self.environment?.logger?.logError(message: String(format: "[%@] Failed to load persistent store.", instanceType(self)), error: error)
             }
         })
         return container
@@ -81,7 +81,7 @@ public extension CoreDataController {
     @available(iOS 10.0, *)
     func perform(block: ((NSManagedObjectContext) -> Void)) {
         let context = persistentContainer.newBackgroundContext()
-        environment?.logger.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))
+        environment?.logger?.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))
         block(context)
     }
     
@@ -103,7 +103,7 @@ public extension CoreDataController {
             results.append(contentsOf: try resolvedContext.fetch(request))
         } catch {
           let message = String(format: "[%@] Error executing fetch request <%@> on context <%@>.", instanceType(self), request, resolvedContext)
-            environment?.logger.logError(message: message, error: error)
+            environment?.logger?.logError(message: message, error: error)
         }
         return results
     }
@@ -137,7 +137,7 @@ public extension CoreDataController {
      */
     func importData(data: Data, completion: ConfirmCompletionBlock? = nil) {
         guard let fileData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSData] else {
-            environment?.logger.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
+            environment?.logger?.logWarning(message: String(format: "[%@] Could not unarchive data to recover encoded databases.", instanceType(self)))
             return
         }
 
@@ -146,7 +146,7 @@ public extension CoreDataController {
             let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
             let path = applicationSupportDirectory.appendingPathComponent($0.key)
             if !$0.value.write(toFile: path, atomically: true) {
-                environment?.logger.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
+                environment?.logger?.logWarning(message: String(format: "[%@] Failed to write imported data to %@.", instanceType(self), $0.key))
                 success = false
             }
         }
@@ -172,7 +172,7 @@ public extension CoreDataController {
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
             guard let data = NSData(contentsOf: $0) else {
-                environment?.logger.logWarning(message: String(format: "[%@] No data read from %@.", instanceType(self), String(describing: $0)))
+                environment?.logger?.logWarning(message: String(format: "[%@] No data read from %@.", instanceType(self), String(describing: $0)))
                 return
             }
 
@@ -189,13 +189,15 @@ public extension CoreDataController {
 
     /**
      Save any outstanding changes to a context, logging any changes and errors. If no context is provided, then all changes to the underlying model are saved via a new vendored context.
-     - parameter context: the context to save changes in.
+     - Parameters:
+       - context: the context to save changes in.
+       - failureMessage: if saving fails, an optional custom message to use for the alert and logging statements.
      */
     @available(iOS 10.0, *)
-    func save(context: NSManagedObjectContext? = nil) {
+    func save(context: NSManagedObjectContext? = nil, orFailWithMessage failureMessage: String? = nil) {
         let resolvedContext = context ?? self.context()
-        environment?.logger.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), resolvedContext))
-        environment?.logger.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", instanceType(self), resolvedContext.insertedObjects, resolvedContext.deletedObjects, resolvedContext.updatedObjects))
+        environment?.logger?.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), resolvedContext))
+        environment?.logger?.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", instanceType(self), resolvedContext.insertedObjects, resolvedContext.deletedObjects, resolvedContext.updatedObjects))
         if !resolvedContext.hasChanges {
             environment?.logger.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", instanceType(self), resolvedContext))
             return
@@ -204,8 +206,9 @@ public extension CoreDataController {
         do {
             try resolvedContext.save()
         } catch {
-            let message = String(format: "[%@] Could not save context <%@>.", instanceType(self), resolvedContext)
-            environment?.logger.logError(message: message, error: error)
+            let message = String(format: "[%@] Could not save context <%@> (%@).", instanceType(self), resolvedContext, failureMessage ?? "<no additional info>")
+            environment?.logger?.logError(message: message, error: error)
+            environment?.alerter?.showAlert(title: "Error", message: failureMessage ?? "Data failure. Restart app and try again. If the error persists, please file a bug report.", type: .error, dismissal: .interactive, occlusion: .strong)
         }
     }
 
@@ -222,7 +225,7 @@ public extension CoreDataController {
      */ 
     @available(iOS 10.0, *)
     func delete(object: NSManagedObject, context: NSManagedObjectContext) {
-        environment?.logger.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", instanceType(self), String(describing: object), context))
+        environment?.logger?.logDebug(message: String(format: "[%@] About to delete object <%@> from context <%@>.", instanceType(self), String(describing: object), context))
         context.delete(object)
         save(context: context)
     }
@@ -236,7 +239,7 @@ private extension CoreDataController {
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {
             guard let data = NSData(contentsOfFile: $0) else {
-                environment?.logger.logWarning(message: String(format: "[%@] No data read from %@.", instanceType(self), $0))
+                environment?.logger?.logWarning(message: String(format: "[%@] No data read from %@.", instanceType(self), $0))
                 return
             }
 
