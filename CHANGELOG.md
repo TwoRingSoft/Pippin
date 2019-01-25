@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
 - Extension on `CGFloat` describing the amount of alpha a disabled UI element should have.
+- Teach `UIFont` instances how to grow a bit bigger or smaller.
 
 ---
 
