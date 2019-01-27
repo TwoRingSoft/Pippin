@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UIDevice {
+public extension UIDevice {
 
     class func isSimulator() -> Bool {
         #if targetEnvironment(simulator)
