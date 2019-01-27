@@ -7,12 +7,10 @@
 
 import UIKit
 
-extension UILabel {
-
-    public func allowShrinking(downTo minimumScale: CGFloat, withTightening: Bool) {
+public extension UILabel {
+    func allowShrinking(downTo minimumScale: CGFloat, withTightening: Bool) {
         allowsDefaultTighteningForTruncation = withTightening
         minimumScaleFactor = minimumScale
         adjustsFontSizeToFitWidth = true
     }
-
 }

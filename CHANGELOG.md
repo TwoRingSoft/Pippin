@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Extension on `CGFloat` describing the amount of alpha a disabled UI element should have.
 - Teach `UIFont` instances how to grow a bit bigger or smaller.
 - New parameter on `CoreDataController.save(context:)` to provide a custom failure message to display in an alert and in the logs.
+- Expose more extensions to `public` and also explicitly declare a few `internal` and `private` ones that were missing any protection type.
 
 ## [PippinAdapters]
 

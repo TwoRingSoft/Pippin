@@ -8,9 +8,8 @@
 
 import UIKit
 
-extension UITextField {
-
-    public static func textField(
+public extension UITextField {
+    static func textField(
         withPlaceholder placeholder: String? = nil,
         text: String? = nil,
         keyboardType: UIKeyboardType = .default,
@@ -27,6 +26,5 @@ extension UITextField {
         textField.textColor = textColor
         textField.autocapitalizationType = capitalization
         return textField
-    }
-    
+    }    
 }

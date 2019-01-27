@@ -8,9 +8,8 @@
 
 import UIKit
 
-extension UILabel {
-
-    public static func label(withText text: String? = nil, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize), textColor: UIColor = .black, alignment: NSTextAlignment = .left, numberOfLines: Int = 1) -> UILabel {
+public extension UILabel {
+    static func label(withText text: String? = nil, font: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize), textColor: UIColor = .black, alignment: NSTextAlignment = .left, numberOfLines: Int = 1) -> UILabel {
         let label = UILabel(frame: .zero)
         label.text = text
         label.font = font
@@ -19,5 +18,4 @@ extension UILabel {
         label.numberOfLines = numberOfLines
         return label
     }
-    
 }

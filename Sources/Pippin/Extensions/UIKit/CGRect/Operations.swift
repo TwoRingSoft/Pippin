@@ -8,8 +8,7 @@
 
 import UIKit
 
-extension CGRect {
-
+public extension CGRect {
     func subtracting(other: CGRect, edge: CGRectEdge) -> CGRect {
         let intersection = self.intersection(other)
 
@@ -22,5 +21,4 @@ extension CGRect {
     func insetting(by insets: UIEdgeInsets) -> CGRect {
         return CGRect(x: origin.x + insets.left, y: origin.y + insets.top, width: width - insets.left - insets.right, height: height - insets.top - insets.bottom)
     }
-
 }

@@ -8,14 +8,13 @@
 
 import UIKit
 
-extension UIFont {
-
+public extension UIFont {
     /// - parameters:
     /// - family: the custom font family to use, if possible
     /// - size: size of the font
     /// - boldFont: if `true` and the custom font can't be loaded, construct the system font using `UIFont.boldSystemFont`; uses `UIFont.systemFont` otherwise
     /// - returns: either the UIFont defined by the family string provided, or the system font of the same size
-    public static func maybeFont(ofFamily family: String, size: CGFloat, boldFont: Bool = false) -> UIFont {
+    static func maybeFont(ofFamily family: String, size: CGFloat, boldFont: Bool = false) -> UIFont {
         if let font = UIFont.init(name: family, size: size) {
             return font
         } else {
@@ -26,5 +25,4 @@ extension UIFont {
             }
         }
     }
-
 }

@@ -8,8 +8,7 @@
 
 import Foundation
 
-extension IndexPath {
-
+public extension IndexPath {
     static var zero: IndexPath {
         get {
             #if os(iOS)
@@ -19,5 +18,4 @@ extension IndexPath {
             #endif
         }
     }
-
 }

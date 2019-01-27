@@ -8,9 +8,8 @@
 
 import UIKit
 
-extension UIView {
-
-    public func fillSuperview(insets: UIEdgeInsets = .zero) {
+public extension UIView {
+    func fillSuperview(insets: UIEdgeInsets = .zero) {
         guard let superview = superview else { return }
         self.translatesAutoresizingMaskIntoConstraints = false
         [
@@ -21,7 +20,7 @@ extension UIView {
         ].forEach { $0.isActive = true }
     }
     
-    public func fillLayoutMargins(insets: UIEdgeInsets = .zero) {
+    func fillLayoutMargins(insets: UIEdgeInsets = .zero) {
         guard let superview = superview else { return }
         self.translatesAutoresizingMaskIntoConstraints = false
         [
@@ -33,7 +32,7 @@ extension UIView {
     }
 
     @available(iOS 11.0, *)
-    public func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
+    func fillSafeArea(inViewController viewController: UIViewController, insets: UIEdgeInsets = .zero) {
         self.translatesAutoresizingMaskIntoConstraints = false
         [
             topAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.topAnchor, constant: insets.top),
@@ -42,5 +41,4 @@ extension UIView {
             trailingAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.trailingAnchor, constant: -insets.right),
         ].forEach { $0.isActive = true }
     }
-
 }

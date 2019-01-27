@@ -7,14 +7,12 @@
 
 import UIKit
 
-extension UIScreen {
-
-    public var hairlineWidth: CGFloat {
+public extension UIScreen {
+    var hairlineWidth: CGFloat {
         if scale > 0 {
             return 1 / scale
         } else {
             return 1
         }
     }
-
 }

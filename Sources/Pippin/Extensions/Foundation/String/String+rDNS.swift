@@ -10,28 +10,24 @@ import Foundation
 
 let rDNSDomain = "com.tworingsoft"
 
-extension String {
-
-    public init(subpaths: [String]) {
+public extension String {
+    init(subpaths: [String]) {
         precondition(subpaths.count > 0)
         precondition(subpaths.filter({ $0.count > 0 }).count > 0)
         self = String(format: "%@.%@", rDNSDomain, subpaths.joined(separator: ".")).lowercased()
     }
 
-    public init(asRDNSForCurrentAppWithSubpaths subpaths: [String]) {
+    init(asRDNSForCurrentAppWithSubpaths subpaths: [String]) {
         precondition(subpaths.count > 0)
         precondition(subpaths.filter({ $0.count > 0 }).count > 0)
         self = String(subpaths: [ Bundle.main.getAppName() ] + subpaths)
     }
-
 }
 
-extension String {
-
+internal extension String {
     init(asRDNSForPippinSubpaths subpaths: [String]) {
         precondition(subpaths.count > 0)
         precondition(subpaths.filter({ $0.count > 0 }).count > 0)
         self = String(subpaths: [ "pippin" ] + subpaths)
     }
-
 }

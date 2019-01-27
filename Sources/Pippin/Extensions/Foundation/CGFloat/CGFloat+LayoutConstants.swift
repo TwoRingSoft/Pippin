@@ -8,15 +8,15 @@
 import Foundation
 
 // MARK: Sizes
-extension CGFloat {
-    public static let iconSize: CGFloat = 35
+public extension CGFloat {
+    static let iconSize: CGFloat = 35
 }
 
 // MARK: Spacing
-extension CGFloat {
-    public static let horizontalMargin: CGFloat = 12
-    public static let verticalMargin: CGFloat = 8
+public extension CGFloat {
+    static let horizontalMargin: CGFloat = 12
+    static let verticalMargin: CGFloat = 8
 
-    public static let horizontalSpacing: CGFloat = 12
-    public static let verticalSpacing: CGFloat = 8
+    static let horizontalSpacing: CGFloat = 12
+    static let verticalSpacing: CGFloat = 8
 }

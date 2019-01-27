@@ -52,7 +52,7 @@ public extension TransparentModalPresentingViewController {
 }
 
 // MARK: Private
-extension TransparentModalPresentingViewController {
+private extension TransparentModalPresentingViewController {
 
     func setUpUI(childViewController: UIViewController) {
         view.isUserInteractionEnabled = false

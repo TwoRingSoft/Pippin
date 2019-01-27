@@ -9,16 +9,13 @@
 import Foundation
 
 enum BundleKey: String {
-
     case semanticVersion = "CFBundleShortVersionString"
     case buildNumber = "CFBundleVersion"
     case name = "CFBundleName"
-
 }
 
-extension Bundle {
-
-    public func getSemanticVersion(defaultVersion: SemanticVersion = .zero) -> SemanticVersion {
+public extension Bundle {
+    func getSemanticVersion(defaultVersion: SemanticVersion = .zero) -> SemanticVersion {
         guard
         let version = infoDictionary?[BundleKey.semanticVersion.rawValue] as? String,
         let versionStruct = SemanticVersion(version)
@@ -28,7 +25,7 @@ extension Bundle {
         return versionStruct
     }
 
-    public func getBuild(defaultBuild: Build = .zero) -> Build {
+    func getBuild(defaultBuild: Build = .zero) -> Build {
         guard
         let build = infoDictionary?[BundleKey.buildNumber.rawValue] as? String,
         let buildStruct = Build(build)
@@ -38,8 +35,7 @@ extension Bundle {
         return buildStruct
     }
 
-    public func getAppName(defaultName: String = "?") -> String {
+    func getAppName(defaultName: String = "?") -> String {
         return infoDictionary?[BundleKey.name.rawValue] as? String ?? defaultName
     }
-
 }

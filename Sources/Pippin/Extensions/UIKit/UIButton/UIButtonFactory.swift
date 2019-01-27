@@ -8,8 +8,7 @@
 
 import UIKit
 
-extension UIButton {
-
+public extension UIButton {
     /**
      - description: Create a UIButton with a tintColor and an image for `.Normal` and `.Highlighted`/`.Selected` states. The images should be template rendered in the asset catalog.
      - parameters:
@@ -19,7 +18,7 @@ extension UIButton {
      - target: target to receive a `touchUpInside` event
      - selector: function to call for a `touchUpInside` event
      */
-    public class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", title: String? = nil, tintColor: UIColor = UIColor.white, font: UIFont? = nil, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) -> UIButton {
+    class func button(withImageSetName imageSetName: String, emphasisSuffix: String = "", title: String? = nil, tintColor: UIColor = UIColor.white, font: UIFont? = nil, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) -> UIButton {
         let button = UIButton(type: .custom)
         let normalImage = UIImage(named: "\(imageSetName)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         button.setImage(normalImage, for: .normal)
@@ -38,7 +37,7 @@ extension UIButton {
         return button
     }
 
-    public func configure(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil) {
+    func configure(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil) {
         setTitle(title, for: .normal)
 
         if selector != nil {
@@ -62,5 +61,4 @@ extension UIButton {
         setTitleColor(.white, for: .highlighted)
         clipsToBounds = true
     }
-    
 }

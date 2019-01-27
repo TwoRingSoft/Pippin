@@ -7,14 +7,13 @@
 
 import UIKit
 
-extension UIViewController {
-
+public extension UIViewController {
     /**
      When the keyboard's frame changes, provides the frame to a block that can
      update autolayout constraints, and then animates the update to the layout
      using other animation information extracted from the notification.
      */
-    public func animateLayout(afterNotification notification: Notification, keyboardHandler: (_ keyboardFrame: CGRect) -> (Void)) {
+    func animateLayout(afterNotification notification: Notification, keyboardHandler: (_ keyboardFrame: CGRect) -> (Void)) {
         guard let frame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         keyboardHandler(frame)
 
@@ -25,5 +24,4 @@ extension UIViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
-
 }

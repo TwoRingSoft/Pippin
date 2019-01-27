@@ -7,10 +7,8 @@
 
 import UIKit
 
-extension CGPoint {
-
-    public func offset(xDelta: CGFloat = 0, yDelta: CGFloat = 0) -> CGPoint {
+public extension CGPoint {
+    func offset(xDelta: CGFloat = 0, yDelta: CGFloat = 0) -> CGPoint {
         return CGPoint(x: x + xDelta, y: y + yDelta)
     }
-
 }
