@@ -25,9 +25,13 @@ public final class PinpointKitAdapter: NSObject, BugReporter {
         var feedbackConfig = FeedbackConfiguration(recipients: recipients)
         
         var allMetadata = [String: AnyObject]()
-        if let dbData = environment?.coreDataController?.exportData() as NSData? {
-            let encodedDBDataString = dbData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) as NSString
-            allMetadata["db"] = encodedDBDataString
+        do {
+            if let dbData = try environment?.coreDataController?.exportData() as NSData? {
+                let encodedDBDataString = dbData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) as NSString
+                allMetadata["db"] = encodedDBDataString
+            }
+        } catch {
+            environment?.logger?.logError(message: String(format: "[%@] Failed to export data for inclusion in bug report: %@", instanceType(self), String(describing: error)), error: error)
         }
         if let logs = environment?.logger?.logContents() {
             allMetadata["logs"] = logs as NSString

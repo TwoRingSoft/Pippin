@@ -9,38 +9,29 @@
 import Foundation
 
 public extension FileManager {
-
     enum FileManagerURLError: Error {
         case failedToLocateUserDocumentsDirectory
-        case failedToConstructDocumentURLWithFileName
-        case failedToConstructTemporaryURLWithFileName
+        case failedToLocateApplicationSupportDirectory
     }
 
-    class func urlForDocument(named fileName: String) throws -> URL {
-        guard let docs = self.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            throw FileManagerURLError.failedToLocateUserDocumentsDirectory
+    class func url(forDocumentNamed fileName: String) throws -> URL {
+        return try url(forFile: fileName, inDirectory: .documentDirectory, domain: .userDomainMask)
+    }
+
+    class func url(forTemporaryFileNamed fileName: String) -> URL {
+        return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+    }
+
+    class func url(forApplicationSupportFile fileName: String) throws -> URL {
+        return try url(forFile: fileName, inDirectory: .applicationSupportDirectory, domain: .userDomainMask)
+    }
+}
+
+private extension FileManager {
+    class func url(forFile file: String, inDirectory directory: FileManager.SearchPathDirectory, domain: FileManager.SearchPathDomainMask) throws -> URL {
+        guard let applicationSupportDirectory = self.default.urls(for: directory, in: domain).first else {
+            throw FileManagerURLError.failedToLocateApplicationSupportDirectory
         }
-
-        guard let url = (docs as NSURL).appendingPathComponent(fileName) else {
-            throw FileManagerURLError.failedToConstructDocumentURLWithFileName
-        }
-
-        return url
+        return applicationSupportDirectory.appendingPathComponent(file)
     }
-
-    class func url(forTemporaryFileNamed fileName: String) throws -> URL {
-        let tempDir = URL(fileURLWithPath: NSTemporaryDirectory())
-        guard let url = (tempDir as NSURL).appendingPathComponent(fileName) else {
-            throw FileManagerURLError.failedToConstructTemporaryURLWithFileName
-        }
-
-        return url
-    }
-
-    class func url(forApplicationSupportFile fileName: String) -> URL {
-        let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first! as NSString
-        return URL(fileURLWithPath: applicationSupportDirectory.appendingPathComponent(fileName))
-
-    }
-
 }

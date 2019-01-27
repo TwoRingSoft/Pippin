@@ -8,11 +8,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Pippin]
 
+### Changed
+
+- Fixed up the APIs in `FileManager+URLs` for better consistency in naming and error throwing.
+
 ### Added
 
 - Extension on `CGFloat` describing the amount of alpha a disabled UI element should have.
 - Teach `UIFont` instances how to grow a bit bigger or smaller.
 - New parameter on `CoreDataController.save(context:)` to provide a custom failure message to display in an alert and in the logs.
+
+## [PippinAdapters]
+
+### Fixed
+
+- Updated `DebugController` and `PinpointKitAdapter` for `FileManager+URLs` API change.
 
 ---
 

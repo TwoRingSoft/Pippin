@@ -164,10 +164,10 @@ public extension CoreDataController {
      the array: `[db.sqlite, db.sqlite-wal, db.sqlite-shm]`, where each item is
      the raw `Data` from each of those files.
      */
-    func exportData() -> Data {
-        let sqlitePath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", modelName))
-        let sqliteWALPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", modelName))
-        let sqliteSHMPath = FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", modelName))
+    func exportData() throws -> Data {
+        let sqlitePath = try FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite", modelName))
+        let sqliteWALPath = try FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-wal", modelName))
+        let sqliteSHMPath = try FileManager.url(forApplicationSupportFile: String(format: "%@.sqlite-shm", modelName))
 
         var fileData = [String: NSData]()
         [ sqlitePath, sqliteWALPath, sqliteSHMPath ].forEach {

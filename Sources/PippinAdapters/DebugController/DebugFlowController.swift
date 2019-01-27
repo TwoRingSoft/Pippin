@@ -88,7 +88,13 @@ private extension DebugFlowController {
             return
         }
 
-        let url = FileManager.url(forApplicationSupportFile: databaseFileName)
+        let url: URL
+        do {
+            url = try FileManager.url(forApplicationSupportFile: databaseFileName)
+        } catch {
+            delegate.failedToExportDatabase(error: .databaseExportError(message: "Could not get a location to which to export data.", underlyingError: error))
+            return
+        }
 
         do {
             try data.write(to: url)
