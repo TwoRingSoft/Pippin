@@ -22,7 +22,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Expose more extensions to `public` and also explicitly declare a few `internal` and `private` ones that were missing any protection type.
 - Backwards compatibility now reaches back to macOS 10.10.
 
-## [PippinAdapters 1.0.1] 2019-01-29
+## [PippinAdapters 2.0.0] 2019-01-29
+
+### Changed
+
+- Pinned `DebugController` and `PinpointKitAdapter` dependencies on `Pippin` to `~> 13`, to ensure the correct version is pulled in for the `FileManager+URLs` changes.
 
 ### Fixed
 
