@@ -8,7 +8,7 @@ abstract_target 'PippinPods-iOS' do
     pod 'PippinAdapters', path: '.'
     
     target 'PippinTestHarness' do
-        platform :ios, '11.0'
+        platform :ios, '9.0'
         pod 'Crashlytics', '~> 3'
     end
 end
