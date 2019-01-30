@@ -100,13 +100,13 @@ SPEC CHECKSUMS:
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: 6f6b73c0016ea7995a9dc0017c28be9f8519c8fa
-  PippinAdapters: 4e260f9f0f21f166a9d34b968f2ca36bd213f4d6
-  PippinTesting: 6622b94f6eab88eb7fd27a368d2e634ee720193e
+  Pippin: 1fa2e6d487d4b7d5d210af343b8f40fa7622077e
+  PippinAdapters: 0a4c3f8c3e47b393009d8fca17e3fb53df4b10ff
+  PippinTesting: cc5d10fe8cdefea7d9cef8d3c6a54cf7702946c4
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
 PODFILE CHECKSUM: 20e321b97fecb9f526500a8d0dd80ce3549c0e0c
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.5.3

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F57E65D008DE23DDBD63D3D0C8900491"
+               BlueprintIdentifier = "025512BD0E46570BB42F31D96A906F84"
                BuildableName = "Pippin.framework"
                BlueprintName = "Pippin-Extensions"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F57E65D008DE23DDBD63D3D0C8900491"
+            BlueprintIdentifier = "025512BD0E46570BB42F31D96A906F84"
             BuildableName = "Pippin.framework"
             BlueprintName = "Pippin-Extensions"
             ReferencedContainer = "container:Pods.xcodeproj">

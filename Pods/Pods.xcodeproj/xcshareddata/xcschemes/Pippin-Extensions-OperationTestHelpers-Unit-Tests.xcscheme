@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5B0F7A926AEC711AC2A6824AA83314DD"
-               BlueprintName = "Pippin-Extensions-OperationTestHelpers-Unit-Extensions-Tests"
+               BlueprintIdentifier = "B9C4AC3C650CDB89E425329389CEF01F"
+               BlueprintName = "Pippin-Extensions-OperationTestHelpers-Unit-Tests"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pippin-Extensions-OperationTestHelpers-Unit-Extensions-Tests.xctest">
+               BuildableName = "Pippin-Extensions-OperationTestHelpers-Unit-Tests.xctest">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,10 +34,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5B0F7A926AEC711AC2A6824AA83314DD"
-               BlueprintName = "Pippin-Extensions-OperationTestHelpers-Unit-Extensions-Tests"
+               BlueprintIdentifier = "B9C4AC3C650CDB89E425329389CEF01F"
+               BlueprintName = "Pippin-Extensions-OperationTestHelpers-Unit-Tests"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pippin-Extensions-OperationTestHelpers-Unit-Extensions-Tests.xctest">
+               BuildableName = "Pippin-Extensions-OperationTestHelpers-Unit-Tests.xctest">
             </BuildableReference>
          </TestableReference>
       </Testables>

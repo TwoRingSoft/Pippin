@@ -63,7 +63,7 @@
         {
           "name": "Tests",
           "test_type": "unit",
-          "source_files": "Tests/Pippin/**/*.{h,m,swift}",
+          "source_files": "Tests/Pippin/Extensions/**/*.{h,m,swift}",
           "dependencies": {
             "Pippin/OperationTestHelpers": [
 
