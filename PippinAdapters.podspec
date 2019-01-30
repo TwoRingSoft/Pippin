@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.subspec 'PinpointKit' do |ss|
     ss.source_files = 'Sources/PippinAdapters/PinpointKit/**/*.{h,m,swift}'
     ss.dependency 'PinpointKit', '~> 1'
-    ss.dependency 'Pippin'
+    ss.dependency 'Pippin', '~> 13'
   end
   s.subspec 'COSTouchVisualizer' do |ss|
     ss.source_files = 'Sources/PippinAdapters/COSTouchVisualizer/**/*.{h,m,swift}'
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   end
   s.subspec 'DebugController' do |ss|
     ss.source_files = 'Sources/PippinAdapters/DebugController/**/*.{h,m,swift}'
-    ss.dependency 'Pippin'
+    ss.dependency 'Pippin', '~> 13'
     ss.dependency 'FLEX', '~> 2'
   end
   s.subspec 'JGProgressHUD' do |ss|
