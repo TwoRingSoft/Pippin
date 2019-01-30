@@ -12,41 +12,41 @@ PODS:
   - PinpointKit (1.3.0):
     - PinpointKit/Core (= 1.3.0)
   - PinpointKit/Core (1.3.0)
-  - Pippin (12.1.0):
-    - Pippin/Core (= 12.1.0)
-    - Pippin/Extensions (= 12.1.0)
-  - Pippin/Core (12.1.0):
+  - Pippin (13.0.0):
+    - Pippin/Core (= 13.0.0)
+    - Pippin/Extensions (= 13.0.0)
+  - Pippin/Core (13.0.0):
     - Anchorage (~> 4)
     - Pippin/Extensions
     - Result
-  - Pippin/Extensions (12.1.0)
-  - Pippin/Extensions/Tests (12.1.0):
+  - Pippin/Extensions (13.0.0)
+  - Pippin/Extensions/Tests (13.0.0):
     - Pippin/OperationTestHelpers
-  - Pippin/OperationTestHelpers (12.1.0):
+  - Pippin/OperationTestHelpers (13.0.0):
     - Pippin/Extensions
-  - PippinAdapters (1.0.0):
-    - PippinAdapters/COSTouchVisualizer (= 1.0.0)
-    - PippinAdapters/DebugController (= 1.0.0)
-    - PippinAdapters/JGProgressHUD (= 1.0.0)
-    - PippinAdapters/PinpointKit (= 1.0.0)
-    - PippinAdapters/SwiftMessages (= 1.0.0)
-    - PippinAdapters/XCGLogger (= 1.0.0)
-  - PippinAdapters/COSTouchVisualizer (1.0.0):
+  - PippinAdapters (2.0.0):
+    - PippinAdapters/COSTouchVisualizer (= 2.0.0)
+    - PippinAdapters/DebugController (= 2.0.0)
+    - PippinAdapters/JGProgressHUD (= 2.0.0)
+    - PippinAdapters/PinpointKit (= 2.0.0)
+    - PippinAdapters/SwiftMessages (= 2.0.0)
+    - PippinAdapters/XCGLogger (= 2.0.0)
+  - PippinAdapters/COSTouchVisualizer (2.0.0):
     - COSTouchVisualizer (~> 1)
     - Pippin
-  - PippinAdapters/DebugController (1.0.0):
+  - PippinAdapters/DebugController (2.0.0):
     - FLEX (~> 2)
-    - Pippin
-  - PippinAdapters/JGProgressHUD (1.0.0):
+    - Pippin (~> 13)
+  - PippinAdapters/JGProgressHUD (2.0.0):
     - JGProgressHUD
     - Pippin
-  - PippinAdapters/PinpointKit (1.0.0):
+  - PippinAdapters/PinpointKit (2.0.0):
     - PinpointKit (~> 1)
-    - Pippin
-  - PippinAdapters/SwiftMessages (1.0.0):
+    - Pippin (~> 13)
+  - PippinAdapters/SwiftMessages (2.0.0):
     - Pippin
     - SwiftMessages (~> 6)
-  - PippinAdapters/XCGLogger (1.0.0):
+  - PippinAdapters/XCGLogger (2.0.0):
     - Pippin
     - XCGLogger (~> 6)
   - PippinTesting (2.0.0)
@@ -100,8 +100,8 @@ SPEC CHECKSUMS:
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: 1fa2e6d487d4b7d5d210af343b8f40fa7622077e
-  PippinAdapters: 0a4c3f8c3e47b393009d8fca17e3fb53df4b10ff
+  Pippin: 8c33eb3ea9a11f1513b1a5d2498a14a55b841aa9
+  PippinAdapters: aea8cf1276cb29ec928a2207f53ed8476f1132ce
   PippinTesting: cc5d10fe8cdefea7d9cef8d3c6a54cf7702946c4
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371

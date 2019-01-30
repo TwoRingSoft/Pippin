@@ -1,6 +1,6 @@
 {
   "name": "PippinAdapters",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "summary": "Plugins for Pippin Protocols.",
   "description": "A collection of pluggable adapters to third-party dependencies, or entirely self-rolled implementations for Pippin protocols.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinAdapters-1.0.0"
+    "tag": "PippinAdapters-2.0.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -33,7 +33,7 @@
           "~> 1"
         ],
         "Pippin": [
-
+          "~> 13"
         ]
       }
     },
@@ -78,7 +78,7 @@
       "source_files": "Sources/PippinAdapters/DebugController/**/*.{h,m,swift}",
       "dependencies": {
         "Pippin": [
-
+          "~> 13"
         ],
         "FLEX": [
           "~> 2"

@@ -5433,40 +5433,6 @@
 			};
 			name = Debug;
 		};
-		138ED6B140098BA52AABAE9CA113447C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03EC8A7A2188FE4F46EF9ED9ED89D82D /* Pippin-Extensions.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/Pippin-Extensions/Pippin-Extensions-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pippin-Extensions/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/Pippin-Extensions/Pippin-Extensions.modulemap";
-				PRODUCT_MODULE_NAME = Pippin;
-				PRODUCT_NAME = Pippin;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		16B4E7467BB20331F2FC264C53C46D0A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4EA1907D34C100AD890E6E39FF2C3E4C /* PippinAdapters.xcconfig */;
@@ -5557,6 +5523,40 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2B3528A9B3E3C3C7CA25C03FF95970AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03EC8A7A2188FE4F46EF9ED9ED89D82D /* Pippin-Extensions.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Pippin-Extensions/Pippin-Extensions-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pippin-Extensions/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pippin-Extensions/Pippin-Extensions.modulemap";
+				PRODUCT_MODULE_NAME = Pippin;
+				PRODUCT_NAME = Pippin;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -5694,6 +5694,40 @@
 			};
 			name = Debug;
 		};
+		48240C1C88B422D9D4CA9C8B6C2B3733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03EC8A7A2188FE4F46EF9ED9ED89D82D /* Pippin-Extensions.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Pippin-Extensions/Pippin-Extensions-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pippin-Extensions/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pippin-Extensions/Pippin-Extensions.modulemap";
+				PRODUCT_MODULE_NAME = Pippin;
+				PRODUCT_NAME = Pippin;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		51B113E23173C53F6DB5F585101D4DA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBBD7547D24CB13900193AC34DAA8225 /* COSTouchVisualizer.xcconfig */;
@@ -5758,40 +5792,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		5D1D2F423E9F4D4460154CDBCBE1A6F5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03EC8A7A2188FE4F46EF9ED9ED89D82D /* Pippin-Extensions.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/Pippin-Extensions/Pippin-Extensions-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pippin-Extensions/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/Pippin-Extensions/Pippin-Extensions.modulemap";
-				PRODUCT_MODULE_NAME = Pippin;
-				PRODUCT_NAME = Pippin;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		62157BFD1603696AF8ECF78D2D3DCE59 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -6970,8 +6970,8 @@
 		754CC2911232B2A70764AECBF4990D97 /* Build configuration list for PBXNativeTarget "Pippin-Extensions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5D1D2F423E9F4D4460154CDBCBE1A6F5 /* Debug */,
-				138ED6B140098BA52AABAE9CA113447C /* Release */,
+				2B3528A9B3E3C3C7CA25C03FF95970AB /* Debug */,
+				48240C1C88B422D9D4CA9C8B6C2B3733 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
