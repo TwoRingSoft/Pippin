@@ -1,7 +1,7 @@
-build: build-ios build-macos
+build: build-phone build-mac
 
-build-ios:
-	xcodebuild -workspace Pippin.xcworkspace -scheme Pippin.default-OperationTestHelpers-iOS -sdk iphoneos -quiet
+build-phone:
+	xcodebuild -workspace Pippin.xcworkspace -scheme PippinTestHarness -sdk iphoneos -quiet
 
-build-macos:
-	xcodebuild -workspace Pippin.xcworkspace -scheme Pippin.default-OperationTestHelpers-macOS -sdk macosx -quiet
+build-mac:
+	xcodebuild -workspace Pippin.xcworkspace -scheme PippinTestHarness-macOS -sdk macosx -quiet

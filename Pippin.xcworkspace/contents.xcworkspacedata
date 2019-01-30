@@ -28,6 +28,9 @@
       location = "group:Gemfile.lock">
    </FileRef>
    <FileRef
+      location = "group:Makefile">
+   </FileRef>
+   <FileRef
       location = "group:Pippin.podspec"
       assignedFileDataType = "public.ruby-script">
    </FileRef>
