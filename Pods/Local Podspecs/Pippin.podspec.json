@@ -14,24 +14,12 @@
   },
   "platforms": {
     "ios": "9.0",
-    "osx": "10.12"
+    "osx": "10.10"
   },
   "swift_version": "4.2",
   "default_subspecs": [
     "Core",
     "Extensions"
-  ],
-  "testspecs": [
-    {
-      "name": "Tests",
-      "test_type": "unit",
-      "source_files": "Tests/Pippin/**/*.{h,m,swift}",
-      "dependencies": {
-        "Pippin/OperationTestHelpers": [
-
-        ]
-      }
-    }
   ],
   "subspecs": [
     {
@@ -70,7 +58,19 @@
         "source_files": [
           "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
         ]
-      }
+      },
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "Tests/Pippin/**/*.{h,m,swift}",
+          "dependencies": {
+            "Pippin/OperationTestHelpers": [
+
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "OperationTestHelpers",

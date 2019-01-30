@@ -4,7 +4,8 @@ project 'Pippin.xcodeproj'
 workspace 'Pippin.xcworkspace'
 
 abstract_target 'PippinPods-iOS' do
-    pod 'Pippin', path: '.', :testspecs => ['Tests']
+    pod 'Pippin', path: '.'
+    pod 'Pippin/Extensions', path: '.', :testspecs => ['Tests']
     pod 'PippinAdapters', path: '.'
     
     target 'PippinTestHarness' do
@@ -14,7 +15,7 @@ abstract_target 'PippinPods-iOS' do
 end
 
 abstract_target 'PippinPods-macOS' do
-    pod 'Pippin', path: '.', :testspecs => ['Tests']
+    pod 'Pippin/Extensions', path: '.'
     
     target 'PippinTestHarness-macOS' do
         platform :osx, '10.14'
@@ -24,7 +25,7 @@ end
 abstract_target 'PippinTestPods' do
   platform :ios, '11.0'
   pod 'PippinTesting', path: '.', :testspecs => ['Tests']
-  pod 'Pippin/Extensions', path: '.'
+  pod 'Pippin/Extensions', path: '.', :testspecs => ['Tests']
   
   target 'PippinUITests'
   target 'PippinUnitTests'

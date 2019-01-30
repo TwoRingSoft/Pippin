@@ -153,11 +153,11 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Pippin-Extensions-OperationTestHelpers/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Pippin-Extensions-OperationTestHelpers/Pippin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

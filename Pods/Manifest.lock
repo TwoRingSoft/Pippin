@@ -1,9 +1,9 @@
 PODS:
   - Anchorage (4.3)
   - COSTouchVisualizer (1.0.6)
-  - Crashlytics (3.11.1):
-    - Fabric (~> 1.8.1)
-  - Fabric (1.8.2)
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
+  - Fabric (1.9.0)
   - FLEX (2.4.0)
   - JGProgressHUD (2.0.3)
   - ObjcExceptionBridging (1.0.1):
@@ -20,10 +20,10 @@ PODS:
     - Pippin/Extensions
     - Result
   - Pippin/Extensions (12.1.0)
+  - Pippin/Extensions/Tests (12.1.0):
+    - Pippin/OperationTestHelpers
   - Pippin/OperationTestHelpers (12.1.0):
     - Pippin/Extensions
-  - Pippin/Tests (12.1.0):
-    - Pippin/OperationTestHelpers
   - PippinAdapters (1.0.0):
     - PippinAdapters/COSTouchVisualizer (= 1.0.0)
     - PippinAdapters/DebugController (= 1.0.0)
@@ -51,10 +51,10 @@ PODS:
     - XCGLogger (~> 6)
   - PippinTesting (2.0.0)
   - PippinTesting/Tests (2.0.0)
-  - Result (4.0.0)
-  - SwiftMessages (6.0.1):
-    - SwiftMessages/App (= 6.0.1)
-  - SwiftMessages/App (6.0.1)
+  - Result (4.1.0)
+  - SwiftMessages (6.0.2):
+    - SwiftMessages/App (= 6.0.2)
+  - SwiftMessages/App (6.0.2)
   - XCGLogger (6.1.0):
     - XCGLogger/Core (= 6.1.0)
   - XCGLogger/Core (6.1.0):
@@ -64,7 +64,7 @@ DEPENDENCIES:
   - Crashlytics (~> 3)
   - Pippin (from `.`)
   - Pippin/Extensions (from `.`)
-  - Pippin/Tests (from `.`)
+  - Pippin/Extensions/Tests (from `.`)
   - PippinAdapters (from `.`)
   - PippinTesting (from `.`)
   - PippinTesting/Tests (from `.`)
@@ -94,19 +94,19 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Anchorage: 21a98675245188427f0bcea21404d42a824a766f
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
-  Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
-  Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: 7a3eb4670d60ac629ead2e133e47930d72cec784
+  Pippin: 6f6b73c0016ea7995a9dc0017c28be9f8519c8fa
   PippinAdapters: 4e260f9f0f21f166a9d34b968f2ca36bd213f4d6
   PippinTesting: 6622b94f6eab88eb7fd27a368d2e634ee720193e
-  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
-  SwiftMessages: 42ed7b6e1f2f1ead9ee667dc61a0ae87e4f49570
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
-PODFILE CHECKSUM: 9e75796ef0925c7e9184db8b9d5664bcd5d160bd
+PODFILE CHECKSUM: 20e321b97fecb9f526500a8d0dd80ce3549c0e0c
 
 COCOAPODS: 1.6.0.beta.2
