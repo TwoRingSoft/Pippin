@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol TouchVisualization {
+public protocol TouchVisualization: EnvironmentallyConscious {
     func installViews()
 }

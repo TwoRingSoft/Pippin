@@ -12,6 +12,7 @@ import Pippin
 /// - Note: `COSTouchVisualizer` requires using its `UIWindow` subclass to construct the main view hierarchy, so this class instantiates and maintains a reference to it, and upon calling `installViews()` calls `makeKeyAndVisible()` on it, thus presenting your app as it normally would be in its `UIApplicationDelegate`.
 public class COSTouchVisualizerAdapter: NSObject {
     private let window: UIWindow
+    public var environment: Environment?
     
     public init(rootViewController: UIViewController) {
         let touchWindow = COSTouchVisualizerWindow(frame: UIScreen.main.bounds)
