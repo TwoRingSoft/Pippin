@@ -523,7 +523,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions-OperationTestHelpers/Pippin.framework",
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
@@ -534,7 +534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUITests/Pods-PippinTestPods-PippinUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5F09DB6796007BFA895FFB68 /* [CP] Check Pods Manifest.lock */ = {
@@ -561,7 +561,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions/Pippin.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -570,7 +570,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-macOS-PippinTestHarness-macOS/Pods-PippinPods-macOS-PippinTestHarness-macOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8FA94FB6EAFB041B5ECB37F4 /* [CP] Check Pods Manifest.lock */ = {
@@ -597,7 +597,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Pippin-Extensions-OperationTestHelpers/Pippin.framework",
 				"${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework",
 			);
@@ -608,7 +608,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-PippinUnitTests/Pods-PippinTestPods-PippinUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BEA547E6B1701426C1424CC7 /* [CP] Embed Pods Frameworks */ = {
@@ -617,7 +617,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Anchorage/Anchorage.framework",
 				"${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
@@ -646,7 +646,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-PippinTestHarness/Pods-PippinPods-iOS-PippinTestHarness-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F65664A0FB59B6D0395DA58D /* [CP] Check Pods Manifest.lock */ = {
