@@ -80,14 +80,14 @@ public extension CoreDataController {
      */
     @available(iOS 10.0, *)
     func perform(block: ((NSManagedObjectContext) -> Void)) {
-        let context = persistentContainer.newBackgroundContext()
-        environment?.logger?.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))
-        block(context)
+        block(context())
     }
     
     @available(iOS 10.0, *)
     func context() -> NSManagedObjectContext {
-        return persistentContainer.newBackgroundContext()
+        let context = persistentContainer.newBackgroundContext()
+        environment?.logger?.logDebug(message: String(format: "[%@] Vending new context <%@>.", instanceType(self), context))
+        return context
     }
 
     /// Returns a typed array of entities fetched, and provides some boilerplate error handling.
