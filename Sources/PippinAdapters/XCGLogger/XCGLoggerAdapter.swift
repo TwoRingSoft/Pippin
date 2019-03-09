@@ -102,7 +102,7 @@ extension XCGLoggerAdapter: Logger {
     @objc public func logError(message: String, error: Error) {
         let messageWithErrorDescription = String(format: "%@: %@", message, error as NSError)
         self.log(message: messageWithErrorDescription, logLevel: XCGLogger.Level.error)
-        environment?.crashReporter.recordNonfatalError(error: error, metadata: nil)
+        environment?.crashReporter?.recordNonfatalError(error: error, metadata: nil)
     }
 
     public func logContents() -> String? {

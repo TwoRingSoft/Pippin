@@ -89,13 +89,19 @@ private extension DebugViewController {
 
         var controlPanels = [UIView]()
     
-        environment.coreDataController.debuggingDelegate = self
-        controlPanels.append(environment.coreDataController.debuggingControlPanel())
-        controlPanels.append(environment.activityIndicator.debuggingControlPanel())
-        controlPanels.append(environment.alerter.debuggingControlPanel())
-        controlPanels.append(environment.crashReporter.debuggingControlPanel())
-        if let locatorDebugging = environment.locator?.debuggingControlPanel() {
-            controlPanels.append(locatorDebugging)
+        environment.coreDataController?.debuggingDelegate = self
+
+        let debuggingControls = [
+            environment.coreDataController?.debuggingControlPanel(),
+            environment.activityIndicator?.debuggingControlPanel(),
+            environment.alerter?.debuggingControlPanel(),
+            environment.crashReporter?.debuggingControlPanel(),
+            environment.locator?.debuggingControlPanel(),
+            ]
+        debuggingControls.forEach {
+            if let view = $0 {
+                controlPanels.append(view)
+            }
         }
         
         let closeButton = UIButton(frame: .zero)
@@ -140,9 +146,9 @@ extension DebugViewController: CoreDataControllerDebugging {
     
     public func coreDataControllerWantsToImportFixture(coreDataController: CoreDataController) {
         do {
-            try present(DatabaseFixturePickerViewController(environment: environment, logger: environment.logger), animated: true)
+            try present(DatabaseFixturePickerViewController(environment: environment), animated: true)
         } catch {
-            environment.alerter.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
+            environment.alerter?.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
         }
     }
 }

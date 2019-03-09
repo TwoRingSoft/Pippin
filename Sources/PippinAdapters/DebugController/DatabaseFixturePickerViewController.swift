@@ -14,11 +14,9 @@ class DatabaseFixturePickerViewController: UIViewController {
 
     var fixtures: [URL]!
     private var environment: Environment
-    private var logger: Logger
 
-    init(environment: Environment, logger: Logger) throws {
+    init(environment: Environment) throws {
         self.environment = environment
-        self.logger = logger
         
         super.init(nibName: nil, bundle: nil)
 
@@ -27,7 +25,7 @@ class DatabaseFixturePickerViewController: UIViewController {
             do {
                 fixtures = try FileManager.default.contentsOfDirectory(at: fixturesDirectoryURL, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions(rawValue: 0))
             } catch {
-                logger.logDebug(message: String(format:"[%@] Failed to retrieve contents of directory %@: %@.", instanceType(self), fixturesDirectoryURL.path, String(describing: error)))
+                environment.logger?.logDebug(message: String(format:"[%@] Failed to retrieve contents of directory %@: %@.", instanceType(self), fixturesDirectoryURL.path, String(describing: error)))
             }
         }
 
@@ -68,10 +66,14 @@ extension DatabaseFixturePickerViewController: UITableViewDataSource {
 extension DatabaseFixturePickerViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let fixtureName = fixtures[indexPath.row]
-        let fixtureSQLitePath = fixtureName.appendingPathComponent(environment.coreDataController.modelName).appendingPathExtension("sqlite").path
+        guard let coreDataController = environment.coreDataController else {
+            fatalError("Importing database fixture with no CoreDataController set up")
+        }
 
-        environment.coreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
+        let fixtureName = fixtures[indexPath.row]
+        let fixtureSQLitePath = fixtureName.appendingPathComponent(coreDataController.modelName).appendingPathExtension("sqlite").path
+
+        coreDataController.importFromSQLitePath(sqlitePath: fixtureSQLitePath) { (success, confirmation) in
             if success {
                 self.environment.alerter?.showConfirmationAlert(title: "Import complete", message: "The app must now close to finish the import. Relaunch to continue.", type: .info, confirmButtonTitle: "OK, Restart!", confirmationCompletion: { () -> (Void) in
                     confirmation(true)
