@@ -58,7 +58,7 @@ public class CrudSearchContainer: UIView {}
         setUpFetchedResultsController(withFetchRequest: configuration.fetchRequest)
         setUpUI()
         setLookAndFeel()
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Initialized CrudViewController with context %@.", instanceType(self), crudName, configuration.context))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Initialized CrudViewController with context %@.", instanceType(self), crudName, configuration.context))
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -71,7 +71,7 @@ public class CrudSearchContainer: UIView {}
 @available(iOS 11.0, *) public extension CrudViewController {
 
     func reloadData() {
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), crudName, fetchedResultsController, tableView))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Reloading data using performFetch on NSFetchedResultsController: %@ and rows using reloadData on UITableView: %@.", instanceType(self), crudName, fetchedResultsController, tableView))
         do {
             try fetchedResultsController.performFetch()
             if fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
@@ -81,7 +81,7 @@ public class CrudSearchContainer: UIView {}
             }
         } catch {
             let message = String(format: "[%@(%@)] Could not perform a new fetch on NSFetchedResultsController: %@.", instanceType(self), crudName, fetchedResultsController)
-            environment?.logger.logError(message: message, error: error)
+            environment?.logger?.logError(message: message, error: error)
         }
     }
 
@@ -267,7 +267,7 @@ public class CrudSearchContainer: UIView {}
     }
 
     func update(object: Any, indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Processing update: %@ at indexPath: %@; newIndexPath: %@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath), String(describing: newIndexPath)))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Processing update: %@ at indexPath: %@; newIndexPath: %@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath), String(describing: newIndexPath)))
         switch type {
         case .delete:
             guard let indexPath = indexPath else { break }
@@ -303,7 +303,7 @@ public class CrudSearchContainer: UIView {}
     }
 
     func addUpdate(type: NSFetchedResultsChangeType, indexPath: IndexPath) {
-        self.environment?.logger.logDebug(message: String(format: "[%@(%@)] Memoizing update: %@ at %@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath)))
+        self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Memoizing update: %@ at %@.", instanceType(self), self.crudName, String(describing: type), String(describing: indexPath)))
         if tableUpdates == nil {
             tableUpdates = [ type: [ indexPath ]]
             return
@@ -318,7 +318,7 @@ public class CrudSearchContainer: UIView {}
     }
 
     func execute(tableUpdates: UpdateTable) {
-        self.environment?.logger.logDebug(message: String(format: "[%@(%@)] Executing updates: %@.", instanceType(self), self.crudName, tableUpdates))
+        self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Executing updates: %@.", instanceType(self), self.crudName, tableUpdates))
         tableView.performBatchUpdates({
             tableUpdates.forEach({ arg in
                 let (updateType, indexPaths) = arg
@@ -369,10 +369,10 @@ public class CrudSearchContainer: UIView {}
             self.tableView.beginUpdates()
             let indexPaths = [ self.addItemRowIndexPath() ]
             if hideAddItemRow {
-                self.environment?.logger.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.crudName))
+                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.crudName))
                 self.tableView.deleteRows(at: indexPaths, with: .fade)
             } else {
-                self.environment?.logger.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.crudName))
+                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.crudName))
                 self.tableView.insertRows(at: indexPaths, with: .fade)
             }
             self.tableView.endUpdates()
@@ -405,24 +405,24 @@ public class CrudSearchContainer: UIView {}
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == "\n" {
-            environment?.logger.logInfo(message: String(format: "[%@(%@)] Ignoring Return key press in search.", instanceType(self), self.crudName))
+            environment?.logger?.logInfo(message: String(format: "[%@(%@)] Ignoring Return key press in search.", instanceType(self), self.crudName))
             return false
         }
 
         let startingText = textField.nonemptyText ?? ""
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Text before search term update: %@.", instanceType(self), self.crudName, startingText))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Text before search term update: %@.", instanceType(self), self.crudName, startingText))
 
         let endingText = (startingText as NSString).replacingCharacters(in: range, with: string)
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] New search term: %@.", instanceType(self), self.crudName, endingText))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] New search term: %@.", instanceType(self), self.crudName, endingText))
 
         if endingText.count == 0 {
-            environment?.logger.logDebug(message: String(format: "[%@(%@)] User cleared search term. Resetting.", instanceType(self), self.crudName))
+            environment?.logger?.logDebug(message: String(format: "[%@(%@)] User cleared search term. Resetting.", instanceType(self), self.crudName))
             resetSearch()
             return true
         }
 
         let predicate = configuration.searchDelegate?.crudViewController(crudViewController: self, predicateForSearchString: endingText) ?? NSPredicate(value: false)
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Received fetch request predicate %@.", instanceType(self), self.crudName, predicate))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Received fetch request predicate %@.", instanceType(self), self.crudName, predicate))
         fetchedResultsController.fetchRequest.predicate = predicate
         reloadData()
 
@@ -435,22 +435,22 @@ public class CrudSearchContainer: UIView {}
 @available(iOS 11.0, *) extension CrudViewController: NSFetchedResultsControllerDelegate {
 
     public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.crudName))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] controller is about to update... clearing out table updates dictionary.", instanceType(self), self.crudName))
         tableUpdates = nil
     }
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        environment?.logger.logVerbose(message: String(format: "[%@(%@)] changed object: %@\nin context: %@", instanceType(self), self.crudName, String(describing: anObject), (anObject as! NSManagedObject).managedObjectContext!))
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Received change: %@ object: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), String(describing: anObject), String(describing: indexPath), String(describing: newIndexPath)))
+        environment?.logger?.logVerbose(message: String(format: "[%@(%@)] changed object: %@\nin context: %@", instanceType(self), self.crudName, String(describing: anObject), (anObject as! NSManagedObject).managedObjectContext!))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Received change: %@ object: %@; indexPath: %@; newIndexPath: %@", instanceType(self), self.crudName, String(describing: type), String(describing: anObject), String(describing: indexPath), String(describing: newIndexPath)))
         update(object: anObject, indexPath: indexPath, for: type, newIndexPath: newIndexPath)
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.crudName, controller))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.crudName, controller))
         DispatchQueue.main.async {
             if let updates = self.tableUpdates, updates.count > 0 {
                 self.tableUpdates = nil
-                self.environment?.logger.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.crudName))
+                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.crudName))
                 self.execute(tableUpdates: updates)
             }
         }
@@ -464,7 +464,7 @@ public class CrudSearchContainer: UIView {}
     public func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else {
             let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.crudName)
-            environment?.logger.logWarning(message: message)
+            environment?.logger?.logWarning(message: message)
             return 0
         }
         return sections.count
@@ -473,16 +473,16 @@ public class CrudSearchContainer: UIView {}
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController.sections else {
             let message = String(format: "[%@(%@)] Couldn't query fetched results controller for number of sections.", instanceType(self), self.crudName)
-            environment?.logger.logWarning(message: message)
+            environment?.logger?.logWarning(message: message)
             return 0
         }
         var rows = sections[section].numberOfObjects
-        environment?.logger.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.crudName, rows))
+        environment?.logger?.logVerbose(message: String(format: "[%@(%@)] Fetched results controller has %i objects.", instanceType(self), self.crudName, rows))
         if shouldShowAddItemCell() && !hideAddItemRowForSearch && sectionContainsAddItemRow(section: section) {
-            environment?.logger.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.crudName))
+            environment?.logger?.logVerbose(message: String(format: "[%@(%@)] Including 'Add object' cell in row count.", instanceType(self), self.crudName))
             rows += 1 // add one row for the "add object" row
         }
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Reporting %i rows in section %i", instanceType(self), self.crudName, rows, section))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Reporting %i rows in section %i", instanceType(self), self.crudName, rows, section))
         return rows
     }
 
@@ -548,10 +548,10 @@ public class CrudSearchContainer: UIView {}
 @available(iOS 11.0, *) extension CrudViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        environment?.logger.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.crudName, String(reflecting: indexPath)))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)] Table view row selected at %@", instanceType(self), self.crudName, String(reflecting: indexPath)))
 
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
-            environment?.logger.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.crudName))
+            environment?.logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.crudName))
 
             configuration.crudDelegate.crudViewControllerWantsToCreateObject?(crudViewController: self)
             return
@@ -561,7 +561,7 @@ public class CrudSearchContainer: UIView {}
 
         let object = fetchedResultsController.object(at: indexPath)
 
-        environment?.logger.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.crudName, object as! NSManagedObject))
+        environment?.logger?.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.crudName, object as! NSManagedObject))
 
         configuration.crudDelegate.crudViewController?(crudViewController: self, wantsToRead: object)
     }

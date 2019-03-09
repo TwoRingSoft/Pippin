@@ -30,10 +30,10 @@ public struct Acknowledgements {
                     }.joined(separator: "\n\n")
                 }
             } catch {
-                environment.logger.logError(message: String(format: "[%@] Failed to decode CocoaPods acknowledgements plist at %@", valueType(self), String(describing: cocoaPodsAcknowledgementsPlistURL)), error: error)
+                environment.logger?.logError(message: String(format: "[%@] Failed to decode CocoaPods acknowledgements plist at %@", valueType(self), String(describing: cocoaPodsAcknowledgementsPlistURL)), error: error)
             }
         } else {
-            environment.logger.logInfo(message: String(format: "[%@] No CocoaPods acknowledgement plist url provided", valueType(self)))
+            environment.logger?.logInfo(message: String(format: "[%@] No CocoaPods acknowledgement plist url provided", valueType(self)))
         }
     }
     

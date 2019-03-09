@@ -25,22 +25,22 @@ public class Environment: NSObject {
     public let lastLaunchedBuild: Build?
     
     // MARK: infrastructure
-    public var coreDataController: CoreDataController!
-    public var crashReporter: CrashReporter!
-    public var logger: Logger!
-    public var alerter: Alerter!
-    public var activityIndicator: ActivityIndicator!
+    public var coreDataController: CoreDataController?
+    public var crashReporter: CrashReporter?
+    public var logger: Logger?
+    public var alerter: Alerter?
+    public var activityIndicator: ActivityIndicator?
     public var defaults: Defaults
     
     // MARK: components
-    public var bugReporter: BugReporter!
-    public var inAppPurchaseVendor: InAppPurchaseVendor!
+    public var bugReporter: BugReporter?
+    public var inAppPurchaseVendor: InAppPurchaseVendor?
     
     // MARK: sensors
     public var locator: Locator?
     
     // MARK: testing/development utilities
-    public var debugging: Debugging!
+    public var debugging: Debugging?
     public var touchVisualizer: TouchVisualization?
     
     // MARK: look/feel

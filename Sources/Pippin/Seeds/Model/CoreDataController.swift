@@ -199,7 +199,7 @@ public extension CoreDataController {
         environment?.logger?.logDebug(message: String(format: "[%@] About to save changes to context <%@>.", instanceType(self), resolvedContext))
         environment?.logger?.logVerbose(message: String(format: "[%@] Changes:\ninserted: %@\ndeleted: %@\nupdated: %@, .", instanceType(self), resolvedContext.insertedObjects, resolvedContext.deletedObjects, resolvedContext.updatedObjects))
         if !resolvedContext.hasChanges {
-            environment?.logger.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", instanceType(self), resolvedContext))
+            environment?.logger?.logDebug(message: String(format: "[%@] No unsaved changes in context <%@>.", instanceType(self), resolvedContext))
             return
         }
         

@@ -389,7 +389,7 @@ private extension FormController {
 extension FormController: UITextViewDelegate {
 
     public func textViewDidBeginEditing(_ textView: UITextView) {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewDidBeginEditing: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewDidBeginEditing: %@", instanceType(self), textView))
         currentInputView = textView
 
         if let notification = self.notification {
@@ -406,14 +406,14 @@ extension FormController: UITextViewDelegate {
     }
 
     public func textViewDidEndEditing(_ textView: UITextView) {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewDidEndEditing: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewDidEndEditing: %@", instanceType(self), textView))
         if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
             unwrappedDelegate.textViewDidEndEditing?(textView)
         }
     }
 
     public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewShouldEndEditing: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewShouldEndEditing: %@", instanceType(self), textView))
         if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate, let result = unwrappedDelegate.textViewShouldEndEditing?(textView) {
             return result
         } else {
@@ -422,7 +422,7 @@ extension FormController: UITextViewDelegate {
     }
 
     public func textViewDidChange(_ textView: UITextView) {
-        environment?.logger.logDebug(message: String(format: "[%@] textViewDidChange: %@", instanceType(self), textView))
+        environment?.logger?.logDebug(message: String(format: "[%@] textViewDidChange: %@", instanceType(self), textView))
         if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
             unwrappedDelegate.textViewDidChange?(textView)
         }
@@ -434,7 +434,7 @@ extension FormController: UITextViewDelegate {
 extension FormController: UITextFieldDelegate {
 
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        environment?.logger.logDebug(message: String(format: "[%@] textFieldDidBeginEditing: %@", instanceType(self), textField))
+        environment?.logger?.logDebug(message: String(format: "[%@] textFieldDidBeginEditing: %@", instanceType(self), textField))
         currentInputView = textField
 
         if let notification = self.notification {
@@ -451,7 +451,7 @@ extension FormController: UITextFieldDelegate {
     }
 
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        environment?.logger.logDebug(message: String(format: "[%@] textFieldDidEndEditing: %@", instanceType(self), textField))
+        environment?.logger?.logDebug(message: String(format: "[%@] textFieldDidEndEditing: %@", instanceType(self), textField))
 
         if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
             unwrappedDelegate.textFieldDidEndEditing?(textField)

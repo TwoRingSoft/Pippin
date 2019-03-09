@@ -285,14 +285,14 @@ extension InfoViewController: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
         case .cancelled, .saved:
-            environment.logger.logInfo(message: String(format: "[%@] User did not complete feedback flow; result: %i", instanceType(self), String(describing: result)))
+            environment.logger?.logInfo(message: String(format: "[%@] User did not complete feedback flow; result: %i", instanceType(self), String(describing: result)))
         case .failed:
             if let error = error {
-                environment.logger.logError(message: String(format: "[%@] Failed to send contact email: %@", instanceType(self), String(describing: error)), error: error)
+                environment.logger?.logError(message: String(format: "[%@] Failed to send contact email: %@", instanceType(self), String(describing: error)), error: error)
             }
-            environment.alerter.showAlert(title: "Error", message: "Failed to send the message", type: .error, dismissal: .automatic, occlusion: .weak)
+            environment.alerter?.showAlert(title: "Error", message: "Failed to send the message", type: .error, dismissal: .automatic, occlusion: .weak)
         case .sent:
-            environment.alerter.showAlert(title: "Sent", message: "Thank you for your feedback!", type: .error, dismissal: .automatic, occlusion: .weak)
+            environment.alerter?.showAlert(title: "Sent", message: "Thank you for your feedback!", type: .error, dismissal: .automatic, occlusion: .weak)
         }
         dismiss(animated: true)
     }
