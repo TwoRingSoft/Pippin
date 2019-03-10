@@ -16,6 +16,24 @@ public protocol EnvironmentTypes {
     associatedtype DefaultsKey
 }
 
+public extension Environment {
+    enum Error: Swift.Error, NSErrorConvertible {
+        case missingCoreDataController
+        case missingInAppPurchaseVendor
+
+        public var code: Int {
+            switch self {
+            case .missingCoreDataController: return 0
+            case .missingInAppPurchaseVendor: return 1
+            }
+        }
+
+        public var nsError: NSError {
+            return NSError(domain: String(asRDNSForPippinSubpaths: ["environment", "error"]), code: code, userInfo: [:])
+        }
+    }
+}
+
 /// A collection of references to objects containing app information and infrastructure.
 public class Environment: NSObject {
     // MARK: app information
