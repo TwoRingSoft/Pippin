@@ -10,8 +10,7 @@ import Foundation
 
 public extension FileManager {
     enum FileManagerURLError: Error {
-        case failedToLocateUserDocumentsDirectory
-        case failedToLocateApplicationSupportDirectory
+        case failedToLocateSearchPath(FileManager.SearchPathDirectory)
     }
 
     class func url(forDocumentNamed fileName: String) throws -> URL {
@@ -30,7 +29,7 @@ public extension FileManager {
 private extension FileManager {
     class func url(forFile file: String, inDirectory directory: FileManager.SearchPathDirectory, domain: FileManager.SearchPathDomainMask) throws -> URL {
         guard let applicationSupportDirectory = self.default.urls(for: directory, in: domain).first else {
-            throw FileManagerURLError.failedToLocateApplicationSupportDirectory
+            throw FileManagerURLError.failedToLocateSearchPath(directory)
         }
         return applicationSupportDirectory.appendingPathComponent(file)
     }
