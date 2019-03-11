@@ -10,6 +10,6 @@ import Pippin
 
 public extension Alerter {
     func showFeatureUnavailableOnSimulatorAlert() {
-        showConfirmationAlert(title: "Dev Error", message: "Feature not available on simulator", type: .error, confirmButtonTitle: "OK", confirmationCompletion: {})
+        showAlert(title: "Dev Error", message: "Feature not available on simulator", type: .error, dismissal: .automatic, occlusion: .weak)
     }
 }
