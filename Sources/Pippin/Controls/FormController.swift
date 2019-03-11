@@ -192,7 +192,7 @@ private extension FormController {
 
         let toolbar = FormControllerInputAccessoryToolbar(frame: .zero)
         var items = [UIBarButtonItem]()
-        if allowTraversal {
+        if allowTraversal && inputViews.count > 0 {
             items.append(contentsOf: [
                 space,
                 previousButton,
@@ -265,7 +265,6 @@ private extension FormController {
     func handleKeyboardDisplay(notification: Notification) {
         guard let currentInputView = self.currentInputView else { return }
         guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-
 
         let unhide: ((Bool) -> ()) = { completed in
             if let scrollView = self.scrollView, !self.insetScrollViewContentForAccessoryView, let inputAccessoryView = currentInputView.inputAccessoryView {
