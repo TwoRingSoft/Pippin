@@ -8,6 +8,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [Pippin 14.0.0] 2019-03-20
+
+### Changed
+
+- Converted remaining implicitly unwrapped optionals in `Environment` to optionals.
+- Make `TouchVisualization` `EnvironmentallyConscious` so it can use logging etc.
+- Consolidate `FileManager` errors in an extension to get standard user directories.
+
+### Added
+
+- `NSErrorConvertible` protocol for Swift errors to be able to produce an `NSError` version of themselves.
+- `Environment` errors for when an expected piece of infrastructure necessary for a particular function is not present, like an `InAppPurchaseVendor`.
+
+### Fixed
+
+- `FormController` no longer shows disabled "Next" and "Previous" buttons when only one input is currently managed.
+
+## [PippinAdapters 2.1.0] 2019-03-20
+
+### Added
+
+- Debug `Alerter` function to show an alert for an unimplemented feature.
+
+### Fixed
+
+- Usages of Pippin's `Environment` with removed IUOs.
+
 ## [Pippin 13.0.0] 2019-01-29
 
 ### Changed
