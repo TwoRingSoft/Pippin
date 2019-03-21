@@ -36,9 +36,11 @@ public class TextAndAccessoryCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
-        [label, trailingImageAccessory, leadingImageAccessory, topImageAccessory, bottomImageAccessory].forEach { self.contentView.addSubview($0) }
+        [label, trailingImageAccessory, leadingImageAccessory, topImageAccessory, bottomImageAccessory].forEach {
+            self.contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         [trailingImageAccessory, leadingImageAccessory, topImageAccessory, bottomImageAccessory].forEach { $0.contentMode = .scaleAspectFill }
-        [leadingImageAccessory, label, trailingImageAccessory, topImageAccessory, bottomImageAccessory].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         leadingImageAccessory.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -75,8 +77,6 @@ public class TextAndAccessoryCell: UITableViewCell {
             trailingImageAccessory.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -CGFloat.verticalMargin),
             bottomImageAccessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
         ].forEach { $0?.isActive = true }
-        
-        [leadingImageAccessoryWidth, trailingImageAccessoryWidth].forEach { $0?.priority = .required }
     }
 
     public required init?(coder aDecoder: NSCoder) {
