@@ -112,16 +112,24 @@ public enum CrudViewControllerMode {
     @objc optional func crudViewController(crudViewController: CrudViewController, canEdit object: NSFetchRequestResult) -> Bool
     
     /// Provide an array of other edit actions to show alongside the standard “Edit” and “Delete” actions automatically provided by instances of `CrudViewController` with a `CrudViewControllerMode` of `editor`.
-    ///
     /// - Note: This is not called for the add item cell and no actions are provided for it at all.
     /// - Note: If `CrudViewControllerMode` is `picker` then this function is not called.
     /// - Note: If `crudViewController(crudViewController:canEdit:)` returns false then this function is not called.
-    ///
+    /// - Note: If an array is returned for `crudViewController(crudViewController:otherEditActionsFor:)`, this function is not called.
     /// - Parameters:
     ///   - crudViewController: The `CrudViewController` managing the cells receiving additional edit actions.
     ///   - indexPath: The `IndexPath` for the cell that should receive a given set of additional actions.
     /// - Returns: The additional actions that should be shown alongside “Edit” and “Delete.”
     @objc optional func crudViewController(crudViewController: CrudViewController, otherEditActionsFor indexPath: IndexPath) -> [UITableViewRowAction]
+
+    /// - Note: This is not called for the add item cell and no actions are provided for it at all.
+    /// - Note: If `CrudViewControllerMode` is `picker` then this function is not called.
+    /// - Note: If `crudViewController(crudViewController:canEdit:)` returns false then this function is not called.
+    /// - Parameters:
+    ///   - crudViewController: The `CrudViewController` managing the cells receiving additional edit actions.
+    ///   - indexPath: The `IndexPath` for the cell that should receive a given set of additional actions.
+    /// - Returns: All the edit actions to show for the cell at the given `IndexPath`
+    @objc optional func crudViewController(crudViewController: CrudViewController, editActionsFor indexPath: IndexPath) -> [UITableViewRowAction]
     
     /// Control whether the `UITableView` should include an add item cell. Default value is `true` when `CrudViewControllerMode` is `editor`.
     ///

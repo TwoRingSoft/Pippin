@@ -527,6 +527,10 @@ public class CrudSearchContainer: UIView {}
             return nil
         }
 
+        if let actions = configuration.tableViewDelegate.crudViewController?(crudViewController: self, editActionsFor: indexPath) {
+            return actions
+        }
+
         var actions = [UITableViewRowAction]()
         if let otherActions = configuration.tableViewDelegate.crudViewController?(crudViewController: self, otherEditActionsFor: indexPath) {
             actions.append(contentsOf: otherActions)

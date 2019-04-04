@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
+## [Pippin UNRELEASED] UNDATED
+
+### Added
+
+- A way to tell `CrudViewController` all the edit actions to show for an item cell, instead of actions to add to default Edit and Delete actions. This helps if you want Delete without Edit, or totally different set of options.
+
 ---
 
 ## [PippinAdapters 2.1.1] 2019-04-03
