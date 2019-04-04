@@ -5,7 +5,7 @@
 ![platforms](https://img.shields.io/badge/platforms-iOS-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 
-Pippin is a collection of utilities to quickly prototype iOS apps and simplify working with Cocoa/UIKit API in Swift, as well as XCTest. It uses the concepts of [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to decouple your application code from its dependencies, whether they are the Cocoa frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable codebase and less noisy revision history.
+Pippin is a collection of utilities to scaffold iOS app infrastructure and extend Cocoa/UIKit/XCTest APIs in Swift. It uses [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) patterns to decouple your application code from its dependencies, whether they are the Cocoa frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable codebase and less noisy revision history.
 
 ## Try it out
 
@@ -15,7 +15,7 @@ There are some unit tests under `Tests/` which can be run from `Pippin.xcworkspa
 
 Pippin is split into three top-level CocoaPod specs:
 
-- [`Pippin`](#pippin-1) is split into two top-level components: the `Core` and `Extensions` subspecs. `Core` contains more sublevels: 
+- [`Pippin`](#pippin-1) is split into two top-level components: the `Core` and `Extensions` subspecs.
 - [`PippinAdapters`](#pippinadapters) provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. 
 - [`PippinTesting`](#pippintesting) delivers tools to work with XCTest.
 
@@ -47,7 +47,7 @@ Pippin delivers seeds as [data structures](#data-structures) and [protocols](#pr
 
 ##### Data Structures
 
-`Environment` contains a property for each protocol type. They are currently implicitly unwrapped optionals, so that you can use only the components you need. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components; e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
+`Environment` contains a property for each protocol type. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components; e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
 
 ##### Protocols
 
