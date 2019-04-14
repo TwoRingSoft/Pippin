@@ -77,6 +77,7 @@ public class CrudSearchContainer: UIView {}
             if fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
                 toggle(emptyState: true, animated: true)
             } else {
+                toggle(emptyState: false, animated: true)
                 tableView.reloadData()
             }
         } catch {

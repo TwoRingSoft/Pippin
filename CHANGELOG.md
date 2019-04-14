@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - A way to tell `CrudViewController` all the edit actions to show for an item cell, instead of actions to add to default Edit and Delete actions. This helps if you want Delete without Edit, or totally different set of options.
 
+### Fixed
+
+- `CrudViewController` now transitions to nonempty states when calling `reloadData()` that causes a fetch of newly added entities.
+
 ---
 
 ## [PippinAdapters 2.1.1] 2019-04-03
