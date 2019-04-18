@@ -47,11 +47,11 @@ Pippin delivers seeds as [data structures](#data-structures) and [protocols](#pr
 
 ##### Data Structures
 
-`Environment` contains a property for each protocol type. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components; e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
+`Environment` contains a property for each protocol type. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components, e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
 
 ##### Protocols
 
-Pippin is designed to immediately abstract and handle the major components that usually go into an app: 
+Pippin is designed to immediately abstract and handle some major aspects of an app: 
 
 - Crash Reporting
 - Bug reporting via in-app ui
@@ -145,5 +145,3 @@ Also runs an integration smoke test, which generates an Xcode project for each s
 # Thanks!
 
 If this project helped you, please consider <a href="https://www.paypal.me/armcknight">leaving a tip</a> 🤗
-
-Do you need help with a project? [I'm currently available for hire or contract.](http://tworingsoft.com/contracts).
