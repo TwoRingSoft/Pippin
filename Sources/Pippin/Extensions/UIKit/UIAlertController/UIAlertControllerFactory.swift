@@ -18,7 +18,7 @@ public extension UIViewController {
         })
     }
 
-    public func showAlert(withTitle title: String? = nil, message: String? = nil, confirmTitle: String = "OK", completion: (() -> ())? = nil) {
+    func showAlert(withTitle title: String? = nil, message: String? = nil, confirmTitle: String = "OK", completion: (() -> ())? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .destructive, handler: { action in
             completion?()

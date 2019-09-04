@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Fixed
 
 - `CrudViewController` now transitions to nonempty states when calling `reloadData()` that causes a fetch of newly added entities.
+- New compiler warning about redundant `public` specifier in `UIAlertControllerFactory.swift`.
 
 ---
 
