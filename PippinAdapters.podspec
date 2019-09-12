@@ -34,14 +34,18 @@ Pod::Spec.new do |s|
     ss.dependency 'SwiftMessages', '~> 6'
     ss.dependency 'Pippin'
   end
-  s.subspec 'DebugController' do |ss|
-    ss.source_files = 'Sources/PippinAdapters/DebugController/**/*.{h,m,swift}'
-    ss.dependency 'Pippin', '>= 13'
-    ss.dependency 'FLEX', '~> 2'
-  end
   s.subspec 'JGProgressHUD' do |ss|
     ss.source_files = 'Sources/PippinAdapters/JGProgressHUD/**/*.{h,m,swift}'
     ss.dependency 'Pippin'
     ss.dependency 'JGProgressHUD'
+  end
+  s.subspec 'DebugController' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/DebugController/**/*.{h,m,swift}'
+    ss.dependency 'Pippin', '>= 13'
+  end
+
+  # other subspecs
+  s.subspec 'DebugTools' do |ss|
+    ss.dependency 'FLEX', '~> 2'
   end
 end

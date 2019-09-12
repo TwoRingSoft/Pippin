@@ -6,19 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
-## [Pippin UNRELEASED] UNDATED
-
-### Added
-
-- A way to tell `CrudViewController` all the edit actions to show for an item cell, instead of actions to add to default Edit and Delete actions. This helps if you want Delete without Edit, or totally different set of options.
-- ObjC access to `UIAlertControllerFactory` functions.
-
-### Fixed
-
-- `CrudViewController` now transitions to nonempty states when calling `reloadData()` that causes a fetch of newly added entities.
-- New compiler warning about redundant `public` specifier in `UIAlertControllerFactory.swift`.
-
 ---
+
+## [PippinAdapters 3.0.0] 2019-09-11
+
+### Changed
+
+- Moved `FLEX` dependency out of `DebugController` subspec to a separate, new subspec named `DebugTools`. This way it is not included in every debug build, but can be if desired, even on a per-configuration basis if setting up a config just for `FLEX` and other debug frameworks.
 
 ## [Pippin 14.1.0] 2019-09-04
 
