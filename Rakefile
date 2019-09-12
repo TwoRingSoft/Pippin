@@ -49,7 +49,8 @@ task :prerelease,[:podspec] do |r, args|
   podspec = args[:podspec]
   version_file = "#{podspec}.podspec"
   current_version = `vrsn --read --file #{version_file}`.strip
-  sh "git checkout -b #{current_version}-release"
+  branch = "#{current_version}-release"
+  sh "git checkout -b #{branch}"
   tag_root = "#{podspec}-#{current_version}-RC"
   release_candidate_number = `git tag --list | grep #{tag_root} | wc -l`.strip.to_i + 1
   release_candidate_tag = "#{tag_root}#{release_candidate_number}"
@@ -58,9 +59,12 @@ task :prerelease,[:podspec] do |r, args|
   sh "git commit --message 'TEMP: set podspec version to release candidate version'"
   sh "git tag #{release_candidate_tag}"
   sh 'git push --tags'
-  sh "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings --verbose"
+  puts "About to lint the podspec. This takes a while... (it is now #{Time.now})"
+  sh "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings"
   sh 'git checkout master'
   sh "git branch -D #{branch}"
+  sh "git tag --delete #{release_candidate_tag}"
+  sh "git push --delete origin #{release_candidate_tag}"
 end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
