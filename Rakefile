@@ -48,6 +48,7 @@ desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
 task :release,[:podspec] do |t, args|
   podspec = args[:podspec]
   version_file = "#{podspec}.podspec"
+  sh "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings"
   version = `vrsn --read --file #{version_file}`
   sh "git tag #{podspec}-#{version.strip}"
   sh 'git push --tags'
