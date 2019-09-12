@@ -44,11 +44,29 @@ task :bump,[:component, :podspec] do |t, args|
     end
 end
 
+desc 'Perform prerelease tests and checks to do to make sure release happens correctly.'
+task :prerelease,[:podspec] do |r, args|
+  podspec = args[:podspec]
+  version_file = "#{podspec}.podspec"
+  current_version = `vrsn --read --file #{version_file}`.strip
+  sh "git checkout -b #{current_version}-release"
+  tag_root = "#{podspec}-#{current_version}-RC"
+  release_candidate_number = `git tag --list | grep #{tag_root} | wc -l`.strip.to_i + 1
+  release_candidate_tag = "#{tag_root}#{release_candidate_number}"
+  sh "sed -i '' \"s/\\(\\.version *= *'\\).*'/\\1\"#{current_version}-RC#{release_candidate_number}\"\\'/g\" #{version_file}"
+  sh "git add #{version_file}"
+  sh "git commit --message 'TEMP: set podspec version to release candidate version'"
+  sh "git tag #{release_candidate_tag}"
+  sh 'git push --tags'
+  sh "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings --verbose"
+  sh 'git checkout master'
+  sh "git branch -D #{branch}"
+end
+
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
 task :release,[:podspec] do |t, args|
   podspec = args[:podspec]
   version_file = "#{podspec}.podspec"
-  sh "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings"
   version = `vrsn --read --file #{version_file}`
   sh "git tag #{podspec}-#{version.strip}"
   sh 'git push --tags'
@@ -59,8 +77,8 @@ desc 'Reverse the last git tag, for use when a release fails.'
 task :reverse_last_tag,[:podspec] do |t, args|
     podspec = args[:podspec]
     version_file = "#{podspec}.podspec"
-    version = `vrsn --read --file #{version_file}`
-    tag = "#{podspec}-#{version.strip}"
+    version = `vrsn --read --file #{version_file}`.strip
+    tag = "#{podspec}-#{version}"
     sh "git tag --delete #{tag}"
     sh "git push --delete origin #{tag}"
 end
