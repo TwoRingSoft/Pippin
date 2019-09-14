@@ -1,6 +1,6 @@
 {
   "name": "Pippin",
-  "version": "12.0.1",
+  "version": "14.1.0",
   "summary": "A Swift framework to scaffold an app and make development and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,41 +10,38 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "Pippin-12.0.1"
+    "tag": "Pippin-14.1.0"
   },
   "platforms": {
     "ios": "9.0",
-    "osx": "10.10"
+    "osx": "10.12"
   },
-  "swift_version": "4.2",
+  "swift_versions": "5.0",
   "default_subspecs": [
     "Core",
     "Extensions"
   ],
-  "testspecs": [
-    {
-      "name": "Tests",
-      "test_type": "unit",
-      "source_files": "Tests/Pippin/**/*.{h,m,swift}"
-    }
-  ],
   "subspecs": [
     {
       "name": "Core",
-      "source_files": [
-        "Sources/Pippin/Seeds/**/*.{h,m,swift}",
-        "Sources/Pippin/Sensors/**/*.{h,m,swift}",
-        "Sources/Pippin/Controls/**/*.{h,m,swift}",
-        "Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}",
-        "Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}"
-      ],
-      "dependencies": {
-        "Result": [
+      "ios": {
+        "source_files": [
+          "Sources/Pippin/Seeds/**/*.{h,m,swift}",
+          "Sources/Pippin/Sensors/**/*.{h,m,swift}",
+          "Sources/Pippin/Controls/**/*.{h,m,swift}",
+          "Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}",
+          "Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}"
+        ],
+        "dependencies": {
+          "Result": [
 
-        ],
-        "Anchorage": [
-          "~> 4"
-        ],
+          ],
+          "Anchorage": [
+            "~> 4"
+          ]
+        }
+      },
+      "dependencies": {
         "Pippin/Extensions": [
 
         ]
@@ -61,7 +58,15 @@
         "source_files": [
           "Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}"
         ]
-      }
+      },
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "Tests/Helpers/Operations/**/*.{swift}"
+        }
+      ]
     }
-  ]
+  ],
+  "swift_version": "5.0"
 }

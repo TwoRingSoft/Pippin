@@ -92,6 +92,7 @@ task :test do
   unit_tests
   app_smoke_test
   test_smoke_test
+  example_smoke_tests
 end
 
 task :unit_test do
@@ -104,6 +105,25 @@ end
 
 task :test_smoke_test do
     test_smoke_test
+end
+
+desc 'Smoke test installing pods for and building all example projects deliverable via `pod try`.'
+task :example_smoke_tests do
+  require 'open3'
+  ['OperationDemo'].each do |example_project|
+    puts "travis_fold:start:#{example_project}" if travis?
+    Dir.chdir("Examples/#{example_project}") do
+      update_command = 'rbenv exec bundle exec pod update --no-repo-update'
+      puts update_command
+      Open3.pipeline([update_command])
+      build_command = "xcrun xcodebuild -workspace #{example_project}.xcworkspace -scheme #{example_project}"
+      tee_pipe = "tee #{example_project}_smoke_test.log"
+      xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
+      puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+      Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+    end
+    puts "travis_fold:end:#{example_project}" if travis?
+  end
 end
 
 def unit_tests

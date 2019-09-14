@@ -1,5 +1,5 @@
 PODS:
-  - Pippin/Extensions (12.0.1)
+  - Pippin/Extensions (14.1.0)
 
 DEPENDENCIES:
   - Pippin/Extensions (from `../..`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../.."
 
 SPEC CHECKSUMS:
-  Pippin: e3333bc23f19ce18cddaf4b6d7d8ec7cc549fa81
+  Pippin: ecfde326ea75483f59be9454514fdcb0309bf77f
 
 PODFILE CHECKSUM: 76bbd5b11df80bbcce22c1836d3a207880f2fabf
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.5
