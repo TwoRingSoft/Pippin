@@ -12,8 +12,6 @@
 		49A2C3A0219BA0F700D6749D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A2C39F219BA0F700D6749D /* Assets.xcassets */; };
 		49A2C3A3219BA0F700D6749D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A2C3A1219BA0F700D6749D /* MainMenu.xib */; };
 		49A2C3AF219BA0F700D6749D /* OperationDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2C3AE219BA0F700D6749D /* OperationDemoUITests.swift */; };
-		49A2C3C0219BA11A00D6749D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A2C3B9219BA11A00D6749D /* Assets.xcassets */; };
-		49A2C3C1219BA11A00D6749D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49A2C3BA219BA11A00D6749D /* Info.plist */; };
 		49A2C3C2219BA11A00D6749D /* DemoAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2C3BB219BA11A00D6749D /* DemoAsyncOperation.swift */; };
 		49A2C3C3219BA11A00D6749D /* OperationStateChangeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2C3BC219BA11A00D6749D /* OperationStateChangeDelegate.swift */; };
 		49A2C3C5219BA11A00D6749D /* DemoCompoundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2C3BE219BA11A00D6749D /* DemoCompoundOperation.swift */; };
@@ -222,9 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49A2C3C1219BA11A00D6749D /* Info.plist in Resources */,
 				49A2C3A0219BA0F700D6749D /* Assets.xcassets in Resources */,
-				49A2C3C0219BA11A00D6749D /* Assets.xcassets in Resources */,
 				49A2C3A3219BA0F700D6749D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
