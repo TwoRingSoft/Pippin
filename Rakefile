@@ -108,27 +108,31 @@ end
 
 def unit_tests
   require 'open3'
-  ['Pippin-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
-    sh "echo travis_fold:start:#{scheme}" if travis?
-    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.1\' test"
-    tee_pipe = "tee #{scheme}.log"
-    xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
-    puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-    Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
-    sh "echo travis_fold:end:#{scheme}" if travis?
+  ['12.4'].each do |ios_version|
+    ['Pippin-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
+      sh "echo travis_fold:start:#{scheme}" if travis?
+      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=#{ios_version}\' test"
+      tee_pipe = "tee #{scheme}_ios_#{ios_version}.log"
+      xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
+      puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+      Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      sh "echo travis_fold:end:#{scheme}" if travis?
+    end
   end
 end
 
 def test_smoke_test
   require 'open3'
-  [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
-    sh "echo travis_fold:start:#{scheme}" if travis?
-    build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=12.1\' test"
-    tee_pipe = "tee #{scheme}_smoke_test.log"
-    xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
-    puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-    Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
-    sh "echo travis_fold:end:#{scheme}" if travis?
+  ['12.4'].each do |ios_version|
+    [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
+      sh "echo travis_fold:start:#{scheme}" if travis?
+      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=#{ios_version}\' test"
+      tee_pipe = "tee #{scheme}_smoke_test_ios_#{ios_version}.log"
+      xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
+      puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+      Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      sh "echo travis_fold:end:#{scheme}" if travis?
+    end
   end
 end
 
