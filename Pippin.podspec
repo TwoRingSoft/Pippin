@@ -38,12 +38,7 @@ Pod::Spec.new do |s|
     ]
     ss.test_spec 'Tests' do |test_spec|
         test_spec.source_files = 'Tests/Pippin/Extensions/**/*.{h,m,swift}'
-        test_spec.dependency 'Pippin/OperationTestHelpers'
     end
   end
-  s.subspec 'OperationTestHelpers' do |ss|
-      ss.source_files = 'Tests/Helpers/Operations/**/*.{swift}'
-      ss.dependency 'Pippin/Extensions'
-  end
-  
+
 end

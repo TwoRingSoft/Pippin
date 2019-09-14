@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F79DF2044A8BA28BE2A27C4900EB5A08"
+               BlueprintIdentifier = "03EE997D23B9A01F958EE5228A57CB33"
+               BuildableName = "PippinTesting.framework"
                BlueprintName = "PippinTesting"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "PippinTesting.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,10 +34,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CD81F76EB03393904D699C12BF1BAA5"
+               BlueprintIdentifier = "9950D14EAB6C64F5212916C63C6E6FC7"
+               BuildableName = "PippinTesting-Unit-Tests.xctest"
                BlueprintName = "PippinTesting-Unit-Tests"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "PippinTesting-Unit-Tests.xctest">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

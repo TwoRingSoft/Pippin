@@ -1,6 +1,6 @@
 {
   "name": "Pippin",
-  "version": "13.0.0",
+  "version": "14.1.0",
   "summary": "A Swift framework to scaffold an app and make development and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -10,13 +10,13 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "Pippin-13.0.0"
+    "tag": "Pippin-14.1.0"
   },
   "platforms": {
     "ios": "9.0",
     "osx": "10.12"
   },
-  "swift_version": "4.2",
+  "swift_versions": "5.0",
   "default_subspecs": [
     "Core",
     "Extensions"
@@ -63,23 +63,10 @@
         {
           "name": "Tests",
           "test_type": "unit",
-          "source_files": "Tests/Pippin/Extensions/**/*.{h,m,swift}",
-          "dependencies": {
-            "Pippin/OperationTestHelpers": [
-
-            ]
-          }
+          "source_files": "Tests/Pippin/Extensions/**/*.{h,m,swift}"
         }
       ]
-    },
-    {
-      "name": "OperationTestHelpers",
-      "source_files": "Tests/Helpers/Operations/**/*.{swift}",
-      "dependencies": {
-        "Pippin/Extensions": [
-
-        ]
-      }
     }
-  ]
+  ],
+  "swift_version": "5.0"
 }

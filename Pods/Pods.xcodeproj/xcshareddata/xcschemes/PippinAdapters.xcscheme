@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DD7ACE1F8AD409D3CA2B853ACE641EDE"
+               BlueprintIdentifier = "2ABAF15A85FAB2CB795DF1D69CE7ADFC"
+               BuildableName = "PippinAdapters.framework"
                BlueprintName = "PippinAdapters"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "PippinAdapters.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

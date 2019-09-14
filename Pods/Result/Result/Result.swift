@@ -1,10 +1,35 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
+#if swift(>=4.2)
+#if compiler(>=5)
+
+// Use Swift.Result
+extension Result {
+	// ResultProtocol
+	public typealias Value = Success
+	public typealias Error = Failure
+}
+
+#else
+
 /// An enum representing either a failure with an explanatory error, or a success with a result value.
-public enum Result<Value, Error: Swift.Error>: ResultProtocol, CustomStringConvertible, CustomDebugStringConvertible {
+public enum Result<Value, Error: Swift.Error> {
 	case success(Value)
 	case failure(Error)
+}
 
+#endif
+#else
+
+/// An enum representing either a failure with an explanatory error, or a success with a result value.
+public enum Result<Value, Error: Swift.Error> {
+	case success(Value)
+	case failure(Error)
+}
+
+#endif
+
+extension Result {
 	/// The compatibility alias for the Swift 5's `Result` in the standard library.
 	///
 	/// See https://github.com/apple/swift-evolution/blob/master/proposals/0235-add-result.md
@@ -17,18 +42,10 @@ public enum Result<Value, Error: Swift.Error>: ResultProtocol, CustomStringConve
 	/// and https://forums.swift.org/t/accepted-with-modifications-se-0235-add-result-to-the-standard-library/18603
 	/// for the details.
 	public typealias Failure = Error
+}
 
+extension Result {
 	// MARK: Constructors
-
-	/// Constructs a success wrapping a `value`.
-	public init(value: Value) {
-		self = .success(value)
-	}
-
-	/// Constructs a failure wrapping an `error`.
-	public init(error: Error) {
-		self = .failure(error)
-	}
 
 	/// Constructs a result from an `Optional`, failing with `Error` if `nil`.
 	public init(_ value: Value?, failWith: @autoclosure () -> Error) {
@@ -124,25 +141,34 @@ public enum Result<Value, Error: Swift.Error>: ResultProtocol, CustomStringConve
 
 		return NSError(domain: errorDomain, code: 0, userInfo: userInfo)
 	}
+}
 
-
-	// MARK: CustomStringConvertible
-
+extension Result: CustomStringConvertible {
 	public var description: String {
 		switch self {
 		case let .success(value): return ".success(\(value))"
 		case let .failure(error): return ".failure(\(error))"
 		}
 	}
+}
 
-
-	// MARK: CustomDebugStringConvertible
-
+extension Result: CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return description
 	}
+}
 
-	// MARK: ResultProtocol
+extension Result: ResultProtocol {
+	/// Constructs a success wrapping a `value`.
+	public init(value: Value) {
+		self = .success(value)
+	}
+
+	/// Constructs a failure wrapping an `error`.
+	public init(error: Error) {
+		self = .failure(error)
+	}
+
 	public var result: Result<Value, Error> {
 		return self
 	}
@@ -163,6 +189,39 @@ extension Result where Result.Failure == AnyError {
 		}
 	}
 }
+
+// MARK: - Equatable
+
+#if swift(>=4.2)
+#if !compiler(>=5)
+	extension Result: Equatable where Result.Success: Equatable, Result.Failure: Equatable {}
+#endif
+#elseif swift(>=4.1)
+	extension Result: Equatable where Result.Success: Equatable, Result.Failure: Equatable {}
+#endif
+
+#if swift(>=4.2)
+	// Conformance to `Equatable` will be automatically synthesized.
+#else
+	extension Result where Result.Success: Equatable, Result.Failure: Equatable {
+		/// Returns `true` if `left` and `right` are both `Success`es and their values are equal, or if `left` and `right` are both `Failure`s and their errors are equal.
+		public static func ==(left: Result<Value, Error>, right: Result<Value, Error>) -> Bool {
+			if let left = left.value, let right = right.value {
+				return left == right
+			} else if let left = left.error, let right = right.error {
+				return left == right
+			}
+			return false
+		}
+	}
+
+	extension Result where Result.Success: Equatable, Result.Failure: Equatable {
+		/// Returns `true` if `left` and `right` represent different cases, or if they represent the same case but different values.
+		public static func !=(left: Result<Value, Error>, right: Result<Value, Error>) -> Bool {
+			return !(left == right)
+		}
+	}
+#endif
 
 // MARK: - Derive result from failable closure
 
