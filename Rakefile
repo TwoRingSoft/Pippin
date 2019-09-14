@@ -95,14 +95,17 @@ task :test do
   example_smoke_tests
 end
 
+desc 'Run unit tests against Pippin and PippinTesting.'
 task :unit_test do
     unit_tests
 end
 
-task :app_smoke_test do
-    app_smoke_test
+desc 'Smoke test installing and building each subspec in isolation against both ObjC- and Swift- based targets across all applicable SDK targets and OSes.'
+task :subspec_smoke_test do
+    subspec_smoke_test
 end
 
+desc 'Smoke test installing and building PippinTesting against unit and UI test targets.'
 task :test_smoke_test do
     test_smoke_test
 end
@@ -156,7 +159,7 @@ def test_smoke_test
   end
 end
 
-def app_smoke_test
+def subspec_smoke_test
   require 'fileutils'
   require 'open3'
   
