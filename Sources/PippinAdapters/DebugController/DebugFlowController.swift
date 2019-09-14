@@ -21,7 +21,6 @@ public protocol DebugFlowControllerDelegate {
     func debugFlowControllerWantsToDeleteModels(debugFlowController: Debugging)
 }
 
-@available(iOS 11.0, *)
 public class DebugFlowController: NSObject, Debugging {
 
     private weak var presentingVC: UIViewController!
@@ -54,7 +53,6 @@ public class DebugFlowController: NSObject, Debugging {
 
 }
 
-@available(iOS 11.0, *)
 extension DebugFlowController: DebugViewControllerDelegate {
     func debugViewControllerDisplayedMenu(debugViewController: DebugViewController) {
         debugWindow?.menuDisplayed = true
@@ -80,7 +78,6 @@ extension DebugFlowController: DebugViewControllerDelegate {
 }
 
 // MARK: Private
-@available(iOS 11.0, *)
 private extension DebugFlowController {
 
     func exportDatabase(databaseFileName: String) {

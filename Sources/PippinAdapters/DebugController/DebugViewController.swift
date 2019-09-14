@@ -10,7 +10,6 @@ import Anchorage
 import Pippin
 import UIKit
 
-@available(iOS 11.0, *)
 protocol DebugViewControllerDelegate {
     func debugViewControllerExported(debugViewController: DebugViewController)
     func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController)
@@ -20,7 +19,6 @@ protocol DebugViewControllerDelegate {
     func debugViewControllerWantsToDeleteModels(debugViewController: DebugViewController)
 }
 
-@available(iOS 11.0, *)
 public class DebugViewController: UIViewController {
 
     private var delegate: DebugViewControllerDelegate!
@@ -43,7 +41,6 @@ public class DebugViewController: UIViewController {
 
 }
 
-@available(iOS 11.0, *)
 @objc extension DebugViewController {
 
     func closePressed() {
@@ -67,7 +64,6 @@ public class DebugViewController: UIViewController {
 
 }
 
-@available(iOS 11.0, *)
 private extension DebugViewController {
 
     func setUpUI(buttonTintColor: UIColor, buttonStartLocation: CGPoint) {
@@ -130,7 +126,6 @@ private extension DebugViewController {
 
 }
 
-@available(iOS 11.0, *)
 extension DebugViewController: CoreDataControllerDebugging {
     public func coreDataControllerExported(coreDataController: CoreDataController) {
         delegate.debugViewControllerExported(debugViewController: self)
