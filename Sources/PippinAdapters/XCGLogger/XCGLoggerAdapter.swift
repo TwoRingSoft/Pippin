@@ -23,7 +23,7 @@ extension LogLevel {
         }
     }
 
-    init(xcgLevel: XCGLogger.Level) {
+    init?(xcgLevel: XCGLogger.Level) {
         switch xcgLevel {
         case .verbose: self = .verbose
         case .debug: self = .debug
@@ -32,6 +32,7 @@ extension LogLevel {
         case .error: self = .error
         case .severe: self = .error
         case .none: self = .info // default to info
+        case .notice, .alert, .emergency: return nil
         }
     }
 
