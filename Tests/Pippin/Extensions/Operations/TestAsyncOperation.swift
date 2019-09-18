@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Pippin
 
 /// A synchronous operation that simulates long running work by infinitely looping. Helps guarantee that it is executing without finishing too soon for in-flight cancellation tests.
 public class TestInfiniteSyncOperation: Operation {

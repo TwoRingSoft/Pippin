@@ -12,6 +12,7 @@
 @import Pippin;
 @import XCTest;
 #import "XCTestCase+OperationTestHelpers.h"
+#import "Pippin_Unit_Extensions_Tests-Swift.h"
 
 @interface SyncOperationTests : XCTestCase
 
