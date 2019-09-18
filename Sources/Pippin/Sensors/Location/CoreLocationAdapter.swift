@@ -9,6 +9,16 @@ import CoreLocation
 import Foundation
 import Result
 
+extension CLLocation: Location {
+    public var latitude: Double {
+        return self.coordinate.latitude
+    }
+
+    public var longitude: Double {
+        return self.coordinate.longitude
+    }
+}
+
 public class CoreLocationAdapter: NSObject, Locator {
     public var environment: Environment?
     private var authorizedLocationManager: CLLocationManager?
