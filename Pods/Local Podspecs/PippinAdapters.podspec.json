@@ -15,7 +15,7 @@
   "platforms": {
     "ios": "9.0"
   },
-  "swift_versions": "5.0",
+  "swift_versions": "5.1",
   "default_subspecs": [
     "PinpointKit",
     "COSTouchVisualizer",
@@ -54,7 +54,7 @@
       "source_files": "Sources/PippinAdapters/XCGLogger/**/*.{h,m,swift}",
       "dependencies": {
         "XCGLogger": [
-          "~> 6"
+          "~> 7"
         ],
         "Pippin": [
 
@@ -66,7 +66,7 @@
       "source_files": "Sources/PippinAdapters/SwiftMessages/**/*.{h,m,swift}",
       "dependencies": {
         "SwiftMessages": [
-          "~> 6"
+          "~> 7"
         ],
         "Pippin": [
 
@@ -103,5 +103,5 @@
       }
     }
   ],
-  "swift_version": "5.0"
+  "swift_version": "5.1"
 }

@@ -40,19 +40,19 @@ PODS:
     - Pippin (>= 13)
   - PippinAdapters/SwiftMessages (3.0.0):
     - Pippin
-    - SwiftMessages (~> 6)
+    - SwiftMessages (~> 7)
   - PippinAdapters/XCGLogger (3.0.0):
     - Pippin
-    - XCGLogger (~> 6)
+    - XCGLogger (~> 7)
   - PippinTesting (2.0.0)
   - PippinTesting/Tests (2.0.0)
   - Result (5.0.0)
-  - SwiftMessages (6.0.2):
-    - SwiftMessages/App (= 6.0.2)
-  - SwiftMessages/App (6.0.2)
-  - XCGLogger (6.1.0):
-    - XCGLogger/Core (= 6.1.0)
-  - XCGLogger/Core (6.1.0):
+  - SwiftMessages (7.0.0):
+    - SwiftMessages/App (= 7.0.0)
+  - SwiftMessages/App (7.0.0)
+  - XCGLogger (7.0.0):
+    - XCGLogger/Core (= 7.0.0)
+  - XCGLogger/Core (7.0.0):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
@@ -93,12 +93,12 @@ SPEC CHECKSUMS:
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: a79b78676a34f25f9ccc407312e3979f6baf0324
-  PippinAdapters: fca4b3e012086e09d264fdd0f9833518231bd9a2
-  PippinTesting: 36bf518b5b9d7bec332ef10ad3b692aedbf5c25b
+  Pippin: 5985bbe1bf97a15a7398edfa9176d738b56fb4cd
+  PippinAdapters: 0a5686e801bf9ffaccdd4225a667122c6c8e0e46
+  PippinTesting: 750aef9016722dd2cc0a74858addf8f95663ad60
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
-  SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
-  XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
+  SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
+  XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
 PODFILE CHECKSUM: 6e7fccd3c4cf9998c7c10bb5b6c897361f70542d
 
