@@ -112,6 +112,8 @@ extension AuthorizedCLLocationManager: CLLocationManagerDelegate {
         case .restricted:
             authorized = false
             break
+        @unknown default:
+            fatalError("New unexpected authorization status encountered: \(status)")
         }
 
         if authorized {

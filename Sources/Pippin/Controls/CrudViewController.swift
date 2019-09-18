@@ -300,6 +300,8 @@ public class CrudSearchContainer: UIView {}
             guard let indexPath = indexPath else { break }
             addUpdate(type: type, indexPath: indexPath)
             break
+        @unknown default:
+            fatalError("New unexpected NSFetchedResultsChangeType: \(type)")
         }
     }
 
@@ -328,6 +330,7 @@ public class CrudSearchContainer: UIView {}
                 case .update: tableView.reloadRows(at: indexPaths, with: .automatic); break
                 case .insert: tableView.insertRows(at: indexPaths, with: .automatic); break
                 case .move: fatalError("Moving currently not supported.")
+                @unknown default: fatalError("New unexpected NSFetchedResultsChangeType: \(updateType)")
                 }
             })
         }) { finished in

@@ -15,10 +15,11 @@ extension NSFetchedResultsChangeType: CustomStringConvertible {
      */
     public var description: String {
         switch self {
-            case .delete: return "delete"
-            case .insert: return "insert"
-            case .update: return "update"
-            case .move: return "move"
+        case .delete: return "delete"
+        case .insert: return "insert"
+        case .update: return "update"
+        case .move: return "move"
+        @unknown default: return "unknown"
         }
     }
 

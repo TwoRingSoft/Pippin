@@ -74,7 +74,8 @@ fileprivate extension AuthorizedAVCaptureDevice {
 
     class func currentlyAuthorized(forMediaType mediaType: MediaType) -> Bool {
         var authorized = false
-        switch(AVCaptureDevice.authorizationStatus(for: mediaType.stringConstant())) {
+        let status = AVCaptureDevice.authorizationStatus(for: mediaType.stringConstant())
+        switch status {
         case .authorized:
             authorized = true
             break
@@ -87,6 +88,8 @@ fileprivate extension AuthorizedAVCaptureDevice {
         case .restricted:
             authorized = false
             break
+        @unknown default:
+            fatalError("New unexpected authorization status encountered: \(status)")
         }
 
         return authorized

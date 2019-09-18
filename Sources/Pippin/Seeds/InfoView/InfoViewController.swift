@@ -293,6 +293,8 @@ extension InfoViewController: MFMailComposeViewControllerDelegate {
             environment.alerter?.showAlert(title: "Error", message: "Failed to send the message", type: .error, dismissal: .automatic, occlusion: .weak)
         case .sent:
             environment.alerter?.showAlert(title: "Sent", message: "Thank you for your feedback!", type: .error, dismissal: .automatic, occlusion: .weak)
+        @unknown default:
+            fatalError("New unexpected MFMailComposeResult: \(result)")
         }
         dismiss(animated: true)
     }
