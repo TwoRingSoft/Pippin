@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
+## [Pippin]
+
+### Added
+
+- Declare `Debuggable` conformance to `BugReporter`, `Logger` and `TouchVisualization` seeds.
+
+## [PippinAdapters]
+
+### Added
+
+- Implement `Debuggable` conformance to `PinpointKitAdapter`, `XCGLoggerAdapter` and `COSTouchVisualizerAdapter`, to add them to the debug console.
+
 ---
 
 ## [PippinAdapters 3.0.0] 2019-09-11

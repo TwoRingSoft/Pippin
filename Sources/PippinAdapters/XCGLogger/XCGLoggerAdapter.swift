@@ -165,3 +165,54 @@ private extension XCGLoggerAdapter {
     }
     
 }
+
+// MARK: Debuggable
+extension XCGLoggerAdapter: Debuggable {
+    public func debuggingControlPanel() -> UIView {
+        let titleLabel = UILabel.label(withText: "Logger:", font: environment!.fonts.title, textColor: .black)
+
+        func makeButton(title: String, action: Selector) -> UIButton {
+            let button = UIButton(type: .custom)
+            button.setTitle(title, for: .normal)
+            button.setTitleColor(.blue, for: .normal)
+            button.addTarget(self, action: action, for: .touchUpInside)
+            return button
+        }
+
+        let stack = UIStackView(arrangedSubviews: [
+            titleLabel,
+            makeButton(title: "Log Verbose", action: #selector(debugLogVerbose)),
+            makeButton(title: "Log Debug", action: #selector(debugLogDebug)),
+            makeButton(title: "Log Info", action: #selector(debugLogInfo)),
+            makeButton(title: "Log Warning", action: #selector(debugLogWarning)),
+            makeButton(title: "Log Error", action: #selector(debugLogError)),
+        ])
+        stack.axis = .vertical
+        stack.spacing = 20
+
+        return stack
+    }
+
+    @objc private func debugLogVerbose() {
+        logVerbose(message: "Debug Verbose level log message.")
+    }
+
+    @objc private func debugLogDebug() {
+        logDebug(message: "Debug Debug level log message.")
+    }
+
+    @objc private func debugLogInfo() {
+        logInfo(message: "Debug Info level log message.")
+    }
+
+    @objc private func debugLogWarning() {
+        logWarning(message: "Debug Warning level log message.")
+    }
+
+    @objc private func debugLogError() {
+        enum Error: Swift.Error {
+            case debugError
+        }
+        logError(message: "Debug Error level log message.", error: Error.debugError)
+    }
+}

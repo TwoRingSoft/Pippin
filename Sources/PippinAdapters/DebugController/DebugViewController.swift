@@ -93,6 +93,9 @@ private extension DebugViewController {
             environment.alerter?.debuggingControlPanel(),
             environment.crashReporter?.debuggingControlPanel(),
             environment.locator?.debuggingControlPanel(),
+            environment.logger?.debuggingControlPanel(),
+            environment.touchVisualizer?.debuggingControlPanel(),
+            environment.bugReporter?.debuggingControlPanel(),
             ]
         debuggingControls.forEach {
             if let view = $0 {

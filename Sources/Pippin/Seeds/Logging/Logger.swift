@@ -18,7 +18,7 @@ public enum LoggerError: Swift.Error {
 }
 
 /// `Logger` provides a common interface to logging mechanisms.
-public protocol Logger: EnvironmentallyConscious {
+public protocol Logger: EnvironmentallyConscious, Debuggable {
     /// The current log level the instance operates at.
     var logLevel: LogLevel { get set }
 

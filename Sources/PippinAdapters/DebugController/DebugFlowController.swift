@@ -62,7 +62,6 @@ extension DebugFlowController: DebugViewControllerDelegate {
         debugWindow?.menuDisplayed = false
     }
     
-
     func debugViewControllerExported(debugViewController: DebugViewController) {
         exportDatabase(databaseFileName: databaseFilename)
     }

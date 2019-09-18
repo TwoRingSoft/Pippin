@@ -9,7 +9,7 @@
 import UIKit
 
 /// `BugReporter` provides a common interface for working with a bug reporter object or SDK.
-public protocol BugReporter: EnvironmentallyConscious {
+public protocol BugReporter: EnvironmentallyConscious, Debuggable {
     /// Initialize with an array of email addresses to which the bug report should be sent.
     init(recipients: [String])
 

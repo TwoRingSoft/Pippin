@@ -11,7 +11,6 @@ import Pippin
 import UIKit
 
 public final class PinpointKitAdapter: NSObject, BugReporter {
-
     public var environment: Environment?
     private var recipients: [String]
     fileprivate var pinpointKit: PinpointKit?
@@ -56,7 +55,6 @@ public final class PinpointKitAdapter: NSObject, BugReporter {
             pinpointKit?.show(from: viewController)
         }
     }
-
 }
 
 extension PinpointKitAdapter: PinpointKitDelegate {
@@ -72,5 +70,27 @@ extension PinpointKitAdapter: PinpointKitDelegate {
         environment?.logger?.logError(message: String(format: "[%@] Failed to send bug report: %@", instanceType(self)), error: error)
         environment?.activityIndicator?.hide(completion: nil)
         environment?.alerter?.showAlert(title: "Error", message: "Failed to send bug report. Please check your device's email settings, or contact us directly to help solve the problem.", type: .error, dismissal: .interactive, occlusion: .strong)
+    }
+}
+
+// MARK: Debuggable
+extension PinpointKitAdapter: Debuggable {
+    public func debuggingControlPanel() -> UIView {
+        let titleLabel = UILabel.label(withText: "Bug Reporter:", font: environment!.fonts.title, textColor: .black)
+
+        let showButton = UIButton(type: .custom)
+        showButton.setTitle("Show", for: .normal)
+        showButton.addTarget(self, action: #selector(showReporter(sender:)), for: .touchUpInside)
+        showButton.setTitleColor(.black, for: .normal)
+
+        let stack = UIStackView(arrangedSubviews: [titleLabel, showButton])
+        stack.axis = .vertical
+        stack.spacing = 20
+
+        return stack
+    }
+
+    @objc private func showReporter(sender: UIButton) {
+        show(fromViewController: sender.window!.rootViewController!, screenshot: nil, metadata: nil)
     }
 }

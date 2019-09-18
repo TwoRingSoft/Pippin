@@ -13,6 +13,7 @@ import Pippin
 public class COSTouchVisualizerAdapter: NSObject {
     private let window: UIWindow
     public var environment: Environment?
+    private var active: Bool = true
     
     public init(rootViewController: UIViewController) {
         let touchWindow = COSTouchVisualizerWindow(frame: UIScreen.main.bounds)
@@ -36,10 +37,34 @@ extension COSTouchVisualizerAdapter: TouchVisualization {
 // MARK: COSTouchVisualizerWindowDelegate
 extension COSTouchVisualizerAdapter: COSTouchVisualizerWindowDelegate {
     public func touchVisualizerWindowShouldShowFingertip(_ window: COSTouchVisualizerWindow) -> Bool {
-        return true
+        return active
     }
     
     public func touchVisualizerWindowShouldAlwaysShowFingertip(_ window: COSTouchVisualizerWindow!) -> Bool {
-        return true
+        return active
+    }
+}
+
+// MARK: Debuggable
+extension COSTouchVisualizerAdapter: Debuggable {
+    public func debuggingControlPanel() -> UIView {
+        let titleLabel = UILabel.label(withText: "Touch Visualizer:", font: environment!.fonts.title, textColor: .black)
+
+        let label = UILabel.label(withText: "Toggle:")
+        let toggle = UISwitch(frame: .zero)
+        toggle.isOn = active
+        toggle.addTarget(self, action:#selector(toggle(sender:)), for: .valueChanged)
+        let controlStack = UIStackView(arrangedSubviews: [label, toggle])
+        controlStack.spacing = 20
+
+        let stack = UIStackView(arrangedSubviews: [titleLabel, controlStack])
+        stack.axis = .vertical
+        stack.spacing = 20
+
+        return stack
+    }
+
+    @objc private func toggle(sender: UISwitch) {
+        active = sender.isOn
     }
 }
