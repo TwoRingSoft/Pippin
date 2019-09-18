@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Declare `Debuggable` conformance to `BugReporter`, `Logger` and `TouchVisualization` seeds.
 
+### Fixed
+
+- `WindowLevel` now includes a level for `TouchVisualizer`.
+
 ## [PippinAdapters]
 
 ### Added

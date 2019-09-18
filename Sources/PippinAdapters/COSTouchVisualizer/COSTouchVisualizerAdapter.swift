@@ -30,6 +30,7 @@ public class COSTouchVisualizerAdapter: NSObject {
 // MARK: TouchVisualization
 extension COSTouchVisualizerAdapter: TouchVisualization {
     public func installViews() {
+        window.windowLevel = WindowLevel.touchVisualizer.windowLevel()
         window.makeKeyAndVisible()
     }
 }

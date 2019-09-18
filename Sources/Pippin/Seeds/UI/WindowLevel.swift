@@ -12,11 +12,12 @@ import Foundation
 public enum WindowLevel: CGFloat {
     static let `default` = UIWindow.Level.statusBar
 
-    case debugging = 1
-    case indicator = 2
-    case alerter = 3
+    case touchVisualizer = 1
+    case debugging = 2
+    case indicator = 3
+    case alerter = 4
     
     public func windowLevel() -> UIWindow.Level {
-        return WindowLevel.`default`
+        return UIWindow.Level(rawValue: rawValue)
     }
 }
