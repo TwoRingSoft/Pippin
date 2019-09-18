@@ -26,12 +26,12 @@ Pod::Spec.new do |s|
   end
   s.subspec 'XCGLogger' do |ss|
     ss.source_files = 'Sources/PippinAdapters/XCGLogger/**/*.{h,m,swift}'
-    ss.dependency 'XCGLogger', '~> 6'
+    ss.dependency 'XCGLogger', '~> 7'
     ss.dependency 'Pippin'
   end
   s.subspec 'SwiftMessages' do |ss|
     ss.source_files = 'Sources/PippinAdapters/SwiftMessages/**/*.{h,m,swift}'
-    ss.dependency 'SwiftMessages', '~> 6'
+    ss.dependency 'SwiftMessages', '~> 7'
     ss.dependency 'Pippin'
   end
   s.subspec 'JGProgressHUD' do |ss|
