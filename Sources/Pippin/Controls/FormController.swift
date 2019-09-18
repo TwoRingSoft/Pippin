@@ -129,7 +129,7 @@ public extension FormController {
             logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
             return
         }
-        guard let currentInputViewIndex = inputViews.index(of: currentInputView) else {
+        guard let currentInputViewIndex = inputViews.firstIndex(of: currentInputView) else {
             logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
             return
         }
@@ -151,7 +151,7 @@ public extension FormController {
             logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
             return
         }
-        guard let currentInputViewIndex = inputViews.index(of: currentInputView) else {
+        guard let currentInputViewIndex = inputViews.firstIndex(of: currentInputView) else {
             logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
             return
         }
@@ -173,13 +173,13 @@ private extension FormController {
 
     func accessoryViewForInputView(view: UIView) -> UIView {
         let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
-        if let idx = inputViews.index(of: view) {
+        if let idx = inputViews.firstIndex(of: view) {
             previousButton.isEnabled = idx > 0
         } else {
             previousButton.isEnabled = false
         }
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextInputView))
-        if let idx = inputViews.index(of: view) {
+        if let idx = inputViews.firstIndex(of: view) {
             nextButton.isEnabled = idx < inputViews.count - 1
         } else {
             nextButton.isEnabled = false
@@ -367,7 +367,7 @@ private extension FormController {
                 oldTextFieldDelegates[textField] = textField.delegate
                 textField.delegate = self
                 textField.inputAccessoryView = accessoryViewForInputView(view: textField)
-                if inputViews.index(of: textField)! < inputViews.count - 1 {
+                if inputViews.firstIndex(of: textField)! < inputViews.count - 1 {
                     textField.returnKeyType = .next
                 } else {
                     textField.returnKeyType = .done
@@ -466,7 +466,7 @@ extension FormController: UITextFieldDelegate {
     }
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let idx = inputViews.index(of: textField)!
+        let idx = inputViews.firstIndex(of: textField)!
         if idx == inputViews.count - 1 {
             resignResponders()
         } else {
