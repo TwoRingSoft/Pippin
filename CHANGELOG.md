@@ -8,12 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Pippin]
 
+### Changed
+
+- Removed iOS 11 minimum requirement for `DebugController`.
+
 ### Added
 
 - Declare `Debuggable` conformance to `BugReporter`, `Logger` and `TouchVisualization` seeds.
+- Extension to construct a `CGRect` centered on a `CGPoint` with a given `CGSize`.
 
 ### Fixed
 
+- Swift 5 support.
 - `WindowLevel` now includes a level for `TouchVisualizer`.
 
 ## [PippinAdapters]
@@ -21,6 +27,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
 - Implement `Debuggable` conformance to `PinpointKitAdapter`, `XCGLoggerAdapter` and `COSTouchVisualizerAdapter`, to add them to the debug console.
+
+### Fixed
+
+- Swift 5 support.
 
 ---
 
