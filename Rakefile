@@ -90,7 +90,7 @@ end
 desc 'Run Pippin unit and smoke tests.'
 task :test do
   unit_tests
-  app_smoke_test
+  subspec_smoke_test
   test_smoke_test
   example_smoke_tests
 end
@@ -132,7 +132,7 @@ end
 def unit_tests
   require 'open3'
   ['12.4'].each do |ios_version|
-    ['Pippin-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
+    ['Pippin-Unit-Extensions-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
       build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=#{ios_version}\' test"
       tee_pipe = "tee #{scheme}_ios_#{ios_version}.log"
