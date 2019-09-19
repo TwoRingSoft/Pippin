@@ -46,6 +46,7 @@ end
 
 desc 'Perform prerelease tests and checks to do to make sure release happens correctly.'
 task :prerelease,[:podspec] do |r, args|
+  require 'open3'
   podspec = args[:podspec]
   version_file = "#{podspec}.podspec"
   current_version = `vrsn --read --file #{version_file}`.strip
@@ -60,11 +61,12 @@ task :prerelease,[:podspec] do |r, args|
   sh "git tag #{release_candidate_tag}"
   sh 'git push --tags'
   puts "About to lint the podspec. This takes a while... (it is now #{Time.now})"
-  sh "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings"
+  stdout, stderr, status = Open3.capture3 "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings"
   sh 'git checkout master'
   sh "git branch -D #{branch}"
-  sh "git tag --delete #{release_candidate_tag}"
-  sh "git push --delete origin #{release_candidate_tag}"
+  if status != 0 then
+    fail "Podspec failed validation"
+  end
 end
 
 desc 'Create git tags and push them to remote, push podspec to CocoaPods.'
