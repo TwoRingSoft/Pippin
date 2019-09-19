@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
-## [Pippin]
+---
+
+## [Pippin 15.0.0] 2019-09-18
 
 ### Changed
 
@@ -23,7 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Swift 5.1 support.
 - `WindowLevel` now includes a level for `TouchVisualizer`.
 
-## [PippinAdapters]
+## [PippinAdapters 3.1.0] 2019-09-18
 
 ### Added
 
@@ -33,13 +35,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Swift 5.1 support.
 
-## [PippinTesting]
+## [PippinTesting 2.0.1] 2019-09-18
 
 ### Fixed
 
 - Swift 5.1 support.
-
----
 
 ## [PippinAdapters 3.0.0] 2019-09-11
 
