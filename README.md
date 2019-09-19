@@ -5,7 +5,7 @@
 ![platforms](https://img.shields.io/badge/platforms-iOS-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 
-Pippin is a collection of utilities to scaffold iOS app infrastructure and extend Cocoa/UIKit/XCTest APIs in Swift. It uses [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) patterns to decouple your application code from its dependencies, whether they are the Cocoa frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable codebase and less noisy revision history.
+Pippin is a collection of utilities to scaffold iOS app infrastructure and extend Foundation, Cocoa and XCTest APIs in Swift. It uses [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) patterns to decouple your application code from its dependencies, whether they are Apple frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable app codebase and less noisy revision history.
 
 ## Try it out
 
@@ -41,18 +41,19 @@ The `Pippin/Core` subspec is split into some subcomponents:
 
 #### Seeds
 
-Seeds are the basic building blocks of Pippin. They are the Swift definitions you use in your code, that should persist in their same form across compatible versions of Pippin, regardless of changes in adapter dependencies targeting Cocoa or third-party frameworks, or Pippin implementations. **This is the main goal of Pippin:** to avoid source changes in applications that consume those dependencies, regardless of how their APIs change.
+Seeds are the basic building blocks of Pippin: stable APIs that sit between app business logic and dependencies on Cocoa, third-party frameworks or Pippin implementations.
 
 Pippin delivers seeds as [data structures](#data-structures) and [protocols](#protocols).
 
 ##### Data Structures
 
-`Environment` contains a property for each protocol type. Each Core protocol conforms to the `EnvironmentallyConscious` protocol, providing an optional back reference to the `Environment` instance referencing the protocol conforming instance. This allows components to use other components, e.g. all components may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the datamodel conforming instance to send the database with the bug report (along with logs, obvi).
+`Environment` contains a property for Seed protocols, sensors etc.
 
 ##### Protocols
 
 Pippin is designed to immediately abstract and handle some major aspects of an app: 
 
+- Data model stack
 - Crash Reporting
 - Bug reporting via in-app ui
 - Logging
@@ -69,7 +70,7 @@ There are a few protocols defining cross cutting concerns across components, lik
 
 - Themeable: provide access to `UIAppearanceProxy` based theming of UI elements
 - Debuggable: deliver UI controls to exercise and manipulate UI components, for use by developers and testers
-- EnvironmentallyConscious: provide a back reference to the `Environment` to use other PIppin components, e.g. the `CrashReporter` and `Logger` working together
+- EnvironmentallyConscious: provides an optional reference back to the `Environment` instance holding a reference to a given seed instance, allowing components to use other components: everything may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the data model to export the database with the bug report
 
 #### Sensors
 
@@ -85,12 +86,11 @@ Provides a UI flow to acquire an object that is gated by user interaction to all
 #### Controls
 
 - CrudViewController: table view with search controls wrapped around an FRC
-- InfoViewController: app name and version info, links to two ring properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
+- InfoViewController: app name and version info, links to Two Ring Software properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
 - FormController: manage traversal and keyboard avoidance for a collection of inputs
 
 #### Things to add:
 
-- Data model
 - Settings bundles
 - Analytics
 - Push notifications
