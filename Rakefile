@@ -65,7 +65,7 @@ task :prerelease,[:podspec] do |r, args|
   sh 'git checkout master'
   sh "git branch -D #{branch}"
   if status != 0 then
-    fail "Podspec failed validation"
+    fail "Podspec failed validation:\nstdout: #{stdout}\nstderr: #{stderr}"
   end
 end
 
