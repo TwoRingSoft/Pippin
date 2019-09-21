@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering helper functions to work with XCTest and XCUIApplication API in service of concise, readable and robust test code.
                    DESC
-  s.homepage     = 'http://github.com/tworingsoft/Pippin'
+  s.homepage     = 'https://github.com/tworingsoft/Pippin'
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }

@@ -7,7 +7,7 @@
 //
 
 /**
- See http://en.wikipedia.org/wiki/Three-valued_logic for an introduction to three valued logic. The truth table for the implemented logic functions follows:
+ See https://en.wikipedia.org/wiki/Three-valued_logic for an introduction to three valued logic. The truth table for the implemented logic functions follows:
 ```
                                    Kleene  Łukasiewicz
  | p q | ¬p | ¬q | p ∧ q | p v q | p → q | p → q |

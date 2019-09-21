@@ -20,7 +20,7 @@ enum SocialIcon: String {
     
     func url() -> String {
         switch self {
-        case .twoRing: return "http://tworingsoft.com"
+        case .twoRing: return "https://tworingsoft.com"
         case .twitter: return "https://twitter.com/tworingsoft"
         case .facebook: return "https://www.facebook.com/tworingsoft"
         case .linkedin: return "https://www.linkedin.com/company/11026810"

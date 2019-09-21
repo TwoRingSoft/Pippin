@@ -10,7 +10,7 @@ import Anchorage
 import MessageUI
 import UIKit
 
-private let twoRingURL = "http://tworingsoft.com"
+private let twoRingURL = "https://tworingsoft.com"
 
 @objc public protocol InfoViewControllerDelegate {
     @objc optional func inAppPurchasesTapped(inInfoViewController infoViewController: InfoViewController)
