@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - Guard usage of debug APIs within `#if DEBUG` conditional compilation directives.
+- Function on `Environment` that hooks up all `EnvironmentallyConscious.environment` properties on its seed/sensor/etc property instances.
 
 ## [PippinDebugging]
 
@@ -23,6 +24,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - Split out debug subspec into its own podspec, `PippinDebugging`.
+
+### Added
+
+ - Convenience function to set up a default `Environment` instance using the default subspec adapters.
 
 ---
 

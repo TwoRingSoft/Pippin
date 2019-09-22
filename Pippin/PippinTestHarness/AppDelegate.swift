@@ -18,39 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     lazy var environment: Environment = {
-        let environment = Environment()
+        let environment = Environment.default(
+            bugReportRecipients: ["andrew@tworingsoft.com"],
+            touchVizRootVC: ViewController(nibName: nil, bundle: nil)
+        )
+
         environment.crashReporter = CrashlyticsAdapter(debug: true)
-        environment.crashReporter?.environment = environment
-
-        environment.logger = XCGLoggerAdapter(name: "PippinTestHarnessLogger", logLevel: .debug)
-        environment.logger?.environment = environment
-
-        environment.activityIndicator = JGProgressHUDAdapter()
-        environment.activityIndicator?.environment = environment
+        environment.locator = CoreLocationAdapter(locatorDelegate: self)
 
         #if DEBUG
         environment.debugging = DebugFlowController(databaseFileName: "PippinTestHarnessDatabase", delegate: self)
-        environment.debugging?.environment = environment
         #endif
 
-        environment.touchVisualizer = COSTouchVisualizerAdapter(rootViewController: ViewController(nibName: nil, bundle: nil))
-        environment.touchVisualizer?.environment = environment
+        environment.connectEnvironment()
 
-        environment.bugReporter = PinpointKitAdapter(recipients: ["andrew@tworingsoft.com"])
-        environment.bugReporter?.environment = environment
-
-        environment.alerter = SwiftMessagesAdapter()
-        environment.alerter?.environment = environment
-
-        AuthorizedCLLocationManager.authorizedLocationManager(scope: .whenInUse, completion: { (result) in
-            switch result {
-            case .success(let locationManager):
-                environment.locator = CoreLocationAdapter(authorizedLocationManager: locationManager, locatorDelegate: self)
-                environment.locator?.environment = environment
-            case .failure(let error):
-                fatalError("failed to authorize location manager: \(error)")
-            }
-        })
         return environment
     }()
 

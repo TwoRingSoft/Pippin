@@ -103,23 +103,43 @@ public class Environment: NSObject {
     
     /// Check a few standard override locations for the logging level to use with a new `Logger`.
     ///
-    /// - Returns: A `LogLevel` found in an override, or `nil` if no override was set.
-    public func logLevel() -> LogLevel? {
+    /// - Returns: A `LogLevel` found in an override, or `debug` for debugging builds or `info` for non-debug builds..
+    public func logLevel() -> LogLevel {
         // log verbosely for ui tests
         if ProcessInfo.launchedWith(launchArgument: LaunchArgument.uiTest) {
             return .verbose
         }
-        
+
         // see if we have an xcode scheme launch argument
         if let launchArgumentValue = EnvironmentVariable.logLevel.value(), let logLevel = LogLevel(launchArgumentValue), logLevel != LogLevel.unknown {
             return logLevel
         }
-        
+
         // see if we have a user default saved
         if let defaultsLevel = defaults.logLevel, defaultsLevel != LogLevel.unknown {
             return defaultsLevel
         }
-        
-        return nil
+
+        #if DEBUG
+        return .debug
+        #else
+        return .info
+        #endif
+    }
+
+    /// Goes through each property that conforms to `EnvironmentallyConscious` and assigns the back reference to the `Environment` to which it belongs.
+    public func connectEnvironment() {
+        logger?.environment = self
+        alerter?.environment = self
+        coreDataController?.environment = self
+        crashReporter?.environment = self
+        activityIndicator?.environment = self
+        bugReporter?.environment = self
+        inAppPurchaseVendor?.environment = self
+        locator?.environment = self
+        #if DEBUG
+        debugging?.environment = self
+        #endif
+        touchVisualizer?.environment = self
     }
 }
