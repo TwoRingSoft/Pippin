@@ -12,10 +12,6 @@ public protocol EnvironmentallyConscious {
     var environment: Environment? { get set }
 }
 
-public protocol EnvironmentTypes {
-    associatedtype DefaultsKey
-}
-
 public extension Environment {
     /// Errors that may be used by apps to describe adverse situations related to the environment.
     enum Error: Swift.Error, NSErrorConvertible {
