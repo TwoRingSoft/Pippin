@@ -55,6 +55,9 @@ import Foundation
         }
     }
 
+    public func activated() -> Bool {
+        return ProcessInfo.launchedWith(launchArgument: String(describing: self))
+    }
 }
 
 extension LaunchArgument: CustomStringConvertible {

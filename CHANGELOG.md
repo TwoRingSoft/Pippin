@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Guard usage of debug APIs within `#if DEBUG` conditional compilation directives.
 - Function on `Environment` that hooks up all `EnvironmentallyConscious.environment` properties on its seed/sensor/etc property instances.
 
+### Added
+
+- Function on `LaunchArgument` to query whether a calling case was supplied in a launch.
+
 ## [PippinDebugging]
 
 ### Added
