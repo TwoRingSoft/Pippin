@@ -1,0 +1,22 @@
+# PippinAdapters
+
+[![Cocoapod](http://img.shields.io/cocoapods/v/PippinAdapters.svg?style=flat)](http://cocoapods.org/pods/PippinAdapters)
+
+These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an adapter implementation to that dependency. Each adapter has a separate CocoaPods subspec. The following adapters for third-party frameworks are currently available:
+
+- `Alerter`: [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages)
+- `BugReporter`: [PinpointKit](https://github.com/Lickability/PinpointKit)
+- `Logger`: [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
+- `ActivityIndicator`: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
+- `TouchVisualization`: [COSTouchVisualizer](https://github.com/conopsys/COSTouchVisualizer)
+- `CrashReporter`: \*[Crashlytics](https://fabric.io)
+
+The following hand rolled adapters are available:
+
+- `Locator`: `CoreLocationAdapter` (and `CoreLocationSimulator`–wip)
+- `Defaults` and `DefaultsKey`: `DefaultDefaults` and `DefaultDefaultsKey` (say _that_ fast five times)
+- `Fonts`: `DefaultFonts` 
+
+> TODO: these are still located in `Pippin`, and need to be extracted into `PippinAdapters`.
+
+> \*Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.

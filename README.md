@@ -1,134 +1,56 @@
 # Pippin
 
-[![Build Status](https://travis-ci.org/TwoRingSoft/Pippin.svg?branch=master)](https://travis-ci.org/TwoRingSoft/Pippin)
-![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Swift 5.1](https://img.shields.io/badge/Swift-5.1-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS-lightgrey.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 
-Pippin is a collection of utilities to scaffold iOS app infrastructure and extend Foundation, Cocoa and XCTest APIs in Swift. It uses [Facade](https://en.wikipedia.org/wiki/Facade_pattern) and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) patterns to decouple your application code from its dependencies, whether they are Apple frameworks, third-party libraries or hand-rolled modules. This keeps your app code from changing when your dependencies change, leaving you with a more stable app codebase and less noisy revision history.
+`Pippin` is a collection of tools to scaffold iOS app infrastructure and assist in development tasks like writing code, testing and debugging.
 
-## Try it out
+Getting started with a default setup is as easy as declaring a Podfile dependency:
 
-There are some unit tests under `Tests/` which can be run from `Pippin.xcworkspace`, and demo apps under `Examples/` which can be run from a local checkout or using `pod try https://github.com/tworingsoft/pippin`.
+```ruby
+pod 'PippinAdapters'
+```
 
-## Organization
+and, at some point during your app launch sequence:
 
-Pippin is split into three top-level CocoaPod specs:
+```swift
+let environment = Environment.default(
+    bugReportRecipients: ["andrew@tworingsoft.com"],
+    touchVizRootVC: UIViewController(nibName: nil, bundle: nil) // optional
+)
 
-- [`Pippin`](#pippin-1) is split into two top-level components: the `Core` and `Extensions` subspecs.
-- [`PippinAdapters`](#pippinadapters) provides pluggable interfaces between Pippin protocols and 3rd party dependencies, or home-rolled implementations. 
-- [`PippinTesting`](#pippintesting) delivers tools to work with XCTest.
+// Crashlytics is a special situation
+environment.crashReporter = CrashlyticsAdapter(debug: true)
 
-> **Bitcode:** `PippinTesting` has bitcode disabled (for compatibility with XCTest, which does not support it); `Pippin` and `PippinTesting` have bitcode enabled by default. 
+// other optional peripherals
+environment.locator = CoreLocationAdapter(locatorDelegate: self)
 
-## <a name="PippinCore">Pippin</a>
+environment.connectEnvironment()
+```
 
-[![Cocoapod](http://img.shields.io/cocoapods/v/Pippin.svg?style=flat)](http://cocoapods.org/pods/Pippin)
+You've just gotten the following, with minimal boilerplate: 
 
-The main `Pippin` CocoaPod has two subspecs:
+- logging
+- crash reporting
+- bug reporting
+- progress indicators
+- alert dialogs
+- fonts
+- app and launch information
+- data model
+- touch visualization
+- launch arguments and environment variables
+- an authorized `CLLocationManager` (an authorized `AVCaptureDevice` may be obtained similarly)
 
-- [`Core`](#core)
-- [`Extensions`](#Extensions)
+## Podspecs
 
-### Core
+There are four podspecs to deliver these tools, see each's README for more information:
 
-The `Pippin/Core` subspec is split into some subcomponents:
-
-- [Seeds](#seeds)
-- [Sensors](#sensors)
-- [CanIHaz](#canihaz)
-- [Controls](#controls)
-
-#### Seeds
-
-Seeds are the basic building blocks of Pippin: stable APIs that sit between app business logic and dependencies on Cocoa, third-party frameworks or Pippin implementations.
-
-Pippin delivers seeds as [data structures](#data-structures) and [protocols](#protocols).
-
-##### Data Structures
-
-`Environment` contains a property for Seed protocols, sensors etc.
-
-##### Protocols
-
-Pippin is designed to immediately abstract and handle some major aspects of an app: 
-
-- Data model stack
-- Crash Reporting
-- Bug reporting via in-app ui
-- Logging
-- Debugging via in-app debug/test/qa utilities
-- Alerting via popups displayed to users
-- In app purchases and licensing
-- Appearance: look and feel, style, theming, fonts, layout
-- Activity indicators for long-running activities and progress
-- Defaults: user configurable settings and storage
-
-###### Aspects
-
-There are a few protocols defining cross cutting concerns across components, like theming and debugging of components that deliver UI.
-
-- Themeable: provide access to `UIAppearanceProxy` based theming of UI elements
-- Debuggable: deliver UI controls to exercise and manipulate UI components, for use by developers and testers
-- EnvironmentallyConscious: provides an optional reference back to the `Environment` instance holding a reference to a given seed instance, allowing components to use other components: everything may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the data model to export the database with the bug report
-
-#### Sensors
-
-- Locator: location/gps
-
-#### CanIHaz
-
-Provides a UI flow to acquire an object that is gated by user interaction to allow access to a hardware device component. Each component type has its own subspec so you can take just what you need. So far there are stock flows for the following: 
-
-- Location: AuthorizedCLLocationManager
-- Camera: AuthorizedAVCaptureDevice
-
-#### Controls
-
-- CrudViewController: table view with search controls wrapped around an FRC
-- InfoViewController: app name and version info, links to Two Ring Software properties (need to parameterize), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
-- FormController: manage traversal and keyboard avoidance for a collection of inputs
-
-#### Things to add:
-
-- Settings bundles
-- Analytics
-- Push notifications
-- State restoration
-- App walkthrough
-
-### Extensions
-
-These are currently split into extensions on Foundation, UIKit and Webkit.
-
-## PippinAdapters
-
-[![Cocoapod](http://img.shields.io/cocoapods/v/PippinAdapters.svg?style=flat)](http://cocoapods.org/pods/PippinAdapters)
-
-These may have concrete objects implementing the functionality directly, or if there is already a great 3rd party doing the job well, provide an adapter implementation to that dependency. Each adapter has a separate CocoaPods subspec. The following adapters for third-party frameworks are currently available:
-
-- Alerter: [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages)
-- BugReporter: [PinpointKit](https://github.com/Lickability/PinpointKit)
-- Logger: [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
-- ActivityIndicator: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
-- TouchVisualization: [COSTouchVisualizer](https://github.com/conopsys/COSTouchVisualizer)
-- CrashReporter: *[Crashlytics](https://fabric.io)
-
-The following hand rolled adapters are available:
-
-- Debugging: DebugViewController, and dependencies on 3rd party in app debugging tools: [FLEX](https://github.com/Flipboard/FLEX)
-- CoreDataController (wip extracting Model protocol)
-- Locator: CoreLocationAdapter (and CoreLocationSimulator–wip)
-- Defaults and DefaultsKey: DefaultDefaults and DefaultDefaultsKey (say _that_ fast five times)
-- Fonts: DefaultFonts 
-
-> *Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.
-
-## PippinTesting
-
-[![Cocoapod](http://img.shields.io/cocoapods/v/PippinTesting.svg?style=flat)](http://cocoapods.org/pods/PippinTesting)
-
-A collection of extensions to simplify some tasks for testing and to make test code more readable.
+- [Pippin](Sources/Pippin)
+- [PippinAdapters](Sources/PippinAdapters)
+- [PippinDebugging](Sources/PippinDebugging)
+- [PippinTesting](Sources/PippinTesting)
 
 # Contribute
 
@@ -138,7 +60,7 @@ Issues and pull requests are welcome!
 
 `rake test`
 
-Files under Pippin/Tests/ are declared in Pippin's `test_spec`, and likewise for PippinTesting. These are brought into the Pippin Xcode project to run as unit tests using the Podfile's `testspecs` declaration.
+Files under Tests/ are declared in `Pippin`'s `test_spec`, and likewise for `PippinTesting`. These are brought into the root xcworkspace to run as unit tests using the Podfile's `testspecs` declaration.
 
 Also runs an integration smoke test, which generates an Xcode project for each spec and subspec, in each of Swift and Objective-C, to try building after `pod install`. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
 
