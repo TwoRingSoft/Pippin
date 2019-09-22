@@ -11,7 +11,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Debug related sources from `PippinAdapters`.
 
-## [PippinAdapters]
+---
+
+## [PippinAdapters 4.0.0] 2019-09-21
 
 ### Changed
 
@@ -20,8 +22,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
  - Convenience function to set up a default `Environment` instance using the default subspec adapters.
-
----
 
 ## [Pippin 16.0.0] 2019-09-21
 
