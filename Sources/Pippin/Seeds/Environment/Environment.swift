@@ -58,7 +58,9 @@ public class Environment: NSObject {
     public var locator: Locator?
     
     // MARK: testing/development utilities
+    #if DEBUG
     public var debugging: Debugging?
+    #endif
     public var touchVisualizer: TouchVisualization?
     
     // MARK: look/feel

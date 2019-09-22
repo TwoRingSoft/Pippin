@@ -14,7 +14,7 @@ public enum DebugFlowError: Error {
     case noAppsToImportDatabase
 }
 
-public protocol DebugFlowControllerDelegate {
+public protocol DebugFlowControllerDelegate: class {
     func exportedDatabaseData() -> Data?
     func failedToExportDatabase(error: DebugFlowError)
     func debugFlowControllerWantsToGenerateTestModels(debugFlowController: Debugging)
@@ -34,8 +34,7 @@ public class DebugFlowController: NSObject, Debugging {
 
     var documentInteractionController: UIDocumentInteractionController!
 
-    public init(databaseFileName: String, delegate: DebugFlowControllerDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor = .black, buttonStartLocation: CGPoint = .zero) {
-        self.environment = environment
+    public init(databaseFileName: String, delegate: DebugFlowControllerDelegate, assetBundle: Bundle? = nil, buttonTintColor: UIColor = .black, buttonStartLocation: CGPoint = .zero) {
         self.delegate = delegate
         self.databaseFilename = databaseFileName
         self.assetBundle = assetBundle

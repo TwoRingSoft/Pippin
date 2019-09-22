@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 # [Unreleased]
 
+## [Pippin]
+
+### Changed
+
+- Guard usage of debug APIs within `#if DEBUG` conditional compilation directives.
+
+## [PippinDebugging]
+
+### Added
+
+- Debug related sources from `PippinAdapters`.
+
+## [PippinAdapters]
+
+### Changed
+
+- Split out debug subspec into its own podspec, `PippinDebugging`.
+
 ---
 
 ## [Pippin 15.0.0] 2019-09-18

@@ -43,9 +43,4 @@ Pod::Spec.new do |s|
     ss.source_files = 'Sources/PippinAdapters/DebugController/**/*.{h,m,swift}'
     ss.dependency 'Pippin', '>= 13'
   end
-
-  # other subspecs
-  s.subspec 'DebugTools' do |ss|
-    ss.dependency 'FLEX', '~> 2'
-  end
 end

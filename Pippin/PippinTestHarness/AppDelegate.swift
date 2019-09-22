@@ -8,6 +8,9 @@
 
 import Pippin
 import PippinAdapters
+#if DEBUG
+import PippinDebugging
+#endif
 import UIKit
 
 @UIApplicationMain
@@ -25,8 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         environment.activityIndicator = JGProgressHUDAdapter()
         environment.activityIndicator?.environment = environment
 
-        environment.debugging = DebugFlowController(databaseFileName: "PippinTestHarnessDatabase", delegate: self, environment: environment )
+        #if DEBUG
+        environment.debugging = DebugFlowController(databaseFileName: "PippinTestHarnessDatabase", delegate: self)
         environment.debugging?.environment = environment
+        #endif
 
         environment.touchVisualizer = COSTouchVisualizerAdapter(rootViewController: ViewController(nibName: nil, bundle: nil))
         environment.touchVisualizer?.environment = environment
@@ -50,12 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        #if DEBUG
         environment.debugging?.installViews()
+        #endif
         environment.touchVisualizer?.installViews()
         return true
     }
 }
 
+#if DEBUG
 extension AppDelegate: DebugFlowControllerDelegate {
     func exportedDatabaseData() -> Data? {
         environment.alerter?.showAlert(title: "Exporting database", message: "This is where your app would export its database to transport to other instances of itself, liek on another test device.", type: .info, dismissal: .interactive, occlusion: .weak)
@@ -74,6 +82,7 @@ extension AppDelegate: DebugFlowControllerDelegate {
         environment.alerter?.showAlert(title: "Deleting models", message: "This is where your app would delete its model entities.", type: .info, dismissal: .interactive, occlusion: .strong)
     }
 }
+#endif
 
 extension AppDelegate: LocatorDelegate {
     func locator(locator: Locator, updatedToLocation location: Location) {
