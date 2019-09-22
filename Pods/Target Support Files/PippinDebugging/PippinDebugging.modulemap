@@ -1,0 +1,6 @@
+framework module PippinDebugging {
+  umbrella header "PippinDebugging-umbrella.h"
+
+  export *
+  module * { export * }
+}

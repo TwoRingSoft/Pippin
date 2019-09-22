@@ -43,6 +43,10 @@
       assignedFileDataType = "public.ruby-script">
    </FileRef>
    <FileRef
+      location = "group:PippinDebugging.podspec"
+      assignedFileDataType = "public.ruby-script">
+   </FileRef>
+   <FileRef
       location = "group:Rakefile"
       assignedFileDataType = "public.ruby-script">
    </FileRef>
@@ -62,6 +66,6 @@
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FolderRef
-      location = "group:.bundle">
+      location = "location">
    </FolderRef>
 </Workspace>

@@ -1,16 +1,16 @@
 {
   "name": "Pippin",
-  "version": "14.1.0",
+  "version": "15.0.0",
   "summary": "A Swift framework to scaffold an app and make development and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.",
-  "homepage": "http://github.com/tworingsoft/Pippin",
+  "homepage": "https://github.com/tworingsoft/Pippin",
   "license": "MIT",
   "authors": {
     "Andrew McKnight": "andrew@tworingsoft.com"
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "Pippin-14.1.0"
+    "tag": "Pippin-15.0.0"
   },
   "platforms": {
     "ios": "9.0",

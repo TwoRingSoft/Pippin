@@ -4,6 +4,7 @@ PODS:
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
+  - FLEX (2.4.0)
   - JGProgressHUD (2.0.4)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
@@ -11,45 +12,48 @@ PODS:
   - PinpointKit (1.3.0):
     - PinpointKit/Core (= 1.3.0)
   - PinpointKit/Core (1.3.0)
-  - Pippin (14.1.0):
-    - Pippin/Core (= 14.1.0)
-    - Pippin/Extensions (= 14.1.0)
-  - Pippin/Core (14.1.0):
+  - Pippin (15.0.0):
+    - Pippin/Core (= 15.0.0)
+    - Pippin/Extensions (= 15.0.0)
+  - Pippin/Core (15.0.0):
     - Anchorage (~> 4)
     - Pippin/Extensions
     - Result
-  - Pippin/Extensions (14.1.0)
-  - Pippin/Extensions/Tests (14.1.0)
-  - PippinAdapters (3.0.0):
-    - PippinAdapters/COSTouchVisualizer (= 3.0.0)
-    - PippinAdapters/DebugController (= 3.0.0)
-    - PippinAdapters/JGProgressHUD (= 3.0.0)
-    - PippinAdapters/PinpointKit (= 3.0.0)
-    - PippinAdapters/SwiftMessages (= 3.0.0)
-    - PippinAdapters/XCGLogger (= 3.0.0)
-  - PippinAdapters/COSTouchVisualizer (3.0.0):
+  - Pippin/Extensions (15.0.0)
+  - Pippin/Extensions/Tests (15.0.0)
+  - PippinAdapters (3.1.0):
+    - PippinAdapters/COSTouchVisualizer (= 3.1.0)
+    - PippinAdapters/DebugController (= 3.1.0)
+    - PippinAdapters/JGProgressHUD (= 3.1.0)
+    - PippinAdapters/PinpointKit (= 3.1.0)
+    - PippinAdapters/SwiftMessages (= 3.1.0)
+    - PippinAdapters/XCGLogger (= 3.1.0)
+  - PippinAdapters/COSTouchVisualizer (3.1.0):
     - COSTouchVisualizer (~> 1)
     - Pippin
-  - PippinAdapters/DebugController (3.0.0):
+  - PippinAdapters/DebugController (3.1.0):
     - Pippin (>= 13)
-  - PippinAdapters/JGProgressHUD (3.0.0):
+  - PippinAdapters/JGProgressHUD (3.1.0):
     - JGProgressHUD
     - Pippin
-  - PippinAdapters/PinpointKit (3.0.0):
+  - PippinAdapters/PinpointKit (3.1.0):
     - PinpointKit (~> 1)
     - Pippin (>= 13)
-  - PippinAdapters/SwiftMessages (3.0.0):
+  - PippinAdapters/SwiftMessages (3.1.0):
     - Pippin
     - SwiftMessages (~> 7)
-  - PippinAdapters/XCGLogger (3.0.0):
+  - PippinAdapters/XCGLogger (3.1.0):
     - Pippin
     - XCGLogger (~> 7)
-  - PippinTesting (2.0.0)
-  - PippinTesting/Tests (2.0.0)
+  - PippinDebugging (1.0.0):
+    - FLEX (~> 2)
+    - Pippin
+  - PippinTesting (2.0.1)
+  - PippinTesting/Tests (2.0.1)
   - Result (5.0.0)
-  - SwiftMessages (7.0.0):
-    - SwiftMessages/App (= 7.0.0)
-  - SwiftMessages/App (7.0.0)
+  - SwiftMessages (7.0.1):
+    - SwiftMessages/App (= 7.0.1)
+  - SwiftMessages/App (7.0.1)
   - XCGLogger (7.0.0):
     - XCGLogger/Core (= 7.0.0)
   - XCGLogger/Core (7.0.0):
@@ -61,6 +65,7 @@ DEPENDENCIES:
   - Pippin/Extensions (from `.`)
   - Pippin/Extensions/Tests (from `.`)
   - PippinAdapters (from `.`)
+  - PippinDebugging (from `.`)
   - PippinTesting (from `.`)
   - PippinTesting/Tests (from `.`)
 
@@ -70,6 +75,7 @@ SPEC REPOS:
     - COSTouchVisualizer
     - Crashlytics
     - Fabric
+    - FLEX
     - JGProgressHUD
     - ObjcExceptionBridging
     - PinpointKit
@@ -82,6 +88,8 @@ EXTERNAL SOURCES:
     :path: "."
   PippinAdapters:
     :path: "."
+  PippinDebugging:
+    :path: "."
   PippinTesting:
     :path: "."
 
@@ -90,16 +98,18 @@ SPEC CHECKSUMS:
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  Pippin: 5985bbe1bf97a15a7398edfa9176d738b56fb4cd
-  PippinAdapters: 0a5686e801bf9ffaccdd4225a667122c6c8e0e46
-  PippinTesting: 750aef9016722dd2cc0a74858addf8f95663ad60
+  Pippin: db8ce0cf4f01695c459d120e0386b29191afe4fc
+  PippinAdapters: a15903839e3efa620193739037514a3d5646e646
+  PippinDebugging: 1425bbc7dfd8aff82221138890e312e0081f0b75
+  PippinTesting: 295bbda8cf43e70098241950969a604f111acf10
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
-  SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
+  SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 6e7fccd3c4cf9998c7c10bb5b6c897361f70542d
+PODFILE CHECKSUM: 719673e97241eff9e56107aeacb18c0fd3aee5be
 
 COCOAPODS: 1.7.5
