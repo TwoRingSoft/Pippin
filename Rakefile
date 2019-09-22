@@ -50,7 +50,7 @@ task :prerelease,[:podspec] do |r, args|
   podspec = args[:podspec]
   version_file = "#{podspec}.podspec"
   current_version = `vrsn --read --file #{version_file}`.strip
-  branch = "#{current_version}-release"
+  branch = "#{podspec}-#{current_version}-release"
   sh "git checkout -b #{branch}"
   tag_root = "#{podspec}-#{current_version}-RC"
   release_candidate_number = `git tag --list | grep #{tag_root} | wc -l`.strip.to_i + 1
