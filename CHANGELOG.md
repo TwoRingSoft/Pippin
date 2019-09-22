@@ -5,23 +5,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ---
 
 # [Unreleased]
-
-## [Pippin]
-
-### Changed
-
-- Guard usage of debug APIs within `#if DEBUG` conditional compilation directives.
-- `AuthorizedCLLocationManager` now returns a token to retain while prompting user for permission instead of the old singleton pattern.
-
-### Added
-
-- Function on `LaunchArgument` to query whether a calling case was supplied in a launch.
-- Function on `Environment` that hooks up all `EnvironmentallyConscious.environment` properties on its seed/sensor/etc property instances.
-
-### Fixed
-
-- Improved `AuthorizedCLLocationManager` handling of possible authorization states at the time it is used to request authorization from the user.
-
 ## [PippinDebugging]
 
 ### Added
@@ -39,6 +22,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
  - Convenience function to set up a default `Environment` instance using the default subspec adapters.
 
 ---
+
+## [Pippin 16.0.0] 2019-09-21
+
+### Changed
+
+- Guard usage of debug APIs within `#if DEBUG` conditional compilation directives.
+- `AuthorizedCLLocationManager` now returns a token to retain while prompting user for permission instead of the old singleton pattern.
+
+### Added
+
+- Function on `LaunchArgument` to query whether a calling case was supplied in a launch.
+- `AuthorizedCLLocationManager` now returns a token to retain while prompting user for permission instead of the old singleton pattern.
+
+### Fixed
+
+- Improved `AuthorizedCLLocationManager` handling of possible authorization states at the time it is used to request authorization from the user.
+
 
 ## [Pippin 15.0.0] 2019-09-18
 
