@@ -23,13 +23,14 @@ public class CoreLocationAdapter: NSObject, Locator {
     public var environment: Environment?
     private var authorizedLocationManager: CLLocationManager?
     private var locatorDelegate: LocatorDelegate
+    private var authToken: AuthorizedCLLocationManager?
     
     /// Initialize a new `CoreLocationAdapter` instance with a delegate and optionally preauthorized `CLLocationManager`. If one is not provided, then one will be authorized when necessary.
     ///
     /// - Parameters:
     ///   - authorizedLocationManager: A preauthorized `CLLocationManager`. If one is not provided, then one will be authorized when necessary.
     ///   - locatorDelegate: A delegate to respond to callbacks.
-    public required init(authorizedLocationManager: CLLocationManager?, locatorDelegate: LocatorDelegate) {
+    public required init(authorizedLocationManager: CLLocationManager? = nil, locatorDelegate: LocatorDelegate) {
         self.authorizedLocationManager = authorizedLocationManager
         self.locatorDelegate = locatorDelegate
         super.init()
@@ -45,7 +46,7 @@ public class CoreLocationAdapter: NSObject, Locator {
         if let authorizedLocationManager = authorizedLocationManager {
             authorizedLocationManager.startUpdatingLocation()
         } else {
-            AuthorizedCLLocationManager.authorizedLocationManager(scope: .whenInUse) { (authorizationResult) in
+            authToken = AuthorizedCLLocationManager.authorizedLocationManager(scope: .whenInUse) { (authorizationResult) in
                 switch authorizationResult {
                 case .success(let authorizedLocationManager):
                     self.authorizedLocationManager = authorizedLocationManager
@@ -54,6 +55,7 @@ public class CoreLocationAdapter: NSObject, Locator {
                 case .failure(let error):
                     self.locatorDelegate.locator(locator: self, encounteredError: LocatorError.coreLocationError(error))
                 }
+                self.authToken = nil
             }
         }
     }

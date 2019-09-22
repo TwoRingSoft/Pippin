@@ -11,11 +11,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - Guard usage of debug APIs within `#if DEBUG` conditional compilation directives.
-- Function on `Environment` that hooks up all `EnvironmentallyConscious.environment` properties on its seed/sensor/etc property instances.
+- `AuthorizedCLLocationManager` now returns a token to retain while prompting user for permission instead of the old singleton pattern.
 
 ### Added
 
 - Function on `LaunchArgument` to query whether a calling case was supplied in a launch.
+- Function on `Environment` that hooks up all `EnvironmentallyConscious.environment` properties on its seed/sensor/etc property instances.
+
+### Fixed
+
+- Improved `AuthorizedCLLocationManager` handling of possible authorization states at the time it is used to request authorization from the user.
 
 ## [PippinDebugging]
 

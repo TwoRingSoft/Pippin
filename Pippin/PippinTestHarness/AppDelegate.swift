@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         environment.connectEnvironment()
-
+        
         return environment
     }()
 
