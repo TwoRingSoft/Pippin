@@ -61,7 +61,7 @@ task :prerelease,[:podspec] do |r, args|
   sh "git tag #{release_candidate_tag}"
   sh 'git push --tags'
   puts "About to lint the podspec. This takes a while... (it is now #{Time.now})"
-  stdout, stderr, status = Open3.capture3 "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings"
+  stdout, stderr, status = Open3.capture3 "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings --verbose | tee #{podspec}.podspec-#{release_candidate_tag}-lint.log"
   sh 'git checkout master'
   sh "git branch -D #{branch}"
   if status != 0 then
