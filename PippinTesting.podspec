@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = 'PippinTesting'
   s.version      = '2.0.1'
-  s.summary      = "A Swift framework to make Xcode testing easier.."
+  s.summary      = "A Swift framework to make Xcode testing easier."
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering helper functions to work with XCTest and XCUIApplication API in service of concise, readable and robust test code.
                    DESC
