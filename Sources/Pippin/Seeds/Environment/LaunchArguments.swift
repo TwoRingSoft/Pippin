@@ -40,6 +40,7 @@ import Foundation
     /// Upon launch, remove any stored user defaults used by the app.
     case wipeDefaults
 
+    /// - Returns: the `String` representation of the launch argument, used in constructing its canonical rDNS version as it should appear in a process' launch arguments.
     private func name() -> String {
         switch self {
         case .uiTest: return "ui-test"
@@ -55,6 +56,7 @@ import Foundation
         }
     }
 
+    /// - Returns: `true` if the process was launched with this argument, `false` otherwise.
     public func activated() -> Bool {
         return ProcessInfo.launchedWith(launchArgument: String(describing: self))
     }

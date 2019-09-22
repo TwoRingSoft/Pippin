@@ -17,8 +17,12 @@ public protocol EnvironmentTypes {
 }
 
 public extension Environment {
+    /// Errors that may be used by apps to describe adverse situations related to the environment.
     enum Error: Swift.Error, NSErrorConvertible {
+        /// Expected an initialized `CoreDataController` but none was present.
         case missingCoreDataController
+
+        /// Expected an initialized `InAppPurchaseVendor` but none was present.
         case missingInAppPurchaseVendor
 
         public var code: Int {
@@ -102,7 +106,6 @@ public class Environment: NSObject {
     }
     
     /// Check a few standard override locations for the logging level to use with a new `Logger`.
-    ///
     /// - Returns: A `LogLevel` found in an override, or `debug` for debugging builds or `info` for non-debug builds..
     public func logLevel() -> LogLevel {
         // log verbosely for ui tests
