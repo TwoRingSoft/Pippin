@@ -1,0 +1,56 @@
+{
+  "name": "PippinCore",
+  "version": "1.0.0",
+  "summary": "A Swift framework to scaffold and abstract the common major parts of an app, to make development faster and maintenance easier.",
+  "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple and third-party frameworks.",
+  "homepage": "https://github.com/tworingsoft/Pippin",
+  "license": "MIT",
+  "authors": {
+    "Andrew McKnight": "andrew@tworingsoft.com"
+  },
+  "source": {
+    "git": "https://github.com/tworingsoft/Pippin.git",
+    "tag": "PippinCore-1.0.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "swift_versions": "5.1",
+  "default_subspecs": [
+    "Components",
+    "Environment",
+    "Peripherals"
+  ],
+  "dependencies": {
+    "PippinLibrary": [
+
+    ]
+  },
+  "module_name": "Pippin",
+  "subspecs": [
+    {
+      "name": "Components",
+      "source_files": [
+        "Sources/PippinCore/Components/**/*.{h,m,swift}"
+      ]
+    },
+    {
+      "name": "Environment",
+      "source_files": [
+        "Sources/PippinCore/Environment/**/*.{h,m,swift}"
+      ]
+    },
+    {
+      "name": "Peripherals",
+      "source_files": [
+        "Sources/PippinCore/Peripherals/**/*.{h,m,swift}"
+      ],
+      "dependencies": {
+        "Result": [
+
+        ]
+      }
+    }
+  ],
+  "swift_version": "5.1"
+}

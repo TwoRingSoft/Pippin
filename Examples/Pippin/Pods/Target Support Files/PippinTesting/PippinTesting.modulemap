@@ -1,0 +1,6 @@
+framework module PippinTesting {
+  umbrella header "PippinTesting-umbrella.h"
+
+  export *
+  module * { export * }
+}

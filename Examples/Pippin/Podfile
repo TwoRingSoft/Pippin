@@ -1,0 +1,10 @@
+use_frameworks!
+install! 'cocoapods', :share_schemes_for_development_pods => true
+platform :ios, '9.0'
+
+target 'Pippin' do
+  pod 'PippinCore', :path => '../..'
+  pod 'PippinLibrary', :path => '../..'
+  pod 'PippinAdapters', :path => '../..'
+  pod 'PippinTesting', :path => '../..'
+end

@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49F9FA6123386B2300F84CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9FA6023386B2300F84CCE /* AppDelegate.swift */; };
+		49F9FA6323386B2300F84CCE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9FA6223386B2300F84CCE /* SceneDelegate.swift */; };
+		49F9FA6523386B2300F84CCE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9FA6423386B2300F84CCE /* ViewController.swift */; };
+		49F9FA6823386B2300F84CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F9FA6623386B2300F84CCE /* Main.storyboard */; };
+		49F9FA6A23386B2400F84CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F9FA6923386B2400F84CCE /* Assets.xcassets */; };
+		49F9FA6D23386B2400F84CCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F9FA6B23386B2400F84CCE /* LaunchScreen.storyboard */; };
+		A84F7005E6B8F01B2B8C4E17 /* Pods_Pippin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A25E475C20441C1AA308C3 /* Pods_Pippin.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		31A25E475C20441C1AA308C3 /* Pods_Pippin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pippin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F9FA5D23386B2300F84CCE /* Pippin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pippin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F9FA6023386B2300F84CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49F9FA6223386B2300F84CCE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		49F9FA6423386B2300F84CCE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49F9FA6723386B2300F84CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49F9FA6923386B2400F84CCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49F9FA6C23386B2400F84CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		49F9FA6E23386B2400F84CCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		757DE438EC8B39D288B7E143 /* Pods-Pippin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pippin.release.xcconfig"; path = "Target Support Files/Pods-Pippin/Pods-Pippin.release.xcconfig"; sourceTree = "<group>"; };
+		E0D6E0B21B3155E9CA8F3E74 /* Pods-Pippin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pippin.debug.xcconfig"; path = "Target Support Files/Pods-Pippin/Pods-Pippin.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49F9FA5A23386B2300F84CCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A84F7005E6B8F01B2B8C4E17 /* Pods_Pippin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49F9FA5423386B2300F84CCE = {
+			isa = PBXGroup;
+			children = (
+				49F9FA5F23386B2300F84CCE /* Pippin */,
+				49F9FA5E23386B2300F84CCE /* Products */,
+				E5C2DCD045C4FDEED130C6EF /* Pods */,
+				D4F0F5EE36A2A15E00EC6EA7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49F9FA5E23386B2300F84CCE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49F9FA5D23386B2300F84CCE /* Pippin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49F9FA5F23386B2300F84CCE /* Pippin */ = {
+			isa = PBXGroup;
+			children = (
+				49F9FA6023386B2300F84CCE /* AppDelegate.swift */,
+				49F9FA6223386B2300F84CCE /* SceneDelegate.swift */,
+				49F9FA6423386B2300F84CCE /* ViewController.swift */,
+				49F9FA6623386B2300F84CCE /* Main.storyboard */,
+				49F9FA6923386B2400F84CCE /* Assets.xcassets */,
+				49F9FA6B23386B2400F84CCE /* LaunchScreen.storyboard */,
+				49F9FA6E23386B2400F84CCE /* Info.plist */,
+			);
+			path = Pippin;
+			sourceTree = "<group>";
+		};
+		D4F0F5EE36A2A15E00EC6EA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31A25E475C20441C1AA308C3 /* Pods_Pippin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5C2DCD045C4FDEED130C6EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E0D6E0B21B3155E9CA8F3E74 /* Pods-Pippin.debug.xcconfig */,
+				757DE438EC8B39D288B7E143 /* Pods-Pippin.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49F9FA5C23386B2300F84CCE /* Pippin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49F9FA7123386B2400F84CCE /* Build configuration list for PBXNativeTarget "Pippin" */;
+			buildPhases = (
+				D4107D712EC918602BD2F199 /* [CP] Check Pods Manifest.lock */,
+				49F9FA5923386B2300F84CCE /* Sources */,
+				49F9FA5A23386B2300F84CCE /* Frameworks */,
+				49F9FA5B23386B2300F84CCE /* Resources */,
+				25B382774F1C53C8FC439B8C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pippin;
+			productName = Pippin;
+			productReference = 49F9FA5D23386B2300F84CCE /* Pippin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49F9FA5523386B2300F84CCE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Andrew McKnight";
+				TargetAttributes = {
+					49F9FA5C23386B2300F84CCE = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = 49F9FA5823386B2300F84CCE /* Build configuration list for PBXProject "Pippin" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49F9FA5423386B2300F84CCE;
+			productRefGroup = 49F9FA5E23386B2300F84CCE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49F9FA5C23386B2300F84CCE /* Pippin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49F9FA5B23386B2300F84CCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F9FA6D23386B2400F84CCE /* LaunchScreen.storyboard in Resources */,
+				49F9FA6A23386B2400F84CCE /* Assets.xcassets in Resources */,
+				49F9FA6823386B2300F84CCE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		25B382774F1C53C8FC439B8C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pippin/Pods-Pippin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pippin/Pods-Pippin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pippin/Pods-Pippin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4107D712EC918602BD2F199 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pippin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49F9FA5923386B2300F84CCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F9FA6523386B2300F84CCE /* ViewController.swift in Sources */,
+				49F9FA6123386B2300F84CCE /* AppDelegate.swift in Sources */,
+				49F9FA6323386B2300F84CCE /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		49F9FA6623386B2300F84CCE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F9FA6723386B2300F84CCE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49F9FA6B23386B2400F84CCE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F9FA6C23386B2400F84CCE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49F9FA6F23386B2400F84CCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		49F9FA7023386B2400F84CCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49F9FA7223386B2400F84CCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0D6E0B21B3155E9CA8F3E74 /* Pods-Pippin.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Pippin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tworingsoft.Pippin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		49F9FA7323386B2400F84CCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 757DE438EC8B39D288B7E143 /* Pods-Pippin.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Pippin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tworingsoft.Pippin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49F9FA5823386B2300F84CCE /* Build configuration list for PBXProject "Pippin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F9FA6F23386B2400F84CCE /* Debug */,
+				49F9FA7023386B2400F84CCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49F9FA7123386B2400F84CCE /* Build configuration list for PBXNativeTarget "Pippin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F9FA7223386B2400F84CCE /* Debug */,
+				49F9FA7323386B2400F84CCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49F9FA5523386B2300F84CCE /* Project object */;
+}
