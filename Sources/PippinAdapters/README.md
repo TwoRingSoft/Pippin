@@ -16,7 +16,8 @@ The following hand rolled adapters are available:
 - `Locator`: `CoreLocationAdapter` (and `CoreLocationSimulator`–wip)
 - `Defaults` and `DefaultsKey`: `DefaultDefaults` and `DefaultDefaultsKey` (say _that_ fast five times)
 - `Fonts`: `DefaultFonts` 
-
-> TODO: these are still located in `Pippin`, and need to be extracted into `PippinAdapters`.
+- `CrudViewController`: Create, read, update and delete from a data model using `UITableView`, `UISearchController` and `FetchedResultsController`
+- `InfoViewController`: app name and version info, links to Two Ring Software properties (need to parameterize and extract to private shared repo), and buttons for more detail for certain components that may be present, like acknowledgements, bug reporting or in app purchases
+- `FormController`: manage traversal and keyboard avoidance for a collection of inputs
 
 > \*Crashlytics is a special case, because it delivers a static binary, which is disallowed in CocoaPods framework dependency chains. `CrashlyticsAdapter.swift` is delivered separately in the repo, as it's not able to be built in the Pippin pod target due to the simple required `import Crashlytics` in that file. Whereas Pippin declares podspec dependencies on the aforementioned pods, you must specify `pod 'Crashlytics'` in your own Podfile and manually add `CrashlyticsAdapter.swift` to your project for it to work correctly.

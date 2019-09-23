@@ -9,12 +9,15 @@
 Getting started with a default setup is as easy as declaring a Podfile dependency:
 
 ```ruby
-pod 'PippinAdapters'
+pod 'Pippin'
 ```
 
 and, at some point during your app launch sequence:
 
 ```swift
+import Pippin
+import PippinAdapters
+
 let environment = Environment.default(
     bugReportRecipients: ["andrew@tworingsoft.com"],
     touchVizRootVC: UIViewController(nibName: nil, bundle: nil) // optional
@@ -45,12 +48,18 @@ You've just gotten the following, with minimal boilerplate:
 
 ## Podspecs
 
-There are four podspecs to deliver these tools, see each's README for more information:
+There are five podspecs to deliver these tools, see each's README for more information:
 
-- [Pippin](Sources/Pippin)
+- [PippinCore](Sources/PippinCore)
 - [PippinAdapters](Sources/PippinAdapters)
 - [PippinDebugging](Sources/PippinDebugging)
+- [PippinLibrary](Sources/PippinLibrar)
 - [PippinTesting](Sources/PippinTesting)
+
+> **Note:** there are several reasons these are delivered via separate podspecs instead of one podspec with multiple podspecs. Those two spec levels are not equivalent for all functionalities.
+>
+- Issues with installing `test_spec`s for just one subspec.
+- Not supported to install a subspec using `Pod:configurations`: [https://github.com/CocoaPods/CocoaPods/issues/3503](https://github.com/CocoaPods/CocoaPods/issues/3503).
 
 # Contribute
 

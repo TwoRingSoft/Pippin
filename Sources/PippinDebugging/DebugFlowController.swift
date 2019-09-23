@@ -21,7 +21,7 @@ public protocol DebugFlowControllerDelegate: class {
     func debugFlowControllerWantsToDeleteModels(debugFlowController: Debugging)
 }
 
-public class DebugFlowController: NSObject, Debugging {
+public class DebugFlowController: NSObject, DebugMenuPresenter {
 
     private weak var presentingVC: UIViewController!
     private var databaseFilename: String

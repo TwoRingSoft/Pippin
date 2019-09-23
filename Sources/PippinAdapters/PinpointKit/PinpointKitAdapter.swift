@@ -8,6 +8,7 @@
 
 import PinpointKit
 import Pippin
+import PippinLibrary
 import UIKit
 
 public final class PinpointKitAdapter: NSObject, BugReporter {
@@ -25,7 +26,7 @@ public final class PinpointKitAdapter: NSObject, BugReporter {
         
         var allMetadata = [String: AnyObject]()
         do {
-            if let dbData = try environment?.coreDataController?.exportData() as NSData? {
+            if let dbData = try environment?.model?.exportData() as NSData? {
                 let encodedDBDataString = dbData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) as NSString
                 allMetadata["db"] = encodedDBDataString
             }

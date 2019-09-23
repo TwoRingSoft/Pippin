@@ -8,6 +8,7 @@
 import Foundation
 import JGProgressHUD
 import Pippin
+import PippinLibrary
 import UIKit
 
 public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {

@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = '16.0.0'
   s.summary      = "A Swift framework to scaffold an app and make development and maintenance easier."
   s.description  = <<-DESC
-    A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple frameworks.
+    An umbrella framework to easily add all the common components of the Pippin ecosystem: core, adapters, library and testing. Debugging is not automatically included; as you should only add that as a dependency specifically set to your non-production build configurations. 
   DESC
   s.homepage     = 'https://github.com/tworingsoft/Pippin'
   s.license      = 'MIT'
@@ -14,31 +14,11 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.12'
   
   s.swift_version = '5.1'
-  
-  s.default_subspecs = ['Core', 'Extensions']
-  
-  s.subspec 'Core' do |ss|
-    ss.ios.source_files = [
-      'Sources/Pippin/Seeds/**/*.{h,m,swift}',
-      'Sources/Pippin/Sensors/**/*.{h,m,swift}',
-      'Sources/Pippin/Controls/**/*.{h,m,swift}',
-      'Sources/Pippin/CanIHaz/Camera/**/*.{h,m,swift}',
-      'Sources/Pippin/CanIHaz/Location/**/*.{h,m,swift}'
-    ]
-    ss.ios.dependency 'Result'
-    ss.ios.dependency 'Anchorage', '~> 4'
-    ss.dependency 'Pippin/Extensions' # just pass through the only thing compatible with macos currently, the extensions, to avoid the empty spec error
-  end
-  s.subspec 'Extensions' do |ss|
-    ss.ios.source_files = [
-      'Sources/Pippin/Extensions/**/*.{h,m,swift}'
-    ]
-    ss.osx.source_files = [
-      'Sources/Pippin/Extensions/Foundation/**/*.{h,m,swift}'
-    ]
-    ss.test_spec 'Tests' do |test_spec|
-        test_spec.source_files = 'Tests/Pippin/Extensions/**/*.{h,m,swift}'
-    end
-  end
 
+  s.dependency 'PippinAdapters'
+  s.dependency 'PippinCore'
+  s.dependency 'PippinLibrary'
+  s.dependency 'PippinTesting'
+
+  s.module_name = 'PippinUmbrella'
 end

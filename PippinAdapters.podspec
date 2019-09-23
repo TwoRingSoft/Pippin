@@ -14,35 +14,56 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Sources/PippinAdapters/*.{h,m,swift}'
   
-  s.default_subspecs = 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'DebugController', 'JGProgressHUD'
+  s.default_subspecs = 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'CoreData'
 
   s.subspec 'PinpointKit' do |ss|
     ss.source_files = 'Sources/PippinAdapters/PinpointKit/**/*.{h,m,swift}'
     ss.dependency 'PinpointKit', '~> 1'
-    ss.dependency 'Pippin', '>= 13'
+    ss.dependency 'PippinCore'
   end
   s.subspec 'COSTouchVisualizer' do |ss|
     ss.source_files = 'Sources/PippinAdapters/COSTouchVisualizer/**/*.{h,m,swift}'
     ss.dependency 'COSTouchVisualizer', '~> 1'
-    ss.dependency 'Pippin'
+    ss.dependency 'PippinCore'
   end
   s.subspec 'XCGLogger' do |ss|
     ss.source_files = 'Sources/PippinAdapters/XCGLogger/**/*.{h,m,swift}'
     ss.dependency 'XCGLogger', '~> 7'
-    ss.dependency 'Pippin'
+    ss.dependency 'PippinCore'
   end
   s.subspec 'SwiftMessages' do |ss|
     ss.source_files = 'Sources/PippinAdapters/SwiftMessages/**/*.{h,m,swift}'
     ss.dependency 'SwiftMessages', '~> 7'
-    ss.dependency 'Pippin'
+    ss.dependency 'PippinCore'
   end
   s.subspec 'JGProgressHUD' do |ss|
     ss.source_files = 'Sources/PippinAdapters/JGProgressHUD/**/*.{h,m,swift}'
-    ss.dependency 'Pippin'
-    ss.dependency 'JGProgressHUD'
+    ss.dependency 'PippinCore'
+    ss.dependency 'JGProgressHUD', '~> 2'
   end
-  s.subspec 'DebugController' do |ss|
-    ss.source_files = 'Sources/PippinAdapters/DebugController/**/*.{h,m,swift}'
-    ss.dependency 'Pippin', '>= 13'
+  s.subspec 'CRUDViewController' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/CRUDViewController/**/*.{h,m,swift}'
+    ss.dependency 'PippinCore'
+    ss.dependency 'PippinLibrary'
+  end
+  s.subspec 'InfoViewController' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/InfoViewController/**/*.{h,m,swift}'
+    ss.dependency 'PippinCore'
+    ss.dependency 'PippinLibrary'
+  end
+  s.subspec 'FormController' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/FormController/**/*.{h,m,swift}'
+    ss.dependency 'PippinCore'
+    ss.dependency 'PippinLibrary'
+  end
+  s.subspec 'CoreData' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/CoreData/**/*.{h,m,swift}'
+    ss.dependency 'PippinCore'
+    ss.dependency 'PippinLibrary'
+  end
+  s.subspec 'CoreLocation' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/CoreData/**/*.{h,m,swift}'
+    ss.dependency 'PippinCore'
+    ss.dependency 'PippinLibrary'
   end
 end
