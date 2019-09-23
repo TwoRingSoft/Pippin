@@ -6,10 +6,10 @@ desc 'Initialize development environment.'
 task :init do
     sh 'brew tap tworingsoft/formulae'
     sh 'brew bundle'
-    sh 'rbenv install'
+    sh 'rbenv install --skip-existing'
     sh 'rbenv exec gem install bundler'
-    sh 'rbenv exec bundle update'
-    sh 'rbenv exec bundle package'
+    sh 'rbenv exec bundle'
+    sh 'mkdir -p Logs'
 end
 
 desc 'Bump version number for the specified podspec and commit the changes with message as the output from vrsn.'
@@ -61,7 +61,7 @@ task :prerelease,[:podspec] do |r, args|
   sh "git tag #{release_candidate_tag}"
   sh 'git push --tags'
   puts "About to lint the podspec. This takes a while... (it is now #{Time.now})"
-  stdout, stderr, status = Open3.capture3 "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings --verbose | tee #{podspec}.podspec-#{release_candidate_tag}-lint.log"
+  stdout, stderr, status = Open3.capture3 "rbenv exec bundle exec pod spec lint #{podspec}.podspec --allow-warnings --verbose | tee Logs/#{podspec}.podspec-#{release_candidate_tag}-lint.log"
   sh 'git checkout master'
   sh "git branch -D #{branch}"
   if status != 0 then
@@ -123,11 +123,12 @@ task :example_smoke_tests do
       update_command = 'rbenv exec bundle exec pod update --no-repo-update'
       puts update_command
       Open3.pipeline([update_command])
-      build_command = "xcrun xcodebuild -workspace #{example_project}.xcworkspace -scheme #{example_project}"
-      tee_pipe = "tee #{example_project}_smoke_test.log"
+      build_command = "xcrun xcodebuild -workspace #{example_project}.xcworkspace -scheme #{example_project} 2>&1"
+      tee_pipe = "tee Logs/#{example_project}_smoke_test.log"
       xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
       puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-      Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      fail if status_list[0] != 0
     end
     puts "travis_fold:end:#{example_project}" if travis?
   end
@@ -135,14 +136,20 @@ end
 
 def unit_tests
   require 'open3'
-  ['12.4'].each do |ios_version|
+  [
+    {:ios_version => '10.3.1', :device_name => 'iPhone SE'}, 
+    {:ios_version => '13.0', :device_name => 'iPhone 8'}
+  ].each do |options|
+    ios_version = options[:ios_version]
+    device_name = options[:device_name]
     ['Pippin-Unit-Extensions-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
-      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=#{ios_version}\' test"
-      tee_pipe = "tee #{scheme}_ios_#{ios_version}.log"
+      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
+      tee_pipe = "tee Logs/#{scheme}_ios_#{ios_version}.log"
       xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
       puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-      Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      fail if status_list[0] != 0
       sh "echo travis_fold:end:#{scheme}" if travis?
     end
   end
@@ -150,14 +157,19 @@ end
 
 def test_smoke_test
   require 'open3'
-  ['12.4'].each do |ios_version|
+  [
+    {:ios_version => '13.0', :device_name => 'iPhone 8'}
+  ].each do |options|
+    ios_version = options[:ios_version]
+    device_name = options[:device_name]
     [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
-      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=iPhone SE,OS=#{ios_version}\' test"
-      tee_pipe = "tee #{scheme}_smoke_test_ios_#{ios_version}.log"
+      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
+      tee_pipe = "tee Logs/#{scheme}_smoke_test_ios_#{ios_version}.log"
       xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
       puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-      Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      fail if status_list[0] != 0
       sh "echo travis_fold:end:#{scheme}" if travis?
     end
   end
@@ -169,7 +181,7 @@ def subspec_smoke_test
   
   sdk_versions_per_platform = {
     # platform => [ sdk versions ]
-    'phone' => ['12.1'],
+    'phone' => ['10.3.1', '13.0'],
     'mac' => ['10.14'],
 #    'tv' => ['11.1'],
 #    'watch' => ['4.1']
@@ -218,13 +230,9 @@ def subspec_smoke_test
     'PippinAdapters-COSTouchVisualizer' => [],
     'PippinAdapters-JGProgressHUD' => [],
     'PippinAdapters-SwiftMessages' => [],
-    'Pippin-OperationTestHelpers' => [],
   }
   
-  languages = [
-    :swift,
-    :objc,
-  ]
+  languages = ['Swift', 'Objc']
   
   # create dir to contain all tests
   root_test_path = 'Pippin/SmokeTests/generated_xcode_projects'
@@ -236,8 +244,7 @@ def subspec_smoke_test
   # test integrating each subspec into a project in each language
   scheme_names.product(languages).each do |subspec_language_combo|
     subspec = subspec_language_combo[0]
-    language = subspec_language_combo[1]
-    language_name = language == :swift ? 'Swift' : 'Objc'
+    language_name = subspec_language_combo[1]
     
     sdk_versions_per_platform.each_key do |platform|
       next if platform == 'mac' and subspec.include? 'Adapters'
@@ -260,7 +267,7 @@ def subspec_smoke_test
           spec_file << xcodegen_spec_yml
           File.chmod(0644, spec_file.path)
         end
-        sh "xcodegen --spec #{spec_filename} >> #{test_name}.log"
+        sh "xcodegen --spec #{spec_filename} >> Logs/#{test_name}.log"
         
         # build for each sdk on each platform
         sdk_versions_per_platform[platform].each do |sdk_version|
@@ -285,17 +292,17 @@ def subspec_smoke_test
             end
           end
           
-          sh "rbenv exec bundle exec pod install | tee #{integration_test_name}.log"
+          sh "rbenv exec bundle exec pod install | tee Logs/#{integration_test_name}.log"
           
           sdk_value = platform_to_device_prefix[platform] + sdk_version
           derived_data_path = 'derivedData'
           FileUtils.remove_dir(derived_data_path, true) if Dir.exists?(derived_data_path)
-          build_command = "xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path}"
-          tee_pipe = "tee #{test_name}-#{platform}-#{sdk_version}.log"
+          build_command = "xcrun xcodebuild -workspace #{test_name}.xcworkspace -scheme #{test_name} -sdk #{sdk_value} -derivedDataPath #{derived_data_path} 2>&1"
+          tee_pipe = "tee Logs/#{test_name}-#{platform}-#{sdk_version}.log"
           xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
           puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-          Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
-          
+          status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+          fail if status_list[0] != 0
           sh "echo travis_fold:end:#{test_name}" if travis?
         end
       end
@@ -327,4 +334,10 @@ targets:
       TARGETED_DEVICE_FAMILY: #{platform == 'iOS' ? '1,2' : '4'}
       ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: $(inherited)
 XCODEGEN_SPEC_YML
+end
+
+# run init task before all tasks for setup
+Rake::Task.tasks.each do |t|
+  next if t.name == 'init'
+  t.enhance [:init]
 end
