@@ -8,9 +8,9 @@
 
 import Anchorage
 import MessageUI
+import Pippin
+import PippinLibrary
 import UIKit
-
-private let twoRingURL = "https://tworingsoft.com"
 
 @objc public protocol InfoViewControllerDelegate {
     @objc optional func inAppPurchasesTapped(inInfoViewController infoViewController: InfoViewController)
@@ -23,27 +23,28 @@ private let twoRingURL = "https://tworingsoft.com"
 
  Importantly, provides a secret crash button to test crash reporting in the wild.
  */
-public class InfoViewController: UIViewController {
+public class InfoViewController: UIViewController, AppInfoPresenter {
 
     fileprivate var environment: Environment
     fileprivate var sharedAssetBundle: Bundle
-    fileprivate var delegate: InfoViewControllerDelegate
+    public weak var delegate: InfoViewControllerDelegate?
     private var acknowledgements: Acknowledgements
     private var modalPresenter: TransparentModalPresentingViewController?
     private var contactEmails: [String]?
+    private let websiteURL: URL
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not implemented")
     }
 
-    public required init(acknowledgements: Acknowledgements, textColor: UIColor, contactEmails: [String]?, environment: Environment, sharedAssetBundle: Bundle, delegate: InfoViewControllerDelegate) {
+    public required init(acknowledgements: Acknowledgements, textColor: UIColor, contactEmails: [String]?, environment: Environment, sharedAssetBundle: Bundle, links: [LinkIcon], companyLink: LinkIcon) {
+        self.websiteURL = companyLink.url
         self.contactEmails = contactEmails
         self.sharedAssetBundle = sharedAssetBundle
         self.environment = environment
-        self.delegate = delegate
         self.acknowledgements = acknowledgements
         super.init(nibName: nil, bundle: nil)
-        setUpUI(textColor: textColor)
+        setUpUI(textColor: textColor, links: links, companyLink: companyLink)
         setUpSecretCrash()
     }
 
@@ -64,23 +65,11 @@ public class InfoViewController: UIViewController {
     }
     
     func websiteURLPressed() {
-        openURL(URLString: twoRingURL)
+        openURL(URLString: websiteURL.absoluteString)
     }
 
-    func twitterPressed() {
-        openURL(URLString: SocialIcon.twitter.url())
-    }
-
-    func facebookPressed() {
-        openURL(URLString: SocialIcon.facebook.url())
-    }
-
-    func linkedinPressed() {
-        openURL(URLString: SocialIcon.linkedin.url())
-    }
-
-    func githubPressed() {
-        openURL(URLString: SocialIcon.github.url())
+    private func pressed(sender: LinkButton) {
+        openURL(URLString: sender.url.absoluteString)
     }
 
     func secretTestCrash() {
@@ -88,11 +77,11 @@ public class InfoViewController: UIViewController {
     }
     
     func reportBugPressed() {
-        delegate.bugReportTapped?(inInfoViewController: self)
+        delegate?.bugReportTapped?(inInfoViewController: self)
     }
     
     func inAppPurchasesPressed() {
-        delegate.inAppPurchasesTapped?(inInfoViewController: self)
+        delegate?.inAppPurchasesTapped?(inInfoViewController: self)
     }
     
     func acknowledgementsPressed() {
@@ -134,10 +123,10 @@ private extension InfoViewController {
         }
     }
 
-    func setUpUI(textColor: UIColor) {
+    func setUpUI(textColor: UIColor, links: [LinkIcon], companyLink: LinkIcon) {
         let appInfoStack = configureAppInfoStack(textColor: textColor)
         let detailStack = configureDetails()
-        let twoRingStack = configureTwoRingStack(textColor: textColor)
+        let twoRingStack = configureStack(textColor: textColor, links: links, companyLink: companyLink)
         
         let stack = UIStackView(arrangedSubviews: [appInfoStack, detailStack, twoRingStack])
         stack.distribution = .equalSpacing
@@ -158,12 +147,12 @@ private extension InfoViewController {
         return stack
     }
     
-    func configureTwoRingStack(textColor: UIColor) -> UIStackView {
+    func configureStack(textColor: UIColor, links: [LinkIcon], companyLink: LinkIcon) -> UIStackView {
         let urlButton = UIButton(frame: .zero)
-        urlButton.configure(title: twoRingURL, tintColor: textColor, font: environment.fonts.text, target: self, selector: #selector(websiteURLPressed))
+        urlButton.configure(title: websiteURL.absoluteString, tintColor: textColor, font: environment.fonts.text, target: self, selector: #selector(websiteURLPressed))
         
-        let socialLinks = configureSocialLinks(textColor: textColor)
-        let copyright = configureCopyright(textColor: textColor)
+        let socialLinks = configureSocialLinks(textColor: textColor, links: links)
+        let copyright = configureCopyright(textColor: textColor, companyLink: companyLink)
         
         if #available(iOS 11.0, *) {
             let stack = UIStackView(arrangedSubviews: [urlButton, copyright, socialLinks])
@@ -181,33 +170,39 @@ private extension InfoViewController {
         }
     }
 
-    func configureSocialLinks(textColor: UIColor) -> UIStackView {
+    class LinkButton: UIButton {
+        public let url: URL
+        init(emphasisSuffix: String = "", title: String? = nil, tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil, linkIcon: LinkIcon) {
+            self.url = linkIcon.url
+            super.init(frame: .zero)
+            self.configure(withImageSetName: linkIcon.name, emphasisSuffix: emphasisSuffix, title: title, tintColor: tintColor, target: target, selector: selector, imageBundle: imageBundle)
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+
+    func configureSocialLinks(textColor: UIColor, links: [LinkIcon]) -> UIStackView {
         let lightenedColor = textColor.withAlphaComponent(0.6)
-        let twitterButton = UIButton.button(withImageSetName: SocialIcon.twitter.rawValue, tintColor: lightenedColor, imageBundle: sharedAssetBundle)
-        let facebookButton = UIButton.button(withImageSetName: SocialIcon.facebook.rawValue, tintColor: lightenedColor, imageBundle: sharedAssetBundle)
-        let linkedinButton = UIButton.button(withImageSetName: SocialIcon.linkedin.rawValue, tintColor: lightenedColor, imageBundle: sharedAssetBundle)
-        let githubButton = UIButton.button(withImageSetName: SocialIcon.github.rawValue, tintColor: lightenedColor, imageBundle: sharedAssetBundle)
 
-        twitterButton.addTarget(self, action: #selector(twitterPressed), for: .touchUpInside)
-        facebookButton.addTarget(self, action: #selector(facebookPressed), for: .touchUpInside)
-        linkedinButton.addTarget(self, action: #selector(linkedinPressed), for: .touchUpInside)
-        githubButton.addTarget(self, action: #selector(githubPressed), for: .touchUpInside)
-
-        let stack = UIStackView(arrangedSubviews: [ githubButton, twitterButton, facebookButton, linkedinButton ])
+        let stack = UIStackView(arrangedSubviews: links.map {
+            LinkButton(tintColor: lightenedColor, target: self, selector: #selector(pressed(sender:)), imageBundle: sharedAssetBundle, linkIcon: $0)
+        })
         stack.spacing = 20
         stack.distribution = .equalSpacing
 
         return stack
     }
 
-    func configureCopyright(textColor: UIColor) -> UILabel {
-        let copyrightString = "© 2018"
-        let string = NSMutableAttributedString(string: "\(copyrightString) \(SocialIcon.twoRing.rawValue)")
+    func configureCopyright(textColor: UIColor, companyLink: LinkIcon) -> UILabel {
+        let copyrightString = "© \(Calendar.current.component(.year, from: Date()))"
+        let string = NSMutableAttributedString(string: "\(copyrightString) \(companyLink.name)")
 
         // insert two ring logo and style copyright text to match
         string.addAttributes([NSAttributedString.Key.font: environment.fonts.text], range: NSMakeRange(0, string.length))
 
-        replace(attachmentImage: .twoRing, in: string, textColor: textColor)
+        replace(attachmentImage: companyLink, in: string, textColor: textColor)
 
         let range = NSMakeRange(0, string.length)
         string.addAttributes([NSAttributedString.Key.foregroundColor: textColor], range: range)
@@ -255,7 +250,7 @@ private extension InfoViewController {
         return stack
     }
 
-    func replace(attachmentImage: SocialIcon, in attributedString: NSMutableAttributedString, textColor: UIColor) {
+    func replace(attachmentImage: LinkIcon, in attributedString: NSMutableAttributedString, textColor: UIColor) {
         let attachment = NSTextAttachment()
         let size = attachmentImage.image(bundle: sharedAssetBundle) != nil ? attachmentImage.image(bundle: sharedAssetBundle)!.size : .zero
         let capHeight = environment.fonts.text.capHeight
@@ -263,7 +258,7 @@ private extension InfoViewController {
         attachment.image = attachmentImage.image(bundle: sharedAssetBundle)
         let attachmentString = NSAttributedString(attachment: attachment)
 
-        let range = (attributedString.string as NSString).range(of: attachmentImage.rawValue)
+        let range = (attributedString.string as NSString).range(of: attachmentImage.name)
         attributedString.replaceCharacters(in: range, with: attachmentString)
     }
 

@@ -9,7 +9,7 @@ import Foundation
 import Pippin
 import PippinLibrary
 
-public struct Acknowledgements {
+public struct CocoaPodAcknowledgements: Acknowledgements {
     private var customAcknowledgements: String?
     private var cocoaPodsAcknowledgements: String?
     private unowned var environment: Environment
@@ -39,11 +39,11 @@ public struct Acknowledgements {
         }
     }
     
-    func containsAcknowledgements() -> Bool {
+    public func containsAcknowledgements() -> Bool {
         return customAcknowledgements != nil || (cocoaPodsAcknowledgements != nil && cocoaPodsAcknowledgements?.count ?? 0 > 0)
     }
     
-    func acknowledgementsString() -> NSAttributedString? {
+    public func acknowledgementsString() -> NSAttributedString? {
         var strings = [String]()
         var headings = [String]()
         if let customAcknowledgements = customAcknowledgements {
