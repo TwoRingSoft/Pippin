@@ -37,8 +37,16 @@ public extension UIButton {
         return button
     }
 
-    func configure(title: String, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil) {
+    func configure(withImageSetName imageSetName: String? = nil, emphasisSuffix: String = "", title: String? = nil, tintColor color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 17), target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil) {
         setTitle(title, for: .normal)
+
+        if let imageSetName = imageSetName {
+            let normalImage = UIImage(named: "\(imageSetName)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            setImage(normalImage, for: .normal)
+            let emphasizedImage = UIImage(named: "\(imageSetName)\(emphasisSuffix)", in: imageBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            setImage(emphasizedImage, for: .highlighted)
+            setImage(emphasizedImage, for: .selected)
+        }
 
         if selector != nil {
             addTarget(target, action: selector!, for: .touchUpInside)
