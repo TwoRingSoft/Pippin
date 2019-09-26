@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary      = "Extensions on Cocoa Touch and Swift stdlib SDKs."
   s.description  = <<-DESC
   All manner of extensions, categories, subclasses, wrappers, helpful functions, macros, syntactic sugar, utilities, &c that make coding faster and more semantically accurate.
-                   DESC
+  DESC
   s.homepage     = 'https://github.com/tworingsoft/Pippin'
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.osx.source_files = 'Sources/PippinLibrary/Foundation/**/*.{h,m,swift}'
   
   s.test_spec 'Tests' do |test_spec|
-      test_spec.source_files = 'Tests/PippinLibrary/**/*.swift'
+    test_spec.source_files = 'Tests/PippinLibrary/**/*.swift'
   end
 
   s.dependency 'Anchorage'
