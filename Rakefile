@@ -235,7 +235,7 @@ def subspec_smoke_test
   languages = ['Swift', 'Objc']
   
   # create dir to contain all tests
-  root_test_path = 'Pippin/SmokeTests/generated_xcode_projects'
+  root_test_path = 'SmokeTests/generated_xcode_projects'
   if Dir.exists?(root_test_path) then
     FileUtils.rm_rf(root_test_path)
   end
