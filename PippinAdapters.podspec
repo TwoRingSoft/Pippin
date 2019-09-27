@@ -13,6 +13,8 @@ Pod::Spec.new do |s|
   s.swift_version = '5.1'
 
   s.source_files = 'Sources/PippinAdapters/*.{h,m,swift}'
+
+  # --- Default subspecs ---
   
   s.default_subspecs = 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'CoreData'
 
@@ -56,6 +58,9 @@ Pod::Spec.new do |s|
     ss.dependency 'PippinCore'
     ss.dependency 'PippinLibrary'
   end
+
+  # --- End default subspecs ---
+
   s.subspec 'CoreData' do |ss|
     ss.source_files = 'Sources/PippinAdapters/CoreData/**/*.{h,m,swift}'
     ss.dependency 'PippinCore'
@@ -65,5 +70,8 @@ Pod::Spec.new do |s|
     ss.source_files = 'Sources/PippinAdapters/CoreData/**/*.{h,m,swift}'
     ss.dependency 'PippinCore'
     ss.dependency 'PippinLibrary'
+  end
+  s.subspec 'Crashlytics' do |ss|
+    ss.preserve_path = 'Sources/PippinAdapters/Crashlytics/CrashlyticsAdapter.swift'
   end
 end
