@@ -12,10 +12,11 @@
     "git": "https://github.com/tworingsoft/Pippin.git",
     "tag": "PippinLibrary-1.0.0"
   },
-  "platforms": {
-    "ios": "9.0"
-  },
   "swift_versions": "5.1",
+  "platforms": {
+    "ios": "9.0",
+    "osx": "10.12"
+  },
   "ios": {
     "source_files": "Sources/PippinLibrary/**/*.{h,m,swift}"
   },

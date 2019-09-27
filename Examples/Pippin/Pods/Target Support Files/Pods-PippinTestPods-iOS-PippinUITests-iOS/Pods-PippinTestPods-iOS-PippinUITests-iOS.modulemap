@@ -1,0 +1,6 @@
+framework module Pods_PippinTestPods_iOS_PippinUITests_iOS {
+  umbrella header "Pods-PippinTestPods-iOS-PippinUITests-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

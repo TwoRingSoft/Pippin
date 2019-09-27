@@ -1,0 +1,6 @@
+framework module PippinLibrary {
+  umbrella header "PippinLibrary-macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,10 +1,41 @@
 use_frameworks!
 install! 'cocoapods', :share_schemes_for_development_pods => true
-platform :ios, '9.0'
+project 'Pippin.xcodeproj'
+workspace 'Pippin.xcworkspace'
 
-target 'Pippin' do
-  pod 'PippinCore', :path => '../..'
-  pod 'PippinLibrary', :path => '../..'
-  pod 'PippinAdapters', :path => '../..'
-  pod 'PippinTesting', :path => '../..'
+abstract_target 'PippinPods-iOS' do
+    pod 'PippinCore', :path => '../..'
+    pod 'PippinAdapters', :path => '../..'
+    pod 'PippinLibrary', :path => '../..', :testspecs => ['Tests']
+
+    # add nondefault adapters
+    pod 'PippinAdapters/CoreLocation', :path => '../..'
+    pod 'PippinAdapters/Crashlytics', :path => '../..'
+
+    # need to explicitly declare Crashlytics dependency (CocoaPods doesn't support transitive dependencies on static libraries, so PippinAdapters/Crashlytics cannot declare a dependency on the Crashlytics pod)
+    pod 'Crashlytics', '~> 3'
+
+    # only link debugging podspec to debug configuration
+    pod 'PippinDebugging', :path => '../..', :configurations => ['Debug']
+    
+    target 'Pippin-iOS' do
+        platform :ios, '9.0'
+    end
+end
+
+abstract_target 'PippinPods-macOS' do
+    pod 'PippinLibrary', path: '../..'
+    
+    target 'Pippin-macOS' do
+        platform :osx, '10.14'
+    end
+end
+
+abstract_target 'PippinTestPods-iOS' do
+  platform :ios, '9.0'
+  pod 'PippinTesting', path: '../..', :testspecs => ['Tests']
+  pod 'PippinLibrary', path: '../..'
+
+  target 'PippinUITests-iOS'
+  target 'PippinUnitTests-iOS'
 end

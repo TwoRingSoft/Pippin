@@ -1,6 +1,0 @@
-framework module PippinAdapters {
-  umbrella header "PippinAdapters-umbrella.h"
-
-  export *
-  module * { export * }
-}

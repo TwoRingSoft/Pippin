@@ -147,6 +147,10 @@
 
         ]
       }
+    },
+    {
+      "name": "Crashlytics",
+      "source_files": "Sources/PippinAdapters/Crashlytics/**/*.{h,m,swift}"
     }
   ],
   "swift_version": "5.1"

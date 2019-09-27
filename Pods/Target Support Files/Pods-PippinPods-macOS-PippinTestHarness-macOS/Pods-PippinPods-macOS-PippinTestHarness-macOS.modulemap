@@ -1,6 +1,0 @@
-framework module Pods_PippinPods_macOS_PippinTestHarness_macOS {
-  umbrella header "Pods-PippinPods-macOS-PippinTestHarness-macOS-umbrella.h"
-
-  export *
-  module * { export * }
-}
