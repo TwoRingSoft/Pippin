@@ -6,7 +6,7 @@
 //
 
 import Cocoa
-import Pippin
+import PippinLibrary
 
 typealias OperationState = (description: String, color: NSColor, font: String)
 

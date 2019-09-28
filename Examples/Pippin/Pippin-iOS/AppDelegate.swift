@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         #if DEBUG
+        environment.model.debuggingDelegate = self
         environment.debugging = DebugFlowController(databaseFileName: "PippinTestHarnessDatabase", delegate: self)
         #endif
 
@@ -48,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 #if DEBUG
-extension AppDelegate: DebugFlowControllerDelegate {
+extension AppDelegate: ModelDebugging {
     func exportedDatabaseData() -> Data? {
         environment.alerter?.showAlert(title: "Exporting database", message: "This is where your app would export its database to transport to other instances of itself, liek on another test device.", type: .info, dismissal: .interactive, occlusion: .weak)
         return nil

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Pippin
+import PippinLibrary
 
 final class DemoAsyncOperation: AsyncOperation {
     private var delegate: OperationStateChangeDelegate

@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-PippinTestPods-iOS-PippinUnitTests-iOS/Pods-PippinTestPods-iOS-PippinUnitTests-iOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework
+${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework
+${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework

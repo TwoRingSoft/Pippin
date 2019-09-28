@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Pippin
+import PippinLibrary
 
 final class DemoCompoundOperation: CompoundOperation {
     private var delegate: OperationStateChangeDelegate

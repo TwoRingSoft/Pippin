@@ -1,0 +1,13 @@
+${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-Pippin-iOS/Pods-PippinPods-iOS-Pippin-iOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework
+${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework
+${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework
+${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework
+${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework
+${BUILT_PRODUCTS_DIR}/PinpointKit/PinpointKit.framework
+${BUILT_PRODUCTS_DIR}/PippinAdapters/PippinAdapters.framework
+${BUILT_PRODUCTS_DIR}/PippinCore/Pippin.framework
+${BUILT_PRODUCTS_DIR}/Result/Result.framework
+${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework
+${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework

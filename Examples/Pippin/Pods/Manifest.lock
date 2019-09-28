@@ -126,7 +126,7 @@ SPEC CHECKSUMS:
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  PippinAdapters: 12fe230c7d9c4be1b4dc57cdbfc48895d4bbfbd4
+  PippinAdapters: eae688f7e64f2574d40a40033922a1768fa0a153
   PippinCore: 8963e4b6e92f12e77ffb532d2b61cbf13aae67e0
   PippinDebugging: b4fa5984b134d28262b9e839db806f90c686e17f
   PippinLibrary: ff632c89cdcb82e63f980154b51f025358127cf1

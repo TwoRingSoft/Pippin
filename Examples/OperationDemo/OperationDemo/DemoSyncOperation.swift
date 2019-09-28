@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Pippin
+import PippinLibrary
 
 final class DemoSyncOperation: Operation {
     private var delegate: OperationStateChangeDelegate

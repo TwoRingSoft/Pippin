@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Pippin
+import PippinLibrary
 
 /// Simulates an implementation of asynchronous work using a stock `Operation`. When many of these are executed on a serial queue or with dependency order, operations begin before the async work being done by those before them actually finishes.
 /// - SeeAlso: OperationDemoUITests.

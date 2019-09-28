@@ -1,0 +1,3 @@
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchorage.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinLibrary.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PippinTesting.framework
