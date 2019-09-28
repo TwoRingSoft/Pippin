@@ -9,8 +9,10 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
-  s.platform     = :ios, '9.0'
   s.swift_version = '5.1'
+
+  s.ios.deployment_target = '9.0'
+  s.osx.deployment_target = '10.12'
 
   s.ios.source_files = 'Sources/PippinLibrary/**/*.{h,m,swift}'
   s.osx.source_files = 'Sources/PippinLibrary/Foundation/**/*.{h,m,swift}'
