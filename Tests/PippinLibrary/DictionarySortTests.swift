@@ -5,7 +5,7 @@
 //  Created by Andrew McKnight on 1/8/19.
 //
 
-import Pippin
+import PippinLibrary
 import XCTest
 
 class DictionarySortTests: XCTestCase {

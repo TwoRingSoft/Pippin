@@ -6,7 +6,7 @@
 //
 //
 
-import Pippin
+import PippinLibrary
 import XCTest
 
 class Tribool_Test: XCTestCase {
