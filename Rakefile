@@ -340,9 +340,3 @@ targets:
       ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: $(inherited)
 XCODEGEN_SPEC_YML
 end
-
-# run init task before all tasks for setup
-Rake::Task.tasks.each do |t|
-  next if t.name == 'init'
-  t.enhance [:init]
-end
