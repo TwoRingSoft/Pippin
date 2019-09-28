@@ -117,20 +117,25 @@ end
 desc 'Smoke test installing pods for and building all example projects deliverable via `pod try`.'
 task :example_smoke_tests do
   require 'open3'
-  ['OperationDemo'].each do |example_project|
-    puts "travis_fold:start:#{example_project}" if travis?
+  [
+    {:project => 'OperationDemo', :scheme => 'OperationDemo'}, 
+    {:project => 'Pippin', :scheme => 'Pippin-iOS'}
+  ].each do |example|
+    example_project = example[:project]
+    example_scheme = example[:scheme]
+    puts "travis_fold:start:#{example_scheme}" if travis?
     Dir.chdir("Examples/#{example_project}") do
       update_command = 'rbenv exec bundle exec pod update --no-repo-update'
       puts update_command
       Open3.pipeline([update_command])
-      build_command = "xcrun xcodebuild -workspace #{example_project}.xcworkspace -scheme #{example_project} 2>&1"
-      tee_pipe = "tee Logs/#{example_project}_smoke_test.log"
+      build_command = "xcrun xcodebuild -workspace #{example_project}.xcworkspace -scheme #{example_scheme} 2>&1"
+      tee_pipe = "tee Logs/#{example_scheme}_smoke_test.log"
       xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
       puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
       status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
       fail if status_list[0] != 0
     end
-    puts "travis_fold:end:#{example_project}" if travis?
+    puts "travis_fold:end:#{example_scheme}" if travis?
   end
 end
 
@@ -142,7 +147,7 @@ def unit_tests
   ].each do |options|
     ios_version = options[:ios_version]
     device_name = options[:device_name]
-    ['Pippin-Unit-Extensions-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
+    ['PippinLibrary-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
       build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
       tee_pipe = "tee Logs/#{scheme}_ios_#{ios_version}.log"
@@ -162,7 +167,7 @@ def test_smoke_test
   ].each do |options|
     ios_version = options[:ios_version]
     device_name = options[:device_name]
-    [ 'PippinUnitTests', 'PippinUITests' ].each do |scheme|
+    [ 'PippinUnitTests-iOS', 'PippinUITests-iOS' ].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
       build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
       tee_pipe = "tee Logs/#{scheme}_smoke_test_ios_#{ios_version}.log"
