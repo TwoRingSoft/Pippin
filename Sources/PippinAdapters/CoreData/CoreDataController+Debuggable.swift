@@ -1,5 +1,5 @@
 //
-//  CoreDataControllerDebugging.swift
+//  CoreDataController+Debuggable.swift
 //  Pippin
 //
 //  Created by Andrew McKnight on 8/20/18.
@@ -8,13 +8,6 @@
 
 import Foundation
 import Pippin
-
-public protocol CoreDataControllerDebugging {
-    func coreDataControllerExported(coreDataController: CoreDataController)
-    func coreDataControllerWantsToGenerateTestModels(coreDataController: CoreDataController)
-    func coreDataControllerDeletedModels(coreDataController: CoreDataController)
-    func coreDataControllerWantsToImportFixture(coreDataController: CoreDataController)
-}
 
 extension CoreDataController: Debuggable {
     public func debuggingControlPanel() -> UIView {
@@ -37,20 +30,19 @@ extension CoreDataController: Debuggable {
 }
 
 @objc extension CoreDataController {
-    
     func exportPressed() {
-        debuggingDelegate?.coreDataControllerExported(coreDataController: self)
+        debuggingDelegate?.exported(coreDataController: self)
     }
     
     func deletePressed() {
-        debuggingDelegate?.coreDataControllerDeletedModels(coreDataController: self)
+        debuggingDelegate?.deleteModels(coreDataController: self)
     }
     
     func generatePressed() {
-        debuggingDelegate?.coreDataControllerWantsToGenerateTestModels(coreDataController: self)
+        debuggingDelegate?.generateTestModels(coreDataController: self)
     }
     
     func importPressed() {
-        debuggingDelegate?.coreDataControllerWantsToImportFixture(coreDataController: self)
+        debuggingDelegate?.importFixtures(coreDataController: self)
     }
 }

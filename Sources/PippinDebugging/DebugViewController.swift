@@ -11,12 +11,8 @@ import Pippin
 import UIKit
 
 protocol DebugViewControllerDelegate {
-    func debugViewControllerExported(debugViewController: DebugViewController)
-    func debugViewControllerWantsToGenerateTestModels(debugViewController: DebugViewController)
-    
     func debugViewControllerDisplayedMenu(debugViewController: DebugViewController)
     func debugViewControllerHidMenu(debugViewController: DebugViewController)
-    func debugViewControllerWantsToDeleteModels(debugViewController: DebugViewController)
 }
 
 public class DebugViewController: UIViewController {
@@ -84,11 +80,9 @@ private extension DebugViewController {
         stackWidthSizingView.topAnchor == debugMenu.topAnchor
 
         var controlPanels = [UIView]()
-    
-        environment.coreDataController?.debuggingDelegate = self
 
-        let debuggingControls = [
-            environment.coreDataController?.debuggingControlPanel(),
+        let debuggingControls: [UIView?] = [
+            environment.model?.debuggingControlPanel(),
             environment.activityIndicator?.debuggingControlPanel(),
             environment.alerter?.debuggingControlPanel(),
             environment.crashReporter?.debuggingControlPanel(),
@@ -127,26 +121,4 @@ private extension DebugViewController {
         displayButton.addGestureRecognizer(panGestureRecognizer)
     }
 
-}
-
-extension DebugViewController: CoreDataControllerDebugging {
-    public func coreDataControllerExported(coreDataController: CoreDataController) {
-        delegate.debugViewControllerExported(debugViewController: self)
-    }
-    
-    public func coreDataControllerWantsToGenerateTestModels(coreDataController: CoreDataController) {
-        delegate.debugViewControllerWantsToGenerateTestModels(debugViewController: self)
-    }
-    
-    public func coreDataControllerDeletedModels(coreDataController: CoreDataController) {
-        delegate.debugViewControllerWantsToDeleteModels(debugViewController: self)
-    }
-    
-    public func coreDataControllerWantsToImportFixture(coreDataController: CoreDataController) {
-        do {
-            try present(DatabaseFixturePickerViewController(environment: environment), animated: true)
-        } catch {
-            environment.alerter?.showAlert(title: "Error", message: String(format: "Failed to initialize list of fixtures: %@.", String(describing: error)), type: .error, dismissal: .automatic, occlusion: .weak)
-        }
-    }
 }

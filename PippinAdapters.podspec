@@ -67,9 +67,10 @@ Pod::Spec.new do |s|
     ss.dependency 'PippinLibrary'
   end
   s.subspec 'CoreLocation' do |ss|
-    ss.source_files = 'Sources/PippinAdapters/CoreData/**/*.{h,m,swift}'
+    ss.source_files = 'Sources/PippinAdapters/CoreLocation/**/*.{h,m,swift}'
     ss.dependency 'PippinCore'
     ss.dependency 'PippinLibrary'
+    ss.dependency 'CanIHaz'
   end
   s.subspec 'Crashlytics' do |ss|
     ss.preserve_path = 'Sources/PippinAdapters/Crashlytics/CrashlyticsAdapter.swift'

@@ -18,7 +18,7 @@ public class CoreDataController: NSObject, Model {
     public var environment: Environment?
     public var modelName: String
     fileprivate var managedObjectModel: NSManagedObjectModel?
-    public var debuggingDelegate: CoreDataControllerDebugging?
+    public var debuggingDelegate: ModelDebugging?
 
     /// Initialize a new Core Data helper.
     /// - Parameters:

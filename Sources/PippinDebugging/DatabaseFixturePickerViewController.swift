@@ -7,6 +7,7 @@
 //
 
 import Pippin
+import PippinLibrary
 import UIKit
 
 class DatabaseFixturePickerViewController: UIViewController {
@@ -67,7 +68,7 @@ extension DatabaseFixturePickerViewController: UITableViewDataSource {
 extension DatabaseFixturePickerViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let coreDataController = environment.coreDataController else {
+        guard let coreDataController = environment.model else {
             fatalError("Importing database fixture with no CoreDataController set up")
         }
 
