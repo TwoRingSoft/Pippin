@@ -21,5 +21,7 @@ Pod::Spec.new do |s|
     test_spec.source_files = 'Tests/PippinLibrary/**/*.swift'
   end
 
+  s.xcconfig = { 'ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES' => 'YES' }
+
   s.dependency 'Anchorage'
 end
