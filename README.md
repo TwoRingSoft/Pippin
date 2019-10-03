@@ -58,8 +58,8 @@ There are five podspecs to deliver these tools, see each's README for more infor
 
 > **Note:** there are several reasons these are delivered via separate podspecs instead of one podspec with multiple podspecs. Those two spec levels are not equivalent for all functionalities.
 >
-- Issues with installing `test_spec`s for just one subspec.
-- Not supported to install a subspec using `Pod:configurations`: [https://github.com/CocoaPods/CocoaPods/issues/3503](https://github.com/CocoaPods/CocoaPods/issues/3503).
+> - Issues with installing `test_spec`s for just one subspec.
+> - Not supported to install a subspec using `Pod:configurations`: [https://github.com/CocoaPods/CocoaPods/issues/3503](https://github.com/CocoaPods/CocoaPods/issues/3503).
 
 The old `Pippin.podspec` is now an umbrella framework that pulls in `PippinCore`, `PippinAdapters`, `PippinLibrary` and `PippinTesting` for convenience.
 
