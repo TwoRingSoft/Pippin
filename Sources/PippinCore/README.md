@@ -30,7 +30,7 @@ The basic building blocks of `Pippin`: stable APIs that sit between app code and
 - `InAppPurchaseVendor`
 - `ActivityIndicator`
 
-These form a[Facade](https://en.wikipedia.org/wiki/Facade_pattern) that sits in between your app code and dependencies, and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) implementations to those protocols are supplied in [`PippinAdapters`](../PippinAdapters).
+These form a [Facade](https://en.wikipedia.org/wiki/Facade_pattern) that sits in between your app code and dependencies, and [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) implementations to those protocols are supplied in [`PippinAdapters`](../PippinAdapters).
 
 ## Environment
 
