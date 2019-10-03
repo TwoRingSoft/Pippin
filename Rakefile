@@ -45,17 +45,15 @@ task :example_smoke_tests do
     example_project = example[:project]
     example_scheme = example[:scheme]
     puts "travis_fold:start:#{example_scheme}" if travis?
-    Dir.chdir("Examples/#{example_project}") do
-      update_command = 'rbenv exec bundle exec pod update --no-repo-update'
-      puts update_command
-      Open3.pipeline([update_command])
-      build_command = "xcrun xcodebuild -workspace #{example_project}.xcworkspace -scheme #{example_scheme} 2>&1"
-      tee_pipe = "tee Logs/#{example_scheme}_smoke_test.log"
-      xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
-      puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-      status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
-      fail if status_list[0] != 0
+    Dir.chdir "Examples/#{example_project}" do
+      sh 'rbenv exec bundle exec pod install'
     end
+    build_command = "xcrun xcodebuild -workspace Examples/#{example_project}/#{example_project}.xcworkspace -scheme #{example_scheme} 2>&1"
+    tee_pipe = "tee Logs/#{example_scheme}_smoke_test.log"
+    xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
+    puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+    status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+    fail if status_list[0] != 0
     puts "travis_fold:end:#{example_scheme}" if travis?
   end
 end
@@ -70,7 +68,7 @@ def unit_tests
     device_name = options[:device_name]
     ['PippinLibrary-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
-      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
+      build_command = "xcrun xcodebuild -workspace Examples/Pippin/Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
       tee_pipe = "tee Logs/#{scheme}_ios_#{ios_version}.log"
       xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
       puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
@@ -90,7 +88,7 @@ def test_smoke_test
     device_name = options[:device_name]
     [ 'PippinUnitTests-iOS', 'PippinUITests-iOS' ].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
-      build_command = "xcrun xcodebuild -workspace Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
+      build_command = "xcrun xcodebuild -workspace Examples/Pippin/Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
       tee_pipe = "tee Logs/#{scheme}_smoke_test_ios_#{ios_version}.log"
       xcpretty_pipe = "rbenv exec bundle exec xcpretty -t"
       puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
