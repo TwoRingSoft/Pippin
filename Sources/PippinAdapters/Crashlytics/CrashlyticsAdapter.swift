@@ -9,13 +9,16 @@ import Crashlytics
 import Fabric
 import Foundation
 import Pippin
+import UIKit
 
 public class CrashlyticsAdapter: NSObject, EnvironmentallyConscious {
     
     public var environment: Environment?
     
     init(debug: Bool) {
+        #if DEBUG
         Fabric.sharedSDK().debug = debug
+        #endif
         Fabric.with([ Crashlytics.self ])
     }
 
