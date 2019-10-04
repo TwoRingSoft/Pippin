@@ -10,18 +10,24 @@ task :init do
     sh 'rbenv exec gem install bundler'
     sh 'rbenv exec bundle'
     sh 'mkdir -p Logs'
+
+    example_projects.each do |project|
+      Dir.chdir "Examples/#{project[:project]}" do
+        sh 'rbenv exec bundle exec pod install'
+      end
+    end
 end
 
 desc 'Run Pippin unit and smoke tests.'
 task :test do
   unit_tests
-  subspec_smoke_test
   test_smoke_test
   example_smoke_tests
+  # subspec_smoke_test
 end
 
 desc 'Run unit tests against Pippin and PippinTesting.'
-task :unit_test do
+task :unit_tests do
     unit_tests
 end
 
@@ -37,36 +43,32 @@ end
 
 desc 'Smoke test installing pods for and building all example projects deliverable via `pod try`.'
 task :example_smoke_tests do
+  example_smoke_tests
+end
+
+def example_smoke_tests
   require 'open3'
-  [
-    {:project => 'OperationDemo', :scheme => 'OperationDemo'}, 
-    {:project => 'Pippin', :scheme => 'Pippin-iOS'}
-  ].each do |example|
+  example_projects.each do |example|
     example_project = example[:project]
-    example_scheme = example[:scheme]
-    puts "travis_fold:start:#{example_scheme}" if travis?
-    Dir.chdir "Examples/#{example_project}" do
-      sh 'rbenv exec bundle exec pod install'
+    example[:schemes].each do |example_scheme|
+      puts "travis_fold:start:#{example_scheme}" if travis?
+      build_command = "xcrun xcodebuild -workspace Examples/#{example_project}/#{example_project}.xcworkspace -scheme #{example_scheme} 2>&1"
+      tee_pipe = "tee Logs/#{example_scheme}_smoke_test.log"
+      xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
+      puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
+      status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
+      fail if status_list[0] != 0
+      puts "travis_fold:end:#{example_scheme}" if travis?
     end
-    build_command = "xcrun xcodebuild -workspace Examples/#{example_project}/#{example_project}.xcworkspace -scheme #{example_scheme} 2>&1"
-    tee_pipe = "tee Logs/#{example_scheme}_smoke_test.log"
-    xcpretty_pipe = 'rbenv exec bundle exec xcpretty'
-    puts "#{build_command} | #{tee_pipe} | #{xcpretty_pipe}"
-    status_list = Open3.pipeline([build_command], [tee_pipe], [xcpretty_pipe])
-    fail if status_list[0] != 0
-    puts "travis_fold:end:#{example_scheme}" if travis?
   end
 end
 
 def unit_tests
   require 'open3'
-  [
-    {:ios_version => '10.3.1', :device_name => 'iPhone SE'}, 
-    {:ios_version => '13.0', :device_name => 'iPhone 8'}
-  ].each do |options|
+  test_destinations.each do |options|
     ios_version = options[:ios_version]
     device_name = options[:device_name]
-    ['PippinLibrary-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
+    ['PippinLibrary-iOS-Unit-Tests', 'PippinTesting-Unit-Tests'].each do |scheme|
       sh "echo travis_fold:start:#{scheme}" if travis?
       build_command = "xcrun xcodebuild -workspace Examples/Pippin/Pippin.xcworkspace -scheme #{scheme} -destination \'platform=iOS Simulator,name=#{device_name},OS=#{ios_version}\' test 2>&1"
       tee_pipe = "tee Logs/#{scheme}_ios_#{ios_version}.log"
@@ -81,9 +83,7 @@ end
 
 def test_smoke_test
   require 'open3'
-  [
-    {:ios_version => '13.0', :device_name => 'iPhone 8'}
-  ].each do |options|
+  test_destinations.each do |options|
     ios_version = options[:ios_version]
     device_name = options[:device_name]
     [ 'PippinUnitTests-iOS', 'PippinUITests-iOS' ].each do |scheme|
@@ -102,61 +102,6 @@ end
 def subspec_smoke_test
   require 'fileutils'
   require 'open3'
-  
-  sdk_versions_per_platform = {
-    # platform => [ sdk versions ]
-    'phone' => ['10.3.1', '13.0'],
-    'mac' => ['10.14'],
-#    'tv' => ['11.1'],
-#    'watch' => ['4.1']
-  }
-  
-  platform_to_device_prefix = {
-    # platform => prefix
-    'phone' => 'iphonesimulator',
-    'mac' => 'macosx',
-    'tv' => 'appletvsimulator',
-    'watch' => 'watchsimulator'
-  }
-  
-  platform_to_cocoapods_names = {
-    # platform => cocoapods platform name
-    'phone' => 'ios',
-    'mac' => 'osx',
-    'tv' => 'tvos',
-    'watch' => 'watchos'
-  }
-  
-  platform_xcodegen_names = {
-    'phone' => 'iOS',
-    'mac' => 'macOS',
-    'tv' => 'tvOS',
-    'watch' => 'watchOS',
-  }
-  
-  scheme_names = [
-    'Pippin',
-    'Pippin-Extensions',
-    'Pippin-OperationTestHelpers',
-    'PippinAdapters-PinpointKit',
-    'PippinAdapters-XCGLogger',
-    'PippinAdapters-DebugController',
-    'PippinAdapters-COSTouchVisualizer',
-    'PippinAdapters-JGProgressHUD',
-    'PippinAdapters-SwiftMessages',
-  ]
-
-  extra_pod_dependencies = {
-    'Pippin' => [ 'Crashlytics' ],
-    'PippinAdapters-PinpointKit' => [],
-    'PippinAdapters-XCGLogger' => [],
-    'PippinAdapters-DebugController' => [],
-    'PippinAdapters-COSTouchVisualizer' => [],
-    'PippinAdapters-JGProgressHUD' => [],
-    'PippinAdapters-SwiftMessages' => [],
-  }
-  
-  languages = ['Swift', 'Objc']
   
   # create dir to contain all tests
   root_test_path = 'SmokeTests/generated_xcode_projects'
@@ -259,3 +204,89 @@ targets:
       ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: $(inherited)
 XCODEGEN_SPEC_YML
 end
+
+def example_projects
+  [
+    {:project => 'OperationDemo', :schemes => ['OperationDemo']}, 
+    {:project => 'Pippin', :schemes => ['Pippin-iOS', 'Pippin-macOS']},
+  ]
+end
+
+def test_destinations
+  [
+    # {:ios_version => '10.3.1', :device_name => 'iPhone 5'}, 
+    {:ios_version => '13.1', :device_name => 'iPhone 8'},
+  ]
+end
+
+def sdk_versions_per_platform 
+  {    
+    'phone' => ['10.3.1', '13.0'],
+    'mac' => ['10.14'],
+    # 'tv' => ['11.1'],
+    # 'watch' => ['4.1']
+  }
+end
+
+def platform_to_device_prefix 
+  {
+    'phone' => 'iphonesimulator',
+    'mac' => 'macosx',
+    'tv' => 'appletvsimulator',
+    'watch' => 'watchsimulator'
+  }
+end
+
+def platform_to_cocoapods_names
+  {
+    'phone' => 'ios',
+    'mac' => 'osx',
+    'tv' => 'tvos',
+    'watch' => 'watchos'
+  }
+end
+
+def platform_xcodegen_names
+ {
+    'phone' => 'iOS',
+    'mac' => 'macOS',
+    'tv' => 'tvOS',
+    'watch' => 'watchOS',
+  }
+end
+
+def scheme_names 
+  [
+    'Pippin',
+    'Pippin-Extensions',
+    'Pippin-OperationTestHelpers',
+    'PippinAdapters-PinpointKit',
+    'PippinAdapters-XCGLogger',
+    'PippinAdapters-DebugController',
+    'PippinAdapters-COSTouchVisualizer',
+    'PippinAdapters-JGProgressHUD',
+    'PippinAdapters-SwiftMessages',
+  ]
+end
+
+def extra_pod_dependencies
+  {
+    'Pippin' => [ 'Crashlytics' ],
+    'PippinAdapters-PinpointKit' => [],
+    'PippinAdapters-XCGLogger' => [],
+    'PippinAdapters-DebugController' => [],
+    'PippinAdapters-COSTouchVisualizer' => [],
+    'PippinAdapters-JGProgressHUD' => [],
+    'PippinAdapters-SwiftMessages' => [],
+  }
+end
+
+def languages
+  ['Swift', 'Objc']
+end
+
+# run init task before all tasks for setup
+# Rake::Task.tasks.each do |t|
+#   next if t.name == 'init'
+#   t.enhance [:init]
+# end
