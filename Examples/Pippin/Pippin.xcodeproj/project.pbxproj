@@ -54,7 +54,7 @@
 		495BEB5621E81D4D00FA478B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		495BEB5921E81D4D00FA478B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		495BEB5B21E81D4D00FA478B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		495BEB5C21E81D4D00FA478B /* PippinTestHarness_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PippinTestHarness_macOS.entitlements; sourceTree = "<group>"; };
+		495BEB5C21E81D4D00FA478B /* Pippin_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pippin_macOS.entitlements; sourceTree = "<group>"; };
 		495CE05220F25BE900A72C80 /* PippinUnitTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PippinUnitTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		495CE05420F25BE900A72C80 /* PippinUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinUnitTests.swift; sourceTree = "<group>"; };
 		495CE05620F25BE900A72C80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 				495BEB5621E81D4D00FA478B /* Assets.xcassets */,
 				495BEB5821E81D4D00FA478B /* MainMenu.xib */,
 				495BEB5B21E81D4D00FA478B /* Info.plist */,
-				495BEB5C21E81D4D00FA478B /* PippinTestHarness_macOS.entitlements */,
+				495BEB5C21E81D4D00FA478B /* Pippin_macOS.entitlements */,
 			);
 			path = "Pippin-macOS";
 			sourceTree = "<group>";
@@ -781,7 +781,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "PippinTestHarness-macOS/PippinTestHarness_macOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Pippin-macOS/Pippin_macOS.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -830,7 +830,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "PippinTestHarness-macOS/PippinTestHarness_macOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Pippin-macOS/Pippin_macOS.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
