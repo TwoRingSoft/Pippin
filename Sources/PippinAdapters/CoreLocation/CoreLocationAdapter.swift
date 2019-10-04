@@ -5,7 +5,6 @@
 //  Created by Andrew McKnight on 8/15/18.
 //
 
-import CanIHaz
 import CoreLocation
 import Foundation
 import Pippin
