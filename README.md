@@ -50,11 +50,11 @@ You've just gotten the following, with minimal boilerplate:
 
 There are five podspecs to deliver these tools, see each's README for more information:
 
-- [PippinCore](Sources/PippinCore)
-- [PippinAdapters](Sources/PippinAdapters)
-- [PippinDebugging](Sources/PippinDebugging)
-- [PippinLibrary](Sources/PippinLibrar)
-- [PippinTesting](Sources/PippinTesting)
+- [`PippinCore`](Sources/PippinCore)
+- [`PippinAdapters`](Sources/PippinAdapters)
+- [`PippinDebugging`](Sources/PippinDebugging)
+- [`PippinLibrary`](Sources/PippinLibrar)
+- [`PippinTesting`](Sources/PippinTesting)
 
 > **Note:** there are several reasons these are delivered via separate podspecs instead of one podspec with multiple podspecs. Those two spec levels are not equivalent for all functionalities.
 >
@@ -78,9 +78,37 @@ Issues and pull requests are welcome!
 
 `rake test`
 
-Files under Tests/ are declared in `Pippin`'s `test_spec`, and likewise for `PippinTesting`. These are brought into the root xcworkspace to run as unit tests using the Podfile's `testspecs` declaration.
+Runs a collection of Rake tasks which themselves may be run independently:
 
-Also runs an integration smoke test, which generates an Xcode project for each spec and subspec, in each of Swift and Objective-C, to try building after `pod install`. Each project is deposited under `PippinTests/SmokeTests`. `PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
+- `example_smoke_tests`
+- `unit_tests`
+- `test_smoke_test`
+- `subspec_smoke_test`
+
+### `example_smoke_tests`
+
+For each project in `Examples/` try to `pod install` and build.
+
+### `unit_tests`
+
+Run the unit test suites created for any `test_specs` of any Pippin podspecs.
+
+### `test_smoke_test`
+
+`pod install` and try to build the `Example/Pippin.xcodeproject` unit and UI test targets, which both declare dependencies on `PippinLibrary` and `PippinTesting`.
+
+### `subspec_smoke_test`
+
+An integration smoke test, which generates an Xcode project for each subspec of each Pippin podspec, each in both Swift and Objective-C, to try building after `pod install`ing that subspec. Each project is deposited under `PippinTests/SmokeTests`. 
+
+`PippinTests/` also contains the template project source code in `ObjcApp/` and `SwiftApp/`, plus the template Podfile.
+
+### Podspec `test_specs`
+
+Pippin podspecs currently with unit tests located under `Tests/`:
+
+- `PippinLibrary`
+- `PippinTesting`
 
 # Thanks!
 
