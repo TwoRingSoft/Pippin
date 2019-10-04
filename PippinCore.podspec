@@ -14,21 +14,9 @@ Pod::Spec.new do |s|
   
   s.swift_version = '5.1'
   
-  s.default_subspecs = ['Components', 'Environment', 'Peripherals']
-
-  s.subspec 'Components' do |ss|
-    ss.source_files = ['Sources/PippinCore/Components/**/*.{h,m,swift}']
-  end
-
-  s.subspec 'Environment' do |ss|
-    ss.source_files = ['Sources/PippinCore/Environment/**/*.{h,m,swift}']
-  end
-
-  s.subspec 'Peripherals' do |ss|
-    ss.source_files = ['Sources/PippinCore/Peripherals/**/*.{h,m,swift}']
-    ss.dependency 'Result'
-  end
-
+  s.source_files = ['Sources/PippinCore/**/*.{h,m,swift}']
+  
+  s.dependency 'Result'
   s.dependency 'PippinLibrary'
 
   s.module_name = 'Pippin'

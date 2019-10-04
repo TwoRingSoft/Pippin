@@ -4,7 +4,7 @@
 
 `PippinCore`'s main goal is to decouple dependencies from your app, allowing you to swap in different third party frameworks, hand rolled versions or test mocks/fakes of production counterparts, with no changes to your codebase. 
 
-`PippinCore` has three subspecs:
+`PippinCore` has three main areas:
 
 - [Components](#components)
 - [Environment](#environment)
