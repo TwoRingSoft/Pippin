@@ -7,7 +7,7 @@ DEPENDENCIES:
   - PippinLibrary (from `../..`)
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - Anchorage
 
 EXTERNAL SOURCES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Anchorage: a187da0bc9b07440637d42c8744b8c82a4490295
-  PippinLibrary: ff632c89cdcb82e63f980154b51f025358127cf1
+  PippinLibrary: 2554eb4111f331c6b620dab4b550ae9b967fe07d
 
 PODFILE CHECKSUM: 358e3f5749264a7dfa3610052e0d409c4d9a7ea4
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.1
