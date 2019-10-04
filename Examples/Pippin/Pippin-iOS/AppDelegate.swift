@@ -25,13 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         environment.crashReporter = CrashlyticsAdapter(debug: true)
 
-        #if targetEnvironment(simulator)
+        #if !targetEnvironment(simulator)
             environment.locator = CoreLocationAdapter(locatorDelegate: self)
         #endif
 
         #if DEBUG
-        environment.model.debuggingDelegate = self
-        environment.debugging = DebugFlowController(databaseFileName: "PippinTestHarnessDatabase", delegate: self)
+        environment.model?.debuggingDelegate = self
+        environment.debugging = DebugFlowController(databaseFileName: "PippinTestHarnessDatabase")
         #endif
 
         environment.connectEnvironment()
@@ -50,26 +50,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 #if DEBUG
 extension AppDelegate: ModelDebugging {
-    func exportedDatabaseData() -> Data? {
-        environment.alerter?.showAlert(title: "Exporting database", message: "This is where your app would export its database to transport to other instances of itself, liek on another test device.", type: .info, dismissal: .interactive, occlusion: .weak)
-        return nil
+    func importFixtures(coreDataController: Model) {
+        environment.alerter?.showAlert(title: "Import database fixtures", message: "This is where your app would imports its database from other instances of itself, like on another test device.", type: .info, dismissal: .interactive, occlusion: .weak)
     }
 
-    func failedToExportDatabase(error: DebugFlowError) {
-        environment.alerter?.showAlert(title: "Failed exporting database", message: "Something went wrong.", type: .error, dismissal: .interactive, occlusion: .strong)
+    func exported(coreDataController: Model) {
+        environment.alerter?.showAlert(title: "Exporting database", message: "This is where your app would export its database to transport to other instances of itself, like on another test device.", type: .info, dismissal: .interactive, occlusion: .weak)
     }
 
-    func debugFlowControllerWantsToGenerateTestModels(debugFlowController: DebugMenuPresenter) {
+    func generateTestModels(coreDataController: Model) {
         environment.alerter?.showAlert(title: "Generating test models", message: "This is where your app would generate some test model entities.", type: .info, dismissal: .interactive, occlusion: .strong)
     }
 
-    func debugFlowControllerWantsToDeleteModels(debugFlowController: DebugMenuPresenter) {
+    func deleteModels(coreDataController: Model) {
         environment.alerter?.showAlert(title: "Deleting models", message: "This is where your app would delete its model entities.", type: .info, dismissal: .interactive, occlusion: .strong)
     }
 }
 #endif
 
-#if targetEnvironment(simulator)
+#if !targetEnvironment(simulator)
 extension AppDelegate: LocatorDelegate {
     func locator(locator: Locator, updatedToLocation location: Location) {
         environment.logger?.logInfo(message: "locator \(locator) updated to location \(location)")

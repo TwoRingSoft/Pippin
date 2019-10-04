@@ -145,8 +145,17 @@
         ],
         "PippinLibrary": [
 
+        ]
+      }
+    },
+    {
+      "name": "AVCaptureDevice",
+      "source_files": "Sources/PippinAdapters/AVCaptureDevice/**/*.{h,m,swift}",
+      "dependencies": {
+        "PippinCore": [
+
         ],
-        "CanIHaz": [
+        "PippinLibrary": [
 
         ]
       }

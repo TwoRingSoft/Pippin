@@ -23,6 +23,9 @@
   "osx": {
     "source_files": "Sources/PippinLibrary/Foundation/**/*.{h,m,swift}"
   },
+  "xcconfig": {
+    "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "YES"
+  },
   "dependencies": {
     "Anchorage": [
 

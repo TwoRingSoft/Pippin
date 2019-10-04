@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		0D6BDB398561FC03D476BCDA /* Pods_PippinTestPods_iOS_PippinUnitTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C34774A1A83F4F9583E4B4 /* Pods_PippinTestPods_iOS_PippinUnitTests_iOS.framework */; };
 		4907828721585E3D0024748B /* PippinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907828621585E3D0024748B /* PippinUITests.swift */; };
-		490A0D3E233EE3C20082B3F8 /* CrashlyticsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490A0D3D233EE3C20082B3F8 /* CrashlyticsAdapter.swift */; };
 		495BEB5521E81D4C00FA478B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495BEB5421E81D4C00FA478B /* AppDelegate.swift */; };
 		495BEB5721E81D4D00FA478B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5621E81D4D00FA478B /* Assets.xcassets */; };
 		495BEB5A21E81D4D00FA478B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5821E81D4D00FA478B /* MainMenu.xib */; };
 		495CE05520F25BE900A72C80 /* PippinUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CE05420F25BE900A72C80 /* PippinUnitTests.swift */; };
+		496B3F8D2346FB59009F2F77 /* CrashlyticsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490A0D3D233EE3C20082B3F8 /* CrashlyticsAdapter.swift */; };
 		49835A061E934995009CC53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A051E934995009CC53E /* AppDelegate.swift */; };
 		49835A081E934995009CC53E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49835A071E934995009CC53E /* ViewController.swift */; };
 		49835A0D1E934995009CC53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49835A0C1E934995009CC53E /* Assets.xcassets */; };
@@ -562,7 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				490A0D3E233EE3C20082B3F8 /* CrashlyticsAdapter.swift in Sources */,
+				496B3F8D2346FB59009F2F77 /* CrashlyticsAdapter.swift in Sources */,
 				49835A081E934995009CC53E /* ViewController.swift in Sources */,
 				49835A061E934995009CC53E /* AppDelegate.swift in Sources */,
 			);
@@ -646,7 +646,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PippinTestHarness;
+				TEST_TARGET_NAME = "Pippin-iOS";
 			};
 			name = Debug;
 		};
@@ -688,7 +688,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PippinTestHarness;
+				TEST_TARGET_NAME = "Pippin-iOS";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

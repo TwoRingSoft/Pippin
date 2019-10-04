@@ -92,7 +92,7 @@ DEPENDENCIES:
   - PippinTesting/Tests (from `../..`)
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - Anchorage
     - COSTouchVisualizer
     - Crashlytics
@@ -126,15 +126,15 @@ SPEC CHECKSUMS:
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  PippinAdapters: eae688f7e64f2574d40a40033922a1768fa0a153
+  PippinAdapters: 9fbda4a8f995ed3366edd305346afbfa6f6bf1aa
   PippinCore: 8963e4b6e92f12e77ffb532d2b61cbf13aae67e0
   PippinDebugging: b4fa5984b134d28262b9e839db806f90c686e17f
-  PippinLibrary: ff632c89cdcb82e63f980154b51f025358127cf1
+  PippinLibrary: 32a209efd502dd9fe1a784770a54b4285fa56399
   PippinTesting: c4903a5db7b4886859addb65d11e22ab3399e3f7
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 360b8f8f71c5394cde4c436ec4bc2ea2e408b617
+PODFILE CHECKSUM: 513c4069a60f751657f3a8e4fe05b28f5336edfd
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.1
