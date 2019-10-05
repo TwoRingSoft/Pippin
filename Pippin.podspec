@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
   s.dependency 'PippinAdapters'
   s.dependency 'PippinCore'
   s.dependency 'PippinLibrary'
-  s.dependency 'PippinTesting'
 
   s.module_name = 'PippinUmbrella'
 end
