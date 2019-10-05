@@ -99,17 +99,18 @@ fileprivate extension AuthorizedAVCaptureDevice {
     class func requestAccess(mediaType: MediaType, completion: CaptureDeviceAuthorizationCompletionBlock?) {
         AVCaptureDevice.requestAccess(for: mediaType.stringConstant()) { authorizationGranted in
             if !authorizationGranted {
-                let authorizationError: NSError? = NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.", NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."])
+                let authorizationError = NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.denied.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.", NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."])
                 completion?(.failure(authorizationError))
                 return
             }
 
             guard let device = createCaptureDevice(mediaType) else {
-                let creationError: NSError? = NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.couldNotCreate.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.", NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."])
+                let creationError = NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.couldNotCreate.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.", NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."])
                 completion?(.failure(creationError))
+                return
             }
 
-            completion?()
+            completion?(.success(device))
         }
     }
 
