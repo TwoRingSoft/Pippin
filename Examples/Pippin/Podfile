@@ -9,8 +9,17 @@ abstract_target 'PippinPods-iOS' do
     pod 'PippinLibrary', :path => '../..', :testspecs => ['Tests']
 
     # add nondefault adapters
-    pod 'PippinAdapters/CoreLocation', :path => '../..'
-    pod 'PippinAdapters/Crashlytics', :path => '../..'
+    [
+      'CoreLocation',
+      'Crashlytics',
+      'FormController',
+      'CRUDViewController',
+      'AVCaptureDevice',
+      'InfoViewController',
+      'CoreData',
+    ].each do |subspec|
+      pod "PippinAdapters/#{subspec}", :path => '../..'
+    end
 
     # need to explicitly declare Crashlytics dependency (CocoaPods doesn't support transitive dependencies on static libraries, so PippinAdapters/Crashlytics cannot declare a dependency on the Crashlytics pod)
     pod 'Crashlytics', '~> 3'

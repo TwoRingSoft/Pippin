@@ -16,41 +16,17 @@
     "ios": "9.0"
   },
   "swift_versions": "5.1",
-  "default_subspecs": [
-    "Components",
-    "Environment",
-    "Peripherals"
+  "source_files": [
+    "Sources/PippinCore/**/*.{h,m,swift}"
   ],
   "dependencies": {
+    "Result": [
+
+    ],
     "PippinLibrary": [
 
     ]
   },
   "module_name": "Pippin",
-  "subspecs": [
-    {
-      "name": "Components",
-      "source_files": [
-        "Sources/PippinCore/Components/**/*.{h,m,swift}"
-      ]
-    },
-    {
-      "name": "Environment",
-      "source_files": [
-        "Sources/PippinCore/Environment/**/*.{h,m,swift}"
-      ]
-    },
-    {
-      "name": "Peripherals",
-      "source_files": [
-        "Sources/PippinCore/Peripherals/**/*.{h,m,swift}"
-      ],
-      "dependencies": {
-        "Result": [
-
-        ]
-      }
-    }
-  ],
   "swift_version": "5.1"
 }

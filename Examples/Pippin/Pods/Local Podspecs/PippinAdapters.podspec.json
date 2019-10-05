@@ -16,18 +16,39 @@
     "ios": "9.0"
   },
   "swift_versions": "5.1",
-  "source_files": "Sources/PippinAdapters/*.{h,m,swift}",
   "default_subspecs": [
+    "Environment",
     "PinpointKit",
     "COSTouchVisualizer",
     "XCGLogger",
     "SwiftMessages",
-    "JGProgressHUD",
-    "CRUDViewController",
-    "InfoViewController",
-    "CoreData"
+    "JGProgressHUD"
   ],
   "subspecs": [
+    {
+      "name": "Environment",
+      "source_files": "Sources/PippinAdapters/*.{h,m,swift}",
+      "dependencies": {
+        "PippinCore": [
+
+        ],
+        "PippinAdapters/PinpointKit": [
+
+        ],
+        "PippinAdapters/XCGLogger": [
+
+        ],
+        "PippinAdapters/SwiftMessages": [
+
+        ],
+        "PippinAdapters/JGProgressHUD": [
+
+        ],
+        "PippinAdapters/COSTouchVisualizer": [
+
+        ]
+      }
+    },
     {
       "name": "PinpointKit",
       "source_files": "Sources/PippinAdapters/PinpointKit/**/*.{h,m,swift}",
