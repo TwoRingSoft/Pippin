@@ -12,7 +12,8 @@ import Pippin
 extension CoreDataController: Debuggable {
     public func debuggingControlPanel() -> UIView {
         let databaseSectionLabel = UILabel.label(withText: "Database:", font: environment!.fonts.title)
-        
+
+        #if DEBUG
         let exportButton = UIButton(frame: .zero)
         exportButton.configure(title: "Export Database", target: self, selector: #selector(exportPressed))
         let importButton = UIButton(frame: .zero)
@@ -24,11 +25,15 @@ extension CoreDataController: Debuggable {
         
         let databaseStack = UIStackView(arrangedSubviews: [databaseSectionLabel, exportButton, importButton, generateButton, deleteButton])
         databaseStack.axis = .vertical
+        #else
+        let databaseStack = UILabel.label(withText: "Database debugging disabled. Check configuration settings.")
+        #endif
         
         return databaseStack
     }
 }
 
+#if DEBUG
 @objc extension CoreDataController {
     func exportPressed() {
         debuggingDelegate?.exported(coreDataController: self)
@@ -46,3 +51,4 @@ extension CoreDataController: Debuggable {
         debuggingDelegate?.importFixtures(coreDataController: self)
     }
 }
+#endif
