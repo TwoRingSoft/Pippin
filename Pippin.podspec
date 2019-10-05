@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   
   s.swift_version = '5.1'
 
-  s.dependency 'PippinAdapters'
-  s.dependency 'PippinCore'
+  s.ios.dependency 'PippinAdapters'
+  s.ios.dependency 'PippinCore'
   s.dependency 'PippinLibrary'
 
   s.module_name = 'PippinUmbrella'
