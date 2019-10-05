@@ -97,6 +97,7 @@ public extension FormController {
         }
     }
 
+    /// Reset any passed-through delegate relationships to direct references again, remove from containers and set any other references to nil.
     func deinitialize() {
         currentInputView = nil
 
