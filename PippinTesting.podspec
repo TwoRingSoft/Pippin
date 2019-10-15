@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '9.0'
   s.swift_version = '5.1'
 
-  s.source_files = 'Sources/PippinTesting/Extensions/XCTest/**/*.{h,m,swift}'
+  s.source_files = 'Sources/PippinTesting/**/*.{h,m,swift}'
   s.frameworks = 'XCTest'
   
   s.test_spec 'Tests' do |test_spec|
