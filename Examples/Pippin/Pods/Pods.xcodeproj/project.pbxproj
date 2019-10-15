@@ -54,6 +54,7 @@
 		09AABFDFD26052802CE2C0200047D4CA /* UIColor+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74319E92C5052800A12C0B60556A1E8 /* UIColor+Factory.swift */; };
 		09DCD8ACA7F14D55D1DCF890D05B3AE0 /* Array+Search_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B5A3702E8B501AC925D002292700C /* Array+Search_Test.swift */; };
 		09F837CA65C2C0A029B53DD218B9E756 /* Array+Chunk_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761BE88332622B76E5BA0678F7DF810A /* Array+Chunk_Test.swift */; };
+		0A77C1DD3ABFBBDBCBCB89AB41129F89 /* PippinTesting-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D84308DEF3D76B306426704CD15824DB /* PippinTesting-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0ACEBEDF5A1D90B5EEF3297FF1E64552 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C227E7F3CAF0512E09064D42EB59DC /* Fonts.swift */; };
 		0B0359291F4DF1904A82E838A07ABAAB /* TextAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D415BEAB3C3718713A4722E3E41733FB /* TextAnnotationView.swift */; };
 		0B3FCF3F0D7F256E1995F74BEA065EA8 /* IndexPath+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CDA406C1D862D6CBD64823C6E0AD3 /* IndexPath+Common.swift */; };
@@ -151,7 +152,6 @@
 		2F169FED7FF1635D5CA526E758085F99 /* DispatchQueue+XCGAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F78735A5032DB7CA234A69E4960F0B9 /* DispatchQueue+XCGAdditions.swift */; };
 		307C6B8AD71089F351AE0A6F78002B3A /* JGProgressHUDPieIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43C766169C764C7DABF57F08212DF2B7 /* JGProgressHUDPieIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		313B7B704D5C02123F0E8AB8666A6D59 /* Double+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C98E7C809EC7F02B6569638365A5C /* Double+Random.swift */; };
-		31FC8B466A64039171BEEF3DD5BAE904 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1886121DEAE3FB1771D815E6877DD27 /* XCTest.framework */; };
 		32120BED687341A3A0ED76A806353C2E /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29311B9840B7F7B9043448E0BC0A054F /* Array+Search.swift */; };
 		3225E66D764BF1E4B026C036FD638AFD /* Dictionary+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788560D257C468FDEAC7F9B8AE07C224 /* Dictionary+JSON.swift */; };
 		32CB7F16AA126576FB2EA58DF14858FE /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F359C878DB10D4F809CC9D8225647D3 /* JGProgressHUDAnimation.m */; };
@@ -168,7 +168,6 @@
 		376F83DE0121B86F42EA5D7BE7F810DA /* FLEXDictionaryExplorerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E49973F0FCBB682D4E43B0082753A2A7 /* FLEXDictionaryExplorerViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		38275C2EF19D46D7DB742F3A4CAB6B51 /* FLEXArgumentInputNotSupportedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 991541406FBA580CB977E906271BA753 /* FLEXArgumentInputNotSupportedView.m */; };
 		383098968E729935FE1194F9B03F4BBC /* infoIconSubtle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D01AD6677378269CE0D64AAEC739F74 /* infoIconSubtle@2x.png */; };
-		38D1D5943C7D5E63AD5C09316721207A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8716CA0235E5EDE6EBC745D2E3A05C1 /* Foundation.framework */; };
 		38EDA9BC5B7E1653D2DB8A9C4292C753 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D29078C6A9D1063C251751B78D62D /* TopBottomAnimation.swift */; };
 		38F26748CDE5E0671BCC21544B4BAC4B /* IndexPath+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CDA406C1D862D6CBD64823C6E0AD3 /* IndexPath+Common.swift */; };
 		3929DBFF1B4DB61E171F880C37C15586 /* UIScreen+HairlineWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C579D9545AEB259D929FF2C12ED87AEC /* UIScreen+HairlineWidth.swift */; };
@@ -198,7 +197,7 @@
 		423F0A9995D12B70A18AAF53209816DC /* JGProgressHUDErrorIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B7B1FF85053722B99EE50DC14426E /* JGProgressHUDErrorIndicatorView.m */; };
 		42B90430BC3F805B941024EA3D544E1C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF6289AD24D97771B78A87B6D2AA0AB /* MessageUI.framework */; };
 		42BCC8E5597909C04D13950168BE97B4 /* FileNameFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6B5F5DE3C9784CEC680FC6657BFFA6 /* FileNameFilter.swift */; };
-		438BE48F292F323570FB69A843050150 /* PippinTestingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0816D0285537B1294CB33528D992AA4 /* PippinTestingUnitTests.swift */; };
+		438BE48F292F323570FB69A843050150 /* PippinTestingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93403E05A3226E204844634CB894B324 /* PippinTestingUnitTests.swift */; };
 		43971F0B8EFE4B7372A7C50FB14A847D /* Double+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C98E7C809EC7F02B6569638365A5C /* Double+Random.swift */; };
 		4592786374FAA555FE00C0979C0D3BEA /* AuthorizedCLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506616DCB3114B46E5259818997DF9BD /* AuthorizedCLLocationManager.swift */; };
 		462E85DD35B03BB72D5B5CF26463316C /* ObjectiveCMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D908AEF90DC1BA634A37DCC989E9C5 /* ObjectiveCMarker.m */; };
@@ -262,7 +261,6 @@
 		61D7CE6AC5DEE1AFCA29B002D791CF66 /* NSBundle+PlistValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8B700597D7BF8B140CD3AA6D59012 /* NSBundle+PlistValues.swift */; };
 		62403499B731AECAEFE911497F800A7D /* TransparentModalPresentingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89577BDDF38373629296A8BD9F4BD571 /* TransparentModalPresentingViewController.swift */; };
 		62822EC50EEF49E04C81B44E01039231 /* successIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDD0F935377F4A64DFB57DBE9E9C562 /* successIcon@2x.png */; };
-		62E683BBE1A183562E21145CAB6A4CFD /* XCUIApplication+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A4CEB1F6487BDCE2CF7ACD6C0DECF /* XCUIApplication+Helpers.swift */; };
 		62F8533F598299912ED6AEDEEC094844 /* FLEXMultilineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 092F999BF8DCCFB4C27BDD296E85BEF7 /* FLEXMultilineTableViewCell.m */; };
 		635656A763E4A82B1563B4A4439800DE /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805F752ACDFAD0FC14357206C8C8BFE /* Alerter.swift */; };
 		63C0CF26E41F39521A676C3403AF3138 /* JGProgressHUDFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B65AD5AC70797E9EE641E31EB14C23E5 /* JGProgressHUDFadeAnimation.m */; };
@@ -270,7 +268,6 @@
 		643340363825BE178FD669E561908622 /* KeyboardTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBEB691C1592A0501162A6863AC16DA /* KeyboardTrackingView.swift */; };
 		6480F4996F1277CAA5886751739EAB4B /* Dictionary+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5342A91B421274B7E48CE9FF650E63FA /* Dictionary+Sort.swift */; };
 		649F876E0E17AC15527B299323D497A1 /* CompoundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2664AAB7004303440E1EDE5D10BF8E /* CompoundOperation.swift */; };
-		6506BE81048F19635DB035411AD9D741 /* XCUIElement+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC69CC2F06C8D3DFA3CDC8A1F10B2F9C /* XCUIElement+Helpers.swift */; };
 		6597E15813EF61AD332466F4FB83AA3A /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C828255E598AEED3D0F0664E094270 /* Build.swift */; };
 		65B1B954DE8575876C8208979880B2D5 /* Annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA6AEE0F32E2A8E3C4E8A18E2CFED6 /* Annotations.swift */; };
 		65BD3DE70C9571BDAA1F72D382976103 /* FLEXRealmDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E7B9B066EBF593DD3A1F929635FD71C /* FLEXRealmDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -294,6 +291,7 @@
 		6EB67B565C54E1585D16255DB2272370 /* SwiftMessagesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB2A6E79737F5A45B0102F3DEE46B7 /* SwiftMessagesAdapter.swift */; };
 		700F84FE275D4E9AAE19C79F1C233E88 /* Array+Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FB6B9FC8EA3E7524612248F0A483 /* Array+Chunk.swift */; };
 		70FA194D49834C480E9E5AC46E8C5AFE /* FLEXWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EBA25D5682D5C10C0DB487B60E53BD /* FLEXWebViewController.m */; };
+		714F8BC532124E89B33A7F0FA316DA90 /* PippinTesting-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A343ECBF0286A6FB50937A83DCAB7A /* PippinTesting-dummy.m */; };
 		716B1013A1E5FC15CD3A9515C6CAA9AD /* Anchorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A91792B00E18A572FAE958F7AB40E1C7 /* Anchorage.framework */; };
 		71BA97684C445A474EE141F50C03A0E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8716CA0235E5EDE6EBC745D2E3A05C1 /* Foundation.framework */; };
 		7219D22055C0D8B8273157BC8C75A09E /* FLEXArgumentInputTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFCC85BD657DB5DCBB767E23C77DD4A /* FLEXArgumentInputTextView.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -304,6 +302,7 @@
 		736297F0A9E40749E2DFA4E2B8120102 /* Screenshotter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B795DD45C9E665E06889B204E0BAF88 /* Screenshotter.swift */; };
 		73D39A97DE24C9CC82AB7565011BAA32 /* Pippin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15940BFBF9FB33CCD4EE30BE4D2FD380 /* Pippin.framework */; };
 		74E87527EA1092F8C23D9DBA8607DCD6 /* FLEXArgumentInputFontView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBD8CF46F8C5C73D18A3AC21237ECFD /* FLEXArgumentInputFontView.m */; };
+		758095B4BCF66E9F18D3875E697B4921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8716CA0235E5EDE6EBC745D2E3A05C1 /* Foundation.framework */; };
 		75866E9D3DEC10A0687AEFA1D575AB99 /* CornerRoundingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D148402140798C4E6E72A129E9FAF9E6 /* CornerRoundingView.swift */; };
 		75E38886B6055D3970FF49D9F2D50187 /* Tribool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFACFAB8E67773C6B23187382B5E2A4 /* Tribool.swift */; };
 		761F43F9E78718A2AC6BD6E0BA98D60F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDCA609B33D25817D688AE290AA5BBA /* MessageView.swift */; };
@@ -367,6 +366,7 @@
 		8DC20695133A1A53360B5B0004ECA2A7 /* UIView+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407544BDD97E6512F92130FD089B7B69 /* UIView+Snapshot.swift */; };
 		8DD9DF3E1B47B807E15729E361A72AFE /* UILabel+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8C11E50DF7E5728759381628A6232 /* UILabel+Layout.swift */; };
 		8DE7594092D1AED945D52C3A5FD3021D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E265BA99517DDBD19E43D5A6B1726B9 /* Model.swift */; };
+		8DF0CF5F7BA152E410C0DCA8C4EFF7BC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1886121DEAE3FB1771D815E6877DD27 /* XCTest.framework */; };
 		8E19861F242828D41D9D4057FFA4061A /* Pods-PippinTestPods-iOS-PippinUITests-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 492AE6662BD73B281F5805F214B2DA12 /* Pods-PippinTestPods-iOS-PippinUITests-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E2C1B1DA9AD6E7ED4BFCE3D9935BC16 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C8B52F88AF6E96E2E2812014B603CA /* PassthroughView.swift */; };
 		8ECB100B9CC490277AA225D2FC9A7BE4 /* UserDefaults+SetAndSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AE93AFAE779681584E57E106CF6E2 /* UserDefaults+SetAndSync.swift */; };
@@ -377,6 +377,7 @@
 		90B8C1AEDE05A028CBB54DC12E834803 /* FLEXSystemLogMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C1E8AC7ABDF59B7CF712CDFC5C86A /* FLEXSystemLogMessage.m */; };
 		90C592422796ABC6B2344AA174569B1E /* FLEXLibrariesTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D4181CE2CAE5C0733D6680869FA4BB02 /* FLEXLibrariesTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9101AB3A4A743D50433D5004849A2CED /* DestinationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7397C9718EFA0CDF6FEA47F7FABF798B /* DestinationProtocol.swift */; };
+		9179C859B287BD8DD674D05BD204AE51 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED043EA606F696AFE22A03A69D515E15 /* Robot.swift */; };
 		921214FF54B862C30B5205C11AF58EBF /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E707CAE5E7289F1BC76958D65A2B289 /* SourceSansPro-Bold.ttf */; };
 		92220871FB1E9D2C5ACA270A50130429 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968C75137A5D285A04E6C1086883A92 /* Priority.swift */; };
 		9264EA05E50EB0F04E78809B6735A001 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE94B9BB7A2045FFD17DF35F82F72CE /* FeedbackViewController.swift */; };
@@ -415,6 +416,7 @@
 		A02E317DFD0A7367A59068BA0D795BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8716CA0235E5EDE6EBC745D2E3A05C1 /* Foundation.framework */; };
 		A052F551E6CF7C64494A02839D4D15E0 /* infoIconLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C1823E965FEF8DC0DA8979BBE9D7FC /* infoIconLight@3x.png */; };
 		A09789B4E53F995F9FC920F9F68BAF3C /* String+NumericValues_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFEA5EE430FBBA5750B218D308E72C1 /* String+NumericValues_Test.swift */; };
+		A0F8638C321BE67A8D3CAC1D4A2C4912 /* XCUIApplication+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60799D99D18E4C50614B7B6036FF8CF1 /* XCUIApplication+Helpers.swift */; };
 		A17D088910E3C93F573F936AB9E97CB5 /* COSTouchVisualizerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706FE3BFDCE30CE3024E2CFA45116A01 /* COSTouchVisualizerAdapter.swift */; };
 		A2533E3383D63A1FE8E704F7F768E605 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8716CA0235E5EDE6EBC745D2E3A05C1 /* Foundation.framework */; };
 		A26F1C776BD3DB5424AF2716017BB2FA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776F5DF121ADBF3F040B3230175D1AD /* Types.swift */; };
@@ -534,7 +536,6 @@
 		D1DF807CC4D9D5A43D3CEFE5BB005FC3 /* NSBundle+PinpointKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1254D0DA3F99864FD4585A62496898EE /* NSBundle+PinpointKit.swift */; };
 		D1DF91B35FBD5FC37DF347264DD33102 /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB503044EB6AA3DF5DB0F6D020D7B853 /* LaunchArguments.swift */; };
 		D1EAC4416D706E6B6A5BE46418E11CF3 /* CoreDataController+Debuggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463416270912C781AE30A7F172A9CF87 /* CoreDataController+Debuggable.swift */; };
-		D259F69F2E3BDEB0AAA17AFCC3B74C19 /* PippinTesting-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15BA5E76907DED5285D9A191BDEB5CB2 /* PippinTesting-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D3748AB644FFAB6F48F07DD9A730DF7D /* FLEXNetworkObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B282A93FC79DF5CD878AEA11B6D0BC3 /* FLEXNetworkObserver.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D396F1CBF4DD9DF2D06A66C66D6F9F4A /* FLEXArgumentInputNumberView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9703253692A946AEFA2C1ECD45345BE4 /* FLEXArgumentInputNumberView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D42ADFAA04C53F6F4EB00C7F1C5C9207 /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6641E5663AB555B57EAECD9A6A271B /* TestDestination.swift */; };
@@ -558,6 +559,7 @@
 		D8F5440FF4EBAC220BD6D97FA725E121 /* ASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BC5A6F0A89F66103AB6CC4593E2176 /* ASLLogger.m */; };
 		D8FEE43DA6D24F2AA90FC4CD31D632AF /* JGProgressHUDShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A261A2393A63F3BCA74184B32499FA58 /* JGProgressHUDShadow.m */; };
 		D9F378DFB4B9EB988E762E9CB08290BD /* KeyboardAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65C7A7548A7D07859521BBF50854B56 /* KeyboardAvoider.swift */; };
+		DAC1E2437D28BA68B8A88D98E8DF1490 /* XCUIElement+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B93699758C28A9164B9018E5EE849E0 /* XCUIElement+Helpers.swift */; };
 		DB34B6F3B9BA3ED902869ED9E9D2CD36 /* LogCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0C4BB73A00A37C36C64D2F6909BC39 /* LogCollector.swift */; };
 		DB842D52246EA9215FBC90C0B382B56D /* FLEXClassExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E59ED7184BFDF490CD6EC43B7E8FE5B /* FLEXClassExplorerViewController.m */; };
 		DBF2A56FF255E3F20BD05D5C242512EE /* Data+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8560338AD3B4B452012A81F344D9D6F /* Data+JSON.swift */; };
@@ -594,7 +596,6 @@
 		EC0FB1DC28C85219FBA47DED1358140F /* Tribool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFACFAB8E67773C6B23187382B5E2A4 /* Tribool.swift */; };
 		EC3F76E8FF64F12F026B7F91F1767AC9 /* BasicLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D5ECFD0F720384A45966319BA8CE5C /* BasicLogViewController.swift */; };
 		ECA3583701E8A1169D2CF8734D852E83 /* FLEXExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B018B1EDE15AC857694D73C3FB0081D /* FLEXExplorerViewController.m */; };
-		ED2D78EB10F3F006E3F2BE1BB84E46F6 /* PippinTesting-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FF522BF15AAEF586784080E19FE1FC /* PippinTesting-dummy.m */; };
 		EE167E6CE3BF36B41282CFD411459B03 /* FLEXArgumentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BF09E6D32237F321615317B05C27F3 /* FLEXArgumentInputView.m */; };
 		EED56A268B47EDC13FD83F3E64637539 /* FLEXFileBrowserTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EBB230D217419776394B242A77E1B948 /* FLEXFileBrowserTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		EF0A0E95C9883E482AA942EFAE7D9908 /* FLEXGlobalsTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EF4B6044F8D11E74127635FEE999943A /* FLEXGlobalsTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -950,8 +951,10 @@
 		01E1C528454949AC9A5274C5854C7C08 /* WKWebView+Load.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "WKWebView+Load.swift"; sourceTree = "<group>"; };
 		028B4AA5186ED195FBEB7C73CC216EA0 /* errorIconLight@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "errorIconLight@2x.png"; path = "SwiftMessages/Resources/errorIconLight@2x.png"; sourceTree = "<group>"; };
 		029B7496598C6C5535D21E0508D1C7A0 /* Pods-PippinTestPods-iOS-PippinUnitTests-iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PippinTestPods-iOS-PippinUnitTests-iOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		02C5EC6079617C8769647ECCD2213D0B /* PippinTesting.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = PippinTesting.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		031928C2A4FD2CE508EEE5D4D609B750 /* BaseQueuedDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseQueuedDestination.swift; path = Sources/XCGLogger/Destinations/BaseQueuedDestination.swift; sourceTree = "<group>"; };
 		035738C80C3DD0E823ABB65C41D31ED1 /* jg_hud_success@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "jg_hud_success@2x.png"; path = "JGProgressHUD/Resources/jg_hud_success@2x.png"; sourceTree = "<group>"; };
+		0395B30D45D827968338B5AE3B4382C4 /* PippinTesting-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PippinTesting-Info.plist"; sourceTree = "<group>"; };
 		03C0D585B64CC2CD09B760F0938B8DEB /* PippinAdapters-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PippinAdapters-dummy.m"; sourceTree = "<group>"; };
 		03CCE6664DFE6BB8511060F77655CD8F /* FLEXWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXWindow.h; path = Classes/ExplorerInterface/FLEXWindow.h; sourceTree = "<group>"; };
 		03F33D24C70D89D7E9116A8F9F8E3334 /* errorIconSubtle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = errorIconSubtle.png; path = SwiftMessages/Resources/errorIconSubtle.png; sourceTree = "<group>"; };
@@ -970,9 +973,9 @@
 		0B6F5C2892994B875C3AE1B1EAD33E65 /* Anchorage-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Anchorage-iOS-prefix.pch"; sourceTree = "<group>"; };
 		0B875132FA8AA70F4512D70D738130BC /* FLEXTableContentViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXTableContentViewController.m; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXTableContentViewController.m; sourceTree = "<group>"; };
 		0B884F237E797C8FBEF04BEFAC9CB011 /* FLEXImagePreviewViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXImagePreviewViewController.m; path = Classes/ViewHierarchy/FLEXImagePreviewViewController.m; sourceTree = "<group>"; };
+		0B93699758C28A9164B9018E5EE849E0 /* XCUIElement+Helpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Helpers.swift"; sourceTree = "<group>"; };
 		0BC6E6F0EA99A559A162E09B4F9D023F /* Error+NSError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Error+NSError.swift"; sourceTree = "<group>"; };
 		0BD0CD3584C82452A36FCFFA0E9DFEDC /* DebugFlowController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugFlowController.swift; path = Sources/PippinDebugging/DebugFlowController.swift; sourceTree = "<group>"; };
-		0CC1F3BCA41F0535C9EAADE9CA14722D /* PippinTesting.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PippinTesting.xcconfig; sourceTree = "<group>"; };
 		0CF6DC3779F978EBB9DACC0D0A32B771 /* PippinAdapters.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = PippinAdapters.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0D41875B069EB4B9322147006B5DA90F /* PippinLibrary-iOS.unit-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "PippinLibrary-iOS.unit-tests.xcconfig"; sourceTree = "<group>"; };
 		0D461CA27E259E05DBD437BE12C1EE25 /* errorIconSubtle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "errorIconSubtle@2x.png"; path = "SwiftMessages/Resources/errorIconSubtle@2x.png"; sourceTree = "<group>"; };
@@ -998,7 +1001,6 @@
 		1254D0DA3F99864FD4585A62496898EE /* NSBundle+PinpointKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+PinpointKit.swift"; path = "PinpointKit/PinpointKit/Sources/Core/NSBundle+PinpointKit.swift"; sourceTree = "<group>"; };
 		12AD37EC16DB592744EA4A17404DEC8B /* PippinLibrary-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "PippinLibrary-iOS.modulemap"; sourceTree = "<group>"; };
 		13C86F03B9314272A5832DBA6E50405A /* Pods_PippinTestPods_iOS_PippinUnitTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PippinTestPods_iOS_PippinUnitTests_iOS.framework; path = "Pods-PippinTestPods-iOS-PippinUnitTests-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13EAF8124372B023A60A83EE6148BB3E /* PippinTesting-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinTesting-prefix.pch"; sourceTree = "<group>"; };
 		1402AE6B93F74BF8C5A15048AA74C4D1 /* JGProgressHUDRingIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JGProgressHUDRingIndicatorView.m; path = JGProgressHUD/JGProgressHUD/JGProgressHUDRingIndicatorView.m; sourceTree = "<group>"; };
 		149E2BDDA671C1F43313C40CD68164EE /* FLEXSQLiteDatabaseManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXSQLiteDatabaseManager.h; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXSQLiteDatabaseManager.h; sourceTree = "<group>"; };
 		1511B43EF178D9DAB47BE8941A8D54C5 /* FLEXRealmDatabaseManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXRealmDatabaseManager.m; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXRealmDatabaseManager.m; sourceTree = "<group>"; };
@@ -1006,7 +1008,6 @@
 		15469C7C7588C513D5012B7BC7C49E0D /* Result-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Result-dummy.m"; sourceTree = "<group>"; };
 		1587191182A291785200663A1FC0CFC9 /* CrudViewControllerConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrudViewControllerConfiguration.swift; path = Sources/PippinAdapters/CrudViewController/CrudViewControllerConfiguration.swift; sourceTree = "<group>"; };
 		15940BFBF9FB33CCD4EE30BE4D2FD380 /* Pippin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pippin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		15BA5E76907DED5285D9A191BDEB5CB2 /* PippinTesting-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinTesting-umbrella.h"; sourceTree = "<group>"; };
 		170FA537851D4B157A7B5A7ACE70B7FC /* DatabaseFixturePickerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseFixturePickerViewController.swift; path = Sources/PippinDebugging/DatabaseFixturePickerViewController.swift; sourceTree = "<group>"; };
 		17ACD16C391B4034D9D3A7546C08EC45 /* Anchorage-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Anchorage-macOS-Info.plist"; path = "../Anchorage-macOS/Anchorage-macOS-Info.plist"; sourceTree = "<group>"; };
 		18A503E9AA7F82C02552C8FD87E10ACB /* Anchorage-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Anchorage-iOS.xcconfig"; sourceTree = "<group>"; };
@@ -1045,14 +1046,12 @@
 		2325E05ACC32F5AF3F5F9B40873EFB05 /* ResourceBundle-SwiftMessages-SwiftMessages-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SwiftMessages-SwiftMessages-Info.plist"; sourceTree = "<group>"; };
 		2345F6FE3E20821D77BA797D39C56E4B /* errorIconSubtle@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "errorIconSubtle@3x.png"; path = "SwiftMessages/Resources/errorIconSubtle@3x.png"; sourceTree = "<group>"; };
 		246B0BCFB2CF9A9FF6ACA52F5272F0F9 /* TextViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
-		24FF522BF15AAEF586784080E19FE1FC /* PippinTesting-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PippinTesting-dummy.m"; sourceTree = "<group>"; };
 		25E9FBA079089CF47867F66A14E5C2D5 /* JGProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JGProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		261579E3D27F7C9E4EE2887286BA6460 /* FLEXTableColumnHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXTableColumnHeader.h; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXTableColumnHeader.h; sourceTree = "<group>"; };
 		274A4E2D13C34752312059824103B701 /* Pods-PippinPods-iOS-Pippin-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PippinPods-iOS-Pippin-iOS-Info.plist"; sourceTree = "<group>"; };
 		2764EE8454A36A6BE5DA61AE8FA5E59A /* FLEXDefaultsExplorerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXDefaultsExplorerViewController.h; path = Classes/ObjectExplorers/FLEXDefaultsExplorerViewController.h; sourceTree = "<group>"; };
 		2774A44BC029768E2C299EAE96F71792 /* Pods-PippinPods-iOS-Pippin-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PippinPods-iOS-Pippin-iOS-dummy.m"; sourceTree = "<group>"; };
 		27DD8A4798C1A4ECA27576A7978131CD /* JGProgressHUDImageIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JGProgressHUDImageIndicatorView.m; path = JGProgressHUD/JGProgressHUD/JGProgressHUDImageIndicatorView.m; sourceTree = "<group>"; };
-		28336F659CA591E8813CD430B22778C1 /* PippinTesting-Unit-Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PippinTesting-Unit-Tests-Info.plist"; sourceTree = "<group>"; };
 		28C4F4ED5B94AD857EA288875E51BE3D /* ShakeDetectingWindowDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShakeDetectingWindowDelegate.swift; path = PinpointKit/PinpointKit/Sources/Core/ShakeDetectingWindowDelegate.swift; sourceTree = "<group>"; };
 		28CCA21A7A4DFE53C66855649E823B94 /* Data+Conversions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Data+Conversions.swift"; sourceTree = "<group>"; };
 		29012B5FAB5AE0A22BD19BA2F840732E /* ASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASLLogger.h; path = PinpointKit/PinpointKit/Sources/Core/ASLLogger.h; sourceTree = "<group>"; };
@@ -1090,7 +1089,6 @@
 		34CEEC69C52068149ECDD99F33B93871 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		34DCFD0B4E87E766CFB723AAA330FED5 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		364AAEFE79DC722E8B93656297EC9B84 /* Fonts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = PinpointKit/PinpointKit/Sources/Core/Fonts.swift; sourceTree = "<group>"; };
-		367655EB3BB409A668172AE49865C41E /* PippinTesting.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PippinTesting.modulemap; sourceTree = "<group>"; };
 		36EAA6FEC52FBFAD287E0FC6B6BE2B3D /* BugReporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BugReporter.swift; sourceTree = "<group>"; };
 		3738373C3E163FD69F6E720E2FD3F334 /* StatusLine.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = StatusLine.xib; path = SwiftMessages/Resources/StatusLine.xib; sourceTree = "<group>"; };
 		37A614E73241BFEE5BBAA816A2221EB4 /* FLEXHierarchyTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXHierarchyTableViewCell.m; path = Classes/ViewHierarchy/FLEXHierarchyTableViewCell.m; sourceTree = "<group>"; };
@@ -1205,9 +1203,9 @@
 		5F2B0E30859EE5D35ACDCC03E4846662 /* FLEXSetExplorerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXSetExplorerViewController.h; path = Classes/ObjectExplorers/FLEXSetExplorerViewController.h; sourceTree = "<group>"; };
 		5FF860B066A134FE1956A74B37991838 /* FLEXArgumentInputDateView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXArgumentInputDateView.h; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputDateView.h; sourceTree = "<group>"; };
 		605BFBBC6C6C1819FA7880230A1B3363 /* FLEXToolbarItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXToolbarItem.h; path = Classes/Toolbar/FLEXToolbarItem.h; sourceTree = "<group>"; };
+		60799D99D18E4C50614B7B6036FF8CF1 /* XCUIApplication+Helpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Helpers.swift"; sourceTree = "<group>"; };
 		6182EB53335FE7F90EDC317379AF6029 /* URL+XCGAdditions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL+XCGAdditions.swift"; path = "Sources/XCGLogger/Extensions/URL+XCGAdditions.swift"; sourceTree = "<group>"; };
 		62E9BFF1F3AD91DF1EDE4DF4DDB4B70C /* MailSender.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MailSender.swift; path = PinpointKit/PinpointKit/Sources/Core/MailSender.swift; sourceTree = "<group>"; };
-		62EB45292DD93941402B30B520870131 /* PippinTesting-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PippinTesting-Info.plist"; sourceTree = "<group>"; };
 		631FF39F86D82D855FD688567AC4AE15 /* PippinAdapters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PippinAdapters.framework; path = PippinAdapters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		638BA49D494BC2A7583998179EE05FDE /* JGProgressHUDAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDAnimation.h; path = JGProgressHUD/JGProgressHUD/JGProgressHUDAnimation.h; sourceTree = "<group>"; };
 		63C227E7F3CAF0512E09064D42EB59DC /* Fonts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -1258,7 +1256,6 @@
 		7091F2DDD1AEE6A505CBBC2ECC4B93D3 /* DefaultDefaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultDefaults.swift; sourceTree = "<group>"; };
 		70EFAC277F859627BF59B916CCE1F37C /* DevFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DevFilter.swift; path = Sources/XCGLogger/Filters/DevFilter.swift; sourceTree = "<group>"; };
 		711365BD40858D6FEEAF467B3EDA3A2E /* successIconSubtle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = successIconSubtle.png; path = SwiftMessages/Resources/successIconSubtle.png; sourceTree = "<group>"; };
-		711D1330275050813B9E8FB8E1313C25 /* PippinTesting-Unit-Tests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinTesting-Unit-Tests-prefix.pch"; sourceTree = "<group>"; };
 		713EAFB18E2F1304F5788AAD977F5681 /* CoreLocationAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreLocationAdapter.swift; path = Sources/PippinAdapters/CoreLocation/CoreLocationAdapter.swift; sourceTree = "<group>"; };
 		723D6AB0A59F5059A5521359C4A9961A /* FLEXFieldEditorViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXFieldEditorViewController.m; path = Classes/Editing/FLEXFieldEditorViewController.m; sourceTree = "<group>"; };
 		726DA1DD478182AF948AD6C783C78505 /* Pods-PippinPods-macOS-Pippin-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PippinPods-macOS-Pippin-macOS-Info.plist"; sourceTree = "<group>"; };
@@ -1291,7 +1288,6 @@
 		7A3FD0C6DA3B6B5C2E59952836F0F928 /* EditImageViewControllerBarButtonItemProviding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EditImageViewControllerBarButtonItemProviding.swift; path = PinpointKit/PinpointKit/Sources/Core/Editing/EditImageViewControllerBarButtonItemProviding.swift; sourceTree = "<group>"; };
 		7A8271CECFDE7B7DB125E856F15375F8 /* SwiftMessages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftMessages.swift; path = SwiftMessages/SwiftMessages.swift; sourceTree = "<group>"; };
 		7AA01B5577127887DEC90815B7FC8489 /* FLEXTableListViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXTableListViewController.m; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXTableListViewController.m; sourceTree = "<group>"; };
-		7BEB7316DB22FB2FD961880A09FCD370 /* PippinTesting.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = PippinTesting.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7C10452E7E075D4A7B9CCEF8930ECA2F /* Pods-PippinPods-macOS-Pippin-macOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PippinPods-macOS-Pippin-macOS-frameworks.sh"; sourceTree = "<group>"; };
 		7C49DD75B1E095E00512B4860D82C8B4 /* Pods-PippinTestPods-iOS-PippinUITests-iOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PippinTestPods-iOS-PippinUITests-iOS-frameworks.sh"; sourceTree = "<group>"; };
 		7CA46331897C4CFAC6BA6BD4902FBB86 /* Anchorage-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Anchorage-iOS-Info.plist"; sourceTree = "<group>"; };
@@ -1329,6 +1325,7 @@
 		8AA694525C775A47DF1077BA4BDADD18 /* FLEXSystemLogTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXSystemLogTableViewCell.m; path = Classes/GlobalStateExplorers/SystemLog/FLEXSystemLogTableViewCell.m; sourceTree = "<group>"; };
 		8B70FB6B9FC8EA3E7524612248F0A483 /* Array+Chunk.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Array+Chunk.swift"; sourceTree = "<group>"; };
 		8BBA6AEE0F32E2A8E3C4E8A18E2CFED6 /* Annotations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Annotations.swift; path = PinpointKit/PinpointKit/Sources/Core/Annotations.swift; sourceTree = "<group>"; };
+		8C44D459A1FBAB5F431290AA5DB945F3 /* PippinTesting-Unit-Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "PippinTesting-Unit-Tests-frameworks.sh"; sourceTree = "<group>"; };
 		8CF2ED89AF674CAA9A51F8BC0286A7DA /* UIDevice+Idioms.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIDevice+Idioms.swift"; sourceTree = "<group>"; };
 		8CF6289AD24D97771B78A87B6D2AA0AB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		8D2057C8A365C5746F227D057DD3579D /* jg_hud_error@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "jg_hud_error@2x.png"; path = "JGProgressHUD/Resources/jg_hud_error@2x.png"; sourceTree = "<group>"; };
@@ -1340,20 +1337,24 @@
 		90AF872B1B0AA44640B2D38124EE0C1E /* JGProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JGProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		90BEDFCB9F46D33BD994290BCC48DAF6 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "SourceSansPro-Semibold.ttf"; path = "PinpointKit/PinpointKit/Resources/SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
 		911355AD77D2EA88734FCEBECD31B090 /* FLEXArgumentInputStringView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXArgumentInputStringView.m; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputStringView.m; sourceTree = "<group>"; };
+		914AA7305957977EAAD88123652A7D75 /* PippinTesting-Unit-Tests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinTesting-Unit-Tests-prefix.pch"; sourceTree = "<group>"; };
 		91E5F3FFB2B214964E096DFEE60FFA5C /* AutoRotatingFileDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoRotatingFileDestination.swift; path = Sources/XCGLogger/Destinations/AutoRotatingFileDestination.swift; sourceTree = "<group>"; };
 		92307E40C86FAD9B0C7F260C362EE843 /* FLEXArgumentInputDateView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXArgumentInputDateView.m; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputDateView.m; sourceTree = "<group>"; };
 		92C7E1F8BC570B419A536B08149F0EF6 /* PhysicsAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhysicsAnimation.swift; path = SwiftMessages/PhysicsAnimation.swift; sourceTree = "<group>"; };
 		92EBA25D5682D5C10C0DB487B60E53BD /* FLEXWebViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXWebViewController.m; path = Classes/GlobalStateExplorers/FLEXWebViewController.m; sourceTree = "<group>"; };
+		93403E05A3226E204844634CB894B324 /* PippinTestingUnitTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PippinTestingUnitTests.swift; path = Tests/PippinTesting/PippinTestingUnitTests.swift; sourceTree = "<group>"; };
 		94021BC557A62CD327673BE6C6AADFAB /* AsyncOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		943A6EDAE5851A98F4A53B074EB28FCE /* XCGLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = Sources/XCGLogger/XCGLogger.swift; sourceTree = "<group>"; };
 		94F94E8CA37E3FB428C093B34047C985 /* NSManagedObject+Factory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSManagedObject+Factory.swift"; path = "Sources/PippinAdapters/CoreData/NSManagedObject+Factory.swift"; sourceTree = "<group>"; };
 		9506CD5386D832A236FA540445A2224F /* PinpointKit.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = PinpointKit.xcassets; path = PinpointKit/PinpointKit/Resources/PinpointKit.xcassets; sourceTree = "<group>"; };
 		955A7AF09CEC7A9859F119691ABE9BF3 /* Pods-PippinPods-macOS-Pippin-macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PippinPods-macOS-Pippin-macOS-umbrella.h"; sourceTree = "<group>"; };
+		95A343ECBF0286A6FB50937A83DCAB7A /* PippinTesting-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PippinTesting-dummy.m"; sourceTree = "<group>"; };
 		95A64A5D775291032C5D512502D32B77 /* UIAlertControllerFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIAlertControllerFactory.swift; sourceTree = "<group>"; };
 		95E6BE1A6CDB6BF05C9B2086B240B92D /* Pods-PippinTestPods-iOS-PippinUnitTests-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PippinTestPods-iOS-PippinUnitTests-iOS-Info.plist"; sourceTree = "<group>"; };
 		96C9D3CAAE7B0C7284F649E7AE9C99C7 /* errorIcon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "errorIcon@3x.png"; path = "SwiftMessages/Resources/errorIcon@3x.png"; sourceTree = "<group>"; };
 		96D585F63ECEA0891D7CBB6B54D73E6F /* AnyError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyError.swift; path = Result/AnyError.swift; sourceTree = "<group>"; };
 		9703253692A946AEFA2C1ECD45345BE4 /* FLEXArgumentInputNumberView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXArgumentInputNumberView.h; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputNumberView.h; sourceTree = "<group>"; };
+		98970ECF9BFE94DE7A3F8283194427F8 /* PippinTesting.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PippinTesting.xcconfig; sourceTree = "<group>"; };
 		98A6FE5FF39894C1CFD150FED36BB8A0 /* BackgroundViewable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BackgroundViewable.swift; path = SwiftMessages/BackgroundViewable.swift; sourceTree = "<group>"; };
 		991541406FBA580CB977E906271BA753 /* FLEXArgumentInputNotSupportedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXArgumentInputNotSupportedView.m; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputNotSupportedView.m; sourceTree = "<group>"; };
 		993E9D15D9EC5C68EDDED81E4B07F7A1 /* Result.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Result.xcconfig; sourceTree = "<group>"; };
@@ -1361,6 +1362,7 @@
 		9A565C237AD5E8E9C095AC7E82B6C7EF /* FLEXNetworkSettingsTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXNetworkSettingsTableViewController.m; path = Classes/Network/FLEXNetworkSettingsTableViewController.m; sourceTree = "<group>"; };
 		9AF158B19793545044999E9C5CBFECEC /* FLEXTableContentCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXTableContentCell.h; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXTableContentCell.h; sourceTree = "<group>"; };
 		9B69BB4460DC10DCCAABD2BF4A661FB3 /* FLEXArgumentInputJSONObjectView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXArgumentInputJSONObjectView.h; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputJSONObjectView.h; sourceTree = "<group>"; };
+		9BA7A90894B7854001BDF0B453138023 /* PippinTesting.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PippinTesting.modulemap; sourceTree = "<group>"; };
 		9BC1CA48D0F4E4C48A58E8557437FBE8 /* String+NumericValues.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+NumericValues.swift"; sourceTree = "<group>"; };
 		9C97B2E578A2D5BE676EF9B724C406F1 /* FLEX.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FLEX.xcconfig; sourceTree = "<group>"; };
 		9CA5B47ABC06B5EF1BDBADC95A4719CB /* MaskingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskingView.swift; path = SwiftMessages/MaskingView.swift; sourceTree = "<group>"; };
@@ -1418,8 +1420,6 @@
 		ABA96494A29AB3FDAA407A5266B92816 /* PippinLibrary-iOS-Unit-Tests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinLibrary-iOS-Unit-Tests-prefix.pch"; sourceTree = "<group>"; };
 		AC0D38A495BC45740791BA76020E70B2 /* PippinLibrary-iOS-Unit-Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "PippinLibrary-iOS-Unit-Tests-frameworks.sh"; sourceTree = "<group>"; };
 		AC2F87E83BFA92D04A7ED9D009D3EDA0 /* JGProgressHUDErrorIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDErrorIndicatorView.h; path = JGProgressHUD/JGProgressHUD/JGProgressHUDErrorIndicatorView.h; sourceTree = "<group>"; };
-		AC69CC2F06C8D3DFA3CDC8A1F10B2F9C /* XCUIElement+Helpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Helpers.swift"; sourceTree = "<group>"; };
-		ACC73F499D5D01C2D0A12E004A8952CE /* PippinTesting.unit-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "PippinTesting.unit-tests.xcconfig"; sourceTree = "<group>"; };
 		ACFA7E7CFE9B31773B1D692051A6A335 /* Alerter+Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Alerter+Debugging.swift"; path = "Sources/PippinDebugging/Alerter+Debugging.swift"; sourceTree = "<group>"; };
 		AD60868C7E9F55BF13D1BF3B228CCC61 /* UITableViewCell+Separators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Separators.swift"; sourceTree = "<group>"; };
 		AD7CF679A6DED91496654BB501C95772 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
@@ -1430,7 +1430,6 @@
 		AEC3491B67912EEA539203F2C449D2C2 /* FillingRoundedRectButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillingRoundedRectButton.swift; sourceTree = "<group>"; };
 		AF218B699F257633AEB04594C968837E /* CALayer+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CALayer+Utils.swift"; path = "SwiftMessages/CALayer+Utils.swift"; sourceTree = "<group>"; };
 		B02D56F70DA81AEBB6DDA0553D289BE7 /* UserInfoFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserInfoFilter.swift; path = Sources/XCGLogger/Filters/UserInfoFilter.swift; sourceTree = "<group>"; };
-		B0816D0285537B1294CB33528D992AA4 /* PippinTestingUnitTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PippinTestingUnitTests.swift; path = Tests/PippinTesting/PippinTestingUnitTests.swift; sourceTree = "<group>"; };
 		B10533FE76262AF1D89071E3D8DF5CFF /* DebugViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugViewController.swift; path = Sources/PippinDebugging/DebugViewController.swift; sourceTree = "<group>"; };
 		B1E71398B2A41640CABC25E98B4FE6CF /* FLEXSystemLogTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXSystemLogTableViewController.h; path = Classes/GlobalStateExplorers/SystemLog/FLEXSystemLogTableViewController.h; sourceTree = "<group>"; };
 		B21ABF05CD84A2C8D8C74249143533D9 /* FLEXArgumentInputSwitchView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXArgumentInputSwitchView.h; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputSwitchView.h; sourceTree = "<group>"; };
@@ -1501,7 +1500,6 @@
 		C999C65EA54256766F4C63797BCB5481 /* FLEXHierarchyTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXHierarchyTableViewController.m; path = Classes/ViewHierarchy/FLEXHierarchyTableViewController.m; sourceTree = "<group>"; };
 		CA3A1FF0FC8CB42808D0BA7C9C8BFDB6 /* errorIconLight.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = errorIconLight.png; path = SwiftMessages/Resources/errorIconLight.png; sourceTree = "<group>"; };
 		CA42388E3A66421F283034C6B018146F /* PinpointKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PinpointKit-prefix.pch"; sourceTree = "<group>"; };
-		CA5A4CEB1F6487BDCE2CF7ACD6C0DECF /* XCUIApplication+Helpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Helpers.swift"; sourceTree = "<group>"; };
 		CA74AB532AB8F8486EEAAE394D45FA06 /* ObjcExceptionBridging-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObjcExceptionBridging-prefix.pch"; sourceTree = "<group>"; };
 		CB2249C380F4F951E742EE408592E984 /* WindowLevel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WindowLevel.swift; sourceTree = "<group>"; };
 		CBE6B327882003A3830732BDF208605E /* WindowViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WindowViewController.swift; path = SwiftMessages/WindowViewController.swift; sourceTree = "<group>"; };
@@ -1518,10 +1516,10 @@
 		CEC9667F1C789CE6D305A5763170CB22 /* FLEXTableListViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXTableListViewController.h; path = Classes/GlobalStateExplorers/DatabaseBrowser/FLEXTableListViewController.h; sourceTree = "<group>"; };
 		CEE640A1750F06F3BAB5905A270B9D44 /* Internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Internal.swift; path = Source/Internal.swift; sourceTree = "<group>"; };
 		CF44AD75691D1C2295AB44024E237698 /* FLEXExplorerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXExplorerViewController.h; path = Classes/ExplorerInterface/FLEXExplorerViewController.h; sourceTree = "<group>"; };
-		CFA525430CCEB241A249694B3DC2391C /* PippinTesting-Unit-Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "PippinTesting-Unit-Tests-frameworks.sh"; sourceTree = "<group>"; };
 		D039E4885F70105639B0396248C47B35 /* Pods-PippinPods-macOS-Pippin-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PippinPods-macOS-Pippin-macOS-dummy.m"; sourceTree = "<group>"; };
 		D148402140798C4E6E72A129E9FAF9E6 /* CornerRoundingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CornerRoundingView.swift; path = SwiftMessages/CornerRoundingView.swift; sourceTree = "<group>"; };
 		D1F7B0F1239FEF8D3A5069E630C4CF93 /* FLEXFileBrowserSearchOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXFileBrowserSearchOperation.m; path = Classes/GlobalStateExplorers/FLEXFileBrowserSearchOperation.m; sourceTree = "<group>"; };
+		D29D0ADA31FF51AF9005084B27546F11 /* PippinTesting-Unit-Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PippinTesting-Unit-Tests-Info.plist"; sourceTree = "<group>"; };
 		D33A95B1245C5FFDE1A45271CC5865EF /* JGProgressHUDRingIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDRingIndicatorView.h; path = JGProgressHUD/JGProgressHUD/JGProgressHUDRingIndicatorView.h; sourceTree = "<group>"; };
 		D415BEAB3C3718713A4722E3E41733FB /* TextAnnotationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextAnnotationView.swift; path = PinpointKit/PinpointKit/Sources/Core/TextAnnotationView.swift; sourceTree = "<group>"; };
 		D4181CE2CAE5C0733D6680869FA4BB02 /* FLEXLibrariesTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXLibrariesTableViewController.h; path = Classes/GlobalStateExplorers/FLEXLibrariesTableViewController.h; sourceTree = "<group>"; };
@@ -1532,6 +1530,7 @@
 		D6EBFA3E70343A9F7EA75E428CF2F69A /* FLEXArgumentInputNotSupportedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXArgumentInputNotSupportedView.h; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputNotSupportedView.h; sourceTree = "<group>"; };
 		D76F57E7E2E13293C4608DB47569312C /* PippinDebugging-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinDebugging-prefix.pch"; sourceTree = "<group>"; };
 		D805F752ACDFAD0FC14357206C8C8BFE /* Alerter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
+		D84308DEF3D76B306426704CD15824DB /* PippinTesting-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinTesting-umbrella.h"; sourceTree = "<group>"; };
 		D8615EB5A1D76A5E3260C280BDCE5A52 /* FLEXGlobalsTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXGlobalsTableViewController.m; path = Classes/GlobalStateExplorers/FLEXGlobalsTableViewController.m; sourceTree = "<group>"; };
 		D8D5ECFD0F720384A45966319BA8CE5C /* BasicLogViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BasicLogViewController.swift; path = PinpointKit/PinpointKit/Sources/Core/BasicLogViewController.swift; sourceTree = "<group>"; };
 		D9957D668DE3460CDF4F5FC9EF9B6102 /* warningIconLight.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = warningIconLight.png; path = SwiftMessages/Resources/warningIconLight.png; sourceTree = "<group>"; };
@@ -1586,12 +1585,14 @@
 		EBC20C494A4C2C1B72C3FFE1C8D73FA2 /* XCGLogger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = XCGLogger.modulemap; sourceTree = "<group>"; };
 		EBE4BC77F446245598CBF263E7A35AF7 /* FLEX-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FLEX-Info.plist"; sourceTree = "<group>"; };
 		EC2242004885B381EC00BE8F2EA493AA /* Operations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		ED043EA606F696AFE22A03A69D515E15 /* Robot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Robot.swift; path = Sources/PippinTesting/Robot.swift; sourceTree = "<group>"; };
 		EDD3972F7AF4D7EFCE5C79F87E082F70 /* PippinAdapters.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PippinAdapters.xcconfig; sourceTree = "<group>"; };
 		EE08540E3C1F5C8150E89C1C585362B2 /* JGProgressHUDSuccessIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JGProgressHUDSuccessIndicatorView.m; path = JGProgressHUD/JGProgressHUD/JGProgressHUDSuccessIndicatorView.m; sourceTree = "<group>"; };
 		EF1818E462477AE8767E57BFCCDC3DFE /* FLEXArgumentInputViewFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXArgumentInputViewFactory.m; path = Classes/Editing/ArgumentInputViews/FLEXArgumentInputViewFactory.m; sourceTree = "<group>"; };
 		EF40C5D999F1623280C510EE517FEF7B /* Pods-PippinTestPods-iOS-PippinUITests-iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PippinTestPods-iOS-PippinUITests-iOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		EF4B6044F8D11E74127635FEE999943A /* FLEXGlobalsTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXGlobalsTableViewController.h; path = Classes/GlobalStateExplorers/FLEXGlobalsTableViewController.h; sourceTree = "<group>"; };
 		EF56DBE16E976B8D26BCCD3B48B3C3A8 /* infoIconSubtle@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "infoIconSubtle@3x.png"; path = "SwiftMessages/Resources/infoIconSubtle@3x.png"; sourceTree = "<group>"; };
+		EF8B8E225B01DB25F4367FD1759EBB7D /* PippinTesting.unit-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "PippinTesting.unit-tests.xcconfig"; sourceTree = "<group>"; };
 		EFDDAE706A0522B0EC476E5D9E13FDFE /* FileDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileDestination.swift; path = Sources/XCGLogger/Destinations/FileDestination.swift; sourceTree = "<group>"; };
 		F036D5C4DF7BA48AEB40BF4B5FE226F4 /* FLEXNetworkHistoryTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXNetworkHistoryTableViewController.h; path = Classes/Network/FLEXNetworkHistoryTableViewController.h; sourceTree = "<group>"; };
 		F065B2AB2E919F693E0538B3D493A3BC /* PippinLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PippinLibrary.framework; path = "PippinLibrary-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1614,6 +1615,7 @@
 		FC7068E77BAE1EEBEABD29EAE09DEF4E /* FLEX.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FLEX.modulemap; sourceTree = "<group>"; };
 		FCBB9F952D929E902E3D173539D42BB2 /* FLEXLibrariesTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXLibrariesTableViewController.m; path = Classes/GlobalStateExplorers/FLEXLibrariesTableViewController.m; sourceTree = "<group>"; };
 		FCDD0F935377F4A64DFB57DBE9E9C562 /* successIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "successIcon@2x.png"; path = "SwiftMessages/Resources/successIcon@2x.png"; sourceTree = "<group>"; };
+		FD90E49748B5C99DAA007A4BBE1B134D /* PippinTesting-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PippinTesting-prefix.pch"; sourceTree = "<group>"; };
 		FDC05617D4FFD06644FB75C9F78F71BD /* FLEXObjectExplorerViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLEXObjectExplorerViewController.m; path = Classes/ObjectExplorers/FLEXObjectExplorerViewController.m; sourceTree = "<group>"; };
 		FE22653F1C0B97D49E6B25B292A00003 /* BlurViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BlurViewController.swift; sourceTree = "<group>"; };
 		FE53EDAAE86ACDE5B5408485AD73AF26 /* PippinCore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PippinCore.xcconfig; sourceTree = "<group>"; };
@@ -1734,6 +1736,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C3EA8E87783BBB546EE168F02CF03D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				758095B4BCF66E9F18D3875E697B4921 /* Foundation.framework in Frameworks */,
+				8DF0CF5F7BA152E410C0DCA8C4EFF7BC /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FAC9C76E2A1B8A5E6B5B777500FA273 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1763,15 +1774,6 @@
 			files = (
 				716B1013A1E5FC15CD3A9515C6CAA9AD /* Anchorage.framework in Frameworks */,
 				60B5B87647A7943EFF0428DA70F4AC98 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C845D42844C3F6C026BB81FFA0F16A21 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				38D1D5943C7D5E63AD5C09316721207A /* Foundation.framework in Frameworks */,
-				31FC8B466A64039171BEEF3DD5BAE904 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2167,14 +2169,6 @@
 			name = SwiftMessages;
 			sourceTree = "<group>";
 		};
-		29CB7B65A4A6BFAB1CF6503A0AFDA9D6 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				B0816D0285537B1294CB33528D992AA4 /* PippinTestingUnitTests.swift */,
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
 		2B5430600287C0187CEB27EE91ABE4E5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -2284,7 +2278,7 @@
 				E09EFF54C593B5B35BC1A9F7ECD246E0 /* PippinCore */,
 				22D5CEE3A22A403E45B2052D1FB59707 /* PippinDebugging */,
 				6F38D066FFC2740263A0FEFFF38161D7 /* PippinLibrary */,
-				52B074D34D4577420DEE5FC67B17D265 /* PippinTesting */,
+				CCAABFB78E32DCDC59BF1633040546F0 /* PippinTesting */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -2316,19 +2310,6 @@
 			);
 			name = Array;
 			path = Array;
-			sourceTree = "<group>";
-		};
-		52B074D34D4577420DEE5FC67B17D265 /* PippinTesting */ = {
-			isa = PBXGroup;
-			children = (
-				E8F6BC60345C2F5811B7872EB8D17991 /* Pod */,
-				70F6D9C824C465D4346AA44BFD78DFF3 /* Support Files */,
-				29CB7B65A4A6BFAB1CF6503A0AFDA9D6 /* Tests */,
-				D6111D17BCAA3D4B42B919684D0D6F61 /* XCUIApplication */,
-				DA6371B07442760571EC25CB4AC0FCCD /* XCUIElement */,
-			);
-			name = PippinTesting;
-			path = ../../..;
 			sourceTree = "<group>";
 		};
 		5301756DF9AAE4CD38266A893DEB513F /* Core */ = {
@@ -2650,24 +2631,6 @@
 			path = ../../..;
 			sourceTree = "<group>";
 		};
-		70F6D9C824C465D4346AA44BFD78DFF3 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				367655EB3BB409A668172AE49865C41E /* PippinTesting.modulemap */,
-				0CC1F3BCA41F0535C9EAADE9CA14722D /* PippinTesting.xcconfig */,
-				24FF522BF15AAEF586784080E19FE1FC /* PippinTesting-dummy.m */,
-				62EB45292DD93941402B30B520870131 /* PippinTesting-Info.plist */,
-				13EAF8124372B023A60A83EE6148BB3E /* PippinTesting-prefix.pch */,
-				15BA5E76907DED5285D9A191BDEB5CB2 /* PippinTesting-umbrella.h */,
-				CFA525430CCEB241A249694B3DC2391C /* PippinTesting-Unit-Tests-frameworks.sh */,
-				28336F659CA591E8813CD430B22778C1 /* PippinTesting-Unit-Tests-Info.plist */,
-				711D1330275050813B9E8FB8E1313C25 /* PippinTesting-Unit-Tests-prefix.pch */,
-				ACC73F499D5D01C2D0A12E004A8952CE /* PippinTesting.unit-tests.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Examples/Pippin/Pods/Target Support Files/PippinTesting";
-			sourceTree = "<group>";
-		};
 		710E2EB9498D7FCF6F7C36810C1E54CE /* Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -2810,6 +2773,24 @@
 			path = "../Target Support Files/Fabric";
 			sourceTree = "<group>";
 		};
+		94339046FECB9C26788D41F6C416135F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F46D67E6B88F4A20CFC8B5F8F50EF1FA /* XCTest */,
+			);
+			name = Extensions;
+			path = Sources/PippinTesting/Extensions;
+			sourceTree = "<group>";
+		};
+		94A735168F865597026D74653A52F682 /* XCUIElement */ = {
+			isa = PBXGroup;
+			children = (
+				0B93699758C28A9164B9018E5EE849E0 /* XCUIElement+Helpers.swift */,
+			);
+			name = XCUIElement;
+			path = XCUIElement;
+			sourceTree = "<group>";
+		};
 		9656182B34409FA0A7AC7A3788A2BCF0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -2930,6 +2911,15 @@
 				1A08F3798645017BE50806E563A1BCA4 /* XCGLogger */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		AAC84AFD448EA6B4CEE37D7E53551AD7 /* XCUIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				60799D99D18E4C50614B7B6036FF8CF1 /* XCUIApplication+Helpers.swift */,
+			);
+			name = XCUIApplication;
+			path = XCUIApplication;
 			sourceTree = "<group>";
 		};
 		AC03F25D8056E55115109FF37D8C230D /* App */ = {
@@ -3076,6 +3066,14 @@
 			name = CoreLocation;
 			sourceTree = "<group>";
 		};
+		C51E37D874E06AA91B42FD0790D1CFC2 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				02C5EC6079617C8769647ECCD2213D0B /* PippinTesting.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		C627776725496C5167FE0CDE08A6076A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -3192,6 +3190,19 @@
 			name = Pod;
 			sourceTree = "<group>";
 		};
+		CCAABFB78E32DCDC59BF1633040546F0 /* PippinTesting */ = {
+			isa = PBXGroup;
+			children = (
+				ED043EA606F696AFE22A03A69D515E15 /* Robot.swift */,
+				94339046FECB9C26788D41F6C416135F /* Extensions */,
+				C51E37D874E06AA91B42FD0790D1CFC2 /* Pod */,
+				E81CC5DF9A7531FE8970019E56CB522C /* Support Files */,
+				EC2AEEFAB13910C8FBE8BC7BA8FB2A02 /* Tests */,
+			);
+			name = PippinTesting;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
@@ -3249,15 +3260,6 @@
 			path = ObjcExceptionBridging;
 			sourceTree = "<group>";
 		};
-		D6111D17BCAA3D4B42B919684D0D6F61 /* XCUIApplication */ = {
-			isa = PBXGroup;
-			children = (
-				CA5A4CEB1F6487BDCE2CF7ACD6C0DECF /* XCUIApplication+Helpers.swift */,
-			);
-			name = XCUIApplication;
-			path = Sources/PippinTesting/Extensions/XCTest/XCUIApplication;
-			sourceTree = "<group>";
-		};
 		D8588157CC20A735112AE1847E0AC116 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -3304,15 +3306,6 @@
 				3E026A2845246CA03A1850247E8C5117 /* warningIconSubtle@3x.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		DA6371B07442760571EC25CB4AC0FCCD /* XCUIElement */ = {
-			isa = PBXGroup;
-			children = (
-				AC69CC2F06C8D3DFA3CDC8A1F10B2F9C /* XCUIElement+Helpers.swift */,
-			);
-			name = XCUIElement;
-			path = Sources/PippinTesting/Extensions/XCTest/XCUIElement;
 			sourceTree = "<group>";
 		};
 		DBAAB84245420B4FFAA59D49DCBD221F /* Pods-PippinTestPods-iOS-PippinUnitTests-iOS */ = {
@@ -3377,6 +3370,24 @@
 			path = NSObject;
 			sourceTree = "<group>";
 		};
+		E81CC5DF9A7531FE8970019E56CB522C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9BA7A90894B7854001BDF0B453138023 /* PippinTesting.modulemap */,
+				98970ECF9BFE94DE7A3F8283194427F8 /* PippinTesting.xcconfig */,
+				95A343ECBF0286A6FB50937A83DCAB7A /* PippinTesting-dummy.m */,
+				0395B30D45D827968338B5AE3B4382C4 /* PippinTesting-Info.plist */,
+				FD90E49748B5C99DAA007A4BBE1B134D /* PippinTesting-prefix.pch */,
+				D84308DEF3D76B306426704CD15824DB /* PippinTesting-umbrella.h */,
+				8C44D459A1FBAB5F431290AA5DB945F3 /* PippinTesting-Unit-Tests-frameworks.sh */,
+				D29D0ADA31FF51AF9005084B27546F11 /* PippinTesting-Unit-Tests-Info.plist */,
+				914AA7305957977EAAD88123652A7D75 /* PippinTesting-Unit-Tests-prefix.pch */,
+				EF8B8E225B01DB25F4367FD1759EBB7D /* PippinTesting.unit-tests.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Examples/Pippin/Pods/Target Support Files/PippinTesting";
+			sourceTree = "<group>";
+		};
 		E8F49C828C7723F0D8E4E58E7DCAABB3 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -3398,14 +3409,6 @@
 			);
 			name = UIKit;
 			path = Sources/PippinLibrary/UIKit;
-			sourceTree = "<group>";
-		};
-		E8F6BC60345C2F5811B7872EB8D17991 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				7BEB7316DB22FB2FD961880A09FCD370 /* PippinTesting.podspec */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		E977C8289C37ECE9CB5E669FCEE321D1 /* Products */ = {
@@ -3447,6 +3450,14 @@
 			name = Pod;
 			sourceTree = "<group>";
 		};
+		EC2AEEFAB13910C8FBE8BC7BA8FB2A02 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				93403E05A3226E204844634CB894B324 /* PippinTestingUnitTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		ED3EAB41319BCB05B5D1D36C3F042087 /* XCGLogger */ = {
 			isa = PBXGroup;
 			children = (
@@ -3470,6 +3481,16 @@
 			);
 			name = "Pods-PippinPods-macOS-Pippin-macOS";
 			path = "Target Support Files/Pods-PippinPods-macOS-Pippin-macOS";
+			sourceTree = "<group>";
+		};
+		F46D67E6B88F4A20CFC8B5F8F50EF1FA /* XCTest */ = {
+			isa = PBXGroup;
+			children = (
+				AAC84AFD448EA6B4CEE37D7E53551AD7 /* XCUIApplication */,
+				94A735168F865597026D74653A52F682 /* XCUIElement */,
+			);
+			name = XCTest;
+			path = XCTest;
 			sourceTree = "<group>";
 		};
 		FD20BFBC4DBBAA0250B1CD47A90C9A78 /* Frameworks */ = {
@@ -3670,14 +3691,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E5832995A4BC7019A7C27B82BDD0CF5 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D259F69F2E3BDEB0AAA17AFCC3B74C19 /* PippinTesting-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		50203AC0842B33F1192278ED8A68DD4B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3739,6 +3752,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE01ABC5D29A1534469020A2FC9F3286 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A77C1DD3ABFBBDBCBCB89AB41129F89 /* PippinTesting-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C1CEB96F1C0149FA6D5CAB1E0A4D4AB8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3784,12 +3805,12 @@
 /* Begin PBXNativeTarget section */
 		03EE997D23B9A01F958EE5228A57CB33 /* PippinTesting */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC4B0BE6A6F7E1F154C66ABD81DEDE29 /* Build configuration list for PBXNativeTarget "PippinTesting" */;
+			buildConfigurationList = 6F2826DC0C029026A8C53F557C8318C5 /* Build configuration list for PBXNativeTarget "PippinTesting" */;
 			buildPhases = (
-				4E5832995A4BC7019A7C27B82BDD0CF5 /* Headers */,
-				BC6DDE08EE1E3CF522847E476788A05E /* Sources */,
-				C845D42844C3F6C026BB81FFA0F16A21 /* Frameworks */,
-				33BE57C55139847A550667EF65D30D45 /* Resources */,
+				BE01ABC5D29A1534469020A2FC9F3286 /* Headers */,
+				8F15F203404242944F140AEA71EEB8AB /* Sources */,
+				9C3EA8E87783BBB546EE168F02CF03D2 /* Frameworks */,
+				EA9895CAC3A166833CF9651B7ED7E41D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -4347,13 +4368,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		33BE57C55139847A550667EF65D30D45 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3D1B3FD079ACD66BAA0289655803EA1E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4455,6 +4469,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C09CEB9E8D9A43F31BF9087647569B82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA9895CAC3A166833CF9651B7ED7E41D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4963,6 +4984,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8F15F203404242944F140AEA71EEB8AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714F8BC532124E89B33A7F0FA316DA90 /* PippinTesting-dummy.m in Sources */,
+				9179C859B287BD8DD674D05BD204AE51 /* Robot.swift in Sources */,
+				A0F8638C321BE67A8D3CAC1D4A2C4912 /* XCUIApplication+Helpers.swift in Sources */,
+				DAC1E2437D28BA68B8A88D98E8DF1490 /* XCUIElement+Helpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A38F3B86E47A35064EEB42CC4DCFD8C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5075,16 +5107,6 @@
 				A7AC61F012BD261412FBD3B3670AE5F6 /* PippinAdapters-dummy.m in Sources */,
 				6EB67B565C54E1585D16255DB2272370 /* SwiftMessagesAdapter.swift in Sources */,
 				DDAA1801A374F5C996B8DAEEE08F5AB2 /* XCGLoggerAdapter.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BC6DDE08EE1E3CF522847E476788A05E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ED2D78EB10F3F006E3F2BE1BB84E46F6 /* PippinTesting-dummy.m in Sources */,
-				62E683BBE1A183562E21145CAB6A4CFD /* XCUIApplication+Helpers.swift in Sources */,
-				6506BE81048F19635DB035411AD9D741 /* XCUIElement+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5424,7 +5446,7 @@
 		};
 		17AC9D7F70E3AF6D3872C821E5A2D899 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACC73F499D5D01C2D0A12E004A8952CE /* PippinTesting.unit-tests.xcconfig */;
+			baseConfigurationReference = EF8B8E225B01DB25F4367FD1759EBB7D /* PippinTesting.unit-tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGNING_REQUIRED = YES;
@@ -5481,6 +5503,41 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		1E83D8F1901ABAF4588BED6409C747BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98970ECF9BFE94DE7A3F8283194427F8 /* PippinTesting.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PippinTesting/PippinTesting-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PippinTesting/PippinTesting-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/PippinTesting/PippinTesting.modulemap";
+				PRODUCT_MODULE_NAME = PippinTesting;
+				PRODUCT_NAME = PippinTesting;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		23B60D35913178004B12919A2E64213E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -5621,7 +5678,7 @@
 		};
 		3ADB8E85989DF5EF4896C5B5B8B09B65 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACC73F499D5D01C2D0A12E004A8952CE /* PippinTesting.unit-tests.xcconfig */;
+			baseConfigurationReference = EF8B8E225B01DB25F4367FD1759EBB7D /* PippinTesting.unit-tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGNING_REQUIRED = YES;
@@ -6200,6 +6257,42 @@
 			};
 			name = Debug;
 		};
+		809A9C56DFF169CAB0525B4E1B1E6AD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98970ECF9BFE94DE7A3F8283194427F8 /* PippinTesting.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PippinTesting/PippinTesting-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PippinTesting/PippinTesting-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/PippinTesting/PippinTesting.modulemap";
+				PRODUCT_MODULE_NAME = PippinTesting;
+				PRODUCT_NAME = PippinTesting;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		849C37C50CF3796D3B64A6F54DE59678 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6E7EB4A29D424EC95429C3E4310E82A /* PippinLibrary-iOS.xcconfig */;
@@ -6323,42 +6416,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		8A42102B85D986E7BBC1CAF80B2F9719 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CC1F3BCA41F0535C9EAADE9CA14722D /* PippinTesting.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PippinTesting/PippinTesting-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PippinTesting/PippinTesting-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/PippinTesting/PippinTesting.modulemap";
-				PRODUCT_MODULE_NAME = PippinTesting;
-				PRODUCT_NAME = PippinTesting;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.1;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		8B3FC9285C43B50AE6A853C778653D8D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -6823,41 +6880,6 @@
 			};
 			name = Debug;
 		};
-		D5EB8579C73338F09396ECCEFD42A63F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CC1F3BCA41F0535C9EAADE9CA14722D /* PippinTesting.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PippinTesting/PippinTesting-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PippinTesting/PippinTesting-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/PippinTesting/PippinTesting.modulemap";
-				PRODUCT_MODULE_NAME = PippinTesting;
-				PRODUCT_NAME = PippinTesting;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.1;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		DEE43375F9336F6E87D63CBEC8196E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18A503E9AA7F82C02552C8FD87E10ACB /* Anchorage-iOS.xcconfig */;
@@ -7293,6 +7315,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		6F2826DC0C029026A8C53F557C8318C5 /* Build configuration list for PBXNativeTarget "PippinTesting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E83D8F1901ABAF4588BED6409C747BD /* Debug */,
+				809A9C56DFF169CAB0525B4E1B1E6AD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		700AB5AC71ACC21AE5124DB68A65843D /* Build configuration list for PBXNativeTarget "PippinAdapters" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -7352,15 +7383,6 @@
 			buildConfigurations = (
 				D43B3DDF5D3BF6757ED79FD2D914D7C7 /* Debug */,
 				CDFCF98E7F9FB4406E116ED6500B19DD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AC4B0BE6A6F7E1F154C66ABD81DEDE29 /* Build configuration list for PBXNativeTarget "PippinTesting" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D5EB8579C73338F09396ECCEFD42A63F /* Debug */,
-				8A42102B85D986E7BBC1CAF80B2F9719 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

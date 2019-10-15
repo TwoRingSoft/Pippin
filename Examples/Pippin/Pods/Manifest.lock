@@ -70,8 +70,8 @@ PODS:
     - Anchorage
   - PippinLibrary/Tests (1.0.0):
     - Anchorage
-  - PippinTesting (2.0.1)
-  - PippinTesting/Tests (2.0.1)
+  - PippinTesting (2.1.0)
+  - PippinTesting/Tests (2.1.0)
   - Result (5.0.0)
   - SwiftMessages (7.0.1):
     - SwiftMessages/App (= 7.0.1)
@@ -137,11 +137,11 @@ SPEC CHECKSUMS:
   PippinCore: 784da03ba3986d92af3e9f443eb6cb206cc1d7e9
   PippinDebugging: b4fa5984b134d28262b9e839db806f90c686e17f
   PippinLibrary: 32a209efd502dd9fe1a784770a54b4285fa56399
-  PippinTesting: c4903a5db7b4886859addb65d11e22ab3399e3f7
+  PippinTesting: 7fb8498100dfb260d0defab53032fd22d8981158
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
 PODFILE CHECKSUM: a0b1b54afbc15c52862cd1c6b1b514cfd4b8a972
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.3

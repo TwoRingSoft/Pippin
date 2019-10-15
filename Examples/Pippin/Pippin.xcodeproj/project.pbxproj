@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D6BDB398561FC03D476BCDA /* Pods_PippinTestPods_iOS_PippinUnitTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C34774A1A83F4F9583E4B4 /* Pods_PippinTestPods_iOS_PippinUnitTests_iOS.framework */; };
 		4907828721585E3D0024748B /* PippinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907828621585E3D0024748B /* PippinUITests.swift */; };
+		493736382355ADDE00118B21 /* UITestRobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493736372355ADDE00118B21 /* UITestRobot.swift */; };
 		495BEB5521E81D4C00FA478B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495BEB5421E81D4C00FA478B /* AppDelegate.swift */; };
 		495BEB5721E81D4D00FA478B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5621E81D4D00FA478B /* Assets.xcassets */; };
 		495BEB5A21E81D4D00FA478B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495BEB5821E81D4D00FA478B /* MainMenu.xib */; };
@@ -49,6 +50,7 @@
 		4907828621585E3D0024748B /* PippinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PippinUITests.swift; sourceTree = "<group>"; };
 		4907828821585E3D0024748B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		490A0D3D233EE3C20082B3F8 /* CrashlyticsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CrashlyticsAdapter.swift; path = ../../../Sources/PippinAdapters/Crashlytics/CrashlyticsAdapter.swift; sourceTree = "<group>"; };
+		493736372355ADDE00118B21 /* UITestRobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestRobot.swift; sourceTree = "<group>"; };
 		495BEB5221E81D4C00FA478B /* Pippin-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pippin-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		495BEB5421E81D4C00FA478B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		495BEB5621E81D4D00FA478B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				4907828621585E3D0024748B /* PippinUITests.swift */,
+				493736372355ADDE00118B21 /* UITestRobot.swift */,
 				4907828821585E3D0024748B /* Info.plist */,
 			);
 			path = "PippinUITests-iOS";
@@ -538,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493736382355ADDE00118B21 /* UITestRobot.swift in Sources */,
 				4907828721585E3D0024748B /* PippinUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
