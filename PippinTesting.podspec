@@ -19,5 +19,7 @@ Pod::Spec.new do |s|
       test_spec.source_files = 'Tests/PippinTesting/**/*.swift'
   end
   
+  s.xcconfig = { 'ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES' => 'YES' }
+
   s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 end
