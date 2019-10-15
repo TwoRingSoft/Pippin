@@ -5,3 +5,6 @@ build-phone:
 
 build-mac:
 	xcodebuild -workspace Pippin.xcworkspace -scheme PippinTestHarness-macOS -sdk macosx -quiet
+
+bump:
+	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec
