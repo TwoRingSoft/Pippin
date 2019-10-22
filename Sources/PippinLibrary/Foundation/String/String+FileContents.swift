@@ -1,9 +1,9 @@
 //
 //  String+FileContents.swift
-//  InformedConsent
+//  PippinLibrary
 //
 //  Created by Andrew McKnight on 7/28/17.
-//  Copyright © 2017 Insight Therapeutics. All rights reserved.
+//  Copyright © 2019 Two Ring Software. All rights reserved.
 //
 
 import Foundation

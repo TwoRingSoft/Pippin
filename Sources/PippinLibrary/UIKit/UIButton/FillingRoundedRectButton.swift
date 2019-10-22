@@ -1,9 +1,9 @@
 //
 //  FillingRoundedRectButton.swift
-//  InformedConsent
+//  PippinLibrary
 //
 //  Created by Andrew McKnight on 8/8/17.
-//  Copyright © 2017 Insight Therapeutics. All rights reserved.
+//  Copyright © 2019 Two Ring Software. All rights reserved.
 //
 
 import QuartzCore
