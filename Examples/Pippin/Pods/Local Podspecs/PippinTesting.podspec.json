@@ -18,9 +18,6 @@
   "swift_versions": "5.1",
   "source_files": "Sources/PippinTesting/**/*.{h,m,swift}",
   "frameworks": "XCTest",
-  "xcconfig": {
-    "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "YES"
-  },
   "pod_target_xcconfig": {
     "ENABLE_BITCODE": "NO"
   },

@@ -66,9 +66,9 @@ PODS:
   - PippinDebugging (1.0.0):
     - FLEX (~> 2)
     - PippinCore
-  - PippinLibrary (1.0.0):
+  - PippinLibrary (1.0.1):
     - Anchorage
-  - PippinLibrary/Tests (1.0.0):
+  - PippinLibrary/Tests (1.0.1):
     - Anchorage
   - PippinTesting (2.1.0)
   - PippinTesting/Tests (2.1.0)
@@ -136,12 +136,12 @@ SPEC CHECKSUMS:
   PippinAdapters: f2bba49f4693a0a8ca5618d5816777703b3f2777
   PippinCore: 784da03ba3986d92af3e9f443eb6cb206cc1d7e9
   PippinDebugging: b4fa5984b134d28262b9e839db806f90c686e17f
-  PippinLibrary: 32a209efd502dd9fe1a784770a54b4285fa56399
-  PippinTesting: 7fb8498100dfb260d0defab53032fd22d8981158
+  PippinLibrary: 017a7ebee4184d2d8e2d9f12451447f95ee16d4b
+  PippinTesting: 8b14c20b118bdfb11f8ba366519022ec2330c79f
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
 PODFILE CHECKSUM: a0b1b54afbc15c52862cd1c6b1b514cfd4b8a972
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

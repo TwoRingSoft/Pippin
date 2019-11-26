@@ -1,0 +1,61 @@
+{
+  "entries": {
+    "brew": {
+      "rbenv": {
+        "version": "1.1.2",
+        "bottle": {
+          "cellar": ":any",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/rbenv-1.1.2.catalina.bottle.tar.gz",
+              "sha256": "503ed6d818502f00f031b9f49461934e252b9bfba2876e90a326fc27bb1052d6"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/rbenv-1.1.2.mojave.bottle.tar.gz",
+              "sha256": "d1019098dee8d037587069398e5ad04e6d736f834dc44ae73943bec46b10b260"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/rbenv-1.1.2.high_sierra.bottle.tar.gz",
+              "sha256": "b5984102794a9d39388ca1f6ec77965aeea29b971cc00cb5af8ede8ee6c926d6"
+            },
+            "sierra": {
+              "url": "https://homebrew.bintray.com/bottles/rbenv-1.1.2.sierra.bottle.tar.gz",
+              "sha256": "873175a851e5aa4f5b3438072030b945c252f08a9a07760c64dc045e2cce4724"
+            }
+          }
+        }
+      },
+      "xcodegen": {
+        "version": "2.10.1",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.10.1.catalina.bottle.tar.gz",
+              "sha256": "887575b080ad6d0bd97f3eb72bea5c2246558b687f5cdcfeb41fc7d40a69f075"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.10.1.mojave.bottle.tar.gz",
+              "sha256": "d943d1454494c09a2e5ded6321305b734faf8137a301d6e94325464254d6ba66"
+            }
+          }
+        }
+      },
+      "tworingsoft/formulae/vrsn": null
+    }
+  },
+  "system": {
+    "macos": {
+      "mojave": {
+        "HOMEBREW_VERSION": "2.1.15",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "7f4a04032d5b1367a7e4b23a9271e05ce7089103",
+        "CLT": "10.3.0.0.1.1562985497",
+        "Xcode": "11.2.1",
+        "macOS": "10.14.6"
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 PODS:
   - Anchorage (4.3.1)
-  - PippinLibrary (1.0.0):
+  - PippinLibrary (1.0.1):
     - Anchorage
 
 DEPENDENCIES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Anchorage: a187da0bc9b07440637d42c8744b8c82a4490295
-  PippinLibrary: 2554eb4111f331c6b620dab4b550ae9b967fe07d
+  PippinLibrary: 017a7ebee4184d2d8e2d9f12451447f95ee16d4b
 
 PODFILE CHECKSUM: 358e3f5749264a7dfa3610052e0d409c4d9a7ea4
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.4

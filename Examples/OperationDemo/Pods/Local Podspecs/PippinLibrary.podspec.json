@@ -1,6 +1,6 @@
 {
   "name": "PippinLibrary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "summary": "Extensions on Cocoa Touch and Swift stdlib SDKs.",
   "description": "All manner of extensions, categories, subclasses, wrappers, helpful functions, macros, syntactic sugar, utilities, &c that make coding faster and more semantically accurate.",
   "homepage": "https://github.com/tworingsoft/Pippin",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinLibrary-1.0.0"
+    "tag": "PippinLibrary-1.0.1"
   },
   "swift_versions": "5.1",
   "platforms": {
@@ -22,9 +22,6 @@
   },
   "osx": {
     "source_files": "Sources/PippinLibrary/Foundation/**/*.{h,m,swift}"
-  },
-  "xcconfig": {
-    "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "Yes"
   },
   "dependencies": {
     "Anchorage": [
