@@ -4,7 +4,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
-# [Unreleased]
+## [Unreleased]
+
+### Added
+
+- Objc-compatible version of `UIView.roundCorners(radius:borderWidth:borderColor:)`, prefixed with `objc_`.
 
 ---
 
