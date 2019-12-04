@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PippinLibrary'
-  s.version      = '1.0.1'
+  s.version      = '1.1.0'
   s.summary      = "Extensions on Cocoa Touch and Swift stdlib SDKs."
   s.description  = <<-DESC
   All manner of extensions, categories, subclasses, wrappers, helpful functions, macros, syntactic sugar, utilities, &c that make coding faster and more semantically accurate.
