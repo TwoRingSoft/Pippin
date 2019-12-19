@@ -66,6 +66,7 @@ public class Environment: NSObject {
     
     // MARK: look/feel
     public var fonts: Fonts
+    public var colors: Colors
     public var sharedAssetsBundle: Bundle
     
     /// Initialize a new app environment. Sets up `appName`, `semanticVersion` and `currentBuild` propertiew from the main bundle. Wipes out the standard `UserDefaults` if the launch argument for it is activated.
@@ -73,7 +74,13 @@ public class Environment: NSObject {
     ///    - defaults: Optionally provide an object conforming to `Defaults`. It's `environment?` property will be automatically set. If you don't need this, an instance of `DefaultDefaults` is generated for Pippin's internal use.
     ///    - fonts: Optionally provide an object conforming to `Fonts`, otherwise Pippin constructs an instance of `DefaultFonts` for use in UI extensions like `InfoViewController`.
     ///    - sharedAssetsBundle: If you use Pippin UI components that draw images to screen, specify which bundle they'll come from. Defaults to `Bundle.main`.
-    public init(defaults: Defaults = DefaultDefaults(), fonts: Fonts = DefaultFonts(), sharedAssetsBundle: Bundle = Bundle.main) {
+    ///    - colors: Optionally provide an object conforming to `Colors`, otherwise Pippin constructs an instande of `DefaultColors` for use in UI extensions like `InfoViewController`.
+    public init(
+        defaults: Defaults = DefaultDefaults(),
+        fonts: Fonts = DefaultFonts(),
+        sharedAssetsBundle: Bundle = Bundle.main,
+        colors: Colors = DefaultColors()
+    ) {
         let bundle = Bundle.main
         self.appName = bundle.getAppName()
         self.semanticVersion = bundle.getSemanticVersion()
@@ -81,6 +88,7 @@ public class Environment: NSObject {
         self.defaults = defaults
         self.fonts = fonts
         self.sharedAssetsBundle = sharedAssetsBundle
+        self.colors = colors
         
         // get previous launch version
         self.lastLaunchedBuild = self.defaults.lastLaunchedBuild

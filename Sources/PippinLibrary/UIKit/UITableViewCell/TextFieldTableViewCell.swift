@@ -25,6 +25,10 @@ public class TextFieldTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
+        if #available(iOS 13.0, *) {
+            textField.backgroundColor = .systemFill
+        }
+
         [textField, titleLabel].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

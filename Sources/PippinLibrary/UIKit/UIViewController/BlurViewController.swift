@@ -22,9 +22,19 @@ public final class BlurViewController: UIViewController {
     ///   - blurStyle: the type of blur to use.
     ///
     /// - Note: `viewController`'s subviews must have transparent background.
+    @available(iOS, deprecated: 13.0, message: "Use init(blurredViewController which uses a system material for the `UIBlurEffect.Style` by default instead of the old `UIUserInterfaceStyle.light`")
     public required init(viewController: UIViewController, blurStyle: UIBlurEffect.Style = .light) {
         super.init(nibName: nil, bundle: nil)
+        _init(viewController: viewController, blurStyle: blurStyle)
+    }
 
+    @available(iOS 13.0, *)
+    public init(blurredViewController viewController: UIViewController, material: UIBlurEffect.Style = .systemMaterial) {
+        super.init(nibName: nil, bundle: nil)
+        _init(viewController: viewController, blurStyle: material)
+    }
+
+    private func _init(viewController: UIViewController, blurStyle: UIBlurEffect.Style) {
         let blurEffect = UIBlurEffect(style: blurStyle)
         let blurView = UIVisualEffectView(effect: blurEffect)
         addNewChildViewController(newChildViewController: viewController, containerView: blurView.contentView)
@@ -32,7 +42,7 @@ public final class BlurViewController: UIViewController {
 
         view.addSubview(blurView)
         blurView.fillSuperview()
-        
+
         self.title = viewController.title
     }
 
