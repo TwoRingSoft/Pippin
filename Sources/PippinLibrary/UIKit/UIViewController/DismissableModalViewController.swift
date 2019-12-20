@@ -33,15 +33,26 @@ public class DismissableModalViewController: UIViewController {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        [
+        var verticalConstraints = Array<NSLayoutConstraint>()
+        if #available(iOS 11.0, *) {
+            verticalConstraints = [
+                titleAndCloseButtonView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: margin),
+                contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -margin),
+            ]
+        } else {
+            verticalConstraints = [
+                titleAndCloseButtonView.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
+                contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin),
+            ]
+        }
+        let constraints = [
             titleAndCloseButtonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             titleAndCloseButtonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            titleAndCloseButtonView.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
             contentView.topAnchor.constraint(equalTo: titleAndCloseButtonView.bottomAnchor, constant: margin),
             contentView.leadingAnchor.constraint(equalTo: titleAndCloseButtonView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: titleAndCloseButtonView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin),
-        ].forEach { $0.isActive = true }
+        ]
+        (constraints + verticalConstraints).forEach { $0.isActive = true }
 
         self.closeBlock = closeBlock
     }
