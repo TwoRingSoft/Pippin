@@ -24,7 +24,6 @@ import UIKit
  Importantly, provides a secret crash button to test crash reporting in the wild.
  */
 public class InfoViewController: UIViewController, AppInfoPresenter {
-
     fileprivate var environment: Environment
     fileprivate var sharedAssetBundle: Bundle
     public weak var delegate: InfoViewControllerDelegate?
@@ -33,28 +32,47 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
     private var contactEmails: [String]?
     private let websiteURL: URL
     private let textColor: UIColor
+    private weak var logicalParent: UIViewController?
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not implemented")
     }
 
-    public required init(acknowledgements: Acknowledgements, textColor: UIColor, contactEmails: [String]?, environment: Environment, sharedAssetBundle: Bundle, links: [LinkIcon], companyLink: LinkIcon) {
+    /// Create a new `InfoViewController` instance.
+    /// - Parameters:
+    ///   - acknowledgements: an `Acknowledgements` instance.
+    ///   - textColor: color that foreground objects should use.
+    ///   - contactEmails: list of email addresses for  contact emails.
+    ///   - environment: an `Environment` instance.
+    ///   - sharedAssetBundle: bundle for `shared` framework.
+    ///   - links: list of `LinkIcon` instances to display.
+    ///   - companyLink: a `LinkIcon` to display separately from the others, for the company.
+    ///   - logicalParent: the `UIViewController` that is presenting this; not necessarily the direct `parent` of this, which could be a `BlurViewController` or `DismissableModalViewController`.
+    public required init(
+        acknowledgements: Acknowledgements,
+        textColor: UIColor,
+        contactEmails: [String]?,
+        environment: Environment,
+        sharedAssetBundle: Bundle,
+        links: [LinkIcon],
+        companyLink: LinkIcon,
+        logicalParent: UIViewController? = nil
+    ) {
         self.websiteURL = companyLink.url
         self.contactEmails = contactEmails
         self.sharedAssetBundle = sharedAssetBundle
         self.environment = environment
         self.acknowledgements = acknowledgements
         self.textColor = textColor
+        self.logicalParent = logicalParent
         super.init(nibName: nil, bundle: nil)
         setUpUI(textColor: textColor, links: links, companyLink: companyLink)
         setUpSecretCrash()
     }
-
 }
 
 // MARK: Actions
 @objc extension InfoViewController {
-    
     func contactPressed() {
         let mailVC = MFMailComposeViewController(nibName: nil, bundle: nil)
         mailVC.mailComposeDelegate = self
@@ -108,21 +126,22 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
             self.modalPresenter?.dismissTransparently(animated: true)
         }
         let modalPresenter = TransparentModalPresentingViewController(childViewController: modal)
-        addNewChildViewController(newChildViewController: modalPresenter)
-        if #available(iOS 11.0, *) {
-            modalPresenter.view.fillSafeArea(inViewController: self)
+
+        // ideally we can place the new modal directly above this one instead of "inside" it
+        if let parent = logicalParent {
+            parent.addNewChildViewController(newChildViewController: modalPresenter)
         } else {
-            modalPresenter.view.fillLayoutMargins()
+            addNewChildViewController(newChildViewController: modalPresenter)
         }
+
+        modalPresenter.view.fillSuperview()
         modalPresenter.presentTransparently(animated: true)
         self.modalPresenter = modalPresenter
     }
-
 }
 
 // MARK: Private
 private extension InfoViewController {
-
     func openURL(URLString: String) {
         let url = URL(string: URLString)!
         if #available(iOS 10, *) {
@@ -281,7 +300,6 @@ private extension InfoViewController {
         secretCrashGesture.numberOfTapsRequired = 10
         button.addGestureRecognizer(secretCrashGesture)
     }
-    
 }
 
 // MARK: MFMailComposeViewControllerDelegate

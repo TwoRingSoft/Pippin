@@ -19,5 +19,14 @@ public protocol Acknowledgements {
 }
 
 public protocol AppInfoPresenter {
-    init(acknowledgements: Acknowledgements, textColor: UIColor, contactEmails: [String]?, environment: Environment, sharedAssetBundle: Bundle, links: [LinkIcon], companyLink: LinkIcon)
+    init(
+        acknowledgements: Acknowledgements,
+        textColor: UIColor,
+        contactEmails: [String]?,
+        environment: Environment,
+        sharedAssetBundle: Bundle,
+        links: [LinkIcon],
+        companyLink: LinkIcon,
+        logicalParent: UIViewController?
+    )
 }
