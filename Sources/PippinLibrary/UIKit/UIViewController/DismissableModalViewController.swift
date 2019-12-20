@@ -24,7 +24,6 @@ public class DismissableModalViewController: UIViewController {
         childViewController.view.fillSuperview()
 
         let titleAndCloseButtonView = headerView(tintColor: tintColor, imageBundle: imageBundle, titleFont: titleFont)
-        titleAndCloseButtonView.setContentHuggingPriority(.required, for: .vertical)
         contentView.setContentCompressionResistancePriority(.required, for: .vertical)
         
         let margin: CGFloat = 10
@@ -46,11 +45,11 @@ public class DismissableModalViewController: UIViewController {
             ]
         }
         let constraints = [
-            titleAndCloseButtonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            titleAndCloseButtonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            titleAndCloseButtonView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            titleAndCloseButtonView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: titleAndCloseButtonView.bottomAnchor, constant: margin),
-            contentView.leadingAnchor.constraint(equalTo: titleAndCloseButtonView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: titleAndCloseButtonView.trailingAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ]
         (constraints + verticalConstraints).forEach { $0.isActive = true }
 
@@ -71,10 +70,6 @@ public class DismissableModalViewController: UIViewController {
 
 private extension DismissableModalViewController {
     func headerView(tintColor: UIColor, imageBundle: Bundle, titleFont: UIFont) -> UIView {
-        let titleAndCloseButtonView = UIView(frame: .zero)
-        titleAndCloseButtonView.setContentHuggingPriority(.required, for: .vertical)
-        titleAndCloseButtonView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        
         let closeButton = UIButton.button(withImageSetName: "close", emphasisSuffix: "-filled", tintColor: tintColor, imageBundle: imageBundle)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
@@ -82,26 +77,11 @@ private extension DismissableModalViewController {
         titleLabel.minimumScaleFactor = 0.5
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.allowsDefaultTighteningForTruncation = true
-        titleLabel.setContentHuggingPriority(.required, for: .vertical)
-        
-        [closeButton, titleLabel].forEach {
-            titleAndCloseButtonView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        [
-            titleLabel.topAnchor.constraint(equalTo: titleAndCloseButtonView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: titleAndCloseButtonView.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: titleAndCloseButtonView.leadingAnchor, constant: CGFloat.horizontalSpacing),
-            titleLabel.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -CGFloat.horizontalSpacing),
-            closeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            closeButton.topAnchor.constraint(greaterThanOrEqualTo: titleAndCloseButtonView.topAnchor),
-            closeButton.bottomAnchor.constraint(lessThanOrEqualTo: titleAndCloseButtonView.bottomAnchor),
-            closeButton.widthAnchor.constraint(equalToConstant: 35),
-            closeButton.heightAnchor.constraint(equalTo: closeButton.widthAnchor),
-            closeButton.trailingAnchor.constraint(equalTo: titleAndCloseButtonView.trailingAnchor, constant: -CGFloat.horizontalSpacing),
-        ].forEach { $0.isActive = true }
-        
-        return titleAndCloseButtonView
+
+        let stack = UIStackView(arrangedSubviews: [titleLabel, closeButton])
+        stack.spacing = CGFloat.horizontalSpacing
+        stack.alignment = .top
+
+        return stack
     }
 }
