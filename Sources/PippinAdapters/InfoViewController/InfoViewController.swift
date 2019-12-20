@@ -32,6 +32,7 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
     private var modalPresenter: TransparentModalPresentingViewController?
     private var contactEmails: [String]?
     private let websiteURL: URL
+    private let textColor: UIColor
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not implemented")
@@ -43,6 +44,7 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
         self.sharedAssetBundle = sharedAssetBundle
         self.environment = environment
         self.acknowledgements = acknowledgements
+        self.textColor = textColor
         super.init(nibName: nil, bundle: nil)
         setUpUI(textColor: textColor, links: links, companyLink: companyLink)
         setUpSecretCrash()
@@ -93,9 +95,16 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
         vc.view.addSubview(textView)
         vc.title = "Acknowledgements"
         textView.backgroundColor = .clear
+        textView.textColor = environment.colors.foreground
         textView.fillSuperview()
-        
-        let modal = DismissableModalViewController(childViewController: BlurViewController(viewController: vc), titleFont: environment.fonts.title, tintColor: .black, imageBundle: sharedAssetBundle, insets: UIEdgeInsets.zero.inset(topDelta: 30)) {
+
+        let blur: BlurViewController
+        if #available(iOS 13.0, *) {
+            blur = BlurViewController(blurredViewController: vc, vibrancyStyle: .label)
+        } else {
+            blur = BlurViewController(viewController: vc, vibrancy: true)
+        }
+        let modal = DismissableModalViewController(childViewController: blur, titleFont: environment.fonts.title, tintColor: textColor, imageBundle: sharedAssetBundle, insets: UIEdgeInsets.zero.inset(topDelta: 30)) {
             self.modalPresenter?.dismissTransparently(animated: true)
         }
         let modalPresenter = TransparentModalPresentingViewController(childViewController: modal)
@@ -124,9 +133,9 @@ private extension InfoViewController {
     }
 
     func setUpUI(textColor: UIColor, links: [LinkIcon], companyLink: LinkIcon) {
-        let appInfoStack = configureAppInfoStack(textColor: textColor)
+        let appInfoStack = configureAppInfoStack()
         let detailStack = configureDetails()
-        let twoRingStack = configureStack(textColor: textColor, links: links, companyLink: companyLink)
+        let twoRingStack = configureStack(links: links, companyLink: companyLink)
         
         let stack = UIStackView(arrangedSubviews: [appInfoStack, detailStack, twoRingStack])
         stack.distribution = .equalSpacing
@@ -138,7 +147,7 @@ private extension InfoViewController {
         stack.centerAnchors == view.centerAnchors
     }
     
-    func configureAppInfoStack(textColor: UIColor) -> UIStackView {
+    func configureAppInfoStack() -> UIStackView {
         let appNameLabel = UILabel.label(withText: environment.appName, font: environment.fonts.superhero, textColor: textColor, alignment: .center)
         let appInfoLabel = UILabel.label(withText: "\(environment.semanticVersion) build \(environment.currentBuild)", font: environment.fonts.text, textColor: textColor, alignment: .center)
         
@@ -147,12 +156,12 @@ private extension InfoViewController {
         return stack
     }
     
-    func configureStack(textColor: UIColor, links: [LinkIcon], companyLink: LinkIcon) -> UIStackView {
+    func configureStack(links: [LinkIcon], companyLink: LinkIcon) -> UIStackView {
         let urlButton = UIButton(frame: .zero)
         urlButton.configure(title: websiteURL.absoluteString, tintColor: textColor, font: environment.fonts.text, target: self, selector: #selector(websiteURLPressed))
         
-        let socialLinks = configureSocialLinks(textColor: textColor, links: links)
-        let copyright = configureCopyright(textColor: textColor, companyLink: companyLink)
+        let socialLinks = configureSocialLinks(links: links)
+        let copyright = configureCopyright(companyLink: companyLink)
         
         if #available(iOS 11.0, *) {
             let stack = UIStackView(arrangedSubviews: [urlButton, copyright, socialLinks])
@@ -183,7 +192,7 @@ private extension InfoViewController {
         }
     }
 
-    func configureSocialLinks(textColor: UIColor, links: [LinkIcon]) -> UIStackView {
+    func configureSocialLinks(links: [LinkIcon]) -> UIStackView {
         let lightenedColor = textColor.withAlphaComponent(0.6)
 
         let stack = UIStackView(arrangedSubviews: links.map {
@@ -195,7 +204,7 @@ private extension InfoViewController {
         return stack
     }
 
-    func configureCopyright(textColor: UIColor, companyLink: LinkIcon) -> UILabel {
+    func configureCopyright(companyLink: LinkIcon) -> UILabel {
         let copyrightString = "© \(Calendar.current.component(.year, from: Date()))"
         let string = NSMutableAttributedString(string: "\(copyrightString) \(companyLink.name)")
 
@@ -218,22 +227,22 @@ private extension InfoViewController {
         var detailItems = [UIButton]()
         
         if acknowledgements.containsAcknowledgements() {
-            let acknowledgementsButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Acknowledgements", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(acknowledgementsPressed), imageBundle: sharedAssetBundle)
+            let acknowledgementsButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Acknowledgements", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(acknowledgementsPressed), imageBundle: sharedAssetBundle)
             detailItems.append(acknowledgementsButton)
         }
         
         if let _ = environment.inAppPurchaseVendor {
-            let inAppPurchaseButton = UIButton.button(withImageSetName: "money", emphasisSuffix: "pressed", title: "In App Purchases", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(inAppPurchasesPressed), imageBundle: sharedAssetBundle)
+            let inAppPurchaseButton = UIButton.button(withImageSetName: "money", emphasisSuffix: "pressed", title: "In App Purchases", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(inAppPurchasesPressed), imageBundle: sharedAssetBundle)
             detailItems.append(inAppPurchaseButton)
         }
         
         if let _ = environment.bugReporter {
-            let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", title: "Report a Bug", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
+            let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", title: "Report a Bug", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
             detailItems.append(bugReportButton)
         }
         
         if MFMailComposeViewController.canSendMail() {
-            let contactButton = UIButton.button(withImageSetName: "contact", emphasisSuffix: "pressed", title: "Send a Note", tintColor: .black, font: environment.fonts.barButtonTitle, target: self, selector: #selector(contactPressed), imageBundle: sharedAssetBundle)
+            let contactButton = UIButton.button(withImageSetName: "contact", emphasisSuffix: "pressed", title: "Send a Note", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(contactPressed), imageBundle: sharedAssetBundle)
             detailItems.append(contactButton)
         }
         
