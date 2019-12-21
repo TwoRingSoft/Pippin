@@ -19,5 +19,8 @@ Pod::Spec.new do |s|
       test_spec.source_files = 'Tests/PippinTesting/**/*.swift'
   end
 
-  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
+  s.pod_target_xcconfig = { 
+    'ENABLE_BITCODE' => 'NO',
+    'PRODUCT_BUNDLE_IDENTIFIER' => 'com.tworingsoft.pippin-testing',
+  }
 end

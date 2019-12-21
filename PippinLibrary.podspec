@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/tworingsoft/Pippin'
   s.license      = 'MIT'
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
+  s.pod_target_xcconfig = { 'PRODUCT_BUNDLE_IDENTIFIER' => 'com.tworingsoft.pippin-library' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
   s.swift_version = '5.1'
 
