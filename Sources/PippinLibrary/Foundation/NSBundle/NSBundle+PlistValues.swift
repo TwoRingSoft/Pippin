@@ -12,7 +12,7 @@ enum BundleKey: String {
     case semanticVersion = "CFBundleShortVersionString"
     case buildNumber = "CFBundleVersion"
     case name = "CFBundleName"
-    case identifier = "CGBundleIdentifier"
+    case identifier = "CFBundleIdentifier"
 }
 
 public extension Bundle {
