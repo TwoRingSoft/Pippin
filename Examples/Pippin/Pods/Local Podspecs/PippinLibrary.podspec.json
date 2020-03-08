@@ -1,6 +1,6 @@
 {
   "name": "PippinLibrary",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "summary": "Extensions on Cocoa Touch and Swift stdlib SDKs.",
   "description": "All manner of extensions, categories, subclasses, wrappers, helpful functions, macros, syntactic sugar, utilities, &c that make coding faster and more semantically accurate.",
   "homepage": "https://github.com/tworingsoft/Pippin",
@@ -8,13 +8,16 @@
   "authors": {
     "Andrew McKnight": "andrew@tworingsoft.com"
   },
+  "pod_target_xcconfig": {
+    "PRODUCT_BUNDLE_IDENTIFIER": "com.tworingsoft.pippin-library"
+  },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinLibrary-1.0.1"
+    "tag": "PippinLibrary-2.0.0"
   },
   "swift_versions": "5.1",
   "platforms": {
-    "ios": "9.0",
+    "ios": "12.0",
     "osx": "10.12"
   },
   "ios": {

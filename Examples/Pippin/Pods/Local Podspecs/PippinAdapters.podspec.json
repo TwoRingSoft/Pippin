@@ -1,6 +1,6 @@
 {
   "name": "PippinAdapters",
-  "version": "4.0.0",
+  "version": "5.0.0-RC5",
   "summary": "Plugins for Pippin Protocols.",
   "description": "A collection of pluggable adapters to third-party dependencies, or entirely self-rolled implementations for Pippin protocols.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -8,12 +8,15 @@
   "authors": {
     "Andrew McKnight": "andrew@tworingsoft.com"
   },
+  "pod_target_xcconfig": {
+    "PRODUCT_BUNDLE_IDENTIFIER": "com.tworingsoft.pippin-adapters"
+  },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinAdapters-4.0.0"
+    "tag": "PippinAdapters-5.0.0-RC5"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "12.0"
   },
   "swift_versions": "5.1",
   "default_subspecs": [
