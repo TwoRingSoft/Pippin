@@ -1,74 +1,74 @@
 PODS:
-  - Anchorage (4.3.1)
+  - Anchorage (4.4.0)
   - COSTouchVisualizer (1.0.6)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
   - FLEX (2.4.0)
-  - JGProgressHUD (2.0.4)
+  - JGProgressHUD (2.1)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PinpointKit (1.3.0):
     - PinpointKit/Core (= 1.3.0)
   - PinpointKit/Core (1.3.0)
-  - PippinAdapters (4.0.0):
-    - PippinAdapters/COSTouchVisualizer (= 4.0.0)
-    - PippinAdapters/Environment (= 4.0.0)
-    - PippinAdapters/JGProgressHUD (= 4.0.0)
-    - PippinAdapters/PinpointKit (= 4.0.0)
-    - PippinAdapters/SwiftMessages (= 4.0.0)
-    - PippinAdapters/XCGLogger (= 4.0.0)
-  - PippinAdapters/AVCaptureDevice (4.0.0):
+  - PippinAdapters (5.0.0):
+    - PippinAdapters/COSTouchVisualizer (= 5.0.0)
+    - PippinAdapters/Environment (= 5.0.0)
+    - PippinAdapters/JGProgressHUD (= 5.0.0)
+    - PippinAdapters/PinpointKit (= 5.0.0)
+    - PippinAdapters/SwiftMessages (= 5.0.0)
+    - PippinAdapters/XCGLogger (= 5.0.0)
+  - PippinAdapters/AVCaptureDevice (5.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/CoreData (4.0.0):
+  - PippinAdapters/CoreData (5.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/CoreLocation (4.0.0):
+  - PippinAdapters/CoreLocation (5.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/COSTouchVisualizer (4.0.0):
+  - PippinAdapters/COSTouchVisualizer (5.0.0):
     - COSTouchVisualizer (~> 1)
     - PippinCore
-  - PippinAdapters/Crashlytics (4.0.0)
-  - PippinAdapters/CRUDViewController (4.0.0):
+  - PippinAdapters/Crashlytics (5.0.0)
+  - PippinAdapters/CRUDViewController (5.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/Environment (4.0.0):
+  - PippinAdapters/Environment (5.0.0):
     - PippinAdapters/COSTouchVisualizer
     - PippinAdapters/JGProgressHUD
     - PippinAdapters/PinpointKit
     - PippinAdapters/SwiftMessages
     - PippinAdapters/XCGLogger
     - PippinCore
-  - PippinAdapters/FormController (4.0.0):
+  - PippinAdapters/FormController (5.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/InfoViewController (4.0.0):
+  - PippinAdapters/InfoViewController (5.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/JGProgressHUD (4.0.0):
+  - PippinAdapters/JGProgressHUD (5.0.0):
     - JGProgressHUD (~> 2)
     - PippinCore
-  - PippinAdapters/PinpointKit (4.0.0):
+  - PippinAdapters/PinpointKit (5.0.0):
     - PinpointKit (~> 1)
     - PippinCore
-  - PippinAdapters/SwiftMessages (4.0.0):
+  - PippinAdapters/SwiftMessages (5.0.0):
     - PippinCore
     - SwiftMessages (~> 7)
-  - PippinAdapters/XCGLogger (4.0.0):
+  - PippinAdapters/XCGLogger (5.0.0):
     - PippinCore
     - XCGLogger (~> 7)
-  - PippinCore (1.0.0):
+  - PippinCore (2.0.0):
     - PippinLibrary
     - Result
   - PippinDebugging (1.0.0):
     - FLEX (~> 2)
     - PippinCore
-  - PippinLibrary (1.0.1):
+  - PippinLibrary (2.0.0):
     - Anchorage
-  - PippinLibrary/Tests (1.0.1):
+  - PippinLibrary/Tests (2.0.0):
     - Anchorage
   - PippinTesting (2.1.0)
   - PippinTesting/Tests (2.1.0)
@@ -76,9 +76,9 @@ PODS:
   - SwiftMessages (7.0.1):
     - SwiftMessages/App (= 7.0.1)
   - SwiftMessages/App (7.0.1)
-  - XCGLogger (7.0.0):
-    - XCGLogger/Core (= 7.0.0)
-  - XCGLogger/Core (7.0.0):
+  - XCGLogger (7.0.1):
+    - XCGLogger/Core (= 7.0.1)
+  - XCGLogger/Core (7.0.1):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
@@ -125,23 +125,23 @@ EXTERNAL SOURCES:
     :path: "../.."
 
 SPEC CHECKSUMS:
-  Anchorage: a187da0bc9b07440637d42c8744b8c82a4490295
+  Anchorage: d7f02c4f9425b537053237aab11ae97e59b55f36
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8ef42ed810a95aaced0462b532e0224a67afb72d
-  PippinAdapters: f2bba49f4693a0a8ca5618d5816777703b3f2777
-  PippinCore: 784da03ba3986d92af3e9f443eb6cb206cc1d7e9
-  PippinDebugging: b4fa5984b134d28262b9e839db806f90c686e17f
-  PippinLibrary: 017a7ebee4184d2d8e2d9f12451447f95ee16d4b
-  PippinTesting: 8b14c20b118bdfb11f8ba366519022ec2330c79f
+  PippinAdapters: af8e064101fe221dc29417d4222d0b067fac8984
+  PippinCore: 7888b57a62090b1907f54b950d2aa83907e1e7db
+  PippinDebugging: 7452f458a5a9e7c4fae4878edd565eeb2f1b021e
+  PippinLibrary: 3c0c2751bc5aee0e1f3cc5701679bbae3d3b5fbc
+  PippinTesting: 36936f7f5e117e91b0c1ab56f9192b0b7992f212
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
-  XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
+  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
 PODFILE CHECKSUM: a0b1b54afbc15c52862cd1c6b1b514cfd4b8a972
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0

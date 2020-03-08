@@ -13,13 +13,14 @@
     "tag": "PippinTesting-2.1.0"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "12.0"
   },
   "swift_versions": "5.1",
   "source_files": "Sources/PippinTesting/**/*.{h,m,swift}",
   "frameworks": "XCTest",
   "pod_target_xcconfig": {
-    "ENABLE_BITCODE": "NO"
+    "ENABLE_BITCODE": "NO",
+    "PRODUCT_BUNDLE_IDENTIFIER": "com.tworingsoft.pippin-testing"
   },
   "testspecs": [
     {
