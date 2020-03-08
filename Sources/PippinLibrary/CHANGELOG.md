@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+---
+
+## [1.1.0] 2020-03-08
+
 ### Added
 
 - Objc-compatible version of `UIView.roundCorners(radius:borderWidth:borderColor:)`, prefixed with `objc_`.
-
----
 
 ## [1.0.1] 2019-11-26
 
