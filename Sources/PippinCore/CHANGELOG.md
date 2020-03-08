@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [2.0.0] 2020-03-08
+
+### Changed
+
+- Added a parameter to `AppInfoPresenter.init` to specify the logical (not direct container) parent `UIViewController`, if any, to corrently stack modally presented view controllers. For example, if an `InfoViewController` is modally presented, and it modally presents another `UIViewController`, then treat the new modal's parent as the original `InfoViewController`'s parent. This helps with layouts that use margins, so the Nth modal doesn't get shifted down by N x margin.
+- Updated bundle identifier for `Pippin.framework`.
+- Bumped podspec's `deployment_target` to iOS 12.0 to workaround a CocoaPods bug: https://github.com/CocoaPods/CocoaPods/issues/7111#issuecomment-589048018.
+
+### Fix
+
+- rDNS raw values for `LaunchArgument` members to use `Pippin.framework`'s bundle ID instead of the app, to help avoid potential collisions.
+
+### Added
+
+- `Colors` protocol and `DefaultColors` struct to help with Dark Mode (or more generally, configurable color systems).
+
 ## [16.0.0] 2019-09-21
 
 ### Changed
