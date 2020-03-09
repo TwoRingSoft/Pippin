@@ -60,7 +60,11 @@ public final class AuthorizedAVCaptureDevice: NSObject {
             return
         #else
             if currentlyAuthorized(forMediaType: mediaType) {
-                completion?(.success(createCaptureDevice(mediaType)))
+                guard let device = createCaptureDevice(mediaType) else {
+                    completion?(.failure(creationError(mediaType: mediaType)))
+                    return
+                }
+                completion?(.success(device))
                 return
             }
 
@@ -105,8 +109,7 @@ fileprivate extension AuthorizedAVCaptureDevice {
             }
 
             guard let device = createCaptureDevice(mediaType) else {
-                let creationError = NSError(domain: CaptureDeviceAuthorizationErrorDomain, code: CaptureDeviceAuthorizationErrorCode.couldNotCreate.rawValue, userInfo: [NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.", NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."])
-                completion?(.failure(creationError))
+                completion?(.failure(creationError(mediaType: mediaType)))
                 return
             }
 
@@ -130,6 +133,17 @@ fileprivate extension AuthorizedAVCaptureDevice {
 
     class func createCaptureDevice(_ mediaType: MediaType) -> AVCaptureDevice? {
         return AVCaptureDevice.default(for: mediaType.stringConstant())
+    }
+
+    class func creationError(mediaType: MediaType) -> NSError {
+        return NSError(
+            domain: CaptureDeviceAuthorizationErrorDomain,
+            code: CaptureDeviceAuthorizationErrorCode.couldNotCreate.rawValue,
+            userInfo: [
+                NSLocalizedDescriptionKey: "Capture device for media type \(mediaType.stringConstant()) not available.",
+                NSLocalizedFailureReasonErrorKey: "The user denied the request to access \(mediaType.stringConstant())."
+            ]
+        )
     }
 
 }
