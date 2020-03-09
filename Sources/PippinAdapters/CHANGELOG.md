@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [5.0.1] 2020-03-08
+
+### Fixed
+
+- Handle `nil` returned `AVCaptureDevice` in the already-authorized codepath.
+- Make all subspecs default to avoid CocoaPods creating multiple framework targets that both have a `PRODUCT_NAME` and `MODULE_NAME` of `PippinAdapters` resulting in a build error of "multiple commands produce...".
+
 ## [5.0.0] 2020-03-08
 
 ### Changed
