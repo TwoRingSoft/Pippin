@@ -8,3 +8,12 @@ build-mac:
 
 bump:
 	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec
+
+release-adapters:
+	rbenv exec bundle exec release-podspec PippinAdapters --skip-tests --podspec-name-in-tag --allow-warnings
+
+release-core:
+	rbenv exec bundle exec release-podspec PippinCore
+
+release-library:
+	rbenv exec bundle exec release-podspec PippinLibrary --skip-tests
