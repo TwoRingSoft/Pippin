@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   # --- Default subspecs ---
   
-  s.default_subspecs = 'Environment', 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD'
+  s.default_subspecs = 'Environment', 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'FormController', 'CoreData', 'CoreLocation', 'AVCaptureDevice', 'Crashlytics'
 
   s.subspec 'Environment' do |ss|
     ss.source_files = 'Sources/PippinAdapters/*.{h,m,swift}'
@@ -51,9 +51,6 @@ Pod::Spec.new do |s|
     ss.dependency 'PippinCore'
     ss.dependency 'JGProgressHUD', '~> 2'
   end
-
-  # --- End default subspecs ---
-
   s.subspec 'CRUDViewController' do |ss|
     ss.source_files = 'Sources/PippinAdapters/CRUDViewController/**/*.{h,m,swift}'
     ss.dependency 'PippinCore'
