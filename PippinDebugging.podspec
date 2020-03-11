@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PippinDebugging'
-  s.version      = '1.0.0'
+  s.version      = '2.0.0'
   s.summary      = "A Swift framework providing tools for in-app debugging."
   s.description  = <<-DESC
   A collection of Swift and Objective-C utilities delivering UI and low-level utilities to debug an app while it's running.
