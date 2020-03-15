@@ -114,7 +114,7 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
         vc.title = "Acknowledgements"
         textView.backgroundColor = .clear
         textView.textColor = environment.colors.foreground
-        textView.fillSuperview()
+        textView.fillSafeArea(inViewController: vc)
 
         let blur: BlurViewController
         if #available(iOS 13.0, *) {

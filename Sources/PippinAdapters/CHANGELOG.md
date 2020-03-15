@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [5.0.2] 2020-03-14
+
+### Fixed
+
+- Layout issue with acknowledgements modal in `InfoViewController` after autorotating between landscape and portrait modes.
+
 ## [5.0.1] 2020-03-08
 
 ### Fixed
