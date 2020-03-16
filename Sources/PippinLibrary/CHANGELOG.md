@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [2.0.1] 2020-03-15
+
+### Fixed
+
+- Made `TransparentModalPresentingViewController` behave well whether being shown/dismissed in landscape or portrait mode.
+
 ## [2.0.0] 2020-03-08
 
 Support for Dark Mode.

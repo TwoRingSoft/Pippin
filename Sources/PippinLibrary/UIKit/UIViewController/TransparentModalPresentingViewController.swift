@@ -15,14 +15,12 @@ import Foundation
  */
 public class TransparentModalPresentingViewController: UIViewController {
 
-    var addStopBlurVCTopConstraint: NSLayoutConstraint!
-    var addStopBlurVCBottomConstraint: NSLayoutConstraint!
-
-    var childViewController: UIViewController!
+    private var topConstraint: NSLayoutConstraint?
+    private var childViewController: UIViewController
 
     public init(childViewController: UIViewController) {
-        super.init(nibName: nil, bundle: nil)
         self.childViewController = childViewController
+        super.init(nibName: nil, bundle: nil)
         setUpUI(childViewController: childViewController)
     }
     
@@ -36,15 +34,13 @@ public class TransparentModalPresentingViewController: UIViewController {
 public extension TransparentModalPresentingViewController {
 
     func presentTransparently(animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        animateViewWithConstraintConstant(constant: 0, animated: animated, completion: { finished in
-            self.view.isUserInteractionEnabled = true
+        toggle(display: true, animated: animated, completion: { finished in
             completion?(finished)
         })
     }
 
     func dismissTransparently(animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        animateViewWithConstraintConstant(constant: view.bounds.height, animated: animated, completion: { finished in
-            self.view.isUserInteractionEnabled = false
+        toggle(display: false, animated: animated, completion: { finished in
             completion?(finished)
         })
     }
@@ -61,21 +57,33 @@ private extension TransparentModalPresentingViewController {
 
         childViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-        addStopBlurVCTopConstraint = childViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: view.bounds.height)
-        addStopBlurVCBottomConstraint = childViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.bounds.height)
-        [
-            addStopBlurVCTopConstraint,
-            addStopBlurVCBottomConstraint,
+        let topConstraint = childViewController.view.topAnchor.constraint(equalTo: view.bottomAnchor)
+        NSLayoutConstraint.activate([
+            topConstraint,
+            childViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor),
             childViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ].forEach { $0?.isActive = true }
+        ])
         
         view.layoutSubviews()
+
+        self.topConstraint = topConstraint
     }
 
-    func animateViewWithConstraintConstant(constant: CGFloat, animated: Bool, completion: ((Bool) -> Void)?) {
-        addStopBlurVCTopConstraint.constant = constant
-        addStopBlurVCBottomConstraint.constant = constant
+    func toggle(display: Bool, animated: Bool, completion: ((Bool) -> Void)?) {
+        if let top = topConstraint {
+            NSLayoutConstraint.deactivate([top])
+        }
+
+        let top: NSLayoutConstraint
+        if display {
+            top = childViewController.view.topAnchor.constraint(equalTo: view.topAnchor)
+        } else {
+            top = childViewController.view.topAnchor.constraint(equalTo: view.bottomAnchor)
+        }
+        topConstraint = top
+
+        NSLayoutConstraint.activate([top])
 
         if !animated {
             view.layoutSubviews()
@@ -85,7 +93,10 @@ private extension TransparentModalPresentingViewController {
 
         UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
             self.view.layoutSubviews()
-        }, completion: completion)
+        }) { finished in
+            self.view.isUserInteractionEnabled = display
+            completion?(finished)
+        }
     }
 
 }
