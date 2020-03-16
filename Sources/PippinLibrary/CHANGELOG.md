@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [2.1.0] 2020-03-15
+
+## Added
+
+- A shorthand `UIEdgeInsets` constructor: `all(_ value: Int)`: `let insets = .all(25)`.
+
+## Fixed
+
+- Always toggle `isUserInteractionEnabled` in `TransparentModalPresentingViewController`.
+- Fix header layout ambiguity in `DismissableModalViewController` and rewrite remaining manual constraints with a `UIStackView`.
+
 ## [2.0.1] 2020-03-15
 
 ### Fixed
