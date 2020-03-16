@@ -72,7 +72,7 @@ private extension DismissableModalViewController {
     func headerView(tintColor: UIColor, imageBundle: Bundle, titleFont: UIFont) -> UIView {
         let closeButton = UIButton.button(withImageSetName: "close", emphasisSuffix: "-filled", tintColor: tintColor, imageBundle: imageBundle)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        closeButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        closeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         let titleLabel = UILabel.label(withText: title ?? "", font: titleFont, textColor: tintColor, alignment: .center)
         titleLabel.minimumScaleFactor = 0.5
