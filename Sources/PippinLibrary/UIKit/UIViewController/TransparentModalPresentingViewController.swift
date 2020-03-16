@@ -85,6 +85,8 @@ private extension TransparentModalPresentingViewController {
 
         NSLayoutConstraint.activate([top])
 
+        view.isUserInteractionEnabled = display
+
         if !animated {
             view.layoutSubviews()
             completion?(true)
@@ -94,7 +96,6 @@ private extension TransparentModalPresentingViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
             self.view.layoutSubviews()
         }) { finished in
-            self.view.isUserInteractionEnabled = display
             completion?(finished)
         }
     }
