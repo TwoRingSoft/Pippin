@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ---
 
+## [5.0.3] 2020-03-15
+
+### Fixed
+
+- Blur behind `Acknowledgements` displayed from `InfoViewController`.
+
 ## [5.0.2] 2020-03-14
 
 ### Fixed
