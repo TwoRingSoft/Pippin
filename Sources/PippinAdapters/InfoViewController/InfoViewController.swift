@@ -116,16 +116,18 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
         textView.textColor = environment.colors.foreground
         textView.fillSafeArea(inViewController: vc)
 
-        let blur: BlurViewController
-        if #available(iOS 13.0, *) {
-            blur = BlurViewController(blurredViewController: vc, vibrancyStyle: .label)
-        } else {
-            blur = BlurViewController(viewController: vc, vibrancy: true)
-        }
-        let modal = DismissableModalViewController(childViewController: blur, titleFont: environment.fonts.title, tintColor: textColor, imageBundle: sharedAssetBundle, insets: UIEdgeInsets.zero.inset(topDelta: 30)) {
+        let modal = DismissableModalViewController(childViewController: vc, titleFont: environment.fonts.title, tintColor: textColor, imageBundle: sharedAssetBundle, insets: UIEdgeInsets.zero.inset(topDelta: 30)) {
             self.modalPresenter?.dismissTransparently(animated: true)
         }
-        let modalPresenter = TransparentModalPresentingViewController(childViewController: modal)
+
+        let blur: BlurViewController
+        if #available(iOS 13.0, *) {
+            blur = BlurViewController(blurredViewController: modal, vibrancyStyle: .label)
+        } else {
+            blur = BlurViewController(viewController: modal, vibrancy: true)
+        }
+
+        let modalPresenter = TransparentModalPresentingViewController(childViewController: blur)
 
         // ideally we can place the new modal directly above this one instead of "inside" it
         if let parent = logicalParent {
