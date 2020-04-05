@@ -149,5 +149,6 @@ public class Environment: NSObject {
         debugging?.environment = self
         #endif
         touchVisualizer?.environment = self
+        defaults.environment = self
     }
 }
