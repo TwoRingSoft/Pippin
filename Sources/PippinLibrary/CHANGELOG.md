@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+### Fixed
+
+- Use correct bundle ID in `AsyncOperation` and `CompoundOperation`.
+
 ## [2.1.0] 2020-03-15
 
 ## Added

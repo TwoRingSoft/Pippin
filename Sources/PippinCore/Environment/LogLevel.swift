@@ -56,7 +56,7 @@ extension LogLevel: CustomDebugStringConvertible {
      */
     public var debugDescription: String {
         get {
-            return String(asRDNSForCurrentAppWithSubpaths: [ "log-level", description ])
+            return String(asRDNSForPippinSubpaths: [ "log-level", description ])
         }
     }
 

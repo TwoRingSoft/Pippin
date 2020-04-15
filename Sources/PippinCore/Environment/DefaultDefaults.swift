@@ -14,7 +14,7 @@ public enum DefaultDefaultsKey: String {
     case lastLaunchedBuildNumber = "last-launched-build-number"
     
     public func keyString() -> String {
-        return String(asRDNSForCurrentAppWithSubpaths: ["user-defaults", "key", self.rawValue])
+        return String(asRDNSForPippinSubpaths: ["user-defaults", "key", self.rawValue])
     }
 }
 

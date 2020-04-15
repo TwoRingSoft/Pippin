@@ -27,7 +27,7 @@ open class AsyncOperation: Operation {
     
     public override init() {
         super.init()
-        lock.name = String(asRDNSForCurrentAppWithSubpaths: ["lock", classType(AsyncOperation.self)])
+        lock.name = String(asRDNSForPippinSubpaths: ["lock", classType(AsyncOperation.self)])
     }
     
     open override var isConcurrent: Bool { return true }

@@ -8,6 +8,16 @@
 import Foundation
 import PippinLibrary
 
+private class PippinDummyRDNSBundleSearchClass {}
+
+extension String {
+    init(asRDNSForPippinSubpaths subpaths: [String]) {
+        precondition(subpaths.count > 0)
+        precondition(subpaths.filter({ $0.count > 0 }).count > 0)
+        self = String(asRDNSWithSubpaths: [Bundle(for: PippinDummyRDNSBundleSearchClass.self).identifier] + subpaths)
+    }
+}
+
 /// A protocol that components are tagged with that provides them a way to reach into their environment to use other components, like a logger. Please use responsibly :)
 public protocol EnvironmentallyConscious {
     var environment: Environment? { get set }
@@ -30,7 +40,7 @@ public extension Environment {
         }
 
         public var nsError: NSError {
-            return NSError(domain: String(asRDNSForCurrentAppWithSubpaths: ["environment", "error"]), code: code, userInfo: [:])
+            return NSError(domain: String(asRDNSForPippinSubpaths: ["environment", "error"]), code: code, userInfo: [:])
         }
     }
 }

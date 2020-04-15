@@ -85,13 +85,3 @@ extension LaunchArgument: CustomStringConvertible {
     }
 
 }
-
-private class PippinDummyRDNSBundleSearchClass {}
-
-private extension String {
-    init(asRDNSForPippinSubpaths subpaths: [String]) {
-        precondition(subpaths.count > 0)
-        precondition(subpaths.filter({ $0.count > 0 }).count > 0)
-        self = String(format: "%@.%@", Bundle(for: PippinDummyRDNSBundleSearchClass.self).identifier, subpaths.joined(separator: "."))
-    }
-}

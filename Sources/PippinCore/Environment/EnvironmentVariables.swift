@@ -46,7 +46,7 @@ public enum EnvironmentVariable: String {
 extension EnvironmentVariable: CustomStringConvertible {
 
     public var description: String {
-        return String(asRDNSForCurrentAppWithSubpaths: [ "environment-variable", rawValue ])
+        return String(asRDNSForPippinSubpaths: [ "environment-variable", rawValue ])
     }
 
 }
