@@ -14,7 +14,7 @@ build-mac:
 
 bump:
 	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec
-	rbenv exec bundle exec migrate-changelog Sources/$(NAME)/CHANGELOG.md `vrsn --read --file $(NAME).podspec`
+	rbenv exec bundle exec migrate-changelog Sources/$(NAME)/CHANGELOG.md $(NAME)-`vrsn --read --file $(NAME).podspec`
 
 prerelease-adapters:
 	rbenv exec bundle exec prerelease-podspec PippinAdapters --podspec-name-in-tag --allow-warnings
