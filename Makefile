@@ -1,3 +1,9 @@
+init:
+	brew bundle
+	rbenv install --skip-existing
+	rbenv exec gem update bundler
+	rbenv exec bundle update
+
 build: build-phone build-mac
 
 build-phone:
@@ -8,6 +14,7 @@ build-mac:
 
 bump:
 	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec
+	rbenv exec bundle exec migrate-changelog Sources/$(NAME)/CHANGELOG.md `vrsn --read --file $(NAME).podspec`
 
 prerelease-adapters:
 	rbenv exec bundle exec prerelease-podspec PippinAdapters --podspec-name-in-tag --allow-warnings
@@ -32,6 +39,12 @@ prerelease-debugging:
 
 release-debugging:
 	rbenv exec bundle exec release-podspec PippinDebugging --podspec-name-in-tag
+
+prerelease-testing:
+	rbenv exec bundle exec prerelease-podspec PippinTesting --podspec-name-in-tag
+
+release-testing:
+	rbenv exec bundle exec release-podspec PippinTesting --podspec-name-in-tag
 
 clean-rc-tags:
 	git tag --list | grep "-RC" | xargs -I @ git push --delete origin @
