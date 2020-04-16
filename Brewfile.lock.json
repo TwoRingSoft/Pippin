@@ -27,23 +27,32 @@
         }
       },
       "xcodegen": {
-        "version": "2.10.1",
+        "version": "2.11.0",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.10.1.catalina.bottle.tar.gz",
-              "sha256": "887575b080ad6d0bd97f3eb72bea5c2246558b687f5cdcfeb41fc7d40a69f075"
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.11.0.catalina.bottle.tar.gz",
+              "sha256": "2b2feec5d445a91697c79cd7863b9bc53856ccf421f2cf078e9e4f4277a4faa1"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.10.1.mojave.bottle.tar.gz",
-              "sha256": "d943d1454494c09a2e5ded6321305b734faf8137a301d6e94325464254d6ba66"
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.11.0.mojave.bottle.tar.gz",
+              "sha256": "d9b119751c32d2c5281a9eaf175f2c49aff398caf5193c3444c6c1b79e03dd16"
             }
           }
         }
       },
-      "tworingsoft/formulae/vrsn": null
+      "tworingsoft/formulae/vrsn": null,
+      "vrsn": {
+        "version": "2.1.0",
+        "bottle": false
+      }
+    },
+    "tap": {
+      "tworingsoft/formulae": {
+        "revision": "943cc253be692f539e7c0d32e43a8bb7c3384f92"
+      }
     }
   },
   "system": {
@@ -55,6 +64,14 @@
         "CLT": "10.3.0.0.1.1562985497",
         "Xcode": "11.2.1",
         "macOS": "10.14.6"
+      },
+      "catalina": {
+        "HOMEBREW_VERSION": "2.2.4",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "1ff573fe3ffa9db3d7884cb53369201d44fbf8a2",
+        "CLT": "",
+        "Xcode": "11.3.1",
+        "macOS": "10.15.4"
       }
     }
   }

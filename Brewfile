@@ -1,3 +1,4 @@
 brew 'rbenv'
 brew 'XcodeGen'
-brew 'tworingsoft/formulae/vrsn'
+tap "tworingsoft/formulae"
+brew 'vrsn'
