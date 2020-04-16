@@ -4,12 +4,6 @@ end
 
 desc 'Initialize development environment.'
 task :init do
-    sh 'brew tap tworingsoft/formulae'
-    sh 'brew bundle'
-    sh 'echo \'2.6.5\' > .ruby-version'
-    sh 'rbenv install --skip-existing'
-    sh 'rbenv exec gem install bundler'
-    sh 'rbenv exec bundle'
     sh 'mkdir -p Logs'
 
     example_projects.each do |project|
