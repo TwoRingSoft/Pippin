@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [PippinCore-2.0.2] 2020-04-15
+
 ### Fixed
 
 - Use correct bundle ID in `DefaultDefaults`, `LogLevel`, `LaunchArgument` and `EnvironmentVariable` descriptions, as well as errors and internal components.
