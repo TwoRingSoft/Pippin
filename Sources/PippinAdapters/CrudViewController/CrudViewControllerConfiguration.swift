@@ -142,7 +142,7 @@ public enum CRUDViewControllerMode {
 }
 
 /// A protocol declaring functions called for interacting with search over the entities managed by the `CRUDViewController`.
-@available(iOS 11.0, *) public protocol CRUDViewControllerSearchDelegate {
+@available(iOS 11.0, *) public protocol CRUDViewControllerSearchDelegate: class {
     /// Decide whether or not the search controls should be accessible to users. Defaults to `false`.
     ///
     /// - Parameter crudViewController: The `CRUDViewController` managing the search controls.
@@ -173,10 +173,10 @@ public enum CRUDViewControllerMode {
         self.name = name
     }
     
-    public let tableViewDelegate: CRUDViewControllerUITableViewDelegate
-    public let crudDelegate: CRUDViewControllerCRUDDelegate
-    public let searchDelegate: CRUDViewControllerSearchDelegate?
-    public let themeDelegate: CRUDViewControllerThemeDelegate?
+    public weak var tableViewDelegate: CRUDViewControllerUITableViewDelegate?
+    public weak var crudDelegate: CRUDViewControllerCRUDDelegate?
+    public weak var searchDelegate: CRUDViewControllerSearchDelegate?
+    public weak var themeDelegate: CRUDViewControllerThemeDelegate?
     
     public let fetchRequest: NSFetchRequest<NSFetchRequestResult>
     public let context: NSManagedObjectContext

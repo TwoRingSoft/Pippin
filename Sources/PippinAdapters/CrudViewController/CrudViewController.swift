@@ -119,11 +119,11 @@ public class CRUDSearchContainer: UIView {}
 @available(iOS 11.0, *) private extension CRUDViewController {
     
     func shouldShowAddItemCell() -> Bool {
-        return configuration.tableViewDelegate.crudViewControllerShouldShowAddItemRow?(crudViewController: self) ?? (configuration.mode == .editor)
+        return configuration.tableViewDelegate?.crudViewControllerShouldShowAddItemRow?(crudViewController: self) ?? (configuration.mode == .editor)
     }
     
     func canEditRow(atIndexPath indexPath: IndexPath) -> Bool {
-        return configuration.tableViewDelegate.crudViewController?(crudViewController: self, canEdit: fetchedResultsController.object(at: indexPath)) ?? (configuration.mode == .editor)
+        return configuration.tableViewDelegate?.crudViewController?(crudViewController: self, canEdit: fetchedResultsController.object(at: indexPath)) ?? (configuration.mode == .editor)
     }
 
     func numberOfEntities() -> Int {
@@ -202,7 +202,7 @@ public class CRUDSearchContainer: UIView {}
             tableView.contentInset = insets
             tableView.contentOffset = CGPoint.zero.offset(yDelta: -insets.top)
         }
-        if let klass = configuration.tableViewDelegate.crudViewControllerCellClassToRegister?(crudViewController: self) {
+        if let klass = configuration.tableViewDelegate?.crudViewControllerCellClassToRegister?(crudViewController: self) {
             tableView.register(klass, forCellReuseIdentifier: entityCellReuseIdentifier)
         } else {
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: entityCellReuseIdentifier)
@@ -500,7 +500,7 @@ public class CRUDSearchContainer: UIView {}
         let object = fetchedResultsController.object(at: indexPath)
         let lastObject = indexPath.row == tableView.numberOfRows(inSection: 0) - 1
         let cell = tableView.dequeueReusableCell(withIdentifier: entityCellReuseIdentifier, for: indexPath)
-        configuration.tableViewDelegate.crudViewController(crudViewController: self, configure: cell, forObject: object, lastObject: lastObject)
+        configuration.tableViewDelegate?.crudViewController(crudViewController: self, configure: cell, forObject: object, lastObject: lastObject)
         return cell
     }
 
@@ -529,20 +529,20 @@ public class CRUDSearchContainer: UIView {}
             return nil
         }
 
-        if let actions = configuration.tableViewDelegate.crudViewController?(crudViewController: self, editActionsFor: indexPath) {
+        if let actions = configuration.tableViewDelegate?.crudViewController?(crudViewController: self, editActionsFor: indexPath) {
             return actions
         }
 
         var actions = [UITableViewRowAction]()
-        if let otherActions = configuration.tableViewDelegate.crudViewController?(crudViewController: self, otherEditActionsFor: indexPath) {
+        if let otherActions = configuration.tableViewDelegate?.crudViewController?(crudViewController: self, otherEditActionsFor: indexPath) {
             actions.append(contentsOf: otherActions)
         }
         actions.append(contentsOf: [
             UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, indexPath) in
-                self.configuration.crudDelegate.crudViewController?(crudViewController: self, wantsToDelete: self.fetchedResultsController.object(at: indexPath))
+                self.configuration.crudDelegate?.crudViewController?(crudViewController: self, wantsToDelete: self.fetchedResultsController.object(at: indexPath))
             }),
             UITableViewRowAction(style: .normal, title: "Edit", handler: { (action, indexPath) in
-                self.configuration.crudDelegate.crudViewController?(crudViewController: self, wantsToUpdate: self.fetchedResultsController.object(at: indexPath))
+                self.configuration.crudDelegate?.crudViewController?(crudViewController: self, wantsToUpdate: self.fetchedResultsController.object(at: indexPath))
             })
         ])
         return actions
@@ -559,7 +559,7 @@ public class CRUDSearchContainer: UIView {}
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             environment?.logger?.logDebug(message: String(format: "[%@(%@)] Add object row selected.", instanceType(self), self.crudName))
 
-            configuration.crudDelegate.crudViewControllerWantsToCreateObject?(crudViewController: self)
+            configuration.crudDelegate?.crudViewControllerWantsToCreateObject?(crudViewController: self)
             return
         }
 
@@ -569,7 +569,7 @@ public class CRUDSearchContainer: UIView {}
 
         environment?.logger?.logDebug(message: String(format: "[%@(%@)]User selected object: %@", instanceType(self), self.crudName, object as! NSManagedObject))
 
-        configuration.crudDelegate.crudViewController?(crudViewController: self, wantsToRead: object)
+        configuration.crudDelegate?.crudViewController?(crudViewController: self, wantsToRead: object)
     }
     
 }
