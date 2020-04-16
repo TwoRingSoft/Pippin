@@ -275,7 +275,6 @@ public class CRUDSearchContainer: UIView {}
         case .delete:
             guard let indexPath = indexPath else { break }
             addUpdate(type: type, indexPath: indexPath)
-            break
         case .insert:
             guard let newIndexPath = newIndexPath else { break }
             guard let fetchRequestResult = object as? NSFetchRequestResult else {
@@ -288,7 +287,6 @@ public class CRUDSearchContainer: UIView {}
                 break
             }
             addUpdate(type: type, indexPath: newIndexPath)
-            break
         case .move:
             guard
                 let indexPath = indexPath,
@@ -297,11 +295,9 @@ public class CRUDSearchContainer: UIView {}
 
             addUpdate(type: .delete, indexPath: indexPath)
             addUpdate(type: .insert, indexPath: newIndexPath)
-            break
         case .update:
             guard let indexPath = indexPath else { break }
             addUpdate(type: type, indexPath: indexPath)
-            break
         @unknown default:
             fatalError("New unexpected NSFetchedResultsChangeType: \(type)")
         }
@@ -328,9 +324,9 @@ public class CRUDSearchContainer: UIView {}
             tableUpdates.forEach({ arg in
                 let (updateType, indexPaths) = arg
                 switch updateType {
-                case .delete: tableView.deleteRows(at: indexPaths, with: .automatic); break
-                case .update: tableView.reloadRows(at: indexPaths, with: .automatic); break
-                case .insert: tableView.insertRows(at: indexPaths, with: .automatic); break
+                case .delete: tableView.deleteRows(at: indexPaths, with: .automatic)
+                case .update: tableView.reloadRows(at: indexPaths, with: .automatic)
+                case .insert: tableView.insertRows(at: indexPaths, with: .automatic)
                 case .move: fatalError("Moving currently not supported.")
                 @unknown default: fatalError("New unexpected NSFetchedResultsChangeType: \(updateType)")
                 }
