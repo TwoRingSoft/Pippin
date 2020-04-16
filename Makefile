@@ -47,4 +47,4 @@ release-testing:
 	rbenv exec bundle exec release-podspec PippinTesting --podspec-name-in-tag
 
 clean-rc-tags:
-	git tag --list | grep "-RC" | xargs -I @ git push --delete origin @
+	git tag --list | grep "\-RC\d*" | xargs -tI @ bash -c "git tag --delete @ &&git push --delete origin @"
