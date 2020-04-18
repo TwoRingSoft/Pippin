@@ -182,11 +182,14 @@ public class CRUDSearchContainer: UIView {}
             .NSManagedObjectContextWillSave,
             .NSManagedObjectContextObjectsDidChange
         ]
+
         notifications.forEach {
-            NotificationCenter.default.addObserver(forName: $0, object: nil, queue: nil) { (note) in
-                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Received NSManagedObjectContext notification: %@", instanceType(self), self.crudName, String(describing: note)))
+            NotificationCenter.default.addObserver(forName: $0, object: nil, queue: nil) { [weak self] (note) in
+                guard let sself = self else { return }
+                sself.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Received NSManagedObjectContext notification: %@", instanceType(sself), sself.crudName, String(describing: note)))
             }
         }
+
         originalFetchRequestPredicate = fetchRequest.predicate
         fetchedResultsController.delegate = self
         reloadData()
