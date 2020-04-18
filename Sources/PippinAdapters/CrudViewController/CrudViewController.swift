@@ -280,15 +280,6 @@ public class CRUDSearchContainer: UIView {}
             addUpdate(type: type, indexPath: indexPath)
         case .insert:
             guard let newIndexPath = newIndexPath else { break }
-            guard let fetchRequestResult = object as? NSFetchRequestResult else {
-                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Could not convert inserted object to NSFetchRequestResult type", instanceType(self), self.crudName))
-                break
-            }
-            self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Object: %@", instanceType(self), self.crudName, String(describing: fetchRequestResult)))
-            guard !self.object(locatedAt: newIndexPath).isEqual(fetchRequestResult) else {
-                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Tried to reinsert object already present in the table view: %@", instanceType(self), self.crudName, String(describing: fetchRequestResult)))
-                break
-            }
             addUpdate(type: type, indexPath: newIndexPath)
         case .move:
             guard
