@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 - [`Closures`](https://github.com/vhesener/Closures) and [`Then`](https://github.com/devxoul/Then) library vending.
+- `conversationalList` on `Array` and `Set` to create lists of the style `1, 2 and 3`.
 
 ## [2.1.1] 2020-04-16
 
