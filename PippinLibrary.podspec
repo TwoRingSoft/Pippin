@@ -17,10 +17,12 @@ Pod::Spec.new do |s|
 
   s.ios.source_files = 'Sources/PippinLibrary/**/*.{h,m,swift}'
   s.osx.source_files = 'Sources/PippinLibrary/Foundation/**/*.{h,m,swift}'
-  
+
   s.test_spec 'Tests' do |test_spec|
     test_spec.source_files = 'Tests/PippinLibrary/**/*.swift'
   end
 
   s.dependency 'Anchorage'
+  s.dependency 'Closures'
+  s.dependency 'Then'
 end
