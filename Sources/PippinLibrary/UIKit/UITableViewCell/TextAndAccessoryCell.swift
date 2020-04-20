@@ -32,6 +32,14 @@ public class TextAndAccessoryCell: UITableViewCell {
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        accessibilityElements = [
+            topImageAccessory,
+            leadingImageAccessory,
+            label,
+            trailingImageAccessory,
+            bottomImageAccessory,
+        ]
+
         backgroundColor = .clear
         contentView.backgroundColor = .clear
         selectionStyle = .none
