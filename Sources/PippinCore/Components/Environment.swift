@@ -25,7 +25,7 @@ public protocol EnvironmentallyConscious {
 
 public extension Environment {
     /// Errors that may be used by apps to describe adverse situations related to the environment.
-    enum Error: Swift.Error, NSErrorConvertible {
+    enum Error: NSErrorConvertible {
         /// Expected an initialized `CoreDataController` but none was present.
         case missingCoreDataController
 

@@ -7,15 +7,21 @@
 
 import Foundation
 
-enum CompoundOperationError: Error {
+enum CompoundOperationError: NSErrorConvertible {
     case suboperationFailure(String, [Error])
-    
-    public static let nsErrorDomain = String(asRDNSForPippinSubpaths: ["error.domain.compound-operation"])
-    
-    func nsError() -> NSError {
+
+    public static let nsErrorDomain = String(asRDNSForPippinSubpaths: ["error", "domain", "compound-operation"])
+
+    var code: Int {
+        switch self {
+        case .suboperationFailure(_, _): return 1
+        }
+    }
+
+    var nsError: NSError {
         switch self {
         case .suboperationFailure(let name, let errors):
-            return NSError(domain: CompoundOperationError.nsErrorDomain, code: CompoundOperation.CompoundOperationErrorCodeSuboperationFailed, userInfo: [
+            return NSError(domain: CompoundOperationError.nsErrorDomain, code: code, userInfo: [
                 NSLocalizedDescriptionKey: "\(String(describing: name)) had suboperations that completed with errors.",
                 String(describing: CompoundOperationErrorUserInfoKey.underlyingErrors): errors,
             ])
@@ -25,7 +31,7 @@ enum CompoundOperationError: Error {
 
 enum CompoundOperationErrorUserInfoKey: CustomStringConvertible {
     case underlyingErrors
-    
+
     var description: String {
         let name: String
         switch self {
@@ -36,31 +42,29 @@ enum CompoundOperationErrorUserInfoKey: CustomStringConvertible {
 }
 
 open class CompoundOperation: AsyncOperation {
-    @objc public static let CompoundOperationErrorCodeSuboperationFailed = 1
-
     static let CompoundOperationCountingQueueLabel = String(asRDNSForPippinSubpaths: ["dispatch-queue", "label", "compound-counting-queue"])
-    
+
     @objc public let compoundQueue = OperationQueue()
     var completedOperations = 0
     var errors = [Error]()
     let countingQueue = DispatchQueue(label: CompoundOperationCountingQueueLabel)
-    
+
     var operations: [Operation]?
-    
+
     @objc public override init() {
         super.init()
     }
-    
+
     @objc public init(operations: [Operation]) {
         self.operations = operations
         super.init()
     }
-    
+
     public init(operations: [Operation]? = nil) {
         self.operations = operations
         super.init()
     }
-    
+
     open override func main() {
         guard let operations = operations else {
             attemptCompoundCompletion()
@@ -74,21 +78,21 @@ open class CompoundOperation: AsyncOperation {
         }
         compoundQueue.addOperations(operations, waitUntilFinished: false)
     }
-    
+
     open override func cancel() {
         compoundQueue.cancelAllOperations()
-        
+
         let operationsToCancel = operations?.filter({
             !$0.isExecuting && !$0.isFinished && !compoundQueue.operations.contains($0)
         })
-        
+
         compoundQueue.isSuspended = true
         operationsToCancel?.forEach({
             compoundQueue.addOperation($0)
             $0.cancel()
         })
         compoundQueue.isSuspended = false
-        
+
         super.cancel()
 
         countingQueue.sync {
@@ -111,7 +115,7 @@ private extension CompoundOperation {
         }
         operation.completionBlock = newCompletion
     }
-    
+
     func injectAsyncErrorGatheringInOperation(asyncOperation: AsyncOperation) {
         let originalCompletion = asyncOperation.asyncCompletionBlock
         let newCompletion: ErrorBlock = { error in
@@ -128,17 +132,17 @@ private extension CompoundOperation {
         }
         asyncOperation.asyncCompletionBlock = newCompletion
     }
-    
+
     func attemptCompoundCompletion() {
         guard let operations = operations else {
             finish(withError: nil)
             return
         }
-        
+
         if isCancelled || completedOperations + errors.count == operations.count {
             var error: Error?
             if !errors.isEmpty {
-                error = CompoundOperationError.suboperationFailure(String(describing: name), errors).nsError()
+                error = CompoundOperationError.suboperationFailure(String(describing: name), errors).nsError
             }
             finish(withError: error)
         }

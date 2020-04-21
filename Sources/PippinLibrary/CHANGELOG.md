@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [`Closures`](https://github.com/vhesener/Closures) and [`Then`](https://github.com/devxoul/Then) library vending.
 - `conversationalList` on `Array` and `Set` to create lists of the style `1, 2 and 3`.
 - Power set computation from contents of an `Array` (in both tail-recursive and regular recursive variants), found at https://gist.github.com/JadenGeller/6174b3461a34465791c5#file-powerset_map-swift and modified.
+- `NSErrorConvertible` now brings conformance to `Swift.Error` and a default implemntation of `var nsError: NSError`.
 
 ### Fixed
 
