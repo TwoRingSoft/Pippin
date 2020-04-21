@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [2.2.0] 2020-04-20
+
 ### Added
 
 - [`Closures`](https://github.com/vhesener/Closures) and [`Then`](https://github.com/devxoul/Then) library vending.
