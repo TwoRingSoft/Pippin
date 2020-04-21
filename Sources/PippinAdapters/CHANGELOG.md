@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Fixed
 
 - Removed a duplicate insertion check in `CrudViewController` that prevented added entities from displaying in table views. This was likely added to prevent the crashes introduced by the retain cycles that have been fixed.
+- Set `accessibilityLabel` on `CrudViewController`'s add item cell.
 
 ## [5.0.5] 2020-04-18
 

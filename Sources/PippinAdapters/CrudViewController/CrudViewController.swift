@@ -485,9 +485,10 @@ public class CRUDSearchContainer: UIView {}
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             let cell = TextAndAccessoryCell(style: .default, reuseIdentifier: textAndAccessoryCellReuseIdentifier)
-            cell.label.text = String(format: "Create new %@", crudName)
+            let value = String(format: "Create new %@", crudName)
+            cell.label.text = value
             configuration.themeDelegate?.crudViewController?(crudViewController: self, themeAddItemCell: cell)
-            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = value
             return cell
         }
 
