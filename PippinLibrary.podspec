@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
   end
 
   s.dependency 'Anchorage'
-  s.dependency 'Closures'
+  s.ios.dependency 'Closures'
   s.dependency 'Then'
 end
