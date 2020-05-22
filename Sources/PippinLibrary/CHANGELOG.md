@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 - Add `enum` describing HTTP response codes.
+- Add closure `typealias`es for blocks with `Result` parameters, and `throws` variants of a few closure types.
 
 ## [2.2.0] 2020-04-20
 

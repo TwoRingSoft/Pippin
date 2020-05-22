@@ -16,7 +16,13 @@ public typealias BooleanBlock = ((Bool) -> (Void))
 /// A closure passing an optional `Error`.
 public typealias ErrorBlock = (Error?) -> (Void)
 
+public typealias ThrowableErrorBlock = (Error?) throws -> (Void)
+
 public typealias URLSessionCompletion = (URL?, URLResponse?, Error?) -> (Void)
+
+public typealias ResultBlock<U, V: Error> = (Result<U, V>) -> (Void)
+
+public typealias ThrowableResultBlock<U, V: Error> = (Result<U, V>) throws -> (Void)
 
 /// A closure that accepts a boolean representing if an operation completed successfully, to decide whether to retrieve confirmation from `confirmBlock`.
 ///
