@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [5.0.7] 2020-04-20
 
+### Fixed
+
+- Accessibility on `CrudViewController` add item cells that works in UI tests.
+
 ## [5.0.6] 2020-04-18
 
 ### Fixed
