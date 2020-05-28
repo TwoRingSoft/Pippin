@@ -17,7 +17,7 @@ public class CoreDataController: NSObject, Model {
 
     public var environment: Environment?
     public var modelName: String
-    fileprivate var managedObjectModel: NSManagedObjectModel?
+    public var managedObjectModel: NSManagedObjectModel?
     #if DEBUG
     public var debuggingDelegate: ModelDebugging?
     #endif
@@ -93,6 +93,7 @@ public extension CoreDataController {
         var results = [T]()
         let resolvedContext = context
         do {
+            environment?.logger?.logDebug(message: String(format: "[%@] Executing fetch request: %@", instanceType(self), request))
             results.append(contentsOf: try resolvedContext.fetch(request))
         } catch {
           let message = String(format: "[%@] Error executing fetch request <%@> on context <%@>.", instanceType(self), request, resolvedContext)
