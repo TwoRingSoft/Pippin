@@ -162,7 +162,7 @@ public enum CRUDViewControllerMode {
 
 /// A `struct` containing references to delegates for the various protocols, the underlying data model, `CRUDViewControllerMode` and name. At a minimum, you must provide a way to display data via data model references and `CRUDViewControllerUITableViewDelegate.crudViewController(crudViewController:configure:forObject:lastObject:)`.
 @available(iOS 11.0, *) public struct CRUDViewControllerConfiguration {
-    public init(tableViewDelegate: CRUDViewControllerUITableViewDelegate, crudDelegate: CRUDViewControllerCRUDDelegate, searchDelegate: CRUDViewControllerSearchDelegate?, themeDelegate: CRUDViewControllerThemeDelegate?, fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, mode: CRUDViewControllerMode, name: String? = nil) {
+    public init(tableViewDelegate: CRUDViewControllerUITableViewDelegate, crudDelegate: CRUDViewControllerCRUDDelegate, searchDelegate: CRUDViewControllerSearchDelegate?, themeDelegate: CRUDViewControllerThemeDelegate?, fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, mode: CRUDViewControllerMode, name: String? = nil, allowsMultipleSelection: Bool = false) {
         self.tableViewDelegate = tableViewDelegate
         self.crudDelegate = crudDelegate
         self.searchDelegate = searchDelegate
@@ -171,6 +171,7 @@ public enum CRUDViewControllerMode {
         self.context = context
         self.mode = mode
         self.name = name
+        self.allowsMultipleSelection = allowsMultipleSelection
     }
     
     public weak var tableViewDelegate: CRUDViewControllerUITableViewDelegate?
@@ -184,4 +185,6 @@ public enum CRUDViewControllerMode {
     public let mode: CRUDViewControllerMode
     
     public let name: String?
+
+    public let allowsMultipleSelection: Bool
 }

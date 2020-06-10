@@ -201,6 +201,7 @@ public class CRUDSearchContainer: UIView {}
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .interactive
+        tableView.allowsMultipleSelection = configuration.allowsMultipleSelection
         if let insets = configuration.themeDelegate?.crudViewControllerTableViewContentInsets?(crudViewController: self) {
             tableView.contentInset = insets
             tableView.contentOffset = CGPoint.zero.offset(yDelta: -insets.top)
