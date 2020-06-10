@@ -39,6 +39,7 @@ public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {
 
     public func hide(completion: EmptyBlock? = nil) {
         self.completion = completion
+        environment?.logger?.logDebug(message: String(format: "[%@] Hiding activity indicator", instanceType(self)))
         indicator.dismiss(animated: true)
     }
 }
@@ -91,6 +92,7 @@ extension JGProgressHUDAdapter: Debuggable {
 private extension JGProgressHUDAdapter {
     func display() {
         window.isHidden = false
+        environment?.logger?.logDebug(message: String(format: "[%@] Showing activity indicator", instanceType(self)))
         indicator.show(in: rootView.view, animated: true)
     }
 }
