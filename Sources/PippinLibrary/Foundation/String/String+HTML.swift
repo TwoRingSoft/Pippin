@@ -18,6 +18,18 @@ public extension String {
         return enclose(withTag: "b")
     }
 
+    var h1: String {
+        return enclose(withTag: "h1")
+    }
+
+    var h2: String {
+        return enclose(withTag: "h2")
+    }
+
+    var h3: String {
+        return enclose(withTag: "h3")
+    }
+
     var afterPageBreak: String {
         return enclose(withTag: "div", parameters: "style=\"page-break-before: always\"")
     }

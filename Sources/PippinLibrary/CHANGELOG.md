@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+### Added
+
+- More HTML enclosures for H1, H2 and H3 headers.
+
 ## [2.3.1] 2020-06-28
 
 ### Fixed
