@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [2.3.1] 2020-06-28
+
 ### Fixed
 
 - Correctly decide when a compound operation is finished according to the number of completed suboperations.
