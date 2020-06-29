@@ -1,3 +1,5 @@
 ${PODS_ROOT}/Target Support Files/PippinLibrary-iOS/PippinLibrary-iOS-Unit-Tests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework
 ${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework
+${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework
+${BUILT_PRODUCTS_DIR}/Closures/Closures.framework

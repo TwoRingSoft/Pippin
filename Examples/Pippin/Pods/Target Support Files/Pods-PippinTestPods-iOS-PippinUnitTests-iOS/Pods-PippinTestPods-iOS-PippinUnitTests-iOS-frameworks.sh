@@ -198,13 +198,17 @@ fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Closures/Closures.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Closures/Closures.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinTesting/PippinTesting.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

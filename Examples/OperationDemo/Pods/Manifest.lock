@@ -1,7 +1,10 @@
 PODS:
   - Anchorage (4.3.1)
-  - PippinLibrary (1.0.1):
+  - PippinLibrary (2.3.0):
     - Anchorage
+    - Closures
+    - Then
+  - Then (2.6.0)
 
 DEPENDENCIES:
   - PippinLibrary (from `../..`)
@@ -9,6 +12,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Anchorage
+    - Then
 
 EXTERNAL SOURCES:
   PippinLibrary:
@@ -16,8 +20,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Anchorage: a187da0bc9b07440637d42c8744b8c82a4490295
-  PippinLibrary: 017a7ebee4184d2d8e2d9f12451447f95ee16d4b
+  PippinLibrary: cd8b36663b454918eb0e7ff18f2d72086a92b79d
+  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
 PODFILE CHECKSUM: 358e3f5749264a7dfa3610052e0d409c4d9a7ea4
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

@@ -5,7 +5,7 @@
 //  Created by Andrew McKnight on 11/14/18.
 //
 
-@import Pippin;
+@import PippinLibrary;
 #import "XCTestCase+OperationTestHelpers.h"
 
 @implementation XCTestCase (OperationTestHelpers)

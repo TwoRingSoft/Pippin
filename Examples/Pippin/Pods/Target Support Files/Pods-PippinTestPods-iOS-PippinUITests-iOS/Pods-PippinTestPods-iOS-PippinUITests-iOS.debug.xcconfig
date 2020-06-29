@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks" "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/PippinLibrary-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/PippinTesting"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks" "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/Closures" "${PODS_CONFIGURATION_BUILD_DIR}/PippinLibrary-iOS" "${PODS_CONFIGURATION_BUILD_DIR}/PippinTesting" "${PODS_CONFIGURATION_BUILD_DIR}/Then-iOS"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage-iOS/Anchorage.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PippinLibrary-iOS/PippinLibrary.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PippinTesting/PippinTesting.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Anchorage-iOS/Anchorage.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Closures/Closures.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PippinLibrary-iOS/PippinLibrary.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PippinTesting/PippinTesting.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Then-iOS/Then.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -framework "Anchorage" -framework "PippinLibrary" -framework "PippinTesting" -framework "XCTest"
+OTHER_LDFLAGS = $(inherited) -framework "Anchorage" -framework "Closures" -framework "PippinLibrary" -framework "PippinTesting" -framework "Then" -framework "XCTest"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
