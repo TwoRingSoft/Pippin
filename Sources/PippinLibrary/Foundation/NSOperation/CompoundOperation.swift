@@ -139,7 +139,7 @@ private extension CompoundOperation {
             return
         }
 
-        if isCancelled || completedOperations + errors.count == operations.count {
+        if isCancelled || completedOperations == operations.count {
             var error: Error?
             if !errors.isEmpty {
                 error = CompoundOperationError.suboperationFailure(String(describing: name), errors).nsError
