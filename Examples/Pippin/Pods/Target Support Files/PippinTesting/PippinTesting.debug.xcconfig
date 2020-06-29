@@ -12,5 +12,5 @@ PODS_TARGET_SRCROOT = ${PODS_ROOT}/../../..
 PRODUCT_BUNDLE_IDENTIFIER = com.tworingsoft.pippin-testing
 SKIP_INSTALL = YES
 SWIFT_INCLUDE_PATHS = $(inherited) "$(PLATFORM_DIR)/Developer/usr/lib"
-SYSTEM_FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PLATFORM_DIR)/Developer/usr/lib"
+SYSTEM_FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

@@ -198,7 +198,9 @@ fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Closures/Closures.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework"
@@ -213,7 +215,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Closures/Closures.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework"

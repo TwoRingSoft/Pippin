@@ -1,6 +1,6 @@
 {
   "name": "PippinLibrary",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "summary": "Extensions on Cocoa Touch and Swift stdlib SDKs.",
   "description": "All manner of extensions, categories, subclasses, wrappers, helpful functions, macros, syntactic sugar, utilities, &c that make coding faster and more semantically accurate.",
   "homepage": "https://github.com/tworingsoft/Pippin",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinLibrary-2.0.0"
+    "tag": "PippinLibrary-2.3.0"
   },
   "swift_versions": "5.1",
   "platforms": {
@@ -21,7 +21,12 @@
     "osx": "10.12"
   },
   "ios": {
-    "source_files": "Sources/PippinLibrary/**/*.{h,m,swift}"
+    "source_files": "Sources/PippinLibrary/**/*.{h,m,swift}",
+    "dependencies": {
+      "Closures": [
+
+      ]
+    }
   },
   "osx": {
     "source_files": "Sources/PippinLibrary/Foundation/**/*.{h,m,swift}"
@@ -29,13 +34,16 @@
   "dependencies": {
     "Anchorage": [
 
+    ],
+    "Then": [
+
     ]
   },
   "testspecs": [
     {
       "name": "Tests",
       "test_type": "unit",
-      "source_files": "Tests/PippinLibrary/**/*.swift"
+      "source_files": "Tests/PippinLibrary/**/*.{h,m,swift}"
     }
   ],
   "swift_version": "5.1"

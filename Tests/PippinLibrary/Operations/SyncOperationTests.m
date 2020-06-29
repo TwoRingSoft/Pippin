@@ -9,10 +9,10 @@
 //  the test if that property is ever set to true. The completionBlock should execute,
 //  but asyncCompletion should not.
 
-@import Pippin;
+@import PippinLibrary;
 @import XCTest;
 #import "XCTestCase+OperationTestHelpers.h"
-#import "Pippin_Unit_Extensions_Tests-Swift.h"
+#import "PippinLibrary_iOS_Unit_Tests-Swift.h"
 
 @interface SyncOperationTests : XCTestCase
 

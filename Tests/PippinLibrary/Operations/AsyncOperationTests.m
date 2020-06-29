@@ -5,10 +5,10 @@
 //  Created by Andrew McKnight on 11/14/18.
 //
 
-@import Pippin;
+@import PippinLibrary;
 @import XCTest;
 #import "XCTestCase+OperationTestHelpers.h"
-#import "Pippin_Unit_Extensions_Tests-Swift.h"
+#import "PippinLibrary_iOS_Unit_Tests-Swift.h"
 
 @interface AsyncOperationTests : XCTestCase
 

@@ -1,6 +1,8 @@
 ${PODS_ROOT}/Target Support Files/Pods-PippinPods-iOS-Pippin-iOS/Pods-PippinPods-iOS-Pippin-iOS-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Anchorage-iOS/Anchorage.framework
+${BUILT_PRODUCTS_DIR}/Closures/Closures.framework
 ${BUILT_PRODUCTS_DIR}/PippinLibrary-iOS/PippinLibrary.framework
+${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework
 ${BUILT_PRODUCTS_DIR}/COSTouchVisualizer/COSTouchVisualizer.framework
 ${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework
 ${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework
