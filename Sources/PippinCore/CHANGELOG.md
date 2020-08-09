@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+### Added
+
+- Ability to pass a custom view for app-specific debug views when installing Pippin debugging views for the menu.
+
 ## [2.0.2] 2020-04-15
 
 ### Fixed
@@ -159,7 +163,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Parameterize `DismissableModalViewController`'s insets instead of hardcoding it to inset by 30 from the top to avoid a status bar, something not all apps may want to do.
 - Extension on `UIView` to round corners and style borders.
 - Keep a reference to the `Bundle` containing any shared assets catalog, which defaults to the main bundle if one isn't specified in `Environment`'s init.
-- A `LaunchArgument` to wipe any stored user defaults the app uses at launch. 
+- A `LaunchArgument` to wipe any stored user defaults the app uses at launch.
 - A static extension function on `ProcessInfo` to test if any launch argument was provided during app launch, to help test app-specific launch arguments.
 
 ### Fixed
@@ -184,7 +188,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 - `DebugFlowController` now delegates model deletion back to the consumer app, instead of directly deleting the sqlite database files. Prevents a forced restart of the app to reconstruct the database.
 - `DatabaseFixsturePickerViewController` now requires a parameter of type `Environment` instead of `CoreDataController`, which it can get from the environment parameter, as well as logging/alerting/etc.
-- 
+-
 
 #### Model
 
