@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         #if DEBUG
-        environment.debugging?.installViews()
+        environment.debugging?.installViews(appControlPanel: nil)
         #endif
         environment.touchVisualizer?.installViews()
         return true

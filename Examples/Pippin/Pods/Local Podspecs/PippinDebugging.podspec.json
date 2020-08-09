@@ -1,6 +1,6 @@
 {
   "name": "PippinDebugging",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "summary": "A Swift framework providing tools for in-app debugging.",
   "description": "A collection of Swift and Objective-C utilities delivering UI and low-level utilities to debug an app while it's running.",
   "homepage": "https://github.com/tworingsoft/Pippin",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinDebugging-2.0.0"
+    "tag": "PippinDebugging-2.1.0"
   },
   "platforms": {
     "ios": "12.0"

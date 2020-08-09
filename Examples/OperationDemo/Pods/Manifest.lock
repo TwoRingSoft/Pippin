@@ -1,6 +1,6 @@
 PODS:
   - Anchorage (4.3.1)
-  - PippinLibrary (2.3.0):
+  - PippinLibrary (2.5.0):
     - Anchorage
     - Closures
     - Then
@@ -20,9 +20,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Anchorage: a187da0bc9b07440637d42c8744b8c82a4490295
-  PippinLibrary: cd8b36663b454918eb0e7ff18f2d72086a92b79d
+  PippinLibrary: 9ca7a41bf1f0e7e3c0b37de66f0cfcc4a4f99e90
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
 PODFILE CHECKSUM: 358e3f5749264a7dfa3610052e0d409c4d9a7ea4
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
