@@ -28,7 +28,7 @@ prerelease-core:
 
 CORE_VERSION=$(shell vrsn --read --file PippinCore.podspec)
 release-core:
-	rbenv exec bundle exec release-podspec PippinCore --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry
+	rbenv exec bundle exec release-podspec PippinCore --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry $(CORE_VERSION)
 
 prerelease-library:
 	rbenv exec bundle exec prerelease-podspec PippinLibrary --podspec-name-in-tag
