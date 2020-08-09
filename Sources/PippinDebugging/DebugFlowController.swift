@@ -34,11 +34,11 @@ public class DebugFlowController: NSObject, DebugMenuPresenter {
         super.init()
     }
 
-    public func installViews() {
+    public func installViews(appControlPanel: UIView? = nil) {
         debugWindow = DebugWindow(frame: UIScreen.main.bounds)
         debugWindow?.windowLevel = WindowLevel.debugging.windowLevel()
         debugWindow?.isHidden = false
-        debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment!, assetBundle: assetBundle, buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation)
+        debugWindow?.rootViewController = DebugViewController(delegate: self, environment: environment!, assetBundle: assetBundle, buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation, appControlPanel: appControlPanel)
     }
 
 }

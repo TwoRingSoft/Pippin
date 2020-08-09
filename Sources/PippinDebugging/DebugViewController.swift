@@ -23,12 +23,12 @@ public class DebugViewController: UIViewController {
     private var displayButton: UIButton!
     private var assetBundle: Bundle?
 
-    init(delegate: DebugViewControllerDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor, buttonStartLocation: CGPoint) {
+    init(delegate: DebugViewControllerDelegate, environment: Environment, assetBundle: Bundle? = nil, buttonTintColor: UIColor, buttonStartLocation: CGPoint, appControlPanel: UIView? = nil) {
         self.delegate = delegate
         self.environment = environment
         self.assetBundle = assetBundle
         super.init(nibName: nil, bundle: nil)
-        setUpUI(buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation)
+        setUpUI(buttonTintColor: buttonTintColor, buttonStartLocation: buttonStartLocation, appControlPanel: appControlPanel)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -62,7 +62,7 @@ public class DebugViewController: UIViewController {
 
 private extension DebugViewController {
 
-    func setUpUI(buttonTintColor: UIColor, buttonStartLocation: CGPoint) {
+    func setUpUI(buttonTintColor: UIColor, buttonStartLocation: CGPoint, appControlPanel: UIView? = nil) {
         debugMenu = UIView(frame: .zero)
         debugMenu.isHidden = true
         debugMenu.backgroundColor = .white
@@ -100,6 +100,10 @@ private extension DebugViewController {
         let closeButton = UIButton(frame: .zero)
         closeButton.configure(title: "Close", target: self, selector: #selector(closePressed))
         controlPanels.append(closeButton)
+
+        if let appControlPanel = appControlPanel {
+            controlPanels.insert(appControlPanel, at: 0)
+        }
 
         let stack = UIStackView(arrangedSubviews: controlPanels)
         stack.axis = .vertical
