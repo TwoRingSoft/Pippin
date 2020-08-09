@@ -132,9 +132,9 @@ public class CRUDSearchContainer: UIView {}
 
     func toggle(emptyState: Bool, animated: Bool) {
         guard let emptyView = emptyView else { return }
-        let animations = {
+        let animations = { [weak self] in
             emptyView.alpha = emptyState ? 1 : 0
-            self.tableView.alpha = emptyState ? 0 : 1
+            self?.tableView.alpha = emptyState ? 0 : 1
         }
 
         if animated {
@@ -157,7 +157,7 @@ public class CRUDSearchContainer: UIView {}
                 guard let cancelButtonBlurView = cancelButtonBlurView else { return }
                 cancelButtonBlurView.alpha = 0
                 [ fieldBlurView, cancelButtonBlurView ].forEach {
-                    self.view.insertSubview($0, belowSubview: searchContainer)
+                    view.insertSubview($0, belowSubview: searchContainer)
                 }
                 fieldBlurView.edgeAnchors == searchField.edgeAnchors
                 cancelButtonBlurView.edgeAnchors == searchCancelButton.edgeAnchors
@@ -183,12 +183,14 @@ public class CRUDSearchContainer: UIView {}
             .NSManagedObjectContextObjectsDidChange
         ]
 
+        #if DEBUG
         notifications.forEach {
             NotificationCenter.default.addObserver(forName: $0, object: nil, queue: nil) { [weak self] (note) in
                 guard let sself = self else { return }
                 sself.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Received NSManagedObjectContext notification: %@", instanceType(sself), sself.crudName, String(describing: note)))
             }
         }
+        #endif
 
         originalFetchRequestPredicate = fetchRequest.predicate
         fetchedResultsController.delegate = self
@@ -315,19 +317,20 @@ public class CRUDSearchContainer: UIView {}
 
     func execute(tableUpdates: UpdateTable) {
         self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Executing updates: %@.", instanceType(self), self.crudName, tableUpdates))
-        tableView.performBatchUpdates({
-            tableUpdates.forEach({ arg in
+        tableView.performBatchUpdates({ [weak self] in
+            tableUpdates.forEach({ [weak self] arg in
                 let (updateType, indexPaths) = arg
                 switch updateType {
-                case .delete: tableView.deleteRows(at: indexPaths, with: .automatic)
-                case .update: tableView.reloadRows(at: indexPaths, with: .automatic)
-                case .insert: tableView.insertRows(at: indexPaths, with: .automatic)
+                case .delete: self?.tableView.deleteRows(at: indexPaths, with: .automatic)
+                case .update: self?.tableView.reloadRows(at: indexPaths, with: .automatic)
+                case .insert: self?.tableView.insertRows(at: indexPaths, with: .automatic)
                 case .move: fatalError("Moving currently not supported.")
                 @unknown default: fatalError("New unexpected NSFetchedResultsChangeType: \(updateType)")
                 }
             })
-        }) { finished in
-            self.toggle(emptyState: self.numberOfEntities() == 0, animated: true)
+        }) { [weak self] finished in
+            guard let sself = self else { return }
+            sself.toggle(emptyState: sself.numberOfEntities() == 0, animated: true)
         }
     }
 
@@ -338,16 +341,19 @@ public class CRUDSearchContainer: UIView {}
             let searchCancelButtonLeadingConstraint = searchCancelButtonLeadingConstraint
         else { return }
 
-        DispatchQueue.main.async {
-            let constraintAnimations = {
+        DispatchQueue.main.async { [weak self] in
+            guard let sself = self else { return }
+            let constraintAnimations = { [weak self] in
+                guard let sself = self else { return }
                 searchCancelButtonWidthConstraint.constant = hideAddItemRow ? 60 : 0
                 searchCancelButtonLeadingConstraint.constant = hideAddItemRow ? CGFloat.horizontalSpacing : 0
-                self.view.layoutIfNeeded()
+                sself.view.layoutIfNeeded()
             }
 
-            let alphaAnimations = {
+            let alphaAnimations = { [weak self] in
+                guard let sself = self else { return }
                 searchCancelButton.alpha = hideAddItemRow ? 1 : 0
-                if let cancelButtonBlurView = self.cancelButtonBlurView {
+                if let cancelButtonBlurView = sself.cancelButtonBlurView {
                     cancelButtonBlurView.alpha = hideAddItemRow ? 1 : 0
                 }
             }
@@ -362,17 +368,17 @@ public class CRUDSearchContainer: UIView {}
                 })
             }
 
-            self.hideAddItemRowForSearch = hideAddItemRow
-            self.tableView.beginUpdates()
-            let indexPaths = [ self.addItemRowIndexPath() ]
+            sself.hideAddItemRowForSearch = hideAddItemRow
+            sself.tableView.beginUpdates()
+            let indexPaths = [ sself.addItemRowIndexPath() ]
             if hideAddItemRow {
-                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(self), self.crudName))
-                self.tableView.deleteRows(at: indexPaths, with: .fade)
+                sself.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Removing 'add ingredient' row from table view for search.", instanceType(sself), sself.crudName))
+                sself.tableView.deleteRows(at: indexPaths, with: .fade)
             } else {
-                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(self), self.crudName))
-                self.tableView.insertRows(at: indexPaths, with: .fade)
+                sself.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Adding 'add ingredient' row to table view after search ended.", instanceType(sself), sself.crudName))
+                sself.tableView.insertRows(at: indexPaths, with: .fade)
             }
-            self.tableView.endUpdates()
+            sself.tableView.endUpdates()
         }
     }
 
@@ -444,11 +450,12 @@ public class CRUDSearchContainer: UIView {}
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         environment?.logger?.logDebug(message: String(format: "[%@(%@)] controller <%@> finished updates", instanceType(self), self.crudName, controller))
-        DispatchQueue.main.async {
-            if let updates = self.tableUpdates, updates.count > 0 {
-                self.tableUpdates = nil
-                self.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(self), self.crudName))
-                self.execute(tableUpdates: updates)
+        DispatchQueue.main.async { [weak self] in
+            guard let sself = self else { return }
+            if let updates = sself.tableUpdates, updates.count > 0 {
+                sself.tableUpdates = nil
+                sself.environment?.logger?.logDebug(message: String(format: "[%@(%@)] Executing table updates.", instanceType(sself), sself.crudName))
+                sself.execute(tableUpdates: updates)
             }
         }
     }
@@ -534,11 +541,13 @@ public class CRUDSearchContainer: UIView {}
             actions.append(contentsOf: otherActions)
         }
         actions.append(contentsOf: [
-            UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, indexPath) in
-                self.configuration.crudDelegate?.crudViewController?(crudViewController: self, wantsToDelete: self.fetchedResultsController.object(at: indexPath))
+            UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
+                guard let sself = self else { return }
+                sself.configuration.crudDelegate?.crudViewController?(crudViewController: sself, wantsToDelete: sself.fetchedResultsController.object(at: indexPath))
             }),
-            UITableViewRowAction(style: .normal, title: "Edit", handler: { (action, indexPath) in
-                self.configuration.crudDelegate?.crudViewController?(crudViewController: self, wantsToUpdate: self.fetchedResultsController.object(at: indexPath))
+            UITableViewRowAction(style: .normal, title: "Edit", handler: { [weak self] (action, indexPath) in
+                guard let sself = self else { return }
+                sself.configuration.crudDelegate?.crudViewController?(crudViewController: sself, wantsToUpdate: sself.fetchedResultsController.object(at: indexPath))
             })
         ])
         return actions
