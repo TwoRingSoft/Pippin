@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [2.1.0] 2020-08-08
+
 ### Added
 
 - Ability to pass a custom view for app-specific debug views when installing Pippin debugging views for the menu.
