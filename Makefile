@@ -18,39 +18,39 @@ bump:
 	git commit --all --message "chore: update version and changelog to `vrsn --read --file $(NAME).podspec`"
 
 prerelease-adapters:
-	rbenv exec bundle exec prerelease-podspec PippinAdapters --podspec-name-in-tag --allow-warnings
+	rbenv exec bundle exec prerelease-podspec PippinAdapters.podspec --podspec-name-in-tag --allow-warnings
 
 ADAPTERS_VERSION=$(shell vrsn --read --file PippinAdapters.podspec)
 release-adapters:
-	rbenv exec bundle exec release-podspec PippinAdapters --skip-tests --podspec-name-in-tag --allow-warnings --changelog-path Sources/PippinAdapters/CHANGELOG.md --changelog-entry $(ADAPTERS_VERSION)
+	rbenv exec bundle exec release-podspec PippinAdapters.podspec --skip-tests --podspec-name-in-tag --allow-warnings --changelog-path Sources/PippinAdapters/CHANGELOG.md --changelog-entry $(ADAPTERS_VERSION)
 
 prerelease-core:
-	rbenv exec bundle exec prerelease-podspec PippinCore --podspec-name-in-tag
+	rbenv exec bundle exec prerelease-podspec PippinCore.podspec --podspec-name-in-tag
 
 CORE_VERSION=$(shell vrsn --read --file PippinCore.podspec)
 release-core:
-	rbenv exec bundle exec release-podspec PippinCore --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry $(CORE_VERSION)
+	rbenv exec bundle exec release-podspec PippinCore.podspec --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry $(CORE_VERSION)
 
 prerelease-library:
-	rbenv exec bundle exec prerelease-podspec PippinLibrary --podspec-name-in-tag
+	rbenv exec bundle exec prerelease-podspec PippinLibrary.podspec --podspec-name-in-tag
 
 LIBRARY_VERSION=$(shell vrsn --read --file PippinLibrary.podspec)
 release-library:
-	rbenv exec bundle exec release-podspec PippinLibrary --skip-tests --podspec-name-in-tag --changelog-path Sources/PippinLibrary/CHANGELOG.md --changelog-entry $(LIBRARY_VERSION)
+	rbenv exec bundle exec release-podspec PippinLibrary.podspec --skip-tests --podspec-name-in-tag --changelog-path Sources/PippinLibrary/CHANGELOG.md --changelog-entry $(LIBRARY_VERSION)
 
 prerelease-debugging:
-	rbenv exec bundle exec prerelease-podspec PippinDebugging --podspec-name-in-tag
+	rbenv exec bundle exec prerelease-podspec PippinDebugging.podspec --podspec-name-in-tag
 
 DEBUGGING_VERSION=$(shell vrsn --read --file PippinDebugging.podspec)
 release-debugging:
-	rbenv exec bundle exec release-podspec PippinDebugging --podspec-name-in-tag --changelog-path Sources/PippinDebugging/CHANGELOG.md --changelog-entry $(DEBUGGING_VERSION)
+	rbenv exec bundle exec release-podspec PippinDebugging.podspec --podspec-name-in-tag --changelog-path Sources/PippinDebugging/CHANGELOG.md --changelog-entry $(DEBUGGING_VERSION)
 
 prerelease-testing:
-	rbenv exec bundle exec prerelease-podspec PippinTesting --podspec-name-in-tag
+	rbenv exec bundle exec prerelease-podspec PippinTesting.podspec --podspec-name-in-tag
 
 TESTING_VERSION=$(shell vrsn --read --file PippinTesting.podspec)
 release-testing:
-	rbenv exec bundle exec release-podspec PippinTesting --podspec-name-in-tag --changelog-path Sources/PippinTesting/CHANGELOG.md --changelog-entry $(TESTING_VERSION)
+	rbenv exec bundle exec release-podspec PippinTesting.podspec --podspec-name-in-tag --changelog-path Sources/PippinTesting/CHANGELOG.md --changelog-entry $(TESTING_VERSION)
 
 clean-rc-tags:
 	git tag --list | grep "\-RC\d*" | xargs -tI @ bash -c "git tag --delete @ &&git push --delete origin @"
