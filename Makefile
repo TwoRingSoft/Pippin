@@ -13,8 +13,9 @@ build-mac:
 	xcodebuild -workspace Pippin.xcworkspace -scheme PippinTestHarness-macOS -sdk macosx -quiet
 
 bump:
-	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec
-	rbenv exec bundle exec migrate-changelog Sources/$(NAME)/CHANGELOG.md `vrsn --read --file $(NAME).podspec`
+	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec --no-commit
+	rbenv exec bundle exec migrate-changelog Sources/$(NAME)/CHANGELOG.md `vrsn --read --file $(NAME).podspec` --no-commit
+	git commit --all --message "chore: update version and changelog to `vrsn --read --file $(NAME).podspec`"
 
 prerelease-adapters:
 	rbenv exec bundle exec prerelease-podspec PippinAdapters --podspec-name-in-tag --allow-warnings
