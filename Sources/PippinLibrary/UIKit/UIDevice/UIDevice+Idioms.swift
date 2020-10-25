@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIDevice {
-    class var isPhone: Bool {
+    @objc class var isPhone: Bool {
         get {
             return current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
         }
