@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [6.0.0] 2020-10-26
+
 ### Changed
 
 - Obsoleted `CrudViewControllerUITableViewDelegate.crudViewController(crudViewController:otherEditActionsFor:)` and introduced `CrudViewControllerUITableViewDelegate.crudViewController(crudViewController:otherSwipeActionsFor:)` to provide the equivalent functionality with the new iOS function, as `UITableViewRowAction` was deprecated in iOS 12.
