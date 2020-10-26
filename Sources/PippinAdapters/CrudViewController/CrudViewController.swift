@@ -519,11 +519,11 @@ public class CRUDSearchContainer: UIView {}
         return canEditRow(atIndexPath: indexPath)
     }
 
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard configuration.mode == .editor else {
             return nil
         }
-        
+
         if indexPathPointsToAddObjectRow(indexPath: indexPath) {
             return nil
         }
@@ -532,27 +532,35 @@ public class CRUDSearchContainer: UIView {}
             return nil
         }
 
-        if let actions = configuration.tableViewDelegate?.crudViewController?(crudViewController: self, editActionsFor: indexPath) {
-            return actions
+        if let actions = configuration.tableViewDelegate?.crudViewController?(crudViewController: self, swipeActionsFor: indexPath) {
+            return UISwipeActionsConfiguration(actions: actions)
         }
 
-        var actions = [UITableViewRowAction]()
-        if let otherActions = configuration.tableViewDelegate?.crudViewController?(crudViewController: self, otherEditActionsFor: indexPath) {
+        var actions = [UIContextualAction]()
+        if let otherActions = configuration.tableViewDelegate?.crudViewController?(crudViewController: self, otherSwipeActionsFor: indexPath) {
             actions.append(contentsOf: otherActions)
         }
         actions.append(contentsOf: [
-            UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
-                guard let sself = self else { return }
+            UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] (action, view, completion) in
+                guard let sself = self else {
+                    completion(false)
+                    return
+                }
                 sself.configuration.crudDelegate?.crudViewController?(crudViewController: sself, wantsToDelete: sself.fetchedResultsController.object(at: indexPath))
+                completion(true)
             }),
-            UITableViewRowAction(style: .normal, title: "Edit", handler: { [weak self] (action, indexPath) in
-                guard let sself = self else { return }
+            UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] (action, view, completion) in
+                guard let sself = self else {
+                    completion(false)
+                    return
+                }
                 sself.configuration.crudDelegate?.crudViewController?(crudViewController: sself, wantsToUpdate: sself.fetchedResultsController.object(at: indexPath))
+                completion(true)
             })
         ])
-        return actions
+        return UISwipeActionsConfiguration(actions: actions)
     }
-    
+
 }
 
 // MARK: UITableViewDelegate

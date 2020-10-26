@@ -116,21 +116,45 @@ public enum CRUDViewControllerMode {
     /// - Note: This is not called for the add item cell and no actions are provided for it at all.
     /// - Note: If `CRUDViewControllerMode` is `picker` then this function is not called.
     /// - Note: If `crudViewController(crudViewController:canEdit:)` returns false then this function is not called.
-    /// - Note: If an array is returned for `crudViewController(crudViewController:otherEditActionsFor:)`, this function is not called.
+    /// - Note: If an array is returned for `crudViewController(crudViewController:editActionsFor:)`, this function is not called.
     /// - Parameters:
     ///   - crudViewController: The `CRUDViewController` managing the cells receiving additional edit actions.
     ///   - indexPath: The `IndexPath` for the cell that should receive a given set of additional actions.
     /// - Returns: The additional actions that should be shown alongside “Edit” and “Delete.”
+    @available(iOS, obsoleted: 12)
     @objc optional func crudViewController(crudViewController: CRUDViewController, otherEditActionsFor indexPath: IndexPath) -> [UITableViewRowAction]
+
+    /// Provide an array of other trailing swipe actions to show alongside the standard “Edit” and “Delete” actions automatically provided by instances of `CRUDViewController` with a `CRUDViewControllerMode` of `editor`.
+    /// - Note: This is not called for the add item cell and no actions are provided for it at all.
+    /// - Note: If `CRUDViewControllerMode` is `picker` then this function is not called.
+    /// - Note: If `crudViewController(crudViewController:canEdit:)` returns false then this function is not called.
+    /// - Note: If an array is returned for `crudViewController(crudViewController:swipeActionsFor:)`, this function is not called.
+    /// - Parameters:
+    ///   - crudViewController: The `CRUDViewController` managing the cells receiving additional trailing swipe actions.
+    ///   - indexPath: The `IndexPath` for the cell that should receive a given set of additional actions.
+    /// - Returns: The additional trailing swipe actions that should be shown alongside “Edit” and “Delete.”
+    @available(iOS, introduced: 12)
+    @objc optional func crudViewController(crudViewController: CRUDViewController, otherSwipeActionsFor indexPath: IndexPath) -> [UIContextualAction]
 
     /// - Note: This is not called for the add item cell and no actions are provided for it at all.
     /// - Note: If `CRUDViewControllerMode` is `picker` then this function is not called.
     /// - Note: If `crudViewController(crudViewController:canEdit:)` returns false then this function is not called.
     /// - Parameters:
     ///   - crudViewController: The `CRUDViewController` managing the cells receiving additional edit actions.
-    ///   - indexPath: The `IndexPath` for the cell that should receive a given set of additional actions.
+    ///   - indexPath: The `IndexPath` for the cell that should receive a given set of actions.
     /// - Returns: All the edit actions to show for the cell at the given `IndexPath`
+    @available(iOS, obsoleted: 12)
     @objc optional func crudViewController(crudViewController: CRUDViewController, editActionsFor indexPath: IndexPath) -> [UITableViewRowAction]
+
+    /// - Note: This is not called for the add item cell and no actions are provided for it at all.
+    /// - Note: If `CRUDViewControllerMode` is `picker` then this function is not called.
+    /// - Note: If `crudViewController(crudViewController:canEdit:)` returns false then this function is not called.
+    /// - Parameters:
+    ///   - crudViewController: The `CRUDViewController` managing the cells receiving additional edit actions.
+    ///   - indexPath: The `IndexPath` for the cell that should receive a given set of trailing swipeactions.
+    /// - Returns: All the trailing swipe actions to show for the cell at the given `IndexPath`
+    @available(iOS, introduced: 12)
+    @objc optional func crudViewController(crudViewController: CRUDViewController, swipeActionsFor indexPath: IndexPath) -> [UIContextualAction]
     
     /// Control whether the `UITableView` should include an add item cell. Default value is `true` when `CRUDViewControllerMode` is `editor`.
     ///
