@@ -1,6 +1,6 @@
 {
   "name": "PippinAdapters",
-  "version": "5.2.1",
+  "version": "6.0.0",
   "summary": "Plugins for Pippin Protocols.",
   "description": "A collection of pluggable adapters to third-party dependencies, or entirely self-rolled implementations for Pippin protocols.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinAdapters-5.2.1"
+    "tag": "PippinAdapters-6.0.0"
   },
   "platforms": {
     "ios": "12.0"

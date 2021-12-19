@@ -5,6 +5,11 @@ init:
 	rbenv exec bundle update
 	rbenv exec bundle exec pod repo add tworingsoft https://github.com/TwoRingSoft/podspecs.git ||:
 
+.PHONY: xcode
+xcode:
+	pushd Examples/Pippin; rbenv exec bundle exec pod update; xed Examples/Pippin/Pippin.xcworkspace; popd
+
+
 build: build-phone build-mac
 
 build-phone:
