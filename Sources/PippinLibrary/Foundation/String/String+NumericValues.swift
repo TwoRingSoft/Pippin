@@ -52,7 +52,20 @@ public extension String {
             print(String(format: "[%@] could not extract unsigned integer from %@.", instanceType(self as NSObject), self))
             return 0
         }
+    }
+}
 
+///// Allows writing things like `somestring[1...3].integerValue` without the explicit cast liek `String(someString[1...3]).integerValue`.
+public extension String.SubSequence {
+    var integerValue: Int {
+        (self as NSString).integerValue
     }
 
+    var intValue: Int32 {
+        return (self as NSString).intValue
+    }
+
+    var doubleValue: Double {
+        return (self as NSString).doubleValue
+    }
 }
