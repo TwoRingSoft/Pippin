@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 - Different ways to count things in Collections: `count(where:)` and `counts`.
+- Ability to print a 2D collection with `gridDescription`.
 
 ## [2.6.0] 2020-10-24
 
