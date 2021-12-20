@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Ability to print a 2D collection with `gridDescription`.
 - Extract typed values from strings like `lines`, `ints`, `stringsAndInts`, `intGrid` and `characterGrid`.
 - Provide sliding window views of collections (`windows(ofSize:)`) and strings (`substrings(ofLength:)`).
+- Flattening collections of collections.
 
 ## [2.6.0] 2020-10-24
 
