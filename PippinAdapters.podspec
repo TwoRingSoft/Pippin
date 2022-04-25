@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PippinAdapters'
-  s.version      = '6.0.0'
+  s.version      = '7.0.0'
   s.summary      = "Plugins for Pippin Protocols."
   s.description  = <<-DESC
                    A collection of pluggable adapters to third-party dependencies, or entirely self-rolled implementations for Pippin protocols.
