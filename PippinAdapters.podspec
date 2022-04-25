@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   # --- Default subspecs ---
 
-  s.default_subspecs = 'Environment', 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'FormController', 'CoreData', 'CoreLocation', 'AVCaptureDevice', 'KSCrash'
+  s.default_subspecs = 'Environment', 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'FormController', 'CoreData', 'KSCrash'
 
   s.subspec 'Environment' do |ss|
     ss.source_files = 'Sources/PippinAdapters/*.{h,m,swift}'

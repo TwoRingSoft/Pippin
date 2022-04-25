@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+### Changed
+
+- Remove `CoreLocation` and `AVCaptureDevice` adapters from the default subspecs list so they don't cause build rejections from AppStoreConnect due to missing infoplist purpose strings even if the app doesn't use them.
+
 ### Added
 
 - Added an adapter for KSCrash as an alternative for Crashlytics.
