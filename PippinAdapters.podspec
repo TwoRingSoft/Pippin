@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
   s.swift_version = '5.1'
 
   # --- Default subspecs ---
-  
-  s.default_subspecs = 'Environment', 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'FormController', 'CoreData', 'CoreLocation', 'AVCaptureDevice', 'Crashlytics'
+
+  s.default_subspecs = 'Environment', 'PinpointKit', 'COSTouchVisualizer', 'XCGLogger', 'SwiftMessages', 'JGProgressHUD', 'CRUDViewController', 'InfoViewController', 'FormController', 'CoreData', 'CoreLocation', 'AVCaptureDevice', 'KSCrash'
 
   s.subspec 'Environment' do |ss|
     ss.source_files = 'Sources/PippinAdapters/*.{h,m,swift}'
@@ -24,7 +24,13 @@ Pod::Spec.new do |s|
     ss.dependency 'PippinAdapters/XCGLogger'
     ss.dependency 'PippinAdapters/SwiftMessages'
     ss.dependency 'PippinAdapters/JGProgressHUD'
+    ss.dependency 'PippinAdapters/KSCrash'
     ss.dependency 'PippinAdapters/COSTouchVisualizer'
+  end
+  s.subspec 'KSCrash' do |ss|
+    ss.source_files = 'Sources/PippinAdapters/KSCrash/**/*.{h,m,swift}'
+    ss.dependency 'KSCrash', '~> 1'
+    ss.dependency 'PippinCore'
   end
   s.subspec 'PinpointKit' do |ss|
     ss.source_files = 'Sources/PippinAdapters/PinpointKit/**/*.{h,m,swift}'
