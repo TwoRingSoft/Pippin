@@ -10,4 +10,5 @@ import UIKit
 public protocol Colors {
     var background: UIColor { get }
     var foreground: UIColor { get }
+    var foregroundSoft: UIColor { get }
 }

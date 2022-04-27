@@ -25,4 +25,12 @@ public struct DefaultColors: Colors {
             return .black
         }
     }
+
+    public var foregroundSoft: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.secondaryLabel
+        } else {
+            return UIColor.gray
+        }
+    }
 }
