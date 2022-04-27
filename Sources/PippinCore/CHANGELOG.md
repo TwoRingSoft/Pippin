@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+## [2.2.0] 2022-04-27
+
 ### Added
 
 - A secondary foreground color in `Colors` (and a default value in `DefaultColors`).
