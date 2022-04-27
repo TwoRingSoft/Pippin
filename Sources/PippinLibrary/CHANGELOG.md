@@ -18,6 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - Provide sliding window views of collections (`windows(ofSize:)`) and strings (`substrings(ofLength:)`).
 - Flattening collections of collections.
 
+### Fixed
+
+- An incorrect calculation previously returned the wrong result from `CGRect(centeredAround:with:)`.
+
 ## [2.6.0] 2020-10-24
 
 ### Added

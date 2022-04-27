@@ -14,6 +14,6 @@ public extension CGRect {
     ///   - point: The point on which the resulting `CGRect` will be centered.
     ///   - size: The size of the resulting `CGRect`.
     init(centeredAround point: CGPoint, with size: CGSize) {
-        self = .init(origin: point.offset(xDelta: size.width / 2, yDelta: size.height / 2), size: size)
+        self = .init(origin: point.offset(xDelta: size.width / -2, yDelta: size.height / -2), size: size)
     }
 }
