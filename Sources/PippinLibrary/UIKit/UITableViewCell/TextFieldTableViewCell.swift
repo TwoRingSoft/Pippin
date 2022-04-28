@@ -11,7 +11,7 @@ import UIKit
 public let textFieldTableViewCellReuseIdentifier = "TextFieldTableViewCell"
 
 /**
- A `UITableViewCell` subclass providing a label on the left and a text field on the right. By default the label's `numberOfLines` is not set to 0, but it is layed out such that the label may extend to multiple lines and leave the text field at the top.
+ A `UITableViewCell` subclass providing a title label on the left and a text field on the right. By default the label's `numberOfLines` is not set to 0, but it is layed out such that the label may extend to multiple lines and leave the text field at the top.
  */
 public class TextFieldTableViewCell: UITableViewCell {
 
