@@ -28,35 +28,35 @@ prerelease-adapters:
 
 ADAPTERS_VERSION=$(shell vrsn --read --file PippinAdapters.podspec)
 release-adapters:
-	rbenv exec bundle exec release-podspec PippinAdapters.podspec --skip-tests --podspec-name-in-tag --allow-warnings --changelog-path Sources/PippinAdapters/CHANGELOG.md --changelog-entry $(ADAPTERS_VERSION) --repo tworingsoft
+	rbenv exec bundle exec release-podspec PippinAdapters.podspec --skip-tests --podspec-name-in-tag --allow-warnings --changelog-path Sources/PippinAdapters/CHANGELOG.md --changelog-entry $(ADAPTERS_VERSION) --repo tworingsoft --also-push-to-trunk
 
 prerelease-core:
 	rbenv exec bundle exec prerelease-podspec PippinCore.podspec --podspec-name-in-tag
 
 CORE_VERSION=$(shell vrsn --read --file PippinCore.podspec)
 release-core:
-	rbenv exec bundle exec release-podspec PippinCore.podspec --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry $(CORE_VERSION) --repo tworingsoft
+	rbenv exec bundle exec release-podspec PippinCore.podspec --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry $(CORE_VERSION) --repo tworingsoft --also-push-to-trunk
 
 prerelease-library:
 	rbenv exec bundle exec prerelease-podspec PippinLibrary.podspec --podspec-name-in-tag --skip-tests
 
 LIBRARY_VERSION=$(shell vrsn --read --file PippinLibrary.podspec)
 release-library:
-	rbenv exec bundle exec release-podspec PippinLibrary.podspec --skip-tests --podspec-name-in-tag --changelog-path Sources/PippinLibrary/CHANGELOG.md --changelog-entry $(LIBRARY_VERSION) --repo tworingsoft
+	rbenv exec bundle exec release-podspec PippinLibrary.podspec --skip-tests --podspec-name-in-tag --changelog-path Sources/PippinLibrary/CHANGELOG.md --changelog-entry $(LIBRARY_VERSION) --repo tworingsoft --also-push-to-trunk
 
 prerelease-debugging:
 	rbenv exec bundle exec prerelease-podspec PippinDebugging.podspec --podspec-name-in-tag
 
 DEBUGGING_VERSION=$(shell vrsn --read --file PippinDebugging.podspec)
 release-debugging:
-	rbenv exec bundle exec release-podspec PippinDebugging.podspec --podspec-name-in-tag --changelog-path Sources/PippinDebugging/CHANGELOG.md --changelog-entry $(DEBUGGING_VERSION) --repo tworingsoft
+	rbenv exec bundle exec release-podspec PippinDebugging.podspec --podspec-name-in-tag --changelog-path Sources/PippinDebugging/CHANGELOG.md --changelog-entry $(DEBUGGING_VERSION) --repo tworingsoft --also-push-to-trunk
 
 prerelease-testing:
 	rbenv exec bundle exec prerelease-podspec PippinTesting.podspec --podspec-name-in-tag
 
 TESTING_VERSION=$(shell vrsn --read --file PippinTesting.podspec)
 release-testing:
-	rbenv exec bundle exec release-podspec PippinTesting.podspec --podspec-name-in-tag --changelog-path Sources/PippinTesting/CHANGELOG.md --changelog-entry $(TESTING_VERSION) --repo tworingsoft
+	rbenv exec bundle exec release-podspec PippinTesting.podspec --podspec-name-in-tag --changelog-path Sources/PippinTesting/CHANGELOG.md --changelog-entry $(TESTING_VERSION) --repo tworingsoft --also-push-to-trunk
 
 clean-rc-tags:
 	git tag --list | grep "\-RC\d*" | xargs -tI @ bash -c "git tag --delete @ &&git push --delete origin @"
