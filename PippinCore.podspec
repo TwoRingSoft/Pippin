@@ -10,10 +10,9 @@ Pod::Spec.new do |s|
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
   s.pod_target_xcconfig = { 'PRODUCT_BUNDLE_IDENTIFIER' => 'com.tworingsoft.pippin' }
-  s.ios.deployment_target = '12.0'
-  
-  s.swift_version = '5.1'
-  
+  s.ios.deployment_target = '15.6'
+
+  s.swift_version = '5.8'
   s.source_files = ['Sources/PippinCore/**/*.{h,m,swift}']
   
   s.dependency 'Result'

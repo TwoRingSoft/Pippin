@@ -10,10 +10,10 @@ Pod::Spec.new do |s|
   s.author       = { 'Andrew McKnight' => 'andrew@tworingsoft.com' }
   s.source       = { :git => 'https://github.com/tworingsoft/Pippin.git', :tag => "#{s.name}-#{s.version}" }
 
-  s.ios.deployment_target = '12.0'
-  s.osx.deployment_target = '10.12'
-  
-  s.swift_version = '5.1'
+  s.ios.deployment_target = '15.6'
+  s.osx.deployment_target = '12.4'
+
+  s.swift_version = '5.8'
 
   s.ios.dependency 'PippinAdapters'
   s.ios.dependency 'PippinCore'
