@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = '16.0.0'
   s.summary      = "A Swift framework to scaffold an app and make development and maintenance easier."
   s.description  = <<-DESC
-    An umbrella framework to easily add all the common components of the Pippin ecosystem: core, adapters, library and testing. Debugging is not automatically included; as you should only add that as a dependency specifically set to your non-production build configurations. 
+    An umbrella framework to easily add all the common components of the Pippin ecosystem: core, adapters, library and testing. Debugging is not automatically included; as you should only add that as a dependency specifically set to your non-production build configurations.
   DESC
   s.homepage     = 'https://github.com/tworingsoft/Pippin'
   s.license      = 'MIT'

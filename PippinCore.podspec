@@ -13,8 +13,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '15.6'
 
   s.swift_version = '5.8'
+
   s.source_files = ['Sources/PippinCore/**/*.{h,m,swift}']
-  
+
   s.dependency 'Result'
   s.dependency 'PippinLibrary'
 

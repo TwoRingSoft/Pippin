@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5.8'
 
   s.source_files = 'Sources/PippinDebugging/**/*.{h,m,swift}'
-  
+
   s.dependency 'FLEX', '~> 2'
   s.dependency 'PippinCore'
 end

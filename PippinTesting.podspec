@@ -14,12 +14,12 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Sources/PippinTesting/**/*.{h,m,swift}'
   s.frameworks = 'XCTest'
-  
+
   s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = 'Tests/PippinTesting/**/*.swift'
   end
 
-  s.pod_target_xcconfig = { 
+  s.pod_target_xcconfig = {
     'ENABLE_BITCODE' => 'NO',
     'PRODUCT_BUNDLE_IDENTIFIER' => 'com.tworingsoft.pippin-testing',
   }
