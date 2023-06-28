@@ -49,7 +49,7 @@ Pod::Spec.new do |s|
   end
   s.subspec 'SwiftMessages' do |ss|
     ss.source_files = 'Sources/PippinAdapters/SwiftMessages/**/*.{h,m,swift}'
-    ss.dependency 'SwiftMessages', '~> 7'
+    ss.dependency 'SwiftMessages', '~> 9'
     ss.dependency 'PippinCore'
   end
   s.subspec 'JGProgressHUD' do |ss|
@@ -86,8 +86,5 @@ Pod::Spec.new do |s|
     ss.source_files = 'Sources/PippinAdapters/AVCaptureDevice/**/*.{h,m,swift}'
     ss.dependency 'PippinCore'
     ss.dependency 'PippinLibrary'
-  end
-  s.subspec 'Crashlytics' do |ss|
-    ss.preserve_path = 'Sources/PippinAdapters/Crashlytics/CrashlyticsAdapter.swift'
   end
 end
