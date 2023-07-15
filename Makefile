@@ -9,7 +9,6 @@ init:
 xcode:
 	pushd Examples/Pippin; rbenv exec bundle exec pod update; xed Examples/Pippin/Pippin.xcworkspace; popd
 
-
 build: build-phone build-mac
 
 build-phone:

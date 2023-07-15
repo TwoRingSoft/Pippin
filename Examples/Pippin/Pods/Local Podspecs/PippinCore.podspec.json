@@ -1,6 +1,6 @@
 {
   "name": "PippinCore",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "summary": "A Swift framework to scaffold and abstract the common major parts of an app, to make development faster and maintenance easier.",
   "description": "A collection of Swift and Objective-C utilities delivering reusable components of iOS applications and utilities to work with Apple and third-party frameworks.",
   "homepage": "https://github.com/tworingsoft/Pippin",
@@ -10,15 +10,15 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinCore-2.1.0"
+    "tag": "PippinCore-2.2.0"
   },
   "pod_target_xcconfig": {
     "PRODUCT_BUNDLE_IDENTIFIER": "com.tworingsoft.pippin"
   },
   "platforms": {
-    "ios": "12.0"
+    "ios": "15.6"
   },
-  "swift_versions": "5.1",
+  "swift_versions": "5.8",
   "source_files": [
     "Sources/PippinCore/**/*.{h,m,swift}"
   ],
@@ -31,5 +31,5 @@
     ]
   },
   "module_name": "Pippin",
-  "swift_version": "5.1"
+  "swift_version": "5.8"
 }

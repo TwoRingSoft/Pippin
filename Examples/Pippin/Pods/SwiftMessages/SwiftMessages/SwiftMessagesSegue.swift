@@ -37,14 +37,23 @@ import UIKit
  It is not necessary to retain `segue` because it retains itself until dismissal. However, you can
  retain it if you plan to `perform()` more than once.
 
+ #### Present the controller on top of all controllers
+
+ If you don't know the presenter or you don't want to pass it as a source, like when you
+ have a completely separated message controller, you can pass a `WindowViewController`
+ as the `source` argument of the segue's initializer.
+
+ By default, the window will be shown in the current window scene at `.normal` window level.
+ However, these parameters can be customized by initializing the view controller with a `SwiftMessages.Config` that has the `SwiftMessages.Config.presentationContext` set to either `.window` or `.windowScene`:
+
  + note: Some additional details:
  1. Your view controller's view will be embedded in a `SwiftMessages.BaseView` in order to
-    utilize some SwiftMessages features. This view can be accessed and configured via the
-    `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
-    shadow by calling `segue.messageView.configureDropShadow()`.
+ utilize some SwiftMessages features. This view can be accessed and configured via the
+ `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
+ shadow by calling `segue.messageView.configureDropShadow()`.
  2. SwiftMessagesSegue provides static default view controller sizing based on device.
-    However, it is recommended that you specify sizing appropriate for your content using
-    one of the following methods.
+ However, it is recommended that you specify sizing appropriate for your content using
+ one of the following methods.
     1. Define sufficient width and height constraints in your view controller.
     2. Set `preferredContentSize` (a.k.a "Use Preferred Explicit Size" in Interface Builder's
        attribute inspector). Zeros are ignored, e.g. `CGSize(width: 0, height: 350)` only
@@ -147,6 +156,13 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     /**
+     Normally, the destination view controller's `modalPresentationStyle` is changed
+     to `.custom` in the `perform()` function. Set this property to `false` to prevent it from
+     being overridden.
+    */
+    public var overrideModalPresentationStyle: Bool = true
+
+    /**
      The view that is passed to `SwiftMessages.show(config:view:)` during presentation.
      The view controller's view is installed into `containerView`, which is itself installed
      into `messageView`. `SwiftMessagesSegue` does this installation automatically based on the
@@ -190,8 +206,11 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }()
 
     override open func perform() {
+        (source as? WindowViewController)?.install()
         selfRetainer = self
-        destination.modalPresentationStyle = .custom
+        if overrideModalPresentationStyle {
+            destination.modalPresentationStyle = .custom
+        }
         destination.transitioningDelegate = self
         source.present(destination, animated: true, completion: nil)
     }
@@ -277,10 +296,11 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
                 if let completeTransition = self.hider.completeTransition {
                     completeTransition(true)
                 } else {
-                    // Case where message is interinally hidden by SwiftMessages, such as with a
+                    // Case where message is internally hidden by SwiftMessages, such as with a
                     // dismiss gesture, rather than by view controller dismissal.
                     source.dismiss(animated: false, completion: nil)
                 }
+                (source as? WindowViewController)?.uninstall()
                 self.selfRetainer = nil
             default: break
             }
@@ -341,11 +361,11 @@ extension SwiftMessagesSegue {
             let toVC = transitionContext.viewController(forKey: .to)
             if let preferredHeight = toVC?.preferredContentSize.height,
                 preferredHeight > 0 {
-                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 950)).isActive = true
+                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
             }
             if let preferredWidth = toVC?.preferredContentSize.width,
                 preferredWidth > 0 {
-                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth).with(priority: UILayoutPriority(rawValue: 950)).isActive = true
+                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
             }
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)

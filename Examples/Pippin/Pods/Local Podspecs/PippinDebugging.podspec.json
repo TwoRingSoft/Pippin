@@ -16,9 +16,9 @@
     "tag": "PippinDebugging-2.1.0"
   },
   "platforms": {
-    "ios": "12.0"
+    "ios": "15.6"
   },
-  "swift_versions": "5.1",
+  "swift_versions": "5.8",
   "source_files": "Sources/PippinDebugging/**/*.{h,m,swift}",
   "dependencies": {
     "FLEX": [
@@ -28,5 +28,5 @@
 
     ]
   },
-  "swift_version": "5.1"
+  "swift_version": "5.8"
 }

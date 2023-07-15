@@ -1,6 +1,6 @@
 {
   "name": "PippinAdapters",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "summary": "Plugins for Pippin Protocols.",
   "description": "A collection of pluggable adapters to third-party dependencies, or entirely self-rolled implementations for Pippin protocols.",
   "homepage": "http://github.com/tworingsoft/Pippin",
@@ -13,12 +13,12 @@
   },
   "source": {
     "git": "https://github.com/tworingsoft/Pippin.git",
-    "tag": "PippinAdapters-6.0.0"
+    "tag": "PippinAdapters-7.0.0"
   },
   "platforms": {
-    "ios": "12.0"
+    "ios": "15.6"
   },
-  "swift_versions": "5.1",
+  "swift_versions": "5.8",
   "default_subspecs": [
     "Environment",
     "PinpointKit",
@@ -30,9 +30,7 @@
     "InfoViewController",
     "FormController",
     "CoreData",
-    "CoreLocation",
-    "AVCaptureDevice",
-    "Crashlytics"
+    "KSCrash"
   ],
   "subspecs": [
     {
@@ -54,7 +52,22 @@
         "PippinAdapters/JGProgressHUD": [
 
         ],
+        "PippinAdapters/KSCrash": [
+
+        ],
         "PippinAdapters/COSTouchVisualizer": [
+
+        ]
+      }
+    },
+    {
+      "name": "KSCrash",
+      "source_files": "Sources/PippinAdapters/KSCrash/**/*.{h,m,swift}",
+      "dependencies": {
+        "KSCrash": [
+          "~> 1"
+        ],
+        "PippinCore": [
 
         ]
       }
@@ -100,7 +113,7 @@
       "source_files": "Sources/PippinAdapters/SwiftMessages/**/*.{h,m,swift}",
       "dependencies": {
         "SwiftMessages": [
-          "~> 7"
+          "~> 9"
         ],
         "PippinCore": [
 
@@ -190,11 +203,7 @@
 
         ]
       }
-    },
-    {
-      "name": "Crashlytics",
-      "preserve_paths": "Sources/PippinAdapters/Crashlytics/CrashlyticsAdapter.swift"
     }
   ],
-  "swift_version": "5.1"
+  "swift_version": "5.8"
 }

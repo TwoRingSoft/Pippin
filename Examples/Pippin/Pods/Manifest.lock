@@ -2,105 +2,164 @@ PODS:
   - Anchorage (4.5.0)
   - Closures (0.7)
   - COSTouchVisualizer (1.0.6)
-  - Crashlytics (3.14.0):
-    - Fabric (~> 1.10.2)
-  - Fabric (1.10.2)
   - FLEX (2.4.0)
   - JGProgressHUD (2.2)
+  - KSCrash (1.15.27):
+    - KSCrash/Installations (= 1.15.27)
+  - KSCrash/Installations (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting
+  - KSCrash/Recording (1.15.27):
+    - KSCrash/Recording/Tools (= 1.15.27)
+  - KSCrash/Recording/Tools (1.15.27)
+  - KSCrash/Reporting (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters (= 1.15.27)
+    - KSCrash/Reporting/MessageUI (= 1.15.27)
+    - KSCrash/Reporting/Sinks (= 1.15.27)
+    - KSCrash/Reporting/Tools (= 1.15.27)
+  - KSCrash/Reporting/Filters (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Alert (= 1.15.27)
+    - KSCrash/Reporting/Filters/AppleFmt (= 1.15.27)
+    - KSCrash/Reporting/Filters/Base (= 1.15.27)
+    - KSCrash/Reporting/Filters/Basic (= 1.15.27)
+    - KSCrash/Reporting/Filters/GZip (= 1.15.27)
+    - KSCrash/Reporting/Filters/JSON (= 1.15.27)
+    - KSCrash/Reporting/Filters/Sets (= 1.15.27)
+    - KSCrash/Reporting/Filters/Stringify (= 1.15.27)
+    - KSCrash/Reporting/Filters/Tools (= 1.15.27)
+  - KSCrash/Reporting/Filters/Alert (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/AppleFmt (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Base (1.15.27):
+    - KSCrash/Recording
+  - KSCrash/Reporting/Filters/Basic (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/GZip (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/JSON (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Sets (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/AppleFmt
+    - KSCrash/Reporting/Filters/Base
+    - KSCrash/Reporting/Filters/Basic
+    - KSCrash/Reporting/Filters/GZip
+    - KSCrash/Reporting/Filters/JSON
+    - KSCrash/Reporting/Filters/Stringify
+  - KSCrash/Reporting/Filters/Stringify (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Tools (1.15.27):
+    - KSCrash/Recording
+  - KSCrash/Reporting/MessageUI (1.15.27):
+    - KSCrash/Recording
+  - KSCrash/Reporting/Sinks (1.15.27):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters
+    - KSCrash/Reporting/Tools
+  - KSCrash/Reporting/Tools (1.15.27):
+    - KSCrash/Recording
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PinpointKit (1.5.0):
     - PinpointKit/Core (= 1.5.0)
   - PinpointKit/Core (1.5.0)
-  - PippinAdapters (6.0.0):
-    - PippinAdapters/AVCaptureDevice (= 6.0.0)
-    - PippinAdapters/CoreData (= 6.0.0)
-    - PippinAdapters/CoreLocation (= 6.0.0)
-    - PippinAdapters/COSTouchVisualizer (= 6.0.0)
-    - PippinAdapters/Crashlytics (= 6.0.0)
-    - PippinAdapters/CRUDViewController (= 6.0.0)
-    - PippinAdapters/Environment (= 6.0.0)
-    - PippinAdapters/FormController (= 6.0.0)
-    - PippinAdapters/InfoViewController (= 6.0.0)
-    - PippinAdapters/JGProgressHUD (= 6.0.0)
-    - PippinAdapters/PinpointKit (= 6.0.0)
-    - PippinAdapters/SwiftMessages (= 6.0.0)
-    - PippinAdapters/XCGLogger (= 6.0.0)
-  - PippinAdapters/AVCaptureDevice (6.0.0):
+  - PippinAdapters (7.0.0):
+    - PippinAdapters/CoreData (= 7.0.0)
+    - PippinAdapters/COSTouchVisualizer (= 7.0.0)
+    - PippinAdapters/CRUDViewController (= 7.0.0)
+    - PippinAdapters/Environment (= 7.0.0)
+    - PippinAdapters/FormController (= 7.0.0)
+    - PippinAdapters/InfoViewController (= 7.0.0)
+    - PippinAdapters/JGProgressHUD (= 7.0.0)
+    - PippinAdapters/KSCrash (= 7.0.0)
+    - PippinAdapters/PinpointKit (= 7.0.0)
+    - PippinAdapters/SwiftMessages (= 7.0.0)
+    - PippinAdapters/XCGLogger (= 7.0.0)
+  - PippinAdapters/AVCaptureDevice (7.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/CoreData (6.0.0):
+  - PippinAdapters/CoreData (7.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/CoreLocation (6.0.0):
+  - PippinAdapters/CoreLocation (7.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/COSTouchVisualizer (6.0.0):
+  - PippinAdapters/COSTouchVisualizer (7.0.0):
     - COSTouchVisualizer (~> 1)
     - PippinCore
-  - PippinAdapters/Crashlytics (6.0.0)
-  - PippinAdapters/CRUDViewController (6.0.0):
+  - PippinAdapters/CRUDViewController (7.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/Environment (6.0.0):
+  - PippinAdapters/Environment (7.0.0):
     - PippinAdapters/COSTouchVisualizer
     - PippinAdapters/JGProgressHUD
+    - PippinAdapters/KSCrash
     - PippinAdapters/PinpointKit
     - PippinAdapters/SwiftMessages
     - PippinAdapters/XCGLogger
     - PippinCore
-  - PippinAdapters/FormController (6.0.0):
+  - PippinAdapters/FormController (7.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/InfoViewController (6.0.0):
+  - PippinAdapters/InfoViewController (7.0.0):
     - PippinCore
     - PippinLibrary
-  - PippinAdapters/JGProgressHUD (6.0.0):
+  - PippinAdapters/JGProgressHUD (7.0.0):
     - JGProgressHUD (~> 2)
     - PippinCore
-  - PippinAdapters/PinpointKit (6.0.0):
+  - PippinAdapters/KSCrash (7.0.0):
+    - KSCrash (~> 1)
+    - PippinCore
+  - PippinAdapters/PinpointKit (7.0.0):
     - PinpointKit (~> 1)
     - PippinCore
-  - PippinAdapters/SwiftMessages (6.0.0):
+  - PippinAdapters/SwiftMessages (7.0.0):
     - PippinCore
-    - SwiftMessages (~> 7)
-  - PippinAdapters/XCGLogger (6.0.0):
+    - SwiftMessages (~> 9)
+  - PippinAdapters/XCGLogger (7.0.0):
     - PippinCore
     - XCGLogger (~> 7)
-  - PippinCore (2.1.0):
+  - PippinCore (2.2.0):
     - PippinLibrary
     - Result
   - PippinDebugging (2.1.0):
     - FLEX (~> 2)
     - PippinCore
-  - PippinLibrary (2.6.0):
+  - PippinLibrary (3.0.0):
     - Anchorage
     - Closures
     - Then
-  - PippinLibrary/Tests (2.6.0):
+  - PippinLibrary/Tests (3.0.0):
     - Anchorage
     - Closures
     - Then
   - PippinTesting (2.1.0)
   - PippinTesting/Tests (2.1.0)
   - Result (5.0.0)
-  - SwiftMessages (7.0.1):
-    - SwiftMessages/App (= 7.0.1)
-  - SwiftMessages/App (7.0.1)
-  - Then (2.7.0)
+  - SwiftMessages (9.0.6):
+    - SwiftMessages/App (= 9.0.6)
+  - SwiftMessages/App (9.0.6)
+  - Then (3.0.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - Crashlytics (~> 3)
   - PippinAdapters (from `../..`)
   - PippinAdapters/AVCaptureDevice (from `../..`)
   - PippinAdapters/CoreData (from `../..`)
   - PippinAdapters/CoreLocation (from `../..`)
-  - PippinAdapters/Crashlytics (from `../..`)
   - PippinAdapters/CRUDViewController (from `../..`)
   - PippinAdapters/FormController (from `../..`)
   - PippinAdapters/InfoViewController (from `../..`)
@@ -116,10 +175,9 @@ SPEC REPOS:
     - Anchorage
     - Closures
     - COSTouchVisualizer
-    - Crashlytics
-    - Fabric
     - FLEX
     - JGProgressHUD
+    - KSCrash
     - ObjcExceptionBridging
     - PinpointKit
     - Result
@@ -143,22 +201,21 @@ SPEC CHECKSUMS:
   Anchorage: 1961bc81c84aeed54ad7ffc697c50cd9de748ba6
   Closures: a83b9892a5b1c4125a9dfcd53e2754db5d7f6d22
   COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
-  Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
-  Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
+  KSCrash: c97c661a989f4d1562e139b8a12bc77a8f08f76e
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PinpointKit: 8599f60b7cff2b65e52a10293c220b6b81f14839
-  PippinAdapters: 4420b3d4fab7ee84a5026686753ca67e51652139
-  PippinCore: 58bd3d70f7910bbf0b53190b3f0221f52ef98d5c
-  PippinDebugging: 1f3cbd0fd5aac4c34820a604879fa1986b5fecbe
-  PippinLibrary: 8e42df6b8586738ad5832a3e496b3bd111e24690
-  PippinTesting: 36936f7f5e117e91b0c1ab56f9192b0b7992f212
+  PippinAdapters: 6b67708a5a935923a196c3d4f6863c28c9ec1914
+  PippinCore: 6478046484ab44586b53d50a1ce91f8ab8983e71
+  PippinDebugging: d578434bd66154f9fc02c8685067942e2fa23594
+  PippinLibrary: 95ff3b943a1ecec1811280720927fa640c14cfb0
+  PippinTesting: 927fe2a8b2e8963b2142e97b4e071bbbc558bede
   Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
-  SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
-  Then: acfe0be7e98221c6204e12f8161459606d5d822d
+  SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: a0b1b54afbc15c52862cd1c6b1b514cfd4b8a972
+PODFILE CHECKSUM: 87ef57c44e4902b97e573973dec265fafb29b092
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.1

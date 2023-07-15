@@ -78,3 +78,8 @@ fastlane/test_output
 vendor/**/*
 *.log
 vendor
+
+### Emacs ###
+# -*- mode: gitignore; -*-
+\#*\#
+*~

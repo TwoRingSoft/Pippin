@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             touchVizRootVC: ViewController(nibName: nil, bundle: nil)
         )
 
-        environment.crashReporter = CrashlyticsAdapter(debug: true)
-
         #if !targetEnvironment(simulator)
             environment.locator = CoreLocationAdapter(locatorDelegate: self)
         #endif
