@@ -63,7 +63,7 @@ extension LogLevel: CustomDebugStringConvertible {
     /**
      Construct a `LogLevel` case from a debug description.
      - returns: the corresponding `LogLevel` case, or `nil` if none match.
-     - Note: This isn't actually a function in `CustomdebugStringConvertible` but it's provided for consistent API. It is a failable initializer just like its counterpart.
+     - Note: This isn't actually a function in `CustomDebugStringConvertible` but it's provided for consistent API. It is a failable initializer just like its counterpart.
      */
     public init?(debugDescription: String?) {
         guard let debugDescription = debugDescription else { return nil }
