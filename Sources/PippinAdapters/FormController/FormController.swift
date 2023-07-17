@@ -19,9 +19,10 @@ public class FormControllerInputAccessoryToolbar: UIToolbar {}
 
 public class FormController: NSObject {
 
-    fileprivate var inputViews: [UIView]!
-    fileprivate var oldTextFieldDelegates: [UITextField: UITextFieldDelegate?] = [:]
-    fileprivate var oldTextViewDelegates: [UITextView: UITextViewDelegate?] = [:]
+    fileprivate let inputViews = NSPointerArray(options: .weakMemory)
+    fileprivate var oldTextFieldDelegates = NSMapTable<UITextField, UITextFieldDelegate>(keyOptions: .weakMemory, valueOptions: .weakMemory)
+    fileprivate var oldTextViewDelegates = NSMapTable<UITextView, UITextViewDelegate>(keyOptions: .weakMemory, valueOptions: .weakMemory)
+
     @objc public weak var currentInputView: UIView?
 
     private var allowTraversal: Bool = true
@@ -35,6 +36,17 @@ public class FormController: NSObject {
     private var notification: Notification?
     private var notificationObservers = [AnyObject]()
 
+//    private lazy var visualDebugWindow: UIWindow = {
+//        let window = UIWindow(frame: UIScreen.main.bounds)
+//        window.windowLevel = UIWindow.Level(rawValue: UIWindow.Level.alert.rawValue + 100)
+//        window.rootViewController = UIViewController(nibName: nil, bundle: nil)
+//        window.rootViewController?.view.layer.borderColor = UIColor.red.cgColor
+//        window.rootViewController?.view.layer.borderWidth = 2
+//        window.isHidden = false
+//        window.isUserInteractionEnabled = false
+//        return window
+//    }()
+
     private var environment: Environment?
 
     /**
@@ -47,7 +59,7 @@ public class FormController: NSObject {
      */
     @objc public init(inputViews: [UIView], environment: Environment?) {
         super.init()
-        self.inputViews = inputViews
+        weakly(inputViews: inputViews)
         self.environment = environment
         _init()
     }
@@ -67,7 +79,7 @@ public class FormController: NSObject {
      */
     @objc public init(inputViews: [UIView], in tableView: UITableView, allowTraversal: Bool = true, environment: Environment?) {
         super.init()
-        self.inputViews = inputViews
+        weakly(inputViews: inputViews)
         self.tableView = tableView
         self.environment = environment
         self.allowTraversal = allowTraversal
@@ -76,10 +88,43 @@ public class FormController: NSObject {
 
     @objc public init(inputViews: [UIView], inScrollView scrollView: UIScrollView, environment: Environment?) {
         super.init()
-        self.inputViews = inputViews
+        weakly(inputViews: inputViews)
         self.scrollView = scrollView
         self.environment = environment
         _init()
+    }
+
+    func weakly(inputViews: [UIView]) {
+        inputViews.forEach {
+            self.inputViews.addPointer(Unmanaged.passUnretained($0).toOpaque())
+        }
+    }
+
+    func resolvedInputViews() -> [UIView] {
+        var views = [UIView]()
+        inputViews.allObjects.forEach {
+            guard let view = $0 as? UIView else { return }
+            views.append(view)
+        }
+        return views
+    }
+
+    func resolvedTextFieldDelegates() -> [UITextField: UITextFieldDelegate] {
+        var delegates = [UITextField: UITextFieldDelegate]()
+        oldTextFieldDelegates.keyEnumerator().allObjects.forEach {
+            guard let key = $0 as? UITextField else { return }
+            delegates[key] = oldTextFieldDelegates.object(forKey: key)
+        }
+        return delegates
+    }
+
+    func resolvedTextViewDelegates() -> [UITextView: UITextViewDelegate] {
+        var delegates = [UITextView: UITextViewDelegate]()
+        oldTextViewDelegates.keyEnumerator().allObjects.forEach {
+            guard let key = $0 as? UITextView else { return }
+            delegates[key] = oldTextViewDelegates.object(forKey: key)
+        }
+        return delegates
     }
 
     deinit {
@@ -92,7 +137,7 @@ public class FormController: NSObject {
 public extension FormController {
 
     func resignResponders() {
-        for inputView in inputViews {
+        for inputView in resolvedInputViews() {
             inputView.resignFirstResponder()
         }
     }
@@ -104,17 +149,56 @@ public extension FormController {
         notificationObservers.forEach { NotificationCenter.default.removeObserver($0) }
         notificationObservers.removeAll()
 
-        oldTextViewDelegates.forEach { entry in
+        resolvedTextViewDelegates().forEach { entry in
             let (textView, delegate) = entry
             textView.delegate = delegate
         }
-        oldTextViewDelegates.removeAll()
+        oldTextViewDelegates.removeAllObjects()
 
-        oldTextFieldDelegates.forEach { entry in
+        resolvedTextFieldDelegates().forEach { entry in
             let (textField, delegate) = entry
             textField.delegate = delegate
         }
-        oldTextFieldDelegates.removeAll()
+        oldTextFieldDelegates.removeAllObjects()
+    }
+
+    func insertInputView(inputView: UIView, at: Int) {
+        self.inputViews.insertPointer(Unmanaged.passUnretained(inputView).toOpaque(), at: at)
+        configureInputView(inputView: inputView)
+    }
+
+    func configureInputView(inputView: UIView) {
+        if let textField = inputView as? UITextField {
+            oldTextFieldDelegates.setObject(textField.delegate, forKey: textField)
+            textField.delegate = self
+            textField.inputAccessoryView = accessoryViewForInputView(view: textField)
+            if resolvedInputViews().firstIndex(of: textField)! < inputViews.count - 1 {
+                textField.returnKeyType = .next
+            } else {
+                textField.returnKeyType = .done
+            }
+        } else if let textView = inputView as? UITextView {
+            oldTextViewDelegates.setObject(textView.delegate, forKey: textView)
+            textView.delegate = self
+            textView.inputAccessoryView = accessoryViewForInputView(view: textView)
+        } else {
+            fatalError("Unsupported responder type.")
+        }
+    }
+
+    func removeInputView(inputView: UIView) {
+        self.inputViews.removePointer(at: resolvedInputViews().firstIndex(of: inputView)!)
+        if let textField = inputView as? UITextField {
+            let oldDelegate = oldTextFieldDelegates.object(forKey: textField)
+            oldTextFieldDelegates.removeObject(forKey: textField)
+            textField.delegate = oldDelegate
+        } else if let textView = inputView as? UITextView {
+            let oldDelegate = oldTextViewDelegates.object(forKey: textView)
+            oldTextViewDelegates.removeObject(forKey: textView)
+            textView.delegate = oldDelegate
+        } else {
+            fatalError("Unsupported responder type.")
+        }
     }
 
 }
@@ -132,12 +216,12 @@ public extension FormController {
             logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
             return
         }
-        guard let currentInputViewIndex = inputViews.firstIndex(of: currentInputView) else {
+        guard let currentInputViewIndex = resolvedInputViews().firstIndex(of: currentInputView) else {
             logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
             return
         }
         let nextIdx = currentInputViewIndex + 1
-        let nextField = inputViews[nextIdx]
+        let nextField = resolvedInputViews()[nextIdx]
         logger?.logDebug(message: String(format: "[%@] nextInputView: %@;", instanceType(self), String(describing: nextField), String(reflecting: nextField)))
         if !nextField.becomeFirstResponder() {
             if !currentInputView.resignFirstResponder() && !currentInputView.endEditing(true) {
@@ -154,12 +238,12 @@ public extension FormController {
             logger?.logWarning(message: String(format: "[%@] No currentInputView during traversal.", instanceType(self)))
             return
         }
-        guard let currentInputViewIndex = inputViews.firstIndex(of: currentInputView) else {
+        guard let currentInputViewIndex = resolvedInputViews().firstIndex(of: currentInputView) else {
             logger?.logWarning(message: String(format: "[%@] currentInputView not found in inputViews: %@.", instanceType(self), String(describing: inputViews)))
             return
         }
         let previousIdx = currentInputViewIndex - 1
-        let previousField = inputViews[previousIdx]
+        let previousField = resolvedInputViews()[previousIdx]
         logger?.logDebug(message: String(format: "[%@] previousTextField: %@;", instanceType(self), String(describing: previousField), String(reflecting: previousField)))
         if !previousField.becomeFirstResponder() {
             if !currentInputView.resignFirstResponder() && !currentInputView.endEditing(true) {
@@ -176,13 +260,13 @@ private extension FormController {
 
     func accessoryViewForInputView(view: UIView) -> UIView {
         let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
-        if let idx = inputViews.firstIndex(of: view) {
+        if let idx = resolvedInputViews().firstIndex(of: view) {
             previousButton.isEnabled = idx > 0
         } else {
             previousButton.isEnabled = false
         }
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextInputView))
-        if let idx = inputViews.firstIndex(of: view) {
+        if let idx = resolvedInputViews().firstIndex(of: view) {
             nextButton.isEnabled = idx < inputViews.count - 1
         } else {
             nextButton.isEnabled = false
@@ -220,7 +304,7 @@ private extension FormController {
         guard let tableView = tableView else { return nil }
         guard let window = UIApplication.shared.keyWindow else { return nil }
         let absoluteCellFrame = window.convert(cell.frame, from: tableView)
-        return inputViews.filter { view in
+        return resolvedInputViews().filter { view in
             let absoluteInputViewFrame = window.convert(view.frame, from: view.superview)
             return absoluteCellFrame.intersects(absoluteInputViewFrame)
         }.first
@@ -265,59 +349,94 @@ private extension FormController {
         return invisibleIndexPaths
     }
 
-    func handleKeyboardDisplay(notification: Notification) {
-        guard let currentInputView = self.currentInputView else { return }
-        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+    func unhide(keyboardFrame: CGRect) {
+        guard let currentInputView = self.currentInputView else {
+            self.environment?.logger?.logWarning(message: "No current input view.")
+            return
+        }
+        if let scrollView = self.scrollView, !self.insetScrollViewContentForAccessoryView, let inputAccessoryView = currentInputView.inputAccessoryView {
+            self.insetScrollViewContentForAccessoryView = true
 
-        let unhide: ((Bool) -> ()) = { completed in
-            if let scrollView = self.scrollView, !self.insetScrollViewContentForAccessoryView, let inputAccessoryView = currentInputView.inputAccessoryView {
-                self.insetScrollViewContentForAccessoryView = true
-                scrollView.contentInset = scrollView.contentInset.inset(bottomDelta: (inputAccessoryView.bounds.height + 12))
-            } else {
-                guard let tableView = self.tableView else { return }
-                guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
-                guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
-                
-                let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
-                let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
-                if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
-                    // don't need to unhide the target cell
-                    return
-                }
-                
-                if let indexPath = tableView.indexPath(for: targetCell) {
-                    if let superview = currentInputView.superview {
-                        let a = currentInputView.center.y / superview.bounds.height
-                        var position: UITableView.ScrollPosition
-                        if a < 0.34 {
-                            position = .top
-                        } else if a < 0.67 {
-                            position = .middle
-                        } else {
-                            position = .bottom
-                        }
-                        tableView.scrollToRow(at: indexPath, at: position, animated: true)
+//                self.visualDebugWindow.rootViewController?.view.subviews.forEach {
+//                    $0.removeFromSuperview()
+//                }
+//
+//                let currentInputViewFrame = self.visualDebugWindow.convert(currentInputView.frame, from: scrollView)
+//
+//                let inputViewFrameDebugRectView = UIView(frame: currentInputViewFrame)
+//                inputViewFrameDebugRectView.layer.borderColor = UIColor.red.cgColor
+//                inputViewFrameDebugRectView.layer.borderWidth = 2
+//                self.visualDebugWindow.rootViewController?.view.addSubview(inputViewFrameDebugRectView)
+//
+//                let keyboardFrameDebugRectView = UIView(frame: keyboardFrame)
+//                keyboardFrameDebugRectView.layer.borderColor = UIColor.red.cgColor
+//                keyboardFrameDebugRectView.layer.borderWidth = 2
+//                self.visualDebugWindow.rootViewController?.view.addSubview(keyboardFrameDebugRectView)
+
+
+            scrollView.contentInset = scrollView.contentInset.inset(bottomDelta: (inputAccessoryView.bounds.height + 12))
+        } else {
+            guard let tableView = self.tableView else { return }
+            guard let targetCell = self.visibleCell(forInputView: currentInputView) else { return }
+            guard let targetCellIndexPath = tableView.indexPath(for: targetCell) else { return }
+
+            let targetCellIsInvisible = self.invisibleIndexPaths(tableView: tableView).contains(targetCellIndexPath)
+            let targetCellIsCoveredByKeyboard = !self.visibleCells(notUnder: keyboardFrame).contains(targetCell)
+            if !targetCellIsInvisible && !targetCellIsCoveredByKeyboard {
+                // don't need to unhide the target cell
+                return
+            }
+
+            if let indexPath = tableView.indexPath(for: targetCell) {
+                if let superview = currentInputView.superview {
+                    let a = currentInputView.center.y / superview.bounds.height
+                    var position: UITableView.ScrollPosition
+                    if a < 0.34 {
+                        position = .top
+                    } else if a < 0.67 {
+                        position = .middle
                     } else {
-                        tableView.scrollToRow(at: indexPath, at: .none, animated: true)
+                        position = .bottom
                     }
+                    tableView.scrollToRow(at: indexPath, at: position, animated: true)
+                } else {
+                    tableView.scrollToRow(at: indexPath, at: .none, animated: true)
                 }
             }
         }
+    }
+
+    func handleKeyboardDisplay(notification: Notification) {
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            self.environment?.logger?.logWarning(message: "No keyboard frame could be retrieved from the notification.")
+            return
+        }
 
         if self.originalContentInset == nil {
-            guard let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else { return }
-            guard let curveRawValue = (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else { return }
-            guard let scrollView = self.tableView ?? self.scrollView else { return }
+            guard let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else {
+                self.environment?.logger?.logWarning(message: "No animation duration could be retrieved from the notification.")
+                return
+            }
+            guard let curveRawValue = (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue else {
+                self.environment?.logger?.logWarning(message: "No animation curve could be retrieved from the notification.")
+                return
+            }
+            guard let scrollView = self.tableView ?? self.scrollView else {
+                self.environment?.logger?.logWarning(message: "No scroll view could be retrieved.")
+                return
+            }
             self.originalContentInset = scrollView.contentInset
             let curveOption = UIView.AnimationOptions(rawValue: curveRawValue)
             UIView.animate(withDuration: duration, delay: 0, options: curveOption, animations: {
                 var insets = scrollView.contentInset
-                insets.bottom = keyboardFrame.height - 49
+                insets.bottom = keyboardFrame.height - 49 // ???: assumed height of UITabBar? input accessory view? safe area bottom margin?
                 scrollView.contentInset = insets
                 scrollView.scrollIndicatorInsets = scrollView.contentInset.inset(bottomDelta: keyboardFrame.height)
-            }, completion: unhide)
+            }) { [weak self] _ in
+                self?.unhide(keyboardFrame: keyboardFrame)
+            }
         } else {
-            unhide(true)
+            unhide(keyboardFrame: keyboardFrame)
         }
     }
 
@@ -342,22 +461,23 @@ private extension FormController {
 
     func _init() {
         [ UIResponder.keyboardWillChangeFrameNotification, UIResponder.keyboardWillHideNotification ].forEach {
-            let observer = NotificationCenter.default.addObserver(forName: $0, object: nil, queue: .main) { notification in
-                let logger = self.environment?.logger
+            let observer = NotificationCenter.default.addObserver(forName: $0, object: nil, queue: .main) { [weak self] notification in
+                guard let strongSelf = self else { return }
+                let logger = strongSelf.environment?.logger
                 switch notification.name {
                 case UIResponder.keyboardWillChangeFrameNotification:
-                    logger?.logDebug(message: String(format: "[%@] UIKeyboardWillChangeFrame", instanceType(self)))
-                    if self.receivedDelegateCallback {
-                        self.receivedDelegateCallback = false
-                        self.notification = nil
-                        self.handleKeyboardDisplay(notification: notification)
+                    logger?.logDebug(message: String(format: "[%@] UIKeyboardWillChangeFrame", instanceType(strongSelf)))
+                    if strongSelf.receivedDelegateCallback {
+                        strongSelf.receivedDelegateCallback = false
+                        strongSelf.notification = nil
+                        strongSelf.handleKeyboardDisplay(notification: notification)
                     } else {
-                        self.notification = notification
+                        strongSelf.notification = notification
                     }
                     break
                 case UIResponder.keyboardWillHideNotification:
-                    logger?.logDebug(message: String(format: "[%@] UIKeyboardWillHide", instanceType(self)))
-                    self.handleKeyboardHide(notification: notification)
+                    logger?.logDebug(message: String(format: "[%@] UIKeyboardWillHide", instanceType(strongSelf)))
+                    strongSelf.handleKeyboardHide(notification: notification)
                     break
                 default: fatalError("Unexpected notification received")
                 }
@@ -365,23 +485,8 @@ private extension FormController {
             self.notificationObservers.append(observer)
         }
 
-        for inputView in inputViews {
-            if let textField = inputView as? UITextField {
-                oldTextFieldDelegates[textField] = textField.delegate
-                textField.delegate = self
-                textField.inputAccessoryView = accessoryViewForInputView(view: textField)
-                if inputViews.firstIndex(of: textField)! < inputViews.count - 1 {
-                    textField.returnKeyType = .next
-                } else {
-                    textField.returnKeyType = .done
-                }
-            } else if let textView = inputView as? UITextView {
-                oldTextViewDelegates[textView] = textView.delegate
-                textView.delegate = self
-                textView.inputAccessoryView = accessoryViewForInputView(view: textView)
-            } else {
-                fatalError("Unsupported responder type.")
-            }
+        resolvedInputViews().forEach {
+            configureInputView(inputView: $0)
         }
     }
 
@@ -402,21 +507,21 @@ extension FormController: UITextViewDelegate {
             self.receivedDelegateCallback = true
         }
 
-        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
-            unwrappedDelegate.textViewDidBeginEditing?(textView)
+        if let delegate = oldTextViewDelegates.object(forKey: textView) {
+            delegate.textViewDidBeginEditing?(textView)
         }
     }
 
     public func textViewDidEndEditing(_ textView: UITextView) {
         environment?.logger?.logDebug(message: String(format: "[%@] textViewDidEndEditing: %@", instanceType(self), textView))
-        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
-            unwrappedDelegate.textViewDidEndEditing?(textView)
+        if let delegate = oldTextViewDelegates.object(forKey: textView) {
+            delegate.textViewDidEndEditing?(textView)
         }
     }
 
     public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         environment?.logger?.logDebug(message: String(format: "[%@] textViewShouldEndEditing: %@", instanceType(self), textView))
-        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate, let result = unwrappedDelegate.textViewShouldEndEditing?(textView) {
+        if let delegate = oldTextViewDelegates.object(forKey: textView), let result = delegate.textViewShouldEndEditing?(textView) {
             return result
         } else {
             return true
@@ -425,8 +530,8 @@ extension FormController: UITextViewDelegate {
 
     public func textViewDidChange(_ textView: UITextView) {
         environment?.logger?.logDebug(message: String(format: "[%@] textViewDidChange: %@", instanceType(self), textView))
-        if let delegate = oldTextViewDelegates[textView], let unwrappedDelegate = delegate {
-            unwrappedDelegate.textViewDidChange?(textView)
+        if let delegate = oldTextViewDelegates.object(forKey: textView) {
+            delegate.textViewDidChange?(textView)
         }
     }
 
@@ -447,21 +552,21 @@ extension FormController: UITextFieldDelegate {
             self.receivedDelegateCallback = true
         }
 
-        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
-            unwrappedDelegate.textFieldDidBeginEditing?(textField)
+        if let delegate = oldTextFieldDelegates.object(forKey: textField) {
+            delegate.textFieldDidBeginEditing?(textField)
         }
     }
 
     public func textFieldDidEndEditing(_ textField: UITextField) {
         environment?.logger?.logDebug(message: String(format: "[%@] textFieldDidEndEditing: %@", instanceType(self), textField))
 
-        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate {
-            unwrappedDelegate.textFieldDidEndEditing?(textField)
+        if let delegate = oldTextFieldDelegates.object(forKey: textField) {
+            delegate.textFieldDidEndEditing?(textField)
         }
     }
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate, let delegateResponse = unwrappedDelegate.textField?(textField, shouldChangeCharactersIn: range, replacementString: string) {
+        if let delegate = oldTextFieldDelegates.object(forKey: textField), let delegateResponse = delegate.textField?(textField, shouldChangeCharactersIn: range, replacementString: string) {
             return delegateResponse
         }
 
@@ -469,14 +574,14 @@ extension FormController: UITextFieldDelegate {
     }
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let idx = inputViews.firstIndex(of: textField)!
+        let idx = resolvedInputViews().firstIndex(of: textField)!
         if idx == inputViews.count - 1 {
             resignResponders()
         } else {
             nextInputView()
         }
 
-        if let delegate = oldTextFieldDelegates[textField], let unwrappedDelegate = delegate, let delegateResponse = unwrappedDelegate.textFieldShouldReturn?(textField) {
+        if let delegate = oldTextFieldDelegates.object(forKey: textField), let delegateResponse = delegate.textFieldShouldReturn?(textField) {
             return delegateResponse
         }
 
