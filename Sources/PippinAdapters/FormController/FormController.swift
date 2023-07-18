@@ -17,6 +17,21 @@ import UIKit
  */
 public class FormControllerInputAccessoryToolbar: UIToolbar {}
 
+public class FormControllerInputAccessoryView: UIView {
+    var nextButton: UIBarButtonItem
+    var previousButton: UIBarButtonItem
+
+    init(nextButton: UIBarButtonItem, previousButton: UIBarButtonItem, frame: CGRect) {
+        self.nextButton = nextButton
+        self.previousButton = previousButton
+        super.init(frame: frame)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 public class FormController: NSObject {
 
     fileprivate let inputViews = NSPointerArray(options: .weakMemory)
@@ -165,11 +180,13 @@ public extension FormController {
     func insertInputView(inputView: UIView, at: Int) {
         self.inputViews.insertPointer(Unmanaged.passUnretained(inputView).toOpaque(), at: at)
         configureInputView(inputView: inputView)
-        configureInputAccessoryViews()
+        configureInputAccessoryViews(inputViews: resolvedInputViews())
     }
 
     func removeInputView(inputView: UIView) {
-        self.inputViews.removePointer(at: resolvedInputViews().firstIndex(of: inputView)!)
+        let views = resolvedInputViews()
+        let index = views.firstIndex(of: inputView)!
+        self.inputViews.removePointer(at: index)
         if let textField = inputView as? UITextField {
             let oldDelegate = oldTextFieldDelegates.object(forKey: textField)
             oldTextFieldDelegates.removeObject(forKey: textField)
@@ -182,7 +199,18 @@ public extension FormController {
             fatalError("Unsupported responder type.")
         }
 
-        configureInputAccessoryViews()
+        if allowTraversal {
+            if currentInputView === inputView {
+                if index == views.startIndex {
+                    currentInputView = views[index + 1]
+                } else {
+                    currentInputView = views[index + 1]
+                }
+                currentInputView?.becomeFirstResponder()
+            }
+
+            configureInputAccessoryViews(inputViews: views)
+        }
     }
 
 }
@@ -259,29 +287,44 @@ private extension FormController {
         }
     }
 
-    func configureInputAccessoryViews() {
-        resolvedInputViews().forEach {
+    func configureInputAccessoryViews(inputViews: [UIView]) {
+        inputViews.forEach {
             if let textField = $0 as? UITextField {
-                textField.inputAccessoryView = accessoryViewForInputView(view: $0)
+                if let inputAccessory = textField.inputAccessoryView as? FormControllerInputAccessoryView {
+                    if allowTraversal {
+                        inputAccessory.nextButton.isEnabled = isEnabled(view: textField, inputViews: inputViews, previous: false)
+                        inputAccessory.previousButton.isEnabled = isEnabled(view: textField, inputViews: inputViews, previous: true)
+                    }
+                } else {
+                    textField.inputAccessoryView = accessoryViewForInputView(view: textField, inputViews: inputViews)
+                }
             } else if let textView = $0 as? UITextView {
-                textView.inputAccessoryView = accessoryViewForInputView(view: textView)
+                if let inputAccessory = textView.inputAccessoryView as? FormControllerInputAccessoryView {
+                    if allowTraversal {
+                        inputAccessory.nextButton.isEnabled = isEnabled(view: textView, inputViews: inputViews, previous: false)
+                        inputAccessory.previousButton.isEnabled = isEnabled(view: textView, inputViews: inputViews, previous: true)
+                    }
+                } else {
+                    textView.inputAccessoryView = accessoryViewForInputView(view: textView, inputViews: inputViews)
+                }
             }
         }
     }
 
-    func accessoryViewForInputView(view: UIView) -> UIView {
+    func isEnabled(view: UIView, inputViews: [UIView], previous: Bool) -> Bool {
+        guard let idx = inputViews.firstIndex(of: view) else {
+            return false
+        }
+        let isEnabled = previous ? idx > 0 : idx < inputViews.count - 1
+        return isEnabled
+    }
+
+    func accessoryViewForInputView(view: UIView, inputViews: [UIView]) -> UIView {
         let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
-        if let idx = resolvedInputViews().firstIndex(of: view) {
-            previousButton.isEnabled = idx > 0
-        } else {
-            previousButton.isEnabled = false
-        }
+        previousButton.isEnabled = isEnabled(view: view, inputViews: inputViews, previous: true)
+
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextInputView))
-        if let idx = resolvedInputViews().firstIndex(of: view) {
-            nextButton.isEnabled = idx < inputViews.count - 1
-        } else {
-            nextButton.isEnabled = false
-        }
+        nextButton.isEnabled = isEnabled(view: view, inputViews: inputViews, previous: false)
 
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePressed))
 
@@ -305,7 +348,7 @@ private extension FormController {
         ])
         toolbar.items = items
 
-        let view = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
+        let view = FormControllerInputAccessoryView(nextButton: nextButton, previousButton: previousButton, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
         view.addSubview(toolbar)
         toolbar.edgeAnchors == view.edgeAnchors
         return view
@@ -496,10 +539,11 @@ private extension FormController {
             self.notificationObservers.append(observer)
         }
 
-        resolvedInputViews().forEach {
+        let inputViews = resolvedInputViews()
+        inputViews.forEach {
             configureInputView(inputView: $0)
         }
-        configureInputAccessoryViews()
+        configureInputAccessoryViews(inputViews: inputViews)
     }
 
 }
