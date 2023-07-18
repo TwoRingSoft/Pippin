@@ -165,25 +165,7 @@ public extension FormController {
     func insertInputView(inputView: UIView, at: Int) {
         self.inputViews.insertPointer(Unmanaged.passUnretained(inputView).toOpaque(), at: at)
         configureInputView(inputView: inputView)
-    }
-
-    func configureInputView(inputView: UIView) {
-        if let textField = inputView as? UITextField {
-            oldTextFieldDelegates.setObject(textField.delegate, forKey: textField)
-            textField.delegate = self
-            textField.inputAccessoryView = accessoryViewForInputView(view: textField)
-            if resolvedInputViews().firstIndex(of: textField)! < inputViews.count - 1 {
-                textField.returnKeyType = .next
-            } else {
-                textField.returnKeyType = .done
-            }
-        } else if let textView = inputView as? UITextView {
-            oldTextViewDelegates.setObject(textView.delegate, forKey: textView)
-            textView.delegate = self
-            textView.inputAccessoryView = accessoryViewForInputView(view: textView)
-        } else {
-            fatalError("Unsupported responder type.")
-        }
+        configureInputAccessoryViews()
     }
 
     func removeInputView(inputView: UIView) {
@@ -199,6 +181,8 @@ public extension FormController {
         } else {
             fatalError("Unsupported responder type.")
         }
+
+        configureInputAccessoryViews()
     }
 
 }
@@ -257,6 +241,33 @@ public extension FormController {
 
 // MARK: Private
 private extension FormController {
+
+    func configureInputView(inputView: UIView) {
+        if let textField = inputView as? UITextField {
+            oldTextFieldDelegates.setObject(textField.delegate, forKey: textField)
+            textField.delegate = self
+            if resolvedInputViews().firstIndex(of: textField)! < inputViews.count - 1 {
+                textField.returnKeyType = .next
+            } else {
+                textField.returnKeyType = .done
+            }
+        } else if let textView = inputView as? UITextView {
+            oldTextViewDelegates.setObject(textView.delegate, forKey: textView)
+            textView.delegate = self
+        } else {
+            fatalError("Unsupported responder type.")
+        }
+    }
+
+    func configureInputAccessoryViews() {
+        resolvedInputViews().forEach {
+            if let textField = $0 as? UITextField {
+                textField.inputAccessoryView = accessoryViewForInputView(view: $0)
+            } else if let textView = $0 as? UITextView {
+                textView.inputAccessoryView = accessoryViewForInputView(view: textView)
+            }
+        }
+    }
 
     func accessoryViewForInputView(view: UIView) -> UIView {
         let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
@@ -488,6 +499,7 @@ private extension FormController {
         resolvedInputViews().forEach {
             configureInputView(inputView: $0)
         }
+        configureInputAccessoryViews()
     }
 
 }
