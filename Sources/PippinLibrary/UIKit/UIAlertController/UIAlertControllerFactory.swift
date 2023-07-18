@@ -18,11 +18,16 @@ import UIKit
         })
     }
 
-    func showAlert(withTitle title: String? = nil, message: String? = nil, confirmTitle: String = "OK", completion: (() -> ())? = nil) {
+    func showAlert(withTitle title: String? = nil, message: String? = nil, confirmTitle: String = "OK", textFieldContents: String? = nil, completion: (() -> ())? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .destructive, handler: { action in
             completion?()
         }))
+        if let textFieldContents {
+            alert.addTextField {
+                $0.text = textFieldContents
+            }
+        }
         present(alert, animated: true, completion: nil)
     }
 
