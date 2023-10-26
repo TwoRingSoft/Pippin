@@ -18,10 +18,10 @@ import UIKit
 public class FormControllerInputAccessoryToolbar: UIToolbar {}
 
 public class FormControllerInputAccessoryView: UIView {
-    var nextButton: UIBarButtonItem
-    var previousButton: UIBarButtonItem
+    var nextButton: UIBarButtonItem?
+    var previousButton: UIBarButtonItem?
 
-    init(nextButton: UIBarButtonItem, previousButton: UIBarButtonItem, frame: CGRect) {
+    init(nextButton: UIBarButtonItem?, previousButton: UIBarButtonItem?, frame: CGRect) {
         self.nextButton = nextButton
         self.previousButton = previousButton
         super.init(frame: frame)
@@ -201,10 +201,12 @@ public extension FormController {
 
         if allowTraversal {
             if currentInputView === inputView {
-                if index == views.startIndex {
+                if inputViews.count == 0 {
+                    currentInputView?.resignFirstResponder()
+                } else if index == views.startIndex {
                     currentInputView = views[index + 1]
                 } else {
-                    currentInputView = views[index + 1]
+                    currentInputView = views[index - 1]
                 }
                 currentInputView?.becomeFirstResponder()
             }
@@ -292,8 +294,8 @@ private extension FormController {
             if let textField = $0 as? UITextField {
                 if let inputAccessory = textField.inputAccessoryView as? FormControllerInputAccessoryView {
                     if allowTraversal {
-                        inputAccessory.nextButton.isEnabled = isEnabled(view: textField, inputViews: inputViews, previous: false)
-                        inputAccessory.previousButton.isEnabled = isEnabled(view: textField, inputViews: inputViews, previous: true)
+                        inputAccessory.nextButton?.isEnabled = isEnabled(view: textField, inputViews: inputViews, previous: false)
+                        inputAccessory.previousButton?.isEnabled = isEnabled(view: textField, inputViews: inputViews, previous: true)
                     }
                 } else {
                     textField.inputAccessoryView = accessoryViewForInputView(view: textField, inputViews: inputViews)
@@ -301,8 +303,8 @@ private extension FormController {
             } else if let textView = $0 as? UITextView {
                 if let inputAccessory = textView.inputAccessoryView as? FormControllerInputAccessoryView {
                     if allowTraversal {
-                        inputAccessory.nextButton.isEnabled = isEnabled(view: textView, inputViews: inputViews, previous: false)
-                        inputAccessory.previousButton.isEnabled = isEnabled(view: textView, inputViews: inputViews, previous: true)
+                        inputAccessory.nextButton?.isEnabled = isEnabled(view: textView, inputViews: inputViews, previous: false)
+                        inputAccessory.previousButton?.isEnabled = isEnabled(view: textView, inputViews: inputViews, previous: true)
                     }
                 } else {
                     textView.inputAccessoryView = accessoryViewForInputView(view: textView, inputViews: inputViews)
@@ -320,11 +322,8 @@ private extension FormController {
     }
 
     func accessoryViewForInputView(view: UIView, inputViews: [UIView]) -> UIView {
-        let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
-        previousButton.isEnabled = isEnabled(view: view, inputViews: inputViews, previous: true)
-
-        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextInputView))
-        nextButton.isEnabled = isEnabled(view: view, inputViews: inputViews, previous: false)
+        var previousButtonOrNil: UIBarButtonItem? = nil
+        var nextButtonOrNil: UIBarButtonItem? = nil
 
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePressed))
 
@@ -334,12 +333,21 @@ private extension FormController {
         let toolbar = FormControllerInputAccessoryToolbar(frame: .zero)
         var items = [UIBarButtonItem]()
         if allowTraversal && inputViews.count > 0 {
+            let previousButton = UIBarButtonItem(title: "Prev", style: .plain, target: self, action: #selector(previousTextField))
+            previousButton.isEnabled = isEnabled(view: view, inputViews: inputViews, previous: true)
+
+            let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextInputView))
+            nextButton.isEnabled = isEnabled(view: view, inputViews: inputViews, previous: false)
+
             items.append(contentsOf: [
                 space,
                 previousButton,
                 space,
                 nextButton
             ])
+
+            nextButtonOrNil = nextButton
+            previousButtonOrNil = previousButton
         }
         items.append(contentsOf: [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
@@ -348,7 +356,7 @@ private extension FormController {
         ])
         toolbar.items = items
 
-        let view = FormControllerInputAccessoryView(nextButton: nextButton, previousButton: previousButton, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
+        let view = FormControllerInputAccessoryView(nextButton: nextButtonOrNil, previousButton: previousButtonOrNil, frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 44)))
         view.addSubview(toolbar)
         toolbar.edgeAnchors == view.edgeAnchors
         return view
