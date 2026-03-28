@@ -43,8 +43,10 @@ let package = Package(
             ],
             path: "Sources/PippinCore",
             exclude: [
-                "CHANGELOG.md",
                 "README.md",
+            ],
+            resources: [
+                .process("Resources"),
             ]
         ),
 
@@ -63,7 +65,6 @@ let package = Package(
             ],
             path: "Sources/PippinAdapters",
             exclude: [
-                "CHANGELOG.md",
                 "README.md",
                 "COSTouchVisualizer",
                 "PinpointKit",
@@ -83,7 +84,6 @@ let package = Package(
             ],
             path: "Sources/PippinDebugging",
             exclude: [
-                "CHANGELOG.md",
                 "README.md",
             ]
         ),
