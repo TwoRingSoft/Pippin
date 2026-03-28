@@ -8,6 +8,8 @@
 
 import Foundation
 import Pippin
+#if canImport(UIKit)
+import UIKit
 
 extension CoreDataController: Debuggable {
     public func debuggingControlPanel() -> UIView {
@@ -51,4 +53,5 @@ extension CoreDataController: Debuggable {
         debuggingDelegate?.importFixtures(coreDataController: self)
     }
 }
+#endif
 #endif

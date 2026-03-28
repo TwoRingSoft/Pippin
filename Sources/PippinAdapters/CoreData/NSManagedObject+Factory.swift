@@ -7,7 +7,8 @@
 //
 
 import CoreData
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 public extension NSManagedObject {
 

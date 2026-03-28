@@ -7,7 +7,9 @@
 //
 
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
 import UIKit
 
 class DatabaseFixturePickerViewController: UIViewController {
@@ -88,3 +90,4 @@ extension DatabaseFixturePickerViewController: UITableViewDelegate {
     }
 
 }
+#endif

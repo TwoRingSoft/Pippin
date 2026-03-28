@@ -8,8 +8,11 @@
 import Anchorage
 import Foundation
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
 import SwiftMessages
+import UIKit
 
 extension AlertType {
 
@@ -24,7 +27,7 @@ extension AlertType {
 
 }
 
-public final class SwiftMessagesAdapter: NSObject, Alerter {
+@MainActor public final class SwiftMessagesAdapter: NSObject, Alerter {
     
     public var environment: Environment?
     
@@ -123,3 +126,4 @@ extension SwiftMessagesAdapter: Debuggable {
         }
     }
 }
+#endif

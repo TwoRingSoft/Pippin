@@ -5,6 +5,7 @@
 //  Created by Andrew McKnight on 12/13/17.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 /// Protocol providing names/accessors for some standard variations of text displayed in an app.
@@ -46,3 +47,4 @@ public struct DefaultFonts: Fonts {
     public var barButtonTitle: UIFont { return UIFont.systemFont(ofSize: 20, weight: .regular) }
     public var tabBarItemTitle: UIFont { return UIFont.systemFont(ofSize: 11, weight: .regular) }
 }
+#endif

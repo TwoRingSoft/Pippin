@@ -8,7 +8,8 @@
 
 import CoreData
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 /**
  A class providing convenience API to work with Apple's Core Data.
@@ -202,7 +203,9 @@ public extension CoreDataController {
         } catch {
             let message = String(format: "[%@] Could not save context <%@> (%@).", instanceType(self), resolvedContext, failureMessage ?? "<no additional info>")
             environment?.logger?.logError(message: message, error: error)
+            #if canImport(UIKit)
             environment?.alerter?.showAlert(title: "Error", message: failureMessage ?? "Data failure. Restart app and try again. If the error persists, please file a bug report.", type: .error, dismissal: .interactive, occlusion: .strong)
+            #endif
         }
     }
 

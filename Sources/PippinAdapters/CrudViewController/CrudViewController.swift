@@ -9,7 +9,9 @@
 import Anchorage
 import CoreData
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
 import UIKit
 
 public struct EmptyStateDecorator {
@@ -584,5 +586,6 @@ public class CRUDSearchContainer: UIView {}
 
         configuration.crudDelegate?.crudViewController?(crudViewController: self, wantsToRead: object)
     }
-    
+
 }
+#endif

@@ -7,9 +7,11 @@
 //
 
 import Anchorage
-import MessageUI
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
+import MessageUI
 import UIKit
 
 @objc public protocol InfoViewControllerDelegate {
@@ -323,3 +325,4 @@ extension InfoViewController: MFMailComposeViewControllerDelegate {
         dismiss(animated: true)
     }
 }
+#endif

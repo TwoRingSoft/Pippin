@@ -17,37 +17,26 @@ public enum LoggerError: Swift.Error {
     case couldNotReadLogFile(String, NSError)
 }
 
-/// `Logger` provides a common interface to logging mechanisms.
+#if canImport(UIKit)
 public protocol Logger: EnvironmentallyConscious, Debuggable {
-    /// The current log level the instance operates at.
     var logLevel: LogLevel { get set }
-
-    /// Log a message at the verbose level.
-    /// - parameter message: The message to log at verbose level.
     func logVerbose(message: String)
-
-    /// Log a message at the debug level.
-    /// - parameter message: The message to log at debug level.
     func logDebug(message: String)
-
-    /// Log a message at the info level.
-    /// - parameter message: The message to log at info level.
     func logInfo(message: String)
-
-    /// Log a message at the warning level.
-    /// - parameter message: The message to log at warning level.
     func logWarning(message: String)
-
-    /// Log a message at the error level.
-    ///
-    /// - Parameters:
-    ///   - message: The message to log at error level.
-    ///   - error: The associated error object to log.
     func logError(message: String, error: Error)
-
-    /// Return all contents of logs written since logs were created or last wiped.
     func logContents() -> String?
-
-    /// Wipe all persisted logs.
     func resetLogs()
 }
+#else
+public protocol Logger: EnvironmentallyConscious {
+    var logLevel: LogLevel { get set }
+    func logVerbose(message: String)
+    func logDebug(message: String)
+    func logInfo(message: String)
+    func logWarning(message: String)
+    func logError(message: String, error: Error)
+    func logContents() -> String?
+    func resetLogs()
+}
+#endif

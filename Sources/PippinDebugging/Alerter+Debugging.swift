@@ -5,6 +5,7 @@
 //  Created by Andrew McKnight on 3/1/19.
 //
 
+#if canImport(UIKit)
 import Foundation
 import Pippin
 
@@ -13,3 +14,4 @@ public extension Alerter {
         showAlert(title: "Dev Error", message: "Feature not available on simulator", type: .error, dismissal: .automatic, occlusion: .weak)
     }
 }
+#endif

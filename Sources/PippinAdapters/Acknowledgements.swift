@@ -7,8 +7,10 @@
 
 import Foundation
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
+#if canImport(UIKit)
 public struct CocoaPodAcknowledgements: Acknowledgements {
     private var customAcknowledgements: String?
     private var cocoaPodsAcknowledgements: String?
@@ -64,3 +66,4 @@ public struct CocoaPodAcknowledgements: Acknowledgements {
         return NSAttributedString(attributedString: attributedString)
     }
 }
+#endif

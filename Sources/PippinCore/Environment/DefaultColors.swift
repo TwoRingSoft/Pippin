@@ -5,6 +5,7 @@
 //  Created by Andrew McKnight on 12/12/19.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public struct DefaultColors: Colors {
@@ -34,3 +35,4 @@ public struct DefaultColors: Colors {
         }
     }
 }
+#endif

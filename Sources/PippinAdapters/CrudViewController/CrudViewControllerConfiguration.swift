@@ -7,7 +7,9 @@
 //
 
 import CoreData
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
 import UIKit
 
 /// The set of modes in which a `CRUDViewController` may be used. Different controls may be available depending on the mode being used.
@@ -212,3 +214,4 @@ public enum CRUDViewControllerMode {
 
     public let allowsMultipleSelection: Bool
 }
+#endif

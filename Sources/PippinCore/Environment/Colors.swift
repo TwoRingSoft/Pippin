@@ -5,6 +5,7 @@
 //  Created by Andrew McKnight on 12/12/19.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public protocol Colors {
@@ -12,3 +13,4 @@ public protocol Colors {
     var foreground: UIColor { get }
     var foregroundSoft: UIColor { get }
 }
+#endif

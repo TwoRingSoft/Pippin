@@ -6,6 +6,8 @@
 //
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
 
 /// `enum` defining the `CGFloat` offsets to be added to the `UIWindowLevelAlert` level of the respective component's display `UIWindow`.
 /// 
@@ -21,3 +23,4 @@ public enum WindowLevel: CGFloat {
         return UIWindow.Level(rawValue: rawValue)
     }
 }
+#endif

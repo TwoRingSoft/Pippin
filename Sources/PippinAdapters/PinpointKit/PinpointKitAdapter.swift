@@ -8,7 +8,8 @@
 
 import PinpointKit
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 import UIKit
 
 public final class PinpointKitAdapter: NSObject, BugReporter {

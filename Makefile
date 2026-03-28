@@ -1,61 +1,53 @@
+VERSION=$(shell cat VERSION)
+
 init:
 	brew bundle
 	rbenv install --skip-existing
 	rbenv exec gem update bundler
 	rbenv exec bundle update
-	rbenv exec bundle exec pod repo add tworingsoft https://github.com/TwoRingSoft/podspecs.git ||:
 
 .PHONY: xcode
 xcode:
 	pushd Examples/Pippin; rbenv exec bundle exec pod update; xed Examples/Pippin/Pippin.xcworkspace; popd
 
-build: build-phone build-mac
+.PHONY: build-macos
+build-macos:
+	swift build
 
-build-phone:
-	xcodebuild -workspace Pippin.xcworkspace -scheme PippinTestHarness -sdk iphoneos -quiet
+.PHONY: build-ios
+build-ios:
+	swift build --sdk "$$(xcrun --sdk iphonesimulator --show-sdk-path)" --triple arm64-apple-ios17.0-simulator
 
-build-mac:
-	xcodebuild -workspace Pippin.xcworkspace -scheme PippinTestHarness-macOS -sdk macosx -quiet
+.PHONY: build
+build: build-macos build-ios
 
-bump:
-	rbenv exec bundle exec bumpr $(COMPONENT) $(NAME).podspec --no-commit
-	rbenv exec bundle exec migrate-changelog Sources/$(NAME)/CHANGELOG.md `vrsn --read --file $(NAME).podspec` --no-commit
-	git commit --all --message "chore: update version and changelog to `vrsn --read --file $(NAME).podspec`"
+.PHONY: bump-major
+bump-major:
+	@echo $$(echo $(VERSION) | awk -F. '{print $$1+1".0.0"}') > VERSION
+	@$(MAKE) -s update-changelog
+	@echo "Version bumped to $$(cat VERSION)"
 
-prerelease-adapters:
-	rbenv exec bundle exec prerelease-podspec PippinAdapters.podspec --podspec-name-in-tag --allow-warnings
+.PHONY: bump-minor
+bump-minor:
+	@echo $$(echo $(VERSION) | awk -F. '{print $$1"."$$2+1".0"}') > VERSION
+	@$(MAKE) -s update-changelog
+	@echo "Version bumped to $$(cat VERSION)"
 
-ADAPTERS_VERSION=$(shell vrsn --read --file PippinAdapters.podspec)
-release-adapters:
-	rbenv exec bundle exec release-podspec PippinAdapters.podspec --skip-tests --podspec-name-in-tag --allow-warnings --changelog-path Sources/PippinAdapters/CHANGELOG.md --changelog-entry $(ADAPTERS_VERSION) --repo tworingsoft --also-push-to-trunk
+.PHONY: bump-patch
+bump-patch:
+	@echo $$(echo $(VERSION) | awk -F. '{print $$1"."$$2"."$$3+1}') > VERSION
+	@$(MAKE) -s update-changelog
+	@echo "Version bumped to $$(cat VERSION)"
 
-prerelease-core:
-	rbenv exec bundle exec prerelease-podspec PippinCore.podspec --podspec-name-in-tag
+.PHONY: update-changelog
+update-changelog:
+	@NEW_VERSION=$$(cat VERSION); \
+	DATE=$$(date +%Y-%m-%d); \
+	sed -i '' "s/## \[Unreleased\]/## [Unreleased]\n\n## [$$NEW_VERSION] - $$DATE/" CHANGELOG.md
 
-CORE_VERSION=$(shell vrsn --read --file PippinCore.podspec)
-release-core:
-	rbenv exec bundle exec release-podspec PippinCore.podspec --podspec-name-in-tag --changelog-path Sources/PippinCore/CHANGELOG.md --changelog-entry $(CORE_VERSION) --repo tworingsoft --also-push-to-trunk
-
-prerelease-library:
-	rbenv exec bundle exec prerelease-podspec PippinLibrary.podspec --podspec-name-in-tag --skip-tests
-
-LIBRARY_VERSION=$(shell vrsn --read --file PippinLibrary.podspec)
-release-library:
-	rbenv exec bundle exec release-podspec PippinLibrary.podspec --skip-tests --podspec-name-in-tag --changelog-path Sources/PippinLibrary/CHANGELOG.md --changelog-entry $(LIBRARY_VERSION) --repo tworingsoft --also-push-to-trunk
-
-prerelease-debugging:
-	rbenv exec bundle exec prerelease-podspec PippinDebugging.podspec --podspec-name-in-tag
-
-DEBUGGING_VERSION=$(shell vrsn --read --file PippinDebugging.podspec)
-release-debugging:
-	rbenv exec bundle exec release-podspec PippinDebugging.podspec --podspec-name-in-tag --changelog-path Sources/PippinDebugging/CHANGELOG.md --changelog-entry $(DEBUGGING_VERSION) --repo tworingsoft --also-push-to-trunk
-
-prerelease-testing:
-	rbenv exec bundle exec prerelease-podspec PippinTesting.podspec --podspec-name-in-tag
-
-TESTING_VERSION=$(shell vrsn --read --file PippinTesting.podspec)
-release-testing:
-	rbenv exec bundle exec release-podspec PippinTesting.podspec --podspec-name-in-tag --changelog-path Sources/PippinTesting/CHANGELOG.md --changelog-entry $(TESTING_VERSION) --repo tworingsoft --also-push-to-trunk
-
-clean-rc-tags:
-	git tag --list | grep "\-RC\d*" | xargs -tI @ bash -c "git tag --delete @ &&git push --delete origin @"
+.PHONY: release
+release:
+	@if [ -n "$$(git status --porcelain)" ]; then echo "Error: working directory not clean"; exit 1; fi
+	git tag $(VERSION)
+	git push origin $(VERSION)
+	@echo "Released $(VERSION)"

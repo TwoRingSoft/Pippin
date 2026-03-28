@@ -8,8 +8,11 @@
 
 import Foundation
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 import XCGLogger
+#if canImport(UIKit)
+import UIKit
 
 extension LogLevel {
 
@@ -218,3 +221,4 @@ extension XCGLoggerAdapter: Debuggable {
         logError(message: "Debug Error level log message.", error: Error.debugError)
     }
 }
+#endif

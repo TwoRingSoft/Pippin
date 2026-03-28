@@ -83,3 +83,5 @@ vendor
 # -*- mode: gitignore; -*-
 \#*\#
 *~
+/.swiftpm/
+/Package.resolved

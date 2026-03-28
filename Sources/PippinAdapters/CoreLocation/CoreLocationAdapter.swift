@@ -9,6 +9,8 @@ import CoreLocation
 import Foundation
 import Pippin
 import Result
+#if canImport(UIKit)
+import UIKit
 
 extension CLLocation: Location {
     public var latitude: Double {
@@ -73,3 +75,4 @@ extension CoreLocationAdapter: CLLocationManagerDelegate {
         }
     }
 }
+#endif

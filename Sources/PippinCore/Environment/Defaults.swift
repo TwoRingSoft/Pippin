@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 /// A protocol providing a type for a collection of keys used in the defaults' backing store, and a way to convert them to their canonical `String` forms.
 ///

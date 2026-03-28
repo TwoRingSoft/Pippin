@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 /**
  Enumeration of logging levels.

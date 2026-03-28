@@ -6,6 +6,8 @@
 //
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
 
 public protocol LinkIcon {
     func image(bundle: Bundle) -> UIImage?
@@ -30,3 +32,4 @@ public protocol AppInfoPresenter {
         logicalParent: UIViewController?
     )
 }
+#endif

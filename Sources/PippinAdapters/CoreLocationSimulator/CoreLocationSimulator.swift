@@ -8,6 +8,9 @@
 import Anchorage
 import CoreLocation
 import Foundation
+import Pippin
+#if canImport(UIKit)
+import UIKit
 
 public class CoreLocationSimulator: NSObject, Locator {
     
@@ -87,3 +90,4 @@ extension CoreLocationSimulator: Debuggable {
         reloadDebuggingTextView()
     }
 }
+#endif

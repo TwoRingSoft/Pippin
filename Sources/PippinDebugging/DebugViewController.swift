@@ -8,6 +8,7 @@
 
 import Anchorage
 import Pippin
+#if canImport(UIKit)
 import UIKit
 
 protocol DebugViewControllerDelegate {
@@ -126,3 +127,4 @@ private extension DebugViewController {
     }
 
 }
+#endif

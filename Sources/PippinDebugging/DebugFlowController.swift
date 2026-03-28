@@ -7,6 +7,7 @@
 //
 
 import Pippin
+#if canImport(UIKit)
 import UIKit
 
 public enum DebugFlowError: Error {
@@ -54,3 +55,4 @@ extension DebugFlowController: DebugViewControllerDelegate {
     }
 
 }
+#endif

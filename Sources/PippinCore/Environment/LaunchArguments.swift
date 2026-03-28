@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 /// Collection of launch arguments that may be configured in an app launch.
 @objc public enum LaunchArgument: Int {

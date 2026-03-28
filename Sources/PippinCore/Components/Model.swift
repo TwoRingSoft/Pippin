@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import PippinLibrary
+import SwiftArmcknight
 
-/// Protocol describing the model infrastructure, that is, the software stack managing state from persistence to in-memory. In Apple, this is CoreData. This is not related to the definition of the schema used in a consuming app. Rather a `Model` is used to manage the data written in the schema defined in that app.
-public protocol Model: Debuggable, EnvironmentallyConscious {
+#if canImport(UIKit)
+public protocol Model: EnvironmentallyConscious, Debuggable {
     var modelName: String { get }
     func importFromSQLitePath(sqlitePath: String, completion: ConfirmCompletionBlock?)
     func importData(data: Data, completion: ConfirmCompletionBlock?)
@@ -18,6 +18,17 @@ public protocol Model: Debuggable, EnvironmentallyConscious {
     var debuggingDelegate: ModelDebugging? { get set }
     #endif
 }
+#else
+public protocol Model: EnvironmentallyConscious {
+    var modelName: String { get }
+    func importFromSQLitePath(sqlitePath: String, completion: ConfirmCompletionBlock?)
+    func importData(data: Data, completion: ConfirmCompletionBlock?)
+    func exportData() throws -> Data
+    #if DEBUG
+    var debuggingDelegate: ModelDebugging? { get set }
+    #endif
+}
+#endif
 
 #if DEBUG
 public protocol ModelDebugging {

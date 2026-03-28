@@ -12,32 +12,21 @@ import Foundation
  `CrashReporter` provides a common interface for working with crash reporter
  objects or SDKs.
  */
-public protocol CrashReporter: Debuggable, EnvironmentallyConscious {
+// CrashReporter protocol body shared across platforms
+// On iOS, also conforms to Debuggable (UIKit-dependent)
 
-    /**
-     Log a message to the crash reporter's breadcrumb log.
-     - parameter message: the message to write to the log
-     */
+#if canImport(UIKit)
+public protocol CrashReporter: EnvironmentallyConscious, Debuggable {
     func log(message: String)
-
-    /**
-     Record the stack trace for a nonfatal error during execution, typically when
-     an error object is unexpectedly returned from an Apple or 3rd party API.
-     - parameters:
-         - error: the error object to record
-         - metadata: any extra data to record with the error
-     */
     func recordNonfatalError(error: Error, metadata: [String: Any]?)
-
-    /**
-     Record metadata to store with the session to help filter crash reports.
-     - parameter keysAndValues: the metadata to record as a dictionary
-     */
     func setSessionMetadata(keysAndValues: [String: Any])
-
-    /**
-     Crash the application.
-     */
     func testCrash()
-
 }
+#else
+public protocol CrashReporter: EnvironmentallyConscious {
+    func log(message: String)
+    func recordNonfatalError(error: Error, metadata: [String: Any]?)
+    func setSessionMetadata(keysAndValues: [String: Any])
+    func testCrash()
+}
+#endif

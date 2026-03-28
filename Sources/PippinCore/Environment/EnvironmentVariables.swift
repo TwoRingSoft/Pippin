@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 /// An enumeration of possible keys that can be passed into a build of an app, either by using the Xcode Scheme > Run > Arguments > Environment Variables area, or on the command line when running `xcodebuild`.
 public enum EnvironmentVariable: String {

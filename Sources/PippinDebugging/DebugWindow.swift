@@ -6,6 +6,8 @@
 //
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
 
 class DebugWindow: UIWindow {
     
@@ -28,3 +30,4 @@ class DebugWindow: UIWindow {
     }
 
 }
+#endif

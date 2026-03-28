@@ -6,9 +6,11 @@
 //
 
 import Foundation
-import JGProgressHUD
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
+import JGProgressHUD
 import UIKit
 
 public final class JGProgressHUDAdapter: NSObject, ActivityIndicator {
@@ -96,3 +98,4 @@ private extension JGProgressHUDAdapter {
         indicator.show(in: rootView.view, animated: true)
     }
 }
+#endif

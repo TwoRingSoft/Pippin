@@ -17,11 +17,19 @@ public protocol Location {
     var longitude: Double { get }
 }
 
-public protocol Locator: Debuggable, EnvironmentallyConscious {
+#if canImport(UIKit)
+public protocol Locator: EnvironmentallyConscious, Debuggable {
     init(authorizedLocationManager: CLLocationManager?, locatorDelegate: LocatorDelegate)
     func startMonitoringLocation()
     func stopMonitoringLocation()
 }
+#else
+public protocol Locator: EnvironmentallyConscious {
+    init(authorizedLocationManager: CLLocationManager?, locatorDelegate: LocatorDelegate)
+    func startMonitoringLocation()
+    func stopMonitoringLocation()
+}
+#endif
 
 public protocol LocatorDelegate {
     func locator(locator: Locator, updatedToLocation location: Location)

@@ -5,12 +5,14 @@
 //  Created by Andrew McKnight on 5/24/18.
 //
 
+#if canImport(UIKit)
 import Foundation
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
 
 /// A protocol describing the functions needed to use an activity indicator–showing and hiding.
 public protocol ActivityIndicator: Debuggable, Themeable, EnvironmentallyConscious {
-    
+
     /// Display an activity indicator.
     ///
     /// - Parameters:
@@ -29,3 +31,4 @@ public protocol ActivityIndicator: Debuggable, Themeable, EnvironmentallyConscio
     /// - Parameter completion: An optional closure to execute when the indicator has been dismissed.
     func hide(completion: EmptyBlock?)
 }
+#endif

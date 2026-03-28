@@ -6,6 +6,7 @@
 //  Copyright © 2018 Two Ring Software. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 /// `BugReporter` provides a common interface for working with a bug reporter object or SDK.
@@ -23,3 +24,4 @@ public protocol BugReporter: EnvironmentallyConscious, Debuggable {
     /// - Note: the core data backing store is compiled into a base64 string, if `Environment.model` exists, and all logs are compiled if `Environment.logger` exists.
     func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?)
 }
+#endif

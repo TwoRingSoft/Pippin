@@ -8,7 +8,9 @@
 
 import Anchorage
 import Pippin
-import PippinLibrary
+import SwiftArmcknight
+import SwiftArmcknightUIKit
+#if canImport(UIKit)
 import UIKit
 
 /**
@@ -653,3 +655,4 @@ extension FormController: UITextFieldDelegate {
     }
 
 }
+#endif

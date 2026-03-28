@@ -110,6 +110,11 @@ Pippin podspecs currently with unit tests located under `Tests/`:
 - `PippinLibrary`
 - `PippinTesting`
 
+# TODO
+
+- [ ] A changelog presenter for when an app is updated, showing the new changelog entries since the last version that had run
+- [ ] ,acOS support
+
 # Thanks!
 
 If this project helped you, please consider <a href="https://www.paypal.me/armcknight">leaving a tip</a> 🤗
