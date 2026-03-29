@@ -113,7 +113,8 @@ Pippin podspecs currently with unit tests located under `Tests/`:
 # TODO
 
 - [ ] A changelog presenter for when an app is updated, showing the new changelog entries since the last version that had run
-- [ ] ,acOS support
+- [ ] macOS support
+- [ ] add "other apps" links to infovc
 
 # Thanks!
 
