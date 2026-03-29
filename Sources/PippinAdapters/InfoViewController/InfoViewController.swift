@@ -283,11 +283,11 @@ private extension InfoViewController {
     }
 
     func replace(attachmentImage: LinkIcon, in attributedString: NSMutableAttributedString, textColor: UIColor) {
+        guard let image = attachmentImage.image(bundle: sharedAssetBundle) else { return }
         let attachment = NSTextAttachment()
-        let size = attachmentImage.image(bundle: sharedAssetBundle) != nil ? attachmentImage.image(bundle: sharedAssetBundle)!.size : .zero
         let capHeight = environment.fonts.text.capHeight
-        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: capHeight * size.width / size.height, height: capHeight))
-        attachment.image = attachmentImage.image(bundle: sharedAssetBundle)
+        attachment.bounds = CGRect(origin: .zero, size: CGSize(width: capHeight * image.size.width / image.size.height, height: capHeight))
+        attachment.image = image
         let attachmentString = NSAttributedString(attachment: attachment)
 
         let range = (attributedString.string as NSString).range(of: attachmentImage.name)
