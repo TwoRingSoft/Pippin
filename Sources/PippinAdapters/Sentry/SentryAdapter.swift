@@ -43,9 +43,16 @@ public final class SentryAdapter: NSObject, EnvironmentallyConscious {
 
 // MARK: CrashReporter
 extension SentryAdapter: CrashReporter {
-    
+
+    public var supportsLogs: Bool { true }
+    public var supportsBreadcrumbs: Bool { true }
+
     public func log(message: String) {
-        let breadcrumb = Breadcrumb(level: .info, category: "log")
+        SentrySDK.logger.info(message)
+    }
+
+    public func recordBreadcrumb(message: String, category: String, level: LogLevel) {
+        let breadcrumb = Breadcrumb(level: level.sentryLevel, category: category)
         breadcrumb.message = message
         SentrySDK.addBreadcrumb(breadcrumb)
     }
@@ -82,12 +89,18 @@ extension SentryAdapter: BugReporter {
         alert.addTextField { $0.placeholder = "What went wrong?" }
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Send", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "Send", style: .default) { [weak self] _ in
             let name = alert.textFields?[0].text
             let email = alert.textFields?[1].text
             let message = alert.textFields?[2].text ?? ""
 
-            let feedback = SentryFeedback(message: message, name: name, email: email, source: .custom)
+            var attachments: [Attachment]?
+            if let logContents = self?.environment?.logger?.logContents(),
+               let logData = logContents.data(using: .utf8) {
+                attachments = [Attachment(data: logData, filename: "logs.txt", contentType: "text/plain")]
+            }
+
+            let feedback = SentryFeedback(message: message, name: name, email: email, source: .custom, attachments: attachments)
             SentrySDK.capture(feedback: feedback)
         })
 
@@ -114,6 +127,19 @@ extension SentryAdapter: Debuggable {
 
     @objc private func testCrashAction() {
         testCrash()
+    }
+}
+
+// MARK: LogLevel → SentryLevel
+private extension LogLevel {
+    var sentryLevel: SentryLevel {
+        switch self {
+        case .unknown, .verbose: return .debug
+        case .debug: return .debug
+        case .info: return .info
+        case .warning: return .warning
+        case .error: return .error
+        }
     }
 }
 #endif
