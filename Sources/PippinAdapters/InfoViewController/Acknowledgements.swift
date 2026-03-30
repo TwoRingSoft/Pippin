@@ -11,20 +11,20 @@ import SwiftArmcknight
 import SwiftArmcknightUIKit
 
 #if canImport(UIKit)
-public struct CocoaPodAcknowledgements: Acknowledgements {
+public struct AppAcknowledgements: Acknowledgements {
     private var customAcknowledgements: String?
-    private var cocoaPodsAcknowledgements: String?
+    private var libraryAcknowledgements: String?
     private unowned var environment: Environment
-    
-    public init(customAcknowledgements: String? = nil, cocoaPodsAcknowledgementsPlistURL: URL? = nil, environment: Environment) {
+
+    public init(customAcknowledgements: String? = nil, acknowledgementsPlistURL: URL? = nil, environment: Environment) {
         self.customAcknowledgements = customAcknowledgements
         self.environment = environment
-        
-        if let cocoaPodPlistURL = cocoaPodsAcknowledgementsPlistURL {
+
+        if let plistURL = acknowledgementsPlistURL {
             do {
-                let data = try Data(contentsOf: cocoaPodPlistURL)
+                let data = try Data(contentsOf: plistURL)
                 if let plist = try PropertyListSerialization.propertyList(from: data, options: PropertyListSerialization.ReadOptions(rawValue: 0), format: nil) as? [String: Any], let acknowledgementsList = plist["PreferenceSpecifiers"] as? [[String: String]] {
-                    cocoaPodsAcknowledgements = acknowledgementsList[1..<acknowledgementsList.count].compactMap { ack in
+                    libraryAcknowledgements = acknowledgementsList[1..<acknowledgementsList.count].compactMap { ack in
                         guard let name = ack["Title"],
                             let footer = ack["FooterText"],
                             let license = ack["License"] else {
@@ -34,17 +34,15 @@ public struct CocoaPodAcknowledgements: Acknowledgements {
                     }.joined(separator: "\n\n")
                 }
             } catch {
-                environment.logger?.logError(message: String(format: "[%@] Failed to decode CocoaPods acknowledgements plist at %@", valueType(self), String(describing: cocoaPodsAcknowledgementsPlistURL)), error: error)
+                environment.logger?.logError(message: String(format: "[%@] Failed to decode acknowledgements plist at %@", valueType(self), String(describing: acknowledgementsPlistURL)), error: error)
             }
-        } else {
-            environment.logger?.logInfo(message: String(format: "[%@] No CocoaPods acknowledgement plist url provided", valueType(self)))
         }
     }
-    
+
     public func containsAcknowledgements() -> Bool {
-        return customAcknowledgements != nil || (cocoaPodsAcknowledgements != nil && cocoaPodsAcknowledgements?.count ?? 0 > 0)
+        return customAcknowledgements != nil || (libraryAcknowledgements != nil && libraryAcknowledgements?.count ?? 0 > 0)
     }
-    
+
     public func acknowledgementsString() -> NSAttributedString? {
         var strings = [String]()
         var headings = [String]()
@@ -53,9 +51,9 @@ public struct CocoaPodAcknowledgements: Acknowledgements {
             strings.append("\(heading):\n\(customAcknowledgements)")
             headings.append(heading)
         }
-        if let cocoaPodsAcknowledgements = cocoaPodsAcknowledgements {
-            let heading = "CocoaPods libraries"
-            strings.append("\(heading):\n\(cocoaPodsAcknowledgements)")
+        if let libraryAcknowledgements = libraryAcknowledgements {
+            let heading = "Libraries"
+            strings.append("\(heading):\n\(libraryAcknowledgements)")
             headings.append(heading)
         }
         let string = strings.joined(separator: "\n\n")
@@ -66,4 +64,5 @@ public struct CocoaPodAcknowledgements: Acknowledgements {
         return NSAttributedString(attributedString: attributedString)
     }
 }
+
 #endif
