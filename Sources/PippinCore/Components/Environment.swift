@@ -11,13 +11,13 @@ import SwiftArmcknight
 import SwiftArmcknightUIKit
 #endif
 
-private class PippinDummyRDNSBundleSearchClass {}
+private let pippinRDNSPrefix = "io.mcknight.pippin"
 
-extension String {
+public extension String {
     init(asRDNSForPippinSubpaths subpaths: [String]) {
         precondition(subpaths.count > 0)
         precondition(subpaths.filter({ $0.count > 0 }).count > 0)
-        self = String(asRDNSWithSubpaths: [Bundle(for: PippinDummyRDNSBundleSearchClass.self).identifier] + subpaths)
+        self = String(asRDNSWithSubpaths: [pippinRDNSPrefix] + subpaths)
     }
 }
 

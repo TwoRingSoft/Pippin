@@ -20,6 +20,7 @@
 ### Fixed
 
 - InfoViewController: fixed rendering corruption when company link has no image (nil image created zero-size `NSTextAttachment`).
+- LaunchArguments that resolved to different string values due to bundle names when linked statically.
 
 ## [12.0.0]
 
