@@ -55,6 +55,7 @@ public class Environment: NSObject {
     public let currentBuild: Build
     public let semanticVersion: SemanticVersion
     public let lastLaunchedBuild: Build?
+    public let lastLaunchedVersion: SemanticVersion?
 
     // MARK: infrastructure
     public var model: Model?
@@ -70,6 +71,7 @@ public class Environment: NSObject {
     // MARK: components
     #if canImport(UIKit)
     public var bugReporter: BugReporter?
+    public var changelogPresenter: ChangelogPresenter?
     #endif
     public var inAppPurchaseVendor: InAppPurchaseVendor?
 
@@ -115,6 +117,7 @@ public class Environment: NSObject {
 
         // get previous launch version
         self.lastLaunchedBuild = self.defaults.lastLaunchedBuild
+        self.lastLaunchedVersion = self.defaults.lastLaunchedVersion
 
         // memoize this launch version
         self.defaults.lastLaunchedVersion = semanticVersion
@@ -150,6 +153,7 @@ public class Environment: NSObject {
 
         // get previous launch version
         self.lastLaunchedBuild = self.defaults.lastLaunchedBuild
+        self.lastLaunchedVersion = self.defaults.lastLaunchedVersion
 
         // memoize this launch version
         self.defaults.lastLaunchedVersion = semanticVersion

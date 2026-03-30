@@ -4,6 +4,8 @@
 
 ### Added
 
+- `ChangelogParser` for parsing Keep a Changelog format markdown and filtering entries between versions.
+- `Environment.lastLaunchedVersion` exposed publicly for version upgrade detection.
 - Sentry adapter for CrashReporter and BugReporter protocols with user feedback form.
 - OSLog adapter for Logger protocol using `os.Logger` and `OSLogStore`.
 - `CrashReporter` protocol: `supportsLogs` and `supportsBreadcrumbs` capability flags.

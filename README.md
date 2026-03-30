@@ -112,9 +112,10 @@ Pippin podspecs currently with unit tests located under `Tests/`:
 
 # TODO
 
-- [ ] A changelog presenter for when an app is updated, showing the new changelog entries since the last version that had run
+- [x] A changelog presenter for when an app is updated, showing the new changelog entries since the last version that had run
 - [ ] macOS support
 - [ ] add "other apps" links to infovc
+- [ ] swap out icons8 icons for SFSymbols
 
 # Thanks!
 

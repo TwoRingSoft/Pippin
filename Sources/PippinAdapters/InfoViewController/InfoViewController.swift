@@ -101,7 +101,11 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
     func reportBugPressed() {
         delegate?.bugReportTapped?(inInfoViewController: self)
     }
-    
+
+    func changelogPressed() {
+        environment.changelogPresenter?.presentFullChangelog(from: self)
+    }
+
     func inAppPurchasesPressed() {
         delegate?.inAppPurchasesTapped?(inInfoViewController: self)
     }
@@ -263,7 +267,12 @@ private extension InfoViewController {
             let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", title: "Report a Bug", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
             detailItems.append(bugReportButton)
         }
-        
+
+        if let _ = environment.changelogPresenter {
+            let changelogButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Changelog", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(changelogPressed), imageBundle: sharedAssetBundle)
+            detailItems.append(changelogButton)
+        }
+
         if MFMailComposeViewController.canSendMail() {
             let contactButton = UIButton.button(withImageSetName: "contact", emphasisSuffix: "pressed", title: "Send a Note", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(contactPressed), imageBundle: sharedAssetBundle)
             detailItems.append(contactButton)
