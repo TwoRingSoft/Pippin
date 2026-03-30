@@ -17,6 +17,7 @@ import Foundation
 
 #if canImport(UIKit)
 public protocol CrashReporter: EnvironmentallyConscious, Debuggable {
+    init(serverKey: String, initialKeysAndValues: [String: String]?)
     func log(message: String)
     func recordNonfatalError(error: Error, metadata: [String: Any]?)
     func setSessionMetadata(keysAndValues: [String: Any])
@@ -24,6 +25,7 @@ public protocol CrashReporter: EnvironmentallyConscious, Debuggable {
 }
 #else
 public protocol CrashReporter: EnvironmentallyConscious {
+    init(serverKey: String, initialKeysAndValues: [String: String]?)
     func log(message: String)
     func recordNonfatalError(error: Error, metadata: [String: Any]?)
     func setSessionMetadata(keysAndValues: [String: Any])

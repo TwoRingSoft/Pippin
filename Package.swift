@@ -31,6 +31,7 @@ let package = Package(
         // .package(url: "https://github.com/Lickability/PinpointKit", from: "1.5.0"),
         .package(url: "https://github.com/FLEXTool/FLEX", from: "5.22.10"),
         .package(url: "https://github.com/antitypical/Result", from: "5.0.0"),
+        .package(path: "../sentry-cocoa"),
     ],
     targets: [
         // PippinCore: app shell - Environment, component protocols, defaults, theming
@@ -62,6 +63,7 @@ let package = Package(
                 "XCGLogger",
                 .product(name: "JGProgressHUD", package: "JGProgressHUD", condition: .when(platforms: [.iOS])),
                 "Result",
+                .product(name: "Sentry", package: "sentry-cocoa"),
             ],
             path: "Sources/PippinAdapters",
             exclude: [
