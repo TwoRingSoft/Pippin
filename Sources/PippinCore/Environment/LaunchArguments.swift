@@ -42,6 +42,9 @@ import SwiftArmcknightUIKit
     /// Upon launch, remove any stored user defaults used by the app.
     case wipeDefaults
 
+    /// Force dark mode appearance.
+    case darkMode
+
     /// - Returns: the `String` representation of the launch argument, used in constructing its canonical rDNS version as it should appear in a process' launch arguments.
     private func name() -> String {
         switch self {
@@ -55,6 +58,7 @@ import SwiftArmcknightUIKit
         case .wipePersistedInAppPurchases: return "wipe-in-app-purchases"
         case .wipeDataModel: return "wipe-data-model"
         case .wipeDefaults: return "wipe-defaults"
+        case .darkMode: return "dark-mode"
         }
     }
 

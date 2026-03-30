@@ -11,6 +11,7 @@
 - OSLog adapter forwards logs to crash reporter preferring structured logs over breadcrumbs.
 - Sentry adapter attaches app logs to user feedback submissions.
 - Split PippinAdapters into individual SPM library targets for selective linking (e.g. `PippinAdapters-Sentry`, `PippinAdapters-OSLog`).
+- A launch argument to help signal forcing dark mode.
 
 ### Removed
 
