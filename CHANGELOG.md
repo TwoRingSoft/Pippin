@@ -10,6 +10,11 @@
 - `CrashReporter` protocol: `recordBreadcrumb(message:category:level:)` for contextual breadcrumb trail.
 - OSLog adapter forwards logs to crash reporter preferring structured logs over breadcrumbs.
 - Sentry adapter attaches app logs to user feedback submissions.
+- Split PippinAdapters into individual SPM library targets for selective linking (e.g. `PippinAdapters-Sentry`, `PippinAdapters-OSLog`).
+
+### Removed
+
+- Removed `DefaultEnvironment.swift` convenience initializer (referenced adapters across multiple targets).
 
 ### Fixed
 
