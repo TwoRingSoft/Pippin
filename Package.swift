@@ -43,6 +43,9 @@ let package = Package(
             name: "PippinAdapters-Sentry",
             targets: ["PippinAdapters-Sentry"]),
         .library(
+            name: "PippinAdapters-StoreKit",
+            targets: ["PippinAdapters-StoreKit"]),
+        .library(
             name: "PippinAdapters-SwiftMessages",
             targets: ["PippinAdapters-SwiftMessages"]),
         .library(
@@ -163,6 +166,16 @@ let package = Package(
                 .product(name: "Sentry", package: "sentry-cocoa"),
             ],
             path: "Sources/PippinAdapters/Sentry"
+        ),
+        .target(
+            name: "PippinAdapters-StoreKit",
+            dependencies: [
+                "Pippin",
+                "Anchorage",
+                .product(name: "SwiftArmcknight", package: "swift-armcknight"),
+                .product(name: "SwiftArmcknightUIKit", package: "swift-armcknight"),
+            ],
+            path: "Sources/PippinAdapters/StoreKit"
         ),
         .target(
             name: "PippinAdapters-SwiftMessages",
