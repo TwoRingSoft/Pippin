@@ -192,7 +192,7 @@ public class Environment: NSObject {
         }
 
         #if DEBUG
-        return .debug
+        return .verbose
         #else
         return .info
         #endif
