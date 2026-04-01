@@ -1,10 +1,13 @@
 VERSION=$(shell cat VERSION)
+TOOLS_BIN = tools/.build/release
 
 init:
+	git submodule update --init --recursive
 	brew bundle
 	rbenv install --skip-existing
 	rbenv exec gem update bundler
 	rbenv exec bundle update
+	cd tools && swift build -c release
 
 .PHONY: xcode
 xcode:
@@ -23,31 +26,21 @@ build: build-macos build-ios
 
 .PHONY: bump-major
 bump-major:
-	@echo $$(echo $(VERSION) | awk -F. '{print $$1+1".0.0"}') > VERSION
-	@$(MAKE) -s update-changelog
-	@echo "Version bumped to $$(cat VERSION)"
+	$(TOOLS_BIN)/vrsn major -f VERSION
+	$(TOOLS_BIN)/migrate-changelog CHANGELOG.md $$(cat VERSION) --no-commit
 
 .PHONY: bump-minor
 bump-minor:
-	@echo $$(echo $(VERSION) | awk -F. '{print $$1"."$$2+1".0"}') > VERSION
-	@$(MAKE) -s update-changelog
-	@echo "Version bumped to $$(cat VERSION)"
+	$(TOOLS_BIN)/vrsn minor -f VERSION
+	$(TOOLS_BIN)/migrate-changelog CHANGELOG.md $$(cat VERSION) --no-commit
 
 .PHONY: bump-patch
 bump-patch:
-	@echo $$(echo $(VERSION) | awk -F. '{print $$1"."$$2"."$$3+1}') > VERSION
-	@$(MAKE) -s update-changelog
-	@echo "Version bumped to $$(cat VERSION)"
-
-.PHONY: update-changelog
-update-changelog:
-	@NEW_VERSION=$$(cat VERSION); \
-	DATE=$$(date +%Y-%m-%d); \
-	sed -i '' "s/## \[Unreleased\]/## [Unreleased]\n\n## [$$NEW_VERSION] - $$DATE/" CHANGELOG.md
+	$(TOOLS_BIN)/vrsn patch -f VERSION
+	$(TOOLS_BIN)/migrate-changelog CHANGELOG.md $$(cat VERSION) --no-commit
 
 .PHONY: release
 release:
 	@if [ -n "$$(git status --porcelain)" ]; then echo "Error: working directory not clean"; exit 1; fi
-	git tag $(VERSION)
+	$(TOOLS_BIN)/changetag CHANGELOG.md $(VERSION)
 	git push origin $(VERSION)
-	@echo "Released $(VERSION)"
