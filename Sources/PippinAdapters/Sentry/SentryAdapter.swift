@@ -19,11 +19,22 @@ public final class SentryAdapter: NSObject, EnvironmentallyConscious {
             options.dsn = serverKey
 #if DEBUG
             options.debug = true
+            options.environment = "development"
 #else
             options.debug = false
+            options.environment = "production"
 #endif
             options.attachScreenshot = true
             options.attachViewHierarchy = true
+            options.enableAutoSessionTracking = true
+            options.tracesSampleRate = 0.1
+            options.enableCaptureFailedRequests = true
+
+            options.configureProfiling = { profilingOptions in
+                profilingOptions.sessionSampleRate = 0.1
+                profilingOptions.lifecycle = .trace
+                profilingOptions.profileAppStarts = true
+            }
 
             if let initialKeysAndValues {
                 options.initialScope = { scope in
