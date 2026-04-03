@@ -1,0 +1,137 @@
+import CoreData
+import CloudKit
+import Pippin
+
+public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
+    public var environment: Environment?
+    public let container: NSPersistentCloudKitContainer
+    public let cloudKitContainer: CKContainer
+    public let modelName: String
+
+    private let privatePersistentStoreURL: URL
+    private let sharedPersistentStoreURL: URL
+
+    public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, initializeCloudKitSchema: Bool) {
+        self.modelName = modelName
+        container = NSPersistentCloudKitContainer(name: modelName, managedObjectModel: managedObjectModel)
+        cloudKitContainer = CKContainer(identifier: cloudKitContainerIdentifier)
+
+        let baseURL = NSPersistentContainer.defaultDirectoryURL()
+        privatePersistentStoreURL = baseURL.appendingPathComponent("\(modelName)-private.sqlite")
+        sharedPersistentStoreURL = baseURL.appendingPathComponent("\(modelName)-shared.sqlite")
+
+        if inMemory {
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            container.persistentStoreDescriptions = [description]
+        } else {
+            let privateDescription = NSPersistentStoreDescription(url: privatePersistentStoreURL)
+            let privateOptions = NSPersistentCloudKitContainerOptions(
+                containerIdentifier: cloudKitContainerIdentifier
+            )
+            privateOptions.databaseScope = .private
+            privateDescription.cloudKitContainerOptions = privateOptions
+            privateDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+            privateDescription.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+
+            let sharedDescription = NSPersistentStoreDescription(url: sharedPersistentStoreURL)
+            let sharedOptions = NSPersistentCloudKitContainerOptions(
+                containerIdentifier: cloudKitContainerIdentifier
+            )
+            sharedOptions.databaseScope = .shared
+            sharedDescription.cloudKitContainerOptions = sharedOptions
+            sharedDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+            sharedDescription.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+
+            container.persistentStoreDescriptions = [privateDescription, sharedDescription]
+        }
+
+        super.init()
+
+        container.loadPersistentStores { [weak self] description, error in
+            if let error {
+                self?.environment?.logger?.logError(
+                    message: "Core Data store failed to load (\(description.url?.lastPathComponent ?? "unknown"))",
+                    error: error
+                )
+            }
+        }
+
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        if initializeCloudKitSchema {
+            do {
+                try container.initializeCloudKitSchema(options: [])
+            } catch {
+                print("CloudKit schema initialization failed: \(error)")
+            }
+        }
+    }
+
+    public var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
+
+    public func newBackgroundContext() -> NSManagedObjectContext {
+        container.newBackgroundContext()
+    }
+
+    public var privatePersistentStore: NSPersistentStore? {
+        container.persistentStoreCoordinator.persistentStore(for: privatePersistentStoreURL)
+    }
+
+    public var sharedPersistentStore: NSPersistentStore? {
+        container.persistentStoreCoordinator.persistentStore(for: sharedPersistentStoreURL)
+    }
+}
+
+extension CloudKitCoreDataController: CloudSharing {
+    public func isShared(object: NSManagedObject) -> Bool {
+        guard let persistentStore = object.objectID.persistentStore else { return false }
+        return persistentStore == sharedPersistentStore
+    }
+
+    public func isOwner(object: NSManagedObject) -> Bool {
+        guard isShared(object: object) else { return true }
+        guard let share = try? container.fetchShares(matching: [object.objectID])[object.objectID] else { return true }
+        return share.currentUserParticipant?.permission == .readWrite
+    }
+
+    public func existingShare(for object: NSManagedObject) throws -> CKShare? {
+        let shares = try container.fetchShares(matching: [object.objectID])
+        return shares[object.objectID]
+    }
+
+    public func share(objects: [NSManagedObject], to existingShare: CKShare?) async throws -> CKShare {
+        let (_, share, _) = try await container.share(objects, to: existingShare)
+        return share
+    }
+
+    public func acceptShareInvitations(from metadata: [CKShare.Metadata]) async throws {
+        guard let sharedStore = sharedPersistentStore else {
+            throw NSError(domain: "io.mcknight.pippin.cloudkit", code: 1, userInfo: [
+                NSLocalizedDescriptionKey: "Shared persistent store not available"
+            ])
+        }
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            container.acceptShareInvitations(from: metadata, into: sharedStore) { _, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
+    public func fetchAllShares() throws -> [CKShare] {
+        var allShares: [CKShare] = []
+        let stores = [privatePersistentStore, sharedPersistentStore].compactMap { $0 }
+        for store in stores {
+            let shares = try container.fetchShares(in: store)
+            allShares.append(contentsOf: shares)
+        }
+        return allShares
+    }
+}

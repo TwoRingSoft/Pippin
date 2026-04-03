@@ -52,6 +52,9 @@ let package = Package(
             name: "PippinAdapters-XCGLogger",
             targets: ["PippinAdapters-XCGLogger"]),
         .library(
+            name: "PippinAdapters-CloudKitCoreData",
+            targets: ["PippinAdapters-CloudKitCoreData"]),
+        .library(
             name: "PippinDebugging",
             targets: ["PippinDebugging"]),
     ],
@@ -97,6 +100,14 @@ let package = Package(
                 .product(name: "SwiftArmcknightUIKit", package: "swift-armcknight"),
             ],
             path: "Sources/PippinAdapters/CoreData"
+        ),
+        .target(
+            name: "PippinAdapters-CloudKitCoreData",
+            dependencies: [
+                "Pippin",
+                "PippinAdapters-CoreData",
+            ],
+            path: "Sources/PippinAdapters/CloudKitCoreData"
         ),
         .target(
             name: "PippinAdapters-CoreLocation",

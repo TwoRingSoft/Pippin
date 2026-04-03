@@ -74,6 +74,7 @@ public class Environment: NSObject {
     public var changelogPresenter: ChangelogPresenter?
     #endif
     public var inAppPurchaseVendor: InAppPurchaseVendor?
+    public var cloudSharing: CloudSharing?
 
     // MARK: sensors
     public var locator: Locator?
@@ -205,6 +206,7 @@ public class Environment: NSObject {
         crashReporter?.environment = self
         inAppPurchaseVendor?.environment = self
         locator?.environment = self
+        cloudSharing?.environment = self
         defaults.environment = self
         #if canImport(UIKit)
         alerter?.environment = self
