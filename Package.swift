@@ -40,9 +40,6 @@ let package = Package(
             name: "PippinAdapters-OSLog",
             targets: ["PippinAdapters-OSLog"]),
         .library(
-            name: "PippinAdapters-Sentry",
-            targets: ["PippinAdapters-Sentry"]),
-        .library(
             name: "PippinAdapters-StoreKit",
             targets: ["PippinAdapters-StoreKit"]),
         .library(
@@ -66,7 +63,6 @@ let package = Package(
         .package(url: "https://github.com/JonasGessner/JGProgressHUD", from: "2.2.0"),
         .package(url: "https://github.com/FLEXTool/FLEX", from: "5.22.10"),
         .package(url: "https://github.com/antitypical/Result", from: "5.0.0"),
-        .package(path: "../sentry-cocoa"),
     ],
     targets: [
         // PippinCore: app shell - Environment, component protocols, defaults, theming
@@ -169,14 +165,6 @@ let package = Package(
             name: "PippinAdapters-OSLog",
             dependencies: ["Pippin"],
             path: "Sources/PippinAdapters/OSLog"
-        ),
-        .target(
-            name: "PippinAdapters-Sentry",
-            dependencies: [
-                "Pippin",
-                .product(name: "Sentry", package: "sentry-cocoa"),
-            ],
-            path: "Sources/PippinAdapters/Sentry"
         ),
         .target(
             name: "PippinAdapters-StoreKit",

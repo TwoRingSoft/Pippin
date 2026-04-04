@@ -10,6 +10,7 @@ These may have concrete objects implementing the functionality directly, or if t
 - `ActivityIndicator`: [JGProgressHUD](https://github.com/JonasGessner/JGProgressHUD)
 - `TouchVisualization`: [COSTouchVisualizer](https://github.com/conopsys/COSTouchVisualizer)
 - `CrashReporter`: [KSCrash](https://github.com/kstenerud/kscrash)
+- `CrashReporter`/`BugReporter`: [Sentry](https://github.com/getsentry/sentry-cocoa) — **Note:** The Sentry adapter source lives in `Sources/PippinAdapters/Sentry/` but is not included as an SPM target because sentry-cocoa's `Package.swift` distributes pre-built xcframeworks which can cause runtime symbol mismatches. Instead, add the sentry-cocoa Xcode project as a child project reference in your app and compile `SentryAdapter.swift` as a separate static library target that links the Sentry framework directly.
 
 The following hand rolled adapters are available:
 

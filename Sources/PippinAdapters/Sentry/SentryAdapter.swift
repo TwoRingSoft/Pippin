@@ -11,6 +11,13 @@ import Pippin
 import Sentry
 import UIKit
 
+/// Pippin adapter for the Sentry SDK, providing `CrashReporter` and `BugReporter` conformance.
+///
+/// This file is not built as an SPM target because sentry-cocoa's `Package.swift` distributes
+/// pre-built xcframeworks, which can cause runtime symbol mismatches when compiled via SPM.
+/// Instead, the host app should:
+/// 1. Add the `sentry-cocoa` Xcode project (`Sentry.xcodeproj`) as a child project reference.
+/// 2. Compile this file as part of a separate static library target that links the Sentry framework directly.
 public final class SentryAdapter: NSObject, EnvironmentallyConscious {
     public var environment: Environment?
 
