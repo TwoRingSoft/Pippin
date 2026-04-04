@@ -162,9 +162,9 @@ private extension InfoViewController {
     func setUpUI(textColor: UIColor, links: [LinkIcon], companyLink: LinkIcon) {
         let appInfoStack = configureAppInfoStack()
         let detailStack = configureDetails()
-        let twoRingStack = configureStack(links: links, companyLink: companyLink)
-        
-        let stack = UIStackView(arrangedSubviews: [appInfoStack, detailStack, twoRingStack])
+        let companyStack = configureStack(links: links, companyLink: companyLink)
+
+        let stack = UIStackView(arrangedSubviews: [appInfoStack, detailStack, companyStack])
         stack.distribution = .equalSpacing
         stack.spacing = 20
         stack.axis = .vertical
@@ -219,7 +219,15 @@ private extension InfoViewController {
         init(emphasisSuffix: String = "", title: String? = nil, tintColor: UIColor = UIColor.white, target: Any? = nil, selector: Selector? = nil, imageBundle: Bundle? = nil, linkIcon: LinkIcon) {
             self.url = linkIcon.url
             super.init(frame: .zero)
-            self.configure(withImageSetName: linkIcon.name, emphasisSuffix: emphasisSuffix, title: title, tintColor: tintColor, target: target, selector: selector, imageBundle: imageBundle)
+            if let image = linkIcon.image(bundle: imageBundle ?? Bundle.main)?.withRenderingMode(.alwaysTemplate) {
+                setImage(image, for: .normal)
+                setImage(image, for: .highlighted)
+                setImage(image, for: .selected)
+            }
+            if let selector = selector {
+                addTarget(target, action: selector, for: .touchUpInside)
+            }
+            self.tintColor = tintColor
         }
 
         required init?(coder: NSCoder) {
@@ -243,7 +251,7 @@ private extension InfoViewController {
         let copyrightString = "© \(Calendar.current.component(.year, from: Date()))"
         let string = NSMutableAttributedString(string: "\(copyrightString) \(companyLink.name)")
 
-        // insert two ring logo and style copyright text to match
+        // insert company logo (if any) and style copyright text to match
         string.addAttributes([NSAttributedString.Key.font: environment.fonts.text], range: NSMakeRange(0, string.length))
 
         replace(attachmentImage: companyLink, in: string, textColor: textColor)
