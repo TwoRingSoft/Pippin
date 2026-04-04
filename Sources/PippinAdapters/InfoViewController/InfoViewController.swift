@@ -175,11 +175,19 @@ private extension InfoViewController {
     }
     
     func configureAppInfoStack() -> UIStackView {
-        let appNameLabel = UILabel.label(withText: environment.appName, font: environment.fonts.superhero, textColor: textColor, alignment: .center)
+        let appNameLabel = PaddedLabel(insets: UIEdgeInsets(top: 4, left: 12, bottom: 12, right: 12))
+        appNameLabel.text = environment.appName
+        appNameLabel.font = environment.fonts.superhero
+        appNameLabel.textColor = textColor
+        appNameLabel.textAlignment = .center
+        appNameLabel.adjustsFontSizeToFitWidth = true
+        appNameLabel.minimumScaleFactor = 0.7
+
         let appInfoLabel = UILabel.label(withText: "\(environment.semanticVersion) build \(environment.currentBuild)", font: environment.fonts.text, textColor: textColor, alignment: .center)
-        
+
         let stack = UIStackView(arrangedSubviews: [appNameLabel, appInfoLabel])
         stack.axis = .vertical
+        stack.clipsToBounds = false
         return stack
     }
     
@@ -334,4 +342,5 @@ extension InfoViewController: MFMailComposeViewControllerDelegate {
         dismiss(animated: true)
     }
 }
+
 #endif
