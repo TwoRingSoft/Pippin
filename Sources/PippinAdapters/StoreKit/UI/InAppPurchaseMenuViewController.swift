@@ -96,7 +96,7 @@ extension InAppPurchaseMenuViewController: UITableViewDataSource {
                 customCell.label.textColor = foregroundColor
                 customCell.label.adjustsFontSizeToFitWidth = true
                 customCell.label.allowsDefaultTighteningForTruncation = true
-                customCell.setAccessoryImage(image: UIImage(named: "import", in: environment.sharedAssetsBundle, compatibleWith: nil), location: .trailing, tintColor: foregroundColor)
+                customCell.setAccessoryImage(image: UIImage(systemName: "arrow.down.circle"), location: .trailing, tintColor: foregroundColor)
             }
 
             cell.backgroundColor = .clear

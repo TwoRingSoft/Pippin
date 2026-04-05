@@ -103,7 +103,30 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
     }
 
     func changelogPressed() {
-        environment.changelogPresenter?.presentFullChangelog(from: self)
+        guard let contentVC = environment.changelogPresenter?.fullChangelogViewController() else { return }
+
+        let modal = DismissableModalViewController(childViewController: contentVC, titleFont: environment.fonts.title, tintColor: textColor, imageBundle: sharedAssetBundle, insets: UIEdgeInsets.zero.inset(topDelta: 30)) {
+            self.modalPresenter?.dismissTransparently(animated: true)
+        }
+
+        let blur: BlurViewController
+        if #available(iOS 13.0, *) {
+            blur = BlurViewController(blurredViewController: modal, vibrancyStyle: .label)
+        } else {
+            blur = BlurViewController(viewController: modal, vibrancy: true)
+        }
+
+        let modalPresenter = TransparentModalPresentingViewController(childViewController: blur)
+
+        if let parent = logicalParent {
+            parent.addNewChildViewController(newChildViewController: modalPresenter)
+        } else {
+            addNewChildViewController(newChildViewController: modalPresenter)
+        }
+
+        modalPresenter.view.fillSuperview()
+        modalPresenter.presentTransparently(animated: true)
+        self.modalPresenter = modalPresenter
     }
 
     func inAppPurchasesPressed() {
@@ -267,44 +290,59 @@ private extension InfoViewController {
     }
     
     func configureDetails() -> UIStackView {
-        var detailItems = [UIButton]()
-        
+        var detailRows = [UIView]()
+
         if acknowledgements.containsAcknowledgements() {
-            let acknowledgementsButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Acknowledgements", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(acknowledgementsPressed), imageBundle: sharedAssetBundle)
-            detailItems.append(acknowledgementsButton)
+            detailRows.append(detailRow(iconName: "info.circle", title: "Acknowledgements", action: #selector(acknowledgementsPressed)))
         }
-        
+
         if let _ = environment.inAppPurchaseVendor {
-            let inAppPurchaseButton = UIButton.button(withImageSetName: "money", emphasisSuffix: "pressed", title: "In App Purchases", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(inAppPurchasesPressed), imageBundle: sharedAssetBundle)
-            detailItems.append(inAppPurchaseButton)
+            detailRows.append(detailRow(iconName: "creditcard", title: "In App Purchases", action: #selector(inAppPurchasesPressed)))
         }
-        
+
         if let _ = environment.bugReporter {
-            let bugReportButton = UIButton.button(withImageSetName: "report-bug", emphasisSuffix: "pressed", title: "Report a Bug", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(reportBugPressed), imageBundle: sharedAssetBundle)
-            detailItems.append(bugReportButton)
+            detailRows.append(detailRow(iconName: "ladybug", title: "Report a Bug", action: #selector(reportBugPressed)))
         }
 
         if let _ = environment.changelogPresenter {
-            let changelogButton = UIButton.button(withImageSetName: "about", emphasisSuffix: "pressed", title: "Changelog", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(changelogPressed), imageBundle: sharedAssetBundle)
-            detailItems.append(changelogButton)
+            detailRows.append(detailRow(iconName: "doc.text", title: "Changelog", action: #selector(changelogPressed)))
         }
 
         if MFMailComposeViewController.canSendMail() {
-            let contactButton = UIButton.button(withImageSetName: "contact", emphasisSuffix: "pressed", title: "Send a Note", tintColor: textColor, font: environment.fonts.barButtonTitle, target: self, selector: #selector(contactPressed), imageBundle: sharedAssetBundle)
-            detailItems.append(contactButton)
+            detailRows.append(detailRow(iconName: "envelope", title: "Send a Note", action: #selector(contactPressed)))
         }
-        
-        detailItems.forEach { button in
-            button.titleEdgeInsets = UIEdgeInsets.zero.inset(leftDelta: 20, rightDelta: -20)
-        }
-        
-        let stack = UIStackView(arrangedSubviews: detailItems)
+
+        let stack = UIStackView(arrangedSubviews: detailRows)
         stack.axis = .vertical
         stack.spacing = 20
-        stack.distribution = .equalSpacing
         stack.alignment = .leading
-        
+
         return stack
+    }
+
+    func detailRow(iconName: String, title: String, action: Selector) -> UIView {
+        let iconWidth: CGFloat = 30
+        let config = UIImage.SymbolConfiguration(scale: .large)
+        let imageView = UIImageView(image: UIImage(systemName: iconName, withConfiguration: config))
+        imageView.tintColor = textColor
+        imageView.contentMode = .center
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: iconWidth).isActive = true
+
+        let label = UILabel()
+        label.text = title
+        label.font = environment.fonts.barButtonTitle
+        label.textColor = textColor
+
+        let row = UIStackView(arrangedSubviews: [imageView, label])
+        row.spacing = 8
+        row.alignment = .center
+
+        let tap = UITapGestureRecognizer(target: self, action: action)
+        row.addGestureRecognizer(tap)
+        row.isUserInteractionEnabled = true
+
+        return row
     }
 
     func replace(attachmentImage: LinkIcon, in attributedString: NSMutableAttributedString, textColor: UIColor) {

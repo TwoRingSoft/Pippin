@@ -114,7 +114,7 @@ private extension DebugViewController {
         stack.edgeAnchors == scrollView.edgeAnchors
         stack.widthAnchor == stackWidthSizingView.widthAnchor
 
-        displayButton = UIButton.button(withImageSetName: "debug", emphasisSuffix: "-pressed", tintColor: buttonTintColor, target: self, selector: #selector(displayPressed), imageBundle: assetBundle)
+        displayButton = UIButton.sfSymbolButton(name: "ladybug", tintColor: buttonTintColor, target: self, selector: #selector(displayPressed))
         let size: CGFloat = 50
         displayButton.frame = CGRect(x: buttonStartLocation.x, y: buttonStartLocation.y, width: size, height: size)
         displayButton.layer.cornerRadius = size / 2

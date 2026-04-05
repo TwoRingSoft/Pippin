@@ -51,7 +51,7 @@ public enum ChangelogParser {
                     ))
                 }
 
-                let pattern = #"^##\s*\[([^\]]+)\](?:\s*-\s*(.+))?"#
+                let pattern = #"^##\s*\[([^\]]+)\](?:\s*-?\s*(.+))?"#
                 if let regex = try? NSRegularExpression(pattern: pattern),
                    let match = regex.firstMatch(in: trimmed, range: NSRange(trimmed.startIndex..., in: trimmed)),
                    let versionRange = Range(match.range(at: 1), in: trimmed) {

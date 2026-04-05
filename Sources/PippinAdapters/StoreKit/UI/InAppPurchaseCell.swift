@@ -76,7 +76,7 @@ extension InAppPurchaseCell {
         descriptionLabel.textColor = foreground
         descriptionLabel.textAlignment = .right
 
-        requiredIndicator.image = UIImage(named: "important-pressed", in: environment.sharedAssetsBundle, compatibleWith: nil)
+        requiredIndicator.image = UIImage(systemName: "exclamationmark.triangle.fill")
         requiredIndicator.tintColor = requiredIndicatorColor
 
         let purchased = environment.inAppPurchaseVendor?.checkLicense(forInAppPurchase: product.product.id) ?? false

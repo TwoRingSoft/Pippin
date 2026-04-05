@@ -39,6 +39,21 @@ public class ChangelogPresenter {
         presenter.present(nav, animated: true)
     }
 
+    /// Returns a view controller displaying the what's-new entries, or nil if there are none.
+    public func whatsNewViewController() -> UIViewController? {
+        guard let entries = whatsNewEntries(), !entries.isEmpty else { return nil }
+        let markdown = entries.map { $0.fullMarkdown }.joined(separator: "\n\n")
+        return ChangelogViewController(title: "What's New", markdown: markdown)
+    }
+
+    /// Returns a view controller displaying the full changelog, or nil if not available.
+    public func fullChangelogViewController() -> UIViewController? {
+        guard let markdown = loadChangelogMarkdown() else { return nil }
+        let entries = ChangelogParser.parse(from: markdown)
+        let versioned = entries.map { $0.fullMarkdown }.joined(separator: "\n\n")
+        return ChangelogViewController(title: "Changelog", markdown: versioned)
+    }
+
     /// Returns changelog entries since the last launched version, or nil if
     /// this is a first launch or the version hasn't changed.
     public func whatsNewEntries() -> [ChangelogEntry]? {
@@ -62,11 +77,11 @@ public class ChangelogPresenter {
     }
 }
 
-private class ChangelogViewController: UIViewController {
+public class ChangelogViewController: UIViewController {
     private let markdown: String
     private let webView = WKWebView()
 
-    init(title: String, markdown: String) {
+    public init(title: String, markdown: String) {
         self.markdown = markdown
         super.init(nibName: nil, bundle: nil)
         self.title = title
@@ -76,12 +91,12 @@ private class ChangelogViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModal))
 
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .clear
         webView.isOpaque = false
         webView.backgroundColor = .clear
         webView.scrollView.backgroundColor = .clear
