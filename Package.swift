@@ -56,7 +56,7 @@ let package = Package(
             targets: ["PippinDebugging"]),
     ],
     dependencies: [
-        .package(path: "../swift-armcknight"),
+        .package(path: "swift-armcknight"),
         .package(url: "https://github.com/Rightpoint/Anchorage", from: "4.5.0"),
         .package(url: "https://github.com/SwiftKickMobile/SwiftMessages", from: "10.0.0"),
         .package(url: "https://github.com/DaveWoodCom/XCGLogger", from: "7.0.0"),
