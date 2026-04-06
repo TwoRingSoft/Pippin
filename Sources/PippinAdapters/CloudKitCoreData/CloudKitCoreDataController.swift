@@ -3,13 +3,16 @@ import CloudKit
 import Pippin
 
 public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
-    public var environment: Environment?
+    public var environment: Environment? {
+        didSet { startObservingCloudKitEvents() }
+    }
     public let container: NSPersistentCloudKitContainer
     public let cloudKitContainer: CKContainer
     public let modelName: String
 
     private let privatePersistentStoreURL: URL
     private let sharedPersistentStoreURL: URL
+    private var eventObserver: NSObjectProtocol?
 
     public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, initializeCloudKitSchema: Bool) {
         self.modelName = modelName
@@ -83,6 +86,48 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
 
     public var sharedPersistentStore: NSPersistentStore? {
         container.persistentStoreCoordinator.persistentStore(for: sharedPersistentStoreURL)
+    }
+
+    private func startObservingCloudKitEvents() {
+        if let eventObserver {
+            NotificationCenter.default.removeObserver(eventObserver)
+        }
+        eventObserver = NotificationCenter.default.addObserver(
+            forName: NSPersistentCloudKitContainer.eventChangedNotification,
+            object: container,
+            queue: .main
+        ) { [weak self] notification in
+            guard let self,
+                  let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event,
+                  event.endDate != nil else { return }
+
+            let typeName: String
+            switch event.type {
+            case .setup: typeName = "setup"
+            case .import: typeName = "import"
+            case .export: typeName = "export"
+            @unknown default: typeName = "unknown"
+            }
+
+            if let error = event.error {
+                self.environment?.logger?.logError(
+                    message: "CloudKit \(typeName) event failed (store: \(event.storeIdentifier))",
+                    error: error
+                )
+                self.environment?.crashReporter?.recordNonfatalError(
+                    error: error,
+                    metadata: [
+                        "cloudkit.event.type": typeName,
+                        "cloudkit.event.store": event.storeIdentifier,
+                        "cloudkit.event.identifier": event.identifier.uuidString,
+                    ]
+                )
+            } else {
+                self.environment?.logger?.logDebug(
+                    message: "CloudKit \(typeName) event completed (store: \(event.storeIdentifier))"
+                )
+            }
+        }
     }
 }
 
