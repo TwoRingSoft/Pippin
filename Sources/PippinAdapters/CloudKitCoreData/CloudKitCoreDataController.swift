@@ -110,17 +110,32 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             }
 
             if let error = event.error {
+                let nsError = error as NSError
+                var metadata: [String: Any] = [
+                    "cloudkit.event.type": typeName,
+                    "cloudkit.event.store": event.storeIdentifier,
+                    "cloudkit.event.identifier": event.identifier.uuidString,
+                    "cloudkit.error.domain": nsError.domain,
+                    "cloudkit.error.code": nsError.code,
+                    "cloudkit.error.description": nsError.localizedDescription,
+                    "cloudkit.error.userInfo": String(describing: nsError.userInfo),
+                ]
+
+                if let partialErrors = nsError.userInfo[CKPartialErrorsByItemIDKey] as? [AnyHashable: Error] {
+                    let partialDescriptions = partialErrors.map { key, value in
+                        let partial = value as NSError
+                        return "\(key): \(partial.domain) code=\(partial.code) \(partial.localizedDescription)"
+                    }.joined(separator: "\n")
+                    metadata["cloudkit.error.partialErrors"] = partialDescriptions
+                }
+
                 self.environment?.logger?.logError(
-                    message: "CloudKit \(typeName) event failed (store: \(event.storeIdentifier))",
+                    message: "CloudKit \(typeName) event failed (store: \(event.storeIdentifier)) — \(metadata)",
                     error: error
                 )
                 self.environment?.crashReporter?.recordNonfatalError(
                     error: error,
-                    metadata: [
-                        "cloudkit.event.type": typeName,
-                        "cloudkit.event.store": event.storeIdentifier,
-                        "cloudkit.event.identifier": event.identifier.uuidString,
-                    ]
+                    metadata: metadata
                 )
             } else {
                 self.environment?.logger?.logDebug(
