@@ -90,6 +90,20 @@ extension SentryAdapter: CrashReporter {
         }
     }
 
+    public func setUser(id: String?, username: String?, email: String?) {
+        SentrySDK.configureScope { scope in
+            if id == nil && username == nil && email == nil {
+                scope.setUser(nil)
+                return
+            }
+            let user = User()
+            user.userId = id
+            user.username = username
+            user.email = email
+            scope.setUser(user)
+        }
+    }
+
     public func setSessionMetadata(keysAndValues: [String: Any]) {
         SentrySDK.configureScope { scope in
             for (key, value) in keysAndValues {

@@ -33,6 +33,7 @@ public protocol CrashReporter: EnvironmentallyConscious, Debuggable {
 
     func recordNonfatalError(error: Error, metadata: [String: Any]?)
     func setSessionMetadata(keysAndValues: [String: Any])
+    func setUser(id: String?, username: String?, email: String?)
     func testCrash()
 }
 #else
@@ -46,6 +47,7 @@ public protocol CrashReporter: EnvironmentallyConscious {
     func recordBreadcrumb(message: String, category: String, level: LogLevel)
     func recordNonfatalError(error: Error, metadata: [String: Any]?)
     func setSessionMetadata(keysAndValues: [String: Any])
+    func setUser(id: String?, username: String?, email: String?)
     func testCrash()
 }
 #endif

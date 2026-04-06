@@ -88,6 +88,23 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         container.persistentStoreCoordinator.persistentStore(for: sharedPersistentStoreURL)
     }
 
+    /// Fetches the current iCloud user record ID and reports it to the environment's crash reporter as the user identifier.
+    /// The record ID is a stable per-container hash of the user's iCloud account; it is not personally identifying.
+    public func reportiCloudUserToCrashReporter() {
+        cloudKitContainer.fetchUserRecordID { [weak self] recordID, error in
+            guard let self else { return }
+            if let error {
+                self.environment?.logger?.logError(message: "Failed to fetch iCloud user record ID", error: error)
+                return
+            }
+            guard let recordID else { return }
+            DispatchQueue.main.async {
+                self.environment?.crashReporter?.setUser(id: recordID.recordName, username: nil, email: nil)
+                self.environment?.logger?.logInfo(message: "Reported iCloud user record ID to crash reporter: \(recordID.recordName)")
+            }
+        }
+    }
+
     private func startObservingCloudKitEvents() {
         if let eventObserver {
             NotificationCenter.default.removeObserver(eventObserver)
