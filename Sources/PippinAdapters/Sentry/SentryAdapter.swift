@@ -76,11 +76,16 @@ extension SentryAdapter: CrashReporter {
     }
 
     public func recordNonfatalError(error: Error, metadata: [String: Any]?) {
-        SentrySDK.capture(error: error) { scope in
+        SentrySDK.capture(error: error) { [weak self] scope in
             if let metadata = metadata {
                 for (key, value) in metadata {
                     scope.setExtra(value: value, key: key)
                 }
+            }
+            if let logContents = self?.environment?.logger?.logContents(),
+               let logData = logContents.data(using: .utf8) {
+                let attachment = Attachment(data: logData, filename: "logs.txt", contentType: "text/plain")
+                scope.addAttachment(attachment)
             }
         }
     }
