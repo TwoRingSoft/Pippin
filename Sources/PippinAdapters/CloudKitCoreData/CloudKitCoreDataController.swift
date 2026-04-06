@@ -118,13 +118,27 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
                     "cloudkit.error.domain": nsError.domain,
                     "cloudkit.error.code": nsError.code,
                     "cloudkit.error.description": nsError.localizedDescription,
-                    "cloudkit.error.userInfo": String(describing: nsError.userInfo),
+                    "cloudkit.error.debugDescription": nsError.debugDescription,
+                    "cloudkit.error.userInfo": String(reflecting: nsError.userInfo),
                 ]
+
+                // Walk the underlying error chain
+                var underlyingErrors: [String] = []
+                var currentError: NSError? = nsError.userInfo[NSUnderlyingErrorKey] as? NSError
+                var depth = 0
+                while let underlying = currentError, depth < 10 {
+                    underlyingErrors.append("\(underlying.domain) code=\(underlying.code): \(underlying.localizedDescription) userInfo=\(String(reflecting: underlying.userInfo))")
+                    currentError = underlying.userInfo[NSUnderlyingErrorKey] as? NSError
+                    depth += 1
+                }
+                if !underlyingErrors.isEmpty {
+                    metadata["cloudkit.error.underlyingChain"] = underlyingErrors.joined(separator: "\n---\n")
+                }
 
                 if let partialErrors = nsError.userInfo[CKPartialErrorsByItemIDKey] as? [AnyHashable: Error] {
                     let partialDescriptions = partialErrors.map { key, value in
                         let partial = value as NSError
-                        return "\(key): \(partial.domain) code=\(partial.code) \(partial.localizedDescription)"
+                        return "\(key): \(partial.domain) code=\(partial.code) \(partial.localizedDescription) userInfo=\(String(reflecting: partial.userInfo))"
                     }.joined(separator: "\n")
                     metadata["cloudkit.error.partialErrors"] = partialDescriptions
                 }
