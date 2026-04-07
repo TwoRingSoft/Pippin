@@ -143,6 +143,24 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
                     "cloudkit.error.userInfo": String(reflecting: nsError.userInfo),
                 ]
 
+                if let failureReason = nsError.localizedFailureReason {
+                    metadata["cloudkit.error.failureReason"] = failureReason
+                }
+                if let recoverySuggestion = nsError.localizedRecoverySuggestion {
+                    metadata["cloudkit.error.recoverySuggestion"] = recoverySuggestion
+                }
+                if let helpAnchor = nsError.helpAnchor {
+                    metadata["cloudkit.error.helpAnchor"] = helpAnchor
+                }
+                for (key, value) in nsError.userInfo {
+                    let keyString = String(describing: key)
+                    // Skip keys we've already captured or that are huge nested errors we handle separately
+                    if keyString == NSUnderlyingErrorKey || keyString == "CKErrorPartialErrorsByItemIDKey" {
+                        continue
+                    }
+                    metadata["cloudkit.error.userInfo.\(keyString)"] = String(describing: value)
+                }
+
                 // Walk the underlying error chain
                 var underlyingErrors: [String] = []
                 var currentError: NSError? = nsError.userInfo[NSUnderlyingErrorKey] as? NSError
