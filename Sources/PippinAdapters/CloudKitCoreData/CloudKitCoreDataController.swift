@@ -36,6 +36,8 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             privateDescription.cloudKitContainerOptions = privateOptions
             privateDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
             privateDescription.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+            privateDescription.shouldMigrateStoreAutomatically = true
+            privateDescription.shouldInferMappingModelAutomatically = true
 
             let sharedDescription = NSPersistentStoreDescription(url: sharedPersistentStoreURL)
             let sharedOptions = NSPersistentCloudKitContainerOptions(
@@ -45,6 +47,8 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             sharedDescription.cloudKitContainerOptions = sharedOptions
             sharedDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
             sharedDescription.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+            sharedDescription.shouldMigrateStoreAutomatically = true
+            sharedDescription.shouldInferMappingModelAutomatically = true
 
             container.persistentStoreDescriptions = [privateDescription, sharedDescription]
         }
