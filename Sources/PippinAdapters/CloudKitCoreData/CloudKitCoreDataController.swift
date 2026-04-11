@@ -128,6 +128,16 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         }
     }
 
+    private func storeName(for storeIdentifier: String) -> String {
+        if let store = privatePersistentStore, store.identifier == storeIdentifier {
+            return "private (\(store.url?.lastPathComponent ?? storeIdentifier))"
+        }
+        if let store = sharedPersistentStore, store.identifier == storeIdentifier {
+            return "shared (\(store.url?.lastPathComponent ?? storeIdentifier))"
+        }
+        return storeIdentifier
+    }
+
     private func logCurrentCoreDataContents() {
         let entityNames = container.managedObjectModel.entities.map { $0.name ?? "unnamed" }
         var summary: [String] = []
@@ -194,9 +204,11 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             @unknown default: typeName = "unknown"
             }
 
+            let storeName = self.storeName(for: event.storeIdentifier)
+
             guard event.endDate != nil else {
                 self.environment?.logger?.logDebug(
-                    message: "CloudKit \(typeName) event started (store: \(event.storeIdentifier))"
+                    message: "CloudKit \(typeName) event started (store: \(storeName))"
                 )
                 return
             }
@@ -205,7 +217,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
                 let nsError = error as NSError
                 var metadata: [String: Any] = [
                     "cloudkit.event.type": typeName,
-                    "cloudkit.event.store": event.storeIdentifier,
+                    "cloudkit.event.store": storeName,
                     "cloudkit.event.identifier": event.identifier.uuidString,
                     "cloudkit.error.domain": nsError.domain,
                     "cloudkit.error.code": nsError.code,
@@ -265,10 +277,11 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
 
             } else {
                 self.environment?.logger?.logDebug(
-                    message: "CloudKit \(typeName) event completed (store: \(event.storeIdentifier))"
+                    message: "CloudKit \(typeName) event completed (store: \(storeName))"
                 )
                 if event.type == .import {
                     self.logCurrentCoreDataContents()
+                    self.logShareStatus()
                 }
             }
         }
