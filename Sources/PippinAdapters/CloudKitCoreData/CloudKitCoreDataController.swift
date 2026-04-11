@@ -13,8 +13,10 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
     private let privatePersistentStoreURL: URL
     private let sharedPersistentStoreURL: URL
     private var eventObserver: NSObjectProtocol?
+    private var pendingErrors: [String: Error] = [:]
 
-    public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, initializeCloudKitSchema: Bool) {
+
+    public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, initializeCloudKitSchema: Bool, resetSharedStore: Bool) {
         self.modelName = modelName
         container = NSPersistentCloudKitContainer(name: modelName, managedObjectModel: managedObjectModel)
         cloudKitContainer = CKContainer(identifier: cloudKitContainerIdentifier)
@@ -29,6 +31,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             container.persistentStoreDescriptions = [description]
         } else {
             let privateDescription = NSPersistentStoreDescription(url: privatePersistentStoreURL)
+            privateDescription.configuration = "Default"
             let privateOptions = NSPersistentCloudKitContainerOptions(
                 containerIdentifier: cloudKitContainerIdentifier
             )
@@ -40,6 +43,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             privateDescription.shouldInferMappingModelAutomatically = true
 
             let sharedDescription = NSPersistentStoreDescription(url: sharedPersistentStoreURL)
+            sharedDescription.configuration = "Shared"
             let sharedOptions = NSPersistentCloudKitContainerOptions(
                 containerIdentifier: cloudKitContainerIdentifier
             )
@@ -55,11 +59,25 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
 
         super.init()
 
+        if resetSharedStore {
+            let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+            do {
+                try coordinator.destroyPersistentStore(at: sharedPersistentStoreURL, type: .sqlite)
+            } catch {
+                pendingErrors["resetSharedStore"] = error
+            }
+        }
+
         container.loadPersistentStores { [weak self] description, error in
             if let error {
                 self?.environment?.logger?.logError(
                     message: "Core Data store failed to load (\(description.url?.lastPathComponent ?? "unknown"))",
                     error: error
+                )
+            } else {
+                let scope = description.cloudKitContainerOptions?.databaseScope == .shared ? "shared" : "private"
+                self?.environment?.logger?.logInfo(
+                    message: "Core Data store loaded (\(scope): \(description.url?.lastPathComponent ?? "unknown"), storeIdentifier: \(description.cloudKitContainerOptions?.containerIdentifier ?? "none"))"
                 )
             }
         }
@@ -70,8 +88,9 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         if initializeCloudKitSchema {
             do {
                 try container.initializeCloudKitSchema(options: [])
+                environment?.logger?.logInfo(message: "CloudKit schema initialization succeeded")
             } catch {
-                print("CloudKit schema initialization failed: \(error)")
+                environment?.logger?.logError(message: "CloudKit schema initialization failed", error: error)
             }
         }
     }
@@ -109,7 +128,53 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         }
     }
 
+    private func logCurrentCoreDataContents() {
+        let entityNames = container.managedObjectModel.entities.map { $0.name ?? "unnamed" }
+        var summary: [String] = []
+        for entityName in entityNames {
+            let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            if let results = try? container.viewContext.fetch(request) {
+                summary.append("\(entityName): \(results.count)")
+            }
+        }
+        environment?.logger?.logDebug(message: "Core Data contents after import — \(summary.joined(separator: ", "))")
+    }
+
+    private func logShareStatus() {
+        let stores: [(NSPersistentStore?, String)] = [
+            (privatePersistentStore, "private"),
+            (sharedPersistentStore, "shared"),
+        ]
+        for (store, label) in stores {
+            guard let store else {
+                environment?.logger?.logDebug(message: "Share status: \(label) store not available")
+                continue
+            }
+            do {
+                let shares = try container.fetchShares(in: store)
+                if shares.isEmpty {
+                    environment?.logger?.logDebug(message: "Share status: \(label) store — no shares")
+                } else {
+                    for share in shares {
+                        let participants = share.participants.map { "\($0.userIdentity.nameComponents?.formatted() ?? "unknown") [\($0.role == .owner ? "owner" : "participant"), \($0.acceptanceStatus == .accepted ? "accepted" : "pending")]" }
+                        environment?.logger?.logInfo(message: "Share status: \(label) store — share \(share.recordID.recordName), participants: \(participants)")
+                    }
+                }
+            } catch {
+                environment?.logger?.logError(message: "Share status: failed to fetch shares from \(label) store", error: error)
+            }
+        }
+    }
+
     private func startObservingCloudKitEvents() {
+        for (key, error) in pendingErrors {
+            environment?.logger?.logError(message: "Deferred error from init (\(key))", error: error)
+            environment?.crashReporter?.recordNonfatalError(error: error, metadata: ["init.phase": key])
+        }
+        pendingErrors.removeAll()
+
+        logShareStatus()
+
         if let eventObserver {
             NotificationCenter.default.removeObserver(eventObserver)
         }
@@ -119,8 +184,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             queue: .main
         ) { [weak self] notification in
             guard let self,
-                  let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event,
-                  event.endDate != nil else { return }
+                  let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event else { return }
 
             let typeName: String
             switch event.type {
@@ -128,6 +192,13 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             case .import: typeName = "import"
             case .export: typeName = "export"
             @unknown default: typeName = "unknown"
+            }
+
+            guard event.endDate != nil else {
+                self.environment?.logger?.logDebug(
+                    message: "CloudKit \(typeName) event started (store: \(event.storeIdentifier))"
+                )
+                return
             }
 
             if let error = event.error {
@@ -190,14 +261,20 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
                     error: error,
                     metadata: metadata
                 )
+
+
             } else {
                 self.environment?.logger?.logDebug(
                     message: "CloudKit \(typeName) event completed (store: \(event.storeIdentifier))"
                 )
+                if event.type == .import {
+                    self.logCurrentCoreDataContents()
+                }
             }
         }
     }
 }
+
 
 extension CloudKitCoreDataController: CloudSharing {
     public func isShared(object: NSManagedObject) -> Bool {
@@ -207,8 +284,13 @@ extension CloudKitCoreDataController: CloudSharing {
 
     public func isOwner(object: NSManagedObject) -> Bool {
         guard isShared(object: object) else { return true }
-        guard let share = try? container.fetchShares(matching: [object.objectID])[object.objectID] else { return true }
-        return share.currentUserParticipant?.permission == .readWrite
+        do {
+            guard let share = try container.fetchShares(matching: [object.objectID])[object.objectID] else { return true }
+            return share.currentUserParticipant?.permission == .readWrite
+        } catch {
+            environment?.logger?.logError(message: "isOwner: fetchShares failed", error: error)
+            return true
+        }
     }
 
     public func existingShare(for object: NSManagedObject) throws -> CKShare? {
@@ -217,21 +299,35 @@ extension CloudKitCoreDataController: CloudSharing {
     }
 
     public func share(objects: [NSManagedObject], to existingShare: CKShare?) async throws -> CKShare {
-        let (_, share, _) = try await container.share(objects, to: existingShare)
-        return share
+        environment?.logger?.logInfo(message: "Creating share for \(objects.count) object(s) (existing share: \(existingShare?.recordID.recordName ?? "none"))")
+        do {
+            let (_, share, _) = try await container.share(objects, to: existingShare)
+            environment?.logger?.logInfo(message: "Share created successfully (recordName: \(share.recordID.recordName), participants: \(share.participants.count))")
+            return share
+        } catch {
+            environment?.logger?.logError(message: "Share creation failed", error: error)
+            environment?.crashReporter?.recordNonfatalError(error: error, metadata: ["cloudkit.operation": "share"])
+            throw error
+        }
     }
 
     public func acceptShareInvitations(from metadata: [CKShare.Metadata]) async throws {
         guard let sharedStore = sharedPersistentStore else {
-            throw NSError(domain: "io.mcknight.pippin.cloudkit", code: 1, userInfo: [
+            let error = NSError(domain: "io.mcknight.pippin.cloudkit", code: 1, userInfo: [
                 NSLocalizedDescriptionKey: "Shared persistent store not available"
             ])
+            environment?.logger?.logError(message: "acceptShareInvitations: shared store not available", error: error)
+            throw error
         }
+        environment?.logger?.logInfo(message: "Accepting \(metadata.count) share invitation(s)")
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            container.acceptShareInvitations(from: metadata, into: sharedStore) { _, error in
+            container.acceptShareInvitations(from: metadata, into: sharedStore) { [weak self] _, error in
                 if let error {
+                    self?.environment?.logger?.logError(message: "acceptShareInvitations failed", error: error)
+                    self?.environment?.crashReporter?.recordNonfatalError(error: error, metadata: ["cloudkit.operation": "acceptShareInvitations"])
                     continuation.resume(throwing: error)
                 } else {
+                    self?.environment?.logger?.logInfo(message: "Share invitation(s) accepted successfully")
                     continuation.resume()
                 }
             }
