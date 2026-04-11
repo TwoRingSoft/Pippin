@@ -49,6 +49,9 @@ let package = Package(
             name: "PippinAdapters-XCGLogger",
             targets: ["PippinAdapters-XCGLogger"]),
         .library(
+            name: "PippinAdapters-SwiftyBeaver",
+            targets: ["PippinAdapters-SwiftyBeaver"]),
+        .library(
             name: "PippinAdapters-CloudKitCoreData",
             targets: ["PippinAdapters-CloudKitCoreData"]),
         .library(
@@ -60,6 +63,7 @@ let package = Package(
         .package(url: "https://github.com/Rightpoint/Anchorage", from: "4.5.0"),
         .package(url: "https://github.com/SwiftKickMobile/SwiftMessages", from: "10.0.0"),
         .package(url: "https://github.com/DaveWoodCom/XCGLogger", from: "7.0.0"),
+        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "2.0.0"),
         .package(url: "https://github.com/JonasGessner/JGProgressHUD", from: "2.2.0"),
         .package(url: "https://github.com/FLEXTool/FLEX", from: "5.22.10"),
         .package(url: "https://github.com/antitypical/Result", from: "5.0.0"),
@@ -188,12 +192,21 @@ let package = Package(
             path: "Sources/PippinAdapters/SwiftMessages"
         ),
         .target(
+            name: "PippinAdapters-SwiftyBeaver",
+            dependencies: [
+                "Pippin",
+                .product(name: "SwiftyBeaver", package: "SwiftyBeaver"),
+            ],
+            path: "Sources/PippinAdapters/SwiftyBeaver"
+        ),
+        .target(
             name: "PippinAdapters-XCGLogger",
             dependencies: [
                 "Pippin",
                 .product(name: "SwiftArmcknight", package: "swift-armcknight"),
                 .product(name: "SwiftArmcknightUIKit", package: "swift-armcknight"),
-                "XCGLogger",
+                .product(name: "XCGLogger", package: "XCGLogger"),
+                .product(name: "ObjcExceptionBridging", package: "XCGLogger"),
             ],
             path: "Sources/PippinAdapters/XCGLogger"
         ),
