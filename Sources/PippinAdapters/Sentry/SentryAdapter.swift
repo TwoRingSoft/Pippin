@@ -25,7 +25,7 @@ public final class SentryAdapter: NSObject, EnvironmentallyConscious {
         Sentry.SentrySDK.start(configureOptions: { options in
             options.dsn = serverKey
 #if DEBUG
-            options.debug = true
+//            options.debug = true
             options.environment = "development"
 #else
             options.debug = false

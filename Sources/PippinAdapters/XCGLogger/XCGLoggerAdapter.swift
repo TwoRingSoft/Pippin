@@ -9,16 +9,13 @@
 import Foundation
 import Pippin
 import SwiftArmcknight
-import SwiftArmcknightUIKit
 import XCGLogger
-#if canImport(UIKit)
-import UIKit
 
 extension LogLevel {
 
     func xcgLogLevel() -> XCGLogger.Level {
         switch self {
-        case .unknown: return XCGLogger.Level.info // default to info
+        case .unknown: return XCGLogger.Level.info
         case .verbose: return XCGLogger.Level.verbose
         case .debug: return XCGLogger.Level.debug
         case .info: return XCGLogger.Level.info
@@ -35,7 +32,7 @@ extension LogLevel {
         case .warning: self = .warning
         case .error: self = .error
         case .severe: self = .error
-        case .none: self = .info // default to info
+        case .none: self = .info
         case .notice, .alert, .emergency: return nil
         }
     }
@@ -79,9 +76,7 @@ public final class XCGLoggerAdapter: NSObject {
 extension XCGLoggerAdapter: Logger {
 
     public var logLevel: LogLevel {
-        get {
-            return _logLevel
-        }
+        get { _logLevel }
         set(newValue) {
             _logLevel = newValue
             xcgLogger.outputLevel = newValue.xcgLogLevel()
@@ -112,12 +107,10 @@ extension XCGLoggerAdapter: Logger {
 
     public func logContents() -> String? {
         var logContentsString = String()
-
         if let logContents = getContentsOfLog() {
             logContentsString.append(logContents)
             logContentsString.append("\n")
         }
-
         return logContentsString
     }
 
@@ -165,13 +158,17 @@ private extension XCGLoggerAdapter {
         logError(message: String(format: "[%@] Could not locate log file.", instanceType(self)), error: LoggerError.noLoggingFile("Could not locate log file."))
     }
 
-    private func urlForFilename(fileName: String, inDirectoryType directoryType: FileManager.SearchPathDirectory) -> URL? {
+    func urlForFilename(fileName: String, inDirectoryType directoryType: FileManager.SearchPathDirectory) -> URL? {
         return FileManager.default.urls(for: directoryType, in: .userDomainMask).last?.appendingPathComponent(fileName)
     }
-    
+
 }
 
 // MARK: Debuggable
+#if canImport(UIKit)
+import UIKit
+import SwiftArmcknightUIKit
+
 extension XCGLoggerAdapter: Debuggable {
     public func debuggingControlPanel() -> UIView {
         let titleLabel = UILabel.label(withText: "Logger:", font: environment!.fonts.title, textColor: .black)
@@ -198,26 +195,12 @@ extension XCGLoggerAdapter: Debuggable {
         return stack
     }
 
-    @objc private func debugLogVerbose() {
-        logVerbose(message: "Debug Verbose level log message.")
-    }
-
-    @objc private func debugLogDebug() {
-        logDebug(message: "Debug Debug level log message.")
-    }
-
-    @objc private func debugLogInfo() {
-        logInfo(message: "Debug Info level log message.")
-    }
-
-    @objc private func debugLogWarning() {
-        logWarning(message: "Debug Warning level log message.")
-    }
-
+    @objc private func debugLogVerbose() { logVerbose(message: "Debug Verbose level log message.") }
+    @objc private func debugLogDebug() { logDebug(message: "Debug Debug level log message.") }
+    @objc private func debugLogInfo() { logInfo(message: "Debug Info level log message.") }
+    @objc private func debugLogWarning() { logWarning(message: "Debug Warning level log message.") }
     @objc private func debugLogError() {
-        enum Error: Swift.Error {
-            case debugError
-        }
+        enum Error: Swift.Error { case debugError }
         logError(message: "Debug Error level log message.", error: Error.debugError)
     }
 }
