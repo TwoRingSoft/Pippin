@@ -54,19 +54,20 @@ public class ChangelogPresenter {
         return ChangelogViewController(title: "Changelog", markdown: versioned)
     }
 
-    /// Returns changelog entries since the last launched version, or nil if
-    /// this is a first launch or the version hasn't changed.
+    /// Returns changelog entries since the last launched build, or nil if
+    /// this is a first launch or the build number hasn't changed.
+    /// Uses build numbers (`+N` in changelog section headers) so RC-to-RC upgrades
+    /// also trigger the display, not just marketing version changes.
     public func whatsNewEntries() -> [ChangelogEntry]? {
-        guard let lastVersion = environment.lastLaunchedVersion else { return nil }
+        guard let lastBuild = environment.lastLaunchedBuild else { return nil }
 
-        let currentVersion = String(describing: environment.semanticVersion)
-        let previousVersion = String(describing: lastVersion)
-        guard currentVersion != previousVersion else { return nil }
+        let currentBuild = environment.currentBuild
+        guard currentBuild != lastBuild else { return nil }
 
         guard let markdown = loadChangelogMarkdown() else { return nil }
 
         let allEntries = ChangelogParser.parse(from: markdown)
-        let entries = ChangelogParser.entriesSince(previousVersion, upTo: currentVersion, from: allEntries)
+        let entries = ChangelogParser.entriesSince(build: lastBuild, upTo: currentBuild, from: allEntries)
         return entries.isEmpty ? nil : entries
     }
 

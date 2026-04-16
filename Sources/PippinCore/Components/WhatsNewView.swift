@@ -22,9 +22,11 @@ public struct WhatsNewView: View {
                 .padding()
             }
             .navigationTitle("What's New")
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.large)
+            #endif
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .automatic) {
                     Button("Done", action: onDismiss)
                 }
             }

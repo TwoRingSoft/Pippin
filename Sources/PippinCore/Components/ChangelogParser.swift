@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftArmcknight
 
 public struct ChangelogEntry {
     public let version: String
@@ -103,5 +104,16 @@ public enum ChangelogParser {
             return []
         }
         return Array(entries[currentIdx..<sinceIdx])
+    }
+
+    /// Extract entries whose semver build metadata (`+N`) falls in the range `(since, upTo]`.
+    /// Works for RC entries (`1.0.1-RC1+42`) and final releases (`1.0.1+44`) alike.
+    /// Entries without a `+N` suffix are skipped.
+    public static func entriesSince(build since: Build, upTo current: Build, from entries: [ChangelogEntry]) -> [ChangelogEntry] {
+        entries.filter { entry in
+            guard let plus = entry.version.firstIndex(of: "+"),
+                  let b = Build(String(entry.version[entry.version.index(after: plus)...])) else { return false }
+            return b > since && b <= current
+        }
     }
 }

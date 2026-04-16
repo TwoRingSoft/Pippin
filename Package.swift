@@ -211,6 +211,15 @@ let package = Package(
             path: "Sources/PippinAdapters/XCGLogger"
         ),
 
+        .testTarget(
+            name: "PippinCoreTests",
+            dependencies: [
+                "Pippin",
+                .product(name: "SwiftArmcknight", package: "swift-armcknight"),
+            ],
+            path: "Tests/PippinCore"
+        ),
+
         // PippinDebugging: debug UI infrastructure
         .target(
             name: "PippinDebugging",
