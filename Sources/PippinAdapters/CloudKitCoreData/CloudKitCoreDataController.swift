@@ -9,6 +9,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
     public let container: NSPersistentCloudKitContainer
     public let cloudKitContainer: CKContainer
     public let modelName: String
+    public private(set) var iCloudUserID: String?
 
     private let privatePersistentStoreURL: URL
     private let sharedPersistentStoreURL: URL
@@ -122,6 +123,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             }
             guard let recordID else { return }
             DispatchQueue.main.async {
+                self.iCloudUserID = recordID.recordName
                 self.environment?.crashReporter?.setUser(id: recordID.recordName, username: nil, email: nil)
                 self.environment?.logger?.logInfo(message: "Reported iCloud user record ID to crash reporter: \(recordID.recordName)")
             }
