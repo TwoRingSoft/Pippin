@@ -70,6 +70,35 @@ These are used for testing and can be evaluated using `pod try`:
 - [`OperationDemo`](Examples/OperationDemo)
 - [`Pippin`](Examples/Pippin)
 
+## Releasing
+
+```bash
+make patch                    # Bump VERSION patch (run before first deploy-beta in a cycle)
+make minor                    # Bump VERSION minor
+make major                    # Bump VERSION major
+make deploy-beta              # Tag an RC from [Unreleased], push, create GitHub prerelease
+make deploy                   # Consolidate RC entries, tag, push, create GitHub release
+```
+
+Version bumping and deploying are separate steps:
+
+```bash
+make minor                    # 1.2.3 → 1.3.0
+make deploy-beta              # tags 1.3.0-RC1
+make deploy-beta              # tags 1.3.0-RC2 (no re-bump needed)
+make deploy                   # consolidates all RC sections into 1.3.0
+```
+
+To change the target version mid-cycle, bump again before the next RC:
+
+```bash
+make minor                    # 1.2.3 → 1.3.0
+make deploy-beta              # 1.3.0-RC1
+make major                    # 1.3.0 → 2.0.0
+make deploy-beta              # 2.0.0-RC2
+make deploy                   # consolidates all RC sections into 2.0.0
+```
+
 # Contribute
 
 Issues and pull requests are welcome! 

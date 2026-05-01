@@ -1,5 +1,4 @@
-VERSION=$(shell cat VERSION)
-TOOLS_BIN = tools/.build/release
+VERSION_FILE = VERSION
 
 init:
 	git submodule update --init --recursive
@@ -7,7 +6,6 @@ init:
 	rbenv install --skip-existing
 	rbenv exec gem update bundler
 	rbenv exec bundle update
-	cd tools && swift build -c release
 
 .PHONY: xcode
 xcode:
@@ -24,23 +22,28 @@ build-ios:
 .PHONY: build
 build: build-macos build-ios
 
-.PHONY: bump-major
-bump-major:
-	$(TOOLS_BIN)/vrsn major -f VERSION
-	$(TOOLS_BIN)/migrate-changelog CHANGELOG.md $$(cat VERSION) --no-commit
+# MARK: - Releasing
 
-.PHONY: bump-minor
-bump-minor:
-	$(TOOLS_BIN)/vrsn minor -f VERSION
-	$(TOOLS_BIN)/migrate-changelog CHANGELOG.md $$(cat VERSION) --no-commit
+.PHONY: patch
+patch:
+	vrsn patch -f $(VERSION_FILE) --commit
 
-.PHONY: bump-patch
-bump-patch:
-	$(TOOLS_BIN)/vrsn patch -f VERSION
-	$(TOOLS_BIN)/migrate-changelog CHANGELOG.md $$(cat VERSION) --no-commit
+.PHONY: minor
+minor:
+	vrsn minor -f $(VERSION_FILE) --commit
 
-.PHONY: release
-release:
-	@if [ -n "$$(git status --porcelain)" ]; then echo "Error: working directory not clean"; exit 1; fi
-	$(TOOLS_BIN)/changetag CHANGELOG.md $(VERSION)
-	git push origin $(VERSION)
+.PHONY: major
+major:
+	vrsn major -f $(VERSION_FILE) --commit
+
+.PHONY: deploy-beta
+deploy-beta:
+	@{ \
+	prepare-release rc --file $(VERSION_FILE) --push --github-release --prerelease ; \
+	} 2>&1 | tee deploy.log
+
+.PHONY: deploy
+deploy:
+	@{ \
+	prepare-release --file $(VERSION_FILE) --push --github-release ; \
+	} 2>&1 | tee deploy.log

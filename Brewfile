@@ -1,3 +1,5 @@
+tap 'armcknight/tools'
+brew 'armcknight/tools/tools'
 brew 'rbenv'
 brew 'XcodeGen'
 brew 'ruby-build'

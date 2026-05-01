@@ -5,7 +5,18 @@
 ### Added
 
 - `ChangelogParser` for parsing Keep a Changelog format markdown and filtering entries between versions.
+- `ChangelogParser.entriesSince(build:upTo:from:)` — filter changelog entries by build number range, extracted from `+N` semver metadata in entry version strings; handles RC-to-RC upgrades where the marketing version doesn't change.
 - `Environment.lastLaunchedVersion` exposed publicly for version upgrade detection.
+- `Environment.currentBuild` — the current app build number read from `CFBundleVersion` at launch.
+- `Environment.lastLaunchedBuild` — the build number of the previous run, persisted in `UserDefaults`; used by `ChangelogPresenter` for What's New detection.
+
+### Changed
+
+- `ChangelogPresenter.whatsNewEntries()` now compares build numbers (`currentBuild` vs `lastLaunchedBuild`) instead of marketing version strings; RC builds with different build numbers correctly trigger the What's New display even when the marketing version hasn't changed.
+
+### Fixed
+
+- `WhatsNewView`: fixed macOS build error — replaced unavailable `ToolbarItem(placement: .topBarTrailing)` with `.automatic` and guarded `.navigationBarTitleDisplayMode` behind `#if !os(macOS)`.
 - Sentry adapter for CrashReporter and BugReporter protocols with user feedback form.
 - OSLog adapter for Logger protocol using `os.Logger` and `OSLogStore`.
 - `CrashReporter` protocol: `supportsLogs` and `supportsBreadcrumbs` capability flags.
