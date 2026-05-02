@@ -21,6 +21,7 @@ public final class InfoPresenter: NSObject, @preconcurrency InfoViewControllerDe
     private let links: [LinkIcon]
     private let companyLink: LinkIcon
     private let getUserID: (() -> String?)?
+    private let userIDLabel: String
 
     public init(
         environment: Pippin.Environment,
@@ -28,7 +29,8 @@ public final class InfoPresenter: NSObject, @preconcurrency InfoViewControllerDe
         contactEmails: [String],
         links: [LinkIcon] = [],
         companyLink: LinkIcon,
-        getUserID: (() -> String?)? = nil
+        getUserID: (() -> String?)? = nil,
+        userIDLabel: String = "User ID"
     ) {
         self.environment = environment
         self.acknowledgements = acknowledgements
@@ -36,6 +38,7 @@ public final class InfoPresenter: NSObject, @preconcurrency InfoViewControllerDe
         self.links = links
         self.companyLink = companyLink
         self.getUserID = getUserID
+        self.userIDLabel = userIDLabel
     }
 
     public func show() {
@@ -79,7 +82,7 @@ public final class InfoPresenter: NSObject, @preconcurrency InfoViewControllerDe
             containerView = container.view
 
             let titleLabel = UILabel()
-            titleLabel.text = "User ID"
+            titleLabel.text = userIDLabel
             titleLabel.font = UIFont.systemFont(ofSize: 11, weight: .medium)
             titleLabel.textColor = environment.colors.foreground.withAlphaComponent(0.5)
             titleLabel.textAlignment = .center
