@@ -23,21 +23,32 @@ public struct AppAcknowledgements: Acknowledgements {
         self.environment = environment
 
         if let plistURL = acknowledgementsPlistURL {
+            environment.logger?.logDebug(message: String(format: "[%@] Loading acknowledgements plist from %@", valueType(self), plistURL.path))
             do {
                 let data = try Data(contentsOf: plistURL)
-                if let plist = try PropertyListSerialization.propertyList(from: data, options: PropertyListSerialization.ReadOptions(rawValue: 0), format: nil) as? [String: Any], let acknowledgementsList = plist["PreferenceSpecifiers"] as? [[String: String]] {
-                    libraryAcknowledgements = acknowledgementsList[1..<acknowledgementsList.count].compactMap { ack in
+                environment.logger?.logDebug(message: String(format: "[%@] Read %d bytes from plist", valueType(self), data.count))
+                if let plist = try PropertyListSerialization.propertyList(from: data, options: PropertyListSerialization.ReadOptions(rawValue: 0), format: nil) as? [String: Any],
+                   let acknowledgementsList = plist["PreferenceSpecifiers"] as? [[String: String]] {
+                    environment.logger?.logDebug(message: String(format: "[%@] Found %d PreferenceSpecifiers entries", valueType(self), acknowledgementsList.count))
+                    let parsed = acknowledgementsList[1..<acknowledgementsList.count].compactMap { ack -> String? in
                         guard let name = ack["Title"],
-                            let footer = ack["FooterText"],
-                            let license = ack["License"] else {
-                                return nil
+                              let footer = ack["FooterText"],
+                              let license = ack["License"] else {
+                            environment.logger?.logDebug(message: String(format: "[%@] Skipping entry missing Title/FooterText/License: %@", valueType(self), String(describing: ack)))
+                            return nil
                         }
                         return "\(name) (\(license))\n\(footer)"
-                    }.joined(separator: "\n\n")
+                    }
+                    environment.logger?.logDebug(message: String(format: "[%@] Parsed %d library acknowledgements", valueType(self), parsed.count))
+                    libraryAcknowledgements = parsed.joined(separator: "\n\n")
+                } else {
+                    environment.logger?.logDebug(message: String(format: "[%@] Plist did not contain expected PreferenceSpecifiers structure", valueType(self)))
                 }
             } catch {
                 environment.logger?.logError(message: String(format: "[%@] Failed to decode acknowledgements plist at %@", valueType(self), String(describing: acknowledgementsPlistURL)), error: error)
             }
+        } else {
+            environment.logger?.logDebug(message: String(format: "[%@] No acknowledgements plist URL provided", valueType(self)))
         }
     }
 
@@ -48,6 +59,11 @@ public struct AppAcknowledgements: Acknowledgements {
     public func acknowledgementsString() -> NSAttributedString? {
         var strings = [String]()
         var headings = [String]()
+        if let disclaimer {
+            let heading = "Disclaimer"
+            strings.append("\(heading):\n\(disclaimer)")
+            headings.append(heading)
+        }
         if let specialThanks {
             let heading = "Special thanks"
             strings.append("\(heading):\n\(specialThanks)")
@@ -56,11 +72,6 @@ public struct AppAcknowledgements: Acknowledgements {
         if let libraryAcknowledgements {
             let heading = "Libraries"
             strings.append("\(heading):\n\(libraryAcknowledgements)")
-            headings.append(heading)
-        }
-        if let disclaimer {
-            let heading = "Disclaimer"
-            strings.append("\(heading):\n\(disclaimer)")
             headings.append(heading)
         }
         let string = strings.joined(separator: "\n\n")
