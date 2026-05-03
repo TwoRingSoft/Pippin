@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [13.0.0] 2026-05-02
+
 ### Added
 
 - `ChangelogParser` for parsing Keep a Changelog format markdown and filtering entries between versions.
