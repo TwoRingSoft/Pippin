@@ -13,6 +13,7 @@
 ### Changed
 
 - `ChangelogPresenter.whatsNewEntries()` now compares build numbers (`currentBuild` vs `lastLaunchedBuild`) instead of marketing version strings; RC builds with different build numbers correctly trigger the What's New display even when the marketing version hasn't changed.
+- `AppAcknowledgements`: replaced `customAcknowledgements: String?` with `specialThanks: String?` and `disclaimer: String?`, each rendered as its own labelled section.
 
 ### Fixed
 

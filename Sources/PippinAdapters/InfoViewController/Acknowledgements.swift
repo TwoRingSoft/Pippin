@@ -12,12 +12,14 @@ import SwiftArmcknightUIKit
 
 #if canImport(UIKit)
 public struct AppAcknowledgements: Acknowledgements {
-    private var customAcknowledgements: String?
+    private var specialThanks: String?
+    private var disclaimer: String?
     private var libraryAcknowledgements: String?
     private unowned var environment: Environment
 
-    public init(customAcknowledgements: String? = nil, acknowledgementsPlistURL: URL? = nil, environment: Environment) {
-        self.customAcknowledgements = customAcknowledgements
+    public init(specialThanks: String? = nil, disclaimer: String? = nil, acknowledgementsPlistURL: URL? = nil, environment: Environment) {
+        self.specialThanks = specialThanks
+        self.disclaimer = disclaimer
         self.environment = environment
 
         if let plistURL = acknowledgementsPlistURL {
@@ -40,20 +42,25 @@ public struct AppAcknowledgements: Acknowledgements {
     }
 
     public func containsAcknowledgements() -> Bool {
-        return customAcknowledgements != nil || (libraryAcknowledgements != nil && libraryAcknowledgements?.count ?? 0 > 0)
+        return specialThanks != nil || disclaimer != nil || (libraryAcknowledgements != nil && libraryAcknowledgements?.count ?? 0 > 0)
     }
 
     public func acknowledgementsString() -> NSAttributedString? {
         var strings = [String]()
         var headings = [String]()
-        if let customAcknowledgements = customAcknowledgements {
+        if let specialThanks {
             let heading = "Special thanks"
-            strings.append("\(heading):\n\(customAcknowledgements)")
+            strings.append("\(heading):\n\(specialThanks)")
             headings.append(heading)
         }
-        if let libraryAcknowledgements = libraryAcknowledgements {
+        if let libraryAcknowledgements {
             let heading = "Libraries"
             strings.append("\(heading):\n\(libraryAcknowledgements)")
+            headings.append(heading)
+        }
+        if let disclaimer {
+            let heading = "Disclaimer"
+            strings.append("\(heading):\n\(disclaimer)")
             headings.append(heading)
         }
         let string = strings.joined(separator: "\n\n")

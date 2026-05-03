@@ -99,6 +99,34 @@ make deploy-beta              # 2.0.0-RC2
 make deploy                   # consolidates all RC sections into 2.0.0
 ```
 
+## Components
+
+### `InfoPresenter` (`PippinAdapters-InfoViewController`)
+
+Presents an about sheet in a floating `UIWindow` so it works correctly from SwiftUI roots. Initialize once and call `show()` / `dismiss()`.
+
+```swift
+let presenter = InfoPresenter(
+    environment: environment,
+    acknowledgements: AppAcknowledgements(
+        specialThanks: "Some Library by Some Author",
+        disclaimer: "For informational purposes only.",
+        environment: environment
+    ),
+    contactEmails: ["support@example.com"],
+    companyLink: MyCompanyLink()
+)
+presenter.show()
+```
+
+`AppAcknowledgements` accepts:
+
+| Parameter | Description |
+|---|---|
+| `specialThanks` | Free-form text rendered under a "Special thanks" heading |
+| `disclaimer` | Free-form text rendered under a "Disclaimer" heading |
+| `acknowledgementsPlistURL` | URL to a CocoaPods-style acknowledgements plist for library licenses |
+
 # Contribute
 
 Issues and pull requests are welcome! 
