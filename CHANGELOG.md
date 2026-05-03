@@ -12,11 +12,11 @@
 
 ### Changed
 
-- `ChangelogPresenter.whatsNewEntries()` now compares build numbers (`currentBuild` vs `lastLaunchedBuild`) instead of marketing version strings; RC builds with different build numbers correctly trigger the What's New display even when the marketing version hasn't changed.
 - `AppAcknowledgements`: replaced `customAcknowledgements: String?` with `specialThanks: String?` and `disclaimer: String?`, each rendered as its own labelled section.
 
 ### Fixed
 
+- `ChangelogPresenter.whatsNewEntries()` now compares build numbers (`currentBuild` vs `lastLaunchedBuild`) instead of marketing version strings; RC builds with different build numbers correctly trigger the What's New display even when the marketing version hasn't changed.
 - `WhatsNewView`: fixed macOS build error — replaced unavailable `ToolbarItem(placement: .topBarTrailing)` with `.automatic` and guarded `.navigationBarTitleDisplayMode` behind `#if !os(macOS)`.
 - Sentry adapter for CrashReporter and BugReporter protocols with user feedback form.
 - OSLog adapter for Logger protocol using `os.Logger` and `OSLogStore`.
