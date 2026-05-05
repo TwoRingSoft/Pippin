@@ -9,6 +9,7 @@
 import Foundation
 import Pippin
 import Sentry
+import SwiftUI
 import UIKit
 
 /// Pippin adapter for the Sentry SDK, providing `CrashReporter` and `BugReporter` conformance.
@@ -19,7 +20,7 @@ import UIKit
 /// 1. Add the `sentry-cocoa` Xcode project (`Sentry.xcodeproj`) as a child project reference.
 /// 2. Compile this file as part of a separate static library target that links the Sentry framework directly.
 public final class SentryAdapter: NSObject, EnvironmentallyConscious {
-    public var environment: Environment?
+    public var environment: Pippin.Environment?
 
     public init(serverKey: String, initialKeysAndValues: [String: String]?, configure: ((Options) -> Void)?) {
         Sentry.SentrySDK.start(configureOptions: { options in
@@ -126,28 +127,19 @@ extension SentryAdapter: CrashReporter {
 // MARK: BugReporter
 extension SentryAdapter: BugReporter {
     public func show(fromViewController viewController: UIViewController, screenshot: UIImage?, metadata: [String: AnyObject]?) {
-        let alert = UIAlertController(title: "Report a Bug", message: "Tell us what happened and we'll look into it.", preferredStyle: .alert)
-        alert.addTextField { $0.placeholder = "Name" }
-        alert.addTextField { $0.placeholder = "Email" }
-        alert.addTextField { $0.placeholder = "What went wrong?" }
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Send", style: .default) { [weak self] _ in
-            let name = alert.textFields?[0].text
-            let email = alert.textFields?[1].text
-            let message = alert.textFields?[2].text ?? ""
-
-            var attachments: [Attachment]?
-            if let logContents = self?.environment?.logger?.logContents(),
-               let logData = logContents.data(using: .utf8) {
-                attachments = [Attachment(data: logData, filename: "logs.txt", contentType: "text/plain")]
+        MainActor.assumeIsolated {
+            let viewModel = BugReportViewModel { [weak self] message, name, email in
+                var attachments: [Attachment]?
+                if let logContents = self?.environment?.logger?.logContents(),
+                   let logData = logContents.data(using: .utf8) {
+                    attachments = [Attachment(data: logData, filename: "logs.txt", contentType: "text/plain")]
+                }
+                let feedback = SentryFeedback(message: message, name: name, email: email, source: .custom, attachments: attachments)
+                SentrySDK.capture(feedback: feedback)
             }
-
-            let feedback = SentryFeedback(message: message, name: name, email: email, source: .custom, attachments: attachments)
-            SentrySDK.capture(feedback: feedback)
-        })
-
-        viewController.present(alert, animated: true)
+            let hostingController = UIHostingController(rootView: BugReportView(viewModel: viewModel))
+            viewController.present(hostingController, animated: true)
+        }
     }
 }
 
