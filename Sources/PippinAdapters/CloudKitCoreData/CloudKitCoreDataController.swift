@@ -124,8 +124,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
             guard let recordID else { return }
             DispatchQueue.main.async {
                 self.iCloudUserID = recordID.recordName
-                self.environment?.crashReporter?.setUser(id: recordID.recordName, username: nil, email: nil)
-                self.environment?.logger?.logInfo(message: "Reported iCloud user record ID to crash reporter: \(recordID.recordName)")
+                self.environment?.logger?.logInfo(message: "Fetched iCloud user record ID: \(recordID.recordName)")
             }
         }
     }
