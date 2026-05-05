@@ -21,7 +21,7 @@ import UIKit
 public final class SentryAdapter: NSObject, EnvironmentallyConscious {
     public var environment: Environment?
 
-    public init(serverKey: String, initialKeysAndValues: [String: String]?) {
+    public init(serverKey: String, initialKeysAndValues: [String: String]?, configure: ((Options) -> Void)?) {
         Sentry.SentrySDK.start(configureOptions: { options in
             options.dsn = serverKey
 #if DEBUG
@@ -51,7 +51,13 @@ public final class SentryAdapter: NSObject, EnvironmentallyConscious {
                     return scope
                 }
             }
+
+            configure?(options)
         })
+    }
+
+    public convenience init(serverKey: String, initialKeysAndValues: [String: String]?) {
+        self.init(serverKey: serverKey, initialKeysAndValues: initialKeysAndValues, configure: nil)
     }
 
     public init(recipients: [String]) {
