@@ -83,13 +83,15 @@ public final class InfoPresenter: NSObject, @preconcurrency InfoViewControllerDe
 
             let titleLabel = UILabel()
             titleLabel.text = userIDLabel
-            titleLabel.font = UIFont.systemFont(ofSize: 11, weight: .medium)
+            titleLabel.font = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: UIFont.systemFont(ofSize: 11, weight: .medium))
+            titleLabel.adjustsFontForContentSizeCategory = true
             titleLabel.textColor = environment.colors.foreground.withAlphaComponent(0.5)
             titleLabel.textAlignment = .center
 
             let idLabel = UILabel()
             idLabel.text = userID
-            idLabel.font = UIFont.monospacedSystemFont(ofSize: 11, weight: .regular)
+            idLabel.font = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: UIFont.monospacedSystemFont(ofSize: 11, weight: .regular))
+            idLabel.adjustsFontForContentSizeCategory = true
             idLabel.textColor = environment.colors.foreground.withAlphaComponent(0.7)
             idLabel.textAlignment = .center
             idLabel.numberOfLines = 0
@@ -173,7 +175,8 @@ private extension InfoPresenter {
 
         let label = UILabel()
         label.text = "Copied to clipboard"
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 13, weight: .medium))
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(label)

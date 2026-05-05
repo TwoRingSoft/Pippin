@@ -138,6 +138,7 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
         textView.attributedText = acknowledgements.acknowledgementsString()
         textView.isEditable = false
         textView.dataDetectorTypes = UIDataDetectorTypes.link
+        textView.adjustsFontForContentSizeCategory = true
         let vc = UIViewController(nibName: nil, bundle: nil)
         vc.view.addSubview(textView)
         vc.title = "Acknowledgements"
@@ -201,12 +202,14 @@ private extension InfoViewController {
         let appNameLabel = PaddedLabel(insets: UIEdgeInsets(top: 4, left: 12, bottom: 12, right: 12))
         appNameLabel.text = environment.appName
         appNameLabel.font = environment.fonts.superhero
+        appNameLabel.adjustsFontForContentSizeCategory = true
         appNameLabel.textColor = textColor
         appNameLabel.textAlignment = .center
         appNameLabel.adjustsFontSizeToFitWidth = true
         appNameLabel.minimumScaleFactor = 0.7
 
         let appInfoLabel = UILabel.label(withText: "\(environment.semanticVersion) build \(environment.currentBuild)", font: environment.fonts.text, textColor: textColor, alignment: .center)
+        appInfoLabel.adjustsFontForContentSizeCategory = true
 
         let stack = UIStackView(arrangedSubviews: [appNameLabel, appInfoLabel])
         stack.axis = .vertical
@@ -217,6 +220,7 @@ private extension InfoViewController {
     func configureStack(links: [LinkIcon], companyLink: LinkIcon) -> UIStackView {
         let urlButton = UIButton(frame: .zero)
         urlButton.configure(title: websiteURL.absoluteString, tintColor: textColor, font: environment.fonts.text, target: self, selector: #selector(websiteURLPressed))
+        urlButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         let socialLinks = configureSocialLinks(links: links)
         let copyright = configureCopyright(companyLink: companyLink)
@@ -284,6 +288,7 @@ private extension InfoViewController {
 
         let label = UILabel(frame: .zero)
         label.attributedText = string
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = textColor
         label.textAlignment = .center
         return label
@@ -332,6 +337,7 @@ private extension InfoViewController {
         let label = UILabel()
         label.text = title
         label.font = environment.fonts.barButtonTitle
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = textColor
 
         let row = UIStackView(arrangedSubviews: [imageView, label])

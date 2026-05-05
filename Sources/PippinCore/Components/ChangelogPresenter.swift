@@ -111,12 +111,23 @@ public class ChangelogViewController: UIViewController {
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
 
-        let html = Self.htmlPage(from: Self.markdownToHTML(markdown))
-        webView.loadHTMLString(html, baseURL: nil)
+        loadContent()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(contentSizeCategoryDidChange), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
     @objc private func dismissModal() {
         dismiss(animated: true)
+    }
+
+    @objc private func contentSizeCategoryDidChange() {
+        loadContent()
+    }
+
+    private func loadContent() {
+        let fontSize = UIFont.preferredFont(forTextStyle: .body).pointSize
+        let html = Self.htmlPage(from: Self.markdownToHTML(markdown), baseFontSize: fontSize)
+        webView.loadHTMLString(html, baseURL: nil)
     }
 
     static func markdownToHTML(_ markdown: String) -> String {
@@ -152,7 +163,7 @@ public class ChangelogViewController: UIViewController {
         return html
     }
 
-    static func htmlPage(from body: String) -> String {
+    static func htmlPage(from body: String, baseFontSize: CGFloat = 16) -> String {
         return """
         <!DOCTYPE html>
         <html>
@@ -162,7 +173,7 @@ public class ChangelogViewController: UIViewController {
             :root { color-scheme: light dark; }
             body {
                 font-family: -apple-system, system-ui;
-                font-size: 16px;
+                font-size: \(Int(baseFontSize))px;
                 line-height: 1.5;
                 padding: 16px;
                 margin: 0;
