@@ -208,7 +208,14 @@ private extension InfoViewController {
         appNameLabel.adjustsFontSizeToFitWidth = true
         appNameLabel.minimumScaleFactor = 0.7
 
-        let appInfoLabel = UILabel.label(withText: "\(environment.semanticVersion) build \(environment.currentBuild)", font: environment.fonts.text, textColor: textColor, alignment: .center)
+        var appInfo = "\(environment.semanticVersion) (\(environment.currentBuild))"
+        if let gitCommitHash = environment.gitCommitHash {
+            appInfo += " · \(gitCommitHash)"
+        }
+        if let gitBranch = environment.gitBranch, gitBranch != "master", gitBranch != "main" {
+            appInfo += " · \(gitBranch)"
+        }
+        let appInfoLabel = UILabel.label(withText: appInfo, font: environment.fonts.text, textColor: textColor, alignment: .center)
         appInfoLabel.adjustsFontForContentSizeCategory = true
 
         let stack = UIStackView(arrangedSubviews: [appNameLabel, appInfoLabel])
