@@ -57,6 +57,11 @@ public class Environment: NSObject {
     public let lastLaunchedBuild: Build?
     public let lastLaunchedVersion: SemanticVersion?
 
+    /// The short git commit hash injected at build time by `inject-git-info`, or `nil` if it wasn't injected.
+    public let gitCommitHash: String?
+    /// The git branch name injected at build time by `inject-git-info`, or `nil` if it wasn't injected.
+    public let gitBranch: String?
+
     // MARK: infrastructure
     public var model: Model?
     public var crashReporter: CrashReporter?
@@ -111,6 +116,8 @@ public class Environment: NSObject {
         self.appName = bundle.getAppName()
         self.semanticVersion = bundle.getSemanticVersion()
         self.currentBuild = bundle.getBuild()
+        self.gitCommitHash = bundle.gitCommitHash
+        self.gitBranch = bundle.gitBranch
         self.defaults = defaults
         self.fonts = fonts
         self.sharedAssetsBundle = sharedAssetsBundle
@@ -149,6 +156,8 @@ public class Environment: NSObject {
         self.appName = bundle.getAppName()
         self.semanticVersion = bundle.getSemanticVersion()
         self.currentBuild = bundle.getBuild()
+        self.gitCommitHash = bundle.gitCommitHash
+        self.gitBranch = bundle.gitBranch
         self.defaults = defaults
         self.sharedAssetsBundle = sharedAssetsBundle
 
