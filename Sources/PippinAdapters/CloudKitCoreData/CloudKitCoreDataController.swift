@@ -2,6 +2,27 @@ import CoreData
 import CloudKit
 import Pippin
 
+/// Controls whether `CloudKitCoreDataController` pushes the Core Data model's CloudKit schema to the
+/// **Development** environment at launch, via `NSPersistentCloudKitContainer.initializeCloudKitSchema`.
+///
+/// Programmatic schema initialization is only permitted against the Development environment; against
+/// Production it fails. The Production schema is promoted from Development through the CloudKit
+/// Dashboard, so Production/Release builds should use `.never`.
+public enum CloudKitSchemaInitializationPolicy {
+    /// Never initialize the schema. Use for Production/Release builds.
+    case never
+
+    /// Initialize once per Core Data model version. The controller derives the version from the
+    /// model's `versionIdentifiers`, records the last successfully-initialized version in
+    /// `UserDefaults` (keyed by model name), and re-runs only when that version changes. Use for
+    /// Debug and staging builds so new entities/fields auto-deploy to Development on first launch.
+    case onModelVersionChange
+
+    /// Always initialize, regardless of the recorded version. Use as a manual override, e.g. after
+    /// resetting the Development environment.
+    case always
+}
+
 public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
     public var environment: Environment? {
         didSet { startObservingCloudKitEvents() }
@@ -11,13 +32,18 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
     public let modelName: String
     public private(set) var iCloudUserID: String?
 
+    /// `nil` when CloudKit schema initialization was not attempted or completed successfully;
+    /// otherwise the error from the attempt. The controller records its "schema is up to date"
+    /// marker only on success, so a failed attempt retries on the next launch.
+    public private(set) var schemaInitializationError: Error?
+
     private let privatePersistentStoreURL: URL
     private let sharedPersistentStoreURL: URL
     private var eventObserver: NSObjectProtocol?
     private var pendingErrors: [String: Error] = [:]
 
 
-    public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, initializeCloudKitSchema: Bool, resetSharedStore: Bool) {
+    public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, schemaInitialization: CloudKitSchemaInitializationPolicy, resetSharedStore: Bool) {
         self.modelName = modelName
         container = NSPersistentCloudKitContainer(name: modelName, managedObjectModel: managedObjectModel)
         cloudKitContainer = CKContainer(identifier: cloudKitContainerIdentifier)
@@ -86,13 +112,48 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
-        if initializeCloudKitSchema {
-            do {
-                try container.initializeCloudKitSchema(options: [])
-                environment?.logger?.logInfo(message: "CloudKit schema initialization succeeded")
-            } catch {
-                environment?.logger?.logError(message: "CloudKit schema initialization failed", error: error)
-            }
+        initializeCloudKitSchemaIfNeeded(policy: schemaInitialization, model: managedObjectModel)
+    }
+
+    /// The `UserDefaults` key under which the last successfully-initialized schema version is stored,
+    /// namespaced by model name so multiple containers don't collide.
+    private var schemaVersionDefaultsKey: String {
+        "\(modelName).lastInitializedCloudKitSchemaVersion"
+    }
+
+    private func schemaVersion(of model: NSManagedObjectModel) -> String {
+        model.versionIdentifiers
+            .compactMap { $0 as? String }
+            .sorted()
+            .joined(separator: ".")
+    }
+
+    /// Resolves `policy` against the model version and the recorded marker, then calls
+    /// `initializeCloudKitSchema` when warranted. On success the model version is recorded so
+    /// `.onModelVersionChange` skips until the next model change; on failure
+    /// `schemaInitializationError` is set and the marker is left untouched so the next launch retries.
+    private func initializeCloudKitSchemaIfNeeded(policy: CloudKitSchemaInitializationPolicy, model: NSManagedObjectModel) {
+        let currentVersion = schemaVersion(of: model)
+
+        let shouldInitialize: Bool
+        switch policy {
+        case .never:
+            shouldInitialize = false
+        case .always:
+            shouldInitialize = true
+        case .onModelVersionChange:
+            shouldInitialize = UserDefaults.standard.string(forKey: schemaVersionDefaultsKey) != currentVersion
+        }
+
+        guard shouldInitialize else { return }
+
+        do {
+            try container.initializeCloudKitSchema(options: [])
+            UserDefaults.standard.set(currentVersion, forKey: schemaVersionDefaultsKey)
+            environment?.logger?.logInfo(message: "CloudKit schema initialization succeeded (version \(currentVersion))")
+        } catch {
+            schemaInitializationError = error
+            environment?.logger?.logError(message: "CloudKit schema initialization failed", error: error)
         }
     }
 

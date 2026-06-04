@@ -127,6 +127,31 @@ presenter.show()
 | `disclaimer` | Free-form text rendered under a "Disclaimer" heading |
 | `acknowledgementsPlistURL` | URL to a CocoaPods-style acknowledgements plist for library licenses |
 
+### `CloudKitCoreDataController` (`PippinAdapters-CloudKitCoreData`)
+
+Wraps an `NSPersistentCloudKitContainer` with a private + shared store for CloudKit sync and sharing, automatic lightweight migration, and remote-change observation.
+
+It can also push the Core Data model's CloudKit schema to the **Development** environment at launch via `initializeCloudKitSchema`. Because programmatic schema initialization is only permitted against Development (it fails against Production), the caller chooses a `CloudKitSchemaInitializationPolicy`:
+
+| Policy | Behavior | Use for |
+|---|---|---|
+| `.never` | Don't initialize the schema. | Production/Release builds (promote the schema via the CloudKit Dashboard instead). |
+| `.onModelVersionChange` | Initialize once per model version. The controller derives the version from `managedObjectModel.versionIdentifiers`, records the last successfully-initialized version in `UserDefaults` (keyed by `modelName`), and re-runs only when it changes. | Debug and staging builds, so new entities/fields auto-deploy to Development on first launch. |
+| `.always` | Initialize on every launch, regardless of the recorded version. | A manual override, e.g. after resetting the Development environment. |
+
+```swift
+let controller = CloudKitCoreDataController(
+    modelName: "MyApp",
+    cloudKitContainerIdentifier: "iCloud.com.example.myapp",
+    managedObjectModel: model,
+    inMemory: false,
+    schemaInitialization: .onModelVersionChange,
+    resetSharedStore: false
+)
+```
+
+The version marker is written only on success, so a failed attempt (offline, etc.) retries on the next launch; inspect `controller.schemaInitializationError` for the most recent failure.
+
 # Contribute
 
 Issues and pull requests are welcome! 
