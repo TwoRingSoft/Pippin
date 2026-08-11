@@ -1,0 +1,27 @@
+name: release
+
+# `make deploy` migrates the changelog, tags, and pushes from a workstation. This
+# picks the tag up and delegates to armcknight/workflows' reusable release
+# pipeline, which publishes the GitHub release from that changelog section.
+#
+# Publishing in CI rather than from `make deploy` is the point: 13.0.1 was tagged
+# and pushed, but its local `prepare-release --github-release` never produced a
+# release, leaving a version dependents could resolve and nobody could read notes
+# for.
+#
+# There is no artifact to build or upload: dependents resolve this package
+# straight from the git tag, so the tag is the release.
+
+on:
+  push:
+    tags:
+    # prepare-release names the tag after the version file exactly — bare, with
+    # no `v` prefix. A release candidate carries an `-RC<n>` suffix.
+    - '[0-9]+.[0-9]+.[0-9]+'
+    - '[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    uses: armcknight/workflows/.github/workflows/github-release.yml@2

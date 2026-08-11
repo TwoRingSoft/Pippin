@@ -1,49 +1,62 @@
 VERSION_FILE = VERSION
 
-init:
+.PHONY: help init xcode build build-macos build-ios patch minor major deploy-beta deploy
+
+.DEFAULT_GOAL := help
+
+help: ## Show this help
+	@echo "Pippin — available make targets:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		| sort \
+		| awk 'BEGIN {FS = ":.*?## "} {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
+
+# MARK: - Dev tooling
+
+init: ## Fetch submodules and install the toolchain
 	git submodule update --init --recursive
 	brew bundle
 	rbenv install --skip-existing
 	rbenv exec gem update bundler
 	rbenv exec bundle update
 
-.PHONY: xcode
-xcode:
+xcode: ## Update the example app's pods and open its workspace
 	pushd Examples/Pippin; rbenv exec bundle exec pod update; xed Examples/Pippin/Pippin.xcworkspace; popd
 
-.PHONY: build-macos
-build-macos:
+build-macos: ## Build for macOS
 	swift build
 
-.PHONY: build-ios
-build-ios:
+build-ios: ## Build for the iOS simulator
 	swift build --sdk "$$(xcrun --sdk iphonesimulator --show-sdk-path)" --triple arm64-apple-ios17.0-simulator
 
-.PHONY: build
-build: build-macos build-ios
+build: build-macos build-ios ## Build for macOS and the iOS simulator
 
 # MARK: - Releasing
+#
+# `make {patch,minor,major}` bumps VERSION with vrsn. Then `make deploy` runs
+# prepare-release, which migrates the CHANGELOG [Unreleased] section into a dated
+# version section, commits, tags, and pushes. GitHub Actions picks up the tag and
+# publishes the GitHub release from that changelog section.
+#
+# Publishing happens in CI rather than here, so it cannot half-succeed depending
+# on the workstation that tagged — which is how 13.0.1 came to be a tag with no
+# release.
+#
+# There is no artifact to ship: dependents resolve the package from the git tag,
+# so tagging is the release.
+#
+# Requires `vrsn` + `prepare-release` on PATH (from the armcknight/tools cask).
 
-.PHONY: patch
-patch:
+patch: ## Bump the patch version (x.y.Z) and commit
 	vrsn patch -f $(VERSION_FILE) --commit
 
-.PHONY: minor
-minor:
+minor: ## Bump the minor version (x.Y.0) and commit
 	vrsn minor -f $(VERSION_FILE) --commit
 
-.PHONY: major
-major:
+major: ## Bump the major version (X.0.0) and commit
 	vrsn major -f $(VERSION_FILE) --commit
 
-.PHONY: deploy-beta
-deploy-beta:
-	@{ \
-	prepare-release rc --file $(VERSION_FILE) --push --github-release --prerelease ; \
-	} 2>&1 | tee deploy.log
+deploy-beta: ## Migrate the changelog, tag an RC, and push
+	prepare-release rc --file $(VERSION_FILE) --push
 
-.PHONY: deploy
-deploy:
-	@{ \
-	prepare-release --file $(VERSION_FILE) --push --github-release ; \
-	} 2>&1 | tee deploy.log
+deploy: ## Migrate the changelog, tag, and push the release
+	prepare-release --file $(VERSION_FILE) --push

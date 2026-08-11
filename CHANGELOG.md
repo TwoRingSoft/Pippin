@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Changed
+
+- The GitHub release is now published by CI on a tag push, via the reusable
+  `github-release` workflow in `armcknight/workflows`, instead of by
+  `prepare-release --github-release` on whichever workstation ran `make deploy`.
+  That local step is how 13.0.1 became a tag with no release at all.
+- `make help` lists every target, and the existing targets carry descriptions.
+
 ## [13.0.1] 2026-05-02
 
 ## [13.0.0] 2026-05-02
