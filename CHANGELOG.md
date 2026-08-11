@@ -12,6 +12,23 @@
 
 ## [13.0.1] 2026-05-02
 
+Notes written after the fact: this version was tagged in May 2026 but its
+release was never published, and its changelog section was left empty. Both are
+reconstructed here from the single commit it contains (`afe777b`).
+
+### Changed
+
+- `Acknowledgements`: the disclaimer is now the first section of the rendered
+  acknowledgements text rather than the last.
+
+### Added
+
+- `Acknowledgements`: debug logging through the whole acknowledgements plist
+  path — the URL it loads, the bytes read, the `PreferenceSpecifiers` count, each
+  entry skipped for a missing `Title`, `FooterText` or `License`, the parsed
+  total, and the two cases that silently produced nothing before (no plist URL
+  supplied, and a plist without the expected structure).
+
 ## [13.0.0] 2026-05-02
 
 ### Added
