@@ -4,6 +4,9 @@
 
 ### Changed
 
+- Bump the `swift-armcknight` submodule to its split release: it now vends a
+  platform-neutral `SwiftArmcknightCore` product (builds on Linux) alongside the
+  Apple-only `SwiftArmcknight`, which re-exports Core. No Pippin API change.
 - The GitHub release is now published by CI on a tag push, via the reusable
   `github-release` workflow in `armcknight/workflows`, instead of by
   `prepare-release --github-release` on whichever workstation ran `make deploy`.
