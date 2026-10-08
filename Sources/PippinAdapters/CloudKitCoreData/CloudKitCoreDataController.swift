@@ -28,7 +28,9 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         didSet { startObservingCloudKitEvents() }
     }
     public let container: NSPersistentCloudKitContainer
-    public let cloudKitContainer: CKContainer
+    /// `nil` for an in-memory store, which never touches CloudKit. Creating a `CKContainer` needs the
+    /// iCloud entitlement, which an unsigned build (such as UI tests run in CI) does not have.
+    public let cloudKitContainer: CKContainer?
     public let modelName: String
     public private(set) var iCloudUserID: String?
 
@@ -46,7 +48,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
     public init(modelName: String, cloudKitContainerIdentifier: String, managedObjectModel: NSManagedObjectModel, inMemory: Bool, schemaInitialization: CloudKitSchemaInitializationPolicy, resetSharedStore: Bool) {
         self.modelName = modelName
         container = NSPersistentCloudKitContainer(name: modelName, managedObjectModel: managedObjectModel)
-        cloudKitContainer = CKContainer(identifier: cloudKitContainerIdentifier)
+        cloudKitContainer = inMemory ? nil : CKContainer(identifier: cloudKitContainerIdentifier)
 
         let baseURL = NSPersistentContainer.defaultDirectoryURL()
         privatePersistentStoreURL = baseURL.appendingPathComponent("\(modelName)-private.sqlite")
@@ -175,8 +177,9 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
 
     /// Fetches the current iCloud user record ID and reports it to the environment's crash reporter as the user identifier.
     /// The record ID is a stable per-container hash of the user's iCloud account; it is not personally identifying.
+    /// Does nothing for an in-memory store, which has no CloudKit container.
     public func reportiCloudUserToCrashReporter() {
-        cloudKitContainer.fetchUserRecordID { [weak self] recordID, error in
+        cloudKitContainer?.fetchUserRecordID { [weak self] recordID, error in
             guard let self else { return }
             if let error {
                 self.environment?.logger?.logError(message: "Failed to fetch iCloud user record ID", error: error)

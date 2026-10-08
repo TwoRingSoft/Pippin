@@ -4,6 +4,13 @@
 
 ### Changed
 
+- **Breaking:** `CloudKitCoreDataController.cloudKitContainer` is now
+  `CKContainer?`, and `nil` for an in-memory store, which no longer creates a
+  `CKContainer` at all. Creating one needs the iCloud entitlement, so an unsigned
+  build (UI tests run in CI) crashed at launch even with `inMemory: true`.
+  `reportiCloudUserToCrashReporter()` does nothing for an in-memory store.
+  Callers unwrap the container, for example to show a share sheet only when
+  there is one.
 - Bump the `swift-armcknight` submodule to its split release: it now vends a
   platform-neutral `SwiftArmcknightCore` product (builds on Linux) alongside the
   Apple-only `SwiftArmcknight`, which re-exports Core. No Pippin API change.
