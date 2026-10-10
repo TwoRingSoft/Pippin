@@ -95,7 +95,7 @@ public class InfoViewController: UIViewController, AppInfoPresenter {
     }
 
     func secretTestCrash() {
-        environment.crashReporter?.testCrash()
+        environment.appMonitor?.testCrash()
     }
     
     func reportBugPressed() {

@@ -1,5 +1,5 @@
 //
-//  CrashReporter.swift
+//  AppMonitor.swift
 //  Pippin
 //
 //  Created by Andrew McKnight on 7/15/17.
@@ -9,14 +9,14 @@
 import Foundation
 
 /**
- `CrashReporter` provides a common interface for working with crash reporter
- objects or SDKs.
+ `AppMonitor` provides a common interface for working with app monitoring
+ objects or SDKs: crash reporting, nonfatal errors, logs and breadcrumbs.
  */
-// CrashReporter protocol body shared across platforms
+// AppMonitor protocol body shared across platforms
 // On iOS, also conforms to Debuggable (UIKit-dependent)
 
 #if canImport(UIKit)
-public protocol CrashReporter: EnvironmentallyConscious, Debuggable {
+public protocol AppMonitor: EnvironmentallyConscious, Debuggable {
     init(serverKey: String, initialKeysAndValues: [String: String]?)
 
     /// Whether the service supports unstructured log messages (e.g. Sentry Logs).
@@ -37,7 +37,7 @@ public protocol CrashReporter: EnvironmentallyConscious, Debuggable {
     func testCrash()
 }
 #else
-public protocol CrashReporter: EnvironmentallyConscious {
+public protocol AppMonitor: EnvironmentallyConscious {
     init(serverKey: String, initialKeysAndValues: [String: String]?)
 
     var supportsLogs: Bool { get }
@@ -51,3 +51,6 @@ public protocol CrashReporter: EnvironmentallyConscious {
     func testCrash()
 }
 #endif
+
+@available(*, deprecated, renamed: "AppMonitor")
+public typealias CrashReporter = AppMonitor

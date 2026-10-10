@@ -86,7 +86,7 @@ private extension DebugViewController {
             environment.model?.debuggingControlPanel(),
             environment.activityIndicator?.debuggingControlPanel(),
             environment.alerter?.debuggingControlPanel(),
-            environment.crashReporter?.debuggingControlPanel(),
+            environment.appMonitor?.debuggingControlPanel(),
             environment.locator?.debuggingControlPanel(),
             environment.logger?.debuggingControlPanel(),
             environment.touchVisualizer?.debuggingControlPanel(),

@@ -4,11 +4,15 @@
 
 ### Changed
 
+- Renamed the `CrashReporter` protocol to `AppMonitor`, `Environment.crashReporter`
+  to `Environment.appMonitor`, and
+  `CloudKitCoreDataController.reportiCloudUserToCrashReporter()` to
+  `reportiCloudUserToAppMonitor()`. The old names remain as deprecated aliases.
 - **Breaking:** `CloudKitCoreDataController.cloudKitContainer` is now
   `CKContainer?`, and `nil` for an in-memory store, which no longer creates a
   `CKContainer` at all. Creating one needs the iCloud entitlement, so an unsigned
   build (UI tests run in CI) crashed at launch even with `inMemory: true`.
-  `reportiCloudUserToCrashReporter()` does nothing for an in-memory store.
+  `reportiCloudUserToAppMonitor()` does nothing for an in-memory store.
   Callers unwrap the container, for example to show a share sheet only when
   there is one.
 - Bump the `swift-armcknight` submodule to its split release: it now vends a
