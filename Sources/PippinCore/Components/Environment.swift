@@ -64,7 +64,12 @@ public class Environment: NSObject {
 
     // MARK: infrastructure
     public var model: Model?
-    public var crashReporter: CrashReporter?
+    public var appMonitor: AppMonitor?
+    @available(*, deprecated, renamed: "appMonitor")
+    public var crashReporter: AppMonitor? {
+        get { appMonitor }
+        set { appMonitor = newValue }
+    }
     public var logger: Logger?
     public var defaults: Defaults
 
@@ -212,7 +217,7 @@ public class Environment: NSObject {
     public func connectEnvironment() {
         logger?.environment = self
         model?.environment = self
-        crashReporter?.environment = self
+        appMonitor?.environment = self
         inAppPurchaseVendor?.environment = self
         locator?.environment = self
         cloudSharing?.environment = self

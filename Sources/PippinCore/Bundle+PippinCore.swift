@@ -26,7 +26,7 @@ public extension Bundle {
         (infoDictionary?["GIT_STATUS_CLEAN"] as? String) == "1"
     }
 
-    /// Tags suitable for passing to a crash reporter, built from git info injected at build time by `inject-git-info`.
+    /// Tags suitable for passing to an app monitor, built from git info injected at build time by `inject-git-info`.
     var gitInfoTags: [String: String] {
         var tags: [String: String] = [:]
         if let hash = gitCommitHash {

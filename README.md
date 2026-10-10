@@ -24,7 +24,7 @@ let environment = Environment.default(
 )
 
 // Crashlytics is a special situation
-environment.crashReporter = CrashlyticsAdapter(debug: true)
+environment.appMonitor = CrashlyticsAdapter(debug: true)
 
 // other optional peripherals
 environment.locator = CoreLocationAdapter(locatorDelegate: self)

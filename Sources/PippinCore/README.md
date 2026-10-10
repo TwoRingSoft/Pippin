@@ -23,7 +23,7 @@ The basic building blocks of `Pippin`: stable APIs that sit between app code and
 `PippinCore` abstracts some major aspects of an app into protocols describing how they should work:
 
 - `Model`: data modelling (WIP: for now just use `PippinAdapters/CoreDataAdapter`)
-- `CrashReporter`
+- `AppMonitor`
 - `BugReporter`
 - `Logger`
 - `Alerter`
@@ -38,7 +38,7 @@ A few protocols define cross-cutting concerns among many components:
 
 - `Themeable`: provide access to `UIAppearanceProxy` based theming of UI elements
 - `Debuggable`: deliver UI controls to exercise and manipulate UI components, for use by developers and testers
-- `EnvironmentallyConscious`: provides a reference back to the `Environment` instance to which an instance belongs, allowing it to use other components: everything may access the logger, the logger may access the crash reporter to leave breadcrumbs, and the bug reporter may access the data model to export the database with the bug report
+- `EnvironmentallyConscious`: provides a reference back to the `Environment` instance to which an instance belongs, allowing it to use other components: everything may access the logger, the logger may access the app monitor to leave breadcrumbs, and the bug reporter may access the data model to export the database with the bug report
 
 ## Peripherals
 
