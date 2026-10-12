@@ -19,6 +19,9 @@
   `prepare-release --github-release` on whichever workstation ran `make deploy`.
   That local step is how 13.0.1 became a tag with no release at all.
 - `make help` lists every target, and the existing targets carry descriptions.
+- `InfoViewController` shows the git branch on its own line under the version,
+  and wraps long branch names at `/`, `-`, `_` and `.` instead of running off
+  the screen.
 
 ## [13.0.1] 2026-05-02
 

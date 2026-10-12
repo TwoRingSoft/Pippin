@@ -196,6 +196,8 @@ private extension InfoViewController {
         view.addSubview(stack)
         
         stack.centerAnchors == view.centerAnchors
+        stack.leadingAnchor >= view.layoutMarginsGuide.leadingAnchor
+        stack.trailingAnchor <= view.layoutMarginsGuide.trailingAnchor
     }
     
     func configureAppInfoStack() -> UIStackView {
@@ -212,18 +214,35 @@ private extension InfoViewController {
         if let gitCommitHash = environment.gitCommitHash {
             appInfo += " · \(gitCommitHash)"
         }
-        if let gitBranch = environment.gitBranch, gitBranch != "master", gitBranch != "main" {
-            appInfo += " · \(gitBranch)"
-        }
         let appInfoLabel = UILabel.label(withText: appInfo, font: environment.fonts.text, textColor: textColor, alignment: .center)
         appInfoLabel.adjustsFontForContentSizeCategory = true
 
-        let stack = UIStackView(arrangedSubviews: [appNameLabel, appInfoLabel])
+        var arrangedSubviews: [UIView] = [appNameLabel, appInfoLabel]
+        if let gitBranch = environment.gitBranch, gitBranch != "master", gitBranch != "main" {
+            arrangedSubviews.append(gitBranchLabel(branch: gitBranch))
+        }
+
+        let stack = UIStackView(arrangedSubviews: arrangedSubviews)
         stack.axis = .vertical
         stack.clipsToBounds = false
         return stack
     }
-    
+
+    /// Branch names can be very long and contain no spaces, so insert zero-width spaces after common separators to give the label places to wrap.
+    func gitBranchLabel(branch: String) -> UILabel {
+        let breakableBranch = branch.reduce(into: "") { result, character in
+            result.append(character)
+            if "/-_.".contains(character) {
+                result.append("\u{200B}")
+            }
+        }
+        let label = UILabel.label(withText: breakableBranch, font: environment.fonts.text, textColor: textColor, alignment: .center)
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        return label
+    }
+
     func configureStack(links: [LinkIcon], companyLink: LinkIcon) -> UIStackView {
         let urlButton = UIButton(frame: .zero)
         urlButton.configure(title: websiteURL.absoluteString, tintColor: textColor, font: environment.fonts.text, target: self, selector: #selector(websiteURLPressed))
