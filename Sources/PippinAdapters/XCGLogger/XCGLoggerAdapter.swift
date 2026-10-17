@@ -102,7 +102,7 @@ extension XCGLoggerAdapter: Logger {
     @objc public func logError(message: String, error: Error) {
         let messageWithErrorDescription = String(format: "%@: %@", message, error as NSError)
         self.log(message: messageWithErrorDescription, logLevel: XCGLogger.Level.error)
-        environment?.crashReporter?.recordNonfatalError(error: error, metadata: nil)
+        environment?.appMonitor?.recordNonfatalError(error: error, metadata: nil)
     }
 
     public func logContents() -> String? {
@@ -150,7 +150,7 @@ private extension XCGLoggerAdapter {
     func log(message: String, logLevel: XCGLogger.Level) {
         self.xcgLogger.logln(message, level: logLevel)
         if self.logLevel.xcgLogLevel() >= logLevel {
-            environment?.crashReporter?.log(message: String(format: "[%@] %@", logLevel.description, message))
+            environment?.appMonitor?.log(message: String(format: "[%@] %@", logLevel.description, message))
         }
     }
 

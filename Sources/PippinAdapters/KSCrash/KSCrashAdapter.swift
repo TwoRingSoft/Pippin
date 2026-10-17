@@ -27,7 +27,7 @@ public final class KSCrashAdapter: NSObject, EnvironmentallyConscious {
     }
 }
 
-extension KSCrashAdapter: CrashReporter {
+extension KSCrashAdapter: AppMonitor {
     public func log(message: String) {
         let formatter = ISO8601DateFormatter()
         if KSCrash.sharedInstance().userInfo == nil {
@@ -54,7 +54,7 @@ extension KSCrashAdapter: CrashReporter {
 extension KSCrashAdapter: Debuggable {
     public func debuggingControlPanel() -> UIView {
         let foregroundColor = environment?.colors.foreground ?? UIColor.black
-        let titleLabel = UILabel.label(withText: "CrashReporter:", font: environment!.fonts.title, textColor: foregroundColor)
+        let titleLabel = UILabel.label(withText: "AppMonitor:", font: environment!.fonts.title, textColor: foregroundColor)
         let button = UIButton(type: .custom)
         button.setTitle("Test crash", for: .normal)
         button.addTarget(self, action: #selector(testCrash), for: .touchUpInside)

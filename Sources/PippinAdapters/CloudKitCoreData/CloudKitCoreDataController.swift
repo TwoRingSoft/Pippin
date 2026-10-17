@@ -175,10 +175,15 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
         container.persistentStoreCoordinator.persistentStore(for: sharedPersistentStoreURL)
     }
 
-    /// Fetches the current iCloud user record ID and reports it to the environment's crash reporter as the user identifier.
+    @available(*, deprecated, renamed: "reportiCloudUserToAppMonitor")
+    public func reportiCloudUserToCrashReporter() {
+        reportiCloudUserToAppMonitor()
+    }
+
+    /// Fetches the current iCloud user record ID and reports it to the environment's app monitor as the user identifier.
     /// The record ID is a stable per-container hash of the user's iCloud account; it is not personally identifying.
     /// Does nothing for an in-memory store, which has no CloudKit container.
-    public func reportiCloudUserToCrashReporter() {
+    public func reportiCloudUserToAppMonitor() {
         cloudKitContainer?.fetchUserRecordID { [weak self] recordID, error in
             guard let self else { return }
             if let error {
@@ -244,7 +249,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
     private func startObservingCloudKitEvents() {
         for (key, error) in pendingErrors {
             environment?.logger?.logError(message: "Deferred error from init (\(key))", error: error)
-            environment?.crashReporter?.recordNonfatalError(error: error, metadata: ["init.phase": key])
+            environment?.appMonitor?.recordNonfatalError(error: error, metadata: ["init.phase": key])
         }
         pendingErrors.removeAll()
 
@@ -334,7 +339,7 @@ public final class CloudKitCoreDataController: NSObject, @unchecked Sendable {
                     message: "CloudKit \(typeName) event failed (store: \(event.storeIdentifier)) — \(metadata)",
                     error: error
                 )
-                self.environment?.crashReporter?.recordNonfatalError(
+                self.environment?.appMonitor?.recordNonfatalError(
                     error: error,
                     metadata: metadata
                 )
@@ -384,7 +389,7 @@ extension CloudKitCoreDataController: CloudSharing {
             return share
         } catch {
             environment?.logger?.logError(message: "Share creation failed", error: error)
-            environment?.crashReporter?.recordNonfatalError(error: error, metadata: ["cloudkit.operation": "share"])
+            environment?.appMonitor?.recordNonfatalError(error: error, metadata: ["cloudkit.operation": "share"])
             throw error
         }
     }
@@ -402,7 +407,7 @@ extension CloudKitCoreDataController: CloudSharing {
             container.acceptShareInvitations(from: metadata, into: sharedStore) { [weak self] _, error in
                 if let error {
                     self?.environment?.logger?.logError(message: "acceptShareInvitations failed", error: error)
-                    self?.environment?.crashReporter?.recordNonfatalError(error: error, metadata: ["cloudkit.operation": "acceptShareInvitations"])
+                    self?.environment?.appMonitor?.recordNonfatalError(error: error, metadata: ["cloudkit.operation": "acceptShareInvitations"])
                     continuation.resume(throwing: error)
                 } else {
                     self?.environment?.logger?.logInfo(message: "Share invitation(s) accepted successfully")

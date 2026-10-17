@@ -12,7 +12,7 @@ import Sentry
 import SwiftUI
 import UIKit
 
-/// Pippin adapter for the Sentry SDK, providing `CrashReporter` and `BugReporter` conformance.
+/// Pippin adapter for the Sentry SDK, providing `AppMonitor` and `BugReporter` conformance.
 ///
 /// This file is not built as an SPM target because sentry-cocoa's `Package.swift` distributes
 /// pre-built xcframeworks, which can cause runtime symbol mismatches when compiled via SPM.
@@ -62,12 +62,12 @@ public final class SentryAdapter: NSObject, EnvironmentallyConscious {
     }
 
     public init(recipients: [String]) {
-        // no-op, it'll already have been initialized as a crash reporter
+        // no-op, it'll already have been initialized as an app monitor
     }
 }
 
-// MARK: CrashReporter
-extension SentryAdapter: CrashReporter {
+// MARK: AppMonitor
+extension SentryAdapter: AppMonitor {
 
     public var supportsLogs: Bool { true }
     public var supportsBreadcrumbs: Bool { true }

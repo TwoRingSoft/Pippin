@@ -78,7 +78,7 @@ extension SwiftyBeaverAdapter: Pippin.Logger {
     public func logError(message: String, error: Error) {
         beaver.error("\(message): \(error.localizedDescription)")
         forward(message: message, level: .error)
-        environment?.crashReporter?.recordNonfatalError(error: error, metadata: nil)
+        environment?.appMonitor?.recordNonfatalError(error: error, metadata: nil)
     }
 
     public func logContents() -> String? {
@@ -106,11 +106,11 @@ extension SwiftyBeaverAdapter: Debuggable {
 
 private extension SwiftyBeaverAdapter {
     func forward(message: String, level: LogLevel) {
-        guard let crashReporter = environment?.crashReporter else { return }
-        if crashReporter.supportsLogs {
-            crashReporter.log(message: "[\(level)] \(message)")
-        } else if crashReporter.supportsBreadcrumbs {
-            crashReporter.recordBreadcrumb(message: message, category: "swiftybeaver", level: level)
+        guard let appMonitor = environment?.appMonitor else { return }
+        if appMonitor.supportsLogs {
+            appMonitor.log(message: "[\(level)] \(message)")
+        } else if appMonitor.supportsBreadcrumbs {
+            appMonitor.recordBreadcrumb(message: message, category: "swiftybeaver", level: level)
         }
     }
 }

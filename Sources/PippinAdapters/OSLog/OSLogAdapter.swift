@@ -34,32 +34,32 @@ extension OSLogAdapter: Pippin.Logger {
     public func logVerbose(message: String) {
         guard logLevel.rawValue <= LogLevel.verbose.rawValue else { return }
         logger.trace("\(message, privacy: .public)")
-        forwardToCrashReporter(message: message, level: .verbose)
+        forwardToAppMonitor(message: message, level: .verbose)
     }
 
     public func logDebug(message: String) {
         guard logLevel.rawValue <= LogLevel.debug.rawValue else { return }
         logger.debug("\(message, privacy: .public)")
-        forwardToCrashReporter(message: message, level: .debug)
+        forwardToAppMonitor(message: message, level: .debug)
     }
 
     public func logInfo(message: String) {
         guard logLevel.rawValue <= LogLevel.info.rawValue else { return }
         logger.info("\(message, privacy: .public)")
-        forwardToCrashReporter(message: message, level: .info)
+        forwardToAppMonitor(message: message, level: .info)
     }
 
     public func logWarning(message: String) {
         guard logLevel.rawValue <= LogLevel.warning.rawValue else { return }
         logger.warning("\(message, privacy: .public)")
-        forwardToCrashReporter(message: message, level: .warning)
+        forwardToAppMonitor(message: message, level: .warning)
     }
 
     public func logError(message: String, error: Error) {
         let fullMessage = "\(message): \(error.localizedDescription)"
         logger.error("\(message, privacy: .public): \(error.localizedDescription, privacy: .public)")
-        forwardToCrashReporter(message: fullMessage, level: .error)
-        environment?.crashReporter?.recordNonfatalError(error: error, metadata: nil)
+        forwardToAppMonitor(message: fullMessage, level: .error)
+        environment?.appMonitor?.recordNonfatalError(error: error, metadata: nil)
     }
 
     public func logContents() -> String? {
@@ -87,12 +87,12 @@ extension OSLogAdapter: Pippin.Logger {
 
 // MARK: Private
 private extension OSLogAdapter {
-    func forwardToCrashReporter(message: String, level: LogLevel) {
-        guard let crashReporter = environment?.crashReporter else { return }
-        if crashReporter.supportsLogs {
-            crashReporter.log(message: "[\(level)] \(message)")
-        } else if crashReporter.supportsBreadcrumbs {
-            crashReporter.recordBreadcrumb(message: message, category: category, level: level)
+    func forwardToAppMonitor(message: String, level: LogLevel) {
+        guard let appMonitor = environment?.appMonitor else { return }
+        if appMonitor.supportsLogs {
+            appMonitor.log(message: "[\(level)] \(message)")
+        } else if appMonitor.supportsBreadcrumbs {
+            appMonitor.recordBreadcrumb(message: message, category: category, level: level)
         }
     }
 }

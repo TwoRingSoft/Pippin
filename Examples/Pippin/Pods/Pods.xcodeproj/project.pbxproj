@@ -451,7 +451,7 @@
 		88D7F78DCB5902BE083C7535AB46306E /* FLEXArgumentInputFontView.m in Sources */ = {isa = PBXBuildFile; fileRef = D99D6B287BBF94EB2F995AD7A0F9AF8B /* FLEXArgumentInputFontView.m */; };
 		89032CA1F52462A61F7425D6B48C28F2 /* COSTouchVisualizer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C098025A1B2FA028DE3913A0EE6DFA9 /* COSTouchVisualizer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89269A18E309AE87831A4E5AC6EC8929 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CACDFF70549C68158B6C579B27B6349 /* Logger.swift */; };
-		8970ABFDCC810D54FFE6EB936D9BE8AA /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0008D9D14E49899EF46B19901D762A3 /* CrashReporter.swift */; };
+		8970ABFDCC810D54FFE6EB936D9BE8AA /* AppMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0008D9D14E49899EF46B19901D762A3 /* AppMonitor.swift */; };
 		8981157CC61F892EAD800FCE2E53E756 /* Demangler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6104BDB17A5CCBFF140C80C7ED756250 /* Demangler.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		89ABA63CAA52A3BAB40B2E7D24E1D066 /* KSID.c in Sources */ = {isa = PBXBuildFile; fileRef = FD961BA8D5C2F63CF0CD02EC8768867A /* KSID.c */; settings = {COMPILER_FLAGS = "-fno-optimize-sibling-calls"; }; };
 		89EB89A8D6EC110A6BC6A66C27A6AA0F /* KSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 945841DBE4CE07BBDCE75C7C8A2B6C16 /* KSDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1862,7 +1862,7 @@
 		AEEA762E2D9D6DE8F9F02392178271D1 /* Tool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Tool.swift; path = PinpointKit/PinpointKit/Sources/Core/Editing/Tool.swift; sourceTree = "<group>"; };
 		AF5B1B7C049F909B20713BD09528C7D1 /* successIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = successIcon.png; path = SwiftMessages/Resources/successIcon.png; sourceTree = "<group>"; };
 		AF9C5671202F4C34F0300AF87FEA5A73 /* KSCrashReportFilterSets.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KSCrashReportFilterSets.m; path = Source/KSCrash/Reporting/Filters/KSCrashReportFilterSets.m; sourceTree = "<group>"; };
-		B0008D9D14E49899EF46B19901D762A3 /* CrashReporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
+		B0008D9D14E49899EF46B19901D762A3 /* AppMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppMonitor.swift; sourceTree = "<group>"; };
 		B00B5C6B710F0E9826898906A81E3ABE /* KSCrashInstallation+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "KSCrashInstallation+Private.h"; path = "Source/KSCrash/Installations/KSCrashInstallation+Private.h"; sourceTree = "<group>"; };
 		B01FBBBF54BACFBF3A6D760849B6E57F /* FLEXManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLEXManager.h; path = Classes/FLEXManager.h; sourceTree = "<group>"; };
 		B0EC81642DBA13775C25E2A5FDBB66F6 /* JGProgressHUDPieIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDPieIndicatorView.h; path = JGProgressHUD/JGProgressHUD/include/JGProgressHUDPieIndicatorView.h; sourceTree = "<group>"; };
@@ -4322,7 +4322,7 @@
 				DA6A113C44A26CCFB2D162E21BFD216C /* ActivityIndicator.swift */,
 				018174F482E8DD7B3A9646B507C59137 /* Alerter.swift */,
 				7DF686962C7D27B60C4997F9BE4B155F /* BugReporter.swift */,
-				B0008D9D14E49899EF46B19901D762A3 /* CrashReporter.swift */,
+				B0008D9D14E49899EF46B19901D762A3 /* AppMonitor.swift */,
 				1A884EFD8ACE406E9AF044E133ED8D2F /* DebugMenuPresenter.swift */,
 				3B6DF3A60D01EB26F373F5F2ED389826 /* Environment.swift */,
 				E8A3A02E669DD167A357BAA95552D530 /* InAppPurchaseVendor.swift */,
@@ -6151,7 +6151,7 @@
 				D4DAA0F77CC9CAAB3523CE4AE4DA0084 /* BugReporter.swift in Sources */,
 				23A9EA649091BFE8BBBEBBDB20C6459D /* Camera.swift in Sources */,
 				8604DBEE734EF33F370C0AFABE53D4DB /* Colors.swift in Sources */,
-				8970ABFDCC810D54FFE6EB936D9BE8AA /* CrashReporter.swift in Sources */,
+				8970ABFDCC810D54FFE6EB936D9BE8AA /* AppMonitor.swift in Sources */,
 				027CEECC69D42B90570B545C58A10D4F /* Debuggable.swift in Sources */,
 				4ED4035FC3DC46358AE30F50226E32DD /* DebugMenuPresenter.swift in Sources */,
 				2B09FC85ACA1947B972B757740D0E7E1 /* DefaultColors.swift in Sources */,
